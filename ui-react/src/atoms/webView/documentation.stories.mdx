@@ -1,0 +1,38 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { WebView, IWebViewProps } from '.';
+
+<Meta
+  component={WebView}
+  title={'Atoms/WebView'}
+/>
+
+# WebView
+
+<br/>
+
+export const Template = (args) => (
+  <WebView {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{url: 'https://www.kibalabs.com'}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='With Error'>
+    <WebView url={'https://www.google.com'} />
+  </Story>
+</Canvas>
+
+NOTE(krish): the error detection isn't working yet.
+
+### Theming
+
+TODO

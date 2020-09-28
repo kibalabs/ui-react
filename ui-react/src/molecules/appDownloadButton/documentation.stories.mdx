@@ -1,0 +1,74 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { PaddingSize } from '../../subatoms';
+import { AppDownloadButton, IAppDownloadButtonProps } from '.';
+import { KibaIcon } from '../../subatoms';
+
+<Meta
+  component={AppDownloadButton}
+  title={'Molecules/AppDownloadButton'}
+/>
+
+# AppDownloadButton
+
+<br/>
+
+export const Template = (args) => (
+  <AppDownloadButton {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{isLazyLoadable: false, appType: 'android'}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Android Dark'>
+    <AppDownloadButton isLazyLoadable={false} appType={'android'} buttonVariant={'dark'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='iOS Dark'>
+    <AppDownloadButton isLazyLoadable={false} appType={'ios'} buttonVariant={'dark'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Mac Dark'>
+    <AppDownloadButton isLazyLoadable={false} appType={'mac'} buttonVariant={'dark'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='AppleTV Dark'>
+    <AppDownloadButton isLazyLoadable={false} appType={'appletv'} buttonVariant={'dark'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Android Dark Clear'>
+    <AppDownloadButton isLazyLoadable={false} appType={'android'} buttonVariant={'dark-clear'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Android Light'>
+    <AppDownloadButton isLazyLoadable={false} appType={'android'} buttonVariant={'light'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Android Light Clear'>
+    <AppDownloadButton isLazyLoadable={false} appType={'android'} buttonVariant={'light-clear'} />
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO

@@ -1,0 +1,39 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { Box, Text } from '../../subatoms';
+import { ContainingView, IContainingViewProps } from '.';
+
+<Meta
+  component={ContainingView}
+  title={'Wrappers/ContainingView'}
+/>
+
+# ContainingView
+
+<br/>
+
+export const Template = (args) => (
+  <ContainingView {...args}>
+    <Box variant='card'>
+      <Box width={'2000px'}>
+        <Text>I'm wrapped</Text>
+      </Box>
+    </Box>
+  </ContainingView>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+TODO
+
+### Theming
+
+TODO

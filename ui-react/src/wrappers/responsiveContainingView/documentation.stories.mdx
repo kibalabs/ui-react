@@ -1,0 +1,39 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { Box, Text } from '../../subatoms';
+import { ResponsiveContainingView, IResponsiveContainingViewProps } from '.';
+
+<Meta
+  component={ResponsiveContainingView}
+  title={'Wrappers/ResponsiveContainingView'}
+/>
+
+# ResponsiveContainingView
+
+<br/>
+
+export const Template = (args) => (
+  <ResponsiveContainingView {...args}>
+    <Box variant='card'>
+      <Box width={'2000px'}>
+        <Text>I'm wrapped</Text>
+      </Box>
+    </Box>
+  </ResponsiveContainingView>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{size: 10}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+TODO
+
+### Theming
+
+TODO

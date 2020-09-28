@@ -1,0 +1,176 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { RecursivePartial } from '@kibalabs/core';
+
+import { ThemeType, IBoxTheme, ITextTheme } from '.';
+
+<Meta
+  title={'Introduction/Architecture'}
+/>
+
+# Architecture
+
+The project defines components that follow a customized version of the [Atomic Design by Brad Frost](https://bradfrost.com/blog/post/atomic-web-design/) principles. We've extended and augmented the core principles in a few ways described below. I'd recommend reading up on atomic design when you get a chance but it's definitely not needed to use the library (it is if you want to contribute though).
+
+## Subatoms
+
+These are the basic building blocks on which most other components in UI-React will build. Subatom components only have one layer of theming, because these components are not used in stateful ways.
+
+### Theming
+
+Subatoms have themes with only a single layer because they are intended to be used within other themable components.
+
+```ts
+export interface IBoxTheme extends CssTheme, ThemeType {
+  'background-color': string;
+  'border-radius': string;
+  'border-color': string;
+  'border-width': string;
+  'border-style': string;
+  'box-shadow': string;
+  'margin': string;
+  'padding': string;
+  ...
+}
+```
+
+They can have variants to allow using subatoms directly in simple ways. For example, the `Text` subatom has variants: `title`, `subtitle`, `note`, as well as `header1`, `header2`, `header3`, `bold`, `italic` etc.
+
+NOTE(krishan711): I think the colors, dimensions and fonts should be pulled out from subatoms and moved to their own category.
+
+### Examples
+
+* Box - Used to draw a rectangular area of content with a background, shadow and border, which can have children inside
+* Text - used to show a piece of text (like this line!)
+* Icon - Used to show a simple icon
+* Spacing - Used to create spacing between / around items
+
+## Atoms
+
+Atoms use subatoms and native elements to build themable, stateful components. These components are intended to be used directly (or within molecules and organisms) to create a consistent UI.
+
+### Theming
+
+Each atom has a theme with 3 levels. The theme has a normal "state" and then zero or more states that represent states that are "long-term" e.g. a button is disabled. Each state then has a default theme and then zero or more states that are "short-term" e.g. a button can be hovered. This is the complete button theme:
+
+```ts
+export interface IButtonTheme {
+  normal: IButtonThemeState;
+  disabled: RecursivePartial<IButtonThemeState>;
+}
+
+export interface IButtonThemeState {
+  default: IButtonThemeBase;
+  hover: RecursivePartial<IButtonThemeBase>;
+  press: RecursivePartial<IButtonThemeBase>;
+  focus: RecursivePartial<IButtonThemeBase>;
+}
+
+export interface IButtonThemeBase {
+  text: ITextTheme;
+  background: IBoxTheme;
+}
+```
+
+The `default > normal` theme for the atom should be specified in entirity, i.e. all the fields need to be filled in for the state, the base and every subatom theme in the base. The `RecursivePartial` definition allows all other theme paths to only specify their difference from the normal state. This works just like CSS and is implemented in exactly the same way - the alternate states are applied *over* the normal state.
+
+So the "theme" object for a Button can look like this:
+
+```js
+{
+  "normal": {
+    "default": {
+      "text": {
+          ... all ITextTheme fields filled in ...
+      },
+      "background": {
+          "color": "$colors.brandPrimary"
+          ... all IBoxTheme fields filled in ...
+      },
+    },
+    "hover": {
+      "background": {
+          "color": "$colors.brandPrimaryDark10"
+      },
+    },
+    "press": {
+      "background": {
+          "color": "$colors.brandPrimaryDark20"
+      },
+    },
+  },
+  "disabled": {
+    "default": {
+      "background": {
+          "color": "$colors.disabled"
+      },
+    },
+  },
+}
+```
+
+This will create a nice button with your brand color as the background with it getting darker on hover and even darker on press. When the button is disabled it will be the disabled color with no other changes from the base.
+
+This means that we can configure how the button looks in each of the states its in very efficiently. Plus, because it's JSON you can even do it programitcally!
+
+Atoms alse have variants which allow the atom to have different styles. For example, the button atom has variants including primary, secondary and tertiary to indicate to the user what kind of action they are about to make.
+
+### Examples
+
+Current examples of atoms include:
+
+* Button - allow the user to take some action by clicking on this
+* Link - a peice of text that can be click to take the user somewhere
+* InputWrapper - intended to be used in conjunction with other elements to create a coherent style for input elements
+
+## Molecules
+
+Molecules use atoms, subatoms and native elements to create more complex visual elements.
+
+#### Theming
+
+As molecules can use atoms, it would not make sense for them to be stateful and have actions because this would lead to very deep hierarchies in the themes. To alleviate this, the theme for a molecule only includes the sub-themes for the atoms it uses.
+
+For example, the OptionSelect molecule uses an input and shows a list item for each option. To allow theming, the OptionSelectTheme looks like this:
+
+```ts
+interface  IOptionSelectTheme {
+  inputTheme: ISingleLineInputTheme;
+  listItemTheme: IListItemTheme;
+}
+```
+
+This allows the user to pass in the theme directly where they want to, but the use of it will look weird and stick out in a pull request. In most cases the theme should not be provided and the default theme for the atoms should be used.
+
+If the molecule includes a list of atomic elements as children (e.g. the Accordion molecule takes a list of Accordion.Item as children), each child should also be allowed to specify its theme and mode.
+
+TODO(krishan711): add images for the below section Sometimes, the molecule wants to use a specific version of the theme. E.g. in the TitledBox atom, the default theme has a padding for the contents of the box. However, the Accordion molecule should use the TitledBox but doesn't want a padding in the content. So, it should have code like this:
+
+```tsx
+<TitledBox
+  id={props.id}
+  className={`accordion ${props.className}`}
+  theme={props.theme?.titledBoxTheme}
+  mode={'unpadded'}
+  title={props.title}
+> ... </TitledBox>
+```
+
+This means that by default the molecule will use the unpadded mode for the TitledBox, but if the user provides a theme directly to the Accordion, that theme will be used instead.
+
+### Layouts
+
+These components are used to lay out other components in specific configurations.
+
+TODO(krishan711): fill this in.
+
+### Wrappers
+
+These components are used to augment other components without creating an additional level of heirarchy in the output html.
+
+TODO(krishan711): fill this in.
+
+### Application-level
+
+These components are used to set up the application.
+
+TODO(krishan711): fill this in.

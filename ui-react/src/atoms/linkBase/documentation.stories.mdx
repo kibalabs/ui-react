@@ -1,0 +1,49 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { LinkBase, ILinkBaseProps } from '.';
+import { KibaIcon } from '../../subatoms';
+
+<Meta
+  component={LinkBase}
+  title={'Atoms/LinkBase'}
+/>
+
+# LinkBase
+
+<br/>
+
+export const Template = (args) => (
+  <LinkBase {...args}>
+    <KibaIcon iconId='ion-bulb' />
+  </LinkBase>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Translucent'>
+    <LinkBase variant='translucent'>
+      <p> I'm a link now </p>
+    </LinkBase>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Image'>
+    <LinkBase variant='image'>
+      <img src={'https://www.everypagehq.com/20200505212614/assets/everypage-wordmark.svg'} />
+    </LinkBase>
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO

@@ -1,0 +1,43 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { BulletList, IBulletListProps } from '.';
+import { BulletText } from '../bulletText';
+
+<Meta
+  component={BulletList}
+  title={'Atoms/BulletList'}
+/>
+
+# BulletList
+
+<br/>
+
+export const Template = (args) => (
+  <BulletList {...args}>
+    <BulletText>hello</BulletText>
+    <BulletText>world</BulletText>
+  </BulletList>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Simple example'>
+    <BulletList>
+      <BulletText>hello</BulletText>
+      <BulletText>world</BulletText>
+    </BulletList>
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO

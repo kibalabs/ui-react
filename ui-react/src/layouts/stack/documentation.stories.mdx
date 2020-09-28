@@ -1,0 +1,54 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { Stack, IStackProps } from '.';
+import { Direction } from '../../model';
+import { KibaIcon } from '../../subatoms';
+
+<Meta
+  component={Stack}
+  title={'Layouts/Stack'}
+/>
+
+# Stack
+
+<br/>
+
+export const Template = (args) => (
+  <Stack {...args}>
+    <KibaIcon iconId={'ion-airplane'} />
+    <KibaIcon iconId={'ion-american-football'} />
+    <KibaIcon iconId={'ion-at'} />
+    <KibaIcon iconId={'ion-albums'} />
+    <KibaIcon iconId={'ion-bag'} />
+    <KibaIcon iconId={'ion-bonfire'} />
+    <KibaIcon iconId={'ion-battery-full'} />
+  </Stack>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Vertical'>
+    <Stack direction={Direction.Vertical}>
+      <KibaIcon iconId={'ion-accessibility'} />
+      <KibaIcon iconId={'ion-american-football'} />
+      <KibaIcon iconId={'ion-at'} />
+      <KibaIcon iconId={'ion-albums'} />
+      <KibaIcon iconId={'ion-bag'} />
+      <KibaIcon iconId={'ion-bonfire'} />
+      <KibaIcon iconId={'ion-battery-full'} />
+    </Stack>
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO
