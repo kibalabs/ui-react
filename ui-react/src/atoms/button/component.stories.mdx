@@ -1,0 +1,48 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { PaddingSize } from '../../subatoms';
+import { Button, IButtonProps } from '.';
+import { KibaIcon } from '../../subatoms';
+
+<Meta
+  component={Button}
+  title={'Atoms/Button'}
+/>
+
+# Button
+
+<br/>
+
+export const Template = (args) => <Button {...args} />;
+
+<Story name='Default' args={{text: 'Default button', mode: 'default'}}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story={'Default'} />
+
+<Canvas>
+  <Story name='Primary'>
+    <Button mode='primary' text='Primary Button'/>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Secondary'>
+    <Button mode='secondary' text='Secondary Button'/>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Right Icon'>
+    <Button iconRight={<KibaIcon iconId='ion-aperture' />} text='Button With Right Icon'/>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Left Icon'>
+    <Button iconLeft={<KibaIcon iconId='ion-aperture' />} text='Button With Left Icon'/>
+  </Story>
+</Canvas>
+
+<!-- TODO(krish): Document the theming -->

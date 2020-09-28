@@ -1,0 +1,6 @@
+// NOTE(krish): the project uses tsconfig from kibalabs/ts-build. This is only here for storybook.
+{
+  "compilerOptions": {
+    "jsx": "react",
+  }
+}
