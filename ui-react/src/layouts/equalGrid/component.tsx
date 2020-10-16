@@ -31,5 +31,6 @@ export const EqualGrid = (props: IEqualGridProps): React.ReactElement => {
   );
 };
 
+EqualGrid.displayName = 'EqualGrid';
 EqualGrid.defaultProps = {
 };

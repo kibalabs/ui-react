@@ -4,6 +4,20 @@ import { getClassName } from '@kibalabs/core';
 
 import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
 
+interface IStyledHidingViewProps extends IWrapperProps {
+  isHidden?: boolean;
+}
+
+const withHidingView = (Component: React.ComponentType<IStyledHidingViewProps>): React.ComponentType => styled(Component)<IStyledHidingViewProps>`
+  ${(props: IStyledHidingViewProps): string => props.isHidden ? `display: none !important;` : ''};
+`;
+
+const StyledHidingView = withHidingView((props: IStyledHidingViewProps): React.ReactElement => {
+  const children = React.Children.toArray(props.children);
+  const child = children.length > 0 ? children[0] : <div />;
+  return React.cloneElement(child, { className: getClassName(props.className, child.props.className) });
+});
+
 export interface IHidingViewProps extends IWrapperProps {
   isHidden?: boolean;
 }
@@ -19,20 +33,7 @@ export const HidingView = (props: IHidingViewProps): React.ReactElement => {
   );
 };
 
+HidingView.displayName = 'HidingView';
 HidingView.defaultProps = {
   ...defaultWrapperProps,
 };
-
-interface IStyledHidingViewProps extends IWrapperProps {
-  isHidden?: boolean;
-}
-
-const withHidingView = (Component: React.ComponentType<IStyledHidingViewProps>): React.ComponentType => styled(Component)<IStyledHidingViewProps>`
-  ${(props: IStyledHidingViewProps): string => props.isHidden ? `display: none !important;` : ''};
-`;
-
-const StyledHidingView = withHidingView((props: IStyledHidingViewProps): React.ReactElement => {
-  const children = React.Children.toArray(props.children);
-  const child = children.length > 0 ? children[0] : <div />;
-  return React.cloneElement(child, { className: getClassName(props.className, child.props.className) });
-});

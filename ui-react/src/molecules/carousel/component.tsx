@@ -215,6 +215,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
   );
 };
 
+Carousel.displayName = 'Carousel';
 Carousel.defaultProps = {
   ...defaultMoleculeProps,
   shouldShowButtons: true,

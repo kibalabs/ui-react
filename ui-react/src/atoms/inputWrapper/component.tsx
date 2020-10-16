@@ -128,6 +128,7 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
   );
 };
 
+InputWrapper.displayName = 'InputWrapper';
 InputWrapper.defaultProps = {
   ...defaultComponentProps,
 };

@@ -94,6 +94,7 @@ export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
   );
 };
 
+KibaIcon.displayName = 'KibaIcon';
 KibaIcon.defaultProps = {
   className: '',
 };

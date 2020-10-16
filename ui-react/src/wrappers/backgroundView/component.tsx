@@ -87,6 +87,7 @@ export const BackgroundView = (props: IBackgroundViewProps): React.ReactElement 
   );
 }
 
+BackgroundView.displayName = 'BackgroundView';
 BackgroundView.defaultProps = {
   ...defaultWrapperProps,
 };

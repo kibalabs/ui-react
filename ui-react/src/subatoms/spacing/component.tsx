@@ -33,6 +33,7 @@ export const Spacing = (props: ISpacingProps): React.ReactElement => {
   );
 };
 
+Spacing.displayName = 'Spacing';
 Spacing.defaultProps = {
   ...defaultComponentProps,
   direction: MultiDirection.Both,

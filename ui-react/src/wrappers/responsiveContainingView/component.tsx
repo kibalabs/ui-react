@@ -80,6 +80,7 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
   );
 };
 
+ResponsiveContainingView.displayName = 'ResponsiveContainingView';
 ResponsiveContainingView.defaultProps = {
   ...defaultWrapperProps,
   isFullWidth: true,

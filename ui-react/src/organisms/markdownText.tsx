@@ -94,6 +94,7 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
   )
 };
 
+MarkdownText.displayName = 'MarkdownText';
 MarkdownText.defaultProps = {
   className: '',
 };

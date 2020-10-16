@@ -106,6 +106,7 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
   );
 };
 
+LinePager.displayName = 'LinePager';
 LinePager.defaultProps = {
   ...defaultComponentProps,
 };

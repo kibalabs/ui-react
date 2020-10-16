@@ -42,6 +42,7 @@ export const LayerContainer = (props: ILayerContainerProps): React.ReactElement 
   );
 };
 
+LayerContainer.displayName = 'LayerContainer';
 LayerContainer.defaultProps = {
   className: '',
 };

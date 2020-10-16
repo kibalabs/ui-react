@@ -31,6 +31,7 @@ export const InputFrame = (props: IInputFrameProps): React.ReactElement => {
   );
 };
 
+InputFrame.displayName = 'InputFrame';
 InputFrame.defaultProps = {
   ...defaultMoleculeProps,
   iEnabled: true,

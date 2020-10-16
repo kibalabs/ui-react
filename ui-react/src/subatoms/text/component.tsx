@@ -88,6 +88,7 @@ export const Text = (props: ITextProps): React.ReactElement => {
   )
 };
 
+Text.displayName = 'Text';
 Text.defaultProps = {
   ...defaultComponentProps,
-}
+};

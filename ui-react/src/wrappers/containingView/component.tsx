@@ -43,6 +43,7 @@ export const ContainingView = (props: IContainingViewProps): React.ReactElement 
   );
 };
 
+ContainingView.displayName = 'ContainingView';
 ContainingView.defaultProps = {
   ...defaultWrapperProps,
   isCenteredHorizontally: true,

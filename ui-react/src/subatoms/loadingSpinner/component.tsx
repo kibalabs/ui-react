@@ -39,6 +39,7 @@ export const LoadingSpinner = (props: ILoadingSpinnerProps): React.ReactElement 
   );
 };
 
+LoadingSpinner.displayName = 'LoadingSpinner';
 LoadingSpinner.defaultProps = {
   ...defaultComponentProps,
 };

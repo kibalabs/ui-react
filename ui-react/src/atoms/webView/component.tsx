@@ -122,6 +122,7 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
   );
 };
 
+WebView.displayName = 'WebView';
 WebView.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,

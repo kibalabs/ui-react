@@ -31,6 +31,7 @@ export const Media = (props: IMediaProps): React.ReactElement => {
   );
 };
 
+Media.displayName = 'Media';
 Media.defaultProps = {
   ...defaultComponentProps,
   fitType: 'scale',

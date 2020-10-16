@@ -66,6 +66,7 @@ export const Box = (props: IBoxProps): React.ReactElement => {
   );
 };
 
+Box.displayName = 'Box';
 Box.defaultProps = {
   ...defaultComponentProps,
   isFullHeight: false,

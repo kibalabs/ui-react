@@ -73,6 +73,7 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
   )
 };
 
+Markdown.displayName = 'Markdown';
 Markdown.defaultProps = {
   className: '',
 };

@@ -87,6 +87,7 @@ export const Grid = (props: IGridProps): React.ReactElement => {
   );
 };
 
+Grid.displayName = 'Grid';
 Grid.defaultProps = {
   className: '',
   isFullHeight: true,

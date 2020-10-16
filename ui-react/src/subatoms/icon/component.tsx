@@ -50,6 +50,7 @@ export const Icon = (props: IIconProps): React.ReactElement => {
   );
 };
 
+Icon.displayName = 'Icon';
 Icon.defaultProps = {
   ...defaultComponentProps,
   shouldAddFill: true,
