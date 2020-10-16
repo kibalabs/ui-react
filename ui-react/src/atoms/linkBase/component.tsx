@@ -92,6 +92,7 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
   );
 };
 
+LinkBase.displayName = 'LinkBase';
 LinkBase.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,

@@ -45,6 +45,7 @@ export const ResponsiveTextAlignmentView = (props: IResponsiveTextAlignmentViewP
   );
 };
 
+ResponsiveTextAlignmentView.displayName = 'ResponsiveTextAlignmentView';
 ResponsiveTextAlignmentView.defaultProps = {
   ...defaultWrapperProps,
   alignment: TextAlignment.Start,

@@ -58,6 +58,7 @@ export const Link = (props: ILinkProps): React.ReactElement => {
   );
 };
 
+Link.displayName = 'Link';
 Link.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,

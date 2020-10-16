@@ -68,6 +68,7 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Ref<HTML
   ), window.document.body);
 });
 
+Portal.displayName = 'Portal';
 Portal.defaultProps = {
   ...defaultComponentProps,
 };

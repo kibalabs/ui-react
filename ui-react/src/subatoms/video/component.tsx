@@ -68,6 +68,7 @@ export const Video = (props: IVideoProps): React.ReactElement => {
   );
 };
 
+Video.displayName = 'Video';
 Video.defaultProps = {
   ...defaultComponentProps,
   fitType: 'scale',

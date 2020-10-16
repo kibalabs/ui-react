@@ -47,6 +47,7 @@ export const PrettyText = (props: IPrettyTextProps): React.ReactElement => {
   );
 };
 
+PrettyText.displayName = 'PrettyText';
 PrettyText.defaultProps = {
   ...defaultComponentProps,
 };

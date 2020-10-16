@@ -42,6 +42,7 @@ export const Container = (props: IContainerProps): React.ReactElement => {
   );
 };
 
+Container.displayName = 'Container';
 Container.defaultProps = {
   className: '',
   isFullHeight: true,

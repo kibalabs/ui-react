@@ -95,6 +95,8 @@ export const ProgressCounterItem = (props: IProgressCounterItemProps): React.Rea
     </StyledProgressCounterItem>
   );
 };
+
+ProgressCounterItem.displayName = 'ProgressCounterItem';
 ProgressCounterItem.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,

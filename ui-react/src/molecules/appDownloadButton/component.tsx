@@ -72,6 +72,7 @@ export const AppDownloadButton = (props: AppDownloadButtonProps): React.ReactEle
   );
 };
 
+AppDownloadButton.displayName = 'AppDownloadButton';
 AppDownloadButton.defaultProps = {
   ...defaultMoleculeProps,
   buttonVariant: 'dark',

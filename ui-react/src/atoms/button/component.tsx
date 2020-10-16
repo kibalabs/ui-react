@@ -128,6 +128,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
   );
 };
 
+Button.displayName = 'Button';
 Button.defaultProps = {
   ...defaultComponentProps,
   buttonType: 'button',

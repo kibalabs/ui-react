@@ -38,6 +38,7 @@ export const BulletText = (props: IBulletTextProps): React.ReactElement => {
   );
 };
 
+BulletText.displayName = 'BulletText';
 BulletText.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,
