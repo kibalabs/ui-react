@@ -1,0 +1,23 @@
+name: Build package npm + build storybook container
+on:
+  pull_request:
+    branches: [ master ]
+env:
+  DIRECTORY: ./ui-react
+jobs:
+  build-package:
+    name: Build package
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Build docker image
+      run: docker build --tag $DOCKER_REPO/package:$DOCKER_TAG $DIRECTORY
+  build-storybook:
+    name: Build storybook image and push to docker registry
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Build docker image
+      run: docker build --file $DIRECTORY/storybook.Dockerfile --tag $DOCKER_REPO/app:$DOCKER_TAG $DIRECTORY
