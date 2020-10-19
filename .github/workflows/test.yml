@@ -11,13 +11,21 @@ jobs:
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
+    - name: Login to GitHub Packages Docker Registry
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
+    - name: Pull previous docker image
+      run: docker pull docker.pkg.github.com/$GITHUB_REPOSITORY/build-cache-no-buildkit || true
     - name: Build docker image
-      run: docker build $DIRECTORY
+      run: docker build --cache-from=docker.pkg.github.com/$GITHUB_REPOSITORY/build-cache-no-buildkit $DIRECTORY
   build-storybook:
     name: Build storybook image
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
+    - name: Login to GitHub Packages Docker Registry
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
+    - name: Pull previous docker image
+      run: docker pull docker.pkg.github.com/$GITHUB_REPOSITORY/build-cache-no-buildkit || true
     - name: Build docker image
-      run: docker build --file $DIRECTORY/storybook.Dockerfile $DIRECTORY
+      run: docker build --file $DIRECTORY/storybook.Dockerfile --cache-from=docker.pkg.github.com/$GITHUB_REPOSITORY/build-cache-no-buildkit $DIRECTORY

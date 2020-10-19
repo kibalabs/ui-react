@@ -15,8 +15,12 @@ jobs:
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
+    - name: Login to GitHub Packages Docker Registry
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
+    - name: Pull previous docker image
+      run: docker pull docker.pkg.github.com/$GITHUB_REPOSITORY/build-cache-no-buildkit || true
     - name: Build docker image
-      run: docker build --tag $DOCKER_REPO/package:$DOCKER_TAG $DIRECTORY
+      run: docker build --tag $DOCKER_REPO/package:$DOCKER_TAG --cache-from=docker.pkg.github.com/$GITHUB_REPOSITORY/build-cache-no-buildkit $DIRECTORY
     - name: Create .npmrc file
       run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
     - name: Publish ui-react package to npm
@@ -27,14 +31,12 @@ jobs:
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
-    - name: Build docker image
-      run: docker build --file $DIRECTORY/storybook.Dockerfile --tag $DOCKER_REPO/app:$DOCKER_TAG $DIRECTORY
     - name: Login to GitHub Packages Docker Registry
-      uses: docker/login-action@v1
-      with:
-        registry: docker.pkg.github.com
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
+    - name: Pull previous docker image
+      run: docker pull docker.pkg.github.com/$GITHUB_REPOSITORY/build-cache-no-buildkit || true
+    - name: Build docker image
+      run: docker build --file $DIRECTORY/storybook.Dockerfile --tag $DOCKER_REPO/app:$DOCKER_TAG --cache-from=docker.pkg.github.com/$GITHUB_REPOSITORY/build-cache-no-buildkit $DIRECTORY
     - name: Push to GitHub Packages
       run: docker push $DOCKER_REPO/app:$DOCKER_TAG
   run-storybook:
