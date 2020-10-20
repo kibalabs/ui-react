@@ -1,14 +1,8 @@
-<!--- Provide a general summary of your changes in the Title above -->
+<!--- Title format: [Feature | Fix | Task#] - <summary of your changes> -->
 
 ## Description
 
 <!--- Describe your changes in detail -->
-
-## Changes/Tasks
-
-<!--- Add your changes or task as points (descriptions can be TL;DR) -->
-
-- [ ] Changed code
 
 ## Motivation and Context
 
