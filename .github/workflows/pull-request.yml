@@ -1,0 +1,23 @@
+name: Build
+on:
+  pull_request:
+    branches: [ master ]
+env:
+  DIRECTORY: ./ui-react
+jobs:
+  build-package:
+    name: Build package
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Build docker image
+      run: docker build $DIRECTORY
+  build-storybook:
+    name: Build storybook image
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Build docker image
+      run: docker build --file $DIRECTORY/storybook.Dockerfile $DIRECTORY

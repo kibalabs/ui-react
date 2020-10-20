@@ -3,7 +3,6 @@ import { createGlobalStyle } from 'styled-components';
 import { ITheme } from '../theming';
 import { colorsToCss, themeToCss } from '../util';
 
-
 interface IGlobalCssProps {
   theme: ITheme;
   resetCss: string;

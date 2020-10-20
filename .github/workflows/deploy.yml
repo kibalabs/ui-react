@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Deploy
 on:
   push:
     branches: [ master ]
@@ -27,14 +27,10 @@ jobs:
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
+    - name: Login to GitHub Packages Docker Registry
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
     - name: Build docker image
       run: docker build --file $DIRECTORY/storybook.Dockerfile --tag $DOCKER_REPO/app:$DOCKER_TAG $DIRECTORY
-    - name: Login to GitHub Packages Docker Registry
-      uses: docker/login-action@v1
-      with:
-        registry: docker.pkg.github.com
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
     - name: Push to GitHub Packages
       run: docker push $DOCKER_REPO/app:$DOCKER_TAG
   run-storybook:

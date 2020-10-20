@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [PATCH] Manually added displayName to all components.
 
 ### Changed
+- [PATCH] Added workflow to build pull requests.
 
 ### Removed
 
