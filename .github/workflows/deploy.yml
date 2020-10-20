@@ -1,23 +1,23 @@
+name: Deploy
+on:
+  push:
+    branches: [ master ]
+env:
+  DOCKER_REPO: docker.pkg.github.com/${{ github.repository }}
+  DOCKER_TAG: latest
+  DIRECTORY: ./ui-react
+jobs:
+  deploy-package:
+    name: Build package and deploy to npm
+    runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Build docker image
+      run: docker build --tag $DOCKER_REPO/package:$DOCKER_TAG $DIRECTORY
 # TODO(krish): this should publish an @latest version of the package to NPM
-# name: Deploy
-# on:
-#   push:
-#     branches: [ master ]
-# env:
-#   DOCKER_REPO: docker.pkg.github.com/${{ github.repository }}
-#   DOCKER_TAG: latest
-#   DIRECTORY: ./ui-react
-# jobs:
-#   deploy-package:
-#     name: Build package and deploy to npm
-#     runs-on: ubuntu-latest
-#     env:
-#       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-#     steps:
-#     - name: Check out the repo
-#       uses: actions/checkout@v2
-#     - name: Build docker image
-#       run: docker build --tag $DOCKER_REPO/package:$DOCKER_TAG $DIRECTORY
 #     - name: Create .npmrc file
 #       run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
 #     - name: Publish ui-react package to npm

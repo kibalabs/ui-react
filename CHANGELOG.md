@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+## [0.7.1] - 2020-10-20
+
+### Added
 - [PATCH] Manually added displayName to all components.
 
 ### Changed
