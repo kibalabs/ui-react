@@ -2,7 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 
 import { ITheme } from '../theming';
 import { colorsToCss, themeToCss } from '../util';
-import xyz;
 
 interface IGlobalCssProps {
   theme: ITheme;
