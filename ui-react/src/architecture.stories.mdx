@@ -71,7 +71,7 @@ export interface IButtonThemeBase {
 }
 ```
 
-The `default > normal` theme for the atom should be specified in entirity, i.e. all the fields need to be filled in for the state, the base and every subatom theme in the base. The `RecursivePartial` definition allows all other theme paths to only specify their difference from the normal state. This works just like CSS and is implemented in exactly the same way - the alternate states are applied *over* the normal state.
+The `default > normal` theme for the atom should be specified in entirety, i.e. all the fields need to be filled in for the state, the base and every subatom theme in the base. The `RecursivePartial` definition allows all other theme paths to only specify their difference from the normal state. This works just like CSS and is implemented in exactly the same way - the alternate states are applied *over* the normal state.
 
 So the "theme" object for a Button can look like this:
 
@@ -110,7 +110,7 @@ So the "theme" object for a Button can look like this:
 
 This will create a nice button with your brand color as the background with it getting darker on hover and even darker on press. When the button is disabled it will be the disabled color with no other changes from the base.
 
-This means that we can configure how the button looks in each of the states its in very efficiently. Plus, because it's JSON you can even do it programitcally!
+This means that we can configure how the button looks in each of the states its in very efficiently. Plus, because it's JSON you can even do it programmatically!
 
 Atoms alse have variants which allow the atom to have different styles. For example, the button atom has variants including primary, secondary and tertiary to indicate to the user what kind of action they are about to make.
 
@@ -119,7 +119,7 @@ Atoms alse have variants which allow the atom to have different styles. For exam
 Current examples of atoms include:
 
 * Button - allow the user to take some action by clicking on this
-* Link - a peice of text that can be click to take the user somewhere
+* Link - a piece of text that can be click to take the user somewhere
 * InputWrapper - intended to be used in conjunction with other elements to create a coherent style for input elements
 
 ## Molecules
