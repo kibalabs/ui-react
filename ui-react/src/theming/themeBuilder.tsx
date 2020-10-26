@@ -22,6 +22,7 @@ import { buildPrettyTextThemes } from '../atoms/prettyText';
 import { buildWebViewThemes } from '../atoms/webView';
 import { buildLinePagerThemes } from '../atoms/linePager';
 import { buildProgressCounterItemThemes } from '../atoms/progressCounterItem';
+import { buildTabBarItemThemes } from '../atoms/tabBarItem';
 
 export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const colors = buildColors(inputTheme?.colors);
@@ -48,6 +49,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const webViewThemes = buildWebViewThemes(colors, dimensions, boxThemes, inputTheme?.webViews);
   const linePagerThemes = buildLinePagerThemes(colors, dimensions, boxThemes, inputTheme?.linePagers);
   const progressCounterItemThemes = buildProgressCounterItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.progressCounterItems);
+  const tabBarItemThemes = buildTabBarItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.tabBarItems);
 
   return merge<ITheme>({
     // Base
@@ -77,6 +79,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     webViews: webViewThemes,
     linePagers: linePagerThemes,
     progressCounterItems: progressCounterItemThemes,
+    tabBarItems: tabBarItemThemes,
   }, inputTheme, {
     // NOTE(krish): this is here so the font replacement doesn't get overridden
     fonts: fonts,

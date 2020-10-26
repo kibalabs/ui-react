@@ -20,6 +20,7 @@ import { IPrettyTextTheme } from '../atoms/prettyText';
 import { IWebViewTheme } from '../atoms/webView';
 import { ILinePagerTheme } from '../atoms/linePager';
 import { IProgressCounterItemTheme } from '../atoms/progressCounterItem';
+import { ITabBarItemTheme } from '../atoms/tabBarItem';
 
 export interface ITheme extends ThemeType {
   // Base
@@ -49,4 +50,5 @@ export interface ITheme extends ThemeType {
   webViews: ThemeMap<IWebViewTheme>,
   linePagers: ThemeMap<ILinePagerTheme>,
   progressCounterItems: ThemeMap<IProgressCounterItemTheme>,
+  tabBarItems: ThemeMap<ITabBarItemTheme>,
 }

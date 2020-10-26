@@ -1,0 +1,79 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { TabBar } from '.';
+
+<Meta
+  component={TabBar}
+  title={'Molecules/TabBar'}
+/>
+
+# TabBar
+
+<br/>
+
+export const Template = (args) => {
+  const [selectedTabKey, setSelectedTabKey] = React.useState();
+  return (
+    <TabBar {...args} selectedTabKey={args.selectedTabKey || selectedTabKey} onTabKeySelected={args.setSelectedTabKey || setSelectedTabKey}>
+      <TabBar.Item tabKey={String(1)} text='First' />
+      <TabBar.Item tabKey={String(2)} text='Second' />
+      <TabBar.Item tabKey={String(3)} text='Third' />
+    </TabBar>
+  )
+};
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Full width'>
+    <TabBar isFullWidth={true}>
+      <TabBar.Item tabKey={String(1)} text='First' />
+      <TabBar.Item tabKey={String(2)} text='Second' />
+      <TabBar.Item tabKey={String(3)} text='Third' />
+    </TabBar>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Full width with long text'>
+    <TabBar isFullWidth={true}>
+      <TabBar.Item tabKey={String(1)} text='First' />
+      <TabBar.Item tabKey={String(2)} text='Second one is super long. I mean super, duper, extra long! Oh yeah, I really mean super alifragislistexpialodicious-ly long!' />
+      <TabBar.Item tabKey={String(3)} text='Third' />
+    </TabBar>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Long text'>
+    <TabBar isFullWidth={false}>
+      <TabBar.Item tabKey={String(1)} text='First' />
+      <TabBar.Item tabKey={String(2)} text='Second one is super long. I mean super, duper, extra long! Oh yeah, I really mean super alifragislistexpialodicious-ly long!' />
+      <TabBar.Item tabKey={String(3)} text='Third' />
+    </TabBar>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Too many'>
+    <TabBar>
+      {Array(50).fill(null).map((_, index) => {
+        return (
+          <TabBar.Item key={index} tabKey={String(index)} text={`Tab ${index}`} />
+        );
+      })}
+    </TabBar>
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO

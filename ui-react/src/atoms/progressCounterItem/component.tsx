@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { getClassName } from '@kibalabs/core';
 
-import { IComponentProps, defaultComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { useBuiltTheme } from '../../theming';
+import { IComponentProps, defaultComponentProps } from '../../model';
+import { themeToCss } from '../../util';
 import { IProgressCounterItemTheme } from './theme';
 
 interface IStyledProgressCounterItemProps {
@@ -35,35 +37,35 @@ const StyledProgressCounterItem = styled.button<IStyledProgressCounterItemProps>
   }
   &.disabled {
     cursor: auto;
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled.default?.text)};
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled.default?.background)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.default?.text)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.default?.background)};
     &:hover {
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled.hover?.text)};
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled.hover?.background)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.hover?.text)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.hover?.background)};
     }
     &:active {
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled.press?.text)};
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled.press?.background)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.press?.text)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.press?.background)};
     }
     &:focus {
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled.focus?.text)};
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled.focus?.background)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.focus?.text)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.focus?.background)};
     }
   }
   &.selected {
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected.default?.text)};
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected.default?.background)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.default?.text)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.default?.background)};
     &:hover {
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected.hover?.text)};
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected.hover?.background)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.hover?.text)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.hover?.background)};
     }
     &:active {
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected.press?.text)};
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected.press?.background)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.press?.text)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.press?.background)};
     }
     &:focus {
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected.focus?.text)};
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected.focus?.background)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.focus?.text)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.focus?.background)};
     }
   }
 `;

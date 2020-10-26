@@ -6,3 +6,4 @@ export * from './form';
 export * from './inputFrame';
 export * from './progressCounter';
 export * from './singleLineInput';
+export * from './tabBar';
