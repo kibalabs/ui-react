@@ -1,5 +1,4 @@
 import { RecursivePartial } from '@kibalabs/core';
-import { darken, transparentize } from 'polished';
 
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../subatoms';
@@ -14,17 +13,17 @@ export const buildProgressCounterItemThemes = (colors: IColorGuide, dimensions: 
           'background-color': 'transparent',
         }),
         text: mergeTheme(textThemes.default, {
-          'color': transparentize(0.7, colors.brandPrimary),
+          'color': '$colors.brandPrimaryClear75',
         }),
       },
       hover: {
         background: {
-          'background-color': transparentize(0.9, colors.brandPrimary),
+          'background-color': '$colors.brandPrimaryClear90',
         },
       },
       press: {
         background: {
-          'background-color': transparentize(0.8, colors.brandPrimary),
+          'background-color': '$colors.brandPrimaryClear80',
         },
       },
       focus: {
