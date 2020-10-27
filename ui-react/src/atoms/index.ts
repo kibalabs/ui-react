@@ -8,4 +8,5 @@ export * from './inputWrapper';
 export * from './link';
 export * from './linePager';
 export * from './progressCounterItem';
+export * from './tabBarItem';
 export * from './webView';
