@@ -21,7 +21,7 @@ const StyledLinkBase = styled.a<IStyledLinkBaseProps>`
   background-clip: padding-box;
   transition: 0.3s;
   width: fit-content;
-  .fullWidth {
+  &.fullWidth {
     width: 100%;
   }
 
