@@ -78,11 +78,33 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
     },
   }, base?.secondary);
 
+  const smallIconButtonTheme = mergeThemePartial<IIconButtonTheme>({
+    normal: {
+      default: {
+        background: {
+          'padding': `${dimensions.paddingNarrow} ${dimensions.paddingNarrow}`,
+        },
+      },
+    },
+  }, base?.secondary);
+
+  const passiveIconButtonTheme = mergeThemePartial<IIconButtonTheme>({
+    normal: {
+      default: {
+        text: {
+          'color': '$colors.textLight50',
+        },
+      },
+    },
+  }, base?.secondary);
+
   return {
     ...base,
     default: defaultIconButtonTheme,
     primary: primaryIconButtonTheme,
     secondary: secondaryIconButtonTheme,
     tertiary: defaultIconButtonTheme,
+    small: smallIconButtonTheme,
+    passive: passiveIconButtonTheme,
   };
 }

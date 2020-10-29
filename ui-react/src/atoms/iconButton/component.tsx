@@ -62,8 +62,10 @@ export interface IIconButtonProps extends IComponentProps<IIconButtonTheme> {
 }
 
 export const IconButton = (props: IIconButtonProps): React.ReactElement => {
-  const onClicked = (): void => {
+  const onClicked = (event: React.SyntheticEvent): void => {
     if (props.onClicked) {
+      console.log('here');
+      event.stopPropagation();
       props.onClicked();
     }
   };
