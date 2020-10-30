@@ -2,6 +2,8 @@
 
 UI-React is a React component library for building powerful applications at scale.
 
+(Yes, we need a better name. If you have a suggestion, post here: https://github.com/kibalabs/ui-react/issues/12.)
+
 UI-React promotes strong separation between the theming and layout in your applications. This practice allows efficient, beautiful, consistent UIs to be built quickly by teams of all sizes.
 
 ## Documentation
