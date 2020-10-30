@@ -5,8 +5,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kibalabs/ui-react.git"
+    "url": "https://github.com/kibalabs/ui-react.git",
+    "directory": "ui-react"
   },
+  "homepage": "https://ui-react-docs.kibalabs.com",
+  "bugs": "https://github.com/kibalabs/ui-react/issues",
   "scripts": {
     "build": "build-react-component",
     "start": "build-react-component --start",
@@ -15,11 +18,11 @@
     "storybook": "start-storybook --docs --port 6006",
     "build-storybook": "build-storybook --docs --output-dir dist"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "files": [
     "dist/*"
   ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
     "@kibalabs/core": "^0.4.4",
     "@kibalabs/core-react": "^0.4.4",
