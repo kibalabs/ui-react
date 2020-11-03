@@ -44,7 +44,9 @@ export interface IWebViewProps extends IComponentProps<IWebViewTheme> {
   url: string;
   errorView: React.FunctionComponent;
   permissions: string[];
+  shouldShowLoadingSpinner: boolean;
   title?: string;
+  onLoadingChanged?: (isLoading: boolean) => void;
 }
 
 export const WebView = (props: IWebViewProps): React.ReactElement => {
@@ -72,10 +74,14 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
     const iframe: HTMLIFrameElement = event.target as HTMLIFrameElement;
     if (!(iframe && iframe.contentWindow && iframe.contentWindow.window && iframe.contentWindow.window.length > 0)) {
       // setHasFailedToLoad(true);
-    } else {
-      iframe.contentWindow.console.log = (): void => { /* no-op */ };
     }
   };
+
+  React.useEffect((): void => {
+    if (props.onLoadingChanged) {
+      props.onLoadingChanged(isLoading);
+    }
+  }, [props.onLoadingChanged, isLoading])
 
   return (
     <StyledWebView
@@ -99,7 +105,7 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
         ? props.errorView
         : (
           <React.Fragment>
-            { isLoading && (
+            { isLoading && props.shouldShowLoadingSpinner && (
               <LoadingWrapper id={props.id && `${props.id}-loading-wrapper`}>
                 <LoadingSpinner id={props.id && `${props.id}-loading-spinner`} className={'web-view-loading-spinner'} />
               </LoadingWrapper>
@@ -127,6 +133,7 @@ WebView.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,
   shouldOpenSameTab: false,
+  shouldShowLoadingSpinner: true,
   title: 'Embedded View',
   permissions: [],
 };

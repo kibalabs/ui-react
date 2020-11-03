@@ -8,7 +8,7 @@ export const buildLinkThemes = (colors: IColorGuide, dimensions: IDimensionGuide
   const defaultLinkTheme = mergeTheme<ILinkTheme>({
     normal: {
       default: {
-        text: mergeTheme(textThemes.default, {
+      text: mergeTheme(textThemes.inherit, {
           'color': '$colors.brandPrimary',
           'text-decoration': 'underline',
         }),

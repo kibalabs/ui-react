@@ -21,7 +21,6 @@ export const buildColors = (base?: Partial<IColorGuide>): IColorGuide => {
   const error = base?.error || '#ff0033';
   const success = base?.success || '#22bb33';
 
-
   const colors = {
     ...base,
     brandPrimary: brandPrimary,
