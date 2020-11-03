@@ -21,3 +21,17 @@ jobs:
       uses: actions/checkout@v2
     - name: Build docker image
       run: docker build --file $DIRECTORY/storybook.Dockerfile $DIRECTORY
+  deploy-package:
+    name: Build package and deploy to npm with @next tag
+    runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Build docker image
+      run: docker build --tag $DOCKER_REPO/package:$DOCKER_TAG $DIRECTORY
+    - name: Create .npmrc file
+      run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+    - name: Publish ui-react package to npm
+      run: docker run -v $(pwd)/.npmrc:/root/.npmrc $DOCKER_REPO/package:$DOCKER_TAG npm publish --tag next
