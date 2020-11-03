@@ -20,7 +20,7 @@ jobs:
     - name: Create .npmrc file
       run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
     - name: Publish ui-react package to npm
-      run: docker run -v $(pwd)/.npmrc:/root/.npmrc $DOCKER_REPO/package:$DOCKER_TAG npm run publish
+      run: docker run -v $(pwd)/.npmrc:/root/.npmrc $DOCKER_REPO/package:$DOCKER_TAG npm publish
   deploy-storybook:
     name: Build storybook image and push to docker registry
     runs-on: ubuntu-latest

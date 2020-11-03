@@ -3,6 +3,8 @@ on:
   pull_request:
     branches: [ master ]
 env:
+  DOCKER_REPO: docker.pkg.github.com/${{ github.repository }}
+  DOCKER_TAG: latest
   DIRECTORY: ./ui-react
 jobs:
   build-package:
