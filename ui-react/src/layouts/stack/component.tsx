@@ -166,7 +166,10 @@ const withStackItem = (Component: React.ComponentType<IStyledStackItemProps>): R
   min-width: ${(props: IStyledStackItemProps): string => props.shrinkFactor ? '0' : 'none'};
   align-self: ${(props: IStyledStackItemProps): string => (props.alignment ? getFlexItemAlignment(props.alignment) : 'auto')};
   /* Fix for https://github.com/philipwalton/flexbugs#flexbug-2 */
-  max-width: 100%;
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    /* IE 10+ */
+    max-width: 100%;
+  }
   &.isHidden {
     display: none;
   }

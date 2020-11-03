@@ -8,17 +8,23 @@ import { IBoxTheme } from './theme';
 
 interface IStyledBoxProps {
   theme: IBoxTheme;
-  height: string;
-  width: string;
+  $height: string;
+  $width: string;
+  maxHeight: string;
+  maxWidth: string;
   blockType: string;
+  zIndex?: number;
 }
 
 const StyledBox = styled.div<IStyledBoxProps>`
   ${(props: IStyledBoxProps): string => themeToCss(props.theme)};
   box-sizing: border-box;
-  height: ${(props: IStyledBoxProps): string => props.height};
-  width: ${(props: IStyledBoxProps): string => props.width};
+  height: ${(props: IStyledBoxProps): string => props.$height};
+  width: ${(props: IStyledBoxProps): string => props.$width};
+  max-height: ${(props: IStyledBoxProps): string => props.maxHeight};
+  max-width: ${(props: IStyledBoxProps): string => props.maxWidth};
   display: ${(props: IStyledBoxProps): string => props.blockType};
+  z-index: ${(props: IStyledBoxProps): string => props.zIndex ? `${props.zIndex}` : 'auto'};
   &.scrollableVertically {
     overflow-y: auto;
   }
@@ -30,41 +36,39 @@ const StyledBox = styled.div<IStyledBoxProps>`
 export interface IBoxProps extends IComponentProps<IBoxTheme>, ISingleAnyChildProps {
   height?: string;
   width?: string;
+  maxHeight?: string;
+  maxWidth?: string;
+  zIndex?: number;
   isFullHeight: boolean;
   isFullWidth: boolean;
   isScrollableVertically: boolean;
   isScrollableHorizontally: boolean;
 }
 
-export const Box = (props: IBoxProps): React.ReactElement => {
+export const Box = React.forwardRef((props: IBoxProps, ref: React.RefObject<HTMLDivElement>): React.ReactElement => {
   const theme = useBuiltTheme('boxes', props.variant, props.theme);
-  let width = props.width || (props.isFullWidth ? '100%' : 'auto');
-  let height = props.height || (props.isFullHeight ? '100%' : 'auto');
+  const height = props.height || (props.isFullHeight ? '100%' : 'auto');
+  const width = props.width || (props.isFullWidth ? '100%' : 'auto');
+  const maxHeight = props.maxHeight || 'none';
+  const maxWidth = props.maxWidth || 'none';
   const blockType = width === '100%' ? 'block' : 'inline-block';
-  // NOTE(krish): this is because width=100% (which is default) won't take margin into account.
-  // It shouldn't be needed but kept here just in case
-  // if (theme.margin) {
-  //   const margin = calculateMargin(...theme.margin.split(' '));
-  //   if (width === '100%') {
-  //     width = `calc(100% - ${margin.marginLeft}px - ${margin.marginRight}px)`;
-  //   }
-  //   if (height === '100%') {
-  //     width = `calc(100% - ${margin.marginTop}px - ${margin.marginBottom}px)`;
-  //   }
-  // }
   return (
     <StyledBox
       id={props.id}
       className={getClassName(Box.displayName, props.className, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally')}
       theme={theme}
-      height={height}
-      width={width}
+      ref={ref}
+      $height={height}
+      $width={width}
+      maxHeight={maxHeight}
+      maxWidth={maxWidth}
       blockType={blockType}
+      zIndex={props.zIndex}
     >
       {props.children}
     </StyledBox>
   );
-};
+});
 
 Box.displayName = 'Box';
 Box.defaultProps = {

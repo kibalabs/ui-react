@@ -19,6 +19,19 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     'text-transform': 'inherit',
   }, base?.default);
 
+  const inheritTextTheme = mergeTheme<ITextTheme>({
+    'font-size': 'inherit',
+    'font-family': 'inherit',
+    'font-weight': 'inherit',
+    'color': 'inherit',
+    'line-height': 'inherit',
+    'text-decoration': 'inherit',
+    'margin': 'inherit',
+    'text-align': 'inherit',
+    'text-shadow': 'inherit',
+    'text-transform': 'inherit',
+  }, base?.default);
+
   const inlineTextTheme = mergeThemePartial<ITextTheme>({
   }, base?.inline);
 
@@ -51,6 +64,10 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
   const smallTextTheme = mergeThemePartial<ITextTheme>({
     'font-size': 'smaller',
   }, base?.small);
+
+  const largeTextTheme = mergeThemePartial<ITextTheme>({
+    'font-size': 'larger',
+  }, base?.large);
 
   const deletedTextTheme = mergeThemePartial<ITextTheme>({
     'text-decoration': 'line-through',
@@ -142,9 +159,18 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     'color': '$colors.brandPrimary',
   }, base?.colored);
 
+  const errorTextTheme = mergeThemePartial<ITextTheme>({
+    'color': '$colors.error',
+  }, base?.error);
+
+  const successTextTheme = mergeThemePartial<ITextTheme>({
+    'color': '$colors.success',
+  }, base?.success);
+
   return {
     ...base,
     default: textTheme,
+    inherit: inheritTextTheme,
     paragraph: paragraphTextTheme,
     inline: inlineTextTheme,
     bold: boldTextTheme,
@@ -154,6 +180,7 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     underline: underlineTextTheme,
     mark: markTextTheme,
     small: smallTextTheme,
+    large: largeTextTheme,
     deleted: deletedTextTheme,
     inserted: insertedTextTheme,
     subscript: subscriptTextTheme,
@@ -172,5 +199,7 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     unmargined: unmarginedTextTheme,
     margined: marginedTextTheme,
     colored: coloredTextTheme,
+    error: errorTextTheme,
+    success: successTextTheme,
   };
 }
