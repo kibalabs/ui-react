@@ -21,3 +21,20 @@ jobs:
       uses: actions/checkout@v2
     - name: Build docker image
       run: docker build --file $DIRECTORY/storybook.Dockerfile $DIRECTORY
+  deploy-package:
+    name: Build package and deploy to npm with @next tag
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_REPO: docker.pkg.github.com/${{ github.repository }}
+      DOCKER_TAG: latest
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Build docker image
+      run: docker build --tag $DOCKER_REPO/package:$DOCKER_TAG $DIRECTORY
+    - name: Create .npmrc file
+      run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+    # NOTE(krishan711): this is quite ugly - it uses the number of commits since the last tag to create the next prerelease.
+    - name: Publish ui-react package to npm
+      run: docker run -v $(pwd)/.npmrc:/root/.npmrc $DOCKER_REPO/package:$DOCKER_TAG /bin/bash -c "npm version prerelease --preid=$(git rev-list $(git describe --abbrev=0)..HEAD --count) && npm publish --tag next"
