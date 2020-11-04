@@ -20,4 +20,4 @@ jobs:
     - name: Create .npmrc file
       run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
     - name: Publish ui-react package to npm
-      run: docker run -v $(pwd)/.npmrc:/root/.npmrc $DOCKER_REPO/package:$DOCKER_TAG npm publish --tag next
+      run: docker run -v $(pwd)/.npmrc:/root/.npmrc $DOCKER_REPO/package:$DOCKER_TAG npm version pre-release && npm publish --tag next
