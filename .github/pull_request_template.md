@@ -2,7 +2,7 @@
 
 ## Description
 
-<!--- Describe your changes in detail -->
+<!--- Describe your changes -->
 
 ## Motivation and Context
 
