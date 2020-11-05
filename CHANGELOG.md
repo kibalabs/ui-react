@@ -13,6 +13,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Removed
 
+## [0.7.3] - 2020-11-05
+
+### Added
+- [MINOR] Added shouldShowLoadingSpinner prop to WebView
+- [MINOR] Added maxHeight, maxWidth and zIndex props to Box
+- [MINOR] Added inheritTextTheme to Text themes + Use this for base Link theme
+
+### Changed
+
+### Removed
+
 ## [0.7.2] - 2020-10-29
 
 ### Added
