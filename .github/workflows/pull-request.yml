@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [ master ]
 env:
-  DIRECTORY: ./ui-react
+  DIRECTORY: .
 jobs:
   build-package:
     name: Build package
