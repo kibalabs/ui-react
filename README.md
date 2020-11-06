@@ -194,6 +194,12 @@ Hopefully this starts to give you a sense of how powerful the separation of them
 
 // TODO(krishan711): we need way more documentation on this!
 
+## Contribute
+1. Ensure you have installed `node` and `npm`
+2. Run `npm install` to install dependencies
+3. Run `npm run start-dev`. This will start ui-react for local development with live reloading and give you instructions for using it locally in other packages.
+4. Run `npm run storybook`. This will start the storybook app at port 5000 on your local machine.
+
 ## Support
 
 UI-React is mostly written by me ([krishan711](https://twitter.com/krishan711)) at the moment. If you want help with contributing or even if you want help using UI-React in your own application just reach out, I'd love to help 🙌.
@@ -201,5 +207,7 @@ UI-React is mostly written by me ([krishan711](https://twitter.com/krishan711)) 
 ## Built with UI-React
 
 **[everypage](https://www.everypagehq.com)** - a website (landing page) builder which is actually just a thin, application-specific layer on top of UI-React. If you want to build a landing page just with JSON, check it out!
+
+**[everysize](https://github.com/kibalabs/everysize)** - a tool for checking your websites look great at multiple resolutions. This is a real must-have if you're using UI-React to build a responsive product! [Try it here](https://everysize-app.kibalabs.com).
 
 **[Appage](https://www.appage.io)** - a small application built on top of everypage. It lets you build a landing page for your mobile app in minutes!
