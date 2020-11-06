@@ -208,6 +208,6 @@ UI-React is mostly written by me ([krishan711](https://twitter.com/krishan711)) 
 
 **[everypage](https://www.everypagehq.com)** - a website (landing page) builder which is actually just a thin, application-specific layer on top of UI-React. If you want to build a landing page just with JSON, check it out!
 
-**[everysize](https://github.com/kibalabs/everysize)** - a tool for checking your websites look great at multiple resolutions. This is a real must-have if you're using UI-React to build a responsive product! [Try it here](https://everysize-app.kibalabs.com).
+**[everysize](https://github.com/kibalabs/everysize)** - a tool for checking your websites look great at multiple resolutions. This is a real must-have if you're using UI-React to build a responsive product - [try it here](https://everysize-app.kibalabs.com)!
 
 **[Appage](https://www.appage.io)** - a small application built on top of everypage. It lets you build a landing page for your mobile app in minutes!
