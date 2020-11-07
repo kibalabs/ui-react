@@ -1,5 +1,5 @@
 import { RecursivePartial } from '@kibalabs/core';
-import { darken, lighten } from '../../elements/colors/node_modules/polished';
+import { darken, lighten } from 'polished';
 
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IColorGuide, IDimensionGuide, IBoxTheme } from '../../elements';
