@@ -1,0 +1,36 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { Image, IImageProps } from '.';
+
+<Meta
+  component={Image}
+  title={'Particles/Image'}
+/>
+
+# Image
+
+<br/>
+
+export const Template = (args) => (
+  <Image {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{source: 'https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg', isLazyLoadable: false}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Circular'>
+    <Image variant='circular' source={'https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg'} isLazyLoadable={false} />
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO

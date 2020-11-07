@@ -1,0 +1,73 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { KibaIcon } from '.';
+import { IIconProps } from '../icon';
+
+<Meta
+  component={KibaIcon}
+  title={'Particles/KibaIcon'}
+/>
+
+# KibaIcon
+
+<br />
+
+export const Template = (args) => (
+  <KibaIcon {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{iconId: 'ion-cash'}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Ion Icon'>
+    <KibaIcon iconId={'ion-cash'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Material Icon'>
+    <KibaIcon iconId={'mui-account-box'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Feather Icon'>
+    <KibaIcon iconId={'feather-airplay'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Bootstrap Icon'>
+    <KibaIcon iconId={'bs-basket2'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Remix Icon'>
+    <KibaIcon iconId={'remix-honour'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Small Icon'>
+    <KibaIcon variant='small' iconId={'remix-honour'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Large Icon'>
+    <KibaIcon variant='large' iconId={'remix-honour'} />
+  </Story>
+</Canvas>
+
+### Theming
+
+See [Icon]()
