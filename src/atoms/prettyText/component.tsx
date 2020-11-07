@@ -6,7 +6,7 @@ import { IMultiAnyChildProps } from '@kibalabs/core-react';
 import { IComponentProps, defaultComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 import { useBuiltTheme } from '../../theming';
-import { TextAlignment, getTextTag, TextTag } from '../../subatoms/text';
+import { TextAlignment, getTextTag, TextTag } from '../../elements/text';
 import { IPrettyTextTheme } from './theme';
 
 interface IStyledPrettyTextProps {

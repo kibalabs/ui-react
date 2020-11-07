@@ -3,7 +3,7 @@ import { getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
 
 import { Grid } from '../grid';
-import { IDimensionGuide } from '../../subatoms';
+import { IDimensionGuide } from '../../elements';
 import { Alignment } from '../../model';
 import { ResponsiveField } from '../../util';
 

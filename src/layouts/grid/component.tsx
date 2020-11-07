@@ -5,7 +5,7 @@ import { IMultiChildProps, ISingleAnyChildProps, flattenChildren } from '@kibala
 
 import { Alignment, getFlexItemAlignment, getFlexContentAlignment } from '../../model';
 import { useDimensions } from '../../theming';
-import { IDimensionGuide } from '../../subatoms';
+import { IDimensionGuide } from '../../elements';
 import { PaddingView, IPaddingViewPaddingProps } from '../../wrappers/paddingView';
 import { ResponsiveField, getResponsiveCss } from '../../util';
 

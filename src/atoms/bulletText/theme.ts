@@ -1,5 +1,5 @@
 import { ThemeType, CssTheme } from '../../util';
-import { ITextTheme } from '../../subatoms';
+import { ITextTheme } from '../../elements';
 
 interface IBulletTheme extends CssTheme {
   'content': string;

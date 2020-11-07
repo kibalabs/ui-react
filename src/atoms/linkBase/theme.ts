@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { ThemeType, CssTheme } from '../../util';
-import { IBoxTheme } from '../../subatoms';
+import { IBoxTheme } from '../../elements';
 
 export interface ILinkBaseThemeInner extends CssTheme {
   opacity: string;

@@ -4,7 +4,7 @@ import { getClassName } from '@kibalabs/core';
 
 import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
 import { useDimensions } from '../../theming';
-import { IDimensionGuide } from '../../subatoms';
+import { IDimensionGuide } from '../../elements';
 
 interface IStyledContainingViewProps extends IWrapperProps {
   theme: IDimensionGuide;

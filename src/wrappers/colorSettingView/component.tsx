@@ -4,7 +4,7 @@ import { getClassName } from '@kibalabs/core';
 
 import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
 import { ColorProvider, useAlternateColors } from '../../theming';
-import { IColorGuide } from '../../subatoms';
+import { IColorGuide } from '../../elements';
 import { colorsToCss } from '../../util';
 
 interface IStyledColorSettingViewProps extends IWrapperProps {

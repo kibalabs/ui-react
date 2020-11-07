@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { ThemeType } from '../../util';
-import { IBoxTheme } from '../../subatoms';
+import { IBoxTheme } from '../../elements';
 
 export interface ILinePagerThemeBase extends ThemeType {
   background: IBoxTheme;

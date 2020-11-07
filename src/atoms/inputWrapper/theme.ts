@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { ThemeType } from '../../util';
-import { IBoxTheme, ITextTheme } from '../../subatoms';
+import { IBoxTheme, ITextTheme } from '../../elements';
 
 export interface IInputWrapperThemeBase extends ThemeType {
   text: ITextTheme;

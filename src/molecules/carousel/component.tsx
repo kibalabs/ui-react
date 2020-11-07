@@ -7,7 +7,7 @@ import { IMoleculeProps, defaultMoleculeProps } from '../moleculeProps';
 import { Stack } from '../../layouts';
 import { Direction, Alignment } from '../../model';
 import { IconButton, IIconButtonTheme } from '../../atoms';
-import { KibaIcon, IDimensionGuide, getScreenSize, ScreenSize } from '../../subatoms';
+import { KibaIcon, IDimensionGuide, getScreenSize, ScreenSize } from '../../elements';
 import { useDimensions } from '../../theming';
 import { ResponsiveField, CssConverter, fieldToResponsiveCss } from '../../util';
 
