@@ -4,7 +4,7 @@ import { getClassName } from '@kibalabs/core';
 
 import { IComponentProps, defaultComponentProps, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
 import { IButtonTheme } from './theme';
-import { IIconProps, Spacing, PaddingSize } from '../../elements';
+import { IIconProps, Spacing, PaddingSize } from '../../particles';
 
 interface IStyledButtonProps {
   theme: IButtonTheme;

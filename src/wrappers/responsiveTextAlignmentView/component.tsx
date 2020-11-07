@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getClassName } from '@kibalabs/core';
 
 import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
-import { TextAlignment, IDimensionGuide } from '../../elements';
+import { TextAlignment, IDimensionGuide } from '../../particles';
 import { useDimensions } from '../../theming';
 import { ResponsiveField, CssConverter, fieldToResponsiveCss } from '../../util';
 

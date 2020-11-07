@@ -115,7 +115,7 @@ The code generates this visual:
 
 ![Everypage Console Metadata Card](https://wml-images.s3-eu-west-1.amazonaws.com/ep-console-metadata.png)
 
-The important thing to notice here is that this code only includes the **layout** of the components. All the theming is done globally and accessed via **variants** on each of the atomic elements provided by UI-React (e.g. Box, Text and Stack). You can read more about this in our [Theming Goals documentation](https://ui-react-docs.kibalabs.com?path=/docs/introduction-theming-goals--page).
+The important thing to notice here is that this code only includes the **layout** of the components. All the theming is done globally and accessed via **variants** on each of the atomic particles provided by UI-React (e.g. Box, Text and Stack). You can read more about this in our [Theming Goals documentation](https://ui-react-docs.kibalabs.com?path=/docs/introduction-theming-goals--page).
 
 This practice makes new interfaces extremely quick to create and allows your components to be super re-usable.
 
@@ -123,7 +123,7 @@ This practice makes new interfaces extremely quick to create and allows your com
 
 To customize the theming in your application, you should provide a parameter to the `buildTheme` function. This parameter can contain a subset of an entire theme object (which you can find in buildTheme.ts in this project).
 
-Here's a simple example where just some colors are changed (see elements/colors/theme.ts):
+Here's a simple example where just some colors are changed (see particles/colors/theme.ts):
 
 ```ts
 const theme = buildTheme({

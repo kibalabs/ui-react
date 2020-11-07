@@ -1,16 +1,16 @@
 import { merge, RecursivePartial } from '@kibalabs/core';
 
 import { ITheme } from '.';
-import { buildColors, buildAlternateColors } from '../elements/colors';
-import { buildDimensions } from '../elements/dimensions';
-import { buildFonts } from '../elements/fonts';
-import { buildTextThemes } from '../elements/text';
-import { buildBoxThemes } from '../elements/box';
-import { buildIconThemes } from '../elements/icon';
-import { buildImageThemes } from '../elements/image';
-import { buildLoadingSpinnerThemes } from '../elements/loadingSpinner';
-import { buildPortalThemes } from '../elements/portal';
-import { buildVideoThemes } from '../elements/video';
+import { buildColors, buildAlternateColors } from '../particles/colors';
+import { buildDimensions } from '../particles/dimensions';
+import { buildFonts } from '../particles/fonts';
+import { buildTextThemes } from '../particles/text';
+import { buildBoxThemes } from '../particles/box';
+import { buildIconThemes } from '../particles/icon';
+import { buildImageThemes } from '../particles/image';
+import { buildLoadingSpinnerThemes } from '../particles/loadingSpinner';
+import { buildPortalThemes } from '../particles/portal';
+import { buildVideoThemes } from '../particles/video';
 import { buildBulletListThemes } from '../atoms/bulletList';
 import { buildBulletTextThemes } from '../atoms/bulletText';
 import { buildButtonThemes } from '../atoms/button';
@@ -58,7 +58,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     dimensions: dimensions,
     fonts: fonts,
 
-    // Elements
+    // Particles
     boxes: boxThemes,
     texts: textThemes,
     icons: iconThemes,

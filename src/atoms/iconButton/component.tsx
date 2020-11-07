@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getClassName } from '@kibalabs/core';
 
 import { IComponentProps, defaultComponentProps, themeToCss, useBuiltTheme } from '../..';
-import { IIconProps } from '../../elements/icon';
+import { IIconProps } from '../../particles/icon';
 import { IIconButtonTheme } from './theme';
 
 interface IStyledIconButtonProps {

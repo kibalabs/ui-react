@@ -4,7 +4,7 @@ import { getClassName } from '@kibalabs/core';
 
 import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
 import { useDimensions } from '../../theming';
-import { IDimensionGuide } from '../../elements';
+import { IDimensionGuide } from '../../particles';
 import { ResponsiveField, getResponsiveCss } from '../../util';
 
 interface IStyledResponsiveContainingViewProps extends IWrapperProps {

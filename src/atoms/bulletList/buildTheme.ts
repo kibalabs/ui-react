@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide, IDimensionGuide } from '../../elements';
+import { IColorGuide, IDimensionGuide } from '../../particles';
 import { IBulletListTheme } from './theme';
 
 export const buildBulletListThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base: RecursivePartial<Record<string, IBulletListTheme>>): ThemeMap<IBulletListTheme> => {

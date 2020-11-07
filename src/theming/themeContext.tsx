@@ -4,8 +4,8 @@ import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
 import { ITheme } from '..';
 import { mergeTheme, ThemeType, ThemeValue } from '../util';
-import { IColorGuide } from '../elements/colors';
-import { IDimensionGuide } from '../elements/dimensions';
+import { IColorGuide } from '../particles/colors';
+import { IDimensionGuide } from '../particles/dimensions';
 
 export const ThemeContext = React.createContext<ITheme | null>(null);
 

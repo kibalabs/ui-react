@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../elements';
+import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../particles';
 import { ILinkTheme } from './theme';
 
 export const buildLinkThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, ILinkTheme>>): ThemeMap<ILinkTheme> => {

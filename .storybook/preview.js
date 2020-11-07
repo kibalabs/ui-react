@@ -33,7 +33,7 @@ export const parameters = {
   },
   options: {
     storySort: {
-      order: ['Introduction', ['Welcome', 'Theming Goals', 'Architecture'], 'Elements', ['Colors', 'Dimensions', 'Fonts'], 'Atoms', 'Molecules', 'Organisms'],
+      order: ['Introduction', ['Welcome', 'Theming Goals', 'Architecture'], 'Particles', ['Colors', 'Dimensions', 'Fonts'], 'Atoms', 'Molecules', 'Organisms'],
     },
   },
 };

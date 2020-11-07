@@ -11,13 +11,13 @@ import { ThemeType, IBoxTheme, ITextTheme } from '.';
 
 The project defines components that follow a customized version of the [Atomic Design by Brad Frost](https://bradfrost.com/blog/post/atomic-web-design/) principles. We've extended and augmented the core principles in a few ways described below. I'd recommend reading up on atomic design when you get a chance but it's definitely not needed to use the library (it is if you want to contribute though).
 
-## Elements
+## Particles
 
-These are the basic building blocks on which most other components in UI-React will build. Element components only have one layer of theming, because these components are not used in stateful ways.
+These are the basic building blocks on which most other components in UI-React will build. Particle components only have one layer of theming, because these components are not used in stateful ways.
 
 ### Theming
 
-Elements have themes with only a single layer because they are intended to be used within other themable components.
+Particles have themes with only a single layer because they are intended to be used within other themable components.
 
 ```ts
 export interface IBoxTheme extends CssTheme, ThemeType {
@@ -33,9 +33,9 @@ export interface IBoxTheme extends CssTheme, ThemeType {
 }
 ```
 
-They can have variants to allow using elements directly in simple ways. For example, the `Text` element has variants: `title`, `subtitle`, `note`, as well as `header1`, `header2`, `header3`, `bold`, `italic` etc.
+They can have variants to allow using particles directly in simple ways. For example, the `Text` particle has variants: `title`, `subtitle`, `note`, as well as `header1`, `header2`, `header3`, `bold`, `italic` etc.
 
-NOTE(krishan711): I think the colors, dimensions and fonts should be pulled out from elements and moved to their own category.
+NOTE(krishan711): I think the colors, dimensions and fonts should be pulled out from particles and moved to their own category.
 
 ### Examples
 
@@ -46,7 +46,7 @@ NOTE(krishan711): I think the colors, dimensions and fonts should be pulled out 
 
 ## Atoms
 
-Atoms use elements and native components to build themable, stateful components. These components are intended to be used directly (or within molecules and organisms) to create a consistent UI.
+Atoms use particles and native components to build themable, stateful components. These components are intended to be used directly (or within molecules and organisms) to create a consistent UI.
 
 ### Theming
 
@@ -71,7 +71,7 @@ export interface IButtonThemeBase {
 }
 ```
 
-The `default > normal` theme for the atom should be specified in entirety, i.e. all the fields need to be filled in for the state, the base and every element theme in the base. The `RecursivePartial` definition allows all other theme paths to only specify their difference from the normal state. This works just like CSS and is implemented in exactly the same way - the alternate states are applied *over* the normal state.
+The `default > normal` theme for the atom should be specified in entirety, i.e. all the fields need to be filled in for the state, the base and every particle theme in the base. The `RecursivePartial` definition allows all other theme paths to only specify their difference from the normal state. This works just like CSS and is implemented in exactly the same way - the alternate states are applied *over* the normal state.
 
 So the "theme" object for a Button can look like this:
 
@@ -124,7 +124,7 @@ Current examples of atoms include:
 
 ## Molecules
 
-Molecules use atoms, elements and native components to create more complex visual components.
+Molecules use atoms, particles and native components to create more complex visual components.
 
 #### Theming
 

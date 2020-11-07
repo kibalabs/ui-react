@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getClassName } from '@kibalabs/core';
 
 import { IComponentProps, defaultComponentProps, themeToCss, useBuiltTheme } from '../..';
-import { Spacing, ScreenSize } from '../../elements';
+import { Spacing, ScreenSize } from '../../particles';
 import { ILinePagerTheme } from './theme';
 import { Direction } from '../../model';
 import { ResponsiveHidingView } from '../../wrappers';
