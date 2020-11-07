@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
-- [MAJOR] Renamed subatoms to particles
+- [MINOR] Renamed subatoms to particles
 
 ### Removed
 
