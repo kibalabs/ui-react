@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getClassName } from '@kibalabs/core';
 
 import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
-import { PaddingSize, getPaddingSize, IDimensionGuide } from '../../subatoms/dimensions';
+import { PaddingSize, getPaddingSize, IDimensionGuide } from '../../particles/dimensions';
 import { useDimensions } from '../../theming';
 
 export interface IPaddingViewPaddingProps {

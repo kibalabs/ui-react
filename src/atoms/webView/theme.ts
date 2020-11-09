@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { ThemeType } from '../../util';
-import { IBoxTheme } from '../../subatoms';
+import { IBoxTheme } from '../../particles';
 
 export interface IWebViewThemeBase extends ThemeType {
   background: IBoxTheme;

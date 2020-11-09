@@ -4,7 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
 import { IMoleculeProps, defaultMoleculeProps } from '../moleculeProps';
-import { Box, IBoxTheme, LoadingSpinner, ILoadingSpinnerTheme } from '../../subatoms';
+import { Box, IBoxTheme, LoadingSpinner, ILoadingSpinnerTheme } from '../../particles';
 import { ThemeType } from '../../util';
 ;
 

@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../subatoms';
+import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../particles';
 import { IIconButtonTheme } from './theme';
 
 export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IIconButtonTheme>>): ThemeMap<IIconButtonTheme> => {

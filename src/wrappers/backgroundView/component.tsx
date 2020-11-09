@@ -4,7 +4,7 @@ import { getClassName } from '@kibalabs/core';
 
 import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
 import { useColors } from '../../theming';
-import { IColorGuide } from '../../subatoms';
+import { IColorGuide } from '../../particles';
 import { valueToCss } from '../../util';
 
 export interface IBackgroundLayer {

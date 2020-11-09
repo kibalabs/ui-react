@@ -4,7 +4,7 @@ import { getClassName } from '@kibalabs/core';
 
 import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
 import { useDimensions } from '../../theming';
-import { IDimensionGuide, ScreenSize, getScreenSize } from '../../subatoms/dimensions';
+import { IDimensionGuide, ScreenSize, getScreenSize } from '../../particles/dimensions';
 
 interface IStyledResponsiveHidingViewProps extends IWrapperProps {
   hiddenAboveSize?: string;

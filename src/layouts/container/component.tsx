@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
-import { IDimensionGuide } from '../../subatoms';
+import { IDimensionGuide } from '../../particles';
 import { useDimensions } from '../../theming';
 
 interface IStyledContainerProps {

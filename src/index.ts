@@ -4,7 +4,7 @@ export * from './util';
 export * from './wrappers';
 export * from './layouts';
 export * from './atoms';
-export * from './subatoms';
+export * from './particles';
 export * from './molecules';
 export * from './organisms';
 

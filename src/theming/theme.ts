@@ -1,14 +1,14 @@
 import { ThemeMap, ThemeType } from '../util';
-import { IColorGuide } from '../subatoms/colors';
-import { IDimensionGuide } from '../subatoms/dimensions';
-import { IFont } from '../subatoms/fonts';
-import { ITextTheme } from '../subatoms/text';
-import { IBoxTheme } from '../subatoms/box';
-import { IIconTheme } from '../subatoms/icon';
-import { IImageTheme } from '../subatoms/image';
-import { IVideoTheme } from '../subatoms/video';
-import { ILoadingSpinnerTheme } from '../subatoms/loadingSpinner';
-import { IPortalTheme } from '../subatoms/portal';
+import { IColorGuide } from '../particles/colors';
+import { IDimensionGuide } from '../particles/dimensions';
+import { IFont } from '../particles/fonts';
+import { ITextTheme } from '../particles/text';
+import { IBoxTheme } from '../particles/box';
+import { IIconTheme } from '../particles/icon';
+import { IImageTheme } from '../particles/image';
+import { IVideoTheme } from '../particles/video';
+import { ILoadingSpinnerTheme } from '../particles/loadingSpinner';
+import { IPortalTheme } from '../particles/portal';
 import { IBulletListTheme } from '../atoms/bulletList';
 import { IBulletTextTheme } from '../atoms/bulletText';
 import { IButtonTheme } from '../atoms/button';
@@ -29,7 +29,7 @@ export interface ITheme extends ThemeType {
   dimensions: IDimensionGuide,
   fonts: Record<string, IFont>,
 
-  // Subatoms
+  // Particles
   boxes: ThemeMap<IBoxTheme>,
   texts: ThemeMap<ITextTheme>,
   icons: ThemeMap<IIconTheme>,

@@ -115,15 +115,15 @@ The code generates this visual:
 
 ![Everypage Console Metadata Card](https://wml-images.s3-eu-west-1.amazonaws.com/ep-console-metadata.png)
 
-The important thing to notice here is that this code only includes the **layout** of the components. All the theming is done globally and accessed via **variants** on each of the atomic elements provided by UI-React (e.g. Box, Text and Stack). You can read more about this in our [Theming Goals documentation](https://ui-react-docs.kibalabs.com?path=/docs/introduction-theming-goals--page).
+The important thing to notice here is that this code only includes the **layout** of the components. All the theming is done globally and accessed via **variants** on each of the atomic particles provided by UI-React (e.g. Box, Text and Stack). You can read more about this in our [Theming Goals documentation](https://ui-react-docs.kibalabs.com?path=/docs/introduction-theming-goals--page).
 
-This practice makes new interfaces extremely quick to create and allows your components to be supre re-usable.
+This practice makes new interfaces extremely quick to create and allows your components to be super re-usable.
 
 ### Customizing your theme
 
 To customize the theming in your application, you should provide a parameter to the `buildTheme` function. This parameter can contain a subset of an entire theme object (which you can find in buildTheme.ts in this project).
 
-Here's a simple example where just some colors are changed (see subatoms/colors/theme.ts):
+Here's a simple example where just some colors are changed (see particles/colors/theme.ts):
 
 ```ts
 const theme = buildTheme({
@@ -208,6 +208,6 @@ UI-React is mostly written by me ([krishan711](https://twitter.com/krishan711)) 
 
 **[everypage](https://www.everypagehq.com)** - a website (landing page) builder which is actually just a thin, application-specific layer on top of UI-React. If you want to build a landing page just with JSON, check it out!
 
-**[everysize](https://everysize-app.kibalabs.com)** \[[open souce](https://github.com/kibalabs/everysize)\] - a tool for checking your websites look great at multiple resolutions. This is a real must-have if you're using UI-React to build a responsive product!
+**[everysize](https://everysize-app.kibalabs.com)** \[[open source](https://github.com/kibalabs/everysize-app)\] - a tool for checking your websites look great at multiple resolutions. This is a real must-have if you're using UI-React to build a responsive product!
 
 **[Appage](https://www.appage.io)** - a small application built on top of everypage. It lets you build a landing page for your mobile app in minutes!

@@ -5,7 +5,7 @@ import { getClassName } from '@kibalabs/core';
 import { IMoleculeProps, defaultMoleculeProps } from '../moleculeProps';
 import { ProgressCounterItem, IProgressCounterItemTheme } from '../../atoms';
 import { Direction } from '../../model';
-import { PaddingSize, Spacing } from '../../subatoms';
+import { PaddingSize, Spacing } from '../../particles';
 
 export interface IProgressCounterTheme {
   progressCounterItemTheme: IProgressCounterItemTheme;

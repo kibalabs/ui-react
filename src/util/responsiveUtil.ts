@@ -1,4 +1,4 @@
-import { IDimensionGuide } from '../subatoms';
+import { IDimensionGuide } from '../particles';
 
 export const getResponsiveCss = (screenWidth: string, css: string): string => {
   return `@media (min-width: ${screenWidth}) { ${css} }`;

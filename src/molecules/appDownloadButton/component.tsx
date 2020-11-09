@@ -3,7 +3,7 @@ import { getClassName, KibaException } from '@kibalabs/core';
 
 import { IMoleculeProps, defaultMoleculeProps } from '..';
 import { LinkBase } from '../../atoms/linkBase';
-import { Image } from '../../subatoms/image';
+import { Image } from '../../particles/image';
 
 export interface AppDownloadButtonTheme {
 }
