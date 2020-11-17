@@ -155,7 +155,7 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     'margin': '1em 0 0.5em 0',
   }, base?.margined);
 
-  const coloredTextTheme = mergeThemePartial<ITextTheme>({
+  const brandedTextTheme = mergeThemePartial<ITextTheme>({
     'color': '$colors.brandPrimary',
   }, base?.colored);
 
@@ -198,7 +198,8 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     supersize: supersizeTextTheme,
     unmargined: unmarginedTextTheme,
     margined: marginedTextTheme,
-    colored: coloredTextTheme,
+    colored: brandedTextTheme,
+    branded: brandedTextTheme,
     error: errorTextTheme,
     success: successTextTheme,
   };
