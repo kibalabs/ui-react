@@ -40,6 +40,15 @@ export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionG
   const translucentLinkBaseTheme = mergeThemePartial<ILinkBaseTheme>({
   }, base?.translucent);
 
+  const cardLinkBaseTheme = mergeThemePartial<ILinkBaseTheme>({
+    normal: {
+      default: {
+        background: mergeTheme(boxThemes.card, boxThemes.focusable, {
+        }),
+      }
+    }
+  }, base?.card);
+
   const imageLinkBaseTheme = mergeThemePartial<ILinkBaseTheme>({
     normal: {
       hover: {
@@ -59,6 +68,7 @@ export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionG
     ...base,
     default: defaultLinkBaseTheme,
     translucent: translucentLinkBaseTheme,
+    card: cardLinkBaseTheme,
     image: imageLinkBaseTheme,
   };
 }

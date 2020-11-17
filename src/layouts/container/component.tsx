@@ -9,7 +9,6 @@ import { useDimensions } from '../../theming';
 interface IStyledContainerProps {
   theme: IDimensionGuide;
   isFullHeight: boolean;
-  isMainContainer?: boolean;
 }
 
 const StyledContainer = styled.div<IStyledContainerProps>`
