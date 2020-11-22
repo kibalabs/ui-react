@@ -46,10 +46,40 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     },
   }, base?.primary);
 
+  const errorPillTheme = mergeThemePartial<IPillTheme>({
+    normal: {
+      default: {
+        background: {
+          'background-color': '$colors.errorClear75',
+          'border-color': '$colors.errorLight10',
+        },
+        text: {
+          'color': '$colors.errorLight10',
+        },
+      },
+    },
+  });
+
+  const successPillTheme = mergeThemePartial<IPillTheme>({
+    normal: {
+      default: {
+        background: {
+          'background-color': '$colors.successClear75',
+          'border-color': '$colors.successLight10',
+        },
+        text: {
+          'color': '$colors.successLight10',
+        },
+      },
+    },
+  });
+
   return {
     ...base,
     default: defaultPillTheme,
     primary: primaryPillTheme,
     secondary: secondaryPillTheme,
+    error: errorPillTheme,
+    success: successPillTheme,
   };
 }
