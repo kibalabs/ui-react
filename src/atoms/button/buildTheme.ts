@@ -22,7 +22,7 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
           'background-color': '$colors.brandPrimaryClear90',
         },
       },
-      press: {
+    press: {
         background: {
           'background-color': '$colors.brandPrimaryClear80',
         },
