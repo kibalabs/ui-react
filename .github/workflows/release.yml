@@ -38,6 +38,7 @@ jobs:
       RUNNABLE_DIRECTORY: deployments/${{ github.repository }}/${{ github.sha }}
       REPOSITORY_URL: git@github.com:${{ github.repository }}
     steps:
+      - name: executing remote ssh commands
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.FREEBOX_URL }}
