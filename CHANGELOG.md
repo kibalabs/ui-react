@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+## [0.7.4] - 2020-11-22
+
+### Added
 - [MINOR] Added pill component
 - [MINOR] New 'card' variant for LinkBase
 
