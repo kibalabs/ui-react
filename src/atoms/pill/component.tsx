@@ -14,7 +14,7 @@ const StyledPill = styled.div<IStyledPillProps>`
   ${(props: IStyledPillProps): string => themeToCss(props.theme.normal.default.text)};
   ${(props: IStyledPillProps): string => themeToCss(props.theme.normal.default.background)};
   outline: none;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
