@@ -16,6 +16,7 @@ import { ILinkBaseTheme } from '../atoms/linkBase';
 import { IIconButtonTheme } from '../atoms/iconButton';
 import { IInputWrapperTheme } from '../atoms/inputWrapper';
 import { ILinkTheme } from '../atoms/link';
+import { IPillTheme } from '../atoms/pill';
 import { IPrettyTextTheme } from '../atoms/prettyText';
 import { IWebViewTheme } from '../atoms/webView';
 import { ILinePagerTheme } from '../atoms/linePager';
@@ -35,6 +36,7 @@ export interface ITheme extends ThemeType {
   icons: ThemeMap<IIconTheme>,
   images: ThemeMap<IImageTheme>,
   loadingSpinners: ThemeMap<ILoadingSpinnerTheme>,
+  pills: ThemeMap<IPillTheme>,
   portals: ThemeMap<IPortalTheme>,
   videos: ThemeMap<IVideoTheme>,
 

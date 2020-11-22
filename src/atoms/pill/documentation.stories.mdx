@@ -1,0 +1,67 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { Pill, IPillProps } from '.';
+import { PaddingSize, KibaIcon } from '../../particles';
+
+<Meta
+  component={Pill}
+  title={'Atoms/Pill'}
+/>
+
+# Pill
+
+<br/>
+
+export const Template = (args) => (
+  <Pill {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{text: 'Default Pill'}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Primary'>
+    <Pill variant='primary' text='Primary Pill'/>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Secondary'>
+    <Pill variant='secondary' text='Secondary Pill'/>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Success'>
+    <Pill variant='success' text='Success Pill'/>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Error'>
+    <Pill variant='error' text='Error Pill'/>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Right Icon'>
+    <Pill iconRight={<KibaIcon iconId='ion-aperture' />} text='Pill With Right Icon'/>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Left Icon'>
+    <Pill iconLeft={<KibaIcon iconId='ion-aperture' />} text='Pill With Left Icon'/>
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO

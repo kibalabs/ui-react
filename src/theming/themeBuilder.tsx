@@ -18,6 +18,7 @@ import { buildIconButtonThemes } from '../atoms/iconButton';
 import { buildInputWrapperThemes } from '../atoms/inputWrapper';
 import { buildLinkThemes } from '../atoms/link';
 import { buildLinkBaseThemes } from '../atoms/linkBase';
+import { buildPillThemes } from '../atoms/pill';
 import { buildPrettyTextThemes } from '../atoms/prettyText';
 import { buildWebViewThemes } from '../atoms/webView';
 import { buildLinePagerThemes } from '../atoms/linePager';
@@ -45,6 +46,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const inputWrapperThemes = buildInputWrapperThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.inputWrappers);
   const linkBaseThemes = buildLinkBaseThemes(colors, dimensions, boxThemes, inputTheme?.linkBases);
   const linkThemes = buildLinkThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.links);
+  const pillThemes = buildPillThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.pills);
   const prettyTextThemes = buildPrettyTextThemes(colors, dimensions, textThemes, inputTheme?.prettyTexts);
   const webViewThemes = buildWebViewThemes(colors, dimensions, boxThemes, inputTheme?.webViews);
   const linePagerThemes = buildLinePagerThemes(colors, dimensions, boxThemes, inputTheme?.linePagers);
@@ -64,6 +66,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     icons: iconThemes,
     images: imageThemes,
     loadingSpinners: loadingSpinnerThemes,
+    pills: pillThemes,
     portals: portalThemes,
     videos: videoThemes,
 
