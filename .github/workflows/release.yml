@@ -48,7 +48,7 @@ jobs:
           script_stop: true
           script: |
             rm -rf $RUNNABLE_DIRECTORY
-            git clone $REPOSITORY_URL $RUNNABLE_DIRECTORY
+            git clone --depth 1 $REPOSITORY_URL $RUNNABLE_DIRECTORY
             cd $RUNNABLE_DIRECTORY
             ./run.sh
   create-release:
