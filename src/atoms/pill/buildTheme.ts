@@ -9,23 +9,14 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          'padding': `${dimensions.padding} ${dimensions.paddingWide}`,
-          'background-color': 'transparent',
+          'padding': `${dimensions.padding} ${dimensions.paddingWide2}`,
+          'background-color': '$colors.brandPrimaryClear75',
+          'border-radius': `${dimensions.paddingWide2}`,
         }),
-        text: mergeTheme(textThemes.default, {
+        text: mergeTheme(textThemes.default, textThemes.small, {
           'color': '$colors.brandPrimary',
           'font-weight': '600',
         }),
-      },
-    },
-    disabled: {
-      default: {
-        background: {
-          'background-color': '$colors.disabled',
-        },
-        text: {
-          'color': '$colors.disabledText',
-        },
       },
     },
   }, base?.default);
@@ -34,11 +25,9 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     normal: {
       default: {
         background: {
-          'background-color': '$colors.brandPrimary',
           'border-color': '$colors.brandPrimary',
         },
         text: {
-          'color': '$colors.textOnBrand',
         },
       },
     },
@@ -48,11 +37,14 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     normal: {
       default: {
         background: {
-          'border-color': '$colors.brandPrimary',
+          'background-color': '$colors.brandPrimaryClear25',
+        },
+        text: {
+          'color': '$colors.textOnBrand',
         },
       },
     },
-  }, base?.secondary);
+  }, base?.primary);
 
   return {
     ...base,
