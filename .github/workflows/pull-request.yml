@@ -6,7 +6,6 @@ env:
   DIRECTORY: .
 jobs:
   build-package:
-    name: Build package
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repo
@@ -14,7 +13,6 @@ jobs:
     - name: Build docker image
       run: docker build $DIRECTORY
   build-storybook:
-    name: Build storybook image
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repo
