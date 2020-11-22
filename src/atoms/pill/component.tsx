@@ -19,7 +19,6 @@ const StyledPill = styled.div<IStyledPillProps>`
   align-items: center;
   justify-content: center;
   background-clip: border-box;
-  transition-duration: 0.3s;
   &.fullWidth {
     width: 100%;
   }
@@ -31,7 +30,6 @@ export interface IPillProps extends IComponentProps<IPillTheme> {
   iconRight?: React.ComponentClass<IIconProps>;
   iconLeft?: React.ComponentClass<IIconProps>;
   iconGutter?: PaddingSize;
-  onClicked?(): void;
 }
 
 export const Pill = (props: IPillProps): React.ReactElement => {
