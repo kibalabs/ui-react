@@ -38,7 +38,7 @@ jobs:
       RUNNABLE_DIRECTORY: deployments/${{ github.repository }}/${{ github.sha }}
       REPOSITORY_URL: git@github.com:${{ github.repository }}
     steps:
-      - name: executing remote ssh commands using password
+      - name: executing remote ssh commands
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.FREEBOX_URL }}
@@ -48,7 +48,7 @@ jobs:
           script_stop: true
           script: |
             rm -rf $RUNNABLE_DIRECTORY
-            git clone $REPOSITORY_URL $RUNNABLE_DIRECTORY
+            git clone --depth 1 $REPOSITORY_URL $RUNNABLE_DIRECTORY
             cd $RUNNABLE_DIRECTORY
             ./run.sh
   create-release:

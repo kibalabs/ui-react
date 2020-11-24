@@ -7,6 +7,7 @@ export * from './iconButton';
 export * from './inputWrapper';
 export * from './link';
 export * from './linePager';
+export * from './pill';
 export * from './progressCounterItem';
 export * from './tabBarItem';
 export * from './webView';
