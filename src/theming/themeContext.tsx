@@ -1,6 +1,6 @@
 import React from 'react';
 import { RecursivePartial} from '@kibalabs/core';
-import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import { IMultiAnyChildProps } from '@kibalabs/core-react';
 
 import { ITheme } from '..';
 import { mergeTheme, ThemeType, ThemeValue } from '../util';
@@ -9,7 +9,7 @@ import { IDimensionGuide } from '../particles/dimensions';
 
 export const ThemeContext = React.createContext<ITheme | null>(null);
 
-interface IThemeProviderProps extends ISingleAnyChildProps {
+interface IThemeProviderProps extends IMultiAnyChildProps {
   theme: ITheme;
 }
 
@@ -58,7 +58,7 @@ export function useAlternateColors(name?: string): Partial<IColorGuide> {
 
 export const ColorContext = React.createContext<IColorGuide | null>(null);
 
-interface IColorProviderProps extends ISingleAnyChildProps {
+interface IColorProviderProps extends IMultiAnyChildProps {
   colors: IColorGuide;
 }
 

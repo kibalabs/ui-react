@@ -21,9 +21,8 @@ const withContainingView = (Component: React.ComponentType<IStyledContainingView
 `;
 
 const StyledContainingView = withContainingView((props: IStyledContainingViewProps): React.ReactElement => {
-  const children = React.Children.toArray(props.children);
-  const child = children.length > 0 ? children[0] : <div />;
-  return React.cloneElement(child, { className: getClassName(props.className, child.props.className) });
+  const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
+  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })))
 });
 
 export interface IContainingViewProps extends IWrapperProps {
