@@ -21,13 +21,12 @@ const StyledImage = styled.img<IStyledImageProps>`
   object-fit: ${(props: IStyledImageProps): string => (props.fitType === 'crop' || props.fitType == 'cover' ? 'cover' : props.fitType === 'contain' ? 'contain' : 'fill')};
   max-width: 100%;
   max-height: 100%;
-  display: block;
 
   .no-js &.lazyload {
     display: none;
   }
 
-  // fade image in after lazy load
+  // fade in after lazy load
   &.lazyload, &.lazyloading {
     opacity: 0;
   }
@@ -37,7 +36,7 @@ const StyledImage = styled.img<IStyledImageProps>`
     transition: opacity 0.15s;
   }
 
-  /* TODO(krish): should all things be like this? */
+  // TODO(krish): should all things be like this?
   &.centered {
     margin-left: auto;
     margin-right: auto;
@@ -47,11 +46,11 @@ const StyledImage = styled.img<IStyledImageProps>`
 export interface IImageProps extends IComponentProps<IImageTheme> {
   source: string;
   alternativeText: string;
-  isFullWidth: boolean;
-  isFullHeight: boolean;
-  isCenteredHorizontally: boolean;
   fitType: 'crop' | 'cover' | 'scale' | 'contain';
-  isLazyLoadable: boolean;
+  isFullWidth?: boolean;
+  isFullHeight?: boolean;
+  isCenteredHorizontally?: boolean;
+  isLazyLoadable?: boolean;
 }
 
 export const Image = (props: IImageProps): React.ReactElement => {
@@ -66,8 +65,8 @@ export const Image = (props: IImageProps): React.ReactElement => {
         data-src={props.source}
         alt={props.alternativeText}
         fitType={props.fitType}
-        isFullWidth={props.isFullWidth}
-        isFullHeight={props.isFullHeight}
+        isFullWidth={Boolean(props.isFullWidth)}
+        isFullHeight={Boolean(props.isFullHeight)}
       />
       {props.isLazyLoadable && (
         <noscript>
@@ -78,8 +77,8 @@ export const Image = (props: IImageProps): React.ReactElement => {
             src={props.source}
             alt={props.alternativeText}
             fitType={props.fitType}
-            isFullWidth={props.isFullWidth}
-            isFullHeight={props.isFullHeight}
+            isFullWidth={Boolean(props.isFullWidth)}
+            isFullHeight={Boolean(props.isFullHeight)}
           />
         </noscript>
       )}
@@ -91,8 +90,4 @@ Image.displayName = 'Image';
 Image.defaultProps = {
   ...defaultComponentProps,
   fitType: 'scale',
-  isFullWidth: false,
-  isFullHeight: false,
-  isCenteredHorizontally: false,
-  isLazyLoadable: false,
 };
