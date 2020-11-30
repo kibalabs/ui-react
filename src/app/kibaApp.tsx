@@ -30,7 +30,7 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
     if (isRunningOnBrowser) {
       var elements = Array.from(document.getElementsByClassName('no-js'));
       elements.forEach((element: HTMLElement) => {
-        element.className += 'js';
+        element.classList.add('js');
         element.classList.remove('no-js');
       });
     }
