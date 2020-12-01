@@ -6,7 +6,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/kibalabs/ui-react.git",
-    "directory": "ui-react"
   },
   "homepage": "https://ui-react-docs.kibalabs.com",
   "bugs": "https://github.com/kibalabs/ui-react/issues",
