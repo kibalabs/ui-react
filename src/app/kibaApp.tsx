@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getClassName } from '@kibalabs/core';
-import { IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
+import { IMultiAnyChildProps } from '@kibalabs/core-react';
 
 import { GlobalCss } from './globalCss';
 import { resetCss } from './resetCss';
 import { ITheme, ThemeProvider } from '../theming';
+import { isRunningOnBrowser } from '../util';
 
 interface IKibaAppProps extends IMultiAnyChildProps {
   theme: ITheme;
@@ -25,24 +26,13 @@ const StyledMainView = withMain((props: IStyledMainViewProps): React.ReactElemen
 });
 
 export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
-  useInitialization((): void => {
-    const isRunningOnBrowser = typeof window !== 'undefined';
-    if (isRunningOnBrowser) {
-      var elements = Array.from(document.getElementsByClassName('no-js'));
-      elements.forEach((element: HTMLElement) => {
-        element.classList.add('js');
-        element.classList.remove('no-js');
-      });
-    }
-  });
-
   return (
     <ThemeProvider theme={props.theme}>
       <GlobalCss
         theme={props.theme}
         resetCss={resetCss}
       />
-      <StyledMainView className='no-js'>
+      <StyledMainView className={getClassName(isRunningOnBrowser() ? 'js' : 'no-js')}>
         {props.children}
       </StyledMainView>
     </ThemeProvider>
