@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Added
 - [MINOR] Fix pill export
+- [MINOR] Add no-js class to main components and change to js if enabled in browser
 
 ### Changed
 - [MAJOR] Change Image, Video, Media to not be lazy loadable by default
