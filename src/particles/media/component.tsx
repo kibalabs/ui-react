@@ -11,11 +11,11 @@ export interface IMediaTheme extends ThemeType {
 export interface IMediaProps extends IComponentProps<IMediaTheme> {
   source: string;
   alternativeText: string;
-  isFullWidth: boolean;
-  isFullHeight: boolean;
-  isCenteredHorizontally: boolean;
-  fitType: 'crop' | 'scale';
-  isLazyLoadable: boolean;
+  fitType: 'crop' | 'cover' | 'scale' | 'contain';
+  isFullWidth?: boolean;
+  isFullHeight?: boolean;
+  isCenteredHorizontally?: boolean;
+  isLazyLoadable?: boolean;
 }
 
 export const Media = (props: IMediaProps): React.ReactElement => {
@@ -35,8 +35,4 @@ Media.displayName = 'Media';
 Media.defaultProps = {
   ...defaultComponentProps,
   fitType: 'scale',
-  isFullWidth: false,
-  isFullHeight: false,
-  isCenteredHorizontally: false,
-  isLazyLoadable: true,
 };

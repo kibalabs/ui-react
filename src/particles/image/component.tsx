@@ -9,7 +9,7 @@ export interface IStyledImageProps {
   theme: IImageTheme;
   isFullWidth: boolean;
   isFullHeight: boolean;
-  fitType: 'crop' | 'scale' | 'contain';
+  fitType: 'crop' | 'cover' | 'scale' | 'contain';
 }
 
 const StyledImage = styled.img<IStyledImageProps>`
@@ -18,14 +18,25 @@ const StyledImage = styled.img<IStyledImageProps>`
   pointer-events: none;
   width: ${(props: IStyledImageProps): string => (props.isFullWidth ? '100%' : 'auto')};
   height: ${(props: IStyledImageProps): string => (props.isFullHeight ? '100%' : 'auto')};
-  object-fit: ${(props: IStyledImageProps): string => (props.fitType === 'crop' ? 'cover' : props.fitType === 'contain' ? 'contain' : 'fill')};
+  object-fit: ${(props: IStyledImageProps): string => (props.fitType === 'crop' || props.fitType == 'cover' ? 'cover' : props.fitType === 'contain' ? 'contain' : 'fill')};
+  max-width: 100%;
+  max-height: 100%;
 
-  &.lazyloaded, &.unlazy {
-    max-width: 100%;
-    max-height: 100%;
+  .no-js &.lazyload {
+    display: none;
   }
 
-  /* TODO(krish): should all things be like this? */
+  // fade in after lazy load
+  &.lazyload, &.lazyloading {
+    opacity: 0;
+  }
+  &.lazyloaded {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.15s;
+  }
+
+  // TODO(krish): should all things be like this?
   &.centered {
     margin-left: auto;
     margin-right: auto;
@@ -35,27 +46,43 @@ const StyledImage = styled.img<IStyledImageProps>`
 export interface IImageProps extends IComponentProps<IImageTheme> {
   source: string;
   alternativeText: string;
-  isFullWidth: boolean;
-  isFullHeight: boolean;
-  isCenteredHorizontally: boolean;
-  fitType: 'crop' | 'scale' | 'contain';
-  isLazyLoadable: boolean;
+  fitType: 'crop' | 'cover' | 'scale' | 'contain';
+  isFullWidth?: boolean;
+  isFullHeight?: boolean;
+  isCenteredHorizontally?: boolean;
+  isLazyLoadable?: boolean;
 }
 
 export const Image = (props: IImageProps): React.ReactElement => {
   const theme = useBuiltTheme('images', props.variant, props.theme);
   return (
-    <StyledImage
-      id={props.id}
-      className={getClassName(Image.displayName, props.className, props.isLazyLoadable ? 'lazyload' : 'unlazy', props.isCenteredHorizontally && 'centered')}
-      theme={theme}
-      src={props.isLazyLoadable ? undefined : props.source}
-      data-src={props.source}
-      alt={props.alternativeText}
-      fitType={props.fitType}
-      isFullWidth={props.isFullWidth}
-      isFullHeight={props.isFullHeight}
-    />
+    <React.Fragment>
+      <StyledImage
+        id={props.id}
+        className={getClassName(Image.displayName, props.className, props.isLazyLoadable ? 'lazyload' : 'unlazy', props.isCenteredHorizontally && 'centered')}
+        theme={theme}
+        src={props.isLazyLoadable ? undefined : props.source}
+        data-src={props.source}
+        alt={props.alternativeText}
+        fitType={props.fitType}
+        isFullWidth={Boolean(props.isFullWidth)}
+        isFullHeight={Boolean(props.isFullHeight)}
+      />
+      {props.isLazyLoadable && (
+        <noscript>
+          <StyledImage
+            id={props.id}
+            className={getClassName(Image.displayName, props.className, 'unlazy', props.isCenteredHorizontally && 'centered')}
+            theme={theme}
+            src={props.source}
+            alt={props.alternativeText}
+            fitType={props.fitType}
+            isFullWidth={Boolean(props.isFullWidth)}
+            isFullHeight={Boolean(props.isFullHeight)}
+          />
+        </noscript>
+      )}
+    </React.Fragment>
   );
 };
 
@@ -63,8 +90,4 @@ Image.displayName = 'Image';
 Image.defaultProps = {
   ...defaultComponentProps,
   fitType: 'scale',
-  isFullWidth: false,
-  isFullHeight: false,
-  isCenteredHorizontally: false,
-  isLazyLoadable: true,
 };
