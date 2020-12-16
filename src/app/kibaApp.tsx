@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getClassName } from '@kibalabs/core';
-import { IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
+import { IMultiAnyChildProps, useInitialization, getIsRunningOnBrowser } from '@kibalabs/core-react';
 
 import { GlobalCss } from './globalCss';
 import { resetCss } from './resetCss';
 import { ITheme, ThemeProvider } from '../theming';
-import { getIsRunningOnBrowser } from '../util';
 
 import 'lazysizes';
 import 'lazysizes/plugins/attrchange/ls.attrchange';
