@@ -13,25 +13,16 @@ import 'lazysizes/plugins/attrchange/ls.attrchange';
 
 interface IKibaAppProps extends IMultiAnyChildProps {
   theme: ITheme;
+  isRunningOnServer?: boolean;
 }
 
-interface IStyledMainViewProps extends IMultiAnyChildProps {
-  className: string;
-}
-
-const withMain = (Component: React.ComponentType<IStyledMainViewProps>): React.ComponentType => styled(Component)<IStyledMainViewProps>`
+const StyledMainView = styled.div`
   min-height: 100vh;
 `;
 
-const StyledMainView = withMain((props: IStyledMainViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
-  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })))
-});
-
 export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
   // NOTE(krish): the default is false because if this is rehydrating it would be false on the server and needs to match.
-  // it could possibly be moved to a prop so there is no weird behavior when not SSR-ed
-  const [isRunningOnBrowser, setIsRunningOnBrowser] = React.useState<boolean>(false);
+  const [isRunningOnBrowser, setIsRunningOnBrowser] = React.useState<boolean>(!!props.isRunningOnServer);
 
   useInitialization((): void => {
     setIsRunningOnBrowser(getIsRunningOnBrowser());
