@@ -14,7 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Changed
 - [MAJOR] Change Image, Video, Media to not be lazy loadable by default
 - [MINOR] Rename crop to cover for fitType in Image
-- [MINOR] update global no-js class to work with SSR
+- [MINOR] update global no-js class to work with SSR by adding `isRehydrating` prop to KibaApp
 
 ### Removed
 
