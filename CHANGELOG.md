@@ -8,21 +8,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
-- [MINOR] Fix pill export
+- [MINOR] Fix `Pill` export
 - [MINOR] Add no-js class to main components and change to js if enabled in browser
 
 ### Changed
-- [MAJOR] Change Image, Video, Media to not be lazy loadable by default
+- [MAJOR] Change `Image`, `Video`, `Media` to not be lazy loadable by default
 - [MINOR] Rename crop to cover for fitType in Image
-- [MINOR] update global no-js class to work with SSR by adding `isRehydrating` prop to KibaApp
+- [MINOR] update global no-js class to work with SSR by adding `isRehydrating` prop to `KibaApp`
 
 ### Removed
 
 ## [0.7.4] - 2020-11-22
 
 ### Added
-- [MINOR] Added pill component
-- [MINOR] New 'card' variant for LinkBase
+- [MINOR] Added `Pill` component
+- [MINOR] New 'card' variant for `LinkBase`
 
 ### Changed
 - [MINOR] Renamed subatoms to particles
@@ -32,9 +32,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [0.7.3] - 2020-11-05
 
 ### Added
-- [MINOR] Added shouldShowLoadingSpinner prop to WebView
-- [MINOR] Added maxHeight, maxWidth and zIndex props to Box
-- [MINOR] Added inheritTextTheme to Text themes + Use this for base Link theme
+- [MINOR] Added `shouldShowLoadingSpinner` prop to `WebView`
+- [MINOR] Added `maxHeight`, `maxWidth` and `zIndex` props to `Box`
+- [MINOR] Added `inheritTextTheme` to `Text` themes + Use this for base `Link` theme
 
 ### Changed
 
@@ -43,7 +43,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [0.7.2] - 2020-10-29
 
 ### Added
-- [PATCH] Added TabBar molecule + TabBarItem atom
+- [PATCH] Added `TabBar` molecule + `TabBarItem` atom
 
 ### Changed
 
@@ -52,7 +52,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [0.7.1] - 2020-10-20
 
 ### Added
-- [PATCH] Manually added displayName to all components.
+- [PATCH] Manually added `displayName` to all components.
 
 ### Changed
 - [PATCH] Added workflow to build pull requests.
