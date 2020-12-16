@@ -13,7 +13,7 @@ import 'lazysizes/plugins/attrchange/ls.attrchange';
 
 interface IKibaAppProps extends IMultiAnyChildProps {
   theme: ITheme;
-  isRunningOnServer?: boolean;
+  isRehydrating?: boolean;
 }
 
 const StyledMainView = styled.div`
@@ -22,7 +22,8 @@ const StyledMainView = styled.div`
 
 export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
   // NOTE(krish): the default is false because if this is rehydrating it would be false on the server and needs to match.
-  const [isRunningOnBrowser, setIsRunningOnBrowser] = React.useState<boolean>(!!props.isRunningOnServer);
+  const [isRunningOnBrowser, setIsRunningOnBrowser] = React.useState<boolean>(!props.isRehydrating);
+  console.log('isRunningOnBrowser', isRunningOnBrowser);
 
   useInitialization((): void => {
     setIsRunningOnBrowser(getIsRunningOnBrowser());
