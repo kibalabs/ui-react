@@ -12,9 +12,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Add no-js class to main components and change to js if enabled in browser
 
 ### Changed
-- [MAJOR] Change `Image`, `Video`, `Media` to not be lazy loadable by default
+- [MAJOR] Change `Image`, `Video`, `Media` to not be lazy-loadable by default
 - [MINOR] Rename crop to cover for fitType in Image
-- [MINOR] update global no-js class to work with SSR by adding `isRehydrating` prop to `KibaApp`
+- [MINOR] Update global no-js class to work with SSR by adding `isRehydrating` prop to `KibaApp`
+- [MINOR] Update `Image` and `Video` to not populate `data-src` if not lazy-loading
 
 ### Removed
 

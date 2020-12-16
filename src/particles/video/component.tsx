@@ -73,7 +73,7 @@ export const Video = (props: IVideoProps): React.ReactElement => {
     >
       <source
         src={props.isLazyLoadable ? undefined : props.source}
-        data-src={props.source}
+        data-src={props.isLazyLoadable ? props.source : undefined}
       />
       {props.isLazyLoadable && (
         <noscript>

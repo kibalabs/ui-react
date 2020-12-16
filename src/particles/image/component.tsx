@@ -62,7 +62,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
         className={getClassName(Image.displayName, props.className, props.isLazyLoadable ? 'lazyload' : 'unlazy', props.isCenteredHorizontally && 'centered')}
         theme={theme}
         src={props.isLazyLoadable ? undefined : props.source}
-        data-src={props.source}
+        data-src={props.isLazyLoadable ? props.source : undefined}
         alt={props.alternativeText}
         fitType={props.fitType}
         isFullWidth={Boolean(props.isFullWidth)}
