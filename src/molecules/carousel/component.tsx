@@ -42,7 +42,7 @@ const StyledSlider = styled.div`
   -ms-overflow-style: none;
   overflow: auto;
 `;
-StyledSlider.displayName = 'carousel-slider';
+StyledSlider.displayName = 'CarouselSlider';
 
 interface IStyledSlideProps {
   theme: IDimensionGuide;
@@ -62,7 +62,7 @@ const StyledSlide = styled.div<IStyledSlideProps>`
   justify-content: center;
   ${(props: IStyledSlideProps): string => fieldToResponsiveCss(props.slidesPerPage, props.theme, getSlidesPerPageCss)};
 `;
-StyledSlide.displayName = 'carousel-slide';
+StyledSlide.displayName = 'CarouselSlide';
 
 export interface ICarouselProps extends IMoleculeProps<ICarouselTheme>, IMultiAnyChildProps {
   shouldShowButtons?: boolean;

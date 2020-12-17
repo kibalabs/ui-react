@@ -1,38 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getClassName } from '@kibalabs/core';
-import { IMultiAnyChildProps } from '@kibalabs/core-react';
+import { IMultiAnyChildProps, useInitialization, getIsRunningOnBrowser } from '@kibalabs/core-react';
 
 import { GlobalCss } from './globalCss';
 import { resetCss } from './resetCss';
 import { ITheme, ThemeProvider } from '../theming';
-import { isRunningOnBrowser } from '../util';
+
+import 'lazysizes';
+import 'lazysizes/plugins/attrchange/ls.attrchange';
 
 interface IKibaAppProps extends IMultiAnyChildProps {
   theme: ITheme;
+  isRehydrating?: boolean;
 }
 
-interface IStyledMainViewProps extends IMultiAnyChildProps {
-  className: string;
-}
-
-const withMain = (Component: React.ComponentType<IStyledMainViewProps>): React.ComponentType => styled(Component)<IStyledMainViewProps>`
+const StyledMainView = styled.div`
   min-height: 100vh;
 `;
 
-const StyledMainView = withMain((props: IStyledMainViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
-  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })))
-});
-
 export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
+  // NOTE(krish): the default is false because if this is rehydrating it would be false on the server and needs to match.
+  const [isRunningOnBrowser, setIsRunningOnBrowser] = React.useState<boolean>(!props.isRehydrating);
+
+  useInitialization((): void => {
+    setIsRunningOnBrowser(getIsRunningOnBrowser());
+  });
+
   return (
     <ThemeProvider theme={props.theme}>
       <GlobalCss
         theme={props.theme}
         resetCss={resetCss}
       />
-      <StyledMainView className={getClassName(isRunningOnBrowser() ? 'js' : 'no-js')}>
+      <StyledMainView className={getClassName(isRunningOnBrowser ? 'js' : 'no-js')}>
         {props.children}
       </StyledMainView>
     </ThemeProvider>
