@@ -27,6 +27,10 @@ export const themeToCss = (theme?: CssTheme): string => {
     return '';
   }
   const output = Object.keys(theme).map((key: string): string => {
+    if (!(key in theme) || !theme[key]) {
+      console.error(`key: ${key} missing in theme: ${theme}`);
+      return '';
+    }
     return `${key}: ${valueToCss(theme[key])};`;
   });
   return output.join('\n');

@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Rename crop to cover for fitType in Image
 - [MINOR] Update global no-js class to work with SSR by adding `isRehydrating` prop to `KibaApp`
 - [MINOR] Update `Image` and `Video` to not populate `data-src` if not lazy-loading
+- [PATCH] Update useBuiltTheme to defer resolving values (for SSR on IE11)
 
 ### Removed
 

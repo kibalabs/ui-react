@@ -21,7 +21,7 @@ export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionG
       },
       press: {
         background: {
-          'background-color': '$colors.brandPrimaryClear60',
+          'background-color': '$colors.brandPrimaryClear50',
         },
       },
       focus: {
