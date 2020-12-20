@@ -1,6 +1,6 @@
 import React from 'react';
 import { RecursivePartial} from '@kibalabs/core';
-import { IMultiAnyChildProps } from '@kibalabs/core-react';
+import { IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
 
 import { ITheme } from '..';
 import { mergeTheme, ThemeType, ThemeValue } from '../util';
@@ -81,7 +81,10 @@ export function useColors(): IColorGuide {
 export const useBuiltTheme = <Theme extends ThemeType>(component: string, variant: string, override?: RecursivePartial<Theme>): Theme => {
   const theme = useTheme();
   const colors = useColors();
+  const baseColors = useBaseColors();
   const dimensions = useDimensions();
+  // NOTE(krishan711): for SSR ie styles will change on hydration so allow this to have an effect
+  const isRendered = useInitialization((): void => {});
   return React.useMemo((): Theme => {
     const componentThemes = theme[component];
     if (!componentThemes) {
@@ -101,16 +104,32 @@ export const useBuiltTheme = <Theme extends ThemeType>(component: string, varian
       themeParts.push(override);
     }
     let builtTheme = mergeTheme(componentThemes.default, ...themeParts);
-    // Resolving reference values is only here because ie 11 doesn't support css vars
-    if (isIe()) {
-      builtTheme = resolveThemeValues(builtTheme, colors, dimensions);
+    // NOTE(krishan711): Resolving reference values is only here because ie 11 doesn't support css vars
+    if (isIe() && isRendered) {
+      // NOTE(krishan711): Need to merge with base otherwise colors are missing because alternates don't need to have all
+      builtTheme = resolveThemeValues(builtTheme, {...baseColors, ...colors}, dimensions);
     }
     return builtTheme;
-  }, [theme, variant, override]);
+  }, [theme, colors, baseColors, dimensions, variant, override, isIe() && isRendered]);
 }
 
 const isIe = (): boolean => {
   return typeof document !== 'undefined' && !!document.documentMode;
+}
+
+const resolveThemeValues = (theme: ThemeType, colors: IColorGuide, dimensions: IDimensionGuide): ThemeType => {
+  const derivedTheme = Object.keys(theme).reduce((currentMap: ThemeType, themeKey: string): ThemeType => {
+    const value = theme[themeKey];
+    let themeValue = value;
+    if (typeof value === 'string') {
+      themeValue = resolveThemeValue(value, colors, dimensions);
+    } else if (typeof value === 'object') {
+      themeValue = resolveThemeValues(value, colors, dimensions);
+    }
+    currentMap[themeKey] = themeValue;
+    return currentMap;
+  }, {});
+  return derivedTheme;
 }
 
 const resolveThemeValue = (value: string, colors: IColorGuide, dimensions: IDimensionGuide): ThemeValue => {
@@ -128,19 +147,4 @@ const resolveThemeValue = (value: string, colors: IColorGuide, dimensions: IDime
     console.error(`Unknown reference used: ${referenceType} (${value})`);
   }
   return value;
-}
-
-const resolveThemeValues = (theme: ThemeType, colors: IColorGuide, dimensions: IDimensionGuide): ThemeType => {
-  const derivedThemes = Object.keys(theme).reduce((currentMap: ThemeType, themeKey: string): ThemeType => {
-    const value = theme[themeKey];
-    let themeValue = value;
-    if (typeof value === 'string') {
-      themeValue = resolveThemeValue(value, colors, dimensions);
-    } else if (typeof value === 'object') {
-      themeValue = resolveThemeValues(value, colors, dimensions);
-    }
-    currentMap[themeKey] = themeValue;
-    return currentMap;
-  }, {});
-  return derivedThemes;
 }
