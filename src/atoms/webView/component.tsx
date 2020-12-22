@@ -46,6 +46,8 @@ export interface IWebViewProps extends IComponentProps<IWebViewTheme> {
   permissions: string[];
   shouldShowLoadingSpinner: boolean;
   title?: string;
+  // TODO(krishan711): this isnt used yet!
+  isLazyLoadable?: boolean;
   onLoadingChanged?: (isLoading: boolean) => void;
 }
 
