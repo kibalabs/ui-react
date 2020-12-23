@@ -91,7 +91,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
   }
 
   const theme = useBuiltTheme('buttons', props.variant, props.theme);
-  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab === undefined && props.target && props.target.startsWith('#'));
+  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab === undefined && props.target && (props.target.startsWith('#') || props.target.startsWith('/')));
   return (
     <StyledButton
       id={props.id}
