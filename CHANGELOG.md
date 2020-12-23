@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+## [0.7.5] - 2020-12-23
+
+### Added
 - [MINOR] Fix `Pill` export
 - [MINOR] Add no-js class to main components and change to js if enabled in browser
 
