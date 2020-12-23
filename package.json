@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@kibalabs/build": "0.6.0",
+    "@storybook/addon-docs": "6.1.11",
     "@storybook/addon-actions": "6.1.11",
     "@storybook/addon-essentials": "6.1.11",
     "@storybook/addon-links": "6.1.11",
