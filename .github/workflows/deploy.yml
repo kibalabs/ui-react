@@ -6,11 +6,11 @@ on:
 jobs:
   deploy-package:
     runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     defaults:
       run:
         working-directory: .
-    env:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2

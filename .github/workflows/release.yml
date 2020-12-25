@@ -5,11 +5,11 @@ on:
 jobs:
   deploy-package:
     runs-on: ubuntu-latest
-    env:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     defaults:
       run:
         working-directory: .
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
@@ -21,12 +21,12 @@ jobs:
       run: docker run -v $(pwd)/.npmrc:/root/.npmrc ui-react-package npm publish
   deploy-storybook:
     runs-on: ubuntu-latest
-    env:
-      DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/ui-react-storybook
-      DOCKER_TAG: latest
     defaults:
       run:
         working-directory: .
+    env:
+      DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/ui-react-storybook
+      DOCKER_TAG: latest
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
