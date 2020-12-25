@@ -24,5 +24,5 @@ jobs:
       run: echo ::set-output name=commit_count::$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
     - name: Create .npmrc file
       run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-    - name: Publish ui-react package to npm
+    - name: Publish next package to npm
       run: docker run -v $(pwd)/.npmrc:/root/.npmrc ui-react-package /bin/bash -c "npm run publish-next -- --next-version ${{ steps.vars.outputs.commit_count }}"
