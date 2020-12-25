@@ -33,6 +33,8 @@ jobs:
       run:
         working-directory: .
     steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
     - name: Calculate commit count since last tag
       id: vars
       run: echo ::set-output name=commit_count::$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
