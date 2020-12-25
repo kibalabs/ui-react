@@ -11,6 +11,8 @@ jobs:
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
+    - name: Set up docker cache
+      uses: satackey/action-docker-layer-caching@v0.0.11
     - name: Build docker image
       run: docker build .
   build-storybook:
