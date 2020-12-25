@@ -11,10 +11,8 @@ jobs:
   #   steps:
   #   - name: Check out the repo
   #     uses: actions/checkout@v2
-  #   - name: Set up docker cache
-  #     uses: satackey/action-docker-layer-caching@v0.0.11
   #   - name: Build docker image
-  #     run: docker build .
+  #     run: docker build --tag ui-react-package .
   # build-storybook:
   #   runs-on: ubuntu-latest
   #   defaults:
@@ -23,10 +21,8 @@ jobs:
   #   steps:
   #   - name: Check out the repo
   #     uses: actions/checkout@v2
-  #   - name: Set up docker cache
-  #     uses: satackey/action-docker-layer-caching@v0.0.11
   #   - name: Build docker image
-  #     run: docker build --file ./storybook.Dockerfile .
+  #     run: docker build --tag ui-react-docs --file ./storybook.Dockerfile .
   deploy-package-next:
     runs-on: ubuntu-latest
     defaults:
@@ -36,11 +32,14 @@ jobs:
     - name: Check out the repo
       uses: actions/checkout@v2
       with:
+        # NOTE(krishan711): need full history to calculate difference
         fetch-depth: 0
-    - name: Print stuff
-      run: echo $(git describe --tags --abbrev=0)
+    - name: Build docker image
+      run: docker build --tag ui-react-package .
     - name: Calculate commit count since last tag
       id: vars
       run: echo ::set-output name=commit_count::$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
-    - name: Print answer
-      run: echo ${{ steps.vars.outputs.commit_count }}
+    - name: Create .npmrc file
+      run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+    - name: Publish ui-react package to npm
+      run: docker run -v $(pwd)/.npmrc:/root/.npmrc ui-react-package /bin/bash -c "npm run publish-next -- --next-version ${{ steps.vars.outputs.commit_count }}"
