@@ -3,30 +3,30 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  build-package:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: .
-    steps:
-    - name: Check out the repo
-      uses: actions/checkout@v2
-    - name: Set up docker cache
-      uses: satackey/action-docker-layer-caching@v0.0.11
-    - name: Build docker image
-      run: docker build .
-  build-storybook:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: .
-    steps:
-    - name: Check out the repo
-      uses: actions/checkout@v2
-    - name: Set up docker cache
-      uses: satackey/action-docker-layer-caching@v0.0.11
-    - name: Build docker image
-      run: docker build --file ./storybook.Dockerfile .
+  # build-package:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: .
+  #   steps:
+  #   - name: Check out the repo
+  #     uses: actions/checkout@v2
+  #   - name: Set up docker cache
+  #     uses: satackey/action-docker-layer-caching@v0.0.11
+  #   - name: Build docker image
+  #     run: docker build .
+  # build-storybook:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: .
+  #   steps:
+  #   - name: Check out the repo
+  #     uses: actions/checkout@v2
+  #   - name: Set up docker cache
+  #     uses: satackey/action-docker-layer-caching@v0.0.11
+  #   - name: Build docker image
+  #     run: docker build --file ./storybook.Dockerfile .
   deploy-package-next:
     runs-on: ubuntu-latest
     defaults:
@@ -35,6 +35,8 @@ jobs:
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
+    - name: Print stuff
+      run: echo $(git describe --tags --abbrev=0)
     - name: Calculate commit count since last tag
       id: vars
       run: echo ::set-output name=commit_count::$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
