@@ -41,6 +41,12 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
+<Canvas>
+  <Story name='With Lazy Loading'>
+    <WebView url={'https://www.youtube.com/embed/_tUCouKc4Ek'} aspectRatio={0.5625} isLazyLoadable={true} />
+  </Story>
+</Canvas>
+
 NOTE(krish): the error detection isn't working yet.
 
 ### Theming
