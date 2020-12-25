@@ -3,26 +3,26 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  # build-package:
-  #   runs-on: ubuntu-latest
-  #   defaults:
-  #     run:
-  #       working-directory: .
-  #   steps:
-  #   - name: Check out the repo
-  #     uses: actions/checkout@v2
-  #   - name: Build docker image
-  #     run: docker build --tag ui-react-package .
-  # build-storybook:
-  #   runs-on: ubuntu-latest
-  #   defaults:
-  #     run:
-  #       working-directory: .
-  #   steps:
-  #   - name: Check out the repo
-  #     uses: actions/checkout@v2
-  #   - name: Build docker image
-  #     run: docker build --tag ui-react-docs --file ./storybook.Dockerfile .
+  build-package:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Build docker image
+      run: docker build --tag ui-react-package .
+  build-storybook:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Build docker image
+      run: docker build --tag ui-react-docs --file ./storybook.Dockerfile .
   deploy-package-next:
     runs-on: ubuntu-latest
     defaults:
