@@ -27,3 +27,14 @@ jobs:
       uses: satackey/action-docker-layer-caching@v0.0.11
     - name: Build docker image
       run: docker build --file ./storybook.Dockerfile .
+  deploy-package-next:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+    - name: Calculate commit count since last tag
+      id: vars
+      run: echo ::set-output name=commit_count::$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+    - name: Print answer
+      run: echo ${{ steps.vars.outputs.commit_count }}
