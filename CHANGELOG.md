@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [PATCH] Change `WebView` to be lazyLoadable
+- [MINOR] Extract hard-coded aspect-ratio from `WebView` into `aspectRatio` prop
 
 ### Changed
 

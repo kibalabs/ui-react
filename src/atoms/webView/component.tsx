@@ -9,6 +9,7 @@ import { LoadingSpinner } from '../../particles';
 
 interface IStyledWebViewProps {
   theme: IWebViewTheme;
+  aspectRatio?: number;
 }
 
 const StyledWebView = styled.div<IStyledWebViewProps>`
@@ -18,8 +19,8 @@ const StyledWebView = styled.div<IStyledWebViewProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 56.25%;
   position: relative;
+  padding-bottom: ${(props: IStyledWebViewProps): string => (props.aspectRatio ? `calc(${props.aspectRatio} * 100%)` : 'auto')};
 `;
 
 const LoadingWrapper = styled.div<IStyledWebViewProps>`
@@ -27,7 +28,6 @@ const LoadingWrapper = styled.div<IStyledWebViewProps>`
 `;
 
 interface IStyledIframeProps {
-  isLoading: boolean;
 }
 
 const StyledIframe = styled.iframe<IStyledIframeProps>`
@@ -37,7 +37,19 @@ const StyledIframe = styled.iframe<IStyledIframeProps>`
   height: 100%;
   width: 100%;
   border: none;
-  display: ${(props: IStyledIframeProps): string => (props.isLoading ? 'none' : 'inherit')};
+
+  .no-js &.lazyload {
+    display: none;
+  }
+
+  &.lazyload, &.lazyloading, &.isLoading {
+    opacity: 0;
+  }
+  &.lazyloaded {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.15s;
+  }
 `;
 
 export interface IWebViewProps extends IComponentProps<IWebViewTheme> {
@@ -46,8 +58,8 @@ export interface IWebViewProps extends IComponentProps<IWebViewTheme> {
   permissions: string[];
   shouldShowLoadingSpinner: boolean;
   title?: string;
-  // TODO(krishan711): this isnt used yet!
   isLazyLoadable?: boolean;
+  aspectRatio?: number;
   onLoadingChanged?: (isLoading: boolean) => void;
 }
 
@@ -90,15 +102,15 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
       id={props.id}
       className={getClassName(WebView.displayName, props.className)}
       theme={theme}
+      aspectRatio={props.aspectRatio}
     >
       <noscript>
         <StyledIframe
           id={props.id && `${props.id}-iframe`}
-          className={'web-view-iframe'}
+          className={getClassName('web-view-iframe', 'unlazy')}
           title={props.title}
           key={currentUrl}
           src={currentUrl}
-          isLoading={false}
           allow={props.permissions.join(';')}
         />
       </noscript>
@@ -114,11 +126,11 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
             )}
             <StyledIframe
               id={props.id && `${props.id}-iframe`}
-              className={'web-view-iframe'}
+              className={getClassName('web-view-iframe', props.isLazyLoadable ? 'lazyload' : 'unlazy', isLoading && 'isLoading')}
               title={props.title}
               key={currentUrl}
-              src={currentUrl}
-              isLoading={isLoading}
+              src={props.isLazyLoadable ? undefined : currentUrl}
+              data-src={props.isLazyLoadable ? currentUrl : undefined}
               onLoad={handleOnLoad}
               onError={handleOnError}
               allow={props.permissions.join(';')}
