@@ -35,6 +35,8 @@ jobs:
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Print stuff
       run: echo $(git describe --tags --abbrev=0)
     - name: Calculate commit count since last tag
