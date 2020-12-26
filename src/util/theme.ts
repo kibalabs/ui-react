@@ -22,7 +22,8 @@ export const valueToCss = (value: string): string => {
   return value;
 }
 
-export const themeToCss = (theme?: CssTheme): string => {
+// NOTE(krishan711): the type param here seems silly but is necessary cos too complex to be calculated itself
+export const themeToCss = (theme?: CssTheme | Partial<CssTheme> | RecursivePartial<CssTheme>): string => {
   if (!theme) {
     return '';
   }
