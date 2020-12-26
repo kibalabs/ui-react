@@ -1,11 +1,12 @@
 import React from 'react';
-import { RecursivePartial} from '@kibalabs/core';
+
+import { RecursivePartial } from '@kibalabs/core';
 import { IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
 
 import { ITheme } from '..';
-import { mergeTheme, ThemeType, ThemeValue } from '../util';
 import { IColorGuide } from '../particles/colors';
 import { IDimensionGuide } from '../particles/dimensions';
+import { mergeTheme, ThemeType, ThemeValue } from '../util';
 
 export const ThemeContext = React.createContext<ITheme | null>(null);
 
@@ -21,7 +22,7 @@ export const ThemeProvider = (props: IThemeProviderProps): React.ReactElement =>
       </ColorProvider>
     </ThemeContext.Provider>
   );
-}
+};
 
 export function useTheme(): ITheme {
   const theme = React.useContext(ThemeContext);
@@ -68,7 +69,7 @@ export const ColorProvider = (props: IColorProviderProps): React.ReactElement =>
       {props.children}
     </ColorContext.Provider>
   );
-}
+};
 
 export function useColors(): IColorGuide {
   let colors = React.useContext(ColorContext);
@@ -90,7 +91,7 @@ export const useBuiltTheme = <Theme extends ThemeType>(component: string, varian
     if (!componentThemes) {
       throw Error(`Could not find component ${component} in current theme. Valid keys are: ${Object.keys(theme)}`);
     }
-    let variants = variant.split('-').filter((variantPart: string): boolean => variantPart.length > 0);
+    const variants = variant.split('-').filter((variantPart: string): boolean => variantPart.length > 0);
     const themeParts = variants.splice(variants.lastIndexOf('default') + 1).reduce((value: RecursivePartial<Theme>[], variant: string): RecursivePartial<Theme>[] => {
       const variantTheme = componentThemes[variant];
       if (variantTheme) {
@@ -107,15 +108,15 @@ export const useBuiltTheme = <Theme extends ThemeType>(component: string, varian
     // NOTE(krishan711): Resolving reference values is only here because ie 11 doesn't support css vars
     if (isIe() && isRendered) {
       // NOTE(krishan711): Need to merge with base otherwise colors are missing because alternates don't need to have all
-      builtTheme = resolveThemeValues(builtTheme, {...baseColors, ...colors}, dimensions);
+      builtTheme = resolveThemeValues(builtTheme, { ...baseColors, ...colors }, dimensions);
     }
     return builtTheme;
   }, [theme, colors, baseColors, dimensions, variant, override, isIe() && isRendered]);
-}
+};
 
 const isIe = (): boolean => {
   return typeof document !== 'undefined' && !!document.documentMode;
-}
+};
 
 const resolveThemeValues = (theme: ThemeType, colors: IColorGuide, dimensions: IDimensionGuide): ThemeType => {
   const derivedTheme = Object.keys(theme).reduce((currentMap: ThemeType, themeKey: string): ThemeType => {
@@ -130,7 +131,7 @@ const resolveThemeValues = (theme: ThemeType, colors: IColorGuide, dimensions: I
     return currentMap;
   }, {});
   return derivedTheme;
-}
+};
 
 const resolveThemeValue = (value: string, colors: IColorGuide, dimensions: IDimensionGuide): ThemeValue => {
   if (value.startsWith('$')) {
@@ -147,4 +148,4 @@ const resolveThemeValue = (value: string, colors: IColorGuide, dimensions: IDime
     console.error(`Unknown reference used: ${referenceType} (${value})`);
   }
   return value;
-}
+};

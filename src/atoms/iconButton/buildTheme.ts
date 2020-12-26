@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../particles';
 import { IIconButtonTheme } from './theme';
 
 export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IIconButtonTheme>>): ThemeMap<IIconButtonTheme> => {
@@ -9,7 +9,7 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          'padding': `${dimensions.padding} ${dimensions.padding}`,
+          padding: `${dimensions.padding} ${dimensions.padding}`,
           'background-color': 'transparent',
         }),
         text: mergeTheme(textThemes.default, {
@@ -35,7 +35,7 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
           'background-color': '$colors.disabled',
         },
         text: {
-          'color': '$colors.disabledText',
+          color: '$colors.disabledText',
         },
       },
     },
@@ -49,7 +49,7 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
           'border-color': '$colors.brandPrimary',
         },
         text: {
-          'color': '$colors.textOnBrand',
+          color: '$colors.textOnBrand',
         },
       },
       hover: {
@@ -72,7 +72,7 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
           'border-color': '$colors.brandPrimary',
         },
         text: {
-          'color': '$colors.brandPrimary',
+          color: '$colors.brandPrimary',
         },
       },
     },
@@ -82,7 +82,7 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
     normal: {
       default: {
         background: {
-          'padding': `${dimensions.paddingNarrow} ${dimensions.paddingNarrow}`,
+          padding: `${dimensions.paddingNarrow} ${dimensions.paddingNarrow}`,
         },
       },
     },
@@ -92,7 +92,7 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
     normal: {
       default: {
         text: {
-          'color': '$colors.textLight50',
+          color: '$colors.textLight50',
         },
       },
     },
@@ -107,4 +107,4 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
     small: smallIconButtonTheme,
     passive: passiveIconButtonTheme,
   };
-}
+};

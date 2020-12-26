@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IComponentProps, defaultComponentProps, useBuiltTheme } from '../..';
-import { ILoadingSpinnerTheme } from './theme';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
 import { valueToCss } from '../../util';
+import { ILoadingSpinnerTheme } from './theme';
 
 interface IStyledLoadingSpinnerProps {
   theme: ILoadingSpinnerTheme;

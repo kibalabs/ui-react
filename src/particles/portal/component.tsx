@@ -1,10 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import styled from 'styled-components';
+
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
+import ReactDOM from 'react-dom';
+import styled from 'styled-components';
 
-import { IComponentProps, defaultComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { IPortalTheme } from './theme';
 
 interface IStyledPortalProps {

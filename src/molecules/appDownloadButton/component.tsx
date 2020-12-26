@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { getClassName, KibaException } from '@kibalabs/core';
 
-import { IMoleculeProps, defaultMoleculeProps } from '..';
+import { defaultMoleculeProps, IMoleculeProps } from '..';
 import { LinkBase } from '../../atoms/linkBase';
 import { Image } from '../../particles/image';
 
@@ -35,26 +36,26 @@ export const AppDownloadButton = (props: AppDownloadButtonProps): React.ReactEle
       return `https://apps.apple.com/app/id${props.appId}`;
     }
     if (props.appType === 'appletv') {
-      return ``;
+      return '';
     }
     return '';
-  }
+  };
 
   const getAlternativeText = (): string => {
     if (props.appType === 'android') {
-      return `Download from the Play Store`;
+      return 'Download from the Play Store';
     }
     if (props.appType === 'ios') {
-      return `Download from the iOS App Store`;
+      return 'Download from the iOS App Store';
     }
     if (props.appType === 'mac') {
-      return `Download from the Mac App Store`;
+      return 'Download from the Mac App Store';
     }
     if (props.appType === 'appletv') {
-      return `Download from the AppleTV App Store`;
+      return 'Download from the AppleTV App Store';
     }
     return '';
-  }
+  };
 
   return (
     <LinkBase

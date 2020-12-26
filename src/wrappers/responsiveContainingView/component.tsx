@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
-import { useDimensions } from '../../theming';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
 import { IDimensionGuide } from '../../particles';
-import { ResponsiveField, getResponsiveCss } from '../../util';
+import { useDimensions } from '../../theming';
+import { getResponsiveCss, ResponsiveField } from '../../util';
+import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 
 interface IStyledResponsiveContainingViewProps extends IWrapperProps {
   theme: IDimensionGuide;
@@ -14,7 +15,7 @@ interface IStyledResponsiveContainingViewProps extends IWrapperProps {
   shouldIncludeMaxSize: boolean;
 }
 
-export const getGridItemSizeCss = (totalColumnCount: number, columnCount: number, baseSize: string = '100%'): string => {
+export const getGridItemSizeCss = (totalColumnCount: number, columnCount: number, baseSize = '100%'): string => {
   return `max-width: calc(${baseSize} * ${(columnCount / totalColumnCount).toFixed(1)}) !important;`;
 };
 
@@ -54,7 +55,7 @@ const withResponsiveContainingView = (Component: React.ComponentType<IStyledResp
 
 const StyledResponsiveContainingView = withResponsiveContainingView((props: IStyledResponsiveContainingViewProps): React.ReactElement => {
   const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
-  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })))
+  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
 });
 
 export interface IResponsiveContainingViewProps extends IWrapperProps {
@@ -71,7 +72,7 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
     <StyledResponsiveContainingView
       className={getClassName(ResponsiveContainingView.displayName, props.className)}
       theme={theme}
-      size={{base: props.size, ...props.sizeResponsive}}
+      size={{ base: props.size, ...props.sizeResponsive }}
       isFullWidth={props.isFullWidth}
       shouldIncludeMaxSize={props.shouldIncludeMaxSize}
     >

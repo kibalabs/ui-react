@@ -1,8 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IComponentProps, defaultComponentProps, useBuiltTheme } from '../..';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
 import { IVideoTheme } from './theme';
 
 export interface IStyledVideoProps {

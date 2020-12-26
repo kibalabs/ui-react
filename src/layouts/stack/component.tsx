@@ -1,27 +1,28 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
-import { IMultiAnyChildProps, ISingleAnyChildProps, flattenChildren } from '@kibalabs/core-react';
 
-import { Direction, Alignment, getFlexItemAlignment, getFlexContentAlignment, IDimensionGuide, PaddingSize, Spacing } from '../..';
-import { PaddingView, IPaddingViewPaddingProps } from '../../wrappers/paddingView';
+import { getClassName } from '@kibalabs/core';
+import { flattenChildren, IMultiAnyChildProps, ISingleAnyChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
+
+import { Alignment, Direction, getFlexContentAlignment, getFlexItemAlignment, IDimensionGuide, PaddingSize, Spacing } from '../..';
 import { useDimensions } from '../../theming';
-import { ResponsiveField, CssConverter, fieldToResponsiveCss } from '../../util';
+import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
+import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
 
 // NOTE(krish): if the child of the stack.item declares 100% height (on vertical stack) it doesn't work on safari unless it has flex-basis: 0 (https://github.com/philipwalton/flexbugs/issues/197)
 // NOTE(krish): behavior of the above is also different on IE11, be careful!
 
 const getContentAlignmentCss: CssConverter<Alignment> = (field: Alignment): string => {
   return `justify-content: ${getFlexContentAlignment(field)};`;
-}
+};
 
 const getChildAlignmentCss: CssConverter<Alignment> = (field: Alignment): string => {
   return `align-items: ${getFlexItemAlignment(field)};`;
-}
+};
 
 const getDirectionCss: CssConverter<Direction> = (field: Direction): string => {
   return `flex-direction: ${field === Direction.Vertical ? 'column' : 'row'};`;
-}
+};
 
 export interface IStackItemProps extends ISingleAnyChildProps {
   className: string;
@@ -107,9 +108,9 @@ export const Stack = (props: IStackProps): React.ReactElement => {
         id={props.id}
         className={getClassName(Stack.displayName, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally')}
         theme={theme}
-        $direction={{base: props.direction, ...props.directionResponsive}}
-        childAlignment={{base: props.childAlignment, ...props.childAlignmentResponsive}}
-        contentAlignment={{base: props.contentAlignment, ...props.contentAlignmentResponsive}}
+        $direction={{ base: props.direction, ...props.directionResponsive }}
+        childAlignment={{ base: props.childAlignment, ...props.childAlignmentResponsive }}
+        contentAlignment={{ base: props.contentAlignment, ...props.contentAlignmentResponsive }}
         isFullWidth={props.isFullWidth}
         isFullHeight={props.isFullHeight}
       >
@@ -163,7 +164,7 @@ const withStackItem = (Component: React.ComponentType<IStyledStackItemProps>): R
   flex-basis: ${(props: IStyledStackItemProps): string => props.baseSize};
   flex-grow: ${(props: IStyledStackItemProps): number => props.growthFactor};
   flex-shrink: ${(props: IStyledStackItemProps): number => props.shrinkFactor};
-  min-width: ${(props: IStyledStackItemProps): string => props.shrinkFactor ? '0' : 'none'};
+  min-width: ${(props: IStyledStackItemProps): string => (props.shrinkFactor ? '0' : 'none')};
   align-self: ${(props: IStyledStackItemProps): string => (props.alignment ? getFlexItemAlignment(props.alignment) : 'auto')};
   /* Fix for https://github.com/philipwalton/flexbugs#flexbug-2 */
   @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
@@ -177,5 +178,5 @@ const withStackItem = (Component: React.ComponentType<IStyledStackItemProps>): R
 
 const StyledStackItem = withStackItem((props: IStyledStackItemProps): React.ReactElement | React.ReactElement[] => {
   const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
-  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })))
+  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
 });

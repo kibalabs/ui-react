@@ -10,10 +10,10 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     'font-size': dimensions.fontSize,
     'font-family': '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Asans-serif',
     'font-weight': 'normal',
-    'color': '$colors.text',
+    color: '$colors.text',
     'line-height': '1.5em',
     'text-decoration': 'none',
-    'margin': '0',
+    margin: '0',
     'text-align': 'inherit',
     'text-shadow': 'inherit',
     'text-transform': 'inherit',
@@ -23,10 +23,10 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     'font-size': 'inherit',
     'font-family': 'inherit',
     'font-weight': 'inherit',
-    'color': 'inherit',
+    color: 'inherit',
     'line-height': 'inherit',
     'text-decoration': 'inherit',
-    'margin': 'inherit',
+    margin: 'inherit',
     'text-align': 'inherit',
     'text-shadow': 'inherit',
     'text-transform': 'inherit',
@@ -92,7 +92,7 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
   const header1TextTheme = mergeThemePartial<ITextTheme>({
     'font-size': '3.0rem',
     'font-weight': '800',
-    'color': '$colors.text',
+    color: '$colors.text',
     'line-height': '1.2em',
   }, base?.header1);
 
@@ -101,7 +101,7 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
   const header2TextTheme = mergeThemePartial<ITextTheme>({
     'font-size': '2.0rem',
     'font-weight': '700',
-    'color': '$colors.text',
+    color: '$colors.text',
     'line-height': '1.2em',
   }, base?.header2);
 
@@ -110,7 +110,7 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
   const header3TextTheme = mergeThemePartial<ITextTheme>({
     'font-size': '1.4rem',
     'font-weight': '700',
-    'color': '$colors.text',
+    color: '$colors.text',
     'line-height': '1.2em',
   }, base?.header3);
 
@@ -119,7 +119,7 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
   const header4TextTheme = mergeThemePartial<ITextTheme>({
     'font-size': '1.3rem',
     'font-weight': '600',
-    'color': '$colors.text',
+    color: '$colors.text',
     'text-decoration': 'underline',
     'line-height': '1.2em',
   }, base?.header4);
@@ -127,20 +127,20 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
   const header5TextTheme = mergeThemePartial<ITextTheme>({
     'font-size': '1.2rem',
     'font-weight': '600',
-    'color': '$colors.text',
+    color: '$colors.text',
     'line-height': '1.2em',
   }, base?.header5);
 
   const header6TextTheme = mergeThemePartial<ITextTheme>({
     'font-size': '1.1rem',
     'font-weight': '600',
-    'color': '$colors.text',
+    color: '$colors.text',
     'line-height': '1.2em',
   }, base?.header6);
 
   const noteTextTheme = mergeThemePartial<ITextTheme>({
     'font-size': '0.8rem',
-    'color': '$colors.textLight25',
+    color: '$colors.textLight25',
   }, base?.note);
 
   const supersizeTextTheme = mergeThemePartial<ITextTheme>({
@@ -148,23 +148,23 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
   }, base?.supersize);
 
   const unmarginedTextTheme = mergeThemePartial<ITextTheme>({
-    'margin': '0',
+    margin: '0',
   }, base?.unmargined);
 
   const marginedTextTheme = mergeThemePartial<ITextTheme>({
-    'margin': '1em 0 0.5em 0',
+    margin: '1em 0 0.5em 0',
   }, base?.margined);
 
   const brandedTextTheme = mergeThemePartial<ITextTheme>({
-    'color': '$colors.brandPrimary',
+    color: '$colors.brandPrimary',
   }, base?.colored);
 
   const errorTextTheme = mergeThemePartial<ITextTheme>({
-    'color': '$colors.error',
+    color: '$colors.error',
   }, base?.error);
 
   const successTextTheme = mergeThemePartial<ITextTheme>({
-    'color': '$colors.success',
+    color: '$colors.success',
   }, base?.success);
 
   return {
@@ -203,4 +203,4 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     error: errorTextTheme,
     success: successTextTheme,
   };
-}
+};

@@ -1,11 +1,11 @@
-import { darken, invert, getLuminance, lighten, transparentize } from 'polished';
+import { darken, getLuminance, invert, lighten, transparentize } from 'polished';
 
 import { IColorGuide } from './theme';
 
 function padZeros(num: number, places: number) {
-  var numString = num.toString();
+  let numString = num.toString();
   while (numString.length < places) {
-    numString = '0' + numString;
+    numString = `0${numString}`;
   }
   return numString;
 }
@@ -23,15 +23,15 @@ export const buildColors = (base?: Partial<IColorGuide>): IColorGuide => {
 
   const colors = {
     ...base,
-    brandPrimary: brandPrimary,
-    brandSecondary: brandSecondary,
-    background: background,
-    text: text,
-    textOnBrand: textOnBrand,
-    disabled: disabled,
-    disabledText: disabledText,
-    error: error,
-    success: success,
+    brandPrimary,
+    brandSecondary,
+    background,
+    text,
+    textOnBrand,
+    disabled,
+    disabledText,
+    error,
+    success,
   };
 
   return expandColors(colors);
@@ -52,25 +52,25 @@ export const buildAlternateColors = (colors: IColorGuide, base?: Record<string, 
   const inverseColors: IColorGuide = {
     ...colors,
     ...base?.inverse,
-    brandPrimary: brandPrimary,
-    brandSecondary: brandSecondary,
-    background: background,
-    text: text,
-    textOnBrand: textOnBrand,
-    disabled: disabled,
-    disabledText: disabledText,
-    error: error,
-    success: success,
+    brandPrimary,
+    brandSecondary,
+    background,
+    text,
+    textOnBrand,
+    disabled,
+    disabledText,
+    error,
+    success,
   };
 
   return {
     ...base,
     inverse: expandColors(inverseColors),
-  }
-}
+  };
+};
 
 const expandColors = (colors: IColorGuide, base?: IColorGuide): IColorGuide => {
-  const values = [0.05, 0.10, 0.20, 0.25, 0.50, 0.75, 0.80, 0.90, 0.95]
+  const values = [0.05, 0.10, 0.20, 0.25, 0.50, 0.75, 0.80, 0.90, 0.95];
   const expandedColors = Object.keys(colors).reduce((extendedColors: Partial<IColorGuide>, colorKey: string): Partial<IColorGuide> => {
     if (/\d+/.test(colorKey.slice(colorKey.length - 1))) {
       // Don't expand any colors that end in a number
@@ -87,5 +87,5 @@ const expandColors = (colors: IColorGuide, base?: IColorGuide): IColorGuide => {
     });
     return extendedColors;
   }, {});
-  return {...colors, ...expandedColors};
-}
+  return { ...colors, ...expandedColors };
+};

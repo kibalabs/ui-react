@@ -1,9 +1,10 @@
 import React from 'react';
+
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
-import { IMoleculeProps, defaultMoleculeProps } from '../moleculeProps';
-import { InputWrapper, IInputWrapperTheme } from '../../atoms';
+import { IInputWrapperTheme, InputWrapper } from '../../atoms';
+import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface IInputFrameTheme {
   inputWrapperTheme?: IInputWrapperTheme;

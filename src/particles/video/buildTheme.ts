@@ -13,4 +13,4 @@ export const buildVideoThemes = (colors: IColorGuide, dimensions: IDimensionGuid
     ...base,
     default: defaultVideoTheme,
   };
-}
+};

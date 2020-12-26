@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../particles';
 import { IButtonTheme } from './theme';
 
 export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IButtonTheme>>): ThemeMap<IButtonTheme> => {
@@ -9,11 +9,11 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          'padding': `${dimensions.padding} ${dimensions.paddingWide}`,
+          padding: `${dimensions.padding} ${dimensions.paddingWide}`,
           'background-color': 'transparent',
         }),
         text: mergeTheme(textThemes.default, {
-          'color': '$colors.brandPrimary',
+          color: '$colors.brandPrimary',
           'font-weight': '600',
         }),
       },
@@ -37,7 +37,7 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
           'background-color': '$colors.disabled',
         },
         text: {
-          'color': '$colors.disabledText',
+          color: '$colors.disabledText',
         },
       },
     },
@@ -51,7 +51,7 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
           'border-color': '$colors.brandPrimary',
         },
         text: {
-          'color': '$colors.textOnBrand',
+          color: '$colors.textOnBrand',
         },
       },
       hover: {
@@ -81,7 +81,7 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
     normal: {
       default: {
         background: {
-          'padding': `${dimensions.paddingWide} ${dimensions.paddingWide2}`,
+          padding: `${dimensions.paddingWide} ${dimensions.paddingWide2}`,
         },
         text: {
           'font-size': '1.2em',
@@ -94,7 +94,7 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
     normal: {
       default: {
         background: {
-          'padding': `${dimensions.paddingNarrow} ${dimensions.padding}`,
+          padding: `${dimensions.paddingNarrow} ${dimensions.padding}`,
         },
         text: {
           'font-size': '0.8em',
@@ -108,7 +108,7 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
       default: {
         background: {
           'box-shadow': boxThemes.card['box-shadow'],
-          'margin': boxThemes.card['margin'],
+          margin: boxThemes.card.margin,
         },
       },
     },
@@ -124,4 +124,4 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
     small: smallButtonTheme,
     card: cardButtonTheme,
   };
-}
+};

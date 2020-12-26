@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../particles';
+import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
+import { mergeTheme, ThemeMap } from '../../util';
 import { IProgressCounterItemTheme } from './theme';
 
 export const buildProgressCounterItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IProgressCounterItemTheme>>): ThemeMap<IProgressCounterItemTheme> => {
@@ -9,11 +9,11 @@ export const buildProgressCounterItemThemes = (colors: IColorGuide, dimensions: 
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          'padding': `${dimensions.padding} ${dimensions.paddingWide}`,
+          padding: `${dimensions.padding} ${dimensions.paddingWide}`,
           'background-color': 'transparent',
         }),
         text: mergeTheme(textThemes.default, {
-          'color': '$colors.brandPrimaryClear75',
+          color: '$colors.brandPrimaryClear75',
         }),
       },
       hover: {
@@ -41,7 +41,7 @@ export const buildProgressCounterItemThemes = (colors: IColorGuide, dimensions: 
       default: {
         text: {
           'font-weight': 'bolder',
-          'color': '$colors.brandPrimary',
+          color: '$colors.brandPrimary',
         },
       },
     },
@@ -49,6 +49,6 @@ export const buildProgressCounterItemThemes = (colors: IColorGuide, dimensions: 
 
   return {
     ...base,
-    default: defaultProgressCounterItemTheme
+    default: defaultProgressCounterItemTheme,
   };
-}
+};

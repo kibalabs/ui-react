@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
-import { IMultiAnyChildProps, useInitialization, getIsRunningOnBrowser } from '@kibalabs/core-react';
 
+import { getClassName } from '@kibalabs/core';
+import { getIsRunningOnBrowser, IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
+import styled from 'styled-components';
+
+import { ITheme, ThemeProvider } from '../theming';
 import { GlobalCss } from './globalCss';
 import { resetCss } from './resetCss';
-import { ITheme, ThemeProvider } from '../theming';
 
 import 'lazysizes';
 import 'lazysizes/plugins/attrchange/ls.attrchange';
@@ -38,4 +39,4 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
       </StyledMainView>
     </ThemeProvider>
   );
-}
+};

@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../particles';
 import { IInputWrapperTheme } from './theme';
 
 export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IInputWrapperTheme>>): ThemeMap<IInputWrapperTheme> => {
@@ -10,14 +10,14 @@ export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimens
       default: {
         text: textThemes.default,
         messageText: mergeTheme(textThemes.default, {
-          'color': '$colors.textLight10',
+          color: '$colors.textLight10',
         }),
         placeholderText: mergeTheme(textThemes.default, {
-          'color': '$colors.textLight50',
+          color: '$colors.textLight50',
         }),
         background: mergeTheme(boxThemes.default, {
           'background-color': '$colors.backgroundLight50',
-          'padding': `${dimensions.padding} ${dimensions.paddingWide}`,
+          padding: `${dimensions.padding} ${dimensions.paddingWide}`,
           'border-radius': dimensions.borderRadius,
           'border-width': dimensions.borderWidthNarrow,
           'border-color': '$colors.backgroundDark05',
@@ -40,17 +40,17 @@ export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimens
         background: {
           'background-color': '$colors.disabledLight90',
           'border-color': '$colors.disabledLight20',
-        }
+        },
       },
       hover: {
         background: {
           'border-color': '$colors.disabledLight10',
-        }
+        },
       },
       focus: {
         background: {
           'border-color': '$colors.disabled',
-        }
+        },
       },
     },
   }, base?.default);
@@ -64,17 +64,17 @@ export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimens
         background: {
           'background-color': '$colors.errorLight90',
           'border-color': '$colors.errorLight20',
-        }
+        },
       },
       hover: {
         background: {
           'border-color': '$colors.errorLight10',
-        }
+        },
       },
       focus: {
         background: {
           'border-color': '$colors.error',
-        }
+        },
       },
     },
   });
@@ -88,17 +88,17 @@ export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimens
         background: {
           'background-color': '$colors.successLight90',
           'border-color': '$colors.successLight20',
-        }
+        },
       },
       hover: {
         background: {
           'border-color': '$colors.successLight10',
-        }
+        },
       },
       focus: {
         background: {
           'border-color': '$colors.success',
-        }
+        },
       },
     },
   });
@@ -109,4 +109,4 @@ export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimens
     error: errorInputWrapperTheme,
     success: successInputWrapperTheme,
   };
-}
+};

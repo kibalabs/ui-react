@@ -1,6 +1,5 @@
-import { RecursivePartial } from '@kibalabs/core';
 
-import { ThemeType, CssTheme } from '../../util';
+import { CssTheme, ThemeType } from '../../util';
 
 interface IBulletListOuterTheme extends CssTheme {
   'list-style-type': string;

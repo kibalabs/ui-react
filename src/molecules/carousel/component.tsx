@@ -1,19 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
-import { IMultiAnyChildProps, flattenChildren, useScrollListener, useInterval, useRenderedRef } from '@kibalabs/core-react';
 
-import { IMoleculeProps, defaultMoleculeProps } from '../moleculeProps';
-import { Stack } from '../../layouts';
-import { Direction, Alignment } from '../../model';
+import { getClassName } from '@kibalabs/core';
+import { flattenChildren, IMultiAnyChildProps, useInterval, useRenderedRef, useScrollListener } from '@kibalabs/core-react';
+import styled from 'styled-components';
+
 import { IconButton, IIconButtonTheme } from '../../atoms';
-import { KibaIcon, IDimensionGuide, getScreenSize, ScreenSize } from '../../particles';
+import { Stack } from '../../layouts';
+import { Alignment, Direction } from '../../model';
+import { getScreenSize, IDimensionGuide, KibaIcon, ScreenSize } from '../../particles';
 import { useDimensions } from '../../theming';
-import { ResponsiveField, CssConverter, fieldToResponsiveCss } from '../../util';
+import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
+import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 const getSlidesPerPageCss: CssConverter<number> = (field: number): string => {
   return `width: calc(100% / ${field});`;
-}
+};
 
 export interface ICarouselTheme {
   indexButtonTheme: IIconButtonTheme;
@@ -90,11 +91,11 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     } else {
       sliderRef.current?.scrollTo((slideIndex - 1) * sliderRef.current?.clientWidth, 0);
     }
-  }
+  };
 
   const onNextClicked = (): void => {
     goToNext();
-  }
+  };
 
   const goToNext = (): void => {
     if (sliderRef.current && !sliderRef.current.scrollTo) {
@@ -103,7 +104,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     } else {
       sliderRef.current?.scrollTo((slideIndex + 1) * sliderRef.current?.clientWidth, 0);
     }
-  }
+  };
 
   useInterval(props.autoplaySeconds || 10000000, (): void => {
     if (props.autoplaySeconds) {
@@ -130,7 +131,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
 
   const getScreenSizeValue = (size: ScreenSize, theme: IDimensionGuide): number => {
     return Number(getScreenSize(size, theme).replace('px', ''));
-  }
+  };
 
   useScrollListener(sliderRef.current, (): void => {
     const position = Math.ceil(sliderRef.current?.scrollLeft);
@@ -194,7 +195,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
                 key={index}
                 className={getClassName(StyledSlide.displayName)}
                 theme={dimensions}
-                slidesPerPage={{base: props.slidesPerPage, ...props.slidesPerPageResponsive}}
+                slidesPerPage={{ base: props.slidesPerPage, ...props.slidesPerPageResponsive }}
               >
                 {child}
               </StyledSlide>

@@ -1,5 +1,5 @@
-import { ThemeType } from '../../util';
 import { IBoxTheme, ITextTheme } from '../../particles';
+import { ThemeType } from '../../util';
 
 export interface IPillThemeBase extends ThemeType {
   text: ITextTheme;

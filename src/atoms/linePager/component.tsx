@@ -1,13 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IComponentProps, defaultComponentProps, themeToCss, useBuiltTheme } from '../..';
-import { Spacing, ScreenSize } from '../../particles';
-import { ILinePagerTheme } from './theme';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { Direction } from '../../model';
-import { ResponsiveHidingView } from '../../wrappers';
+import { ScreenSize, Spacing } from '../../particles';
 import { ResponsiveField } from '../../util';
+import { ResponsiveHidingView } from '../../wrappers';
+import { ILinePagerTheme } from './theme';
 
 interface IStyledLinePagerProps {
   theme: ILinePagerTheme;
@@ -82,7 +83,7 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
       return ScreenSize.ExtraLarge;
     }
     return undefined;
-  }
+  };
 
   return (
     <StyledLinePager

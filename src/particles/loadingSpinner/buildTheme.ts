@@ -7,17 +7,17 @@ import { ILoadingSpinnerTheme } from './theme';
 
 export const buildLoadingSpinnerThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base: RecursivePartial<Record<string, ILoadingSpinnerTheme>>): ThemeMap<ILoadingSpinnerTheme> => {
   const defaultLoadingSpinnerTheme = mergeTheme<ILoadingSpinnerTheme>({
-    'color': '$colors.brandPrimary',
-    'size': '2rem',
-    'width': '0.25em',
+    color: '$colors.brandPrimary',
+    size: '2rem',
+    width: '0.25em',
   }, base?.default);
 
   const lightLoadingSpinnerTheme = mergeThemePartial<ILoadingSpinnerTheme>({
-    'color': 'white',
+    color: 'white',
   }, base?.light);
 
   const darkLoadingSpinnerTheme = mergeThemePartial<ILoadingSpinnerTheme>({
-    'color': 'black',
+    color: 'black',
   }, base?.dark);
 
   const smallLoadingSpinnerTheme = mergeThemePartial<ILoadingSpinnerTheme>({
@@ -49,4 +49,4 @@ export const buildLoadingSpinnerThemes = (colors: IColorGuide, dimensions: IDime
     extraLarge: extraLargeLoadingSpinnerTheme,
     fill: fillLoadingSpinnerTheme,
   };
-}
+};

@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
-import { useColors } from '../../theming';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
 import { IColorGuide } from '../../particles';
+import { useColors } from '../../theming';
 import { valueToCss } from '../../util';
+import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 
 export interface IBackgroundLayer {
   color?: string;
@@ -22,10 +23,10 @@ export interface IBackgroundConfig extends IBackgroundLayer {
 
 const getLayersCss = (backgroundLayers: IBackgroundLayer[], colors: IColorGuide): string => {
   return backgroundLayers.reverse().map((backgroundLayer: IBackgroundLayer): string => getLayerCss(backgroundLayer, colors)).join(', ');
-}
+};
 
 const getLayerCss = (backgroundLayer: IBackgroundLayer, colors: IColorGuide): string => {
-  let layers = [];
+  const layers = [];
   // TODO(krish): this resolve doesn't do the "full resolution" thing for IE
   // TODO(krish): resolve values for linear and radial gradients too
   if (backgroundLayer.color) {
@@ -44,7 +45,7 @@ const getLayerCss = (backgroundLayer: IBackgroundLayer, colors: IColorGuide): st
     layers.push(`url(${backgroundLayer.patternImageUrl}) repeat top left`);
   }
   return layers.join(', ');
-}
+};
 
 interface IStyledBackgroundViewProps extends ISingleAnyChildProps {
   className: string;
@@ -58,7 +59,7 @@ const withBackground = (Component: React.ComponentType<IStyledBackgroundViewProp
 
 const StyledBackgroundView = withBackground((props: IStyledBackgroundViewProps): React.ReactElement => {
   const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
-  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })))
+  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
 });
 
 export interface IBackgroundViewProps extends IWrapperProps, IBackgroundConfig {
@@ -66,7 +67,7 @@ export interface IBackgroundViewProps extends IWrapperProps, IBackgroundConfig {
 
 export const BackgroundView = (props: IBackgroundViewProps): React.ReactElement => {
   const colors = useColors();
-  let layers = props.layers || [];
+  const layers = props.layers || [];
   if (props.color || props.linearGradient || props.radialGradient || props.imageUrl || props.patternImageUrl || layers.length == 0) {
     layers.splice(0, 0, {
       color: props.color,
@@ -85,7 +86,7 @@ export const BackgroundView = (props: IBackgroundViewProps): React.ReactElement 
       { props.children }
     </StyledBackgroundView>
   );
-}
+};
 
 BackgroundView.displayName = 'BackgroundView';
 BackgroundView.defaultProps = {

@@ -1,5 +1,5 @@
-import { ThemeType, CssTheme } from '../../util';
 import { ITextTheme } from '../../particles';
+import { CssTheme, ThemeType } from '../../util';
 
 interface IBulletTheme extends CssTheme {
   'content': string;

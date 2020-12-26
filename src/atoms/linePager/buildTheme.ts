@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { IBoxTheme, IColorGuide, IDimensionGuide } from '../../particles';
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide, IDimensionGuide, IBoxTheme } from '../../particles';
 import { ILinePagerTheme } from './theme';
 
 export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, ILinePagerTheme>>): ThemeMap<ILinePagerTheme> => {
@@ -9,7 +9,7 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          'padding': dimensions.paddingNarrow3,
+          padding: dimensions.paddingNarrow3,
           'background-color': '$colors.backgroundDark05',
         }),
       },
@@ -71,7 +71,7 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
     normal: {
       default: {
         background: {
-          'padding': dimensions.padding,
+          padding: dimensions.padding,
         },
       },
     },
@@ -81,7 +81,7 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
     normal: {
       default: {
         background: {
-          'padding': dimensions.paddingNarrow4,
+          padding: dimensions.paddingNarrow4,
         },
       },
     },
@@ -92,7 +92,7 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
       default: {
         background: {
           'box-shadow': boxThemes.card['box-shadow'],
-          'margin': boxThemes.card['margin'],
+          margin: boxThemes.card.margin,
         },
       },
     },
@@ -108,4 +108,4 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
     small: smallLinePagerTheme,
     card: cardLinePagerTheme,
   };
-}
+};

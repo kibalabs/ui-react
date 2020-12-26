@@ -1,8 +1,9 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import { getClassName } from '@kibalabs/core';
 
-import { TextAlignment, TextTag, Link } from '..';
+import { getClassName } from '@kibalabs/core';
+import ReactMarkdown from 'react-markdown';
+
+import { Link, TextAlignment, TextTag } from '..';
 import { PrettyText } from '../atoms/prettyText/component';
 
 interface IMarkdownTextProps {
@@ -28,7 +29,7 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       }
     }
     return true;
-  }
+  };
 
   const mergeVariants = (...variants: (string | undefined | null)[]): string => {
     const values = [];
@@ -38,7 +39,7 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       }
     });
     return values.join('-');
-  }
+  };
 
   const renderers: ReactMarkdown.Renderers = {
     root: (rendererProps: object): React.ReactElement => {
@@ -73,10 +74,10 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       return <Link target={rendererProps.href} text={String(rendererProps.children[0].props.children)}/>;
     },
     emphasis: (rendererProps: object): React.ReactElement => {
-      return <em>{rendererProps.children}</em>
+      return <em>{rendererProps.children}</em>;
     },
     strong: (rendererProps: object): React.ReactElement => {
-      return <strong>{rendererProps.children}</strong>
+      return <strong>{rendererProps.children}</strong>;
     },
   };
 
@@ -91,7 +92,7 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       escapeHtml={false}
       source={props.source.replace(/\n/g, '<br/>')}
     />
-  )
+  );
 };
 
 MarkdownText.displayName = 'MarkdownText';

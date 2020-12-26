@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IMoleculeProps, defaultMoleculeProps } from '../moleculeProps';
-import { ProgressCounterItem, IProgressCounterItemTheme } from '../../atoms';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { IProgressCounterItemTheme, ProgressCounterItem } from '../../atoms';
 import { Direction } from '../../model';
 import { PaddingSize, Spacing } from '../../particles';
+import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface IProgressCounterTheme {
   progressCounterItemTheme: IProgressCounterItemTheme;

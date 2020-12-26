@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
-import { useDimensions } from '../../theming';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
 import { IDimensionGuide } from '../../particles';
+import { useDimensions } from '../../theming';
+import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 
 interface IStyledContainingViewProps extends IWrapperProps {
   theme: IDimensionGuide;
@@ -22,7 +23,7 @@ const withContainingView = (Component: React.ComponentType<IStyledContainingView
 
 const StyledContainingView = withContainingView((props: IStyledContainingViewProps): React.ReactElement => {
   const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
-  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })))
+  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
 });
 
 export interface IContainingViewProps extends IWrapperProps {

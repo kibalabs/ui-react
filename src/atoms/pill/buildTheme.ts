@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../particles';
 import { IPillTheme } from './theme';
 
 export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IPillTheme>>): ThemeMap<IPillTheme> => {
@@ -9,12 +9,12 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          'padding': `${dimensions.padding} ${dimensions.paddingWide2}`,
+          padding: `${dimensions.padding} ${dimensions.paddingWide2}`,
           'background-color': '$colors.brandPrimaryClear75',
           'border-radius': `${dimensions.paddingWide2}`,
         }),
         text: mergeTheme(textThemes.default, textThemes.small, {
-          'color': '$colors.brandPrimary',
+          color: '$colors.brandPrimary',
           'font-weight': '600',
         }),
       },
@@ -40,7 +40,7 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
           'background-color': '$colors.brandPrimaryClear25',
         },
         text: {
-          'color': '$colors.textOnBrand',
+          color: '$colors.textOnBrand',
         },
       },
     },
@@ -54,7 +54,7 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
           'border-color': '$colors.errorLight10',
         },
         text: {
-          'color': '$colors.errorLight10',
+          color: '$colors.errorLight10',
         },
       },
     },
@@ -68,7 +68,7 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
           'border-color': '$colors.successLight10',
         },
         text: {
-          'color': '$colors.successLight10',
+          color: '$colors.successLight10',
         },
       },
     },
@@ -82,4 +82,4 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     error: errorPillTheme,
     success: successPillTheme,
   };
-}
+};

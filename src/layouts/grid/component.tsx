@@ -1,13 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
-import { IMultiChildProps, ISingleAnyChildProps, flattenChildren } from '@kibalabs/core-react';
 
-import { Alignment, getFlexItemAlignment, getFlexContentAlignment } from '../../model';
-import { useDimensions } from '../../theming';
+import { getClassName } from '@kibalabs/core';
+import { flattenChildren, IMultiChildProps, ISingleAnyChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
+
+import { Alignment, getFlexContentAlignment, getFlexItemAlignment } from '../../model';
 import { IDimensionGuide } from '../../particles';
-import { PaddingView, IPaddingViewPaddingProps } from '../../wrappers/paddingView';
-import { ResponsiveField, getResponsiveCss } from '../../util';
+import { useDimensions } from '../../theming';
+import { getResponsiveCss, ResponsiveField } from '../../util';
+import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
 
 
 export interface IGridItemProps extends ISingleAnyChildProps {
@@ -74,7 +75,7 @@ export const Grid = (props: IGridProps): React.ReactElement => {
             id={child.props.id}
             className={getClassName(StyledGridItem.displayName, child.props.className)}
             theme={theme}
-            size={{base: child.props.size, ...child.props.sizeResponsive}}
+            size={{ base: child.props.size, ...child.props.sizeResponsive }}
             isFullHeight={child.props.isFullHeight}
             gutter={props.shouldAddGutters ? theme.gutter : '0px'}
             alignment={child.props.alignment}
@@ -83,7 +84,7 @@ export const Grid = (props: IGridProps): React.ReactElement => {
           </StyledGridItem>
         ))}
       </StyledGrid>
-      </PaddingView>
+    </PaddingView>
   );
 };
 

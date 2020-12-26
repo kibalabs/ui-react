@@ -1,4 +1,5 @@
-import { merge, mergePartial, RecursivePartial} from '@kibalabs/core';
+import { merge, mergePartial, RecursivePartial } from '@kibalabs/core';
+
 import { camelCaseToKebabCase } from './stringUtil';
 
 export type CssTheme = {
@@ -17,10 +18,10 @@ export const valueToCss = (value: string): string => {
     if (referenceType === 'dimensions') {
       return `var(--dimension-${camelCaseToKebabCase(referenceValue)})`;
     }
-    console.error(`Unknown reference used: ${referenceType} (${value})`)
+    console.error(`Unknown reference used: ${referenceType} (${value})`);
   }
   return value;
-}
+};
 
 export const themeToCss = (theme?: CssTheme): string => {
   if (!theme) {
@@ -41,7 +42,7 @@ export const colorsToCss = (colors: Record<string, string>): string => {
     return `--color-${camelCaseToKebabCase(colorKey)}: ${colors[colorKey]};`;
   });
   return output.join('\n');
-}
+};
 
 export type ThemeValue = Readonly<string | number | ThemeType | RecursivePartial<ThemeType>>;
 
@@ -51,7 +52,7 @@ export type ThemeType = {
 
 export interface ThemeMap<Theme extends ThemeType> extends Record<string, RecursivePartial<Theme> | Theme> {
   default: Theme;
-};
+}
 
 export function mergeTheme<Theme extends ThemeType>(baseTheme: Theme, ...partialThemes: (RecursivePartial<Theme> | undefined)[]): Theme {
   return merge(baseTheme, ...partialThemes);

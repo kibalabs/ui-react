@@ -1,8 +1,9 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import { getClassName } from '@kibalabs/core';
 
-import { Box, PrettyText, TextAlignment, Media } from '..';
+import { getClassName } from '@kibalabs/core';
+import ReactMarkdown from 'react-markdown';
+
+import { Box, Media, PrettyText, TextAlignment } from '..';
 
 interface IMarkdownProps {
   id?: string;
@@ -25,7 +26,7 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
       }
     }
     return true;
-  }
+  };
 
   const renderers: ReactMarkdown.Renderers = {
     // TODO(krish): this should use pretty text eventually
@@ -70,7 +71,7 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
       includeNodeIndex={true}
       source={props.source}
     />
-  )
+  );
 };
 
 Markdown.displayName = 'Markdown';

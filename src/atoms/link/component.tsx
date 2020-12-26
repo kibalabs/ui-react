@@ -1,8 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IComponentProps, defaultComponentProps, useBuiltTheme, themeToCss } from '../..';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { ILinkTheme } from './theme';
 
 interface IStyledLinkProps {

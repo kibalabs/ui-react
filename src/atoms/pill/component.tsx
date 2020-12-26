@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IComponentProps, defaultComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { IIconProps, PaddingSize, Spacing } from '../../particles';
 import { IPillTheme } from './theme';
-import { IIconProps, Spacing, PaddingSize } from '../../particles';
 
 interface IStyledPillProps {
   theme: IPillTheme;

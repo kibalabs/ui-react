@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import { getClassName } from '@kibalabs/core';
 import { IMultiChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
 
-import { IMoleculeProps, defaultMoleculeProps } from '../moleculeProps';
-import { TabBarItem, ITabBarItemTheme, ITabBarItemProps } from '../../atoms/tabBarItem';
+import { ITabBarItemProps, ITabBarItemTheme, TabBarItem } from '../../atoms/tabBarItem';
 import { Direction } from '../../model';
+import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface ITabBarTheme {
   tabBarItemTheme: ITabBarItemTheme;

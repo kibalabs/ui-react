@@ -2,7 +2,7 @@ import { IDimensionGuide } from '../particles';
 
 export const getResponsiveCss = (screenWidth: string, css: string): string => {
   return `@media (min-width: ${screenWidth}) { ${css} }`;
-}
+};
 
 export interface ResponsiveField<FieldType> {
   base?: FieldType;
@@ -32,4 +32,4 @@ export const fieldToResponsiveCss = <FieldType>(field: ResponsiveField<FieldType
     output.push(getResponsiveCss(theme.screenWidthExtraLarge, cssConversion(field.extraLarge)));
   }
   return output.join('\n');
-}
+};
