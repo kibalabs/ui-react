@@ -14,8 +14,8 @@
     "start": "build-react-component --start",
     "start-dev": "build-react-component --start --dev",
     "clean": "rm -rf ./node_modules ./package-lock.json ./dist",
-    "lint": "lint",
-    "lint-fix": "lint --fix",
+    "lint": "lint --config-modifier ./eslintrc-modifier.js",
+    "lint-fix": "lint --config-modifier ./eslintrc-modifier.js --fix",
     "publish-next": "kiba-publish --next",
     "storybook": "start-storybook --docs --port 6006",
     "build-storybook": "build-storybook --docs --output-dir dist"

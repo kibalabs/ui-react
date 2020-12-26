@@ -13,13 +13,23 @@ export interface IStyledImageProps {
   fitType: 'crop' | 'cover' | 'scale' | 'contain';
 }
 
+const getImageFit = (fitType: string): string => {
+  if (fitType === 'crop' || fitType === 'cover') {
+    return 'cover';
+  }
+  if (fitType === 'contain') {
+    return 'contain';
+  }
+  return 'fill';
+};
+
 const StyledImage = styled.img<IStyledImageProps>`
   ${(props: IStyledImageProps): string => themeToCss(props.theme.background)};
   display: block;
   pointer-events: none;
   width: ${(props: IStyledImageProps): string => (props.isFullWidth ? '100%' : 'auto')};
   height: ${(props: IStyledImageProps): string => (props.isFullHeight ? '100%' : 'auto')};
-  object-fit: ${(props: IStyledImageProps): string => (props.fitType === 'crop' || props.fitType === 'cover' ? 'cover' : props.fitType === 'contain' ? 'contain' : 'fill')};
+  object-fit: ${(props: IStyledImageProps): string => getImageFit(props.fitType)};
   max-width: 100%;
   max-height: 100%;
 

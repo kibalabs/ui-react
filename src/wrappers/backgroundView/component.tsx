@@ -26,6 +26,7 @@ const getLayersCss = (backgroundLayers: IBackgroundLayer[], colors: IColorGuide)
   return backgroundLayers.reverse().map((backgroundLayer: IBackgroundLayer): string => getLayerCss(backgroundLayer, colors)).join(', ');
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getLayerCss = (backgroundLayer: IBackgroundLayer, colors: IColorGuide): string => {
   const layers = [];
   // TODO(krish): this resolve doesn't do the "full resolution" thing for IE

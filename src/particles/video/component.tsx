@@ -13,11 +13,21 @@ export interface IStyledVideoProps {
   fitType: 'crop' | 'cover' | 'scale' | 'contain';
 }
 
+const getImageFit = (fitType: string): string => {
+  if (fitType === 'crop' || fitType === 'cover') {
+    return 'cover';
+  }
+  if (fitType === 'contain') {
+    return 'contain';
+  }
+  return 'fill';
+};
+
 const StyledVideo = styled.video<IStyledVideoProps>`
   display: block;
   width: ${(props: IStyledVideoProps): string => (props.isFullWidth ? '100%' : 'auto')};
   height: ${(props: IStyledVideoProps): string => (props.isFullHeight ? '100%' : 'auto')};
-  object-fit: ${(props: IStyledVideoProps): string => (props.fitType === 'crop' || props.fitType === 'cover' ? 'cover' : props.fitType === 'contain' ? 'contain' : 'fill')};
+  object-fit: ${(props: IStyledVideoProps): string => getImageFit(props.fitType)};
   max-width: 100%;
   max-height: 100%;
 

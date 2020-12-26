@@ -44,10 +44,10 @@ export const useBaseColors = (): IColorGuide => {
 
 export const useAlternateColors = (name?: string, override?: Partial<IColorGuide>): Partial<IColorGuide> => {
   const colors = useColors();
+  const theme = useTheme();
   if (name === undefined) {
     return { ...colors, ...(override || {}) };
   }
-  const theme = useTheme();
   if (name === 'default') {
     return { ...theme.colors, ...(override || {}) };
   }
@@ -73,11 +73,9 @@ export const ColorProvider = (props: IColorProviderProps): React.ReactElement =>
 };
 
 export function useColors(): IColorGuide {
-  let colors = React.useContext(ColorContext);
-  if (!colors) {
-    colors = useBaseColors();
-  }
-  return colors;
+  const colors = React.useContext(ColorContext);
+  const baseColors = useBaseColors();
+  return colors || baseColors;
 }
 
 export const useBuiltTheme = <Theme extends ThemeType>(component: string, variant: string, override?: RecursivePartial<Theme>): Theme => {
@@ -86,19 +84,20 @@ export const useBuiltTheme = <Theme extends ThemeType>(component: string, varian
   const baseColors = useBaseColors();
   const dimensions = useDimensions();
   // NOTE(krishan711): for SSR ie styles will change on hydration so allow this to have an effect
-  const isRendered = useInitialization((): void => {});
+  const isRendered = useInitialization((): void => undefined);
+  const needsRerunningForIe = isIe() && isRendered;
   return React.useMemo((): Theme => {
     const componentThemes = theme[component];
     if (!componentThemes) {
       throw Error(`Could not find component ${component} in current theme. Valid keys are: ${Object.keys(theme)}`);
     }
     const variants = variant.split('-').filter((variantPart: string): boolean => variantPart.length > 0);
-    const themeParts = variants.splice(variants.lastIndexOf('default') + 1).reduce((value: RecursivePartial<Theme>[], variant: string): RecursivePartial<Theme>[] => {
-      const variantTheme = componentThemes[variant];
+    const themeParts = variants.splice(variants.lastIndexOf('default') + 1).reduce((value: RecursivePartial<Theme>[], currentVariant: string): RecursivePartial<Theme>[] => {
+      const variantTheme = componentThemes[currentVariant];
       if (variantTheme) {
         value.push(variantTheme);
       } else {
-        console.error(`Failed to find variant ${variant} in ${component} themes`);
+        console.error(`Failed to find variant ${currentVariant} in ${component} themes`);
       }
       return value;
     }, []);
@@ -107,12 +106,12 @@ export const useBuiltTheme = <Theme extends ThemeType>(component: string, varian
     }
     let builtTheme = mergeTheme(componentThemes.default, ...themeParts);
     // NOTE(krishan711): Resolving reference values is only here because ie 11 doesn't support css vars
-    if (isIe() && isRendered) {
+    if (needsRerunningForIe) {
       // NOTE(krishan711): Need to merge with base otherwise colors are missing because alternates don't need to have all
       builtTheme = resolveThemeValues(builtTheme, { ...baseColors, ...colors }, dimensions);
     }
     return builtTheme;
-  }, [theme, colors, baseColors, dimensions, variant, override, isIe() && isRendered]);
+  }, [theme, colors, baseColors, dimensions, variant, override, component, needsRerunningForIe]);
 };
 
 const isIe = (): boolean => {

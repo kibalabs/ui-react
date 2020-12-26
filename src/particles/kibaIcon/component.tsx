@@ -87,6 +87,7 @@ export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
       id={props.id}
       className={getClassName(KibaIcon.displayName, props.className)}
       variant={props.variant}
+      // eslint-disable-next-line no-underscore-dangle
       _color={props._color}
       shouldAddFill={shouldAddFill}
       shouldAddStroke={shouldAddStroke}

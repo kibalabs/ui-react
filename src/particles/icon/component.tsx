@@ -44,7 +44,9 @@ export const Icon = (props: IIconProps): React.ReactElement => {
       id={props.id}
       className={getClassName(Icon.displayName, props.className)}
       theme={theme}
+      // NOTE(krishan711): is size ever used here?! It's not in the props!
       size={props.size}
+      // eslint-disable-next-line no-underscore-dangle
       color={props._color}
       shouldAddFill={props.shouldAddFill}
       shouldAddStroke={props.shouldAddStroke}

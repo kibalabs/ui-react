@@ -121,7 +121,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
         sliderRef.current?.scrollTo(sliderRef.current?.clientWidth * props.initialIndex, 0);
       }
     }, 50);
-  }, [props.initialIndex, sliderRef, sliderRef.current]);
+  }, [props.initialIndex, sliderRef]);
 
   const slidesPerPage = props.slidesPerPageResponsive?.base || props.slidesPerPage;
   const slidesPerPageSmall = props.slidesPerPageResponsive?.small || slidesPerPage;
