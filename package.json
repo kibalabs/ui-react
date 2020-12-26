@@ -1,7 +1,7 @@
 {
   "name": "@kibalabs/ui-react",
   "version": "0.8.0",
-  "description": "React UI components for building projects at Kiba Labs",
+  "description": "React UI component library for building projects at Kiba Labs",
   "license": "MIT",
   "repository": {
     "type": "git",
