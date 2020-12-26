@@ -32,7 +32,7 @@
     "react-markdown": "^5.0.3"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.6.2",
+    "@kibalabs/build": "file:/Users/krishan/Projects/build-js/kibalabs-build-0.6.2-1.tgz",
     "@storybook/addon-docs": "6.1.11",
     "@storybook/addon-actions": "6.1.11",
     "@storybook/addon-essentials": "6.1.11",
