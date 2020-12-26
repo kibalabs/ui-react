@@ -33,9 +33,6 @@ jobs:
   lint-package:
     needs: build-package
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: .
     env:
       DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/ui-react-build
       DOCKER_TAG: ${{ github.sha }}
