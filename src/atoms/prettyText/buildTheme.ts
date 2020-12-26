@@ -24,6 +24,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
   }, base?.default);
 
   const derivedThemes = Object.keys(textThemes).reduce((currentMap: Record<string, RecursivePartial<IPrettyTextTheme>>, textVariant: string): Record<string, RecursivePartial<IPrettyTextTheme>> => {
+    // eslint-disable-next-line no-param-reassign
     currentMap[textVariant] = mergeThemePartial({
       normal: {
         default: {

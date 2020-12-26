@@ -79,10 +79,13 @@ const expandColors = (colors: IColorGuide, base?: IColorGuide): IColorGuide => {
     values.forEach((value: number): void => {
       const valueNumber = padZeros(value * 100, 2);
       const valueKeyLight = `${colorKey}Light${valueNumber}`;
+      // eslint-disable-next-line no-param-reassign
       extendedColors[valueKeyLight] = base?.[valueKeyLight] || lighten(value, colors[colorKey]);
       const valueKeyDark = `${colorKey}Dark${valueNumber}`;
+      // eslint-disable-next-line no-param-reassign
       extendedColors[valueKeyDark] = base?.[valueKeyDark] || darken(value, colors[colorKey]);
       const valueKeyClear = `${colorKey}Clear${valueNumber}`;
+      // eslint-disable-next-line no-param-reassign
       extendedColors[valueKeyClear] = base?.[valueKeyClear] || transparentize(value, colors[colorKey]);
     });
     return extendedColors;

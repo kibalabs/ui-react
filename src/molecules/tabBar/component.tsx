@@ -5,7 +5,6 @@ import { IMultiChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { ITabBarItemProps, ITabBarItemTheme, TabBarItem } from '../../atoms/tabBarItem';
-import { Direction } from '../../model';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface ITabBarTheme {
@@ -57,7 +56,7 @@ export const TabBar = (props: ITabBarProps): React.ReactElement => {
       id={props.id}
       className={getClassName(TabBar.displayName, props.className, props.isFullWidth && 'fullWidth')}
     >
-      { React.Children.map(props.children, (child: React.ReactElement<TabBarItemInnerProps>, index: number): React.ReactElement => (
+      { React.Children.map(props.children, (child: React.ReactElement<ITabBarItemInnerProps>, index: number): React.ReactElement => (
         <TabBarItem
           key={child.props.tabKey}
           id={child.props.id}
@@ -83,9 +82,9 @@ TabBar.defaultProps = {
 };
 TabBar.Item = TabBarItemInner;
 
-interface IManagedTabBarProps extends Omit<ITabBarProps, 'selectedTabKey' | 'onTabKeySelected'> {
-  onTabKeyChanged(tabKey: string): void;
-}
+// interface IManagedTabBarProps extends Omit<ITabBarProps, 'selectedTabKey' | 'onTabKeySelected'> {
+//   onTabKeyChanged(tabKey: string): void;
+// }
 
 // export const ManagedTabBar = (props: IManagedTabBarProps): React.ReactElement => {
 //   const [selectedTabKey, setSelectedTabKey] = React.useState<string>();

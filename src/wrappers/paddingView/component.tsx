@@ -33,7 +33,7 @@ const withPaddingView = (Component: React.ComponentType<IStyledPaddingViewProps>
 `;
 
 const StyledPaddingView = withPaddingView((props: IStyledPaddingViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
+  const children = React.Children.count(props.children) > 0 ? props.children : [<div key='defaultChild' />];
   return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
 });
 
@@ -42,7 +42,7 @@ export interface IPaddingViewProps extends IWrapperProps, IPaddingViewPaddingPro
 }
 
 export const PaddingView = (props: IPaddingViewProps): React.ReactElement => {
-  const theme = props.theme || useDimensions();
+  const theme = useDimensions(props.theme);
   const paddingTop = props.paddingTop || props.paddingVertical || props.padding;
   const paddingBottom = props.paddingBottom || props.paddingVertical || props.padding;
   const paddingRight = props.paddingRight || props.paddingHorizontal || props.padding;

@@ -14,7 +14,7 @@ const withHidingView = (Component: React.ComponentType<IStyledHidingViewProps>):
 `;
 
 const StyledHidingView = withHidingView((props: IStyledHidingViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
+  const children = React.Children.count(props.children) > 0 ? props.children : [<div key='defaultChild' />];
   return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
 });
 

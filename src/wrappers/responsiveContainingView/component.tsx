@@ -54,7 +54,7 @@ const withResponsiveContainingView = (Component: React.ComponentType<IStyledResp
 `;
 
 const StyledResponsiveContainingView = withResponsiveContainingView((props: IStyledResponsiveContainingViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
+  const children = React.Children.count(props.children) > 0 ? props.children : [<div key='defaultChild' />];
   return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
 });
 
@@ -67,7 +67,7 @@ export interface IResponsiveContainingViewProps extends IWrapperProps {
 }
 
 export const ResponsiveContainingView = (props: IResponsiveContainingViewProps): React.ReactElement => {
-  const theme = props.theme || useDimensions();
+  const theme = useDimensions(props.theme);
   return (
     <StyledResponsiveContainingView
       className={getClassName(ResponsiveContainingView.displayName, props.className)}

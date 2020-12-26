@@ -22,7 +22,7 @@ const withResponsiveTextAlignmentView = (Component: React.ComponentType<IStyledR
 `;
 
 const StyledResponsiveTextAlignmentView = withResponsiveTextAlignmentView((props: IStyledResponsiveTextAlignmentViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
+  const children = React.Children.count(props.children) > 0 ? props.children : [<div key='defaultChild' />];
   return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
 });
 
@@ -33,7 +33,7 @@ export interface IResponsiveTextAlignmentViewProps extends IWrapperProps {
 }
 
 export const ResponsiveTextAlignmentView = (props: IResponsiveTextAlignmentViewProps): React.ReactElement => {
-  const theme = props.theme || useDimensions();
+  const theme = useDimensions(props.theme);
   return (
     <StyledResponsiveTextAlignmentView
       className={getClassName(ResponsiveTextAlignmentView.displayName, props.className)}

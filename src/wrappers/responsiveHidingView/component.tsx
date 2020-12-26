@@ -18,7 +18,7 @@ const withResponsiveHidingView = (Component: React.ComponentType<IStyledResponsi
 `;
 
 const StyledResponsiveHidingView = withResponsiveHidingView((props: IStyledResponsiveHidingViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
+  const children = React.Children.count(props.children) > 0 ? props.children : [<div key='defaultChild' />];
   return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
 });
 
@@ -29,7 +29,7 @@ export interface IResponsiveHidingViewProps extends IWrapperProps {
 }
 
 export const ResponsiveHidingView = (props: IResponsiveHidingViewProps): React.ReactElement => {
-  const theme = props.theme || useDimensions();
+  const theme = useDimensions(props.theme);
   return (
     <StyledResponsiveHidingView
       className={getClassName(ResponsiveHidingView.displayName, props.className)}

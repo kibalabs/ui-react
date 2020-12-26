@@ -22,7 +22,7 @@ export interface ISpacingProps extends IComponentProps<IDimensionGuide> {
 }
 
 export const Spacing = (props: ISpacingProps): React.ReactElement => {
-  const theme = props.theme || useDimensions();
+  const theme = useDimensions(props.theme);
   return (
     <StyledDiv
       id={props.id}

@@ -1,5 +1,3 @@
-import { RecursivePartial } from '@kibalabs/core';
-
 import { IBoxTheme } from '../../particles';
 import { ThemeType } from '../../util';
 

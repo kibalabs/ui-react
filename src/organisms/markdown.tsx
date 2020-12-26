@@ -31,7 +31,7 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
   const renderers: ReactMarkdown.Renderers = {
     // TODO(krish): this should use pretty text eventually
     // NOTE(krish): full list here: https://github.com/rexxars/react-markdown/blob/master/src/renderers.js
-    root: (rendererProps: object): React.ReactElement => {
+    root: (rendererProps: Record<string, unknown>): React.ReactElement => {
       return (
         <Box
           id={props.id}
@@ -42,21 +42,21 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
         </Box>
       );
     },
-    image: (rendererProps: object): React.ReactElement => {
+    image: (rendererProps: Record<string, unknown>): React.ReactElement => {
       return <Media isCenteredHorizontally={true} source={rendererProps.src} alternativeText={rendererProps.alt}/>;
     },
-    paragraph: (rendererProps: object): React.ReactElement => {
+    paragraph: (rendererProps: Record<string, unknown>): React.ReactElement => {
       const childrenKeys = React.Children.map(rendererProps.children, (child: React.ReactElement): string => String(child.key).split('-')[0]);
       const isCaption = childrenKeys.indexOf('image') > -1;
       return (<PrettyText variant='paragraph' alignment={isCaption ? TextAlignment.Center : TextAlignment.Left}>{rendererProps.children}</PrettyText>);
     },
-    heading: (rendererProps: object): React.ReactElement => {
+    heading: (rendererProps: Record<string, unknown>): React.ReactElement => {
       return <PrettyText variant={`header${rendererProps.level}`} alignment={TextAlignment.Left}>{rendererProps.children}</PrettyText>;
     },
-    emphasis: (rendererProps: object): React.ReactElement => {
+    emphasis: (rendererProps: Record<string, unknown>): React.ReactElement => {
       return <PrettyText variant='emphasis'>{rendererProps.children}</PrettyText>;
     },
-    strong: (rendererProps: object): React.ReactElement => {
+    strong: (rendererProps: Record<string, unknown>): React.ReactElement => {
       return <PrettyText variant='strong'>{rendererProps.children}</PrettyText>;
     },
   };

@@ -38,7 +38,7 @@ export const ProgressCounter = (props: IProgressCounterProps): React.ReactElemen
       id={props.id}
       className={getClassName(ProgressCounter.displayName, props.className)}
     >
-      {Array(props.stepCount).fill(null).map((_: any, index: number): React.ReactElement => {
+      {Array(props.stepCount).fill(null).map((_: unknown, index: number): React.ReactElement => {
         return (
           <React.Fragment key={index}>
             <ProgressCounterItem

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
+import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IColorGuide } from '../../particles';
@@ -58,7 +59,7 @@ const withBackground = (Component: React.ComponentType<IStyledBackgroundViewProp
 `;
 
 const StyledBackgroundView = withBackground((props: IStyledBackgroundViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
+  const children = React.Children.count(props.children) > 0 ? props.children : [<div key='defaultChild' />];
   return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
 });
 
@@ -68,7 +69,7 @@ export interface IBackgroundViewProps extends IWrapperProps, IBackgroundConfig {
 export const BackgroundView = (props: IBackgroundViewProps): React.ReactElement => {
   const colors = useColors();
   const layers = props.layers || [];
-  if (props.color || props.linearGradient || props.radialGradient || props.imageUrl || props.patternImageUrl || layers.length == 0) {
+  if (props.color || props.linearGradient || props.radialGradient || props.imageUrl || props.patternImageUrl || layers.length === 0) {
     layers.splice(0, 0, {
       color: props.color,
       linearGradient: props.linearGradient,

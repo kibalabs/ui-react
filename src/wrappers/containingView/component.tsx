@@ -22,7 +22,7 @@ const withContainingView = (Component: React.ComponentType<IStyledContainingView
 `;
 
 const StyledContainingView = withContainingView((props: IStyledContainingViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
+  const children = React.Children.count(props.children) > 0 ? props.children : [<div key='defaultChild' />];
   return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
 });
 
@@ -32,7 +32,7 @@ export interface IContainingViewProps extends IWrapperProps {
 }
 
 export const ContainingView = (props: IContainingViewProps): React.ReactElement => {
-  const theme = props.theme || useDimensions();
+  const theme = useDimensions(props.theme);
   return (
     <StyledContainingView
       className={getClassName(ContainingView.displayName, props.className, props.isCenteredHorizontally && 'centered')}

@@ -68,6 +68,7 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
   const [currentUrl, setCurrentUrl] = React.useState<string | undefined>(props.url);
   const [hasFailedToLoad, setHasFailedToLoad] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   const isInitialized = useInitialization((): void => {});
   const theme = useBuiltTheme('webViews', props.variant, props.theme);
 
@@ -77,7 +78,7 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
       setCurrentUrl(props.url);
       setHasFailedToLoad(false);
     }
-  }, [props.url]);
+  }, [props.url, currentUrl]);
 
   const handleOnError = (): void => {
     setIsLoading(false);

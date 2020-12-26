@@ -121,7 +121,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
         sliderRef.current?.scrollTo(sliderRef.current?.clientWidth * props.initialIndex, 0);
       }
     }, 50);
-  }, [props.initialIndex, sliderRef.current]);
+  }, [props.initialIndex, sliderRef, sliderRef.current]);
 
   const slidesPerPage = props.slidesPerPageResponsive?.base || props.slidesPerPage;
   const slidesPerPageSmall = props.slidesPerPageResponsive?.small || slidesPerPage;
@@ -153,20 +153,24 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     const width = Math.ceil(sliderRef.current?.scrollWidth);
     const progress = (children.length / slideCount) * (position / width);
     const progressRounded = Math.round(progress * 100.0) / 100;
-    const slideIndex = Math.round(progress);
-    props.onIndexProgressed && props.onIndexProgressed(progressRounded);
+    const newSlideIndex = Math.round(progress);
+    if (props.onIndexProgressed) {
+      props.onIndexProgressed(progressRounded);
+    }
     if (scrollTimeoutRef.current) {
       clearTimeout(scrollTimeoutRef.current);
     }
     scrollTimeoutRef.current = setTimeout((): void => {
-      setSlideIndex(slideIndex);
+      setSlideIndex(newSlideIndex);
       scrollTimeoutRef.current = null;
     }, 50);
   });
 
   React.useEffect((): void => {
-    props.onIndexChanged && props.onIndexChanged(slideIndex);
-  }, [slideIndex]);
+    if (props.onIndexChanged) {
+      props.onIndexChanged(slideIndex);
+    }
+  }, [props.onIndexChanged, slideIndex]);
 
   return (
     <Stack

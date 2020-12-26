@@ -24,38 +24,39 @@ export const ThemeProvider = (props: IThemeProviderProps): React.ReactElement =>
   );
 };
 
-export function useTheme(): ITheme {
+export const useTheme = (): ITheme => {
   const theme = React.useContext(ThemeContext);
   if (!theme) {
     throw Error('No theme has been set!');
   }
   return theme;
-}
+};
 
-export function useDimensions(): IDimensionGuide {
+export const useDimensions = (override?: Partial<IDimensionGuide>): IDimensionGuide => {
   const theme = useTheme();
-  return theme.dimensions;
-}
+  return { ...theme.dimensions, ...(override || {}) };
+};
 
-export function useBaseColors(): IColorGuide {
+export const useBaseColors = (): IColorGuide => {
   const theme = useTheme();
   return theme.colors;
-}
+};
 
-export function useAlternateColors(name?: string): Partial<IColorGuide> {
+export const useAlternateColors = (name?: string, override?: Partial<IColorGuide>): Partial<IColorGuide> => {
+  const colors = useColors();
   if (name === undefined) {
-    return useColors();
+    return { ...colors, ...(override || {}) };
   }
   const theme = useTheme();
   if (name === 'default') {
-    return theme.colors;
+    return { ...theme.colors, ...(override || {}) };
   }
   if (!(name in theme.alternateColors)) {
     console.error(`Unrecognized color variant requested: ${name}`);
-    return theme.colors;
+    return { ...theme.colors, ...(override || {}) };
   }
-  return theme.alternateColors[name];
-}
+  return { ...theme.alternateColors[name], ...(override || {}) };
+};
 
 export const ColorContext = React.createContext<IColorGuide | null>(null);
 
@@ -127,6 +128,7 @@ const resolveThemeValues = (theme: ThemeType, colors: IColorGuide, dimensions: I
     } else if (typeof value === 'object') {
       themeValue = resolveThemeValues(value, colors, dimensions);
     }
+    // eslint-disable-next-line no-param-reassign
     currentMap[themeKey] = themeValue;
     return currentMap;
   }, {});

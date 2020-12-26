@@ -67,7 +67,7 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
   const pageCountLarge = props.pageCountResponsive?.large || pageCountMedium;
   const pageCountExtraLarge = props.pageCountResponsive?.extraLarge || pageCountLarge;
   const pageCounts = [pageCount, pageCountSmall, pageCountMedium, pageCountLarge, pageCountExtraLarge];
-  const maxPageCount = Math.max(...(pageCounts.filter((pageCount?: number): boolean => pageCount !== undefined)));
+  const maxPageCount = Math.max(...(pageCounts.filter((candidatePageCount?: number): boolean => candidatePageCount !== undefined)));
 
   const getHiddenAboveSize = (index: number): ScreenSize | undefined => {
     if (index >= pageCountSmall) {
@@ -90,7 +90,7 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
       id={props.id}
       className={getClassName(LinePager.displayName, props.className)}
     >
-      {Array(maxPageCount).fill(null).map((_: any, index: number): React.ReactElement => {
+      {Array(maxPageCount).fill(null).map((_: unknown, index: number): React.ReactElement => {
         return (
           <ResponsiveHidingView key={index} hiddenAbove={getHiddenAboveSize(index)}>
             <StyledLinePagerItem

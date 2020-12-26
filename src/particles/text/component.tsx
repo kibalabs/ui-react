@@ -47,12 +47,12 @@ const textVariantTagMapping: Record<string, TextTag> = {
 
 export const getTextTag = (variant: string): TextTag => {
   const variants = variant.split('-');
-  const textVariants = variants.map((variant: string): TextTag | null => {
-    if (variant in textVariantTagMapping) {
-      return textVariantTagMapping[variant];
+  const textVariants = variants.map((innerVariant: string): TextTag | null => {
+    if (innerVariant in textVariantTagMapping) {
+      return textVariantTagMapping[innerVariant];
     }
-    if (variant in styleVariantTagMapping) {
-      return styleVariantTagMapping[variant];
+    if (innerVariant in styleVariantTagMapping) {
+      return styleVariantTagMapping[innerVariant];
     }
     return null;
   }).filter((textVariant: TextTag | null): boolean => textVariant !== null);
