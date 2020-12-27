@@ -19,34 +19,20 @@ jobs:
       run:
         working-directory: .
     env:
-      DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/ui-react-build
-      DOCKER_TAG: ${{ github.sha }}
+      DOCKER_IMAGE: ui-react-build
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
-    - name: Login to GitHub Packages Docker Registry
-      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
     - name: Build docker image
-      run: docker build --tag $DOCKER_IMAGE:$DOCKER_TAG .
-    - name: Push to GitHub Packages
-      run: docker push $DOCKER_IMAGE:$DOCKER_TAG
-  lint-package:
-    needs: build-package
-    runs-on: ubuntu-latest
-    env:
-      DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/ui-react-build
-      DOCKER_TAG: ${{ github.sha }}
-    steps:
-    - name: Login to GitHub Packages Docker Registry
-      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
-    - name: Pull docker image
-      run: docker pull $DOCKER_IMAGE:$DOCKER_TAG
+      run: docker build --tag $DOCKER_IMAGE .
     - name: Run linting
       run: |
-        docker run --name lint $DOCKER_IMAGE:$DOCKER_TAG npm run lint -- --output-file lint-results.json
+        docker run --name lint $DOCKER_IMAGE npm run lint -- --output-file lint-results.json --output-file-format annotations
         docker cp lint:/app/lint-results.json ./lint-results.json
-    - name: Annotate Code Linting Results
-      uses: kibalabs/eslint-annotate-action@master
+    - name: Upload linting results
+      uses: kibalabs/github-action-create-annotations@main
       with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        report-json: lint-results.json
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        json-file-path: ./lint-results.json
+        check-name: lint-package
+        fail-on-error: false
