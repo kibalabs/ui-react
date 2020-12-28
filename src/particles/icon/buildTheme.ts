@@ -6,7 +6,7 @@ import { IDimensionGuide } from '../dimensions';
 import { IIconTheme } from './theme';
 import { IBoxTheme } from '../box';
 
-export const buildIconThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IIconTheme>>): ThemeMap<IIconTheme> => {
+export const buildIconThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IIconTheme>>): ThemeMap<IIconTheme> => {
   const defaultIconTheme = mergeTheme<IIconTheme>({
     size: '1.3rem',
   }, base?.default);
@@ -32,7 +32,7 @@ export const buildIconThemes = (colors: IColorGuide, dimensions: IDimensionGuide
   });
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultIconTheme,
     small: smallIconTheme,
     large: largeIconTheme,

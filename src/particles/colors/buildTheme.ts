@@ -1,3 +1,4 @@
+import { RecursivePartial } from '@kibalabs/core';
 import { darken, invert, getLuminance, lighten, transparentize } from 'polished';
 
 import { IColorGuide } from './theme';
@@ -22,7 +23,7 @@ export const buildColors = (base?: Partial<IColorGuide>): IColorGuide => {
   const success = base?.success || '#22bb33';
 
   const colors = {
-    ...base,
+    ...(base || {}),
     brandPrimary: brandPrimary,
     brandSecondary: brandSecondary,
     background: background,
@@ -37,7 +38,7 @@ export const buildColors = (base?: Partial<IColorGuide>): IColorGuide => {
   return expandColors(colors);
 };
 
-export const buildAlternateColors = (colors: IColorGuide, base?: Record<string, Partial<IColorGuide>>): Record<string, IColorGuide> => {
+export const buildAlternateColors = (colors: IColorGuide, base?: RecursivePartial<Record<string, Partial<IColorGuide>>>): Record<string, IColorGuide> => {
   const inverseBase = base?.inverse;
   const brandPrimary = inverseBase?.brandPrimary || colors.brandPrimary;
   const brandSecondary = inverseBase?.brandSecondary || colors.brandSecondary;
@@ -64,7 +65,7 @@ export const buildAlternateColors = (colors: IColorGuide, base?: Record<string, 
   };
 
   return {
-    ...base,
+    ...(base || {}),
     inverse: expandColors(inverseColors),
   }
 }

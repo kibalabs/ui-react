@@ -15,7 +15,7 @@ export enum TextAlignment {
   Justify = 'justify',
 }
 
-type TextTag = 'p' | 'span' | 'h1' | 'h1' | 'h2' | 'h2' | 'h3' | 'h3' | 'h4' | 'h5' | 'h6' | 'b' | 'strong' | 'i' | 'em' | 'mark' | 'small' | 'del' | 'ins' | 'sub' | 'sup';
+export type TextTag = 'p' | 'span' | 'h1' | 'h1' | 'h2' | 'h2' | 'h3' | 'h3' | 'h4' | 'h5' | 'h6' | 'b' | 'strong' | 'i' | 'em' | 'mark' | 'small' | 'del' | 'ins' | 'sub' | 'sup';
 
 const styleVariantTagMapping: Record<string, TextTag> = {
   bold: 'b',
@@ -44,7 +44,10 @@ const textVariantTagMapping: Record<string, TextTag> = {
   header6: 'h6',
 }
 
-export const getTextTag = (variant: string): TextTag => {
+export const getTextTag = (variant?: string): TextTag => {
+  if (!variant) {
+    return 'span';
+  }
   const variants = variant.split('-');
   const textVariants = variants.map((variant: string): TextTag | null => {
     if (variant in textVariantTagMapping) {
@@ -55,7 +58,7 @@ export const getTextTag = (variant: string): TextTag => {
     }
     return null;
   }).filter((textVariant: TextTag | null): boolean => textVariant !== null);
-  return textVariants.length > 0 ? textVariants[textVariants.length - 1] : 'p';
+  return textVariants.length > 0 ? textVariants[textVariants.length - 1] : 'span';
 }
 
 interface IStyledTextProps {

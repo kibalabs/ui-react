@@ -93,7 +93,9 @@ export interface ITabBarItemProps extends IComponentProps<ITabBarItemTheme> {
 
 export const TabBarItem = (props: ITabBarItemProps): React.ReactElement => {
   const onClicked = (): void => {
-    props.onClicked(props.tabKey);
+    if (props.onClicked) {
+      props.onClicked(props.tabKey);
+    }
   };
 
   const theme = useBuiltTheme('tabBarItems', props.variant, props.theme);

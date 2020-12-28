@@ -5,7 +5,7 @@ import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IColorGuide, IDimensionGuide, IBoxTheme } from '../../particles';
 import { IWebViewTheme } from './theme';
 
-export const buildWebViewThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IWebViewTheme>>): ThemeMap<IWebViewTheme> => {
+export const buildWebViewThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IWebViewTheme>>): ThemeMap<IWebViewTheme> => {
   const defaultWebViewTheme = mergeTheme<IWebViewTheme>({
     normal: {
       default: {
@@ -16,7 +16,7 @@ export const buildWebViewThemes = (colors: IColorGuide, dimensions: IDimensionGu
   }, base?.default);
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultWebViewTheme,
   };
 }

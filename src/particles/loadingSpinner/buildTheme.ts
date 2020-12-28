@@ -5,7 +5,7 @@ import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
 import { ILoadingSpinnerTheme } from './theme';
 
-export const buildLoadingSpinnerThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base: RecursivePartial<Record<string, ILoadingSpinnerTheme>>): ThemeMap<ILoadingSpinnerTheme> => {
+export const buildLoadingSpinnerThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: RecursivePartial<Record<string, ILoadingSpinnerTheme>>): ThemeMap<ILoadingSpinnerTheme> => {
   const defaultLoadingSpinnerTheme = mergeTheme<ILoadingSpinnerTheme>({
     'color': '$colors.brandPrimary',
     'size': '2rem',
@@ -40,7 +40,7 @@ export const buildLoadingSpinnerThemes = (colors: IColorGuide, dimensions: IDime
   });
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultLoadingSpinnerTheme,
     light: lightLoadingSpinnerTheme,
     dark: darkLoadingSpinnerTheme,

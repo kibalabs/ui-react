@@ -4,7 +4,7 @@ import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../particles';
 import { IPillTheme } from './theme';
 
-export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IPillTheme>>): ThemeMap<IPillTheme> => {
+export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IPillTheme>>): ThemeMap<IPillTheme> => {
   const defaultPillTheme = mergeTheme<IPillTheme>({
     normal: {
       default: {
@@ -75,7 +75,7 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
   });
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultPillTheme,
     primary: primaryPillTheme,
     secondary: secondaryPillTheme,

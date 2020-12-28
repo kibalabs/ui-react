@@ -6,6 +6,7 @@ import { ITheme } from '..';
 import { mergeTheme, ThemeType, ThemeValue } from '../util';
 import { IColorGuide } from '../particles/colors';
 import { IDimensionGuide } from '../particles/dimensions';
+import { ThemeMap } from '../../dist';
 
 export const ThemeContext = React.createContext<ITheme | null>(null);
 
@@ -56,10 +57,10 @@ export function useAlternateColors(name?: string): Partial<IColorGuide> {
   return theme.alternateColors[name];
 }
 
-export const ColorContext = React.createContext<IColorGuide | null>(null);
+export const ColorContext = React.createContext<Partial<IColorGuide> | null>(null);
 
 interface IColorProviderProps extends IMultiAnyChildProps {
-  colors: IColorGuide;
+  colors: Partial<IColorGuide>;
 }
 
 export const ColorProvider = (props: IColorProviderProps): React.ReactElement => {
@@ -71,28 +72,25 @@ export const ColorProvider = (props: IColorProviderProps): React.ReactElement =>
 }
 
 export function useColors(): IColorGuide {
-  let colors = React.useContext(ColorContext);
-  if (!colors) {
-    colors = useBaseColors();
-  }
-  return colors;
+  const baseColors = useBaseColors();
+  const colors = React.useContext(ColorContext);
+  return { ...baseColors, ...(colors || {})} as IColorGuide;
 }
 
 export const useBuiltTheme = <Theme extends ThemeType>(component: string, variant?: string, override?: RecursivePartial<Theme>): Theme => {
   const theme = useTheme();
   const colors = useColors();
-  const baseColors = useBaseColors();
   const dimensions = useDimensions();
   // NOTE(krishan711): for SSR ie styles will change on hydration so allow this to have an effect
   const isRendered = useInitialization((): void => {});
   return React.useMemo((): Theme => {
-    const componentThemes = theme[component];
+    const componentThemes = theme[component] as ThemeMap<Theme>;
     if (!componentThemes) {
       throw Error(`Could not find component ${component} in current theme. Valid keys are: ${Object.keys(theme)}`);
     }
     let variants = (variant || 'default').split('-').filter((variantPart: string): boolean => variantPart.length > 0);
     const themeParts = variants.splice(variants.lastIndexOf('default') + 1).reduce((value: RecursivePartial<Theme>[], variant: string): RecursivePartial<Theme>[] => {
-      const variantTheme = componentThemes[variant];
+      const variantTheme = componentThemes[variant] as RecursivePartial<Theme>;
       if (variantTheme) {
         value.push(variantTheme);
       } else {
@@ -106,29 +104,34 @@ export const useBuiltTheme = <Theme extends ThemeType>(component: string, varian
     let builtTheme = mergeTheme(componentThemes.default, ...themeParts);
     // NOTE(krishan711): Resolving reference values is only here because ie 11 doesn't support css vars
     if (isIe() && isRendered) {
-      // NOTE(krishan711): Need to merge with base otherwise colors are missing because alternates don't need to have all
-      builtTheme = resolveThemeValues(builtTheme, {...baseColors, ...colors}, dimensions);
+      builtTheme = resolveThemeValues(builtTheme, colors, dimensions);
     }
     return builtTheme;
-  }, [theme, colors, baseColors, dimensions, variant, override, isIe() && isRendered]);
+  }, [theme, colors, dimensions, variant, override, isIe() && isRendered]);
+}
+
+declare global {
+  interface Document {
+      documentMode?: any;
+  }
 }
 
 const isIe = (): boolean => {
   return typeof document !== 'undefined' && !!document.documentMode;
 }
 
-const resolveThemeValues = (theme: ThemeType, colors: IColorGuide, dimensions: IDimensionGuide): ThemeType => {
-  const derivedTheme = Object.keys(theme).reduce((currentMap: ThemeType, themeKey: string): ThemeType => {
+const resolveThemeValues = <Theme extends ThemeType>(theme: Theme, colors: IColorGuide, dimensions: IDimensionGuide): Theme => {
+  const derivedTheme = Object.keys(theme).reduce((currentMap: Theme, themeKey: string): Theme => {
     const value = theme[themeKey];
     let themeValue = value;
     if (typeof value === 'string') {
       themeValue = resolveThemeValue(value, colors, dimensions);
     } else if (typeof value === 'object') {
-      themeValue = resolveThemeValues(value, colors, dimensions);
+      themeValue = resolveThemeValues(value as ThemeType, colors, dimensions);
     }
     currentMap[themeKey] = themeValue;
     return currentMap;
-  }, {});
+  }, theme);
   return derivedTheme;
 }
 

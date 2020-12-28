@@ -5,7 +5,7 @@ import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
 import { ITextTheme } from './theme';
 
-export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base: RecursivePartial<Record<string, ITextTheme>>): ThemeMap<ITextTheme> => {
+export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: RecursivePartial<Record<string, ITextTheme>>): ThemeMap<ITextTheme> => {
   const textTheme = mergeTheme<ITextTheme>({
     'font-size': dimensions.fontSize,
     'font-family': '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Asans-serif',
@@ -168,7 +168,7 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
   }, base?.success);
 
   return {
-    ...base,
+    ...(base || {}),
     default: textTheme,
     inherit: inheritTextTheme,
     paragraph: paragraphTextTheme,

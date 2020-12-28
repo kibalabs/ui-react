@@ -56,8 +56,8 @@ export interface IGridProps extends IMultiChildProps<IGridItemProps>, IPaddingVi
 
 export const Grid = (props: IGridProps): React.ReactElement => {
   const theme = props.theme || useDimensions();
-  const children = flattenChildren(props.children).map((child: React.ReactElement, index: number): React.ReactElement<IGridItemProps> => (
-    child.type !== GridItem ? <GridItem key={index}>{ child }</GridItem> : child
+  const children = flattenChildren(props.children).map((child: React.ReactChild, index: number): React.ReactElement<IGridItemProps> => (
+    'type' in child && child.type === GridItem ? child : <GridItem key={index}>{ child }</GridItem>
   ));
   return (
     <PaddingView {...props as IPaddingViewPaddingProps}>

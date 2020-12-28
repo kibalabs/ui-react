@@ -4,7 +4,7 @@ import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IColorGuide, IDimensionGuide, IBoxTheme } from '../../particles';
 import { ILinkBaseTheme } from './theme';
 
-export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, ILinkBaseTheme>>): ThemeMap<ILinkBaseTheme> => {
+export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ILinkBaseTheme>>): ThemeMap<ILinkBaseTheme> => {
   const defaultLinkBaseTheme = mergeTheme<ILinkBaseTheme>({
     normal: {
       default: {
@@ -43,7 +43,7 @@ export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionG
   const cardLinkBaseTheme = mergeThemePartial<ILinkBaseTheme>({
     normal: {
       default: {
-        background: mergeTheme(boxThemes.card, boxThemes.focusable, {
+        background: mergeThemePartial(boxThemes.card, boxThemes.focusable, {
         }),
       }
     }
@@ -65,7 +65,7 @@ export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionG
   }, base?.translucent);
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultLinkBaseTheme,
     translucent: translucentLinkBaseTheme,
     card: cardLinkBaseTheme,

@@ -28,18 +28,18 @@ export const themeToCss = (theme?: CssTheme | Partial<CssTheme> | RecursiveParti
     return '';
   }
   const output = Object.keys(theme).map((key: string): string => {
-    if (!(key in theme) || !theme[key]) {
+    if (!key || !(key in theme)) {
       console.error(`key: ${key} missing in theme: ${theme}`);
       return '';
     }
-    return `${key}: ${valueToCss(theme[key])};`;
+    return theme[key] ? `${key}: ${valueToCss(theme[key] as string)};` : '';
   });
   return output.join('\n');
 };
 
-export const colorsToCss = (colors: Record<string, string>): string => {
+export const colorsToCss = (colors: Record<string, string> | Partial<Record<string, string>>): string => {
   const output = Object.keys(colors).map((colorKey: string): string => {
-    return `--color-${camelCaseToKebabCase(colorKey)}: ${colors[colorKey]};`;
+    return colors[colorKey] ? `--color-${camelCaseToKebabCase(colorKey)}: ${colors[colorKey]};` : '';
   });
   return output.join('\n');
 }
