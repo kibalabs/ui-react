@@ -6,6 +6,7 @@ import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
 import { useColors } from '../../theming';
 import { IColorGuide } from '../../particles';
 import { valueToCss } from '../../util';
+import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
 export interface IBackgroundLayer {
   color?: string;
