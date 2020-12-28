@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getClassName } from '@kibalabs/core';
-import { IMultiAnyChildProps, ISingleAnyChildProps, flattenChildren } from '@kibalabs/core-react';
+import { IMultiAnyChildProps, ISingleAnyChildProps, IOptionalSingleAnyChildProps, flattenChildren } from '@kibalabs/core-react';
 
 import { Direction, Alignment, getFlexItemAlignment, getFlexContentAlignment, IDimensionGuide, PaddingSize, Spacing } from '../..';
 import { PaddingView, IPaddingViewPaddingProps } from '../../wrappers/paddingView';
@@ -23,8 +23,8 @@ const getDirectionCss: CssConverter<Direction> = (field: Direction): string => {
   return `flex-direction: ${field === Direction.Vertical ? 'column' : 'row'};`;
 }
 
-export interface IStackItemProps extends ISingleAnyChildProps {
-  className: string;
+export interface IStackItemProps extends IOptionalSingleAnyChildProps {
+  className?: string;
   growthFactor: number;
   shrinkFactor: number;
   baseSize: string;
@@ -71,7 +71,7 @@ const StyledStack = styled.div<IStyledStackProps>`
 
 interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   id?: string;
-  className: string;
+  className?: string;
   theme?: IDimensionGuide;
   shouldAddGutters: boolean;
   defaultGutter?: PaddingSize;
@@ -92,7 +92,7 @@ interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
 export const Stack = (props: IStackProps): React.ReactElement => {
   const theme = props.theme || useDimensions();
   const children = flattenChildren(props.children).map((child: React.ReactElement, index: number): React.ReactElement<IStackItemProps> => (
-    child.type !== StackItem ? <StackItem key={index}>{ child }</StackItem> : child
+    child.type === StackItem ? child : <StackItem key={index}>{ child }</StackItem>
   ));
   const paddingTop = (props.paddingStart && props.direction == Direction.Vertical) ? props.paddingStart : undefined;
   const paddingBottom = (props.paddingEnd && props.direction == Direction.Vertical) ? props.paddingEnd : undefined;
@@ -152,7 +152,7 @@ Stack.defaultProps = {
 Stack.Item = StackItem;
 
 interface IStyledStackItemProps extends ISingleAnyChildProps {
-  className: string;
+  className?: string;
   growthFactor: number;
   shrinkFactor: number;
   baseSize: string;

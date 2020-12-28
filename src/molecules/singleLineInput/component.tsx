@@ -40,7 +40,7 @@ const getAutocompleteType = (inputType: InputType): string | null => {
 }
 
 export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTheme> {
-  value: string;
+  value: string | null;
   isEnabled: boolean;
   placeholderText?: string;
   messageText?: string;

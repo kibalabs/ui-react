@@ -1,6 +1,6 @@
 export interface IMoleculeProps<Theme> {
   id?: string;
-  className: string;
+  className?: string;
   theme?: Theme;
 }
 

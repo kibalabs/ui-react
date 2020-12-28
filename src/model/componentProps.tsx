@@ -1,6 +1,6 @@
 export interface IComponentProps<Theme> {
   id?: string;
-  className: string;
+  className?: string;
   theme?: Theme;
   variant?: string;
 }

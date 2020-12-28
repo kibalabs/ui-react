@@ -48,7 +48,7 @@ const getLayerCss = (backgroundLayer: IBackgroundLayer, colors: IColorGuide): st
 }
 
 interface IStyledBackgroundViewProps extends ISingleAnyChildProps {
-  className: string;
+  className?: string;
   backgroundLayers: IBackgroundLayer[];
   colors: IColorGuide;
 }

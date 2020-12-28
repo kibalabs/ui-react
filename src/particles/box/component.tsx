@@ -39,10 +39,10 @@ export interface IBoxProps extends IComponentProps<IBoxTheme>, ISingleAnyChildPr
   maxHeight?: string;
   maxWidth?: string;
   zIndex?: number;
-  isFullHeight: boolean;
-  isFullWidth: boolean;
-  isScrollableVertically: boolean;
-  isScrollableHorizontally: boolean;
+  isFullHeight?: boolean;
+  isFullWidth?: boolean;
+  isScrollableVertically?: boolean;
+  isScrollableHorizontally?: boolean;
 }
 
 export const Box = React.forwardRef((props: IBoxProps, ref: React.RefObject<HTMLDivElement>): React.ReactElement => {
@@ -73,8 +73,5 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.RefObject<HTML
 Box.displayName = 'Box';
 Box.defaultProps = {
   ...defaultComponentProps,
-  isFullHeight: false,
   isFullWidth: true,
-  isScrollableVertically: false,
-  isScrollableHorizontally: false,
 };

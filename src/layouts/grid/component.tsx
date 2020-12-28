@@ -12,7 +12,7 @@ import { ResponsiveField, getResponsiveCss } from '../../util';
 
 export interface IGridItemProps extends ISingleAnyChildProps {
   id?: string;
-  className: string;
+  className?: string;
   isFullHeight: boolean;
   size: number;
   sizeResponsive?: ResponsiveField<number>;
