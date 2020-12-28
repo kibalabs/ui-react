@@ -78,7 +78,7 @@ export function useColors(): IColorGuide {
   return colors;
 }
 
-export const useBuiltTheme = <Theme extends ThemeType>(component: string, variant: string, override?: RecursivePartial<Theme>): Theme => {
+export const useBuiltTheme = <Theme extends ThemeType>(component: string, variant?: string, override?: RecursivePartial<Theme>): Theme => {
   const theme = useTheme();
   const colors = useColors();
   const baseColors = useBaseColors();
@@ -90,7 +90,7 @@ export const useBuiltTheme = <Theme extends ThemeType>(component: string, varian
     if (!componentThemes) {
       throw Error(`Could not find component ${component} in current theme. Valid keys are: ${Object.keys(theme)}`);
     }
-    let variants = variant.split('-').filter((variantPart: string): boolean => variantPart.length > 0);
+    let variants = (variant || 'default').split('-').filter((variantPart: string): boolean => variantPart.length > 0);
     const themeParts = variants.splice(variants.lastIndexOf('default') + 1).reduce((value: RecursivePartial<Theme>[], variant: string): RecursivePartial<Theme>[] => {
       const variantTheme = componentThemes[variant];
       if (variantTheme) {

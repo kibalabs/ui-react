@@ -34,7 +34,7 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
       ${(props: IGlobalCssProps): string => themeToCss(props.theme.links.default.normal.hover.text)};
     }
     :visited {
-      ${(props: IGlobalCssProps): string => themeToCss(props.theme.links.default.visited.default.text)};
+      ${(props: IGlobalCssProps): string => themeToCss(props.theme.links.default.visited?.default?.text)};
     }
   }
 
