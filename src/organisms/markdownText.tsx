@@ -44,7 +44,7 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
     return values.join('-');
   };
 
-  /* eslint-disable react/display-name, react/prop-types */
+  /* eslint-disable react/display-name */
   const renderers: ReactMarkdownTypes.Renderers = {
     root: (rendererProps: {className?: string} & IMultiAnyChildProps): React.ReactElement => {
       // TODO(krish): what should this check? It cant run the below check cos would fail for markdown like: "**Hello** world"
@@ -86,7 +86,7 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       return <strong>{rendererProps.children}</strong>;
     },
   };
-  /* eslint-enable react/display-name, react/prop-types */
+  /* eslint-enable react/display-name */
 
   return (
     <ReactMarkdown
