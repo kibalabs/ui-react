@@ -48,16 +48,15 @@ export const getTextTag = (variant?: string): TextTag => {
   if (!variant) {
     return 'span';
   }
-  const variants = variant.split('-');
-  const textVariants = variants.map((variant: string): TextTag | null => {
-    if (variant in textVariantTagMapping) {
-      return textVariantTagMapping[variant];
+  const textVariants = variant.split('-').reduce((current: TextTag[], value: string): TextTag[] => {
+    if (value in textVariantTagMapping) {
+      current.push(textVariantTagMapping[value]);
     }
-    if (variant in styleVariantTagMapping) {
-      return styleVariantTagMapping[variant];
+    if (value in styleVariantTagMapping) {
+      current.push(styleVariantTagMapping[value]);
     }
-    return null;
-  }).filter((textVariant: TextTag | null): boolean => textVariant !== null);
+    return current;
+  }, []);
   return textVariants.length > 0 ? textVariants[textVariants.length - 1] : 'span';
 }
 

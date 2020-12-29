@@ -88,5 +88,5 @@ const expandColors = (colors: IColorGuide, base?: IColorGuide): IColorGuide => {
     });
     return extendedColors;
   }, {});
-  return {...colors, ...expandedColors};
+  return {...colors, ...expandedColors} as IColorGuide;
 }

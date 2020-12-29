@@ -7,7 +7,7 @@ import { getPaddingSize, PaddingSize, IDimensionGuide } from '../dimensions';
 import { useDimensions } from '../../../dist';
 
 interface IStyledSpacingProps {
-  size: string;
+  size: PaddingSize;
   direction: Direction | MultiDirection;
   theme: IDimensionGuide;
 }

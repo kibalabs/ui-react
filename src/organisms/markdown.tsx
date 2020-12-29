@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { getClassName } from '@kibalabs/core';
 
 import { Box, PrettyText, TextAlignment, Media } from '..';
+import { IMultiAnyChildProps } from '@kibalabs/core-react';
 
 interface IMarkdownProps {
   id?: string;
@@ -10,6 +11,11 @@ interface IMarkdownProps {
   source: string;
   rootBoxVariant?: string;
 }
+
+interface ReactMarkdownRenderers {
+}
+
+ReactMarkdown.Renderers = ReactMarkdown.Renderers & ReactMarkdownRenderers;
 
 export const Markdown = (props: IMarkdownProps): React.ReactElement => {
   const shouldAllowNode = (node: ReactMarkdown.MarkdownAbstractSyntaxTree, index: number, parent: ReactMarkdown.NodeType): boolean => {
@@ -29,8 +35,8 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
 
   const renderers: ReactMarkdown.Renderers = {
     // TODO(krish): this should use pretty text eventually
-    // NOTE(krish): full list here: https://github.com/rexxars/react-markdown/blob/master/src/renderers.js
-    root: (rendererProps: object): React.ReactElement => {
+    // NOTE(krish): full list here: https://github.com/rexxars/react-markdown/blob/main/src/renderers.js
+    root: (rendererProps: { className?: string } & IMultiAnyChildProps): React.ElementType => {
       return (
         <Box
           id={props.id}

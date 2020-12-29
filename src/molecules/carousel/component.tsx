@@ -78,10 +78,10 @@ export interface ICarouselProps extends IMoleculeProps<ICarouselTheme>, IMultiAn
 // NOTE(krish): the slider could potentially be its own component here!
 export const Carousel = (props: ICarouselProps): React.ReactElement => {
   const dimensions = useDimensions();
-  const [sliderRef] = useRenderedRef<HTMLDivElement | null>(null);
+  const [sliderRef] = useRenderedRef<HTMLDivElement>(() => undefined);
   const scrollTimeoutRef = React.useRef<number | null>(null);
   const children = flattenChildren(props.children);
-  const [slideIndex, setSlideIndex] = React.useState<number>(props.initialIndex);
+  const [slideIndex, setSlideIndex] = React.useState<number>(props.initialIndex || 0);
 
   const onPreviousClicked = (): void => {
     if (sliderRef.current && !sliderRef.current.scrollTo) {
@@ -115,9 +115,9 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     setTimeout((): void => {
       if (sliderRef.current && !sliderRef.current.scrollTo) {
         // ie 11 doesn't support scrollTo (this doesn't animate nicely)
-        sliderRef.current.scrollLeft = sliderRef.current?.clientWidth * props.initialIndex;
+        sliderRef.current.scrollLeft = sliderRef.current.clientWidth * (props.initialIndex || 0);
       } else {
-        sliderRef.current?.scrollTo(sliderRef.current?.clientWidth * props.initialIndex, 0);
+        sliderRef.current?.scrollTo(sliderRef.current?.clientWidth * (props.initialIndex || 0), 0);
       }
     }, 50);
   }, [props.initialIndex, sliderRef.current]);
@@ -157,7 +157,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     if (scrollTimeoutRef.current) {
       clearTimeout(scrollTimeoutRef.current);
     }
-    scrollTimeoutRef.current = setTimeout((): void => {
+    scrollTimeoutRef.current = window.setTimeout((): void => {
       setSlideIndex(slideIndex);
       scrollTimeoutRef.current = null;
     }, 50);
@@ -188,7 +188,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
           ref={sliderRef}
           className={getClassName(StyledSlider.displayName)}
         >
-          {children.map((child: React.ReactElement, index: number): React.ReactElement => {
+          {children.map((child: React.ReactChild, index: number): React.ReactElement => {
             return (
               <StyledSlide
                 key={index}

@@ -45,7 +45,7 @@ export interface IBoxProps extends IComponentProps<IBoxTheme>, ISingleAnyChildPr
   isScrollableHorizontally?: boolean;
 }
 
-export const Box = React.forwardRef((props: IBoxProps, ref: React.RefObject<HTMLDivElement>): React.ReactElement => {
+export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
   const theme = useBuiltTheme('boxes', props.variant, props.theme);
   const height = props.height || (props.isFullHeight ? '100%' : 'auto');
   const width = props.width || (props.isFullWidth ? '100%' : 'auto');
