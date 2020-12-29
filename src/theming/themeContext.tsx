@@ -128,6 +128,7 @@ const resolveThemeValues = <Theme extends ThemeType>(theme: Theme, colors: IColo
     } else if (typeof value === 'object') {
       themeValue = resolveThemeValues(value as ThemeType, colors, dimensions);
     }
+    // @ts-ignore
     currentMap[themeKey] = themeValue;
     return currentMap;
   }, theme);

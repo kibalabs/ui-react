@@ -93,7 +93,7 @@ interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
 export const Stack = (props: IStackProps): React.ReactElement => {
   const theme = props.theme || useDimensions();
   const children = flattenChildren(props.children).map((child: React.ReactChild, index: number): React.ReactElement<IStackItemProps> => (
-    'type' in child && child.type === StackItem ? child : <StackItem key={index}>{ child }</StackItem>
+    typeof child === 'object' && 'type' in child && child.type === StackItem ? child : <StackItem key={index}>{ child }</StackItem>
   ));
   const paddingTop = (props.paddingStart && props.direction == Direction.Vertical) ? props.paddingStart : undefined;
   const paddingBottom = (props.paddingEnd && props.direction == Direction.Vertical) ? props.paddingEnd : undefined;
