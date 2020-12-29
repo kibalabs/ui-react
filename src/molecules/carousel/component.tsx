@@ -170,6 +170,8 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     if (props.onIndexChanged) {
       props.onIndexChanged(slideIndex);
     }
+  // NOTE(krishan711): not sure why this disable is needed. eslint complains it needs all of props??
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.onIndexChanged, slideIndex]);
 
   return (

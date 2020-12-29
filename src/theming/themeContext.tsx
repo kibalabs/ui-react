@@ -34,7 +34,7 @@ export const useTheme = (): ITheme => {
 
 export const useDimensions = (override?: Partial<IDimensionGuide>): IDimensionGuide => {
   const theme = useTheme();
-  return { ...theme.dimensions, ...(override || {}) };
+  return { ...theme.dimensions, ...(override || {}) } as IDimensionGuide;
 };
 
 export const useBaseColors = (): IColorGuide => {

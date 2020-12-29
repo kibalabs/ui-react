@@ -1,8 +1,9 @@
 import React from 'react';
 
+import ReactDOM from 'react-dom';
+
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
@@ -28,14 +29,17 @@ export interface IPortalProps extends IComponentProps<IPortalTheme>, ISingleAnyC
   below: React.RefObject<HTMLDivElement>;
 }
 
-export const Portal = React.forwardRef<HTMLDivElement, IPortalProps>((props: IPortalProps, ref: React.Ref<HTMLDivElement>): React.ReactElement => {
+export const Portal = React.forwardRef((props: IPortalProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
   const theme = useBuiltTheme('portals', props.variant, props.theme);
   const [positionTop, setPositionTop] = React.useState<number>(0);
   const [positionLeft, setPositionLeft] = React.useState<number>(0);
   const [width, setWidth] = React.useState<number>(0);
 
   const updateSizes = React.useCallback((): void => {
-    const belowNodeRect = props.below.current.getBoundingClientRect();
+    const belowNodeRect = props.below?.current?.getBoundingClientRect();
+    if (!belowNodeRect) {
+      return;
+    }
     setPositionTop(belowNodeRect.bottom + window.pageYOffset);
     setPositionLeft(belowNodeRect.left + window.pageXOffset);
     setWidth(belowNodeRect.width);

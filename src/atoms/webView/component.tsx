@@ -97,6 +97,8 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
     if (props.onLoadingChanged) {
       props.onLoadingChanged(isLoading);
     }
+  // NOTE(krishan711): not sure why this disable is needed. eslint complains it needs all of props??
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.onLoadingChanged, isLoading]);
 
   return (
