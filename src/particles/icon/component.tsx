@@ -18,7 +18,11 @@ const StyledIcon = styled.div<IStyledIconProps>`
   height: ${(props: IStyledIconProps): string => props.theme.size};
   min-width: ${(props: IStyledIconProps): string => props.theme.size};
   min-height: ${(props: IStyledIconProps): string => props.theme.size};
+<<<<<<< HEAD
   color: ${(props: IStyledIconProps): string => (props.color ? props.color : 'currentColor')};
+=======
+  color: ${(props: IStyledIconProps): string => props.color || 'currentColor'};
+>>>>>>> main
   overflow: hidden;
 
   svg {
@@ -44,8 +48,6 @@ export const Icon = (props: IIconProps): React.ReactElement => {
       id={props.id}
       className={getClassName(Icon.displayName, props.className)}
       theme={theme}
-      // NOTE(krishan711): is size ever used here?! It's not in the props!
-      size={props.size}
       // eslint-disable-next-line no-underscore-dangle
       color={props._color}
       shouldAddFill={props.shouldAddFill}

@@ -7,6 +7,7 @@ import { IDimensionGuide, TextAlignment } from '../../particles';
 import { useDimensions } from '../../theming';
 import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
+import { wrappingComponent } from '../wrappingComponent';
 
 const getAlignmentCss: CssConverter<TextAlignment> = (field: TextAlignment): string => {
   return `text-align: ${field};`;
@@ -17,13 +18,10 @@ interface IStyledResponsiveTextAlignmentViewProps extends IWrapperProps {
   alignment: ResponsiveField<TextAlignment>;
 }
 
-const withResponsiveTextAlignmentView = (Component: React.ComponentType<IStyledResponsiveTextAlignmentViewProps>): React.ComponentType => styled(Component)<IStyledResponsiveTextAlignmentViewProps>`
-  ${(props: IStyledResponsiveTextAlignmentViewProps): string => fieldToResponsiveCss(props.alignment, props.theme, getAlignmentCss)};
-`;
-
-const StyledResponsiveTextAlignmentView = withResponsiveTextAlignmentView((props: IStyledResponsiveTextAlignmentViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div key='defaultChild' />];
-  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
+const StyledResponsiveTextAlignmentView = wrappingComponent((component: React.ComponentType<IStyledResponsiveTextAlignmentViewProps>): React.ComponentType<IStyledResponsiveTextAlignmentViewProps> => {
+  return styled(component)<IStyledResponsiveTextAlignmentViewProps>`
+    ${(props: IStyledResponsiveTextAlignmentViewProps): string => fieldToResponsiveCss(props.alignment, props.theme, getAlignmentCss)};
+  `
 });
 
 export interface IResponsiveTextAlignmentViewProps extends IWrapperProps {
@@ -48,5 +46,5 @@ export const ResponsiveTextAlignmentView = (props: IResponsiveTextAlignmentViewP
 ResponsiveTextAlignmentView.displayName = 'ResponsiveTextAlignmentView';
 ResponsiveTextAlignmentView.defaultProps = {
   ...defaultWrapperProps,
-  alignment: TextAlignment.Start,
+  alignment: TextAlignment.Left,
 };

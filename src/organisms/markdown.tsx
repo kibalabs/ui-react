@@ -1,9 +1,11 @@
 import React from 'react';
-
-import { getClassName } from '@kibalabs/core';
 import ReactMarkdown from 'react-markdown';
+import { Content as MarkdownAST } from 'mdast'
+import { getClassName } from '@kibalabs/core';
+import { IMultiAnyChildProps } from '@kibalabs/core-react';
 
-import { Box, Media, PrettyText, TextAlignment } from '..';
+import { Box, PrettyText, TextAlignment, Media } from '..';
+import { ReactMarkdownTypes } from './reactMarkdown';
 
 interface IMarkdownProps {
   id?: string;
@@ -13,9 +15,9 @@ interface IMarkdownProps {
 }
 
 export const Markdown = (props: IMarkdownProps): React.ReactElement => {
-  const shouldAllowNode = (node: ReactMarkdown.MarkdownAbstractSyntaxTree, index: number, parent: ReactMarkdown.NodeType): boolean => {
+  const shouldAllowNode = (node: MarkdownAST, index: number, parent: ReactMarkdown.NodeType): boolean => {
     if (node.type === 'paragraph') {
-      if (parent.children.length === 1) {
+      if (React.Children.count((parent as IMultiAnyChildProps)?.children) === 1) {
         return false;
       }
       if (node.children.length === 0) {
@@ -28,10 +30,10 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
     return true;
   };
 
-  const renderers: ReactMarkdown.Renderers = {
+  const renderers: ReactMarkdownTypes.Renderers = {
     // TODO(krish): this should use pretty text eventually
-    // NOTE(krish): full list here: https://github.com/rexxars/react-markdown/blob/master/src/renderers.js
-    root: (rendererProps: Record<string, unknown>): React.ReactElement => {
+    // NOTE(krish): full list here: https://github.com/rexxars/react-markdown/blob/main/src/renderers.js
+    root: (rendererProps: { className?: string } & IMultiAnyChildProps): React.ReactElement => {
       return (
         <Box
           id={props.id}
@@ -42,21 +44,23 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
         </Box>
       );
     },
-    image: (rendererProps: Record<string, unknown>): React.ReactElement => {
+    image: (rendererProps: { src: string, alt: string }): React.ReactElement => {
       return <Media isCenteredHorizontally={true} source={rendererProps.src} alternativeText={rendererProps.alt}/>;
     },
-    paragraph: (rendererProps: Record<string, unknown>): React.ReactElement => {
-      const childrenKeys = React.Children.map(rendererProps.children, (child: React.ReactElement): string => String(child.key).split('-')[0]);
+    paragraph: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
+      const childrenKeys = React.Children.map(rendererProps.children, (child: React.ReactNode): string | null => (
+        (child && typeof child === 'object' && 'key' in child) ? String(child.key).split('-')[0] : null
+      )) || [];
       const isCaption = childrenKeys.indexOf('image') > -1;
       return (<PrettyText variant='paragraph' alignment={isCaption ? TextAlignment.Center : TextAlignment.Left}>{rendererProps.children}</PrettyText>);
     },
-    heading: (rendererProps: Record<string, unknown>): React.ReactElement => {
+    heading: (rendererProps: { level: number } & IMultiAnyChildProps): React.ReactElement => {
       return <PrettyText variant={`header${rendererProps.level}`} alignment={TextAlignment.Left}>{rendererProps.children}</PrettyText>;
     },
-    emphasis: (rendererProps: Record<string, unknown>): React.ReactElement => {
+    emphasis: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
       return <PrettyText variant='emphasis'>{rendererProps.children}</PrettyText>;
     },
-    strong: (rendererProps: Record<string, unknown>): React.ReactElement => {
+    strong: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
       return <PrettyText variant='strong'>{rendererProps.children}</PrettyText>;
     },
   };
@@ -67,6 +71,7 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
       className={getClassName(Markdown.displayName, props.className)}
       allowNode={shouldAllowNode}
       unwrapDisallowed={true}
+      // @ts-ignore
       renderers={renderers}
       includeNodeIndex={true}
       source={props.source}

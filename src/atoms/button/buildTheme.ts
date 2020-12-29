@@ -4,7 +4,7 @@ import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../parti
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IButtonTheme } from './theme';
 
-export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IButtonTheme>>): ThemeMap<IButtonTheme> => {
+export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IButtonTheme>>): ThemeMap<IButtonTheme> => {
   const defaultButtonTheme = mergeTheme<IButtonTheme>({
     normal: {
       default: {
@@ -115,7 +115,7 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
   }, base?.card);
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultButtonTheme,
     primary: primaryButtonTheme,
     secondary: secondaryButtonTheme,

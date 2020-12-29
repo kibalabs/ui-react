@@ -20,7 +20,7 @@ const StyledLayerContainer = styled.div`
 
 interface ILayerContainerProps extends IMultiAnyChildProps {
   id?: string;
-  className: string;
+  className?: string;
 }
 
 export const LayerContainer = (props: ILayerContainerProps): React.ReactElement => {

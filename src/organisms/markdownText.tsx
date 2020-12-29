@@ -1,10 +1,12 @@
 import React from 'react';
-
-import { getClassName } from '@kibalabs/core';
 import ReactMarkdown from 'react-markdown';
+import { Content as MarkdownAST } from 'mdast'
+import { getClassName } from '@kibalabs/core';
+import { IMultiAnyChildProps } from '@kibalabs/core-react';
 
 import { Link, TextAlignment, TextTag } from '..';
 import { PrettyText } from '../atoms/prettyText/component';
+import { ReactMarkdownTypes } from './reactMarkdown';
 
 interface IMarkdownTextProps {
   id?: string;
@@ -16,9 +18,9 @@ interface IMarkdownTextProps {
 }
 
 export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
-  const shouldAllowNode = (node: ReactMarkdown.MarkdownAbstractSyntaxTree, index: number, parent: ReactMarkdown.NodeType): boolean => {
+  const shouldAllowNode = (node: MarkdownAST, index: number, parent: ReactMarkdown.NodeType): boolean => {
     if (node.type === 'paragraph') {
-      if (parent.children.length === 1) {
+      if (React.Children.count((parent as IMultiAnyChildProps)?.children) === 1) {
         return false;
       }
       if (node.children.length === 0) {
@@ -32,17 +34,17 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
   };
 
   const mergeVariants = (...variants: (string | undefined | null)[]): string => {
-    const values = [];
-    variants.forEach((arg: string | undefined | null): void => {
-      if (arg) {
-        values.push(String(arg).trim());
+    const values = variants.reduce((current: string[], value: string | undefined | null): string[] => {
+      if (value) {
+        current.push(String(value).trim());
       }
-    });
+      return current;
+    }, []);
     return values.join('-');
   };
 
-  const renderers: ReactMarkdown.Renderers = {
-    root: (rendererProps: Record<string, unknown>): React.ReactElement => {
+  const renderers: ReactMarkdownTypes.Renderers = {
+    root: (rendererProps: {className?: string} & IMultiAnyChildProps): React.ReactElement => {
       // TODO(krish): what should this check? It cant run the below check cos would fail for markdown like: "**Hello** world"
       // const childrenKeys = React.Children.map(rendererProps.children, (child: React.ReactElement): string => String(child.key).split('-')[0]);
       // if (React.Children.count(rendererProps.children) > 1 && childrenKeys[0] !== 'text') {
@@ -61,23 +63,25 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
         </PrettyText>
       );
     },
-    link: (rendererProps: Record<string, unknown>): React.ReactElement => {
-      if (rendererProps.children.length > 1) {
+    link: (rendererProps: {href: string} & IMultiAnyChildProps): React.ReactElement => {
+      if (React.Children.count(rendererProps.children) > 1) {
         console.error(`Link in markdown has more than one child: ${rendererProps.children}`);
       }
+      // @ts-ignore
       return <Link target={rendererProps.href} text={String(rendererProps.children[0].props.children)}/>;
     },
-    linkReference: (rendererProps: Record<string, unknown>): React.ReactElement => {
-      if (rendererProps.children.length > 1) {
+    linkReference: (rendererProps: {href: string} & IMultiAnyChildProps): React.ReactElement => {
+      if (React.Children.count(rendererProps.children) > 1) {
         console.error(`Link in markdown has more than one child: ${rendererProps.children}`);
       }
+      // @ts-ignore
       return <Link target={rendererProps.href} text={String(rendererProps.children[0].props.children)}/>;
     },
-    emphasis: (rendererProps: Record<string, unknown>): React.ReactElement => {
-      return <em>{rendererProps.children}</em>;
+    emphasis: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
+      return <em>{rendererProps.children}</em>
     },
-    strong: (rendererProps: Record<string, unknown>): React.ReactElement => {
-      return <strong>{rendererProps.children}</strong>;
+    strong: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
+      return <strong>{rendererProps.children}</strong>
     },
   };
 
@@ -87,6 +91,7 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       className={getClassName(MarkdownText.displayName, props.className)}
       allowNode={shouldAllowNode}
       unwrapDisallowed={true}
+      // @ts-ignore
       renderers={renderers}
       includeNodeIndex={true}
       escapeHtml={false}

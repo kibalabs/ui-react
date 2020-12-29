@@ -2,12 +2,13 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
-import styled from 'styled-components';
 
 import { IColorGuide } from '../../particles';
 import { useColors } from '../../theming';
 import { valueToCss } from '../../util';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
+import { wrappingComponent } from '../wrappingComponent';
+import styled from 'styled-components';
 
 export interface IBackgroundLayer {
   color?: string;
@@ -50,18 +51,15 @@ const getLayerCss = (backgroundLayer: IBackgroundLayer, colors: IColorGuide): st
 };
 
 interface IStyledBackgroundViewProps extends ISingleAnyChildProps {
-  className: string;
+  className?: string;
   backgroundLayers: IBackgroundLayer[];
   colors: IColorGuide;
 }
 
-const withBackground = (Component: React.ComponentType<IStyledBackgroundViewProps>): React.ComponentType => styled(Component)<IStyledBackgroundViewProps>`
-  background: ${(props: IStyledBackgroundViewProps): string => getLayersCss(props.backgroundLayers, props.colors)};
-`;
-
-const StyledBackgroundView = withBackground((props: IStyledBackgroundViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div key='defaultChild' />];
-  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
+const StyledBackgroundView = wrappingComponent((Component: React.ComponentType<IStyledBackgroundViewProps>): React.ComponentType<IStyledBackgroundViewProps> => {
+  return styled(Component)<IStyledBackgroundViewProps>`
+    background: ${(props: IStyledBackgroundViewProps): string => getLayersCss(props.backgroundLayers, props.colors)};
+  `;
 });
 
 export interface IBackgroundViewProps extends IWrapperProps, IBackgroundConfig {

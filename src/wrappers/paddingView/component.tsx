@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { getPaddingSize, IDimensionGuide, PaddingSize } from '../../particles/dimensions';
 import { useDimensions } from '../../theming';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
+import { wrappingComponent } from '../wrappingComponent';
 
 export interface IPaddingViewPaddingProps {
   paddingTop?: PaddingSize;
@@ -25,16 +26,13 @@ interface IStyledPaddingViewProps extends IWrapperProps {
   paddingRight?: PaddingSize;
 }
 
-const withPaddingView = (Component: React.ComponentType<IStyledPaddingViewProps>): React.ComponentType => styled(Component)<IStyledPaddingViewProps>`
-  ${(props: IStyledPaddingViewProps): string => (props.paddingTop ? `padding-top: ${getPaddingSize(props.paddingTop, props.theme)}` : '')};
-  ${(props: IStyledPaddingViewProps): string => (props.paddingBottom ? `padding-bottom: ${getPaddingSize(props.paddingBottom, props.theme)}` : '')};
-  ${(props: IStyledPaddingViewProps): string => (props.paddingLeft ? `padding-left: ${getPaddingSize(props.paddingLeft, props.theme)}` : '')};
-  ${(props: IStyledPaddingViewProps): string => (props.paddingRight ? `padding-right: ${getPaddingSize(props.paddingRight, props.theme)}` : '')};
-`;
-
-const StyledPaddingView = withPaddingView((props: IStyledPaddingViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div key='defaultChild' />];
-  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
+const StyledPaddingView = wrappingComponent((Component: React.ComponentType<IStyledPaddingViewProps>): React.ComponentType<IStyledPaddingViewProps> => {
+  return styled(Component)<IStyledPaddingViewProps>`
+    ${(props: IStyledPaddingViewProps): string => props.paddingTop ? `padding-top: ${getPaddingSize(props.paddingTop, props.theme)}` : ''};
+    ${(props: IStyledPaddingViewProps): string => props.paddingBottom ? `padding-bottom: ${getPaddingSize(props.paddingBottom, props.theme)}` : ''};
+    ${(props: IStyledPaddingViewProps): string => props.paddingLeft ? `padding-left: ${getPaddingSize(props.paddingLeft, props.theme)}` : ''};
+    ${(props: IStyledPaddingViewProps): string => props.paddingRight ? `padding-right: ${getPaddingSize(props.paddingRight, props.theme)}` : ''};
+  `;
 });
 
 export interface IPaddingViewProps extends IWrapperProps, IPaddingViewPaddingProps {

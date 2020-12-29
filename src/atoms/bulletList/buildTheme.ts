@@ -4,7 +4,7 @@ import { IColorGuide, IDimensionGuide } from '../../particles';
 import { mergeTheme, ThemeMap } from '../../util';
 import { IBulletListTheme } from './theme';
 
-export const buildBulletListThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base: RecursivePartial<Record<string, IBulletListTheme>>): ThemeMap<IBulletListTheme> => {
+export const buildBulletListThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: RecursivePartial<Record<string, IBulletListTheme>>): ThemeMap<IBulletListTheme> => {
   const defaultBulletListTheme = mergeTheme<IBulletListTheme>({
     normal: {
       default: {
@@ -17,7 +17,7 @@ export const buildBulletListThemes = (colors: IColorGuide, dimensions: IDimensio
   }, base?.default);
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultBulletListTheme,
   };
 };

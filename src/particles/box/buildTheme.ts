@@ -5,7 +5,7 @@ import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
 import { IBoxTheme } from './theme';
 
-export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base: RecursivePartial<Record<string, IBoxTheme>>): ThemeMap<IBoxTheme> => {
+export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: RecursivePartial<Record<string, IBoxTheme>>): ThemeMap<IBoxTheme> => {
   const defaultBoxTheme = mergeTheme<IBoxTheme>({
     'background-color': 'transparent',
     'border-radius': dimensions.borderRadius,
@@ -57,7 +57,7 @@ export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide,
   }, base?.focussed);
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultBoxTheme,
     transparent: transparentBoxTheme,
     padded: paddedBoxTheme,

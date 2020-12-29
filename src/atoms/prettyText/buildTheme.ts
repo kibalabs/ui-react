@@ -6,7 +6,7 @@ import { IDimensionGuide } from '../../particles/dimensions';
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IPrettyTextTheme } from './theme';
 
-export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, base: RecursivePartial<Record<string, IPrettyTextTheme>>): ThemeMap<IPrettyTextTheme> => {
+export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, base?: RecursivePartial<Record<string, IPrettyTextTheme>>): ThemeMap<IPrettyTextTheme> => {
   const prettyTextTheme = mergeTheme<IPrettyTextTheme>({
     normal: {
       default: {
@@ -101,7 +101,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
   }, base?.header6);
 
   return {
-    ...base,
+    ...(base || {}),
     ...derivedThemes,
     default: prettyTextTheme,
   };

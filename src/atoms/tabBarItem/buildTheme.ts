@@ -4,7 +4,7 @@ import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../parti
 import { mergeTheme, ThemeMap } from '../../util';
 import { ITabBarItemTheme } from './theme';
 
-export const buildTabBarItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, ITabBarItemTheme>>): ThemeMap<ITabBarItemTheme> => {
+export const buildTabBarItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ITabBarItemTheme>>): ThemeMap<ITabBarItemTheme> => {
   const defaultTabBarItemTheme = mergeTheme<ITabBarItemTheme>({
     normal: {
       default: {
@@ -53,7 +53,7 @@ export const buildTabBarItemThemes = (colors: IColorGuide, dimensions: IDimensio
   }, base?.default);
 
   return {
-    ...base,
-    default: defaultTabBarItemTheme,
+    ...(base || {}),
+    default: defaultTabBarItemTheme
   };
 };

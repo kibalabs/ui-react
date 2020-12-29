@@ -1,8 +1,12 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
+<<<<<<< HEAD
 import { IMultiChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
+=======
+import { flattenChildren, IMultiChildProps } from '@kibalabs/core-react';
+>>>>>>> main
 
 import { ITabBarItemProps, ITabBarItemTheme, TabBarItem } from '../../atoms/tabBarItem';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
@@ -56,22 +60,27 @@ export const TabBar = (props: ITabBarProps): React.ReactElement => {
       id={props.id}
       className={getClassName(TabBar.displayName, props.className, props.isFullWidth && 'fullWidth')}
     >
-      { React.Children.map(props.children, (child: React.ReactElement<ITabBarItemInnerProps>, index: number): React.ReactElement => (
-        <TabBarItem
-          key={child.props.tabKey}
-          id={child.props.id}
-          className={child.props.className}
-          theme={props.theme?.tabBarItemTheme}
-          variant={child.props.variant}
-          tabKey={child.props.tabKey}
-          text={child.props.text}
-          isEnabled={child.props.isEnabled}
-          isCollapsible={child.props.isCollapsible !== undefined ? child.props.isCollapsible : props.isFullWidth}
-          isExpandable={child.props.isExpandable !== undefined ? child.props.isExpandable : props.isFullWidth}
-          isSelected={(props.selectedTabKey === undefined && index === 0) || props.selectedTabKey === child.props.tabKey}
-          onClicked={onTabClicked}
-        />
-      ))}
+      { React.Children.map(props.children, (child: React.ReactElement<ITabBarItemInnerProps> | undefined, index: number): React.ReactElement | null => {
+        if (!child) {
+          return null;
+        }
+        return (
+          <TabBarItem
+            key={child.props.tabKey}
+            id={child.props.id}
+            className={child.props.className}
+            theme={props.theme?.tabBarItemTheme}
+            variant={child.props.variant}
+            tabKey={child.props.tabKey}
+            text={child.props.text}
+            isEnabled={child.props.isEnabled}
+            isCollapsible={child.props.isCollapsible !== undefined ? child.props.isCollapsible : props.isFullWidth}
+            isExpandable={child.props.isExpandable !== undefined ? child.props.isExpandable : props.isFullWidth}
+            isSelected={(props.selectedTabKey === undefined && index === 0) || props.selectedTabKey === child.props.tabKey}
+            onClicked={onTabClicked}
+          />
+        );
+      })}
     </StyledTabBar>
   );
 };

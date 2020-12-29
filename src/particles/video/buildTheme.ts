@@ -5,12 +5,12 @@ import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
 import { IVideoTheme } from './theme';
 
-export const buildVideoThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base: RecursivePartial<Record<string, IVideoTheme>>): ThemeMap<IVideoTheme> => {
+export const buildVideoThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: RecursivePartial<Record<string, IVideoTheme>>): ThemeMap<IVideoTheme> => {
   const defaultVideoTheme = mergeTheme<IVideoTheme>({
   }, base?.default);
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultVideoTheme,
   };
 };

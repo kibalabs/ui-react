@@ -6,7 +6,7 @@ import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
 import { IImageTheme } from './theme';
 
-export const buildImageThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IImageTheme>>): ThemeMap<IImageTheme> => {
+export const buildImageThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IImageTheme>>): ThemeMap<IImageTheme> => {
   const defaultImageTheme = mergeTheme<IImageTheme>({
     background: boxThemes.default,
   }, base?.default);
@@ -20,7 +20,7 @@ export const buildImageThemes = (colors: IColorGuide, dimensions: IDimensionGuid
   const profileImageTheme = mergeThemePartial<IImageTheme>(circularImageTheme, base?.profile);
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultImageTheme,
     profile: profileImageTheme,
     circular: circularImageTheme,

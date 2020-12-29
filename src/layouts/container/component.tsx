@@ -23,7 +23,7 @@ const StyledContainer = styled.div<IStyledContainerProps>`
 
 export interface IContainerProps extends ISingleAnyChildProps {
   id?: string;
-  className: string;
+  className?: string;
   theme?: IDimensionGuide;
   isFullHeight: boolean;
 }

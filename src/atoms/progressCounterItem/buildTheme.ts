@@ -4,7 +4,7 @@ import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../parti
 import { mergeTheme, ThemeMap } from '../../util';
 import { IProgressCounterItemTheme } from './theme';
 
-export const buildProgressCounterItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IProgressCounterItemTheme>>): ThemeMap<IProgressCounterItemTheme> => {
+export const buildProgressCounterItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IProgressCounterItemTheme>>): ThemeMap<IProgressCounterItemTheme> => {
   const defaultProgressCounterItemTheme = mergeTheme<IProgressCounterItemTheme>({
     normal: {
       default: {
@@ -48,7 +48,7 @@ export const buildProgressCounterItemThemes = (colors: IColorGuide, dimensions: 
   }, base?.default);
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultProgressCounterItemTheme,
   };
 };

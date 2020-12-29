@@ -3,12 +3,13 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
-import { defaultComponentProps, IComponentProps, MultiDirection, useDimensions } from '../..';
-import { getPaddingSize, IDimensionGuide, PaddingSize } from '../dimensions';
+import { defaultComponentProps, Direction, IComponentProps, MultiDirection } from '../../model';
+import { getPaddingSize, PaddingSize, IDimensionGuide } from '../dimensions';
+import { useDimensions } from '../../theming';
 
 interface IStyledSpacingProps {
-  size: string;
-  direction: MultiDirection;
+  size: PaddingSize;
+  direction: Direction | MultiDirection;
   theme: IDimensionGuide;
 }
 
@@ -18,7 +19,7 @@ const StyledDiv = styled.div<IStyledSpacingProps>`
 `;
 
 export interface ISpacingProps extends IComponentProps<IDimensionGuide> {
-  direction: MultiDirection;
+  direction: Direction | MultiDirection;
 }
 
 export const Spacing = (props: ISpacingProps): React.ReactElement => {

@@ -4,7 +4,7 @@ import { IBoxTheme, IColorGuide, IDimensionGuide } from '../../particles';
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { ILinePagerTheme } from './theme';
 
-export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, ILinePagerTheme>>): ThemeMap<ILinePagerTheme> => {
+export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ILinePagerTheme>>): ThemeMap<ILinePagerTheme> => {
   const defaultLinePagerTheme = mergeTheme<ILinePagerTheme>({
     normal: {
       default: {
@@ -99,7 +99,7 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
   }, base?.card);
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultLinePagerTheme,
     primary: primaryLinePagerTheme,
     secondary: secondaryLinePagerTheme,

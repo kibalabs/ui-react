@@ -61,7 +61,7 @@ export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
   };
 
   React.useEffect(() => {
-    setSvgContent(undefined);
+    setSvgContent(null);
     const iconData = getIconData(props.iconId);
     if (!iconData) {
       console.warn(`Failed to identify icon type from iconId: ${props.iconId}`);
@@ -91,7 +91,7 @@ export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
       _color={props._color}
       shouldAddFill={shouldAddFill}
       shouldAddStroke={shouldAddStroke}
-      svgContent={svgContent}
+      svgContent={svgContent || '<svg></svg>'}
     />
   );
 };

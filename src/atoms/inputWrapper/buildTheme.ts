@@ -4,7 +4,7 @@ import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../parti
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IInputWrapperTheme } from './theme';
 
-export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IInputWrapperTheme>>): ThemeMap<IInputWrapperTheme> => {
+export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IInputWrapperTheme>>): ThemeMap<IInputWrapperTheme> => {
   const defaultInputWrapperTheme = mergeTheme<IInputWrapperTheme>({
     normal: {
       default: {
@@ -104,7 +104,7 @@ export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimens
   });
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultInputWrapperTheme,
     error: errorInputWrapperTheme,
     success: successInputWrapperTheme,

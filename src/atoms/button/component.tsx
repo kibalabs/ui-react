@@ -94,6 +94,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
   const theme = useBuiltTheme('buttons', props.variant, props.theme);
   const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab === undefined && props.target && (props.target.startsWith('#') || props.target.startsWith('/')));
   return (
+    // @ts-ignore: as prop doesn't match type required
     <StyledButton
       id={props.id}
       className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', !props.isEnabled && 'disabled')}
@@ -102,7 +103,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       isLoading={props.isLoading}
       disabled={!props.isEnabled}
       href={props.target}
-      as={props.target && 'a'}
+      as={props.target ? 'a' : undefined}
       rel={props.target && 'noopener'}
       target={props.target && (targetShouldOpenSameTab ? '_self' : '_blank')}
     >

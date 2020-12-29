@@ -7,18 +7,16 @@ import { IColorGuide } from '../../particles';
 import { ColorProvider, useAlternateColors } from '../../theming';
 import { colorsToCss } from '../../util';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
+import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledColorSettingViewProps extends IWrapperProps {
   colors: Partial<IColorGuide>;
 }
 
-const withColorSettingView = (Component: React.ComponentType<IStyledColorSettingViewProps>): React.ComponentType => styled(Component)<IStyledColorSettingViewProps>`
-  ${(props: IStyledColorSettingViewProps): string => colorsToCss(props.colors)};
-`;
-
-const StyledColorSettingView = withColorSettingView((props: IStyledColorSettingViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div key='defaultChild' />];
-  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
+const StyledColorSettingView = wrappingComponent((Component: React.ComponentType<IStyledColorSettingViewProps>): React.ComponentType<IStyledColorSettingViewProps> => {
+  return styled(Component)<IStyledColorSettingViewProps>`
+    ${(props: IStyledColorSettingViewProps): string => colorsToCss(props.colors)};
+  `;
 });
 
 export interface IColorSettingViewProps extends IWrapperProps {

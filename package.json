@@ -16,6 +16,7 @@
     "clean": "rm -rf ./node_modules ./package-lock.json ./dist",
     "lint": "lint",
     "lint-fix": "lint --fix",
+    "type-check": "type-check",
     "publish-next": "kiba-publish --next",
     "storybook": "start-storybook --docs --port 6006",
     "build-storybook": "build-storybook --docs --output-dir dist"
@@ -27,16 +28,16 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "dependencies": {
-    "@kibalabs/core": "^0.5.0",
-    "@kibalabs/core-react": "^0.5.2",
+    "@kibalabs/core": "^0.5.1",
+    "@kibalabs/core-react": "^0.5.3",
     "lazysizes": "^5.2.1",
     "polished": "^4.0.5",
     "react-markdown": "^5.0.3"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.6.3-next.7",
-    "@storybook/addon-docs": "6.1.11",
+    "@kibalabs/build": "0.6.3-next.9",
     "@storybook/addon-actions": "6.1.11",
+    "@storybook/addon-docs": "6.1.11",
     "@storybook/addon-essentials": "6.1.11",
     "@storybook/addon-links": "6.1.11",
     "@storybook/preset-typescript": "3.0.0",

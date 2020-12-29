@@ -7,6 +7,7 @@ import { IDimensionGuide } from '../../particles';
 import { useDimensions } from '../../theming';
 import { getResponsiveCss, ResponsiveField } from '../../util';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
+import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledResponsiveContainingViewProps extends IWrapperProps {
   theme: IDimensionGuide;
@@ -37,25 +38,22 @@ const columnCountsToCss = (field: ResponsiveField<number>, theme: IDimensionGuid
     output.push(getResponsiveCss(theme.screenWidthExtraLarge, getGridItemSizeCss(theme.columnCount, field.extraLarge)));
   }
   if (shouldIncludeMaxSize) {
-    const largestColumnCount = field.extraLarge || field.large || field.medium || field.small || field.base;
+    const largestColumnCount = field.extraLarge || field.large || field.medium || field.small || field.base || 12;
     output.push(getResponsiveCss(theme.screenWidthMax, getGridItemSizeCss(theme.columnCount, largestColumnCount, theme.screenWidthMax)));
   }
   return output.join('\n');
 };
 
-const withResponsiveContainingView = (Component: React.ComponentType<IStyledResponsiveContainingViewProps>): React.ComponentType => styled(Component)<IStyledResponsiveContainingViewProps>`
-  max-width: 100%;
-  width: ${(props: IStyledResponsiveContainingViewProps): string => (props.isFullWidth ? '100%' : 'auto')};
-  ${(props: IStyledResponsiveContainingViewProps): string => columnCountsToCss(props.size, props.theme, props.shouldIncludeMaxSize)};
-  /* &.centered {
-    margin-right: auto;
-    margin-left: auto;
-  } */
-`;
-
-const StyledResponsiveContainingView = withResponsiveContainingView((props: IStyledResponsiveContainingViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div key='defaultChild' />];
-  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })));
+const StyledResponsiveContainingView = wrappingComponent((Component: React.ComponentType<IStyledResponsiveContainingViewProps>): React.ComponentType<IStyledResponsiveContainingViewProps> => {
+  return styled(Component)<IStyledResponsiveContainingViewProps>`
+    max-width: 100%;
+    width: ${(props: IStyledResponsiveContainingViewProps): string => (props.isFullWidth ? '100%' : 'auto')};
+    ${(props: IStyledResponsiveContainingViewProps): string => columnCountsToCss(props.size, props.theme, props.shouldIncludeMaxSize)};
+    /* &.centered {
+      margin-right: auto;
+      margin-left: auto;
+    } */
+  `;
 });
 
 export interface IResponsiveContainingViewProps extends IWrapperProps {
@@ -63,18 +61,20 @@ export interface IResponsiveContainingViewProps extends IWrapperProps {
   size?: number;
   sizeResponsive?: ResponsiveField<number>;
   isFullWidth?: boolean;
-  shouldIncludeMaxSize: boolean;
+  shouldIncludeMaxSize?: boolean;
 }
 
 export const ResponsiveContainingView = (props: IResponsiveContainingViewProps): React.ReactElement => {
   const theme = useDimensions(props.theme);
+  const isFullWidth = props.isFullWidth === true || props.isFullWidth === undefined;
+  const shouldIncludeMaxSize = props.shouldIncludeMaxSize === true || props.shouldIncludeMaxSize === undefined;
   return (
     <StyledResponsiveContainingView
       className={getClassName(ResponsiveContainingView.displayName, props.className)}
       theme={theme}
-      size={{ base: props.size, ...props.sizeResponsive }}
-      isFullWidth={props.isFullWidth}
-      shouldIncludeMaxSize={props.shouldIncludeMaxSize}
+      size={{base: props.size, ...props.sizeResponsive}}
+      isFullWidth={isFullWidth}
+      shouldIncludeMaxSize={shouldIncludeMaxSize}
     >
       {props.children}
     </StyledResponsiveContainingView>
@@ -84,6 +84,4 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
 ResponsiveContainingView.displayName = 'ResponsiveContainingView';
 ResponsiveContainingView.defaultProps = {
   ...defaultWrapperProps,
-  isFullWidth: true,
-  shouldIncludeMaxSize: true,
 };
