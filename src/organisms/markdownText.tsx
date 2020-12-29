@@ -1,8 +1,9 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import { Content as MarkdownAST } from 'mdast'
+
 import { getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
+import { Content as MarkdownAST } from 'mdast';
+import ReactMarkdown from 'react-markdown';
 
 import { Link, TextAlignment, TextTag } from '..';
 import { PrettyText } from '../atoms/prettyText/component';
@@ -78,10 +79,10 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       return <Link target={rendererProps.href} text={String(rendererProps.children[0].props.children)}/>;
     },
     emphasis: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
-      return <em>{rendererProps.children}</em>
+      return <em>{rendererProps.children}</em>;
     },
     strong: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
-      return <strong>{rendererProps.children}</strong>
+      return <strong>{rendererProps.children}</strong>;
     },
   };
 

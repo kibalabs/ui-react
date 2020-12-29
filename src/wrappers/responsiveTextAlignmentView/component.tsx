@@ -21,7 +21,7 @@ interface IStyledResponsiveTextAlignmentViewProps extends IWrapperProps {
 const StyledResponsiveTextAlignmentView = wrappingComponent((component: React.ComponentType<IStyledResponsiveTextAlignmentViewProps>): React.ComponentType<IStyledResponsiveTextAlignmentViewProps> => {
   return styled(component)<IStyledResponsiveTextAlignmentViewProps>`
     ${(props: IStyledResponsiveTextAlignmentViewProps): string => fieldToResponsiveCss(props.alignment, props.theme, getAlignmentCss)};
-  `
+  `;
 });
 
 export interface IResponsiveTextAlignmentViewProps extends IWrapperProps {

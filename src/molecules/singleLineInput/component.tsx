@@ -38,7 +38,7 @@ const getAutocompleteType = (inputType: InputType): string | undefined => {
     return 'url';
   }
   return undefined;
-}
+};
 
 export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTheme> {
   value: string | null;

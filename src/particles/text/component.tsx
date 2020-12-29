@@ -59,7 +59,7 @@ export const getTextTag = (variant?: string): TextTag => {
     return current;
   }, []);
   return textVariants.length > 0 ? textVariants[textVariants.length - 1] : 'span';
-}
+};
 
 interface IStyledTextProps {
   theme: ITextTheme;

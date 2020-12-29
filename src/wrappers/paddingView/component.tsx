@@ -28,10 +28,10 @@ interface IStyledPaddingViewProps extends IWrapperProps {
 
 const StyledPaddingView = wrappingComponent((Component: React.ComponentType<IStyledPaddingViewProps>): React.ComponentType<IStyledPaddingViewProps> => {
   return styled(Component)<IStyledPaddingViewProps>`
-    ${(props: IStyledPaddingViewProps): string => props.paddingTop ? `padding-top: ${getPaddingSize(props.paddingTop, props.theme)}` : ''};
-    ${(props: IStyledPaddingViewProps): string => props.paddingBottom ? `padding-bottom: ${getPaddingSize(props.paddingBottom, props.theme)}` : ''};
-    ${(props: IStyledPaddingViewProps): string => props.paddingLeft ? `padding-left: ${getPaddingSize(props.paddingLeft, props.theme)}` : ''};
-    ${(props: IStyledPaddingViewProps): string => props.paddingRight ? `padding-right: ${getPaddingSize(props.paddingRight, props.theme)}` : ''};
+    ${(props: IStyledPaddingViewProps): string => (props.paddingTop ? `padding-top: ${getPaddingSize(props.paddingTop, props.theme)}` : '')};
+    ${(props: IStyledPaddingViewProps): string => (props.paddingBottom ? `padding-bottom: ${getPaddingSize(props.paddingBottom, props.theme)}` : '')};
+    ${(props: IStyledPaddingViewProps): string => (props.paddingLeft ? `padding-left: ${getPaddingSize(props.paddingLeft, props.theme)}` : '')};
+    ${(props: IStyledPaddingViewProps): string => (props.paddingRight ? `padding-right: ${getPaddingSize(props.paddingRight, props.theme)}` : '')};
   `;
 });
 

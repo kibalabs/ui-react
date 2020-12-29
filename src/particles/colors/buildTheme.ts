@@ -1,3 +1,4 @@
+import { RecursivePartial } from '@kibalabs/core';
 import { darken, getLuminance, invert, lighten, transparentize } from 'polished';
 
 import { IColorGuide } from './theme';
@@ -91,4 +92,4 @@ const expandColors = (colors: IColorGuide, base?: IColorGuide): IColorGuide => {
     return extendedColors;
   }, {});
   return { ...colors, ...expandedColors } as IColorGuide;
-}
+};

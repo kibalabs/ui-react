@@ -72,7 +72,7 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
     <StyledResponsiveContainingView
       className={getClassName(ResponsiveContainingView.displayName, props.className)}
       theme={theme}
-      size={{base: props.size, ...props.sizeResponsive}}
+      size={{ base: props.size, ...props.sizeResponsive }}
       isFullWidth={isFullWidth}
       shouldIncludeMaxSize={shouldIncludeMaxSize}
     >

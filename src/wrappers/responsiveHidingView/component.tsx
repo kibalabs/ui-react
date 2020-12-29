@@ -15,9 +15,9 @@ interface IStyledResponsiveHidingViewProps extends IWrapperProps {
 
 const StyledResponsiveHidingView = wrappingComponent((Component: React.ComponentType<IStyledResponsiveHidingViewProps>): React.ComponentType<IStyledResponsiveHidingViewProps> => {
   return styled(Component)<IStyledResponsiveHidingViewProps>`
-    ${(props: IStyledResponsiveHidingViewProps): string => props.hiddenAboveSize ? `@media (min-width: ${props.hiddenAboveSize}) {display: none !important;}` : ''};
-    ${(props: IStyledResponsiveHidingViewProps): string => props.hiddenBelowSize ? `@media not all and (min-width: ${props.hiddenBelowSize}) {display: none !important;}` : ''};
-  `
+    ${(props: IStyledResponsiveHidingViewProps): string => (props.hiddenAboveSize ? `@media (min-width: ${props.hiddenAboveSize}) {display: none !important;}` : '')};
+    ${(props: IStyledResponsiveHidingViewProps): string => (props.hiddenBelowSize ? `@media not all and (min-width: ${props.hiddenBelowSize}) {display: none !important;}` : '')};
+  `;
 });
 
 export interface IResponsiveHidingViewProps extends IWrapperProps {

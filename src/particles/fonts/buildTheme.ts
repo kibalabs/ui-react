@@ -10,7 +10,7 @@ export const buildFonts = (base?: RecursivePartial<Record<string, IFont>>): Reco
     const baseUrl = base[name]?.url;
     if (baseUrl) {
       // eslint-disable-next-line no-param-reassign
-      current[name] = {url: baseUrl.replace('//fonts.googleapis.com/', '//assets.evrpg.com/gfonts/')};
+      current[name] = { url: baseUrl.replace('//fonts.googleapis.com/', '//assets.evrpg.com/gfonts/') };
     }
     return current;
   }, {} as Record<string, IFont>);

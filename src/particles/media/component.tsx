@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IComponentProps, defaultComponentProps, ThemeType } from '../..';
+import { defaultComponentProps, IComponentProps, ThemeType } from '../..';
 import { IImageProps, Image } from '../image';
 import { Video } from '../video';
 

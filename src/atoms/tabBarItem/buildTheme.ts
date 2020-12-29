@@ -54,6 +54,6 @@ export const buildTabBarItemThemes = (colors: IColorGuide, dimensions: IDimensio
 
   return {
     ...(base || {}),
-    default: defaultTabBarItemTheme
+    default: defaultTabBarItemTheme,
   };
 };

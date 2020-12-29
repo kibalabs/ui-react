@@ -9,7 +9,7 @@ export const buildLinkThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     normal: {
       default: {
         text: mergeTheme(textThemes.default, textThemes.inherit, {
-          'color': '$colors.brandPrimary',
+          color: '$colors.brandPrimary',
           'text-decoration': 'underline',
         }),
         background: mergeTheme(boxThemes.default, {

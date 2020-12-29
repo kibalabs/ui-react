@@ -12,7 +12,7 @@ interface IStyledHidingViewProps extends IWrapperProps {
 
 const StyledHidingView = wrappingComponent((Component: React.ComponentType<IStyledHidingViewProps>): React.ComponentType<IStyledHidingViewProps> => {
   return styled(Component)<IStyledHidingViewProps>`
-    ${(props: IStyledHidingViewProps): string => props.isHidden ? `display: none !important;` : ''};
+    ${(props: IStyledHidingViewProps): string => (props.isHidden ? 'display: none !important;' : '')};
   `;
 });
 

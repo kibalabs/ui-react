@@ -1,12 +1,9 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-<<<<<<< HEAD
 import { IMultiChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
-=======
-import { flattenChildren, IMultiChildProps } from '@kibalabs/core-react';
->>>>>>> main
+
 
 import { ITabBarItemProps, ITabBarItemTheme, TabBarItem } from '../../atoms/tabBarItem';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';

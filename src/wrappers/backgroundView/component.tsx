@@ -2,13 +2,13 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
 
 import { IColorGuide } from '../../particles';
 import { useColors } from '../../theming';
 import { valueToCss } from '../../util';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
-import styled from 'styled-components';
 
 export interface IBackgroundLayer {
   color?: string;

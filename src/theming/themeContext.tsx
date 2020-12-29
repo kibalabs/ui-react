@@ -4,9 +4,9 @@ import { RecursivePartial } from '@kibalabs/core';
 import { IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
 
 import { ITheme } from '..';
-import { mergeTheme, ThemeMap, ThemeType, ThemeValue } from '../util';
 import { IColorGuide } from '../particles/colors';
 import { IDimensionGuide } from '../particles/dimensions';
+import { mergeTheme, ThemeMap, ThemeType, ThemeValue } from '../util';
 
 export const ThemeContext = React.createContext<ITheme | null>(null);
 
@@ -75,7 +75,7 @@ export const ColorProvider = (props: IColorProviderProps): React.ReactElement =>
 export function useColors(): IColorGuide {
   const baseColors = useBaseColors();
   const colors = React.useContext(ColorContext);
-  return { ...baseColors, ...(colors || {})} as IColorGuide;
+  return { ...baseColors, ...(colors || {}) } as IColorGuide;
 }
 
 export const useBuiltTheme = <Theme extends ThemeType>(component: string, variant?: string, override?: RecursivePartial<Theme>): Theme => {
@@ -90,9 +90,9 @@ export const useBuiltTheme = <Theme extends ThemeType>(component: string, varian
     if (!componentThemes) {
       throw Error(`Could not find component ${component} in current theme. Valid keys are: ${Object.keys(theme)}`);
     }
-    let variants = (variant || 'default').split('-').filter((variantPart: string): boolean => variantPart.length > 0);
-    const themeParts = variants.splice(variants.lastIndexOf('default') + 1).reduce((value: RecursivePartial<Theme>[], variant: string): RecursivePartial<Theme>[] => {
-      const variantTheme = componentThemes[variant] as RecursivePartial<Theme>;
+    const variants = (variant || 'default').split('-').filter((variantPart: string): boolean => variantPart.length > 0);
+    const themeParts = variants.splice(variants.lastIndexOf('default') + 1).reduce((value: RecursivePartial<Theme>[], currentVariant: string): RecursivePartial<Theme>[] => {
+      const variantTheme = componentThemes[currentVariant] as RecursivePartial<Theme>;
       if (variantTheme) {
         value.push(variantTheme);
       } else {
@@ -114,7 +114,7 @@ export const useBuiltTheme = <Theme extends ThemeType>(component: string, varian
 
 declare global {
   interface Document {
-      documentMode?: any;
+    documentMode?: string;
   }
 }
 

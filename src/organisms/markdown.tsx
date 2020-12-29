@@ -1,10 +1,11 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import { Content as MarkdownAST } from 'mdast'
+
 import { getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
+import { Content as MarkdownAST } from 'mdast';
+import ReactMarkdown from 'react-markdown';
 
-import { Box, PrettyText, TextAlignment, Media } from '..';
+import { Box, Media, PrettyText, TextAlignment } from '..';
 import { ReactMarkdownTypes } from './reactMarkdown';
 
 interface IMarkdownProps {

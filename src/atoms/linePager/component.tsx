@@ -73,7 +73,7 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
     if (props.onPageClicked) {
       props.onPageClicked(pageIndex);
     }
-  }
+  };
 
   const getHiddenAboveSize = (index: number): ScreenSize | undefined => {
     if (index >= pageCountSmall) {
