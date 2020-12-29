@@ -4,7 +4,7 @@ import { getClassName } from '@kibalabs/core';
 
 import { defaultComponentProps, Direction, IComponentProps, MultiDirection } from '../../model';
 import { getPaddingSize, PaddingSize, IDimensionGuide } from '../dimensions';
-import { useDimensions } from '../../../dist';
+import { useDimensions } from '../../theming';
 
 interface IStyledSpacingProps {
   size: PaddingSize;

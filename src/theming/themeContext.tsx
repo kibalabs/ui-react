@@ -3,10 +3,9 @@ import { RecursivePartial} from '@kibalabs/core';
 import { IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
 
 import { ITheme } from '..';
-import { mergeTheme, ThemeType, ThemeValue } from '../util';
+import { mergeTheme, ThemeMap, ThemeType, ThemeValue } from '../util';
 import { IColorGuide } from '../particles/colors';
 import { IDimensionGuide } from '../particles/dimensions';
-import { ThemeMap } from '../../dist';
 
 export const ThemeContext = React.createContext<ITheme | null>(null);
 
