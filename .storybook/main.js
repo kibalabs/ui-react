@@ -9,6 +9,5 @@ module.exports = {
   ],
   typescript: {
     check: false,
-    reactDocgen: 'none'
   },
 };
