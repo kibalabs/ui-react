@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
 
 import { defaultComponentProps, Direction, IComponentProps, MultiDirection } from '../../model';
-import { getPaddingSize, PaddingSize, IDimensionGuide } from '../dimensions';
 import { useDimensions } from '../../theming';
+import { getPaddingSize, IDimensionGuide, PaddingSize } from '../dimensions';
 
 interface IStyledSpacingProps {
   size: PaddingSize;
@@ -13,8 +14,8 @@ interface IStyledSpacingProps {
 }
 
 const StyledDiv = styled.div<IStyledSpacingProps>`
-  margin-left: ${(props: IStyledSpacingProps): string => (props.direction === MultiDirection.Both || props.direction === MultiDirection.Horizontal ? getPaddingSize(props.size, props.theme): '0')};
-  margin-top: ${(props: IStyledSpacingProps): string => (props.direction === MultiDirection.Both || props.direction === MultiDirection.Vertical ? getPaddingSize(props.size, props.theme): '0')};
+  margin-left: ${(props: IStyledSpacingProps): string => (props.direction === MultiDirection.Both || props.direction === MultiDirection.Horizontal ? getPaddingSize(props.size, props.theme) : '0')};
+  margin-top: ${(props: IStyledSpacingProps): string => (props.direction === MultiDirection.Both || props.direction === MultiDirection.Vertical ? getPaddingSize(props.size, props.theme) : '0')};
 `;
 
 export interface ISpacingProps extends IComponentProps<IDimensionGuide> {
@@ -22,7 +23,7 @@ export interface ISpacingProps extends IComponentProps<IDimensionGuide> {
 }
 
 export const Spacing = (props: ISpacingProps): React.ReactElement => {
-  const theme = props.theme || useDimensions();
+  const theme = useDimensions(props.theme);
   return (
     <StyledDiv
       id={props.id}

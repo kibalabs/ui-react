@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { getScreenSize, IDimensionGuide, ScreenSize } from '../../particles/dimensions';
 import { useDimensions } from '../../theming';
-import { IDimensionGuide, ScreenSize, getScreenSize } from '../../particles/dimensions';
+import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledResponsiveHidingViewProps extends IWrapperProps {
@@ -14,9 +15,9 @@ interface IStyledResponsiveHidingViewProps extends IWrapperProps {
 
 const StyledResponsiveHidingView = wrappingComponent((Component: React.ComponentType<IStyledResponsiveHidingViewProps>): React.ComponentType<IStyledResponsiveHidingViewProps> => {
   return styled(Component)<IStyledResponsiveHidingViewProps>`
-    ${(props: IStyledResponsiveHidingViewProps): string => props.hiddenAboveSize ? `@media (min-width: ${props.hiddenAboveSize}) {display: none !important;}` : ''};
-    ${(props: IStyledResponsiveHidingViewProps): string => props.hiddenBelowSize ? `@media not all and (min-width: ${props.hiddenBelowSize}) {display: none !important;}` : ''};
-  `
+    ${(props: IStyledResponsiveHidingViewProps): string => (props.hiddenAboveSize ? `@media (min-width: ${props.hiddenAboveSize}) {display: none !important;}` : '')};
+    ${(props: IStyledResponsiveHidingViewProps): string => (props.hiddenBelowSize ? `@media not all and (min-width: ${props.hiddenBelowSize}) {display: none !important;}` : '')};
+  `;
 });
 
 export interface IResponsiveHidingViewProps extends IWrapperProps {
@@ -26,7 +27,7 @@ export interface IResponsiveHidingViewProps extends IWrapperProps {
 }
 
 export const ResponsiveHidingView = (props: IResponsiveHidingViewProps): React.ReactElement => {
-  const theme = props.theme || useDimensions();
+  const theme = useDimensions(props.theme);
   return (
     <StyledResponsiveHidingView
       className={getClassName(ResponsiveHidingView.displayName, props.className)}

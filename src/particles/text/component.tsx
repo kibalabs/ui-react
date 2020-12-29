@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
 
-import { IComponentProps, defaultComponentProps } from '../../model';
-import { themeToCss } from '../../util';
+import { defaultComponentProps, IComponentProps } from '../../model';
 import { useBuiltTheme } from '../../theming';
+import { themeToCss } from '../../util';
 import { ITextTheme } from './theme';
 
 export enum TextAlignment {
@@ -28,7 +29,7 @@ const styleVariantTagMapping: Record<string, TextTag> = {
   inserted: 'ins',
   subscript: 'sub',
   superscript: 'sup',
-}
+};
 
 const textVariantTagMapping: Record<string, TextTag> = {
   paragraph: 'p',
@@ -42,7 +43,7 @@ const textVariantTagMapping: Record<string, TextTag> = {
   header4: 'h4',
   header5: 'h5',
   header6: 'h6',
-}
+};
 
 export const getTextTag = (variant?: string): TextTag => {
   if (!variant) {
@@ -58,7 +59,7 @@ export const getTextTag = (variant?: string): TextTag => {
     return current;
   }, []);
   return textVariants.length > 0 ? textVariants[textVariants.length - 1] : 'span';
-}
+};
 
 interface IStyledTextProps {
   theme: ITextTheme;
@@ -67,7 +68,7 @@ interface IStyledTextProps {
 
 const StyledText = styled.span<IStyledTextProps>`
   ${(props: IStyledTextProps): string => themeToCss(props.theme)};
-  ${(props: IStyledTextProps): string => props.alignment ? `text-align: ${props.alignment}`: ''};
+  ${(props: IStyledTextProps): string => (props.alignment ? `text-align: ${props.alignment}` : '')};
 `;
 
 export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChildProps {
@@ -87,7 +88,7 @@ export const Text = (props: ITextProps): React.ReactElement => {
     >
       { props.children }
     </StyledText>
-  )
+  );
 };
 
 Text.displayName = 'Text';

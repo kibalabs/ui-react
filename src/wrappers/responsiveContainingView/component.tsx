@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
-import { useDimensions } from '../../theming';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
 import { IDimensionGuide } from '../../particles';
-import { ResponsiveField, getResponsiveCss } from '../../util';
+import { useDimensions } from '../../theming';
+import { getResponsiveCss, ResponsiveField } from '../../util';
+import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledResponsiveContainingViewProps extends IWrapperProps {
@@ -15,7 +16,7 @@ interface IStyledResponsiveContainingViewProps extends IWrapperProps {
   shouldIncludeMaxSize: boolean;
 }
 
-export const getGridItemSizeCss = (totalColumnCount: number, columnCount: number, baseSize: string = '100%'): string => {
+export const getGridItemSizeCss = (totalColumnCount: number, columnCount: number, baseSize = '100%'): string => {
   return `max-width: calc(${baseSize} * ${(columnCount / totalColumnCount).toFixed(1)}) !important;`;
 };
 
@@ -64,14 +65,14 @@ export interface IResponsiveContainingViewProps extends IWrapperProps {
 }
 
 export const ResponsiveContainingView = (props: IResponsiveContainingViewProps): React.ReactElement => {
-  const theme = props.theme || useDimensions();
+  const theme = useDimensions(props.theme);
   const isFullWidth = props.isFullWidth === true || props.isFullWidth === undefined;
   const shouldIncludeMaxSize = props.shouldIncludeMaxSize === true || props.shouldIncludeMaxSize === undefined;
   return (
     <StyledResponsiveContainingView
       className={getClassName(ResponsiveContainingView.displayName, props.className)}
       theme={theme}
-      size={{base: props.size, ...props.sizeResponsive}}
+      size={{ base: props.size, ...props.sizeResponsive }}
       isFullWidth={isFullWidth}
       shouldIncludeMaxSize={shouldIncludeMaxSize}
     >

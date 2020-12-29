@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { IBoxTheme, IColorGuide, IDimensionGuide } from '../../particles';
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide, IDimensionGuide, IBoxTheme } from '../../particles';
 import { ILinkBaseTheme } from './theme';
 
 export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ILinkBaseTheme>>): ThemeMap<ILinkBaseTheme> => {
@@ -45,8 +45,8 @@ export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionG
       default: {
         background: mergeThemePartial(boxThemes.card, boxThemes.focusable, {
         }),
-      }
-    }
+      },
+    },
   }, base?.card);
 
   const imageLinkBaseTheme = mergeThemePartial<ILinkBaseTheme>({
@@ -71,4 +71,4 @@ export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionG
     card: cardLinkBaseTheme,
     image: imageLinkBaseTheme,
   };
-}
+};

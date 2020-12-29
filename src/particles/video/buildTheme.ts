@@ -1,6 +1,6 @@
 import { RecursivePartial } from '@kibalabs/core';
 
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { mergeTheme, ThemeMap } from '../../util';
 import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
 import { IVideoTheme } from './theme';
@@ -13,4 +13,4 @@ export const buildVideoThemes = (colors: IColorGuide, dimensions: IDimensionGuid
     ...(base || {}),
     default: defaultVideoTheme,
   };
-}
+};

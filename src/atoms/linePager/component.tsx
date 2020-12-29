@@ -1,13 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IComponentProps, defaultComponentProps, themeToCss, useBuiltTheme } from '../..';
-import { Spacing, ScreenSize } from '../../particles';
-import { ILinePagerTheme } from './theme';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { Direction } from '../../model';
-import { ResponsiveHidingView } from '../../wrappers';
+import { ScreenSize, Spacing } from '../../particles';
 import { ResponsiveField } from '../../util';
+import { ResponsiveHidingView } from '../../wrappers';
+import { ILinePagerTheme } from './theme';
 
 interface IStyledLinePagerProps {
   theme: ILinePagerTheme;
@@ -66,13 +67,13 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
   const pageCountLarge = props.pageCountResponsive?.large || pageCountMedium;
   const pageCountExtraLarge = props.pageCountResponsive?.extraLarge || pageCountLarge;
   const pageCounts = [pageCount, pageCountSmall, pageCountMedium, pageCountLarge, pageCountExtraLarge];
-  const maxPageCount = Math.max(...(pageCounts.filter((pageCount?: number): boolean => pageCount !== undefined)));
+  const maxPageCount = Math.max(...(pageCounts.filter((candidatePageCount?: number): boolean => candidatePageCount !== undefined)));
 
   const onPageClicked = (pageIndex: number): void => {
     if (props.onPageClicked) {
       props.onPageClicked(pageIndex);
     }
-  }
+  };
 
   const getHiddenAboveSize = (index: number): ScreenSize | undefined => {
     if (index >= pageCountSmall) {
@@ -88,14 +89,14 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
       return ScreenSize.ExtraLarge;
     }
     return undefined;
-  }
+  };
 
   return (
     <StyledLinePager
       id={props.id}
       className={getClassName(LinePager.displayName, props.className)}
     >
-      {Array(maxPageCount).fill(null).map((_: any, index: number): React.ReactElement => {
+      {Array(maxPageCount).fill(null).map((_: unknown, index: number): React.ReactElement => {
         return (
           <ResponsiveHidingView key={index} hiddenAbove={getHiddenAboveSize(index)}>
             <StyledLinePagerItem

@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IComponentProps, defaultComponentProps, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { defaultComponentProps, IComponentProps, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
+import { IIconProps, PaddingSize, Spacing } from '../../particles';
 import { IButtonTheme } from './theme';
-import { IIconProps, Spacing, PaddingSize } from '../../particles';
 
 interface IStyledButtonProps {
   theme: IButtonTheme;
@@ -86,7 +87,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
     }
   };
 
-  if (props.onClicked && props.buttonType == 'submit') {
+  if (props.onClicked && props.buttonType === 'submit') {
     throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
   }
 

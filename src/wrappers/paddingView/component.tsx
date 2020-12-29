@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
-import { PaddingSize, getPaddingSize, IDimensionGuide } from '../../particles/dimensions';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { getPaddingSize, IDimensionGuide, PaddingSize } from '../../particles/dimensions';
 import { useDimensions } from '../../theming';
+import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 export interface IPaddingViewPaddingProps {
@@ -27,10 +28,10 @@ interface IStyledPaddingViewProps extends IWrapperProps {
 
 const StyledPaddingView = wrappingComponent((Component: React.ComponentType<IStyledPaddingViewProps>): React.ComponentType<IStyledPaddingViewProps> => {
   return styled(Component)<IStyledPaddingViewProps>`
-    ${(props: IStyledPaddingViewProps): string => props.paddingTop ? `padding-top: ${getPaddingSize(props.paddingTop, props.theme)}` : ''};
-    ${(props: IStyledPaddingViewProps): string => props.paddingBottom ? `padding-bottom: ${getPaddingSize(props.paddingBottom, props.theme)}` : ''};
-    ${(props: IStyledPaddingViewProps): string => props.paddingLeft ? `padding-left: ${getPaddingSize(props.paddingLeft, props.theme)}` : ''};
-    ${(props: IStyledPaddingViewProps): string => props.paddingRight ? `padding-right: ${getPaddingSize(props.paddingRight, props.theme)}` : ''};
+    ${(props: IStyledPaddingViewProps): string => (props.paddingTop ? `padding-top: ${getPaddingSize(props.paddingTop, props.theme)}` : '')};
+    ${(props: IStyledPaddingViewProps): string => (props.paddingBottom ? `padding-bottom: ${getPaddingSize(props.paddingBottom, props.theme)}` : '')};
+    ${(props: IStyledPaddingViewProps): string => (props.paddingLeft ? `padding-left: ${getPaddingSize(props.paddingLeft, props.theme)}` : '')};
+    ${(props: IStyledPaddingViewProps): string => (props.paddingRight ? `padding-right: ${getPaddingSize(props.paddingRight, props.theme)}` : '')};
   `;
 });
 
@@ -39,7 +40,7 @@ export interface IPaddingViewProps extends IWrapperProps, IPaddingViewPaddingPro
 }
 
 export const PaddingView = (props: IPaddingViewProps): React.ReactElement => {
-  const theme = props.theme || useDimensions();
+  const theme = useDimensions(props.theme);
   const paddingTop = props.paddingTop || props.paddingVertical || props.padding;
   const paddingBottom = props.paddingBottom || props.paddingVertical || props.padding;
   const paddingRight = props.paddingRight || props.paddingHorizontal || props.padding;

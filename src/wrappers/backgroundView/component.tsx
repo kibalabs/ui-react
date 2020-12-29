@@ -1,12 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
 
-import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
-import { useColors } from '../../theming';
 import { IColorGuide } from '../../particles';
+import { useColors } from '../../theming';
 import { valueToCss } from '../../util';
+import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 export interface IBackgroundLayer {
@@ -24,10 +25,11 @@ export interface IBackgroundConfig extends IBackgroundLayer {
 
 const getLayersCss = (backgroundLayers: IBackgroundLayer[], colors: IColorGuide): string => {
   return backgroundLayers.reverse().map((backgroundLayer: IBackgroundLayer): string => getLayerCss(backgroundLayer, colors)).join(', ');
-}
+};
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getLayerCss = (backgroundLayer: IBackgroundLayer, colors: IColorGuide): string => {
-  let layers = [];
+  const layers = [];
   // TODO(krish): this resolve doesn't do the "full resolution" thing for IE
   // TODO(krish): resolve values for linear and radial gradients too
   if (backgroundLayer.color) {
@@ -46,7 +48,7 @@ const getLayerCss = (backgroundLayer: IBackgroundLayer, colors: IColorGuide): st
     layers.push(`url(${backgroundLayer.patternImageUrl}) repeat top left`);
   }
   return layers.join(', ');
-}
+};
 
 interface IStyledBackgroundViewProps extends ISingleAnyChildProps {
   className?: string;
@@ -65,8 +67,8 @@ export interface IBackgroundViewProps extends IWrapperProps, IBackgroundConfig {
 
 export const BackgroundView = (props: IBackgroundViewProps): React.ReactElement => {
   const colors = useColors();
-  let layers = props.layers || [];
-  if (props.color || props.linearGradient || props.radialGradient || props.imageUrl || props.patternImageUrl || layers.length == 0) {
+  const layers = props.layers || [];
+  if (props.color || props.linearGradient || props.radialGradient || props.imageUrl || props.patternImageUrl || layers.length === 0) {
     layers.splice(0, 0, {
       color: props.color,
       linearGradient: props.linearGradient,
@@ -84,7 +86,7 @@ export const BackgroundView = (props: IBackgroundViewProps): React.ReactElement 
       { props.children }
     </StyledBackgroundView>
   );
-}
+};
 
 BackgroundView.displayName = 'BackgroundView';
 BackgroundView.defaultProps = {

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { getClassName } from '@kibalabs/core';
 
 import { IComponentProps } from '../..';
@@ -26,38 +27,38 @@ export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
         url: `https://assets.evrpg.com/ionicons/v5/${iconId.replace('ion-', '')}.svg`,
         shouldAddFill: true,
         shouldAddStroke: false,
-      }
+      };
     }
     if (iconId.startsWith('mui-')) {
       return {
         url: `https://assets.evrpg.com/material-icons/v1/${iconId.replace('mui-', '')}.svg`,
         shouldAddFill: true,
         shouldAddStroke: false,
-      }
+      };
     }
     if (iconId.startsWith('bs-')) {
       return {
         url: `https://assets.evrpg.com/bootstrap-icons/v1/${iconId.replace('bs-', '')}.svg`,
         shouldAddFill: true,
         shouldAddStroke: false,
-      }
+      };
     }
     if (iconId.startsWith('feather-')) {
       return {
         url: `https://assets.evrpg.com/feather/v4/${iconId.replace('feather-', '')}.svg`,
         shouldAddFill: false,
         shouldAddStroke: true,
-      }
+      };
     }
     if (iconId.startsWith('remix-')) {
       return {
         url: `https://assets.evrpg.com/remix-icons/v2/${iconId.replace('remix-', '')}.svg`,
         shouldAddFill: true,
         shouldAddStroke: false,
-      }
+      };
     }
     return null;
-  }
+  };
 
   React.useEffect(() => {
     setSvgContent(null);
@@ -69,14 +70,14 @@ export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
     setShouldAddFill(iconData.shouldAddFill);
     setShouldAddStroke(iconData.shouldAddStroke);
     fetch(iconData.url)
-      .then(result => {
+      .then((result) => {
         if (result.status >= 300) {
           throw new Error(`Failed to fetch icon: ${result}`);
         }
         return result.text();
       })
-      .then(resultText => {
-        setSvgContent(resultText.replace(/<title>.*<\/title>/gi, '').replace(/stroke:#000/gi, 'stroke:currentColor').replace(/fill:#000/gi, 'fill:currentColor'))
+      .then((resultText) => {
+        setSvgContent(resultText.replace(/<title>.*<\/title>/gi, '').replace(/stroke:#000/gi, 'stroke:currentColor').replace(/fill:#000/gi, 'fill:currentColor'));
       })
       .catch(() => setSvgContent(null));
   }, [props.iconId]);
@@ -86,6 +87,7 @@ export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
       id={props.id}
       className={getClassName(KibaIcon.displayName, props.className)}
       variant={props.variant}
+      // eslint-disable-next-line no-underscore-dangle
       _color={props._color}
       shouldAddFill={shouldAddFill}
       shouldAddStroke={shouldAddStroke}

@@ -1,10 +1,11 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import { Content as MarkdownAST } from 'mdast'
+
 import { getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
+import { Content as MarkdownAST } from 'mdast';
+import ReactMarkdown from 'react-markdown';
 
-import { TextAlignment, TextTag, Link } from '..';
+import { Link, TextAlignment, TextTag } from '..';
 import { PrettyText } from '../atoms/prettyText/component';
 import { ReactMarkdownTypes } from './reactMarkdown';
 
@@ -31,7 +32,7 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       }
     }
     return true;
-  }
+  };
 
   const mergeVariants = (...variants: (string | undefined | null)[]): string => {
     const values = variants.reduce((current: string[], value: string | undefined | null): string[] => {
@@ -41,8 +42,9 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       return current;
     }, []);
     return values.join('-');
-  }
+  };
 
+  /* eslint-disable react/display-name */
   const renderers: ReactMarkdownTypes.Renderers = {
     root: (rendererProps: {className?: string} & IMultiAnyChildProps): React.ReactElement => {
       // TODO(krish): what should this check? It cant run the below check cos would fail for markdown like: "**Hello** world"
@@ -78,12 +80,13 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       return <Link target={rendererProps.href} text={String(rendererProps.children[0].props.children)}/>;
     },
     emphasis: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
-      return <em>{rendererProps.children}</em>
+      return <em>{rendererProps.children}</em>;
     },
     strong: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
-      return <strong>{rendererProps.children}</strong>
+      return <strong>{rendererProps.children}</strong>;
     },
   };
+  /* eslint-enable react/display-name */
 
   return (
     <ReactMarkdown
@@ -97,7 +100,7 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       escapeHtml={false}
       source={props.source.replace(/\n/g, '<br/>')}
     />
-  )
+  );
 };
 
 MarkdownText.displayName = 'MarkdownText';

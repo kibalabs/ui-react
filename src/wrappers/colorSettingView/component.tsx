@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
-import { ColorProvider, useAlternateColors } from '../../theming';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
 import { IColorGuide } from '../../particles';
+import { ColorProvider, useAlternateColors } from '../../theming';
 import { colorsToCss } from '../../util';
+import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledColorSettingViewProps extends IWrapperProps {
@@ -24,7 +25,7 @@ export interface IColorSettingViewProps extends IWrapperProps {
 }
 
 export const ColorSettingView = (props: IColorSettingViewProps): React.ReactElement => {
-  const colors = props.theme || useAlternateColors(props.variant);
+  const colors = useAlternateColors(props.variant, props.theme);
 
   return (
     <ColorProvider colors={colors}>

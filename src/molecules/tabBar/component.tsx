@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
-import { flattenChildren, IMultiChildProps } from '@kibalabs/core-react';
 
-import { IMoleculeProps, defaultMoleculeProps } from '../moleculeProps';
-import { TabBarItem, ITabBarItemTheme, ITabBarItemProps } from '../../atoms/tabBarItem';
-import { Direction } from '../../model';
+import { getClassName } from '@kibalabs/core';
+import { IMultiChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
+
+
+import { ITabBarItemProps, ITabBarItemTheme, TabBarItem } from '../../atoms/tabBarItem';
+import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface ITabBarTheme {
   tabBarItemTheme: ITabBarItemTheme;
@@ -87,9 +88,9 @@ TabBar.defaultProps = {
 };
 TabBar.Item = TabBarItemInner;
 
-interface IManagedTabBarProps extends Omit<ITabBarProps, 'selectedTabKey' | 'onTabKeySelected'> {
-  onTabKeyChanged(tabKey: string): void;
-}
+// interface IManagedTabBarProps extends Omit<ITabBarProps, 'selectedTabKey' | 'onTabKeySelected'> {
+//   onTabKeyChanged(tabKey: string): void;
+// }
 
 // export const ManagedTabBar = (props: IManagedTabBarProps): React.ReactElement => {
 //   const [selectedTabKey, setSelectedTabKey] = React.useState<string>();

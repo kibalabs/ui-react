@@ -1,8 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IComponentProps, defaultComponentProps, useBuiltTheme } from '../..';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
 import { IIconTheme } from './theme';
 
 interface IStyledIconProps {
@@ -17,15 +18,19 @@ const StyledIcon = styled.div<IStyledIconProps>`
   height: ${(props: IStyledIconProps): string => props.theme.size};
   min-width: ${(props: IStyledIconProps): string => props.theme.size};
   min-height: ${(props: IStyledIconProps): string => props.theme.size};
+<<<<<<< HEAD
+  color: ${(props: IStyledIconProps): string => (props.color ? props.color : 'currentColor')};
+=======
   color: ${(props: IStyledIconProps): string => props.color || 'currentColor'};
+>>>>>>> main
   overflow: hidden;
 
   svg {
     height: 100%;
     width: 100%;
     display: block;
-    fill: ${(props: IStyledIconProps): string => props.shouldAddFill ? 'currentColor': 'none'};
-    stroke: ${(props: IStyledIconProps): string => props.shouldAddStroke ? 'currentColor': 'none'};
+    fill: ${(props: IStyledIconProps): string => (props.shouldAddFill ? 'currentColor' : 'none')};
+    stroke: ${(props: IStyledIconProps): string => (props.shouldAddStroke ? 'currentColor' : 'none')};
   }
 `;
 
@@ -43,10 +48,11 @@ export const Icon = (props: IIconProps): React.ReactElement => {
       id={props.id}
       className={getClassName(Icon.displayName, props.className)}
       theme={theme}
+      // eslint-disable-next-line no-underscore-dangle
       color={props._color}
       shouldAddFill={props.shouldAddFill}
       shouldAddStroke={props.shouldAddStroke}
-      dangerouslySetInnerHTML={{__html: props.svgContent}}
+      dangerouslySetInnerHTML={{ __html: props.svgContent }}
     />
   );
 };

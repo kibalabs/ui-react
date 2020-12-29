@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../particles';
+import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
+import { mergeTheme, ThemeMap } from '../../util';
 import { ITabBarItemTheme } from './theme';
 
 export const buildTabBarItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ITabBarItemTheme>>): ThemeMap<ITabBarItemTheme> => {
@@ -9,13 +9,13 @@ export const buildTabBarItemThemes = (colors: IColorGuide, dimensions: IDimensio
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          'padding': `${dimensions.padding} ${dimensions.paddingWide}`,
+          padding: `${dimensions.padding} ${dimensions.paddingWide}`,
           'border-radius': `${dimensions.borderRadius} ${dimensions.borderRadius} 0 0`,
           'border-width': '0 0 2px 0',
           'background-color': 'transparent',
         }),
         text: mergeTheme(textThemes.default, {
-          'color': '$colors.brandPrimaryClear25',
+          color: '$colors.brandPrimaryClear25',
         }),
       },
       hover: {
@@ -46,7 +46,7 @@ export const buildTabBarItemThemes = (colors: IColorGuide, dimensions: IDimensio
         },
         text: {
           // 'font-weight': 'bolder',
-          'color': '$colors.brandPrimary',
+          color: '$colors.brandPrimary',
         },
       },
     },
@@ -54,6 +54,6 @@ export const buildTabBarItemThemes = (colors: IColorGuide, dimensions: IDimensio
 
   return {
     ...(base || {}),
-    default: defaultTabBarItemTheme
+    default: defaultTabBarItemTheme,
   };
-}
+};

@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IMoleculeProps, defaultMoleculeProps } from '../moleculeProps';
-import { InputFrame, IInputFrameTheme } from '../inputFrame';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
 import { InputType } from '../../model';
+import { IInputFrameTheme, InputFrame } from '../inputFrame';
+import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface ISingleLineInputTheme {
   inputFrameTheme: IInputFrameTheme;
@@ -33,11 +34,11 @@ const StyledSingleLineInput = styled.input`
 const getAutocompleteType = (inputType: InputType): string | undefined => {
   if (inputType === InputType.Email) {
     return 'email';
-  } else if (inputType === InputType.Url) {
+  } if (inputType === InputType.Url) {
     return 'url';
   }
   return undefined;
-}
+};
 
 export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTheme> {
   value: string | null;

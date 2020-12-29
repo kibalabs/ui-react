@@ -1,10 +1,11 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import { Content as MarkdownAST } from 'mdast'
+
 import { getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
+import { Content as MarkdownAST } from 'mdast';
+import ReactMarkdown from 'react-markdown';
 
-import { Box, PrettyText, TextAlignment, Media } from '..';
+import { Box, Media, PrettyText, TextAlignment } from '..';
 import { ReactMarkdownTypes } from './reactMarkdown';
 
 interface IMarkdownProps {
@@ -28,8 +29,9 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
       }
     }
     return true;
-  }
+  };
 
+  /* eslint-disable react/display-name */
   const renderers: ReactMarkdownTypes.Renderers = {
     // TODO(krish): this should use pretty text eventually
     // NOTE(krish): full list here: https://github.com/rexxars/react-markdown/blob/main/src/renderers.js
@@ -52,7 +54,7 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
         (child && typeof child === 'object' && 'key' in child) ? String(child.key).split('-')[0] : null
       )) || [];
       const isCaption = childrenKeys.indexOf('image') > -1;
-      return (<PrettyText variant='paragraph' alignment={isCaption ? TextAlignment.Center : TextAlignment.Left}>{rendererProps.children}</PrettyText>);
+      return <PrettyText variant='paragraph' alignment={isCaption ? TextAlignment.Center : TextAlignment.Left}>{rendererProps.children}</PrettyText>;
     },
     heading: (rendererProps: { level: number } & IMultiAnyChildProps): React.ReactElement => {
       return <PrettyText variant={`header${rendererProps.level}`} alignment={TextAlignment.Left}>{rendererProps.children}</PrettyText>;
@@ -64,6 +66,7 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
       return <PrettyText variant='strong'>{rendererProps.children}</PrettyText>;
     },
   };
+  /* eslint-enable react/display-name */
 
   return (
     <ReactMarkdown
@@ -76,7 +79,7 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
       includeNodeIndex={true}
       source={props.source}
     />
-  )
+  );
 };
 
 Markdown.displayName = 'Markdown';

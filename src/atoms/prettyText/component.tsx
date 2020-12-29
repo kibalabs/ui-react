@@ -1,12 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import { getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
 
-import { IComponentProps, defaultComponentProps } from '../../model';
-import { themeToCss } from '../../util';
+import { defaultComponentProps, IComponentProps } from '../../model';
+import { getTextTag, TextAlignment, TextTag } from '../../particles/text';
 import { useBuiltTheme } from '../../theming';
-import { TextAlignment, getTextTag, TextTag } from '../../particles/text';
+import { themeToCss } from '../../util';
 import { IPrettyTextTheme } from './theme';
 
 interface IStyledPrettyTextProps {
@@ -16,7 +17,7 @@ interface IStyledPrettyTextProps {
 
 const StyledPrettyText = styled.span<IStyledPrettyTextProps>`
   ${(props: IStyledPrettyTextProps): string => themeToCss(props.theme.normal.default.text)};
-  ${(props: IStyledPrettyTextProps): string => props.alignment ? `text-align: ${props.alignment}`: ''};
+  ${(props: IStyledPrettyTextProps): string => (props.alignment ? `text-align: ${props.alignment}` : '')};
   & > em {
     display: inline-block;
     ${(props: IStyledPrettyTextProps): string => themeToCss(props.theme.normal.emphasis?.text)};

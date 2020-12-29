@@ -1,7 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
 
 import { IDimensionGuide } from '../../particles';
 import { useDimensions } from '../../theming';
@@ -28,7 +29,7 @@ export interface IContainerProps extends ISingleAnyChildProps {
 }
 
 export const Container = (props: IContainerProps): React.ReactElement => {
-  const theme = props.theme || useDimensions();
+  const theme = useDimensions(props.theme);
   return (
     <StyledContainer
       id={props.id}

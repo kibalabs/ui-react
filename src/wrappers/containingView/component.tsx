@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
-import { useDimensions } from '../../theming';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
 import { IDimensionGuide } from '../../particles';
+import { useDimensions } from '../../theming';
+import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledContainingViewProps extends IWrapperProps {
@@ -29,7 +30,7 @@ export interface IContainingViewProps extends IWrapperProps {
 }
 
 export const ContainingView = (props: IContainingViewProps): React.ReactElement => {
-  const theme = props.theme || useDimensions();
+  const theme = useDimensions(props.theme);
   return (
     <StyledContainingView
       className={getClassName(ContainingView.displayName, props.className, props.isCenteredHorizontally && 'centered')}

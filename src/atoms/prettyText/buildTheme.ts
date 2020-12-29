@@ -1,9 +1,9 @@
 import { RecursivePartial } from '@kibalabs/core';
 
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { ITextTheme } from '../../particles';
 import { IColorGuide } from '../../particles/colors';
 import { IDimensionGuide } from '../../particles/dimensions';
+import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IPrettyTextTheme } from './theme';
 
 export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, base?: RecursivePartial<Record<string, IPrettyTextTheme>>): ThemeMap<IPrettyTextTheme> => {
@@ -11,7 +11,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
     normal: {
       default: {
         text: mergeTheme<ITextTheme>(textThemes.default, {
-          'margin': '1em 0',
+          margin: '1em 0',
         }),
       },
       emphasis: {
@@ -24,13 +24,14 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
   }, base?.default);
 
   const derivedThemes = Object.keys(textThemes).reduce((currentMap: Record<string, RecursivePartial<IPrettyTextTheme>>, textVariant: string): Record<string, RecursivePartial<IPrettyTextTheme>> => {
+    // eslint-disable-next-line no-param-reassign
     currentMap[textVariant] = mergeThemePartial({
       normal: {
         default: {
           text: textThemes[textVariant],
-        }
-      }
-    }, base?.['textVariant']);
+        },
+      },
+    }, base?.textVariant);
     return currentMap;
   }, {});
 
@@ -38,12 +39,12 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
     normal: {
       default: {
         text: {
-          'margin': '0.67em 0',
+          margin: '0.67em 0',
         },
       },
       strong: {
         text: {
-          'color': '$colors.brandPrimary',
+          color: '$colors.brandPrimary',
         },
       },
     },
@@ -53,7 +54,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
     normal: {
       default: {
         text: {
-          'margin': '0.83em 0',
+          margin: '0.83em 0',
         },
       },
     },
@@ -63,7 +64,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
     normal: {
       default: {
         text: {
-          'margin': '1em 0 0.5em 0',
+          margin: '1em 0 0.5em 0',
         },
       },
     },
@@ -73,7 +74,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
     normal: {
       default: {
         text: {
-          'margin': '1em 0 0.5em 0',
+          margin: '1em 0 0.5em 0',
         },
       },
     },
@@ -83,7 +84,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
     normal: {
       default: {
         text: {
-          'margin': '1em 0 0.5em 0',
+          margin: '1em 0 0.5em 0',
         },
       },
     },
@@ -93,7 +94,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
     normal: {
       default: {
         text: {
-          'margin': '1em 0 0.5em 0',
+          margin: '1em 0 0.5em 0',
         },
       },
     },
@@ -104,4 +105,4 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
     ...derivedThemes,
     default: prettyTextTheme,
   };
-}
+};

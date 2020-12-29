@@ -9,9 +9,10 @@ export const buildFonts = (base?: RecursivePartial<Record<string, IFont>>): Reco
   const output = Object.keys(base).reduce((current: Record<string, IFont>, name: string): Record<string, IFont> => {
     const baseUrl = base[name]?.url;
     if (baseUrl) {
-      current[name] = {url: baseUrl.replace('//fonts.googleapis.com/', '//assets.evrpg.com/gfonts/')};
+      // eslint-disable-next-line no-param-reassign
+      current[name] = { url: baseUrl.replace('//fonts.googleapis.com/', '//assets.evrpg.com/gfonts/') };
     }
     return current;
   }, {} as Record<string, IFont>);
   return output;
-}
+};

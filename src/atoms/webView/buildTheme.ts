@@ -1,8 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
-import { darken, lighten } from 'polished';
 
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide, IDimensionGuide, IBoxTheme } from '../../particles';
+import { IBoxTheme, IColorGuide, IDimensionGuide } from '../../particles';
+import { mergeTheme, ThemeMap } from '../../util';
 import { IWebViewTheme } from './theme';
 
 export const buildWebViewThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IWebViewTheme>>): ThemeMap<IWebViewTheme> => {
@@ -19,4 +18,4 @@ export const buildWebViewThemes = (colors: IColorGuide, dimensions: IDimensionGu
     ...(base || {}),
     default: defaultWebViewTheme,
   };
-}
+};

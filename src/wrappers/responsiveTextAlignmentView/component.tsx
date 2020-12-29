@@ -1,16 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
-import { TextAlignment, IDimensionGuide } from '../../particles';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { IDimensionGuide, TextAlignment } from '../../particles';
 import { useDimensions } from '../../theming';
-import { ResponsiveField, CssConverter, fieldToResponsiveCss } from '../../util';
+import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
+import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 const getAlignmentCss: CssConverter<TextAlignment> = (field: TextAlignment): string => {
   return `text-align: ${field};`;
-}
+};
 
 interface IStyledResponsiveTextAlignmentViewProps extends IWrapperProps {
   theme: IDimensionGuide;
@@ -20,7 +21,7 @@ interface IStyledResponsiveTextAlignmentViewProps extends IWrapperProps {
 const StyledResponsiveTextAlignmentView = wrappingComponent((component: React.ComponentType<IStyledResponsiveTextAlignmentViewProps>): React.ComponentType<IStyledResponsiveTextAlignmentViewProps> => {
   return styled(component)<IStyledResponsiveTextAlignmentViewProps>`
     ${(props: IStyledResponsiveTextAlignmentViewProps): string => fieldToResponsiveCss(props.alignment, props.theme, getAlignmentCss)};
-  `
+  `;
 });
 
 export interface IResponsiveTextAlignmentViewProps extends IWrapperProps {
@@ -30,12 +31,12 @@ export interface IResponsiveTextAlignmentViewProps extends IWrapperProps {
 }
 
 export const ResponsiveTextAlignmentView = (props: IResponsiveTextAlignmentViewProps): React.ReactElement => {
-  const theme = props.theme || useDimensions();
+  const theme = useDimensions(props.theme);
   return (
     <StyledResponsiveTextAlignmentView
       className={getClassName(ResponsiveTextAlignmentView.displayName, props.className)}
       theme={theme}
-      alignment={{base: props.alignment, ...props.alignmentResponsive}}
+      alignment={{ base: props.alignment, ...props.alignmentResponsive }}
     >
       {props.children}
     </StyledResponsiveTextAlignmentView>

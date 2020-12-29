@@ -1,29 +1,29 @@
 import { merge, RecursivePartial } from '@kibalabs/core';
 
 import { ITheme } from '.';
-import { buildColors, buildAlternateColors } from '../particles/colors';
-import { buildDimensions } from '../particles/dimensions';
-import { buildFonts } from '../particles/fonts';
-import { buildTextThemes } from '../particles/text';
-import { buildBoxThemes } from '../particles/box';
-import { buildIconThemes } from '../particles/icon';
-import { buildImageThemes } from '../particles/image';
-import { buildLoadingSpinnerThemes } from '../particles/loadingSpinner';
-import { buildPortalThemes } from '../particles/portal';
-import { buildVideoThemes } from '../particles/video';
 import { buildBulletListThemes } from '../atoms/bulletList';
 import { buildBulletTextThemes } from '../atoms/bulletText';
 import { buildButtonThemes } from '../atoms/button';
 import { buildIconButtonThemes } from '../atoms/iconButton';
 import { buildInputWrapperThemes } from '../atoms/inputWrapper';
+import { buildLinePagerThemes } from '../atoms/linePager';
 import { buildLinkThemes } from '../atoms/link';
 import { buildLinkBaseThemes } from '../atoms/linkBase';
 import { buildPillThemes } from '../atoms/pill';
 import { buildPrettyTextThemes } from '../atoms/prettyText';
-import { buildWebViewThemes } from '../atoms/webView';
-import { buildLinePagerThemes } from '../atoms/linePager';
 import { buildProgressCounterItemThemes } from '../atoms/progressCounterItem';
 import { buildTabBarItemThemes } from '../atoms/tabBarItem';
+import { buildWebViewThemes } from '../atoms/webView';
+import { buildBoxThemes } from '../particles/box';
+import { buildAlternateColors, buildColors } from '../particles/colors';
+import { buildDimensions } from '../particles/dimensions';
+import { buildFonts } from '../particles/fonts';
+import { buildIconThemes } from '../particles/icon';
+import { buildImageThemes } from '../particles/image';
+import { buildLoadingSpinnerThemes } from '../particles/loadingSpinner';
+import { buildPortalThemes } from '../particles/portal';
+import { buildTextThemes } from '../particles/text';
+import { buildVideoThemes } from '../particles/video';
 
 export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const colors = buildColors(inputTheme?.colors);
@@ -55,10 +55,10 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
 
   return merge<ITheme>({
     // Base
-    colors: colors,
-    alternateColors: alternateColors,
-    dimensions: dimensions,
-    fonts: fonts,
+    colors,
+    alternateColors,
+    dimensions,
+    fonts,
 
     // Particles
     boxes: boxThemes,
@@ -85,6 +85,6 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     tabBarItems: tabBarItemThemes,
   }, inputTheme, {
     // NOTE(krish): this is here so the font replacement doesn't get overridden
-    fonts: fonts,
+    fonts,
   });
 };

@@ -1,10 +1,10 @@
 import { RecursivePartial } from '@kibalabs/core';
 
-import { mergeTheme, ThemeMap, mergeThemePartial } from '../../util';
+import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { IBoxTheme } from '../box';
 import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
 import { IIconTheme } from './theme';
-import { IBoxTheme } from '../box';
 
 export const buildIconThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IIconTheme>>): ThemeMap<IIconTheme> => {
   const defaultIconTheme = mergeTheme<IIconTheme>({
@@ -40,4 +40,4 @@ export const buildIconThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     extraExtraLarge: extraExtraLargeIconTheme,
     fill: fillIconTheme,
   };
-}
+};

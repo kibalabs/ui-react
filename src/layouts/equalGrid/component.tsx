@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiAnyChildProps } from '@kibalabs/core-react';
 
-import { Grid } from '../grid';
-import { IDimensionGuide } from '../../particles';
 import { Alignment } from '../../model';
+import { IDimensionGuide } from '../../particles';
 import { ResponsiveField } from '../../util';
+import { Grid } from '../grid';
 
 export interface IEqualGridProps extends IMultiAnyChildProps {
   id?: string;

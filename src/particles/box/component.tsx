@@ -1,9 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
 
-import { IComponentProps, defaultComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { IBoxTheme } from './theme';
 
 interface IStyledBoxProps {
@@ -24,7 +25,7 @@ const StyledBox = styled.div<IStyledBoxProps>`
   max-height: ${(props: IStyledBoxProps): string => props.maxHeight};
   max-width: ${(props: IStyledBoxProps): string => props.maxWidth};
   display: ${(props: IStyledBoxProps): string => props.blockType};
-  z-index: ${(props: IStyledBoxProps): string => props.zIndex ? `${props.zIndex}` : 'auto'};
+  z-index: ${(props: IStyledBoxProps): string => (props.zIndex ? `${props.zIndex}` : 'auto')};
   &.scrollableVertically {
     overflow-y: auto;
   }

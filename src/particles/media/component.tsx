@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IComponentProps, defaultComponentProps, ThemeType } from '../..';
+import { defaultComponentProps, IComponentProps, ThemeType } from '../..';
 import { IImageProps, Image } from '../image';
 import { Video } from '../video';
 
@@ -22,7 +22,7 @@ export const Media = (props: IMediaProps): React.ReactElement => {
   const isVideo = (): boolean => {
     const fileExtension = props.source.split('.').pop()?.toLowerCase() || '';
     return fileExtension === 'mp4' || fileExtension === 'webm' || fileExtension === 'ogg';
-  }
+  };
 
   return isVideo() ? (
     <Video shouldShowControls={false} shouldLoop={true} shouldMute={true} shouldAutoplay={true} {...props} />

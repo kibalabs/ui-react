@@ -1,12 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
 
-import { IMoleculeProps, defaultMoleculeProps } from '../moleculeProps';
-import { Box, IBoxTheme, LoadingSpinner, ILoadingSpinnerTheme } from '../../particles';
+import { Box, IBoxTheme, ILoadingSpinnerTheme, LoadingSpinner } from '../../particles';
 import { ThemeType } from '../../util';
-;
+import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 
 export interface IFormTheme extends ThemeType {

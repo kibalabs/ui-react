@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import { getClassName } from '@kibalabs/core';
 import { IMultiChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
 
-import { IComponentProps, defaultComponentProps, useBuiltTheme, themeToCss } from '../..';
-import { IBulletListTheme } from './theme';
+import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { IBulletTextProps } from '../bulletText';
+import { IBulletListTheme } from './theme';
 
 interface IStyledBulletListProps {
   theme: IBulletListTheme;

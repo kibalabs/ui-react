@@ -1,8 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledHidingViewProps extends IWrapperProps {
@@ -11,7 +12,7 @@ interface IStyledHidingViewProps extends IWrapperProps {
 
 const StyledHidingView = wrappingComponent((Component: React.ComponentType<IStyledHidingViewProps>): React.ComponentType<IStyledHidingViewProps> => {
   return styled(Component)<IStyledHidingViewProps>`
-    ${(props: IStyledHidingViewProps): string => props.isHidden ? `display: none !important;` : ''};
+    ${(props: IStyledHidingViewProps): string => (props.isHidden ? 'display: none !important;' : '')};
   `;
 });
 

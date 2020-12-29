@@ -1,7 +1,7 @@
 {
   "name": "@kibalabs/ui-react",
   "version": "0.8.0",
-  "description": "React UI components for building frontend projects at Kiba Labs",
+  "description": "React UI component library for building projects at Kiba Labs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -14,6 +14,8 @@
     "start": "build-react-component --start",
     "start-dev": "build-react-component --start --dev",
     "clean": "rm -rf ./node_modules ./package-lock.json ./dist",
+    "lint": "lint",
+    "lint-fix": "lint --fix",
     "type-check": "type-check",
     "publish-next": "kiba-publish --next",
     "storybook": "start-storybook --docs --port 6006",
@@ -33,7 +35,7 @@
     "react-markdown": "^5.0.3"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.6.3-next.9",
+    "@kibalabs/build": "0.6.3-next.12",
     "@storybook/addon-actions": "6.1.11",
     "@storybook/addon-docs": "6.1.11",
     "@storybook/addon-essentials": "6.1.11",

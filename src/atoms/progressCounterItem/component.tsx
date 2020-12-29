@@ -1,9 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { defaultComponentProps, IComponentProps } from '../../model';
 import { useBuiltTheme } from '../../theming';
-import { IComponentProps, defaultComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 import { IProgressCounterItemTheme } from './theme';
 
