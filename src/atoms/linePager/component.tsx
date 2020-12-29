@@ -37,15 +37,15 @@ const StyledLinePagerItem = styled.button<IStyledLinePagerProps>`
     ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.normal.focus?.background)};
   }
   &.active {
-    ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.active.default.background)};
+    ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.active?.default?.background)};
     &:hover {
-      ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.active.hover?.background)};
+      ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.active?.hover?.background)};
     }
     &:active {
-      ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.active.press?.background)};
+      ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.active?.press?.background)};
     }
     &:focus {
-      ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.active.focus?.background)};
+      ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.active?.focus?.background)};
     }
   }
 `;
@@ -67,6 +67,12 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
   const pageCountExtraLarge = props.pageCountResponsive?.extraLarge || pageCountLarge;
   const pageCounts = [pageCount, pageCountSmall, pageCountMedium, pageCountLarge, pageCountExtraLarge];
   const maxPageCount = Math.max(...(pageCounts.filter((pageCount?: number): boolean => pageCount !== undefined)));
+
+  const onPageClicked = (pageIndex: number): void => {
+    if (props.onPageClicked) {
+      props.onPageClicked(pageIndex);
+    }
+  }
 
   const getHiddenAboveSize = (index: number): ScreenSize | undefined => {
     if (index >= pageCountSmall) {
@@ -96,7 +102,7 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
               className={getClassName(index === props.activePageIndex && 'active')}
               theme={theme}
               aria-label={`Page ${index + 1}`}
-              onClick={props.onPageClicked ? ((): void => props.onPageClicked(index)) : undefined}
+              onClick={(): void => onPageClicked(index)}
             />
             {index < pageCount - 1 && <Spacing direction={Direction.Horizontal} />}
           </ResponsiveHidingView>

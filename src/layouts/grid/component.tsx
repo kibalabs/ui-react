@@ -12,7 +12,7 @@ import { ResponsiveField, getResponsiveCss } from '../../util';
 
 export interface IGridItemProps extends ISingleAnyChildProps {
   id?: string;
-  className: string;
+  className?: string;
   isFullHeight: boolean;
   size: number;
   sizeResponsive?: ResponsiveField<number>;
@@ -56,8 +56,8 @@ export interface IGridProps extends IMultiChildProps<IGridItemProps>, IPaddingVi
 
 export const Grid = (props: IGridProps): React.ReactElement => {
   const theme = props.theme || useDimensions();
-  const children = flattenChildren(props.children).map((child: React.ReactElement, index: number): React.ReactElement<IGridItemProps> => (
-    child.type !== GridItem ? <GridItem key={index}>{ child }</GridItem> : child
+  const children = flattenChildren(props.children).map((child: React.ReactChild, index: number): React.ReactElement<IGridItemProps> => (
+    typeof child === 'object' && 'type' in child && child.type === GridItem ? child : <GridItem key={index}>{ child }</GridItem>
   ));
   return (
     <PaddingView {...props as IPaddingViewPaddingProps}>

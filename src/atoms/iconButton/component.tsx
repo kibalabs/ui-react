@@ -72,6 +72,7 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
   const theme = useBuiltTheme('iconButtons', props.variant, props.theme);
   const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab === undefined && props.target && (props.target.startsWith('#') || props.target.startsWith('/')));
   return (
+    // @ts-ignore: as prop doesn't match type required
     <StyledIconButton
       id={props.id}
       className={getClassName(IconButton.displayName, !props.isEnabled && 'disabled', props.className)}
@@ -80,7 +81,7 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
       disabled={!props.isEnabled}
       aria-label={props.label}
       href={props.target}
-      as={props.target && 'a'}
+      as={props.target ? 'a' : undefined}
       rel={props.target && 'noopener'}
       target={props.target && (targetShouldOpenSameTab ? '_self' : '_blank')}
     >

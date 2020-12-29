@@ -4,7 +4,7 @@ import { mergeTheme, ThemeMap } from '../../util';
 import { IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
 import { IBulletTextTheme } from './theme';
 
-export const buildBulletTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, base: RecursivePartial<Record<string, IBulletTextTheme>>): ThemeMap<IBulletTextTheme> => {
+export const buildBulletTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, base?: RecursivePartial<Record<string, IBulletTextTheme>>): ThemeMap<IBulletTextTheme> => {
   const defaultBulletTextTheme = mergeTheme<IBulletTextTheme>({
     normal: {
       default: {
@@ -22,7 +22,7 @@ export const buildBulletTextThemes = (colors: IColorGuide, dimensions: IDimensio
   }, base?.default);
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultBulletTextTheme,
   };
 }

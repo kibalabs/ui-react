@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getClassName } from '@kibalabs/core';
-import { IMultiAnyChildProps, ISingleAnyChildProps, flattenChildren } from '@kibalabs/core-react';
+import { IMultiAnyChildProps, ISingleAnyChildProps, IOptionalSingleAnyChildProps, flattenChildren } from '@kibalabs/core-react';
 
 import { Direction, Alignment, getFlexItemAlignment, getFlexContentAlignment, IDimensionGuide, PaddingSize, Spacing } from '../..';
 import { PaddingView, IPaddingViewPaddingProps } from '../../wrappers/paddingView';
 import { useDimensions } from '../../theming';
 import { ResponsiveField, CssConverter, fieldToResponsiveCss } from '../../util';
+import { wrappingComponent } from '../../wrappers';
 
 // NOTE(krish): if the child of the stack.item declares 100% height (on vertical stack) it doesn't work on safari unless it has flex-basis: 0 (https://github.com/philipwalton/flexbugs/issues/197)
 // NOTE(krish): behavior of the above is also different on IE11, be careful!
@@ -23,8 +24,8 @@ const getDirectionCss: CssConverter<Direction> = (field: Direction): string => {
   return `flex-direction: ${field === Direction.Vertical ? 'column' : 'row'};`;
 }
 
-export interface IStackItemProps extends ISingleAnyChildProps {
-  className: string;
+export interface IStackItemProps extends IOptionalSingleAnyChildProps {
+  className?: string;
   growthFactor: number;
   shrinkFactor: number;
   baseSize: string;
@@ -71,7 +72,7 @@ const StyledStack = styled.div<IStyledStackProps>`
 
 interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   id?: string;
-  className: string;
+  className?: string;
   theme?: IDimensionGuide;
   shouldAddGutters: boolean;
   defaultGutter?: PaddingSize;
@@ -91,8 +92,8 @@ interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
 
 export const Stack = (props: IStackProps): React.ReactElement => {
   const theme = props.theme || useDimensions();
-  const children = flattenChildren(props.children).map((child: React.ReactElement, index: number): React.ReactElement<IStackItemProps> => (
-    child.type !== StackItem ? <StackItem key={index}>{ child }</StackItem> : child
+  const children = flattenChildren(props.children).map((child: React.ReactChild, index: number): React.ReactElement<IStackItemProps> => (
+    typeof child === 'object' && 'type' in child && child.type === StackItem ? child : <StackItem key={index}>{ child }</StackItem>
   ));
   const paddingTop = (props.paddingStart && props.direction == Direction.Vertical) ? props.paddingStart : undefined;
   const paddingBottom = (props.paddingEnd && props.direction == Direction.Vertical) ? props.paddingEnd : undefined;
@@ -152,30 +153,27 @@ Stack.defaultProps = {
 Stack.Item = StackItem;
 
 interface IStyledStackItemProps extends ISingleAnyChildProps {
-  className: string;
+  className?: string;
   growthFactor: number;
   shrinkFactor: number;
   baseSize: string;
   alignment?: Alignment;
 }
 
-const withStackItem = (Component: React.ComponentType<IStyledStackItemProps>): React.ComponentType => styled(Component)<IStyledStackItemProps>`
-  flex-basis: ${(props: IStyledStackItemProps): string => props.baseSize};
-  flex-grow: ${(props: IStyledStackItemProps): number => props.growthFactor};
-  flex-shrink: ${(props: IStyledStackItemProps): number => props.shrinkFactor};
-  min-width: ${(props: IStyledStackItemProps): string => props.shrinkFactor ? '0' : 'none'};
-  align-self: ${(props: IStyledStackItemProps): string => (props.alignment ? getFlexItemAlignment(props.alignment) : 'auto')};
-  /* Fix for https://github.com/philipwalton/flexbugs#flexbug-2 */
-  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-    /* IE 10+ */
-    max-width: 100%;
-  }
-  &.isHidden {
-    display: none;
-  }
-`;
-
-const StyledStackItem = withStackItem((props: IStyledStackItemProps): React.ReactElement | React.ReactElement[] => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
-  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })))
+const StyledStackItem = wrappingComponent((Component: React.ComponentType<IStyledStackItemProps>): React.ComponentType<IStyledStackItemProps> => {
+  return styled(Component)<IStyledStackItemProps>`
+    flex-basis: ${(props: IStyledStackItemProps): string => props.baseSize};
+    flex-grow: ${(props: IStyledStackItemProps): number => props.growthFactor};
+    flex-shrink: ${(props: IStyledStackItemProps): number => props.shrinkFactor};
+    min-width: ${(props: IStyledStackItemProps): string => props.shrinkFactor ? '0' : 'none'};
+    align-self: ${(props: IStyledStackItemProps): string => (props.alignment ? getFlexItemAlignment(props.alignment) : 'auto')};
+    /* Fix for https://github.com/philipwalton/flexbugs#flexbug-2 */
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      /* IE 10+ */
+      max-width: 100%;
+    }
+    &.isHidden {
+      display: none;
+    }
+  `;
 });

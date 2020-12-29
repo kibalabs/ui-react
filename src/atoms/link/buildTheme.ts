@@ -4,11 +4,11 @@ import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../particles';
 import { ILinkTheme } from './theme';
 
-export const buildLinkThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, ILinkTheme>>): ThemeMap<ILinkTheme> => {
+export const buildLinkThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ILinkTheme>>): ThemeMap<ILinkTheme> => {
   const defaultLinkTheme = mergeTheme<ILinkTheme>({
     normal: {
       default: {
-      text: mergeTheme(textThemes.inherit, {
+      text: mergeTheme(textThemes.default, textThemes.inherit, {
           'color': '$colors.brandPrimary',
           'text-decoration': 'underline',
         }),
@@ -38,7 +38,7 @@ export const buildLinkThemes = (colors: IColorGuide, dimensions: IDimensionGuide
   }, base?.default);
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultLinkTheme,
   };
 }

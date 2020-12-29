@@ -5,24 +5,22 @@ import { getClassName } from '@kibalabs/core';
 import { IWrapperProps, defaultWrapperProps } from '../wrapperProps';
 import { useDimensions } from '../../theming';
 import { IDimensionGuide } from '../../particles';
+import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledContainingViewProps extends IWrapperProps {
   theme: IDimensionGuide;
 }
 
-const withContainingView = (Component: React.ComponentType<IStyledContainingViewProps>): React.ComponentType => styled(Component)<IStyledContainingViewProps>`
-  max-width: ${(props: IStyledContainingViewProps): string => props.theme.screenWidthMax};
-  width: 100%;
-  overflow: auto;
-  &.centered {
-    margin-right: auto;
-    margin-left: auto;
-  }
-`;
-
-const StyledContainingView = withContainingView((props: IStyledContainingViewProps): React.ReactElement => {
-  const children = React.Children.count(props.children) > 0 ? props.children : [<div />];
-  return React.Children.map(children, ((child: React.ReactElement) => child && React.cloneElement(child, { className: getClassName(props.className, child.props.className) })))
+const StyledContainingView = wrappingComponent((Component: React.ComponentType<IStyledContainingViewProps>): React.ComponentType<IStyledContainingViewProps> => {
+  return styled(Component)<IStyledContainingViewProps>`
+    max-width: ${(props: IStyledContainingViewProps): string => props.theme.screenWidthMax};
+    width: 100%;
+    overflow: auto;
+    &.centered {
+      margin-right: auto;
+      margin-left: auto;
+    }
+  `;
 });
 
 export interface IContainingViewProps extends IWrapperProps {

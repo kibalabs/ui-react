@@ -30,17 +30,17 @@ const StyledSingleLineInput = styled.input`
   }
 `;
 
-const getAutocompleteType = (inputType: InputType): string | null => {
+const getAutocompleteType = (inputType: InputType): string | undefined => {
   if (inputType === InputType.Email) {
     return 'email';
   } else if (inputType === InputType.Url) {
     return 'url';
   }
-  return null;
+  return undefined;
 }
 
 export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTheme> {
-  value: string;
+  value: string | null;
   isEnabled: boolean;
   placeholderText?: string;
   messageText?: string;

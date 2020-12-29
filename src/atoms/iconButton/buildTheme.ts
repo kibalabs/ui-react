@@ -4,7 +4,7 @@ import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IColorGuide, IDimensionGuide, IBoxTheme, ITextTheme } from '../../particles';
 import { IIconButtonTheme } from './theme';
 
-export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IIconButtonTheme>>): ThemeMap<IIconButtonTheme> => {
+export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IIconButtonTheme>>): ThemeMap<IIconButtonTheme> => {
   const defaultIconButtonTheme = mergeTheme<IIconButtonTheme>({
     normal: {
       default: {
@@ -99,7 +99,7 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
   }, base?.secondary);
 
   return {
-    ...base,
+    ...(base || {}),
     default: defaultIconButtonTheme,
     primary: primaryIconButtonTheme,
     secondary: secondaryIconButtonTheme,

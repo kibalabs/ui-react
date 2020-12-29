@@ -29,7 +29,7 @@ export const buildDimensions = (base?: Partial<IDimensionGuide>): IDimensionGuid
   const screenWidthMax = base?.screenWidthMax || '1200px';
 
   return {
-    ...base,
+    ...(base || {}),
     fontSize: fontSize,
     borderRadius: borderRadius,
     borderWidth: borderWidth,

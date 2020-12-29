@@ -13,10 +13,12 @@ export interface IDimensionGuide extends ThemeType {
   paddingNarrow1: string;
   paddingNarrow2: string;
   paddingNarrow3: string;
+  paddingNarrow4: string;
   paddingWide: string;
   paddingWide1: string;
   paddingWide2: string;
   paddingWide3: string;
+  paddingWide4: string;
 
   columnCount: number;
   gutter: string;
