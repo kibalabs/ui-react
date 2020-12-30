@@ -21,7 +21,7 @@ interface IMarkdownTextProps {
 export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
   const shouldAllowNode = (node: MarkdownAST, index: number, parent: ReactMarkdown.NodeType): boolean => {
     if (node.type === 'paragraph') {
-      if (React.Children.count((parent as IMultiAnyChildProps)?.children) === 1) {
+      if (parent.children.length === 1) {
         return false;
       }
       if (node.children.length === 0) {
@@ -50,7 +50,6 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       // TODO(krish): what should this check? It cant run the below check cos would fail for markdown like: "**Hello** world"
       // const childrenKeys = React.Children.map(rendererProps.children, (child: React.ReactElement): string => String(child.key).split('-')[0]);
       // if (React.Children.count(rendererProps.children) > 1 && childrenKeys[0] !== 'text') {
-      //   console.log('rendererProps.children', rendererProps.children);
       //   throw new Error('MarkdownText only supports having one text child!')
       // }
       return (
@@ -98,7 +97,7 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       renderers={renderers}
       includeNodeIndex={true}
       escapeHtml={false}
-      source={props.source.replace(/\n/g, '<br/>')}
+      children={props.source.replace(/\n/g, '<br/>')}
     />
   );
 };

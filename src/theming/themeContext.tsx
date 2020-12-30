@@ -45,17 +45,15 @@ export const useBaseColors = (): IColorGuide => {
 export const useAlternateColors = (name?: string, override?: Partial<IColorGuide>): Partial<IColorGuide> => {
   const colors = useColors();
   const theme = useTheme();
+  var colorsToUse = theme.colors;
   if (name === undefined) {
-    return { ...colors, ...(override || {}) };
-  }
-  if (name === 'default') {
-    return { ...theme.colors, ...(override || {}) };
-  }
-  if (!(name in theme.alternateColors)) {
+    colorsToUse = colors;
+  } else if (name in theme.alternateColors) {
+    colorsToUse = theme.alternateColors[name];
+  } else {
     console.error(`Unrecognized color variant requested: ${name}`);
-    return { ...theme.colors, ...(override || {}) };
   }
-  return { ...theme.alternateColors[name], ...(override || {}) };
+  return { ...colorsToUse, ...(override || {}) };
 };
 
 export const ColorContext = React.createContext<Partial<IColorGuide> | null>(null);

@@ -18,7 +18,7 @@ interface IMarkdownProps {
 export const Markdown = (props: IMarkdownProps): React.ReactElement => {
   const shouldAllowNode = (node: MarkdownAST, index: number, parent: ReactMarkdown.NodeType): boolean => {
     if (node.type === 'paragraph') {
-      if (React.Children.count((parent as IMultiAnyChildProps)?.children) === 1) {
+      if (parent.children.length === 1) {
         return false;
       }
       if (node.children.length === 0) {
@@ -77,7 +77,7 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
       // @ts-ignore
       renderers={renderers}
       includeNodeIndex={true}
-      source={props.source}
+      children={props.source}
     />
   );
 };

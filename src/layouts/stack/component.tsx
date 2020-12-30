@@ -129,7 +129,7 @@ export const Stack = (props: IStackProps): React.ReactElement => {
               baseSize={child.props.baseSize}
               alignment={child.props.alignment}
             >
-              {child.props.children}
+              {React.Children.count(child.props.children) > 0 ? child.props.children : <div />}
             </StyledStackItem>
             {(child.props.gutterAfter || (shouldAddGutters && index < children.length - 1)) && (
               <Spacing className='stack-gutter' variant={child.props.gutterAfter || defaultGutter}/>
@@ -179,4 +179,4 @@ const StyledStackItem = wrappingComponent((Component: React.ComponentType<IStyle
       display: none;
     }
   `;
-});
+}, true);
