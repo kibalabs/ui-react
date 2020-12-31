@@ -6,16 +6,13 @@ import { flattenChildren } from '@kibalabs/core-react';
 import { IWrapperProps } from './wrapperProps';
 
 const styleCopier = <P extends IWrapperProps>(props: P): React.ReactElement => {
-  return (
-    <React.Fragment>
-      {flattenChildren(props.children).map((child: React.ReactChild): React.ReactChild => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child, { className: getClassName(props.className, child.props?.className) });
-        }
-        return child;
-      })}
-    </React.Fragment>
-  );
+  const children = flattenChildren(props.children).map((child: React.ReactChild): React.ReactChild => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, { className: getClassName(props.className, child.props?.className) });
+    }
+    return child;
+  });
+  return <React.Fragment>{ children }</React.Fragment>;
 };
 
 export const wrappingComponent = <P extends IWrapperProps>(wrapper: ((component: React.ComponentType<P>) => React.ComponentType<P>)): React.ComponentType<P> => {

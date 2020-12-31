@@ -5,17 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) with some additions:
 - For all changes include one of [PATCH | MINOR | MAJOR] with the scope of the change being made.
 
-## [Unreleased]
+## [Unreleased] - 2020-12-23
 
 ### Added
 - [PATCH] Change `WebView` to be lazyLoadable
 - [MINOR] Extract hard-coded aspect-ratio from `WebView` into `aspectRatio` prop
+- [PATCH] Added a `MarkdownText` example to storybook
 
 ### Changed
 
 ### Removed
 
-## [0.7.5] - 2020-12-23
+## [0.8.0] - 2020-12-23
 
 ### Added
 - [MINOR] Fix `Pill` export

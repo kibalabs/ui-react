@@ -3,9 +3,8 @@ module.exports = {
     '../src/**/*.stories.@(mdx|js|jsx|ts|tsx)',
   ],
   addons: [
-    '@storybook/addon-docs',
-    '@storybook/addon-links',
     '@storybook/addon-essentials',
+    '@storybook/addon-links',
   ],
   typescript: {
     check: false,

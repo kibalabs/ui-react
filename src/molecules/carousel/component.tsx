@@ -78,11 +78,12 @@ export interface ICarouselProps extends IMoleculeProps<ICarouselTheme>, IMultiAn
 
 // NOTE(krish): the slider could potentially be its own component here!
 export const Carousel = (props: ICarouselProps): React.ReactElement => {
+  const initialIndex = props.initialIndex || 0;
   const dimensions = useDimensions();
-  const [sliderRef] = useRenderedRef<HTMLDivElement>(() => undefined);
+  const [sliderRef] = useRenderedRef<HTMLDivElement>();
   const scrollTimeoutRef = React.useRef<number | null>(null);
   const children = flattenChildren(props.children);
-  const [slideIndex, setSlideIndex] = React.useState<number>(props.initialIndex || 0);
+  const [slideIndex, setSlideIndex] = React.useState<number>(initialIndex);
 
   const onPreviousClicked = (): void => {
     if (sliderRef.current && !sliderRef.current.scrollTo) {
@@ -116,12 +117,12 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     setTimeout((): void => {
       if (sliderRef.current && !sliderRef.current.scrollTo) {
         // ie 11 doesn't support scrollTo (this doesn't animate nicely)
-        sliderRef.current.scrollLeft = sliderRef.current.clientWidth * (props.initialIndex || 0);
+        sliderRef.current.scrollLeft = sliderRef.current.clientWidth * initialIndex;
       } else {
-        sliderRef.current?.scrollTo(sliderRef.current?.clientWidth * (props.initialIndex || 0), 0);
+        sliderRef.current?.scrollTo(sliderRef.current?.clientWidth * initialIndex, 0);
       }
     }, 50);
-  }, [props.initialIndex, sliderRef]);
+  }, [initialIndex, sliderRef]);
 
   const slidesPerPage = props.slidesPerPageResponsive?.base || props.slidesPerPage;
   const slidesPerPageSmall = props.slidesPerPageResponsive?.small || slidesPerPage;
@@ -134,7 +135,10 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
   };
 
   useScrollListener(sliderRef.current, (): void => {
-    const position = Math.ceil(sliderRef.current?.scrollLeft);
+    if (!sliderRef.current) {
+      return;
+    }
+    const position = Math.ceil(sliderRef.current.scrollLeft);
     // TODO(krish): this doesn't work in console because it refers to the global document, not the local (inside iframe) one
     const screenWidth = Math.ceil(document.body.clientWidth);
     let slideCount = slidesPerPage;
@@ -150,7 +154,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     if (screenWidth > getScreenSizeValue(ScreenSize.ExtraLarge, dimensions)) {
       slideCount = slidesPerPageExtraLarge;
     }
-    const width = Math.ceil(sliderRef.current?.scrollWidth);
+    const width = Math.ceil(sliderRef.current.scrollWidth);
     const progress = (children.length / slideCount) * (position / width);
     const progressRounded = Math.round(progress * 100.0) / 100;
     const newSlideIndex = Math.round(progress);
@@ -170,9 +174,10 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     if (props.onIndexChanged) {
       props.onIndexChanged(slideIndex);
     }
-  // NOTE(krishan711): not sure why this disable is needed. eslint complains it needs all of props??
+  // NOTE(krishan711): Don't put props.onIndexChanged as a prop because if it is changing every time, this effect will run every time and
+  // that will mean the initialIndex won't have an effect when changed because the setTimeout above will not have time to finish the transition
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.onIndexChanged, slideIndex]);
+  }, [slideIndex]);
 
   return (
     <Stack
