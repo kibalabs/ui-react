@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
-import { Content as MarkdownAST } from 'mdast';
+import { Content as MarkdownAST, Parent } from 'mdast';
 import ReactMarkdown from 'react-markdown';
 
 import { Box, Media, PrettyText, TextAlignment } from '..';
@@ -18,7 +18,7 @@ interface IMarkdownProps {
 export const Markdown = (props: IMarkdownProps): React.ReactElement => {
   const shouldAllowNode = (node: MarkdownAST, index: number, parent: ReactMarkdown.NodeType): boolean => {
     if (node.type === 'paragraph') {
-      if (parent.children.length === 1) {
+      if ((parent as unknown as Parent).children.length === 1) {
         return false;
       }
       if (node.children.length === 0) {
@@ -77,8 +77,9 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
       // @ts-ignore
       renderers={renderers}
       includeNodeIndex={true}
-      children={props.source}
-    />
+    >
+      {props.source}
+    </ReactMarkdown>
   );
 };
 

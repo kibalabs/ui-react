@@ -28,8 +28,8 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "dependencies": {
-    "@kibalabs/core": "^0.5.1",
-    "@kibalabs/core-react": "^0.5.3",
+    "@kibalabs/core": "^0.5.2",
+    "@kibalabs/core-react": "^0.5.4",
     "lazysizes": "^5.2.1",
     "polished": "^4.0.5",
     "react-markdown": "^5.0.3"

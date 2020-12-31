@@ -12,7 +12,7 @@ const styleCopier = <P extends IWrapperProps>(props: P): React.ReactElement => {
     }
     return child;
   });
-  return children;
+  return <React.Fragment>{ children }</React.Fragment>;
 };
 
 export const wrappingComponent = <P extends IWrapperProps>(wrapper: ((component: React.ComponentType<P>) => React.ComponentType<P>)): React.ComponentType<P> => {

@@ -179,4 +179,4 @@ const StyledStackItem = wrappingComponent((Component: React.ComponentType<IStyle
       display: none;
     }
   `;
-}, true);
+});
