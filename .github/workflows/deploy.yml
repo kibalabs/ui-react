@@ -2,7 +2,6 @@ name: Deploy
 on:
   push:
     branches: [ main ]
-    tags-ignore: [ 'v*' ]
 jobs:
   deploy-package-next:
     runs-on: ubuntu-latest
@@ -25,4 +24,5 @@ jobs:
     - name: Create .npmrc file
       run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
     - name: Publish next package to npm
+      if: steps.vars.outputs.commit_count != '0'
       run: docker run -v $(pwd)/.npmrc:/root/.npmrc package /bin/bash -c "npm run publish-next -- --next-version ${{ steps.vars.outputs.commit_count }}"
