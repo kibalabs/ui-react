@@ -24,7 +24,7 @@ export interface IBackgroundConfig extends IBackgroundLayer {
 }
 
 const getLayersCss = (backgroundLayers: IBackgroundLayer[], colors: IColorGuide): string => {
-  return backgroundLayers.reverse().map((backgroundLayer: IBackgroundLayer): string => getLayerCss(backgroundLayer, colors)).join(', ');
+  return backgroundLayers.slice().reverse().map((backgroundLayer: IBackgroundLayer): string => getLayerCss(backgroundLayer, colors)).join(', ');
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
