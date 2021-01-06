@@ -3,27 +3,27 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
-import { getPaddingSize, IDimensionGuide, PaddingSize } from '../../particles/dimensions';
+import { getPaddingSize, IDimensionGuide, PaddingSizeProp } from '../../particles/dimensions';
 import { useDimensions } from '../../theming';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 export interface IPaddingViewPaddingProps {
-  paddingTop?: PaddingSize;
-  paddingBottom?: PaddingSize;
-  paddingLeft?: PaddingSize;
-  paddingRight?: PaddingSize;
-  paddingHorizontal?: PaddingSize;
-  paddingVertical?: PaddingSize;
-  padding?: PaddingSize;
+  paddingTop?: PaddingSizeProp;
+  paddingBottom?: PaddingSizeProp;
+  paddingLeft?: PaddingSizeProp;
+  paddingRight?: PaddingSizeProp;
+  paddingHorizontal?: PaddingSizeProp;
+  paddingVertical?: PaddingSizeProp;
+  padding?: PaddingSizeProp;
 }
 
 interface IStyledPaddingViewProps extends IWrapperProps {
   theme: IDimensionGuide;
-  paddingTop?: PaddingSize;
-  paddingBottom?: PaddingSize;
-  paddingLeft?: PaddingSize;
-  paddingRight?: PaddingSize;
+  paddingTop?: PaddingSizeProp;
+  paddingBottom?: PaddingSizeProp;
+  paddingLeft?: PaddingSizeProp;
+  paddingRight?: PaddingSizeProp;
 }
 
 const StyledPaddingView = wrappingComponent((Component: React.ComponentType<IStyledPaddingViewProps>): React.ComponentType<IStyledPaddingViewProps> => {
