@@ -52,7 +52,7 @@ const StyledLinePagerItem = styled.button<IStyledLinePagerProps>`
 `;
 
 interface ILinePagerProps extends IComponentProps<ILinePagerTheme> {
-  pageCount: number;
+  pageCount?: number;
   pageCountResponsive?: ResponsiveField<number>;
   activePageIndex: number;
   onPageClicked?(index: number): void;
@@ -60,8 +60,11 @@ interface ILinePagerProps extends IComponentProps<ILinePagerTheme> {
 
 export const LinePager = (props: ILinePagerProps): React.ReactElement => {
   const theme = useBuiltTheme('linePagers', props.variant, props.theme);
+  if (props.pageCount == null && props.pageCountResponsive?.base == null) {
+    throw new Error(`One of {pageCount, pageCountResponsive.base} must be passed to ${LinePager.displayName}`);
+  }
 
-  const pageCount = props.pageCountResponsive?.base || props.pageCount;
+  const pageCount = props.pageCountResponsive?.base || props.pageCount || 12;
   const pageCountSmall = props.pageCountResponsive?.small || pageCount;
   const pageCountMedium = props.pageCountResponsive?.medium || pageCountSmall;
   const pageCountLarge = props.pageCountResponsive?.large || pageCountMedium;

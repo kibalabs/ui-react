@@ -46,7 +46,7 @@ export const useAlternateColors = (name?: string, override?: Partial<IColorGuide
   const colors = useColors();
   const theme = useTheme();
   let colorsToUse = theme.colors;
-  if (name === undefined) {
+  if (name == null) {
     colorsToUse = colors;
   } else if (name in theme.alternateColors) {
     colorsToUse = theme.alternateColors[name];

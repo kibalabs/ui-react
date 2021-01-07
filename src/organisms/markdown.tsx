@@ -47,7 +47,7 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
       );
     },
     image: (rendererProps: { src: string, alt: string }): React.ReactElement => {
-      return <Media isCenteredHorizontally={true} source={rendererProps.src} alternativeText={rendererProps.alt}/>;
+      return <Media isCenteredHorizontally={true} source={rendererProps.src} alternativeText={rendererProps.alt} />;
     },
     paragraph: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
       const childrenKeys = React.Children.map(rendererProps.children, (child: React.ReactNode): string | null => (

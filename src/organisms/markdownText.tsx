@@ -69,14 +69,14 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
         console.error(`Link in markdown has more than one child: ${rendererProps.children}`);
       }
       // @ts-ignore
-      return <Link target={rendererProps.href} text={String(rendererProps.children[0].props.children)}/>;
+      return <Link target={rendererProps.href} text={String(rendererProps.children[0].props.children)} />;
     },
     linkReference: (rendererProps: {href: string} & IMultiAnyChildProps): React.ReactElement => {
       if (React.Children.count(rendererProps.children) > 1) {
         console.error(`Link in markdown has more than one child: ${rendererProps.children}`);
       }
       // @ts-ignore
-      return <Link target={rendererProps.href} text={String(rendererProps.children[0].props.children)}/>;
+      return <Link target={rendererProps.href} text={String(rendererProps.children[0].props.children)} />;
     },
     emphasis: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
       return <em>{rendererProps.children}</em>;

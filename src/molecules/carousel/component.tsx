@@ -218,7 +218,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
         <IconButton
           theme={props.theme?.indexButtonTheme}
           variant={props.indexButtonVariant}
-          icon={<KibaIcon iconId='mui-chevron-right'/>}
+          icon={<KibaIcon iconId='mui-chevron-right' />}
           label={'Next'}
           onClicked={onNextClicked}
         />

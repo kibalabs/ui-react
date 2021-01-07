@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { IMultiChildProps } from '@kibalabs/core-react';
+import { IMultiChildProps, OptionalProppedElement } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 
@@ -57,7 +57,7 @@ export const TabBar = (props: ITabBarProps): React.ReactElement => {
       id={props.id}
       className={getClassName(TabBar.displayName, props.className, props.isFullWidth && 'fullWidth')}
     >
-      { React.Children.map(props.children, (child: React.ReactElement<ITabBarItemInnerProps> | undefined, index: number): React.ReactElement | null => {
+      { React.Children.map(props.children, (child: OptionalProppedElement<ITabBarItemInnerProps>, index: number): React.ReactElement | null => {
         if (!child) {
           return null;
         }
@@ -71,9 +71,9 @@ export const TabBar = (props: ITabBarProps): React.ReactElement => {
             tabKey={child.props.tabKey}
             text={child.props.text}
             isEnabled={child.props.isEnabled}
-            isCollapsible={child.props.isCollapsible !== undefined ? child.props.isCollapsible : props.isFullWidth}
-            isExpandable={child.props.isExpandable !== undefined ? child.props.isExpandable : props.isFullWidth}
-            isSelected={(props.selectedTabKey === undefined && index === 0) || props.selectedTabKey === child.props.tabKey}
+            isCollapsible={child.props.isCollapsible != null ? child.props.isCollapsible : props.isFullWidth}
+            isExpandable={child.props.isExpandable != null ? child.props.isExpandable : props.isFullWidth}
+            isSelected={(props.selectedTabKey == null && index === 0) || props.selectedTabKey === child.props.tabKey}
             onClicked={onTabClicked}
           />
         );

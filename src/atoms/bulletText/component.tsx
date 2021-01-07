@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { ISingleChildProps } from '@kibalabs/core-react';
+import { IOptionalSingleChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
@@ -20,9 +20,8 @@ const StyledBulletText = styled.li<IStyledBulletTextProps>`
   }
 `;
 
-export interface IBulletTextProps extends IComponentProps<IBulletTextTheme>, ISingleChildProps<IBulletListProps> {
+export interface IBulletTextProps extends IComponentProps<IBulletTextTheme>, IOptionalSingleChildProps<IBulletListProps> {
   text: string;
-  textVariant: string;
 }
 
 export const BulletText = (props: IBulletTextProps): React.ReactElement => {

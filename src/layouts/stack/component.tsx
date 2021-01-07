@@ -118,7 +118,7 @@ export const Stack = (props: IStackProps): React.ReactElement => {
         { children.map((child: React.ReactElement, index: number): React.ReactElement<IStackItemProps> => (
           <React.Fragment key={index}>
             {child.props.gutterBefore && (
-              <Spacing className='stack-gutter' variant={child.props.gutterBefore}/>
+              <Spacing className='stack-gutter' variant={child.props.gutterBefore} />
             )}
             <StyledStackItem
               className={getClassName(StyledStackItem.displayName, child.props.isHidden && 'isHidden')}
@@ -130,7 +130,7 @@ export const Stack = (props: IStackProps): React.ReactElement => {
               {React.Children.count(child.props.children) > 0 ? child.props.children : <div />}
             </StyledStackItem>
             {(child.props.gutterAfter || (shouldAddGutters && index < children.length - 1)) && (
-              <Spacing className='stack-gutter' variant={child.props.gutterAfter || defaultGutter}/>
+              <Spacing className='stack-gutter' variant={child.props.gutterAfter || defaultGutter} />
             )}
           </React.Fragment>
         ))}

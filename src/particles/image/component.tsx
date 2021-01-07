@@ -57,7 +57,7 @@ const StyledImage = styled.img<IStyledImageProps>`
 export interface IImageProps extends IComponentProps<IImageTheme> {
   source: string;
   alternativeText: string;
-  fitType: 'crop' | 'cover' | 'scale' | 'contain';
+  fitType?: 'crop' | 'cover' | 'scale' | 'contain';
   isFullWidth?: boolean;
   isFullHeight?: boolean;
   isCenteredHorizontally?: boolean;
@@ -66,6 +66,7 @@ export interface IImageProps extends IComponentProps<IImageTheme> {
 
 export const Image = (props: IImageProps): React.ReactElement => {
   const theme = useBuiltTheme('images', props.variant, props.theme);
+  const fitType = props.fitType || 'scale';
   return (
     <React.Fragment>
       <StyledImage
@@ -75,7 +76,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
         src={props.isLazyLoadable ? undefined : props.source}
         data-src={props.isLazyLoadable ? props.source : undefined}
         alt={props.alternativeText}
-        fitType={props.fitType}
+        fitType={fitType}
         isFullWidth={Boolean(props.isFullWidth)}
         isFullHeight={Boolean(props.isFullHeight)}
       />
@@ -87,7 +88,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
             theme={theme}
             src={props.source}
             alt={props.alternativeText}
-            fitType={props.fitType}
+            fitType={fitType}
             isFullWidth={Boolean(props.isFullWidth)}
             isFullHeight={Boolean(props.isFullHeight)}
           />
@@ -100,5 +101,4 @@ export const Image = (props: IImageProps): React.ReactElement => {
 Image.displayName = 'Image';
 Image.defaultProps = {
   ...defaultComponentProps,
-  fitType: 'scale',
 };

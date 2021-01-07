@@ -16,11 +16,14 @@ export interface IEqualGridProps extends IMultiAnyChildProps {
   shouldAddGutters?: boolean;
   childAlignment?: Alignment;
   contentAlignment?: Alignment;
-  childSize: number;
+  childSize?: number;
   childSizeResponsive?: ResponsiveField<number>;
 }
 
 export const EqualGrid = (props: IEqualGridProps): React.ReactElement => {
+  if (props.childSize == null && props.childSizeResponsive?.base == null) {
+    throw new Error(`One of {childSize, childSizeResponsive.base} must be passed to ${EqualGrid.displayName}`);
+  }
   return (
     <Grid {...props} className={getClassName(EqualGrid.displayName, props.className)}>
       {flattenChildren(props.children).map((child: React.ReactChild, index: number): React.ReactElement => (

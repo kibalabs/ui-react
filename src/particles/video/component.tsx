@@ -55,7 +55,7 @@ const StyledVideo = styled.video<IStyledVideoProps>`
 export interface IVideoProps extends IComponentProps<IVideoTheme> {
   source: string;
   alternativeText: string;
-  fitType: 'crop' | 'cover' | 'scale' | 'contain';
+  fitType?: 'crop' | 'cover' | 'scale' | 'contain';
   isFullWidth?: boolean;
   isFullHeight?: boolean;
   isCenteredHorizontally?: boolean;
@@ -68,6 +68,8 @@ export interface IVideoProps extends IComponentProps<IVideoTheme> {
 
 export const Video = (props: IVideoProps): React.ReactElement => {
   const theme = useBuiltTheme('videos', props.variant, props.theme);
+  const fitType = props.fitType || 'scale';
+  const shouldShowControls = props.shouldShowControls != null ? props.shouldShowControls : true;
   return (
     <StyledVideo
       id={props.id}
@@ -76,9 +78,9 @@ export const Video = (props: IVideoProps): React.ReactElement => {
       autoPlay={Boolean(props.shouldAutoplay)}
       muted={Boolean(props.shouldMute)}
       playsInline={true}
-      controls={Boolean(props.shouldShowControls)}
+      controls={shouldShowControls}
       loop={Boolean(props.shouldLoop)}
-      fitType={props.fitType}
+      fitType={fitType}
       isFullWidth={Boolean(props.isFullWidth)}
       isFullHeight={Boolean(props.isFullHeight)}
     >
@@ -101,6 +103,5 @@ export const Video = (props: IVideoProps): React.ReactElement => {
 Video.displayName = 'Video';
 Video.defaultProps = {
   ...defaultComponentProps,
-  fitType: 'scale',
   shouldShowControls: true,
 };

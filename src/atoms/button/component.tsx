@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
+import { OptionalProppedElement } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
@@ -69,8 +70,8 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   isEnabled: boolean;
   isLoading: boolean;
   isFullWidth: boolean;
-  iconRight?: React.ComponentClass<IIconProps>;
-  iconLeft?: React.ComponentClass<IIconProps>;
+  iconRight?: OptionalProppedElement<IIconProps>;
+  iconLeft?: OptionalProppedElement<IIconProps>;
   iconGutter?: PaddingSize;
   target?: string;
   targetShouldOpenSameTab?: boolean;
@@ -92,7 +93,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
   }
 
   const theme = useBuiltTheme('buttons', props.variant, props.theme);
-  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab === undefined && props.target && (props.target.startsWith('#') || props.target.startsWith('/')));
+  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab == null && props.target && (props.target.startsWith('#') || props.target.startsWith('/')));
   return (
     // @ts-ignore: as prop doesn't match type required
     <StyledButton

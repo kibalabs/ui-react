@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { flattenChildren, IMultiChildProps, ISingleAnyChildProps } from '@kibalabs/core-react';
+import { flattenChildren, IMultiChildProps, IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { Alignment, getFlexContentAlignment, getFlexItemAlignment } from '../../model';
@@ -11,7 +11,7 @@ import { getResponsiveCss, ResponsiveField } from '../../util';
 import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
 
 
-export interface IGridItemProps extends ISingleAnyChildProps {
+export interface IGridItemProps extends IOptionalSingleAnyChildProps {
   id?: string;
   className?: string;
   isFullHeight: boolean;
