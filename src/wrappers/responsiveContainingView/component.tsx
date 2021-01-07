@@ -66,8 +66,11 @@ export interface IResponsiveContainingViewProps extends IWrapperProps {
 
 export const ResponsiveContainingView = (props: IResponsiveContainingViewProps): React.ReactElement => {
   const theme = useDimensions(props.theme);
-  const isFullWidth = props.isFullWidth === true || props.isFullWidth === undefined;
-  const shouldIncludeMaxSize = props.shouldIncludeMaxSize === true || props.shouldIncludeMaxSize === undefined;
+  const isFullWidth = props.isFullWidth === true || props.isFullWidth == null;
+  const shouldIncludeMaxSize = props.shouldIncludeMaxSize === true || props.shouldIncludeMaxSize == null;
+  if (props.size == null && props.sizeResponsive?.base == null) {
+    throw new Error(`One of {size, sizeResponsive.base} must be passed to ${ResponsiveContainingView.displayName}`);
+  }
   return (
     <StyledResponsiveContainingView
       className={getClassName(ResponsiveContainingView.displayName, props.className)}

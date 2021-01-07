@@ -55,9 +55,9 @@ const StyledIframe = styled.iframe<IStyledIframeProps>`
 
 export interface IWebViewProps extends IComponentProps<IWebViewTheme> {
   url: string;
-  errorView: React.FunctionComponent;
   permissions: string[];
   shouldShowLoadingSpinner: boolean;
+  errorView?: React.FunctionComponent;
   title?: string;
   isLazyLoadable?: boolean;
   aspectRatio?: number;
@@ -68,8 +68,11 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
   const [currentUrl, setCurrentUrl] = React.useState<string | undefined>(props.url);
   const [hasFailedToLoad, setHasFailedToLoad] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const isInitialized = useInitialization((): void => {});
+  const isInitialized = useInitialization((): void => undefined);
+  // TODO(krishan711): make a better default error view
+  const errorView = props.errorView || (
+    <div>Something went wrong</div>
+  );
   const theme = useBuiltTheme('webViews', props.variant, props.theme);
 
   React.useEffect((): void => {
@@ -119,28 +122,26 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
         />
       </noscript>
       {isInitialized && (
-        hasFailedToLoad
-          ? props.errorView
-          : (
-            <React.Fragment>
-              { isLoading && props.shouldShowLoadingSpinner && (
-                <LoadingWrapper id={props.id && `${props.id}-loading-wrapper`}>
-                  <LoadingSpinner id={props.id && `${props.id}-loading-spinner`} className={'web-view-loading-spinner'} />
-                </LoadingWrapper>
-              )}
-              <StyledIframe
-                id={props.id && `${props.id}-iframe`}
-                className={getClassName('web-view-iframe', props.isLazyLoadable ? 'lazyload' : 'unlazy', isLoading && 'isLoading')}
-                title={props.title}
-                key={currentUrl}
-                src={props.isLazyLoadable ? undefined : currentUrl}
-                data-src={props.isLazyLoadable ? currentUrl : undefined}
-                onLoad={handleOnLoad}
-                onError={handleOnError}
-                allow={props.permissions.join(';')}
-              />
-            </React.Fragment>
-          )
+        hasFailedToLoad ? errorView : (
+          <React.Fragment>
+            { isLoading && props.shouldShowLoadingSpinner && (
+              <LoadingWrapper id={props.id && `${props.id}-loading-wrapper`}>
+                <LoadingSpinner id={props.id && `${props.id}-loading-spinner`} className={'web-view-loading-spinner'} />
+              </LoadingWrapper>
+            )}
+            <StyledIframe
+              id={props.id && `${props.id}-iframe`}
+              className={getClassName('web-view-iframe', props.isLazyLoadable ? 'lazyload' : 'unlazy', isLoading && 'isLoading')}
+              title={props.title}
+              key={currentUrl}
+              src={props.isLazyLoadable ? undefined : currentUrl}
+              data-src={props.isLazyLoadable ? currentUrl : undefined}
+              onLoad={handleOnLoad}
+              onError={handleOnError}
+              allow={props.permissions.join(';')}
+            />
+          </React.Fragment>
+        )
       )}
     </StyledWebView>
   );

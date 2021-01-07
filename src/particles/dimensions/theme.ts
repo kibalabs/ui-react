@@ -72,7 +72,9 @@ export enum PaddingSize {
   Wide4 = 'Wide4',
 }
 
-export const getPaddingSize = (size: PaddingSize, theme: IDimensionGuide): string => {
+export type PaddingSizeProp = PaddingSize | string;
+
+export const getPaddingSize = (size: PaddingSizeProp, theme: IDimensionGuide): string => {
   if (size === PaddingSize.None) {
     return '0px';
   }

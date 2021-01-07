@@ -11,7 +11,7 @@ export interface IMediaTheme extends ThemeType {
 export interface IMediaProps extends IComponentProps<IMediaTheme> {
   source: string;
   alternativeText: string;
-  fitType: 'crop' | 'cover' | 'scale' | 'contain';
+  fitType?: 'crop' | 'cover' | 'scale' | 'contain';
   isFullWidth?: boolean;
   isFullHeight?: boolean;
   isCenteredHorizontally?: boolean;
@@ -34,5 +34,4 @@ export const Media = (props: IMediaProps): React.ReactElement => {
 Media.displayName = 'Media';
 Media.defaultProps = {
   ...defaultComponentProps,
-  fitType: 'scale',
 };

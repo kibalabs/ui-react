@@ -71,7 +71,7 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
   };
 
   const theme = useBuiltTheme('iconButtons', props.variant, props.theme);
-  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab === undefined && props.target && (props.target.startsWith('#') || props.target.startsWith('/')));
+  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab == null && props.target && (props.target.startsWith('#') || props.target.startsWith('/')));
   return (
     // @ts-ignore: as prop doesn't match type required
     <StyledIconButton

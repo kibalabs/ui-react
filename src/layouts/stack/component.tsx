@@ -4,13 +4,11 @@ import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiAnyChildProps, IOptionalSingleAnyChildProps, ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
-
-import { Alignment, Direction, getFlexContentAlignment, getFlexItemAlignment, IDimensionGuide, PaddingSize, Spacing } from '../..';
+import { Alignment, Direction, getFlexContentAlignment, getFlexItemAlignment, IDimensionGuide, PaddingSize, PaddingSizeProp, Spacing } from '../..';
 import { useDimensions } from '../../theming';
 import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
-import { wrappingComponent } from '../../wrappers';
 import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
-
+import { wrappingComponent } from '../../wrappers/wrappingComponent';
 
 // NOTE(krish): if the child of the stack.item declares 100% height (on vertical stack) it doesn't work on safari unless it has flex-basis: 0 (https://github.com/philipwalton/flexbugs/issues/197)
 // NOTE(krish): behavior of the above is also different on IE11, be careful!
@@ -34,8 +32,8 @@ export interface IStackItemProps extends IOptionalSingleAnyChildProps {
   baseSize: string;
   isHidden: boolean;
   alignment?: Alignment;
-  gutterBefore?: PaddingSize,
-  gutterAfter?: PaddingSize,
+  gutterBefore?: PaddingSizeProp,
+  gutterAfter?: PaddingSizeProp,
 }
 
 class StackItem extends React.Component<IStackItemProps> {
@@ -78,13 +76,13 @@ interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   className?: string;
   theme?: IDimensionGuide;
   shouldAddGutters: boolean;
-  defaultGutter?: PaddingSize;
+  defaultGutter?: PaddingSizeProp;
   isScrollableVertically: boolean;
   isScrollableHorizontally: boolean;
   isFullWidth: boolean;
   isFullHeight: boolean;
-  paddingStart?: PaddingSize,
-  paddingEnd?: PaddingSize,
+  paddingStart?: PaddingSizeProp,
+  paddingEnd?: PaddingSizeProp,
   direction: Direction;
   directionResponsive?: ResponsiveField<Direction>;
   childAlignment: Alignment;
@@ -120,7 +118,7 @@ export const Stack = (props: IStackProps): React.ReactElement => {
         { children.map((child: React.ReactElement, index: number): React.ReactElement<IStackItemProps> => (
           <React.Fragment key={index}>
             {child.props.gutterBefore && (
-              <Spacing className='stack-gutter' variant={child.props.gutterBefore}/>
+              <Spacing className='stack-gutter' variant={child.props.gutterBefore} />
             )}
             <StyledStackItem
               className={getClassName(StyledStackItem.displayName, child.props.isHidden && 'isHidden')}
@@ -132,7 +130,7 @@ export const Stack = (props: IStackProps): React.ReactElement => {
               {React.Children.count(child.props.children) > 0 ? child.props.children : <div />}
             </StyledStackItem>
             {(child.props.gutterAfter || (shouldAddGutters && index < children.length - 1)) && (
-              <Spacing className='stack-gutter' variant={child.props.gutterAfter || defaultGutter}/>
+              <Spacing className='stack-gutter' variant={child.props.gutterAfter || defaultGutter} />
             )}
           </React.Fragment>
         ))}
