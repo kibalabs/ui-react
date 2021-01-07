@@ -10,7 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
-- [PATCH] Fix background view to not reverse layers in place
+- [PATCH] Fix `BackgroundView` to not reverse layers in place
+- [MINOR] Fix typing for `Grid.Item` and `Stack.Item` children
+- [MINOR] Fix typing for `Button`'s `leftIcon` and `rightIcon` props
+- [PATCH] Add a default `errorView` to `WebView`
+- [PATCH] Added `PaddingSizeProp` (which accepts any string) and use everywhere as a prop instead of `PaddingSize`
 
 ### Removed
 
