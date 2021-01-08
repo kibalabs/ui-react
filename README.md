@@ -198,7 +198,7 @@ Hopefully this starts to give you a sense of how powerful the separation of them
 1. Ensure you have installed `node` and `npm`
 2. Run `npm install` to install dependencies
 3. Run `npm run start-dev`. This will start ui-react for local development with live reloading and give you instructions for using it locally in other packages.
-4. Run `npm run storybook`. This will start the storybook app at port 5000 on your local machine.
+4. Run `npm run docs`. This will start the documentation app (storybook.js) at port 6006 on your local machine.
 
 ## Support
 

@@ -19,13 +19,13 @@ jobs:
       run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
     - name: Publish package to npm
       run: docker run -v $(pwd)/.npmrc:/root/.npmrc package npm publish
-  deploy-storybook:
+  deploy-docs:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: .
     env:
-      DOCKER_IMAGE: ghcr.io/${{ github.repository }}-storybook
+      DOCKER_IMAGE: ghcr.io/${{ github.repository }}-docs
       DOCKER_TAG: latest
     steps:
     - name: Check out the repo
@@ -33,11 +33,11 @@ jobs:
     - name: Login to GitHub container registry
       run: echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
     - name: Build docker image
-      run: docker build --file ./storybook.Dockerfile --tag $DOCKER_IMAGE:$DOCKER_TAG .
+      run: docker build --file ./docs.Dockerfile --tag $DOCKER_IMAGE:$DOCKER_TAG .
     - name: Push to container registry
       run: docker push $DOCKER_IMAGE:$DOCKER_TAG
-  run-storybook:
-    needs: deploy-storybook
+  run-docs:
+    needs: deploy-docs
     runs-on: ubuntu-latest
     env:
       RUNNABLE_DIRECTORY: deployments/${{ github.repository }}/${{ github.sha }}
