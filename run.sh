@@ -3,7 +3,7 @@ set -e -o pipefail
 
 name="ui-react-app"
 url="ui-react-docs.kibalabs.com"
-dockerImageName="docker.pkg.github.com/kibalabs/ui-react/ui-react-storybook"
+dockerImageName="ghcr.io/kibalabs/ui-react-storybook"
 dockerTag="latest"
 dockerImage="${dockerImageName}:${dockerTag}"
 version="$(git rev-list --count HEAD)"

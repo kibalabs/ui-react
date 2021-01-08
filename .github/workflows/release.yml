@@ -25,16 +25,16 @@ jobs:
       run:
         working-directory: .
     env:
-      DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/ui-react-storybook
+      DOCKER_IMAGE: ghcr.io/${{ github.repository }}-storybook
       DOCKER_TAG: latest
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
-    - name: Login to GitHub Packages Docker Registry
-      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
+    - name: Login to GitHub container registry
+      run: echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
     - name: Build docker image
       run: docker build --file ./storybook.Dockerfile --tag $DOCKER_IMAGE:$DOCKER_TAG .
-    - name: Push to GitHub Packages
+    - name: Push to container registry
       run: docker push $DOCKER_IMAGE:$DOCKER_TAG
   run-storybook:
     needs: deploy-storybook
