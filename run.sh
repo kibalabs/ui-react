@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -e -o pipefail
 
-name="ui-react-app"
+name="ui-react-docs"
 url="ui-react-docs.kibalabs.com"
-dockerImageName="docker.pkg.github.com/kibalabs/ui-react/ui-react-storybook"
+dockerImageName="ghcr.io/kibalabs/ui-react-docs"
 dockerTag="latest"
 dockerImage="${dockerImageName}:${dockerTag}"
 version="$(git rev-list --count HEAD)"

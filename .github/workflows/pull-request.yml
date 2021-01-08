@@ -3,16 +3,18 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  build-storybook:
+  build-docs:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: .
+    env:
+      DOCKER_IMAGE: ui-react-docs
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
     - name: Build docker image
-      run: docker build --tag ui-react-docs --file ./storybook.Dockerfile .
+      run: docker build --tag $DOCKER_IMAGE --file ./docs.Dockerfile .
   build-package:
     runs-on: ubuntu-latest
     defaults:
