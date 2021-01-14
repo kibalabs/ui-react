@@ -1,7 +1,7 @@
 import { IBulletListTheme } from '../atoms/bulletList';
 import { IBulletTextTheme } from '../atoms/bulletText';
 import { IButtonTheme } from '../atoms/button';
-import { ICollapsibleBoxTheme } from '../atoms/collapsibleBox';
+import { ITitledCollapsibleBoxTheme } from '../atoms/titledCollapsibleBox';
 import { IIconButtonTheme } from '../atoms/iconButton';
 import { IInputWrapperTheme } from '../atoms/inputWrapper';
 import { ILinePagerTheme } from '../atoms/linePager';
@@ -54,5 +54,5 @@ export interface ITheme extends ThemeType {
   linePagers: ThemeMap<ILinePagerTheme>,
   progressCounterItems: ThemeMap<IProgressCounterItemTheme>,
   tabBarItems: ThemeMap<ITabBarItemTheme>,
-  collapsibleBoxes: ThemeMap<ICollapsibleBoxTheme>,
+  titledCollapsibleBoxes: ThemeMap<ITitledCollapsibleBoxTheme>,
 }

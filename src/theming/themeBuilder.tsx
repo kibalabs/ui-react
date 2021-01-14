@@ -4,7 +4,7 @@ import { ITheme } from '.';
 import { buildBulletListThemes } from '../atoms/bulletList';
 import { buildBulletTextThemes } from '../atoms/bulletText';
 import { buildButtonThemes } from '../atoms/button';
-import { buildCollapsibleBoxThemes } from '../atoms/collapsibleBox';
+import { buildTitledCollapsibleBoxThemes } from '../atoms/titledCollapsibleBox';
 import { buildIconButtonThemes } from '../atoms/iconButton';
 import { buildInputWrapperThemes } from '../atoms/inputWrapper';
 import { buildLinePagerThemes } from '../atoms/linePager';
@@ -53,7 +53,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const linePagerThemes = buildLinePagerThemes(colors, dimensions, boxThemes, inputTheme?.linePagers);
   const progressCounterItemThemes = buildProgressCounterItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.progressCounterItems);
   const tabBarItemThemes = buildTabBarItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.tabBarItems);
-  const collapsibleBoxThemes = buildCollapsibleBoxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.collapsibleBoxes);
+  const titledCollapsibleBoxThemes = buildTitledCollapsibleBoxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.titledCollapsibleBoxes);
 
   return merge<ITheme>({
     // Base
@@ -85,7 +85,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     linePagers: linePagerThemes,
     progressCounterItems: progressCounterItemThemes,
     tabBarItems: tabBarItemThemes,
-    collapsibleBoxes: collapsibleBoxThemes,
+    titledCollapsibleBoxes: titledCollapsibleBoxThemes,
   }, inputTheme, {
     // NOTE(krish): this is here so the font replacement doesn't get overridden
     fonts,
