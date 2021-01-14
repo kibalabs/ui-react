@@ -8,8 +8,6 @@ export interface ICollapsibleBoxThemeBase extends ThemeType {
   background: IBoxTheme;
   headerBackground: IBoxTheme;
   contentBackground: IBoxTheme;
-  dividerColor: string;
-  dividerSize: string;
 }
 
 export interface ICollapsibleBoxThemeState extends ThemeType {

@@ -22,8 +22,6 @@ export const buildCollapsibleBoxThemes = (colors: IColorGuide, dimensions: IDime
         contentBackground: mergeTheme(boxThemes.default, boxThemes.transparent, {
           'padding': `${dimensions.padding} ${dimensions.paddingWide}`,
         }),
-        dividerColor: '$colors.backgroundDark10',
-        dividerSize: dimensions.borderWidthNarrow,
       },
       hover: {
         background: {
