@@ -1,0 +1,34 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { CollapsibleBox, ICollapsibleBoxProps } from '.';
+
+<Meta
+  component={CollapsibleBox}
+  title={'Atoms/CollapsibleBox'}
+/>
+
+# CollapsibleBox
+
+<br/>
+
+export const Template = (args) => (
+  <CollapsibleBox {...args}>
+    <span> This is the content inside the box </span>
+  </CollapsibleBox>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{title: 'Here is a CollapsibleBox'}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+TODO
+
+### Theming
+
+TODO

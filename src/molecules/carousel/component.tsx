@@ -139,8 +139,11 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
       return;
     }
     const position = Math.ceil(sliderRef.current.scrollLeft);
-    // TODO(krish): this doesn't work in console because it refers to the global document, not the local (inside iframe) one
+    console.log('useScrollListener position', position);
+    // TODO(krish): this doesn't work in everypage console because it refers to the global document, not the local (inside iframe) one
     const screenWidth = Math.ceil(document.body.clientWidth);
+    console.log('useScrollListener screenWidth', screenWidth);
+    console.log('useScrollListener window.innerWidth', window.innerWidth);
     let slideCount = slidesPerPage;
     if (screenWidth > getScreenSizeValue(ScreenSize.Small, dimensions)) {
       slideCount = slidesPerPageSmall;
@@ -154,10 +157,12 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     if (screenWidth > getScreenSizeValue(ScreenSize.ExtraLarge, dimensions)) {
       slideCount = slidesPerPageExtraLarge;
     }
+    console.log('useScrollListener slideCount', slideCount);
     const width = Math.ceil(sliderRef.current.scrollWidth);
     const progress = (children.length / slideCount) * (position / width);
     const progressRounded = Math.round(progress * 100.0) / 100;
     const newSlideIndex = Math.round(progress);
+    console.log('useScrollListener newSlideIndex', newSlideIndex);
     if (props.onIndexProgressed) {
       props.onIndexProgressed(progressRounded);
     }
