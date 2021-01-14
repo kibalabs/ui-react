@@ -45,13 +45,14 @@ export interface ILinkProps extends IComponentProps<ILinkTheme> {
 
 export const Link = (props: ILinkProps): React.ReactElement => {
   const theme = useBuiltTheme('links', props.variant, props.theme);
+  const shouldOpenSameTab = props.shouldOpenSameTab || (props.shouldOpenSameTab === undefined && props.target && (props.target.startsWith('#') || props.target.startsWith('/')));
   return (
     <StyledLink
       id={props.id}
       className={getClassName(Link.displayName, props.className, !props.isEnabled && 'disabled')}
       theme={theme}
       href={props.isEnabled ? props.target : undefined}
-      target={props.shouldOpenSameTab ? '_self' : '_blank'}
+      target={shouldOpenSameTab ? '_self' : '_blank'}
       rel={'noopener'}
     >
       {props.text}

@@ -71,7 +71,7 @@ export const buildAlternateColors = (colors: IColorGuide, base?: RecursivePartia
 };
 
 const expandColors = (colors: IColorGuide, base?: IColorGuide): IColorGuide => {
-  const values = [0.05, 0.10, 0.20, 0.25, 0.50, 0.75, 0.80, 0.90, 0.95];
+  const values = [0.01, 0.05, 0.10, 0.20, 0.25, 0.50, 0.75, 0.80, 0.90, 0.95];
   const expandedColors = Object.keys(colors).reduce((extendedColors: Partial<IColorGuide>, colorKey: string): Partial<IColorGuide> => {
     if (/\d+/.test(colorKey.slice(colorKey.length - 1))) {
       // Don't expand any colors that end in a number

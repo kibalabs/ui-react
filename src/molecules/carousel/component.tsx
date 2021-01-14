@@ -139,7 +139,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
       return;
     }
     const position = Math.ceil(sliderRef.current.scrollLeft);
-    // TODO(krish): this doesn't work in console because it refers to the global document, not the local (inside iframe) one
+    // TODO(krish): this doesn't work in everypage console because it refers to the global document, not the local (inside iframe) one
     const screenWidth = Math.ceil(document.body.clientWidth);
     let slideCount = slidesPerPage;
     if (screenWidth > getScreenSizeValue(ScreenSize.Small, dimensions)) {
