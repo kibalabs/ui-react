@@ -9,10 +9,11 @@ import { ITitledCollapsibleBoxTheme } from './theme';
 
 interface IStatefulTitledCollapsibleBoxProps extends IComponentProps<ITitledCollapsibleBoxTheme>, ISingleAnyChildProps {
   title: string;
+  isCollapsedInitially?: boolean;
 }
 
 export const StatefulTitledCollapsibleBox = (props: IStatefulTitledCollapsibleBoxProps): React.ReactElement => {
-  const [isCollapsed, setIsCollapsed] = React.useState(false);
+  const [isCollapsed, setIsCollapsed] = React.useState(!!props.isCollapsedInitially);
   const onCollapseToggled = (): void => {
     setIsCollapsed(!isCollapsed);
   };

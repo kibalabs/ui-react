@@ -36,6 +36,14 @@ export const Template = (args) => (
 </Canvas>
 
 
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Stateful Collapsed'>
+    <StatefulTitledCollapsibleBox title='Stateful TitledCollapsibleBox (collapsed initially)' isCollapsedInitially={true}>
+      <span> This is the content inside the box </span>
+    </StatefulTitledCollapsibleBox>
+  </Story>
+</Canvas>
+
 ### Theming
 
 TODO
