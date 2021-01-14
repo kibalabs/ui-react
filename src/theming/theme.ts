@@ -1,7 +1,6 @@
 import { IBulletListTheme } from '../atoms/bulletList';
 import { IBulletTextTheme } from '../atoms/bulletText';
 import { IButtonTheme } from '../atoms/button';
-import { ITitledCollapsibleBoxTheme } from '../atoms/titledCollapsibleBox';
 import { IIconButtonTheme } from '../atoms/iconButton';
 import { IInputWrapperTheme } from '../atoms/inputWrapper';
 import { ILinePagerTheme } from '../atoms/linePager';
@@ -11,6 +10,7 @@ import { IPillTheme } from '../atoms/pill';
 import { IPrettyTextTheme } from '../atoms/prettyText';
 import { IProgressCounterItemTheme } from '../atoms/progressCounterItem';
 import { ITabBarItemTheme } from '../atoms/tabBarItem';
+import { ITitledCollapsibleBoxTheme } from '../atoms/titledCollapsibleBox';
 import { IWebViewTheme } from '../atoms/webView';
 import { IBoxTheme } from '../particles/box';
 import { IColorGuide } from '../particles/colors';
