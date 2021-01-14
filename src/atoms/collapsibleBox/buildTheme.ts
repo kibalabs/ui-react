@@ -17,10 +17,10 @@ export const buildCollapsibleBoxThemes = (colors: IColorGuide, dimensions: IDime
         headerBackground: mergeTheme(boxThemes.default, boxThemes.transparent, {
           'background-color': '$colors.backgroundDark01',
           'border-radius': '0',
-          'padding': `${dimensions.padding} ${dimensions.paddingWide}`,
+          padding: `${dimensions.padding} ${dimensions.paddingWide}`,
         }),
         contentBackground: mergeTheme(boxThemes.default, boxThemes.transparent, {
-          'padding': `${dimensions.padding} ${dimensions.paddingWide}`,
+          padding: `${dimensions.padding} ${dimensions.paddingWide}`,
         }),
       },
       hover: {

@@ -1,13 +1,12 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { ISingleAnyChildProps, OptionalProppedElement } from '@kibalabs/core-react';
+import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
-import { defaultComponentProps, IComponentProps, KibaIcon, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
-import { IIconProps, PaddingSize, Spacing } from '../../particles';
-import { ICollapsibleBoxTheme } from './theme';
+import { defaultComponentProps, IComponentProps, KibaIcon, themeToCss, useBuiltTheme } from '../..';
 import { HidingView } from '../../wrappers';
+import { ICollapsibleBoxTheme } from './theme';
 
 interface IStyledCollapsibleBoxProps {
   theme: ICollapsibleBoxTheme;
