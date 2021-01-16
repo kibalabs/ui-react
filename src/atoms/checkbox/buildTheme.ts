@@ -9,13 +9,13 @@ export const buildCheckboxThemes = (colors: IColorGuide, dimensions: IDimensionG
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          'padding': `${dimensions.paddingNarrow3} ${dimensions.paddingNarrow3}`,
+          padding: `${dimensions.paddingNarrow3} ${dimensions.paddingNarrow3}`,
           'border-width': '2px',
           'border-color': '$colors.brandPrimary',
           'border-radius': '0.2em',
         }),
         text: mergeTheme(textThemes.default, {
-          'color': '$colors.textOnBrand',
+          color: '$colors.textOnBrand',
         }),
       },
       hover: {
@@ -45,7 +45,7 @@ export const buildCheckboxThemes = (colors: IColorGuide, dimensions: IDimensionG
           'background-color': '$colors.disabled',
         },
         text: {
-          'color': '$colors.disabledText',
+          color: '$colors.disabledText',
         },
       },
     },
@@ -55,7 +55,7 @@ export const buildCheckboxThemes = (colors: IColorGuide, dimensions: IDimensionG
     normal: {
       default: {
         background: {
-          'padding': `${dimensions.paddingWide} ${dimensions.paddingWide2}`,
+          padding: `${dimensions.paddingWide} ${dimensions.paddingWide2}`,
         },
         text: {
           'font-size': '1.2em',
@@ -68,7 +68,7 @@ export const buildCheckboxThemes = (colors: IColorGuide, dimensions: IDimensionG
     normal: {
       default: {
         background: {
-          'padding': `${dimensions.paddingNarrow} ${dimensions.padding}`,
+          padding: `${dimensions.paddingNarrow} ${dimensions.padding}`,
         },
         text: {
           'font-size': '0.8em',
@@ -83,4 +83,4 @@ export const buildCheckboxThemes = (colors: IColorGuide, dimensions: IDimensionG
     large: largeCheckboxTheme,
     small: smallCheckboxTheme,
   };
-}
+};

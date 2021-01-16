@@ -1,8 +1,8 @@
 
 import { RecursivePartial } from '@kibalabs/core';
 
-import { ThemeType } from '../../util';
 import { IBoxTheme, ITextTheme } from '../../particles';
+import { ThemeType } from '../../util';
 
 export interface ICheckboxThemeBase extends ThemeType {
   text: ITextTheme;

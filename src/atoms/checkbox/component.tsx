@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+
 import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
 
-import { ICheckboxTheme } from './theme';
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
-
-import { Icon, Spacing, PaddingSize } from '../../particles';
+import { Icon, PaddingSize, Spacing, Text } from '../../particles';
 import { HidingView } from '../../wrappers';
+import { ICheckboxTheme } from './theme';
 
 const StyledContainer = styled.div`
   display: flex;
@@ -97,6 +97,7 @@ interface ICheckBoxProps extends IComponentProps<ICheckboxTheme> {
   isChecked: boolean;
   isEnabled: boolean;
   text: string;
+  textVariant?: string;
   gutter?: PaddingSize;
   onToggled?(): void;
 }
@@ -126,11 +127,11 @@ export const Checkbox = (props: ICheckBoxProps): React.ReactElement => {
       <StyledLabel
         htmlFor={props.id ? `${props.id}-input` : 'my-cool-checkbox'}
       >
-        { props.text }
+        <Text variant={props.textVariant}>{ props.text }</Text>
       </StyledLabel>
     </StyledContainer>
   );
-}
+};
 
 Checkbox.displayName = 'Checkbox';
 Checkbox.defaultProps = {
@@ -138,4 +139,5 @@ Checkbox.defaultProps = {
   isChecked: false,
   isEnabled: true,
   gutter: PaddingSize.Narrow,
+  textVariant: 'default',
 };
