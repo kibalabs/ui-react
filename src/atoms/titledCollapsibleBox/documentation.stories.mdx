@@ -1,0 +1,49 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { TitledCollapsibleBox, ICollapsibleBoxProps, StatefulTitledCollapsibleBox } from '.';
+
+<Meta
+  component={TitledCollapsibleBox}
+  title={'Atoms/TitledCollapsibleBox'}
+/>
+
+# TitledCollapsibleBox
+
+<br/>
+
+export const Template = (args) => (
+  <TitledCollapsibleBox {...args}>
+    <span> This is the content inside the box </span>
+  </TitledCollapsibleBox>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{title: 'Here is a TitledCollapsibleBox'}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Stateful'>
+    <StatefulTitledCollapsibleBox title='Stateful TitledCollapsibleBox'>
+      <span> This is the content inside the box </span>
+    </StatefulTitledCollapsibleBox>
+  </Story>
+</Canvas>
+
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Stateful Collapsed'>
+    <StatefulTitledCollapsibleBox title='Stateful TitledCollapsibleBox (collapsed initially)' isCollapsedInitially={true}>
+      <span> This is the content inside the box </span>
+    </StatefulTitledCollapsibleBox>
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO

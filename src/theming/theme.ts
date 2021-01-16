@@ -11,6 +11,7 @@ import { IPillTheme } from '../atoms/pill';
 import { IPrettyTextTheme } from '../atoms/prettyText';
 import { IProgressCounterItemTheme } from '../atoms/progressCounterItem';
 import { ITabBarItemTheme } from '../atoms/tabBarItem';
+import { ITitledCollapsibleBoxTheme } from '../atoms/titledCollapsibleBox';
 import { IWebViewTheme } from '../atoms/webView';
 import { IBoxTheme } from '../particles/box';
 import { IColorGuide } from '../particles/colors';
@@ -55,4 +56,5 @@ export interface ITheme extends ThemeType {
   linePagers: ThemeMap<ILinePagerTheme>,
   progressCounterItems: ThemeMap<IProgressCounterItemTheme>,
   tabBarItems: ThemeMap<ITabBarItemTheme>,
+  titledCollapsibleBoxes: ThemeMap<ITitledCollapsibleBoxTheme>,
 }
