@@ -25,6 +25,21 @@ export const Template = (args) => (
 
 ### Examples
 
+
+<Canvas>
+  <Story name='Value'>
+    <SingleLineInput value='Sample Text'/>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Input Message'>
+    <SingleLineInput inputWrapperVariant='success' messageText='Success message' />
+    <SingleLineInput inputWrapperVariant='error' messageText='Error message' />
+    <SingleLineInput inputWrapperVariant='warning' messageText='Warning message' />
+  </Story>
+</Canvas>
+
 <Canvas>
   <Story name='Disabled'>
     <SingleLineInput isEnabled={false} />

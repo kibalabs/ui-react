@@ -1,3 +1,4 @@
+import { ICheckboxTheme } from '../atoms/checkbox';
 import { IBulletListTheme } from '../atoms/bulletList';
 import { IBulletTextTheme } from '../atoms/bulletText';
 import { IButtonTheme } from '../atoms/button';
@@ -44,6 +45,7 @@ export interface ITheme extends ThemeType {
   bulletLists: ThemeMap<IBulletListTheme>,
   bulletTexts: ThemeMap<IBulletTextTheme>,
   buttons: ThemeMap<IButtonTheme>,
+  checkboxes: ThemeMap<ICheckboxTheme>,
   linkBases: ThemeMap<ILinkBaseTheme>,
   iconButtons: ThemeMap<IIconButtonTheme>,
   inputWrappers: ThemeMap<IInputWrapperTheme>,

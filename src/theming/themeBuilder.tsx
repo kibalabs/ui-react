@@ -1,6 +1,7 @@
 import { merge, RecursivePartial } from '@kibalabs/core';
 
 import { ITheme } from '.';
+import { buildCheckboxThemes } from '../atoms';
 import { buildBulletListThemes } from '../atoms/bulletList';
 import { buildBulletTextThemes } from '../atoms/bulletText';
 import { buildButtonThemes } from '../atoms/button';
@@ -40,6 +41,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const videoThemes = buildVideoThemes(colors, dimensions, inputTheme?.videos);
 
   const buttonThemes = buildButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.buttons);
+  const checkboxThemes = buildCheckboxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.checkboxes);
   const bulletListThemes = buildBulletListThemes(colors, dimensions, inputTheme?.bulletLists);
   const bulletTextThemes = buildBulletTextThemes(colors, dimensions, textThemes, inputTheme?.bulletTexts);
   const iconButtonThemes = buildIconButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.iconButtons);
@@ -74,6 +76,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     bulletLists: bulletListThemes,
     bulletTexts: bulletTextThemes,
     buttons: buttonThemes,
+    checkboxes: checkboxThemes,
     iconButtons: iconButtonThemes,
     inputWrappers: inputWrapperThemes,
     linkBases: linkBaseThemes,

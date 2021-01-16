@@ -11,3 +11,4 @@ export * from './pill';
 export * from './progressCounterItem';
 export * from './tabBarItem';
 export * from './webView';
+export * from './checkbox';
