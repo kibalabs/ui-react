@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { deepCompare, getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
 import { Content as MarkdownAST, Parent } from 'mdast';
 import ReactMarkdown from 'react-markdown';
@@ -25,7 +25,7 @@ interface RendererProps extends IMultiAnyChildProps {
   parentChildCount: number;
 }
 
-export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
+export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactElement => {
   const shouldAllowNode = (node: MarkdownAST, index: number, parent: ReactMarkdown.NodeType): boolean => {
     if (node.type === 'paragraph') {
       if ((parent as unknown as Parent).children.length === 1) {
@@ -98,7 +98,7 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       {props.source.replace(/\n/g, '<br/>')}
     </ReactMarkdown>
   );
-};
+}, deepCompare);
 
 MarkdownText.displayName = 'MarkdownText';
 MarkdownText.defaultProps = {
