@@ -1,22 +1,22 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
-import { Markdown, MarkdownText, IMarkdownTextProps } from '.';
+import { Markdown, IMarkdownProps } from '.';
 
 <Meta
-  component={MarkdownText}
-  title={'Orgnanisms/MarkdownText'}
+  component={Markdown}
+  title={'Molecules/Markdown'}
 />
 
-# MarkdownText
+# Markdown
 
 <br/>
 
 export const Template = (args) => (
-  <MarkdownText {...args} />
+  <Markdown {...args} />
 );
 
 <Canvas withToolbar={true} withSource={'none'}>
-  <Story name='Default' args={{source: 'this is an **example**'}}>
+  <Story name='Default' args={{source: 'this is an **example**\n\n![cool image](https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg)'}}>
     {Template.bind({})}
   </Story>
 </Canvas>
@@ -24,18 +24,6 @@ export const Template = (args) => (
 <ArgsTable story={'Default'} />
 
 ### Examples
-
-<Canvas>
-  <Story name='Simple'>
-    <MarkdownText source={'this is an **example**'} />
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name='With newlines'>
-    <MarkdownText source={'hello\n\nworld'} />
-  </Story>
-</Canvas>
 
 <Canvas>
   <Story name='Markdown with embedded strong'>

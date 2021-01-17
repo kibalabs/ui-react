@@ -5,10 +5,10 @@ import { IMultiAnyChildProps } from '@kibalabs/core-react';
 import { Content as MarkdownAST, Parent } from 'mdast';
 import ReactMarkdown from 'react-markdown';
 
-import { Link, TextAlignment, TextTag } from '..';
-import { PrettyText } from '../atoms/prettyText/component';
-import { mergeVariants } from '../util';
-import { ReactMarkdownTypes } from './reactMarkdown';
+import { PrettyText } from '../../atoms';
+import { mergeVariants } from '../../util';
+import { ReactMarkdownTypes } from '../reactMarkdown';
+import { TextAlignment, TextTag } from '../../particles';
 
 interface IMarkdownTextProps {
   id?: string;
