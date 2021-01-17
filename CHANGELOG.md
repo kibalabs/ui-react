@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Changed
 - [PATCH] Fixed `Icon` to set color correctly
+- [PATCH] Fixed `Markdown` to use un-margined text when embedded in other text (e.g. a <strong> inside a <p>)
 
 ### Removed
 
