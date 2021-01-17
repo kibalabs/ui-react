@@ -18,11 +18,7 @@ const StyledIcon = styled.div<IStyledIconProps>`
   height: ${(props: IStyledIconProps): string => props.theme.size};
   min-width: ${(props: IStyledIconProps): string => props.theme.size};
   min-height: ${(props: IStyledIconProps): string => props.theme.size};
-<<<<<<< HEAD
-  color: ${(props: IStyledIconProps): string => (props.color ? props.color : 'currentColor')};
-=======
   color: ${(props: IStyledIconProps): string => props.color || 'currentColor'};
->>>>>>> main
   overflow: hidden;
 
   svg {
@@ -43,6 +39,7 @@ export interface IIconProps extends IComponentProps<IIconTheme> {
 
 export const Icon = (props: IIconProps): React.ReactElement => {
   const theme = useBuiltTheme('icons', props.variant, props.theme);
+  console.log('props._color', props._color);
   return (
     <StyledIcon
       id={props.id}
