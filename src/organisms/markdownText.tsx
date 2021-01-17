@@ -7,8 +7,8 @@ import ReactMarkdown from 'react-markdown';
 
 import { Link, TextAlignment, TextTag } from '..';
 import { PrettyText } from '../atoms/prettyText/component';
-import { ReactMarkdownTypes } from './reactMarkdown';
 import { mergeVariants } from '../util';
+import { ReactMarkdownTypes } from './reactMarkdown';
 
 interface IMarkdownTextProps {
   id?: string;
@@ -17,6 +17,12 @@ interface IMarkdownTextProps {
   textAlignment?: TextAlignment;
   textVariant?: string;
   textTag?: TextTag;
+}
+
+interface RendererProps extends IMultiAnyChildProps {
+  className?: string;
+  index: number;
+  parentChildCount: number;
 }
 
 export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
@@ -37,7 +43,7 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
 
   /* eslint-disable react/display-name */
   const renderers: ReactMarkdownTypes.Renderers = {
-    root: (rendererProps: {className?: string} & IMultiAnyChildProps): React.ReactElement => {
+    root: (rendererProps: RendererProps): React.ReactElement => {
       // TODO(krish): what should this check? It cant run the below check cos would fail for markdown like: "**Hello** world"
       // const childrenKeys = React.Children.map(rendererProps.children, (child: React.ReactElement): string => String(child.key).split('-')[0]);
       // if (React.Children.count(rendererProps.children) > 1 && childrenKeys[0] !== 'text') {
@@ -55,24 +61,24 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
         </PrettyText>
       );
     },
-    link: (rendererProps: {href: string} & IMultiAnyChildProps): React.ReactElement => {
+    link: (rendererProps: {href: string} & RendererProps): React.ReactElement => {
       if (React.Children.count(rendererProps.children) > 1) {
         console.error(`Link in markdown has more than one child: ${rendererProps.children}`);
       }
       // @ts-ignore
       return <Link target={rendererProps.href} text={String(rendererProps.children[0].props.children)} />;
     },
-    linkReference: (rendererProps: {href: string} & IMultiAnyChildProps): React.ReactElement => {
+    linkReference: (rendererProps: {href: string} & RendererProps): React.ReactElement => {
       if (React.Children.count(rendererProps.children) > 1) {
         console.error(`Link in markdown has more than one child: ${rendererProps.children}`);
       }
       // @ts-ignore
       return <Link target={rendererProps.href} text={String(rendererProps.children[0].props.children)} />;
     },
-    emphasis: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
+    emphasis: (rendererProps: RendererProps): React.ReactElement => {
       return <em>{rendererProps.children}</em>;
     },
-    strong: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
+    strong: (rendererProps: RendererProps): React.ReactElement => {
       return <strong>{rendererProps.children}</strong>;
     },
   };
