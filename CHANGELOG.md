@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [PATCH] Fixed `Markdown` to use un-margined text when embedded in other text (e.g. a <strong> inside a <p>)
 - [PATCH] Moved `Markdown` to be a molecule
 - [PATCH] Moved `MarkdownText` to be a molecule
+- [PATCH] Memoize `Markdown` and `MarkdownText` to prevent expensive re-renders
 
 ### Removed
 
