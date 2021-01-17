@@ -86,8 +86,8 @@ export interface ITabBarItemProps extends IComponentProps<ITabBarItemTheme> {
   tabKey: string;
   text: string;
   isEnabled: boolean;
-  isSelected: boolean;
-  isCollapsible: boolean;
+  isSelected?: boolean;
+  isCollapsible?: boolean;
   isExpandable: boolean;
   onClicked?(tabKey: string): void;
 }
@@ -117,7 +117,5 @@ TabBarItem.displayName = 'TabBarItem';
 TabBarItem.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,
-  isSelected: false,
-  isCollapsible: false,
   isExpandable: true,
 };
