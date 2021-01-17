@@ -1,0 +1,42 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { MarkdownText, IMarkdownTextProps } from '.';
+
+<Meta
+  component={MarkdownText}
+  title={'Molecules/MarkdownText'}
+/>
+
+# MarkdownText
+
+<br/>
+
+export const Template = (args) => (
+  <MarkdownText {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{source: 'this is an **example**'}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Simple'>
+    <MarkdownText source={'this is an **example**'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='With newlines'>
+    <MarkdownText source={'hello\n\nworld'} />
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO

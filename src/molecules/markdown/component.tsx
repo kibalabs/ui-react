@@ -5,8 +5,9 @@ import { IMultiAnyChildProps } from '@kibalabs/core-react';
 import { Content as MarkdownAST, Parent } from 'mdast';
 import ReactMarkdown from 'react-markdown';
 
-import { Box, Media, PrettyText, TextAlignment } from '..';
-import { ReactMarkdownTypes } from './reactMarkdown';
+import { PrettyText } from '../../atoms';
+import { Box, Media, TextAlignment } from '../../particles';
+import { ReactMarkdownTypes } from '../reactMarkdown';
 
 interface IMarkdownProps {
   id?: string;
