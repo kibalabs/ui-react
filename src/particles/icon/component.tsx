@@ -39,7 +39,6 @@ export interface IIconProps extends IComponentProps<IIconTheme> {
 
 export const Icon = (props: IIconProps): React.ReactElement => {
   const theme = useBuiltTheme('icons', props.variant, props.theme);
-  console.log('props._color', props._color);
   return (
     <StyledIcon
       id={props.id}
