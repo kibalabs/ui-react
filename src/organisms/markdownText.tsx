@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import { Link, TextAlignment, TextTag } from '..';
 import { PrettyText } from '../atoms/prettyText/component';
 import { ReactMarkdownTypes } from './reactMarkdown';
+import { mergeVariants } from '../util';
 
 interface IMarkdownTextProps {
   id?: string;
@@ -32,16 +33,6 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       }
     }
     return true;
-  };
-
-  const mergeVariants = (...variants: (string | undefined | null)[]): string => {
-    const values = variants.reduce((current: string[], value: string | undefined | null): string[] => {
-      if (value) {
-        current.push(String(value).trim());
-      }
-      return current;
-    }, []);
-    return values.join('-');
   };
 
   /* eslint-disable react/display-name */
@@ -98,7 +89,7 @@ export const MarkdownText = (props: IMarkdownTextProps): React.ReactElement => {
       includeNodeIndex={true}
       escapeHtml={false}
     >
-      {props.source}
+      {props.source.replace(/\n/g, '<br/>')}
     </ReactMarkdown>
   );
 };
