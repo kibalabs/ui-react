@@ -60,14 +60,14 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
       return <PrettyText variant={`header${rendererProps.level}`} alignment={TextAlignment.Left}>{rendererProps.children}</PrettyText>;
     },
     emphasis: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
-      if (rendererProps.index === 0 && rendererProps.parentChildCount === 1) {
+      if (rendererProps.parentChildCount === 1) {
         return <PrettyText variant='paragraph'><em>{rendererProps.children}</em></PrettyText>;
       } else {
         return <em>{rendererProps.children}</em>;
       }
     },
     strong: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
-      if (rendererProps.index === 0 && rendererProps.parentChildCount === 1) {
+      if (rendererProps.parentChildCount === 1) {
         return <PrettyText variant='paragraph'><strong>{rendererProps.children}</strong></PrettyText>;
       } else {
         return <strong>{rendererProps.children}</strong>;
