@@ -97,6 +97,3 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
 }, deepCompare);
 
 Markdown.displayName = 'Markdown';
-Markdown.defaultProps = {
-  className: '',
-};

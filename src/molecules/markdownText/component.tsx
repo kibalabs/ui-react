@@ -101,6 +101,3 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
 }, deepCompare);
 
 MarkdownText.displayName = 'MarkdownText';
-MarkdownText.defaultProps = {
-  className: '',
-};
