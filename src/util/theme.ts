@@ -40,7 +40,7 @@ export const themeToCss = (theme?: CssTheme | Partial<CssTheme> | RecursiveParti
       console.error(`key: ${key} missing in theme: ${theme}`);
       return '';
     }
-    return theme[key] ? propertyToCss(key, theme[key] as string) : '';
+    return propertyToCss(key, theme[key] as string);
   });
   return output.join('\n');
 };
