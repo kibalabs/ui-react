@@ -23,6 +23,13 @@ export const valueToCss = (value: string): string => {
   return value;
 };
 
+export const propertyToCss = (name: string, value?: string): string => {
+  if (!value) {
+    return '';
+  }
+  return `${name}: ${valueToCss(value)};`;
+};
+
 // NOTE(krishan711): the type param here seems silly but is necessary cos too complex to be calculated itself
 export const themeToCss = (theme?: CssTheme | Partial<CssTheme> | RecursivePartial<CssTheme>): string => {
   if (!theme) {
@@ -33,7 +40,7 @@ export const themeToCss = (theme?: CssTheme | Partial<CssTheme> | RecursiveParti
       console.error(`key: ${key} missing in theme: ${theme}`);
       return '';
     }
-    return theme[key] ? `${key}: ${valueToCss(theme[key] as string)};` : '';
+    return propertyToCss(key, theme[key] as string);
   });
   return output.join('\n');
 };

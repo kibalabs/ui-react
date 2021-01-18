@@ -12,3 +12,4 @@ export * from './progressCounterItem';
 export * from './tabBarItem';
 export * from './titledCollapsibleBox';
 export * from './webView';
+export * from './checkbox';

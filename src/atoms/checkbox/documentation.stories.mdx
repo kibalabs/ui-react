@@ -1,0 +1,48 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { Checkbox, ICheckboxProps } from '.';
+import { PaddingSize, KibaIcon } from '../../particles';
+
+<Meta
+  component={Checkbox}
+  title={'Atoms/Checkbox'}
+/>
+
+# Checkbox
+
+<br/>
+
+export const Template = (args) => (
+  <Checkbox {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{text: 'Default Checkbox'}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story='Default' />
+
+### Examples
+
+<Canvas>
+  <Story name='Wrapped state'>
+    {() => {
+      const [isChecked, setIsChecked] = React.useState(true);
+      return (
+        <Checkbox isChecked={isChecked} onToggled={() => setIsChecked(!isChecked)} text='A Simple Checkbox'/>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Disabled'>
+    <Checkbox isChecked={true} isDisabled={true} text='Disabled Checkbox'/>
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO

@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 - [MINOR] Created `TitledCollapsibleBox` atom component
 - [MINOR] Created `StatefulTitledCollapsibleBox` atom component
+- [MINOR] Created `Checkbox` atom component
 
 ### Changed
 - [PATCH] Fixed `Icon` to set color correctly
