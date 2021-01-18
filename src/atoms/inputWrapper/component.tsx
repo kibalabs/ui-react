@@ -85,7 +85,9 @@ const InputWrapperInner = styled.div<IInputWrapperInnerProps>`
 
 const StyledMessage = styled.p`
   ${(props) => themeToCss(props.theme.normal.default.messageText)};
-  margin-top: 0.5em;
+  /* TODO(krishan711): move this to the theme or as a gutter prop (see checkbox) */
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
   overflow: auto;
   width: 100%;
   text-align: right;

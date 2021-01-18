@@ -1,18 +1,18 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
-import { SingleLineInput, ISingleLineInputProps } from '.';
+import { MultiLineInput, IMultiLineInputProps } from '.';
 
 <Meta
-  component={SingleLineInput}
-  title={'Molecules/SingleLineInput'}
+  component={MultiLineInput}
+  title={'Molecules/MultiLineInput'}
 />
 
-# SingleLineInput
+# MultiLineInput
 
 <br/>
 
 export const Template = (args) => (
-  <SingleLineInput {...args} />
+  <MultiLineInput {...args} />
 );
 
 <Canvas withToolbar={true} withSource={'none'}>
@@ -28,31 +28,31 @@ export const Template = (args) => (
 
 <Canvas>
   <Story name='Value'>
-    <SingleLineInput value='Sample Text'/>
+    <MultiLineInput value='Sample Text'/>
   </Story>
 </Canvas>
 
 <Canvas>
   <Story name='Success Message'>
-    <SingleLineInput inputWrapperVariant='success' messageText='Success message' />
+    <MultiLineInput inputWrapperVariant='success' messageText='Success message' />
   </Story>
 </Canvas>
 
 <Canvas>
   <Story name='Error Message'>
-    <SingleLineInput inputWrapperVariant='error' messageText='Error message' />
+    <MultiLineInput inputWrapperVariant='error' messageText='Error message' />
   </Story>
 </Canvas>
 
 <Canvas>
   <Story name='Warning Message'>
-    <SingleLineInput inputWrapperVariant='warning' messageText='Warning message' />
+    <MultiLineInput inputWrapperVariant='warning' messageText='Warning message' />
   </Story>
 </Canvas>
 
 <Canvas>
   <Story name='Disabled'>
-    <SingleLineInput isEnabled={false} />
+    <MultiLineInput isEnabled={false} />
   </Story>
 </Canvas>
 

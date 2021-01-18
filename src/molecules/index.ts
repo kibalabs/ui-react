@@ -6,6 +6,7 @@ export * from './form';
 export * from './inputFrame';
 export * from './markdown';
 export * from './markdownText';
+export * from './multiLineInput';
 export * from './progressCounter';
 export * from './singleLineInput';
 export * from './tabBar';

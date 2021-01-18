@@ -49,10 +49,10 @@ export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTh
   name?: string;
   label?: string;
   inputWrapperVariant?: string;
-  onKeyUp?(key: string): void;
-  onKeyDown?(key: string): void;
-  onClick?(): void;
-  onValueChanged(value: string): void;
+  onKeyUp?: (key: string) => void;
+  onKeyDown?: (key: string) => void;
+  onClick?: () => void;
+  onValueChanged: (value: string) => void;
 }
 
 export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElement => {
