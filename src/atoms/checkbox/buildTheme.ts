@@ -1,10 +1,10 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { mergeTheme, ThemeMap } from '../../util';
 import { ICheckboxTheme } from './theme';
 
-export const buildCheckboxThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, ICheckboxTheme>>): ThemeMap<ICheckboxTheme> => {
+export const buildCheckboxThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ICheckboxTheme>>): ThemeMap<ICheckboxTheme> => {
   const defaultCheckboxTheme = mergeTheme<ICheckboxTheme>({
     normal: {
       default: {
@@ -23,7 +23,7 @@ export const buildCheckboxThemes = (colors: IColorGuide, dimensions: IDimensionG
           'background-color': '$colors.brandPrimaryClear80',
         },
         text: {
-          'color': '$colors.brandPrimary',
+          color: '$colors.brandPrimary',
         },
       },
       press: {

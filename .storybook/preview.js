@@ -15,9 +15,7 @@ export const decorators = [
         theme={theme}
         resetCss={resetCss}
       />
-      <div id='themeroot'>
-        <Story />
-      </div>
+      <Story />
     </ThemeProvider>
   ),
 ];

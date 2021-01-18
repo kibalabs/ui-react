@@ -27,6 +27,17 @@ export const Template = (args) => (
 ### Examples
 
 <Canvas>
+  <Story name='Wrapped state'>
+    {() => {
+      const [isChecked, setIsChecked] = React.useState(true);
+      return (
+        <Checkbox isChecked={isChecked} onToggled={() => setIsChecked(!isChecked)} text='A Simple Checkbox'/>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<Canvas>
   <Story name='Disabled'>
     <Checkbox isChecked={true} isDisabled={true} text='Disabled Checkbox'/>
   </Story>
