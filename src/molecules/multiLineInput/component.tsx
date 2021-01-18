@@ -32,6 +32,7 @@ const StyledMultiLineTextArea = styled.textarea`
   }
 `;
 
+// TODO(krishan711): this only grows when the user types into it, not when the prop passed in is very long
 interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
   value: string| null;
   isEnabled: boolean;
@@ -125,6 +126,6 @@ MultiLineInput.displayName = 'MultiLineInput';
 MultiLineInput.defaultProps = {
   ...defaultMoleculeProps,
   isEnabled: true,
-  minRowCount: 5,
+  minRowCount: 3,
   maxRowCount: 6,
 };
