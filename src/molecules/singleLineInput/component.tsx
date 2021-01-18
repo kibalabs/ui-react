@@ -41,7 +41,7 @@ const getAutocompleteType = (inputType: InputType): string | undefined => {
 };
 
 export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTheme> {
-  value: string | null;
+  value: string | number | null;
   isEnabled: boolean;
   placeholderText?: string;
   messageText?: string;
@@ -52,7 +52,7 @@ export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTh
   onKeyUp?(key: string): void;
   onKeyDown?(key: string): void;
   onClick?(): void;
-  onValueChanged(value: string): void;
+  onValueChanged(value: string | number): void;
 }
 
 export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElement => {

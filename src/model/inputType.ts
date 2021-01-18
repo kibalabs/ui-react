@@ -4,4 +4,6 @@ export enum InputType {
   Url = 'url',
   Password = 'password',
   Email = 'email',
+  Number = 'number',
+  PhoneNumber = 'tel'
 }

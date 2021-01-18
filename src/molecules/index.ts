@@ -8,4 +8,5 @@ export * from './markdown';
 export * from './markdownText';
 export * from './progressCounter';
 export * from './singleLineInput';
+export * from './multiLineInput';
 export * from './tabBar';
