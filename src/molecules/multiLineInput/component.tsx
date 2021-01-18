@@ -31,64 +31,43 @@ const StyledMultiLineTextArea = styled.textarea`
     pointer-events: none;
   }
 `;
+
 interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
   value: string| null;
   isEnabled: boolean;
   minRowCount: number;
   maxRowCount: number;
   placeholderText?: string;
-  inputWrapperVariant?: string;
   messageText?: string;
-  shouldDisableCopy: boolean;
-  shouldDisableCut: boolean;
-  shouldDisablePaste: boolean;
-  shouldDisableDrop: boolean;
-  shouldDisableDrag: boolean;
-  onKeyUp?(key: string): void;
-  onKeyDown?(key: string): void;
-  onValueChanged(value: string): void;
+  name?: string;
+  label?: string;
+  inputWrapperVariant?: string;
+  onKeyUp?: (key: string) => void;
+  onKeyDown?: (key: string) => void;
+  onClick?: () => void;
+  onValueChanged: (value: string) => void;
 }
+
 export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement => {
   const [rowCount, setRowCount] = React.useState(props.minRowCount);
-  const handleCopy = (event: React.ClipboardEvent<HTMLElement>): void => {
-    if (props.shouldDisableCopy) {
-      event.preventDefault();
-    }
-  };
-  const handleCut = (event: React.ClipboardEvent<HTMLElement>): void => {
-    if (props.shouldDisableCut) {
-      event.preventDefault();
-    }
-  };
-  const handlePaste = (event: React.ClipboardEvent<HTMLElement>): void => {
-    if (props.shouldDisablePaste) {
-      event.preventDefault();
-    }
-  };
-  const handleDrop = (event: React.DragEvent<HTMLElement>): void => {
-    if (props.shouldDisableDrop) {
-      event.preventDefault();
-    }
-  };
-  const handleDrag = (event: React.DragEvent<HTMLElement>): void => {
-    if (props.shouldDisableDrag) {
-      event.preventDefault();
-    }
-  };
-  const handleOnKeyUp = (event: React.KeyboardEvent<HTMLElement>): void => {
+
+  const onKeyUp = (event: React.KeyboardEvent<HTMLElement>): void => {
     if (props.onKeyUp) {
       const { key } = event;
       props.onKeyUp(key);
     }
   };
-  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLElement>): void => {
+
+  const onKeyDown = (event: React.KeyboardEvent<HTMLElement>): void => {
     if (props.onKeyDown) {
       const { key } = event;
       props.onKeyDown(key);
     }
   };
+
   const onValueChanged = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    const fontSize = 16; // TODO(krish): remove hardcoded value
+    // TODO(krishan711): get the font size from the theme!
+    const fontSize = 16;
     // Make the textarea smaller when lines are removed
     const previousRows: number = event.target.rows;
     const currentRows = Math.floor(event.target.scrollHeight / fontSize);
@@ -109,6 +88,13 @@ export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement 
       props.onValueChanged(event.target.value);
     }
   };
+
+  const onClick = (): void => {
+    if (props.onClick) {
+      props.onClick();
+    }
+  };
+
   return (
     <InputFrame
       id={props.id}
@@ -121,30 +107,24 @@ export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement 
       <StyledMultiLineTextArea
         id={props.id && `${props.id}-multiline-textarea`}
         className={getClassName(StyledMultiLineTextArea.displayName, !props.isEnabled && 'disabled')}
+        name={props.name}
         rows={rowCount}
         value={props.value || ''}
-        onKeyUp={handleOnKeyUp}
-        onKeyDown={handleOnKeyDown}
+        onKeyUp={onKeyUp}
+        onKeyDown={onKeyDown}
         onChange={onValueChanged}
-        onCut={handleCopy}
-        onCopy={handleCut}
-        onPaste={handlePaste}
-        onDrop={handleDrop}
-        onDragStart={handleDrag}
+        onClick={onClick}
+        aria-label={props.label || props.name || props.placeholderText}
         placeholder={props.placeholderText}
       />
     </InputFrame>
   );
 };
+
 MultiLineInput.displayName = 'MultiLineInput';
 MultiLineInput.defaultProps = {
   ...defaultMoleculeProps,
   isEnabled: true,
   minRowCount: 5,
   maxRowCount: 6,
-  shouldDisableCopy: false,
-  shouldDisableCut: false,
-  shouldDisablePaste: false,
-  shouldDisableDrop: false,
-  shouldDisableDrag: false,
 };
