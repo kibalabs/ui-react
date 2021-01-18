@@ -1,0 +1,42 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { Markdown, IMarkdownProps } from '.';
+
+<Meta
+  component={Markdown}
+  title={'Molecules/Markdown'}
+/>
+
+# Markdown
+
+<br/>
+
+export const Template = (args) => (
+  <Markdown {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{source: 'this is an **example**\n\n![cool image](https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg)'}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Markdown with embedded strong'>
+    <Markdown source={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. **Praesent gravida** ante elit, eu ullamcorper lacus posuere fermentum. \n\n**Proin** convallis rhoncus lacus, vitae faucibus dolor sodales quis. Praesent dapibus **ante nec erat** pretium tempor non non elit. Integer dapibus tortor et lacus laoreet, sit amet lacinia neque accumsan. '} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Markdown with just strong'>
+    <Markdown source={'**Lorem ipsum dolor sit amet, consectetur adipiscing elit**'} />
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO

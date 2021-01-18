@@ -1,12 +1,13 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { deepCompare, getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
 import { Content as MarkdownAST, Parent } from 'mdast';
 import ReactMarkdown from 'react-markdown';
 
-import { Box, Media, PrettyText, TextAlignment } from '..';
-import { ReactMarkdownTypes } from './reactMarkdown';
+import { PrettyText } from '../../atoms';
+import { Box, Media, TextAlignment } from '../../particles';
+import { ReactMarkdownTypes } from '../reactMarkdown';
 
 interface IMarkdownProps {
   id?: string;
@@ -15,7 +16,13 @@ interface IMarkdownProps {
   rootBoxVariant?: string;
 }
 
-export const Markdown = (props: IMarkdownProps): React.ReactElement => {
+interface RendererProps extends IMultiAnyChildProps {
+  className?: string;
+  index: number;
+  parentChildCount: number;
+}
+
+export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement => {
   const shouldAllowNode = (node: MarkdownAST, index: number, parent: ReactMarkdown.NodeType): boolean => {
     if (node.type === 'paragraph') {
       if ((parent as unknown as Parent).children.length === 1) {
@@ -35,7 +42,7 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
   const renderers: ReactMarkdownTypes.Renderers = {
     // TODO(krish): this should use pretty text eventually
     // NOTE(krish): full list here: https://github.com/rexxars/react-markdown/blob/main/src/renderers.js
-    root: (rendererProps: { className?: string } & IMultiAnyChildProps): React.ReactElement => {
+    root: (rendererProps: RendererProps): React.ReactElement => {
       return (
         <Box
           id={props.id}
@@ -46,24 +53,30 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
         </Box>
       );
     },
-    image: (rendererProps: { src: string, alt: string }): React.ReactElement => {
+    image: (rendererProps: { src: string, alt: string } & RendererProps): React.ReactElement => {
       return <Media isCenteredHorizontally={true} source={rendererProps.src} alternativeText={rendererProps.alt} />;
     },
-    paragraph: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
+    paragraph: (rendererProps: RendererProps): React.ReactElement => {
       const childrenKeys = React.Children.map(rendererProps.children, (child: React.ReactNode): string | null => (
         (child && typeof child === 'object' && 'key' in child) ? String(child.key).split('-')[0] : null
       )) || [];
       const isCaption = childrenKeys.indexOf('image') > -1;
       return <PrettyText variant='paragraph' alignment={isCaption ? TextAlignment.Center : TextAlignment.Left}>{rendererProps.children}</PrettyText>;
     },
-    heading: (rendererProps: { level: number } & IMultiAnyChildProps): React.ReactElement => {
+    heading: (rendererProps: { level: number } & RendererProps): React.ReactElement => {
       return <PrettyText variant={`header${rendererProps.level}`} alignment={TextAlignment.Left}>{rendererProps.children}</PrettyText>;
     },
-    emphasis: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
-      return <PrettyText variant='emphasis'>{rendererProps.children}</PrettyText>;
+    emphasis: (rendererProps: RendererProps): React.ReactElement => {
+      if (rendererProps.parentChildCount === 1) {
+        return <PrettyText variant='paragraph'><em>{rendererProps.children}</em></PrettyText>;
+      }
+      return <em>{rendererProps.children}</em>;
     },
-    strong: (rendererProps: IMultiAnyChildProps): React.ReactElement => {
-      return <PrettyText variant='strong'>{rendererProps.children}</PrettyText>;
+    strong: (rendererProps: RendererProps): React.ReactElement => {
+      if (rendererProps.parentChildCount === 1) {
+        return <PrettyText variant='paragraph'><strong>{rendererProps.children}</strong></PrettyText>;
+      }
+      return <strong>{rendererProps.children}</strong>;
     },
   };
   /* eslint-enable react/display-name */
@@ -81,9 +94,6 @@ export const Markdown = (props: IMarkdownProps): React.ReactElement => {
       {props.source}
     </ReactMarkdown>
   );
-};
+}, deepCompare);
 
 Markdown.displayName = 'Markdown';
-Markdown.defaultProps = {
-  className: '',
-};

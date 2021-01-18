@@ -4,7 +4,7 @@ import { MarkdownText, IMarkdownTextProps } from '.';
 
 <Meta
   component={MarkdownText}
-  title={'Orgnanisms/MarkdownText'}
+  title={'Molecules/MarkdownText'}
 />
 
 # MarkdownText
@@ -28,6 +28,12 @@ export const Template = (args) => (
 <Canvas>
   <Story name='Simple'>
     <MarkdownText source={'this is an **example**'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='With newlines'>
+    <MarkdownText source={'hello\n\nworld'} />
   </Story>
 </Canvas>
 
