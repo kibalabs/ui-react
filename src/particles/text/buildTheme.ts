@@ -30,7 +30,7 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     'text-align': 'inherit',
     'text-shadow': 'inherit',
     'text-transform': 'inherit',
-  }, base?.default);
+  }, base?.inherit);
 
   const inlineTextTheme = mergeThemePartial<ITextTheme>({
   }, base?.inline);

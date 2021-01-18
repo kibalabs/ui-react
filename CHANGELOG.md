@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [PATCH] Moved `Markdown` to be a molecule
 - [PATCH] Moved `MarkdownText` to be a molecule
 - [PATCH] Memoize `Markdown` and `MarkdownText` to prevent expensive re-renders
+- [PATCH] Update `Link` to only use inherited text styles with the `inherit` variant
 
 ### Removed
 

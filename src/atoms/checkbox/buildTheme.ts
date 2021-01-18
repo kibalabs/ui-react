@@ -10,8 +10,8 @@ export const buildCheckboxThemes = (colors: IColorGuide, dimensions: IDimensionG
       default: {
         checkBackground: mergeTheme(boxThemes.default, boxThemes.focusable, {
           padding: `${dimensions.paddingNarrow3} ${dimensions.paddingNarrow3}`,
-          'border-width': '2px',
-          'border-color': '$colors.brandPrimary',
+          'border-width': dimensions.borderWidth,
+          'border-color': '$colors.text',
           'border-radius': '0.2em',
         }),
         text: mergeTheme(textThemes.default, {
@@ -39,6 +39,7 @@ export const buildCheckboxThemes = (colors: IColorGuide, dimensions: IDimensionG
       default: {
         checkBackground: {
           'background-color': '$colors.brandPrimary',
+          'border-color': '$colors.brandPrimary',
         },
       },
     },
