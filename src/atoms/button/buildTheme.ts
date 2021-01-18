@@ -34,7 +34,7 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
     disabled: {
       default: {
         background: {
-          'background-color': '$colors.disabled',
+          'background-color': '$colors.disabledLight50',
         },
         text: {
           color: '$colors.disabledText',
