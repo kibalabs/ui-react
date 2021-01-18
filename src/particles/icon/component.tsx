@@ -18,11 +18,7 @@ const StyledIcon = styled.div<IStyledIconProps>`
   height: ${(props: IStyledIconProps): string => props.theme.size};
   min-width: ${(props: IStyledIconProps): string => props.theme.size};
   min-height: ${(props: IStyledIconProps): string => props.theme.size};
-<<<<<<< HEAD
-  color: ${(props: IStyledIconProps): string => (props.color ? props.color : 'currentColor')};
-=======
   color: ${(props: IStyledIconProps): string => props.color || 'currentColor'};
->>>>>>> main
   overflow: hidden;
 
   svg {

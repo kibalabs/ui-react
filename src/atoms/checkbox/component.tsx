@@ -7,11 +7,50 @@ import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } fro
 import { Icon, PaddingSize, Spacing, Text } from '../../particles';
 import { HidingView } from '../../wrappers';
 import { ICheckboxTheme } from './theme';
+import { valueToCss } from '../../util';
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.label`
   display: flex;
   flex-direction: row;
   align-items: center;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.default.text)};
+
+  &:hover {
+    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.hover?.text)};
+  }
+  &:active {
+    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.press?.text)};
+  }
+  &:focus {
+    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.focus?.text)};
+  }
+  &.checked {
+    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.default?.text)};
+    &:hover {
+      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.hover?.text)};
+    }
+    &:active {
+      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.press?.text)};
+    }
+    &:focus {
+      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.focus?.text)};
+    }
+  }
+  &.disabled {
+    cursor: auto;
+    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.default?.text)};
+    &:hover {
+      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.hover?.text)};
+    }
+    &:active {
+      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.press?.text)};
+    }
+    &:focus {
+      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.focus?.text)};
+    }
+  }
 `;
 
 const StyledHiddenCheckbox = styled.input`
@@ -33,102 +72,102 @@ interface IStyledCheckboxProps {
 }
 
 const StyledCheckbox = styled.div<IStyledCheckboxProps>`
-  ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.default.text)};
-  ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.default.background)};
+  ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.default.checkBackground)};
+  color: ${(props: IStyledCheckboxProps): string => valueToCss(props.theme.normal.default.checkColor)};
   cursor: pointer;
   background-clip: border-box;
   transition-duration: 0.3s;
+  width: 1em;
+  height: 1em;
 
-  &:hover {
-    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.hover?.text)};
-    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.hover?.background)};
+  ${StyledContainer}:hover & {
+    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.hover?.checkBackground)};
+    color: ${(props: IStyledCheckboxProps): string => valueToCss(props.theme.normal.hover?.checkColor)};
   }
-  &:active {
-    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.press?.text)};
-    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.press?.background)};
+  ${StyledContainer}:active & {
+    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.press?.checkBackground)};
+    color: ${(props: IStyledCheckboxProps): string => valueToCss(props.theme.normal.press?.checkColor)};
   }
-  &:focus {
-    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.focus?.text)};
-    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.focus?.background)};
+  ${StyledContainer}:focus & {
+    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.normal.focus?.checkBackground)};
+    color: ${(props: IStyledCheckboxProps): string => valueToCss(props.theme.normal.focus?.checkColor)};
   }
-  &.checked {
-    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.default?.text)};
-    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.default?.background)};
-    &:hover {
-      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.hover?.text)};
-      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.hover?.background)};
+
+  ${StyledContainer}.checked & {
+    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.default?.checkBackground)};
+    color: ${(props: IStyledCheckboxProps): string => valueToCss(props.theme.checked?.default?.checkColor)};
+    ${StyledContainer}:hover & {
+      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.hover?.checkBackground)};
+      color: ${(props: IStyledCheckboxProps): string => valueToCss(props.theme.checked?.hover?.checkColor)};
     }
-    &:active {
-      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.press?.text)};
-      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.press?.background)};
+    ${StyledContainer}:active & {
+      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.press?.checkBackground)};
+      color: ${(props: IStyledCheckboxProps): string => valueToCss(props.theme.checked?.press?.checkColor)};
     }
-    &:focus {
-      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.focus?.text)};
-      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.focus?.background)};
+    ${StyledContainer}:focus & {
+      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.checked?.focus?.checkBackground)};
+      color: ${(props: IStyledCheckboxProps): string => valueToCss(props.theme.checked?.focus?.checkColor)};
     }
   }
-  &.disabled {
+
+  ${StyledContainer}.disabled & {
     cursor: auto;
-    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.default?.text)};
-    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.default?.background)};
-    &:hover {
-      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.hover?.text)};
-      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.hover?.background)};
+    ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.default?.checkBackground)};
+    color: ${(props: IStyledCheckboxProps): string => valueToCss(props.theme.disabled?.default?.checkColor)};
+    ${StyledContainer}:hover & {
+      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.hover?.checkBackground)};
+      color: ${(props: IStyledCheckboxProps): string => valueToCss(props.theme.disabled?.hover?.checkColor)};
     }
-    &:active {
-      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.press?.text)};
-      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.press?.background)};
+    ${StyledContainer}:active & {
+      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.press?.checkBackground)};
+      color: ${(props: IStyledCheckboxProps): string => valueToCss(props.theme.disabled?.press?.checkColor)};
     }
-    &:focus {
-      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.focus?.text)};
-      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.focus?.background)};
+    ${StyledContainer}:focus & {
+      ${(props: IStyledCheckboxProps): string => themeToCss(props.theme.disabled?.focus?.checkBackground)};
+      color: ${(props: IStyledCheckboxProps): string => valueToCss(props.theme.disabled?.focus?.checkColor)};
     }
   }
-`;
-
-const StyledLabel = styled.label`
-  flex-grow: 1;
-  flex-shrink: 0;
-  flex-basis: auto;
-  cursor: inherit;
 `;
 
 interface ICheckBoxProps extends IComponentProps<ICheckboxTheme> {
-  isChecked: boolean;
-  isEnabled: boolean;
   text: string;
-  textVariant?: string;
+  isChecked: boolean;
+  isDisabled?: boolean;
   gutter?: PaddingSize;
   onToggled?(): void;
 }
 
 export const Checkbox = (props: ICheckBoxProps): React.ReactElement => {
+  const onToggled = (event: React.SyntheticEvent<HTMLElement>): void => {
+    if (props.isDisabled && props.onToggled) {
+      props.onToggled();
+    }
+    event.preventDefault();
+  };
+
   const theme = useBuiltTheme('checkboxes', props.variant, props.theme);
   return (
     <StyledContainer
       id={props.id}
-      className={getClassName(Checkbox.displayName, props.className, !props.isEnabled && 'disabled')}
+      className={getClassName(Checkbox.displayName, props.className, props.isDisabled && 'disabled', props.isChecked && 'checked')}
+      theme={theme}
     >
       <StyledHiddenCheckbox
         type='checkbox'
         checked={props.isChecked}
+        onChange={onToggled}
       />
       <StyledCheckbox
         id={props.id ? `${props.id}-input` : 'my-cool-checkbox'}
-        className={getClassName(props.isChecked && 'checked')}
         isChecked={props.isChecked}
         theme={theme}
       >
-        <HidingView isInvisible={!props.isChecked}>
-          <Icon variant='medium' svgContent={'<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128L192 384l-96-96"/></svg>'} />
+        <HidingView isHidden={!props.isChecked}>
+          <Icon variant='fill' svgContent={'<svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m21.365 4.5379c0.8075 0.75366 0.8512 2.0192 0.0975 2.8267l-11.2 12c-0.36243 0.3884-0.86448 0.6166-1.3954 0.6343s-1.047-0.1765-1.4346-0.5398l-4.8-4.5c-0.80582-0.7555-0.84665-2.0212-0.09119-2.827s2.0211-0.8466 2.827-0.0912l3.3377 3.1291 9.8323-10.535c0.7537-0.8075 2.0192-0.85114 2.8267-0.09747z" clip-rule="evenodd" fill="currentColor" fill-rule="evenodd"/></svg>'} />
         </HidingView>
       </StyledCheckbox>
-      <Spacing variant={props.gutter} />
-      <StyledLabel
-        htmlFor={props.id ? `${props.id}-input` : 'my-cool-checkbox'}
-      >
-        <Text variant={props.textVariant}>{ props.text }</Text>
-      </StyledLabel>
+      <Spacing variant={props.gutter || PaddingSize.Default} />
+      { props.text }
     </StyledContainer>
   );
 };
@@ -136,8 +175,4 @@ export const Checkbox = (props: ICheckBoxProps): React.ReactElement => {
 Checkbox.displayName = 'Checkbox';
 Checkbox.defaultProps = {
   ...defaultComponentProps,
-  isChecked: false,
-  isEnabled: true,
-  gutter: PaddingSize.Narrow,
-  textVariant: 'default',
 };

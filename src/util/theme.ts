@@ -6,7 +6,10 @@ export type CssTheme = {
   [key: string]: Readonly<string>
 };
 
-export const valueToCss = (value: string): string => {
+export const valueToCss = (value?: string): string => {
+  if (!value) {
+    return '';
+  }
   if (value.startsWith('$')) {
     const strippedValue = value.substring(1);
     const strippedValueParts = strippedValue.split('.');

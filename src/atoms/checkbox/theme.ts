@@ -6,7 +6,8 @@ import { ThemeType } from '../../util';
 
 export interface ICheckboxThemeBase extends ThemeType {
   text: ITextTheme;
-  background: IBoxTheme;
+  checkColor: string;
+  checkBackground: IBoxTheme;
 }
 
 export interface ICheckboxThemeState extends ThemeType {
