@@ -1,9 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
-import { getClassName } from '@kibalabs/core';
 
-import { IMoleculeProps, defaultMoleculeProps } from '../moleculeProps';
-import { InputFrame, IInputFrameTheme } from '../inputFrame';
+import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
+
+import { IInputFrameTheme, InputFrame } from '../inputFrame';
+import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 
 export interface IMultiLineInputTheme {
