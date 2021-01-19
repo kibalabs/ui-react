@@ -73,10 +73,7 @@ export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement 
     const fontSize = 24;
     // Make the textarea smaller when lines are removed
     const previousRows: number = event.target.rows;
-    console.log('previousRows', previousRows);
-    console.log('event.target.scrollHeight', event.target.scrollHeight);
     const currentRows = Math.floor(event.target.scrollHeight / fontSize);
-    console.log('currentRows', currentRows);
     // eslint-disable-next-line no-param-reassign
     event.target.rows = props.minRowCount;
     if (currentRows === previousRows) {
