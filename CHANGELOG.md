@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+## [0.8.3] - 2021-01-19
+
+### Added
 - [MINOR] Created `TitledCollapsibleBox` atom component
 - [MINOR] Created `StatefulTitledCollapsibleBox` atom component
 - [MINOR] Created `Checkbox` atom component
