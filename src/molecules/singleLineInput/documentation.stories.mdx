@@ -27,8 +27,13 @@ export const Template = (args) => (
 
 
 <Canvas>
-  <Story name='Value'>
-    <SingleLineInput value='Sample Text'/>
+  <Story name='Stateful Example'>
+    {() => {
+      const [value, setValue] = React.useState('');
+      return (
+        <SingleLineInput value={value} onValueChanged={setValue} />
+      );
+    }}
   </Story>
 </Canvas>
 
