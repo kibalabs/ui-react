@@ -20,12 +20,15 @@ const StyledSingleLineInput = styled.input`
   overflow: hidden;
   white-space: nowrap;
   box-shadow: none;
+
   &:hover {
     box-shadow: none;
   }
+
   &:focus {
     outline: none;
   }
+  
   &.disabled {
     pointer-events: none;
   }

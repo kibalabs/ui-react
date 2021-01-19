@@ -17,16 +17,18 @@ const StyledMultiLineTextArea = styled.textarea`
   border: none;
   outline: none;
   cursor: text;
-  overflow: hidden;
+  overflow-y: auto;
   resize: none;
-  padding: 1px 0;
-  margin: 1px;
+  box-shadow: none;
+
   &:hover {
     box-shadow: none;
   }
+
   &:focus {
     outline: none;
   }
+
   &.disabled {
     pointer-events: none;
   }
@@ -67,11 +69,14 @@ export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement 
   };
 
   const onValueChanged = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    // TODO(krishan711): get the font size from the theme!
-    const fontSize = 16;
+    // TODO(krishan711): get the font size from the theme! Also, not sure why this works with 24, seems like it should be 16!
+    const fontSize = 24;
     // Make the textarea smaller when lines are removed
     const previousRows: number = event.target.rows;
+    console.log('previousRows', previousRows);
+    console.log('event.target.scrollHeight', event.target.scrollHeight);
     const currentRows = Math.floor(event.target.scrollHeight / fontSize);
+    console.log('currentRows', currentRows);
     // eslint-disable-next-line no-param-reassign
     event.target.rows = props.minRowCount;
     if (currentRows === previousRows) {
