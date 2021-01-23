@@ -14,6 +14,7 @@ interface IStyledResponsiveContainingViewProps extends IWrapperProps {
   size: ResponsiveField<number>;
   isFullWidth: boolean;
   shouldIncludeMaxSize: boolean;
+  centerHorizontally: boolean;
 }
 
 export const getGridItemSizeCss = (totalColumnCount: number, columnCount: number, baseSize = '100%'): string => {
@@ -53,6 +54,8 @@ const StyledResponsiveContainingView = wrappingComponent((Component: React.Compo
       margin-right: auto;
       margin-left: auto;
     } */
+    margin-left: ${(props: IStyledResponsiveContainingViewProps): string => (props.centerHorizontally ? 'auto' : '0')};
+    margin-right: ${(props: IStyledResponsiveContainingViewProps): string => (props.centerHorizontally ? 'auto' : '0')};
   `;
 });
 
@@ -62,6 +65,7 @@ export interface IResponsiveContainingViewProps extends IWrapperProps {
   sizeResponsive?: ResponsiveField<number>;
   isFullWidth?: boolean;
   shouldIncludeMaxSize?: boolean;
+  centerdHorizontally: boolean;
 }
 
 export const ResponsiveContainingView = (props: IResponsiveContainingViewProps): React.ReactElement => {
