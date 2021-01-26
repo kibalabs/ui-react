@@ -50,10 +50,6 @@ const StyledResponsiveContainingView = wrappingComponent((Component: React.Compo
     max-width: 100%;
     width: ${(props: IStyledResponsiveContainingViewProps): string => (props.isFullWidth ? '100%' : 'auto')};
     ${(props: IStyledResponsiveContainingViewProps): string => columnCountsToCss(props.size, props.theme, props.shouldIncludeMaxSize)};
-    /* &.centered {
-      margin-right: auto;
-      margin-left: auto;
-    } */
     margin-left: ${(props: IStyledResponsiveContainingViewProps): string => (props.centerHorizontally ? 'auto' : '0')};
     margin-right: ${(props: IStyledResponsiveContainingViewProps): string => (props.centerHorizontally ? 'auto' : '0')};
   `;
