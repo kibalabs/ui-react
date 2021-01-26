@@ -39,19 +39,19 @@ export const Template = (args) => (
 
 <Canvas>
   <Story name='Success Message'>
-  {() => {
-    const [value, setValue] = React.useState('');
-    return <SingleLineInput inputWrapperVariant='success' messageText='Success message' value={value} onValueChanged={setValue} />
-  }}
+    {() => {
+      const [value, setValue] = React.useState('');
+      return <SingleLineInput inputWrapperVariant='success' messageText='Success message' value={value} onValueChanged={setValue} />
+    }}
   </Story>
 </Canvas>
 
 <Canvas>
   <Story name='Error Message'>
-  {() => {
-    const [value, setValue] = React.useState('');
-    return <SingleLineInput inputWrapperVariant='error' messageText='Error message' value={value} onValueChanged={setValue}/>
-  }}
+    {() => {
+      const [value, setValue] = React.useState('');
+      return <SingleLineInput inputWrapperVariant='error' messageText='Error message' value={value} onValueChanged={setValue}/>
+    }}
   </Story>
 </Canvas>
 

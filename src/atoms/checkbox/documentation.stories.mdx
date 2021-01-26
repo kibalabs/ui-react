@@ -39,12 +39,12 @@ export const Template = (args) => (
 
 <Canvas>
   <Story name='Disabled'>
-  {() => {
+    {() => {
       const [isChecked, setIsChecked] = React.useState(true);
       return (
-    <Checkbox isChecked={isChecked} onToggled={() => setIsChecked(!isChecked)} isDisabled={true} text='Disabled Checkbox'/>
-    );
-  }}
+        <Checkbox isChecked={isChecked} onToggled={() => setIsChecked(!isChecked)} isDisabled={true} text='Disabled Checkbox'/>
+      );
+    }}
   </Story>
 </Canvas>
 

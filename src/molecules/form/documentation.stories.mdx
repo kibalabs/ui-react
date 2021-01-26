@@ -28,20 +28,20 @@ export const Template = (args) => (
 ### Examples
 
 <Canvas>
-{/* Button is disabled, so that when Button is clicked the page doesn't change. */}
+  {/* Button is disabled, so that when Button is clicked the page doesn't change. */}
   <Story name='Error Message'>
-  {() => {
-    const [value, setValue] = React.useState('');
-    const [isLoading, setIsLoading] = React.useState(false);
-    
-    return (
-      <form isLoading={isLoading} onFormSubmitted={() => setValue('')}>
-        <SingleLineInput placeholderText='Enter Message' value={value} onValueChanged={setValue} messageText='Button is disabled'/>
-        <br />
-        <Button type='submit' isEnabled={false} variant='primary' text='Submit'/>
-      </form>
-    );
-  }}
+    {() => {
+      const [value, setValue] = React.useState('');
+      const [isLoading, setIsLoading] = React.useState(false);
+      
+      return (
+        <form isLoading={isLoading} onFormSubmitted={() => setValue('')}>
+          <SingleLineInput placeholderText='Enter Message' value={value} onValueChanged={setValue} messageText='Button is disabled'/>
+          <br />
+          <Button type='submit' isEnabled={false} variant='primary' text='Submit'/>
+        </form>
+      );
+    }}
   </Story>
 </Canvas>
 
