@@ -14,7 +14,6 @@ interface IStyledResponsiveContainingViewProps extends IWrapperProps {
   size: ResponsiveField<number>;
   isFullWidth: boolean;
   shouldIncludeMaxSize: boolean;
-  centerHorizontally: boolean;
 }
 
 export const getGridItemSizeCss = (totalColumnCount: number, columnCount: number, baseSize = '100%'): string => {
@@ -50,8 +49,10 @@ const StyledResponsiveContainingView = wrappingComponent((Component: React.Compo
     max-width: 100%;
     width: ${(props: IStyledResponsiveContainingViewProps): string => (props.isFullWidth ? '100%' : 'auto')};
     ${(props: IStyledResponsiveContainingViewProps): string => columnCountsToCss(props.size, props.theme, props.shouldIncludeMaxSize)};
-    margin-left: ${(props: IStyledResponsiveContainingViewProps): string => (props.centerHorizontally ? 'auto' : '0')};
-    margin-right: ${(props: IStyledResponsiveContainingViewProps): string => (props.centerHorizontally ? 'auto' : '0')};
+    &.centered {
+      margin-right: auto;
+      margin-left: auto;
+    }
   `;
 });
 
@@ -61,7 +62,7 @@ export interface IResponsiveContainingViewProps extends IWrapperProps {
   sizeResponsive?: ResponsiveField<number>;
   isFullWidth?: boolean;
   shouldIncludeMaxSize?: boolean;
-  centerHorizontally?: boolean;
+  isCenteredHorizontally?: boolean;
 }
 
 export const ResponsiveContainingView = (props: IResponsiveContainingViewProps): React.ReactElement => {
@@ -73,12 +74,11 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
   }
   return (
     <StyledResponsiveContainingView
-      className={getClassName(ResponsiveContainingView.displayName, props.className)}
+      className={getClassName(ResponsiveContainingView.displayName, props.className , props.isCenteredHorizontally && 'centered')}
       theme={theme}
       size={{ base: props.size, ...props.sizeResponsive }}
       isFullWidth={isFullWidth}
       shouldIncludeMaxSize={shouldIncludeMaxSize}
-      centerHorizontally={props.centerHorizontally}
     >
       {props.children}
     </StyledResponsiveContainingView>
@@ -88,4 +88,5 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
 ResponsiveContainingView.displayName = 'ResponsiveContainingView';
 ResponsiveContainingView.defaultProps = {
   ...defaultWrapperProps,
+  isCenteredHorizontally: true,
 };
