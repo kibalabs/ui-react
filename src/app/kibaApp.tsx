@@ -18,6 +18,8 @@ interface IKibaAppProps extends IMultiAnyChildProps {
 
 const StyledMainView = styled.div`
   min-height: 100vh;
+  /* NOTE(krishan711): the min-height doesn't propagate to children that have height:100% unless this is here (https://stackoverflow.com/questions/8468066) */
+  height: 1px;
 `;
 
 export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
