@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
+- [MINOR] Updated `KibaApp` to have a height so it can have children with `height:100%`
 
 ### Removed
 
