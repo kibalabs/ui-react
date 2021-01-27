@@ -74,7 +74,7 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
   }
   return (
     <StyledResponsiveContainingView
-      className={getClassName(ResponsiveContainingView.displayName, props.className , props.isCenteredHorizontally && 'centered')}
+      className={getClassName(ResponsiveContainingView.displayName, props.className, props.isCenteredHorizontally && 'centered')}
       theme={theme}
       size={{ base: props.size, ...props.sizeResponsive }}
       isFullWidth={isFullWidth}
