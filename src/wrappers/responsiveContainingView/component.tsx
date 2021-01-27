@@ -49,10 +49,10 @@ const StyledResponsiveContainingView = wrappingComponent((Component: React.Compo
     max-width: 100%;
     width: ${(props: IStyledResponsiveContainingViewProps): string => (props.isFullWidth ? '100%' : 'auto')};
     ${(props: IStyledResponsiveContainingViewProps): string => columnCountsToCss(props.size, props.theme, props.shouldIncludeMaxSize)};
-    /* &.centered {
+    &.centered {
       margin-right: auto;
       margin-left: auto;
-    } */
+    }
   `;
 });
 
@@ -62,6 +62,7 @@ export interface IResponsiveContainingViewProps extends IWrapperProps {
   sizeResponsive?: ResponsiveField<number>;
   isFullWidth?: boolean;
   shouldIncludeMaxSize?: boolean;
+  isCenteredHorizontally?: boolean;
 }
 
 export const ResponsiveContainingView = (props: IResponsiveContainingViewProps): React.ReactElement => {
@@ -73,7 +74,7 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
   }
   return (
     <StyledResponsiveContainingView
-      className={getClassName(ResponsiveContainingView.displayName, props.className)}
+      className={getClassName(ResponsiveContainingView.displayName, props.className, props.isCenteredHorizontally && 'centered')}
       theme={theme}
       size={{ base: props.size, ...props.sizeResponsive }}
       isFullWidth={isFullWidth}
@@ -87,4 +88,5 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
 ResponsiveContainingView.displayName = 'ResponsiveContainingView';
 ResponsiveContainingView.defaultProps = {
   ...defaultWrapperProps,
+  isCenteredHorizontally: true,
 };
