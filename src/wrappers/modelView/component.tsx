@@ -1,14 +1,4 @@
-import React from 'react';
-
-import { getClassName } from '@kibalabs/core';
-import styled from 'styled-components';
-
-import { IDimensionGuide } from '../../particles';
-import { useDimensions } from '../../theming';
-import { getResponsiveCss, ResponsiveField } from '../../util';
-import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
-import { wrappingComponent } from '../wrappingComponent';
-
+/* imports will be same as other wrapper components */
 /*
 interface for base component
 theme
