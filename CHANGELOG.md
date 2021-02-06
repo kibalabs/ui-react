@@ -10,6 +10,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
+
+### Removed
+
+## [0.8.4] - 2021-02-06
+
+### Added
+
+### Changed
 - [MINOR] Updated `ResponsiveContainingView` to have `isCenteredHorizontally` prop to center contents horizontally
 - [MINOR] Updated `KibaApp` to have a height so it can have children with `height:100%`
 
