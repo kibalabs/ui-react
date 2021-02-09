@@ -19,6 +19,7 @@ import { IDimensionGuide } from '../particles/dimensions';
 import { IFont } from '../particles/fonts';
 import { IIconTheme } from '../particles/icon';
 import { IImageTheme } from '../particles/image';
+import { IListItemTheme } from "../atoms/listItem";
 import { ILoadingSpinnerTheme } from '../particles/loadingSpinner';
 import { IPortalTheme } from '../particles/portal';
 import { ITextTheme } from '../particles/text';
@@ -51,6 +52,7 @@ export interface ITheme extends ThemeType {
   iconButtons: ThemeMap<IIconButtonTheme>,
   inputWrappers: ThemeMap<IInputWrapperTheme>,
   links: ThemeMap<ILinkTheme>,
+  listItems: ThemeMap<IListItemTheme>,
   prettyTexts: ThemeMap<IPrettyTextTheme>,
   webViews: ThemeMap<IWebViewTheme>,
   linePagers: ThemeMap<ILinePagerTheme>,
