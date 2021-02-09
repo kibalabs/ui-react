@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import { getClassName } from '@kibalabs/core';
 import { IMultiChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
 
-import { IMoleculeProps, defaultMoleculeProps } from '../moleculeProps';
-import {IListItemProps , IListItemTheme, ListItem} from '../../atoms/listItem';
+import { IListItemProps, IListItemTheme, ListItem } from '../../atoms/listItem';
+import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 // import { Direction } from '../../model';
 
 export interface IListTheme {
@@ -62,11 +63,11 @@ export const List = (props: IListProps): React.ReactElement => {
           variant={child.props.variant}
           itemKey={child.props.itemKey}
           isEnabled={child.props.isEnabled}
-        //   isCollapsible={child.props.isCollapsible !== undefined ? child.props.isCollapsible : props.isFullWidth}
-        //   isExpandable={child.props.isExpandable !== undefined ? child.props.isExpandable : props.isFullWidth}
+          //   isCollapsible={child.props.isCollapsible !== undefined ? child.props.isCollapsible : props.isFullWidth}
+          //   isExpandable={child.props.isExpandable !== undefined ? child.props.isExpandable : props.isFullWidth}
           onClicked={onListItemClicked}
         >
-            {child.props.children}
+          {child.props.children}
         </ListItem>
       ))}
     </StyledList>

@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import styled from 'styled-components';
 
+import { defaultComponentProps, IComponentProps } from '../../model';
 import { useBuiltTheme } from '../../theming';
-import { IComponentProps, defaultComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 import { IListItemTheme } from './theme';
 
