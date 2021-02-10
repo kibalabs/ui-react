@@ -2,7 +2,6 @@ export * from './moleculeProps';
 
 export * from './appDownloadButton';
 export * from './carousel';
-export * from './dialog';
 export * from './form';
 export * from './inputFrame';
 export * from './list';
