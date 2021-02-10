@@ -30,8 +30,6 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
   const dialogRef = React.useRef();
   const maxWidth = props.maxWidth || '400px';
   const maxHeight = props.maxHeight || '400px';
-  const isScrollableHorizontally = props.isScrollableHorizontally || true;
-  const isScrollableVertically = props.isScrollableVertically || true;
 
 
   const onBackdropClicked = (event: React.SyntheticEvent<HTMLDivElement>) => {
@@ -49,9 +47,14 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
 
   return props.isOpen ? (
     <StyledBackdrop id='backdrop' ref={dialogRef} onClick={onBackdropClicked}>
-      <Box variant='card' width='90%' maxWidth={maxWidth} maxHeight={maxHeight} isScrollableVertically={isScrollableVertically} isScrollableHorizontally={isScrollableHorizontally}>
+      <Box variant='card' width='90%' maxWidth={maxWidth} maxHeight={maxHeight} isScrollableVertically={props.isScrollableVertically} isScrollableHorizontally={props.isScrollableHorizontally}>
         {props.children}
       </Box>
     </StyledBackdrop>
   ) : null;
 };
+Dialog.defaultProps = {
+  isOpen: false,
+  isScrollableHorizontally: true,
+  isScrollableVertically: true
+}
