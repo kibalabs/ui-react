@@ -21,6 +21,8 @@ interface IDialogProps extends ISingleAnyChildProps {
   isOpen: boolean;
   maxHeight?: string;
   maxWidth?: string;
+  isScrollableVertically?: boolean;
+  isScrollableHorizontally?: boolean;
   onCloseClicked: () => void;
 }
 
@@ -28,6 +30,9 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
   const dialogRef = React.useRef();
   const maxWidth = props.maxWidth || '400px';
   const maxHeight = props.maxHeight || '400px';
+  const isScrollableHorizontally = props.isScrollableHorizontally || true;
+  const isScrollableVertically = props.isScrollableVertically || true;
+
 
   const onBackdropClicked = (event: React.SyntheticEvent<HTMLDivElement>) => {
     if (event.target === dialogRef.current) {
@@ -44,7 +49,7 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
 
   return props.isOpen ? (
     <StyledBackdrop id='backdrop' ref={dialogRef} onClick={onBackdropClicked}>
-      <Box variant='card' width='90%' maxWidth={maxWidth} maxHeight={maxHeight} isScrollableVertically={true} isScrollableHorizontally={true}>
+      <Box variant='card' width='90%' maxWidth={maxWidth} maxHeight={maxHeight} isScrollableVertically={isScrollableVertically} isScrollableHorizontally={isScrollableHorizontally}>
         {props.children}
       </Box>
     </StyledBackdrop>
