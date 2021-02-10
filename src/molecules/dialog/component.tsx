@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
-import {Box} from '../../particles/box';
 import styled from 'styled-components';
+
+import { Box } from '../../particles/box';
 
 const StyledBackdrop = styled.div`
   width: 100%;
