@@ -8,8 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
-- [MINOR] Created `List` molecule component
-- [MINOR] Created `List.Item` atom component
+- [MINOR] Created `List` molecule and `List.Item` atom
+
 ### Changed
 
 ### Removed

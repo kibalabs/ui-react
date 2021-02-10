@@ -12,12 +12,12 @@ import { List } from '.';
 <br/>
 
 export const Template = (args) => {
-  const [selectedListItemKey, setSelectedListItemKey] = React.useState();
+  const [selectedItemKey, setSelectedItemKey] = React.useState();
   return (
-    <List {...args} selectedListItemKey={args.selectedListItemKey || selectedListItemKey} onListItemKeySelected={args.setSelectedListItemKey || setSelectedListItemKey}>
-      <List.Item listItemKey={String(1)}>First</List.Item>
-      <List.Item listItemKey={String(2)}>Second</List.Item>
-      <List.Item listItemKey={String(3)}>Third</List.Item>
+    <List {...args} selectedItemKey={args.selectedItemKey || selectedItemKey} onItemClicked={args.setSelectedItemKey || setSelectedItemKey}>
+      <List.Item itemKey={String(1)}>First</List.Item>
+      <List.Item itemKey={String(2)}>Second</List.Item>
+      <List.Item itemKey={String(3)}>Third</List.Item>
     </List>
   )
 };
@@ -33,11 +33,21 @@ export const Template = (args) => {
 ### Examples
 
 <Canvas>
-  <Story name='Simple List' args={{}}>
-    <List onListItemKeySelected={(itemNumber) => console.log('Item' ,itemNumber , 'clicked')}>
-      <List.Item itemKey={1}>a</List.Item>
-      <List.Item itemKey={2}>b</List.Item>
-      <List.Item itemKey={3}>c</List.Item>
+  <Story name='Un-clickable List' args={{}}>
+    <List>
+      <List.Item itemKey={String(1)}>Item 1</List.Item>
+      <List.Item itemKey={String(2)}>Item 2</List.Item>
+      <List.Item itemKey={String(3)}>Item 3</List.Item>
+    </List>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Click without selecting List' args={{}}>
+    <List onItemClicked={(itemKey) => console.log(`clicked list item with key: ${itemKey}`)}>
+      <List.Item itemKey={String(1)}>Item 1</List.Item>
+      <List.Item itemKey={String(2)}>Item 2</List.Item>
+      <List.Item itemKey={String(3)}>Item 3</List.Item>
     </List>
   </Story>
 </Canvas>

@@ -50,7 +50,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const inputWrapperThemes = buildInputWrapperThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.inputWrappers);
   const linkBaseThemes = buildLinkBaseThemes(colors, dimensions, boxThemes, inputTheme?.linkBases);
   const linkThemes = buildLinkThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.links);
-  const listItemTheme = buildTabBarItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.listItems);
+  const listItemTheme = buildListItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.listItems);
   const pillThemes = buildPillThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.pills);
   const prettyTextThemes = buildPrettyTextThemes(colors, dimensions, textThemes, inputTheme?.prettyTexts);
   const webViewThemes = buildWebViewThemes(colors, dimensions, boxThemes, inputTheme?.webViews);

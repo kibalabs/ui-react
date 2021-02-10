@@ -14,53 +14,58 @@ interface IStyledListItemProps {
   isClickable: boolean;
 }
 
-const StyledListItem = styled.li<IStyledListItemProps>`
+const StyledListItem = styled.div<IStyledListItemProps>`
   ${(props: IStyledListItemProps): string => themeToCss(props.theme.normal.default.background)};
   cursor: ${(props: IStyledListItemProps): string => (props.isClickable ? 'pointer' : 'default')};
   outline: none;
-  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-clip: border-box;
   transition-duration: 0.3s;
 
   &:hover {
-    ${(props: IStyledListItemProps): string => themeToCss(props.theme.normal.hover?.background)};
+    ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.normal.hover?.background) : '')};
   }
   &:active {
-    ${(props: IStyledListItemProps): string => themeToCss(props.theme.normal.press?.background)};
+    ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.normal.press?.background) : '')};
   }
   &:focus {
-    ${(props: IStyledListItemProps): string => themeToCss(props.theme.normal.focus?.background)};
+    ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.normal.focus?.background) : '')};
   }
   &.disabled {
     cursor: auto;
-    ${(props: IStyledListItemProps): string => themeToCss(props.theme.disabled?.default?.background)};
+    ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.disabled?.default?.background) : '')};
     &:hover {
-      ${(props: IStyledListItemProps): string => themeToCss(props.theme.disabled?.hover?.background)};
+      ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.disabled?.hover?.background) : '')};
     }
     &:active {
-      ${(props: IStyledListItemProps): string => themeToCss(props.theme.disabled?.press?.background)};
+      ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.disabled?.press?.background) : '')};
     }
     &:focus {
-      ${(props: IStyledListItemProps): string => themeToCss(props.theme.disabled?.focus?.background)};
+      ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.disabled?.focus?.background) : '')};
     }
   }
-  // &.selected {
-  //   ${(props: IStyledListItemProps): string => themeToCss(props.theme.selected?.default?.background)};
-  //   &:hover {
-  //     ${(props: IStyledListItemProps): string => themeToCss(props.theme.selected?.hover?.background)};
-  //   }
-  //   &:active {
-  //     ${(props: IStyledListItemProps): string => themeToCss(props.theme.selected?.press?.background)};
-  //   }
-  //   &:focus {
-  //     ${(props: IStyledListItemProps): string => themeToCss(props.theme.selected?.focus?.background)};
-  //   }
-  // }
+  &.selected {
+    ${(props: IStyledListItemProps): string => themeToCss(props.theme.selected?.default?.background)};
+    &:hover {
+      ${(props: IStyledListItemProps): string => themeToCss(props.theme.selected?.hover?.background)};
+    }
+    &:active {
+      ${(props: IStyledListItemProps): string => themeToCss(props.theme.selected?.press?.background)};
+    }
+    &:focus {
+      ${(props: IStyledListItemProps): string => themeToCss(props.theme.selected?.focus?.background)};
+    }
+  }
 `;
 
 export interface IListItemProps extends IComponentProps<IListItemTheme>, ISingleAnyChildProps {
   itemKey: string;
-  isEnabled: boolean;
-  onClicked?(listItemKey: string): void;
+  isDisabled: boolean;
+  isSelected?: boolean;
+  onClicked?(itemKey: string): void;
 }
 
 export const ListItem = (props: IListItemProps): React.ReactElement => {
@@ -73,10 +78,10 @@ export const ListItem = (props: IListItemProps): React.ReactElement => {
     <StyledListItem
       id={props.id}
       key={props.itemKey}
-      className={getClassName(ListItem.displayName, props.className, !props.isEnabled && 'disabled')}
+      className={getClassName(ListItem.displayName, props.className, props.isDisabled && 'disabled', props.isSelected && 'selected')}
       theme={theme}
       onClick={onClicked}
-      isClickable={onClicked !== undefined}
+      isClickable={onClicked != null}
     >
       { props.children }
     </StyledListItem>
@@ -86,5 +91,4 @@ export const ListItem = (props: IListItemProps): React.ReactElement => {
 ListItem.displayName = 'ListItem';
 ListItem.defaultProps = {
   ...defaultComponentProps,
-  isEnabled: true,
 };
