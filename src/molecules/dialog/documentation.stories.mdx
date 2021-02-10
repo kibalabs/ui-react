@@ -1,0 +1,45 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { Text } from '../../particles';
+import { Button} from '../../atoms';
+import { Dialog } from '.';
+
+<Meta
+  component={Dialog}
+  title={'Molecules/Dialog'}
+/>
+
+# Dialog
+
+<br/>
+
+export const Template = () => (
+  <Dialog {...args} />
+);
+
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+# Examples
+<Canvas >
+  <Story name='Simple Dialog'>
+  {() => {
+  const [openDialog, setOpenDialog] = React.useState(false);
+  return (
+    <div>
+  <Button onClicked={() => setOpenDialog(true)} text='Open Dialog'/>
+  <Dialog {...args} isOpen={openDialog} onCloseClicked={() => setOpenDialog(!openDialog)}>
+    <Box variant='card'>
+        <Text>I'm a Dialog</Text>
+    </Box>
+  </Dialog>
+  </div>);
+  }}
+  </Story>
+</Canvas>
