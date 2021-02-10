@@ -9,8 +9,10 @@ export const buildListItemThemes = (colors: IColorGuide, dimensions: IDimensionG
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          padding: `${dimensions.padding} ${dimensions.paddingWide}`,
+          padding: `${dimensions.paddingWide} ${dimensions.paddingWide}`,
           'background-color': 'transparent',
+          'border-radius': `${dimensions.borderRadius} ${dimensions.borderRadius} ${dimensions.borderRadius} ${dimensions.borderRadius}`,
+          'border-width': dimensions.borderWidth,
         }),
       },
       hover: {

@@ -34,7 +34,7 @@ export const Template = (args) => {
 
 <Canvas>
   <Story name='Simple List' args={{}}>
-    <List onListItemKeySelected={(ind) => console.log('Item' ,ind , 'clicked')}>
+    <List onListItemKeySelected={(itemNumber) => console.log('Item' ,itemNumber , 'clicked')}>
       <List.Item itemKey={1}>a</List.Item>
       <List.Item itemKey={2}>b</List.Item>
       <List.Item itemKey={3}>c</List.Item>
