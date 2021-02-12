@@ -56,5 +56,5 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
 Dialog.defaultProps = {
   isOpen: false,
   isScrollableHorizontally: true,
-  isScrollableVertically: true
-}
+  isScrollableVertically: true,
+};
