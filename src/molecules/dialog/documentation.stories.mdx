@@ -31,19 +31,20 @@ export const Template = (args) => (
 # Examples
 <Canvas >
   <Story name='Simple Dialog'>
-  {() => {
-  const [openDialog, setOpenDialog] = React.useState(false);
-  return (
-    <div>
-  <Button variant='primary' onClicked={() => setOpenDialog(true)} text='Open Dialog'/>
-  <Dialog isOpen={openDialog} onCloseClicked={() => setOpenDialog(!openDialog)}>
-    <Stack direction={Direction.Vertical}>
-      <Text alignment={TextAlignment.Center}>I'm a Dialog</Text>
-      <br />
-      <Button variant='primary' text='Close' onClicked={() => setOpenDialog(!openDialog)}/> 
-    </Stack>
-  </Dialog>
-  </div>);
-  }}
+    {() => {
+      const [openDialog, setOpenDialog] = React.useState(false);
+      return (
+        <React.Fragment>
+          <Button variant='primary' onClicked={() => setOpenDialog(true)} text='Open Dialog' />
+          <Dialog isOpen={openDialog} onCloseClicked={() => setOpenDialog(!openDialog)}>
+            <Stack direction={Direction.Vertical}>
+              <Text alignment={TextAlignment.Center}>I'm a Dialog</Text>
+              <br />
+              <Button variant='primary' text='Close' onClicked={() => setOpenDialog(!openDialog)}/>
+            </Stack>
+          </Dialog>
+        </React.Fragment>
+      );
+    }}
   </Story>
 </Canvas>
