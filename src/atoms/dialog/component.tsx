@@ -31,7 +31,6 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
   const maxWidth = props.maxWidth || '400px';
   const maxHeight = props.maxHeight || '400px';
 
-
   const onBackdropClicked = (event: React.SyntheticEvent<HTMLDivElement>) => {
     if (event.target === dialogRef.current) {
       props.onCloseClicked();
