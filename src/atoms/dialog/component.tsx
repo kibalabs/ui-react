@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
@@ -15,6 +16,10 @@ const StyledBackdrop = styled.div`
   align-items: center;
   left: 0;
   top: 0;
+
+  &.dialog-closed {
+    display: none;
+  }
 `;
 
 interface IDialogProps extends ISingleAnyChildProps {
@@ -44,16 +49,16 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
     }
   });
 
-  return props.isOpen ? (
-    <StyledBackdrop id='backdrop' ref={dialogRef} onClick={onBackdropClicked}>
+  return <StyledBackdrop id='backdrop' className={getClassName(Dialog.displayName, !props.isOpen && 'dialog-closed')} ref={dialogRef} onClick={onBackdropClicked}>
       <Box variant='card' width='90%' maxWidth={maxWidth} maxHeight={maxHeight} isScrollableVertically={props.isScrollableVertically} isScrollableHorizontally={props.isScrollableHorizontally}>
         {props.children}
       </Box>
-    </StyledBackdrop>
-  ) : null;
+    </StyledBackdrop>;
 };
 Dialog.defaultProps = {
   isOpen: false,
   isScrollableHorizontally: true,
   isScrollableVertically: true,
 };
+
+Dialog.displayName = 'Dialog';
