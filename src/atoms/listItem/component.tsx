@@ -21,7 +21,7 @@ const StyledListItem = styled.div<IStyledListItemProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   background-clip: border-box;
   transition-duration: 0.3s;
 
@@ -62,10 +62,10 @@ const StyledListItem = styled.div<IStyledListItemProps>`
 `;
 
 export interface IListItemProps extends IComponentProps<IListItemTheme>, ISingleAnyChildProps {
-  itemKey: string | number;
+  itemKey: string;
   isDisabled?: boolean;
   isSelected?: boolean;
-  onClicked?(itemKey: string | number): void;
+  onClicked?(itemKey: string): void;
 }
 
 export const ListItem = (props: IListItemProps): React.ReactElement => {
