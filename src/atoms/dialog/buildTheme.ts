@@ -7,7 +7,8 @@ import { IDialogTheme } from './theme';
 export const buildDialogThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IDialogTheme>>): ThemeMap<IDialogTheme> => {
   const defaultDialogTheme = mergeTheme<IDialogTheme>({
     backdropColor: 'rgba(0, 0, 0, 0.8)',
-    background: mergeTheme(boxThemes.default),
+    background: mergeTheme(boxThemes.default, boxThemes.card, {
+    }),
   }, base?.default);
 
   return {

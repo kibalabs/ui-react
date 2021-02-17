@@ -47,7 +47,7 @@ export interface ITheme extends ThemeType {
   bulletLists: ThemeMap<IBulletListTheme>,
   bulletTexts: ThemeMap<IBulletTextTheme>,
   buttons: ThemeMap<IButtonTheme>,
-  dialog: ThemeMap<IDialogTheme>,
+  dialogs: ThemeMap<IDialogTheme>,
   checkboxes: ThemeMap<ICheckboxTheme>,
   linkBases: ThemeMap<ILinkBaseTheme>,
   iconButtons: ThemeMap<IIconButtonTheme>,

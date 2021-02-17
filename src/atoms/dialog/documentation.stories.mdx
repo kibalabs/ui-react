@@ -8,7 +8,7 @@ import { Dialog } from '.';
 
 <Meta
   component={Dialog}
-  title={'Molecules/Dialog'}
+  title={'Atoms/Dialog'}
 />
 
 # Dialog
@@ -29,6 +29,7 @@ export const Template = (args) => (
 <ArgsTable story={'Default'} />
 
 # Examples
+
 <Canvas >
   <Story name='Simple Dialog'>
     {() => {
@@ -37,11 +38,26 @@ export const Template = (args) => (
         <React.Fragment>
           <Button variant='primary' onClicked={() => setOpenDialog(true)} text='Open Dialog' />
           <Dialog isOpen={openDialog} onCloseClicked={() => setOpenDialog(!openDialog)}>
-            <Stack direction={Direction.Vertical}>
+            <Stack direction={Direction.Vertical} shouldAddGutters={true}>
               <Text alignment={TextAlignment.Center}>I'm a Dialog</Text>
-              <br />
               <Button variant='primary' text='Close' onClicked={() => setOpenDialog(!openDialog)}/>
             </Stack>
+          </Dialog>
+        </React.Fragment>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Non-dismissable Dialog'>
+    {() => {
+      const [openDialog, setOpenDialog] = React.useState(false);
+      return (
+        <React.Fragment>
+          <Button variant='primary' onClicked={() => setOpenDialog(true)} text='Open Dialog' />
+          <Dialog isOpen={openDialog} onCloseClicked={() => setOpenDialog(!openDialog)} isDismissableByBackdrop={false} isDismissableByEscape={false}>
+            <Text alignment={TextAlignment.Center}>I'm not going anywhere</Text>
           </Dialog>
         </React.Fragment>
       );
