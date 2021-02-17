@@ -5,7 +5,7 @@ import { buildCheckboxThemes } from '../atoms';
 import { buildBulletListThemes } from '../atoms/bulletList';
 import { buildBulletTextThemes } from '../atoms/bulletText';
 import { buildButtonThemes } from '../atoms/button';
-import { buildDialogThemes } from "../atoms/dialog";
+import { buildDialogThemes } from '../atoms/dialog';
 import { buildIconButtonThemes } from '../atoms/iconButton';
 import { buildInputWrapperThemes } from '../atoms/inputWrapper';
 import { buildLinePagerThemes } from '../atoms/linePager';
