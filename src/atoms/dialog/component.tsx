@@ -54,8 +54,8 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
     }
   };
 
-  // NOTE(krishan711): this doesn't pass the dependencies in as it should
-  // NOTE(krishan711): this should allow the event object to be provided as a generic
+  // NOTE(krishan711): useEventListener doesn't pass the dependencies in as it should
+  // NOTE(krishan711): useEventListener should allow the event object to be provided as a generic
   // @ts-ignore
   useEventListener(document, 'keydown', (event: React.KeyboardEvent): void => {
     if (props.isClosableByEscape && props.isOpen && event.key === 'Escape') {
