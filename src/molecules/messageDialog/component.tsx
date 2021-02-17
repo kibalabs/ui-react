@@ -1,16 +1,15 @@
 import React from 'react';
 
-import { Button, Dialog, IButtonTheme, IconButton } from '../../atoms';
+import { Button, Dialog, IconButton } from '../../atoms';
 import { Stack } from '../../layouts';
 import { Alignment, Direction } from '../../model';
-import { KibaIcon, PaddingSize, Text, TextAlignment } from '../../particles';
+import { KibaIcon, PaddingSize, Spacing, Text, TextAlignment } from '../../particles';
 import { IMoleculeProps } from '../moleculeProps';
 
-export interface IActionButtonTheme {
-  actionButtonTheme: IButtonTheme;
+export interface IMessageDialogTheme {
 }
 
-interface IMessageDialogProps extends IMoleculeProps<IActionButtonTheme> {
+interface IMessageDialogProps extends IMoleculeProps<IMessageDialogTheme> {
   isOpen: boolean;
   maxHeight?: string;
   maxWidth?: string;
@@ -29,7 +28,8 @@ export const MessageDialog = (props: IMessageDialogProps): React.ReactElement | 
   return (
     <Dialog isOpen={props.isOpen} onCloseClicked={props.onCloseClicked} maxHeight={props.maxHeight} maxWidth={props.maxWidth}>
       <Stack direction={Direction.Vertical} shouldAddGutters={true} defaultGutter={PaddingSize.Wide}>
-        <Stack direction={Direction.Horizontal} contentAlignment={Alignment.Fill} childAlignment={Alignment.Center}>
+        <Stack direction={Direction.Horizontal} contentAlignment={Alignment.Fill} childAlignment={Alignment.Center} shouldAddGutters={true}>
+          <Spacing />
           <Text variant='header3' alignment={TextAlignment.Center}>{props.title}</Text>
           {props.onCloseClicked && (
             <IconButton icon={<KibaIcon iconId='ion-close' />} onClicked={props.onCloseClicked} />
@@ -39,8 +39,8 @@ export const MessageDialog = (props: IMessageDialogProps): React.ReactElement | 
         <Stack.Item gutterBefore={PaddingSize.Default}>
           <Stack direction={Direction.Horizontal} shouldAddGutters={true} defaultGutter={PaddingSize.Wide}>
             <Stack.Item growthFactor={1} shrinkFactor={1} />
-            <Button theme={props.theme?.actionButtonTheme} variant='secondary' onClicked={props.onCloseClicked} text={cancelButtonText} />
-            <Button theme={props.theme?.actionButtonTheme} variant='primary' onClicked={props.onConfirmClicked} text={confirmButtonText} />
+            <Button variant='secondary' onClicked={props.onCloseClicked} text={cancelButtonText} />
+            <Button variant='primary' onClicked={props.onConfirmClicked} text={confirmButtonText} />
             <Stack.Item growthFactor={1} shrinkFactor={1} />
           </Stack>
         </Stack.Item>

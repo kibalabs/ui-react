@@ -18,7 +18,7 @@ export const Template = (args) => (
 
 
 <Canvas withToolbar={true} withSource={'none'}>
-  <Story name='Default' args={{}}>
+  <Story name='Default' args={{'title': 'Here is something to choose', 'message': 'And here is some detail about the important choice you are about to make. What do you think?'}}>
     {Template.bind({})}
   </Story>
 </Canvas>
@@ -33,7 +33,7 @@ export const Template = (args) => (
       return (
         <React.Fragment>
           <Button variant='primary' onClicked={() => setOpenDialog(true)} text='Open Dialog' />
-          <MessageDialog 
+          <MessageDialog
             isOpen={openDialog}
             title='Message Dialog'
             message='This is a simple message dialog with two  buttons'
