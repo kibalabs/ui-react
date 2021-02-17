@@ -46,7 +46,11 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const checkboxThemes = buildCheckboxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.checkboxes);
   const bulletListThemes = buildBulletListThemes(colors, dimensions, inputTheme?.bulletLists);
   const bulletTextThemes = buildBulletTextThemes(colors, dimensions, textThemes, inputTheme?.bulletTexts);
+<<<<<<< HEAD
+  const dialogTheme = buildDialogThemes(colors, dimensions, boxThemes, inputTheme?.dialog);
+=======
   const dialogThemes = buildDialogThemes(colors, dimensions, boxThemes, inputTheme?.dialogs);
+>>>>>>> main
   const iconButtonThemes = buildIconButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.iconButtons);
   const inputWrapperThemes = buildInputWrapperThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.inputWrappers);
   const linkBaseThemes = buildLinkBaseThemes(colors, dimensions, boxThemes, inputTheme?.linkBases);
@@ -81,7 +85,11 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     bulletTexts: bulletTextThemes,
     buttons: buttonThemes,
     checkboxes: checkboxThemes,
+<<<<<<< HEAD
+    dialog: dialogTheme,
+=======
     dialogs: dialogThemes,
+>>>>>>> main
     iconButtons: iconButtonThemes,
     inputWrappers: inputWrapperThemes,
     linkBases: linkBaseThemes,

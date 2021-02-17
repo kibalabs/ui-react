@@ -8,7 +8,11 @@ import { Dialog } from '.';
 
 <Meta
   component={Dialog}
+<<<<<<< HEAD
+  title={'Molecules/Dialog'}
+=======
   title={'Atoms/Dialog'}
+>>>>>>> main
 />
 
 # Dialog
@@ -29,6 +33,10 @@ export const Template = (args) => (
 <ArgsTable story={'Default'} />
 
 # Examples
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 <Canvas >
   <Story name='Simple Dialog'>
     {() => {
@@ -37,8 +45,14 @@ export const Template = (args) => (
         <React.Fragment>
           <Button variant='primary' onClicked={() => setOpenDialog(true)} text='Open Dialog' />
           <Dialog isOpen={openDialog} onCloseClicked={() => setOpenDialog(!openDialog)}>
+<<<<<<< HEAD
+            <Stack direction={Direction.Vertical}>
+              <Text alignment={TextAlignment.Center}>I'm a Dialog</Text>
+              <br />
+=======
             <Stack direction={Direction.Vertical} shouldAddGutters={true}>
               <Text alignment={TextAlignment.Center}>I'm a Dialog</Text>
+>>>>>>> main
               <Button variant='primary' text='Close' onClicked={() => setOpenDialog(!openDialog)}/>
             </Stack>
           </Dialog>
@@ -47,6 +61,8 @@ export const Template = (args) => (
     }}
   </Story>
 </Canvas>
+<<<<<<< HEAD
+=======
 
 <Canvas>
   <Story name='Non-dismissable Dialog'>
@@ -63,3 +79,4 @@ export const Template = (args) => (
     }}
   </Story>
 </Canvas>
+>>>>>>> main
