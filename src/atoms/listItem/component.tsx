@@ -62,10 +62,10 @@ const StyledListItem = styled.div<IStyledListItemProps>`
 `;
 
 export interface IListItemProps extends IComponentProps<IListItemTheme>, ISingleAnyChildProps {
-  itemKey: string;
-  isDisabled: boolean;
+  itemKey: string | number;
+  isDisabled?: boolean;
   isSelected?: boolean;
-  onClicked?(itemKey: string): void;
+  onClicked?(itemKey: string | number): void;
 }
 
 export const ListItem = (props: IListItemProps): React.ReactElement => {
@@ -90,5 +90,6 @@ export const ListItem = (props: IListItemProps): React.ReactElement => {
 
 ListItem.displayName = 'ListItem';
 ListItem.defaultProps = {
+  isDisabled: false,
   ...defaultComponentProps,
 };
