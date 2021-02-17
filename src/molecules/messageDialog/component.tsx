@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Dialog } from '../../atoms';
-import { Direction } from '../../model';
+import { Button, Dialog, IconButton } from '../../atoms';
+import { Direction, Alignment } from '../../model';
 import { Stack } from '../../layouts';
-import { PaddingSize, Text, TextAlignment } from '../../particles';
+import { PaddingSize, Text, TextAlignment, KibaIcon } from '../../particles';
 import { IButtonTheme } from '../../atoms';
 import { IMoleculeProps } from "../moleculeProps";
 
@@ -29,7 +29,12 @@ export const MessageDialog = (props: IMessageDialogProps): React.ReactElement | 
 
 	return <Dialog isOpen={props.isOpen} onCloseClicked={props.onCloseClicked} maxHeight={props.maxHeight} maxWidth={props.maxWidth}>
 <Stack direction={Direction.Vertical} shouldAddGutters={true} defaultGutter={PaddingSize.Wide}>
-        <Text variant='header3' alignment={TextAlignment.Center}>{props.title}</Text>
+        <Stack direction={Direction.Horizontal} contentAlignment={Alignment.Fill} childAlignment={Alignment.Center}>
+          <Text variant='header3' alignment={TextAlignment.Center}>{props.title}</Text>
+          {props.onCloseClicked && (
+            <IconButton icon={<KibaIcon iconId='ion-close' />} onClicked={props.onCloseClicked} />
+          )}
+        </Stack>
         <Text alignment={TextAlignment.Center}>{props.message}</Text>
         <Stack.Item gutterBefore={PaddingSize.Default}>
           <Stack direction={Direction.Horizontal} shouldAddGutters={true} defaultGutter={PaddingSize.Wide}>
