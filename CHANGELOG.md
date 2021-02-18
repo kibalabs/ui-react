@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Added
 - [MINOR] Created `Dialog` atom component
+- [MINOR] Created `MessageDialog` molecule component
 - [MINOR] Created `List` molecule and `List.Item` atom
 
 ### Changed
