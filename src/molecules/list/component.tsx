@@ -43,10 +43,6 @@ interface IListProps extends IMoleculeProps<IListTheme>, IMultiChildProps<IListI
 }
 
 export const List = (props: IListProps): React.ReactElement => {
-  if (React.Children.count(props.children) === 0) {
-    throw new Error('List must have at least one child');
-  }
-
   const onItemClicked = !props.onItemClicked ? undefined : (itemKey: string): void => {
     props.onItemClicked(itemKey);
   };
