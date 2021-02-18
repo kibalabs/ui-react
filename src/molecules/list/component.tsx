@@ -65,7 +65,7 @@ export const List = (props: IListProps): React.ReactElement => {
             key={child.props.itemKey}
             id={child.props.id}
             className={child.props.className}
-            theme={props.theme?.ListItemTheme}
+            theme={props.theme?.listItemTheme}
             variant={child.props.variant}
             itemKey={child.props.itemKey}
             isDisabled={child.props.isDisabled}
