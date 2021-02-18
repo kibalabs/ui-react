@@ -70,7 +70,8 @@ export interface IListItemProps extends IComponentProps<IListItemTheme>, ISingle
 
 export const ListItem = (props: IListItemProps): React.ReactElement => {
   const onClicked = !props.onClicked ? undefined : (): void => {
-    props.onClicked(props.itemKey);
+    // this is to remove the type check error
+    if(props.onClicked) props.onClicked(props.itemKey);
   };
 
   const theme = useBuiltTheme('listItems', props.variant, props.theme);

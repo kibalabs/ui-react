@@ -4,7 +4,7 @@ import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../parti
 import { mergeTheme, ThemeMap } from '../../util';
 import { IListItemTheme } from './theme';
 
-export const buildListItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base: RecursivePartial<Record<string, IListItemTheme>>): ThemeMap<IListItemTheme> => {
+export const buildListItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IListItemTheme>>): ThemeMap<IListItemTheme> => {
   const defaultListItemTheme = mergeTheme<IListItemTheme>({
     normal: {
       default: {
