@@ -11,6 +11,7 @@ import { buildInputWrapperThemes } from '../atoms/inputWrapper';
 import { buildLinePagerThemes } from '../atoms/linePager';
 import { buildLinkThemes } from '../atoms/link';
 import { buildLinkBaseThemes } from '../atoms/linkBase';
+import { buildListItemThemes } from '../atoms/listItem';
 import { buildPillThemes } from '../atoms/pill';
 import { buildPrettyTextThemes } from '../atoms/prettyText';
 import { buildProgressCounterItemThemes } from '../atoms/progressCounterItem';
@@ -51,6 +52,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const inputWrapperThemes = buildInputWrapperThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.inputWrappers);
   const linkBaseThemes = buildLinkBaseThemes(colors, dimensions, boxThemes, inputTheme?.linkBases);
   const linkThemes = buildLinkThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.links);
+  const listItemTheme = buildListItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.listItems);
   const pillThemes = buildPillThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.pills);
   const prettyTextThemes = buildPrettyTextThemes(colors, dimensions, textThemes, inputTheme?.prettyTexts);
   const webViewThemes = buildWebViewThemes(colors, dimensions, boxThemes, inputTheme?.webViews);
@@ -86,6 +88,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     inputWrappers: inputWrapperThemes,
     linkBases: linkBaseThemes,
     links: linkThemes,
+    listItems: listItemTheme,
     prettyTexts: prettyTextThemes,
     webViews: webViewThemes,
     linePagers: linePagerThemes,

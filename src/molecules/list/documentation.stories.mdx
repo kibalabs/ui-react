@@ -1,0 +1,57 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { List } from '.';
+
+<Meta
+  component={List}
+  title={'Molecules/List'}
+/>
+
+# List
+
+<br/>
+
+export const Template = (args) => {
+  const [selectedItemKey, setSelectedItemKey] = React.useState();
+  return (
+    <List {...args} selectedItemKey={args.selectedItemKey || selectedItemKey} onItemClicked={args.setSelectedItemKey || setSelectedItemKey}>
+      <List.Item itemKey={String(1)}>First</List.Item>
+      <List.Item itemKey={String(2)}>Second</List.Item>
+      <List.Item itemKey={String(3)}>Third</List.Item>
+    </List>
+  )
+};
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Un-clickable List' args={{}}>
+    <List>
+      <List.Item itemKey={String(1)}>Item 1</List.Item>
+      <List.Item itemKey={String(2)}>Item 2</List.Item>
+      <List.Item itemKey={String(3)}>Item 3</List.Item>
+    </List>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Click without selecting List' args={{}}>
+    <List onItemClicked={(itemKey) => console.log(`clicked list item with key: ${itemKey}`)}>
+      <List.Item itemKey={String(1)}>Item 1</List.Item>
+      <List.Item itemKey={String(2)}>Item 2</List.Item>
+      <List.Item itemKey={String(3)}>Item 3</List.Item>
+    </List>
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO

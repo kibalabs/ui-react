@@ -8,6 +8,7 @@ import { IInputWrapperTheme } from '../atoms/inputWrapper';
 import { ILinePagerTheme } from '../atoms/linePager';
 import { ILinkTheme } from '../atoms/link';
 import { ILinkBaseTheme } from '../atoms/linkBase';
+import { IListItemTheme } from '../atoms/listItem';
 import { IPillTheme } from '../atoms/pill';
 import { IPrettyTextTheme } from '../atoms/prettyText';
 import { IProgressCounterItemTheme } from '../atoms/progressCounterItem';
@@ -53,6 +54,7 @@ export interface ITheme extends ThemeType {
   iconButtons: ThemeMap<IIconButtonTheme>,
   inputWrappers: ThemeMap<IInputWrapperTheme>,
   links: ThemeMap<ILinkTheme>,
+  listItems: ThemeMap<IListItemTheme>,
   prettyTexts: ThemeMap<IPrettyTextTheme>,
   webViews: ThemeMap<IWebViewTheme>,
   linePagers: ThemeMap<ILinePagerTheme>,
