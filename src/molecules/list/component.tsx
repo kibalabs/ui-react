@@ -8,7 +8,7 @@ import { IListItemProps, IListItemTheme, ListItem } from '../../atoms/listItem';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface IListTheme {
-  ListItemTheme: IListItemTheme;
+  listItemTheme: IListItemTheme;
 }
 
 interface IStyledListProps {
