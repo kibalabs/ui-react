@@ -7,6 +7,7 @@ export * from './inputFrame';
 export * from './list';
 export * from './markdown';
 export * from './markdownText';
+export * from './messageDialog';
 export * from './multiLineInput';
 export * from './progressCounter';
 export * from './singleLineInput';
