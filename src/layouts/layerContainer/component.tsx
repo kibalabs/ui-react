@@ -10,8 +10,8 @@ interface ILayerProps extends IOptionalSingleAnyChildProps {
   className?: string;
   isFullWidth?: boolean;
   isFullHeight?: boolean;
-  alignmentVertical: Alignment;
-  alignmentHorizontal: Alignment;
+  alignmentVertical?: Alignment;
+  alignmentHorizontal?: Alignment;
 }
 
 class Layer extends React.Component<ILayerProps> {
