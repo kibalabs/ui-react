@@ -1,8 +1,9 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 import { LayerContainer, ILayerContainerProps } from '.';
-import { Direction } from '../../model';
-import { KibaIcon } from '../../particles';
+import { Direction, Alignment } from '../../model';
+import { KibaIcon, Box } from '../../particles';
+import { BackgroundView } from '../../wrappers';
 
 <Meta
   component={LayerContainer}
@@ -15,8 +16,10 @@ import { KibaIcon } from '../../particles';
 
 export const Template = (args) => (
   <LayerContainer {...args}>
-    <KibaIcon iconId={'ion-airplane'} />
-    <KibaIcon iconId={'ion-american-football'} />
+    <LayerContainer.Layer>
+      <KibaIcon iconId={'ion-airplane'} />
+      <KibaIcon iconId={'ion-american-football'} />
+    </LayerContainer.Layer>
   </LayerContainer>
 );
 
@@ -29,6 +32,53 @@ export const Template = (args) => (
 <ArgsTable story={'Default'} />
 
 ### Examples
+
+<Canvas>
+  <Story name='Icon on top of Box'>
+    <LayerContainer childSize={6}>
+      <LayerContainer.Layer key={1}>
+        <Box variant='card'/>
+      </LayerContainer.Layer>
+      <LayerContainer.Layer key={2} isFullWidth={false} alignmentVertical={Alignment.Center} alignmentHorizontal={Alignment.Center}>
+        <KibaIcon iconId='ion-home' />
+      </LayerContainer.Layer>
+    </LayerContainer>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Layers of Box - 1'>
+    <LayerContainer childSize={6}>
+      <LayerContainer.Layer key={1}>
+        <BackgroundView color='lightblue'>
+          <Box variant='bordered' height='100px'/>
+        </BackgroundView>
+      </LayerContainer.Layer>
+      <LayerContainer.Layer key={2} isFullWidth={false} alignmentVertical={Alignment.Center} alignmentHorizontal={Alignment.Center}>
+        <BackgroundView color='limegreen'>
+          <Box variant='card' height='50px' width='50px'/>
+        </BackgroundView>
+      </LayerContainer.Layer>
+    </LayerContainer>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Layers of Box - 2'>
+    <LayerContainer childSize={6}>
+      <LayerContainer.Layer key={1}>
+        <BackgroundView color='lightblue'>
+          <Box variant='bordered' height='100px'/>
+        </BackgroundView>
+      </LayerContainer.Layer>
+      <LayerContainer.Layer key={2} isFullWidth={false} alignmentVertical={Alignment.Start} alignmentHorizontal={Alignment.End}>
+        <BackgroundView color='limegreen'>
+          <Box variant='card' height='50px' width='50px'/>
+        </BackgroundView>
+      </LayerContainer.Layer>
+    </LayerContainer>
+  </Story>
+</Canvas>
 
 TODO
 
