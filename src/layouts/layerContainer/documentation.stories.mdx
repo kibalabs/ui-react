@@ -1,8 +1,9 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 import { LayerContainer, ILayerContainerProps } from '.';
-import { Direction } from '../../model';
-import { KibaIcon } from '../../particles';
+import { Direction, Alignment } from '../../model';
+import { KibaIcon, Box } from '../../particles';
+import { BackgroundView } from '../../wrappers';
 
 <Meta
   component={LayerContainer}
@@ -14,14 +15,21 @@ import { KibaIcon } from '../../particles';
 <br/>
 
 export const Template = (args) => (
-  <LayerContainer {...args}>
-    <KibaIcon iconId={'ion-airplane'} />
-    <KibaIcon iconId={'ion-american-football'} />
-  </LayerContainer>
+  <Box height='30px' width='30px'>
+    <LayerContainer {...args}>
+      <BackgroundView color='lightblue'>
+        <Box isFullHeight={true} isFullWidth={true} />
+      </BackgroundView>
+      <KibaIcon iconId={'ion-airplane'} />
+      <LayerContainer.Layer isFullHeight={false} isFullWidth={false} alignmentVertical={Alignment.Center} alignmentHorizontal={Alignment.Center}>
+        <KibaIcon iconId={'ion-american-football'} />
+      </LayerContainer.Layer>
+    </LayerContainer>
+  </Box>
 );
 
 <Canvas withToolbar={true} withSource={'none'}>
-  <Story name='Default' args={{childSize: 3}}>
+  <Story name='Default' args={{}}>
     {Template.bind({})}
   </Story>
 </Canvas>
@@ -29,6 +37,55 @@ export const Template = (args) => (
 <ArgsTable story={'Default'} />
 
 ### Examples
+
+<Canvas>
+  <Story name='Layers on top of each other'>
+    <Box height='100px' width='100px'>
+      <LayerContainer>
+        <BackgroundView color='lightblue'>
+          <Box height='100px' width='100px' />
+        </BackgroundView>
+        <BackgroundView color='limegreen'>
+          <Box height='50px' width='50px'/>
+        </BackgroundView>
+      </LayerContainer>
+    </Box>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Layers on top of each other and centered'>
+    <Box height='100px' width='100px'>
+      <LayerContainer>
+        <BackgroundView color='lightblue'>
+          <Box height='100px' width='100px' />
+        </BackgroundView>
+        <LayerContainer.Layer isFullHeight={false} isFullWidth={false} alignmentVertical={Alignment.Center} alignmentHorizontal={Alignment.Center}>
+          <BackgroundView color='limegreen'>
+            <Box height='50px' width='50px'/>
+          </BackgroundView>
+        </LayerContainer.Layer>
+      </LayerContainer>
+    </Box>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Layers on top of each other with custom alignment'>
+    <Box height='100px' width='100px'>
+      <LayerContainer>
+        <BackgroundView color='lightblue'>
+          <Box height='100px' width='100px' />
+        </BackgroundView>
+        <LayerContainer.Layer isFullHeight={false} isFullWidth={false} alignmentVertical={Alignment.Start} alignmentHorizontal={Alignment.End}>
+          <BackgroundView color='limegreen'>
+            <Box height='50px' width='50px'/>
+          </BackgroundView>
+        </LayerContainer.Layer>
+      </LayerContainer>
+    </Box>
+  </Story>
+</Canvas>
 
 TODO
 
