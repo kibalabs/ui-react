@@ -14,7 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Changed
 - [MINOR] Updated `LayerContainer` wrapper component
-- [MINOR] Examples added in `LayerContainer` wrapper component
+
 ### Removed
 
 ## [0.8.4] - 2021-02-06
