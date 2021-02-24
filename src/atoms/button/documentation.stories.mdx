@@ -2,6 +2,7 @@ import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 import { Button, IButtonProps } from '.';
 import { PaddingSize, KibaIcon } from '../../particles';
+import { buildTheme, ThemeProvider } from '../../theming';
 
 <Meta
   component={Button}
@@ -57,5 +58,104 @@ export const Template = (args) => (
 </Canvas>
 
 ### Theming
+
+<Canvas>
+  <Story name='Themed button'>
+    {() => {
+      const theme = buildTheme({
+        buttons: {
+          default: {
+            normal: {
+              default: {
+                background: {
+                  'background-color': '$colors.brandSecondaryLight50',
+                },
+                text: {
+                  color: '$colors.brandPrimary'
+                }
+              },
+              hover: {
+                background: {
+                  'background-color': '$colors.brandSecondaryClear80',
+                },
+              },
+              press: {
+                background: {
+                  'background-color': '$colors.brandSecondaryClear90',
+                },
+              },
+            }
+          }
+        }
+      });
+      return (<ThemeProvider theme={theme}>
+        <Button text='Themed Button'/>
+      </ThemeProvider>);
+    }}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Themed variant button'>
+    {() => {
+      const defaultTheme = buildTheme();
+      const theme = buildTheme({
+        buttons: {
+          default: {
+            normal: {
+              default: {
+                background: {
+                  'background-color': '$colors.brandSecondaryLight50',
+                },
+                text: {
+                  color: '$colors.brandPrimary'
+                }
+              },
+              hover: {
+                background: {
+                  'background-color': '$colors.brandSecondaryClear80',
+                },
+              },
+              press: {
+                background: {
+                  'background-color': '$colors.brandSecondaryClear90',
+                },
+              },
+            }
+          },
+          newVariant: {
+            normal: {
+              default: {
+                background: {
+                  'background-color': '$colors.successLight10',
+                  padding: `${defaultTheme.dimensions.paddingNarrow} ${defaultTheme.dimensions.paddingWide}`,
+                },
+                text: {
+                  'font-weight': 'bold',
+                  color: '$colors.text',
+                }
+              },
+              hover: {
+                background: {
+                  'background-color': '$colors.errorLight20'
+                },
+                text: {
+                  color: '$colors.textClear10'
+                }
+              }
+            }
+          }
+        }
+      });
+      return (<ThemeProvider theme={theme}>
+          <Button text='Button'/>
+          <br />
+          <Button variant='newVariant' text='New variant button' />
+        </ThemeProvider>);
+    }
+  }
+  </Story>
+</Canvas>
+
 
 TODO
