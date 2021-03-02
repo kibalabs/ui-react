@@ -62,35 +62,10 @@ export const Template = (args) => (
 
 ### Theming
 
-**Buttons** in `ui-react` have theme in 3 layers.
+**Buttons** in `ui-react` have theme in 3 layers. To know more about `button theme`, [Click Here](?path=/docs/introduction-architecture--page#theming-1)
 
-1. Button Type : `normal` theme is used when the button is enabled & `disabled` theme is used when button is not enabled.
-2. Button States : There are 4 states of a button, namely, `default`, `hover`, `focus` and `press`. For each state, you can provide a seperate theme.
-3. Button Base : Button has 2 seperate things, text and background. Provide styling for base inside the state of a button.
-
-```ts
-interface IButtonTheme extends ThemeType {
-  normal: IButtonThemeState;
-  disabled: RecursivePartial<IButtonThemeState>;
-}
-
-interface IButtonThemeBase extends ThemeType {
-  text: ITextTheme;
-  background: IBoxTheme;
-}
-
-interface IButtonThemeState extends ThemeType {
-  default: IButtonThemeBase;
-  hover: RecursivePartial<IButtonThemeBase>;
-  press: RecursivePartial<IButtonThemeBase>;
-  focus: RecursivePartial<IButtonThemeBase>;
-}
-```
 <Canvas withSource={'none'}>
   <Story name='compTestBlock'>
     <ButtonThemeExample />
   </Story>
 </Canvas>
-
-TODO
-
