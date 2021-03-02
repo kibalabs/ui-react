@@ -1,9 +1,9 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
-import { Button, IButtonProps } from '.';
+import { Button, IButtonProps, ButtonThemeExample } from '.';
 import { EqualGrid, Stack } from '../../layouts';
 import { Direction } from '../../model';
-import { Box, PaddingSize, KibaIcon, Text } from '../../particles';
+import { Box, KibaIcon, Text } from '../../particles';
 import { MultiLineInput } from '../../molecules';
 import { buildTheme, ThemeProvider } from '../../theming';
 
@@ -62,119 +62,35 @@ export const Template = (args) => (
 
 ### Theming
 
-<Canvas>
-  <Story name='testblock'>
-    {() => {
-      const defaultTheme = React.useMemo(() => buildTheme(), []);
-      const [themeData, setThemeData] = React.useState({});
-      const [defaultThemeField, setDefaultThemeField] = React.useState(JSON.stringify(defaultTheme.buttons.default.normal.default, undefined, 4));
-      const [hoverThemeField, setHoverThemeField] = React.useState(JSON.stringify(defaultTheme.buttons.default.normal.hover, undefined, 4));
-      const [focusThemeField, setFocusThemeField] = React.useState(JSON.stringify(defaultTheme.buttons.default.normal.focus, undefined, 4));
-      const [pressThemeField, setPressThemeField] = React.useState(JSON.stringify(defaultTheme.buttons.default.normal.press, undefined, 4));
-      const [theme, setTheme] = React.useState(buildTheme({
-        buttons: {
-          default: {
-            normal: {
-              ...themeData
-            }
-          }
-        },
-        inputWrappers: {
-          default: {
-            normal: {
-              default: {
-                text: {
-                  "font-size": '0.73em',
-                }
-              }
-            }
-          }
-        }
-      }));
-      React.useEffect(() => {
-        setTheme(buildTheme({
-          ...theme,
-          buttons: {
-          default: {
-            normal: {
-              ...themeData
-            }
-          }
-        }
-        }))
-      },
-      [themeData]);
-      React.useEffect(() => {
-        setTimeout(() => {
-          const changedValue = JSON.parse(defaultThemeField);
-          if(JSON.stringify(changedValue) !== JSON.stringify(defaultTheme.buttons.default.normal.default)){
-            setThemeData({ ...themeData, default: changedValue });
-          }
-        } , 1500);
-      },
-      [defaultThemeField]);
-      React.useEffect(() => {
-        setTimeout(() => {
-          const changedValue = JSON.parse(hoverThemeField);
-          if(JSON.stringify(changedValue) !== JSON.stringify(defaultTheme.buttons.default.normal.hover)){
-            setThemeData({ ...themeData, hover: changedValue });
-          }
-        } , 1500);
-      },
-      [hoverThemeField]);
-      React.useEffect(() => {
-        setTimeout(() => {
-          const changedValue = JSON.parse(focusThemeField);
-          if(JSON.stringify(changedValue) !== JSON.stringify(defaultTheme.buttons.default.normal.focus)){
-            setThemeData({ ...themeData, focus: changedValue });
-          }
-        } , 1500);
-      },
-      [focusThemeField]);
-      React.useEffect(() => {
-        setTimeout(() => {
-          const changedValue = JSON.parse(pressThemeField);
-          if(JSON.stringify(changedValue) !== JSON.stringify(defaultTheme.buttons.default.normal.press)){
-            setThemeData({ ...themeData, press: changedValue });
-          }
-        } , 1500);
-      },
-      [pressThemeField]);
-      return (
-        <ThemeProvider theme={theme}>
-          <Button text='Themed Button' />
-          <EqualGrid childSize={3} >
-            <Box maxHeight='250px'>
-              <Stack direction={Direction.Vertical} defaultGutter={PaddingSize.Wide} shouldAddGutters={true}>
-                <Text>Default</Text>
-                <MultiLineInput value={defaultThemeField} onValueChanged={(val) => setDefaultThemeField(val)} />
-              </Stack>
-            </Box>
-            <Box>
-              <Stack direction={Direction.Vertical} defaultGutter={PaddingSize.Wide} shouldAddGutters={true}>
-                <Text>Hover</Text>
-                <MultiLineInput value={hoverThemeField} onValueChanged={(val) => setHoverThemeField(val)} />
-              </Stack>
-            </Box>
-            <Box>
-              <Stack direction={Direction.Vertical} defaultGutter={PaddingSize.Wide} shouldAddGutters={true}>
-                <Text>Focus</Text>
-                <MultiLineInput value={focusThemeField} onValueChanged={(val) => setFocusThemeField(val)} />
-              </Stack>
-            </Box>
-            <Box>
-              <Stack direction={Direction.Vertical} defaultGutter={PaddingSize.Wide} shouldAddGutters={true}>
-                <Text>Press</Text>
-                <MultiLineInput value={pressThemeField} onValueChanged={(val) => setPressThemeField(val)} />
-              </Stack>
-            </Box>
-          </EqualGrid>
-        </ThemeProvider>
-      );
-      }
-    }
+**Buttons** in `ui-react` have theme in 3 layers.
+
+1. Button Type : `normal` theme is used when the button is enabled & `disabled` theme is used when button is not enabled.
+2. Button States : There are 4 states of a button, namely, `default`, `hover`, `focus` and `press`. For each state, you can provide a seperate theme.
+3. Button Base : Button has 2 seperate things, text and background. Provide styling for base inside the state of a button.
+
+```ts
+interface IButtonTheme extends ThemeType {
+  normal: IButtonThemeState;
+  disabled: RecursivePartial<IButtonThemeState>;
+}
+
+interface IButtonThemeBase extends ThemeType {
+  text: ITextTheme;
+  background: IBoxTheme;
+}
+
+interface IButtonThemeState extends ThemeType {
+  default: IButtonThemeBase;
+  hover: RecursivePartial<IButtonThemeBase>;
+  press: RecursivePartial<IButtonThemeBase>;
+  focus: RecursivePartial<IButtonThemeBase>;
+}
+```
+<Canvas withSource={'none'}>
+  <Story name='compTestBlock'>
+    <ButtonThemeExample />
   </Story>
 </Canvas>
 
-
 TODO
+
