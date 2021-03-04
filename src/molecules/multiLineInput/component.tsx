@@ -78,7 +78,7 @@ export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement 
     event.target.rows = props.minRowCount;
     if (currentRows === previousRows) {
       // eslint-disable-next-line no-param-reassign
-      event.target.rows = currentRows;
+      event.target.rows = Math.max(currentRows, props.minRowCount);
     }
     if (currentRows >= props.maxRowCount) {
       // eslint-disable-next-line no-param-reassign
@@ -86,7 +86,7 @@ export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement 
       // eslint-disable-next-line no-param-reassign
       event.target.scrollTop = event.target.scrollHeight;
     }
-    setRowCount(currentRows < props.maxRowCount ? currentRows : props.maxRowCount);
+    setRowCount(currentRows < props.maxRowCount ? Math.max(currentRows, props.minRowCount) : props.maxRowCount);
     if (props.onValueChanged) {
       props.onValueChanged(event.target.value);
     }
