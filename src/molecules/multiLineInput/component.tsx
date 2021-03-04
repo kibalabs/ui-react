@@ -38,8 +38,8 @@ const StyledMultiLineTextArea = styled.textarea`
 interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
   value: string| null;
   isEnabled: boolean;
-  minRowCount: number;
-  maxRowCount: number;
+  minRowCount?: number;
+  maxRowCount?: number;
   placeholderText?: string;
   messageText?: string;
   name?: string;
@@ -53,6 +53,7 @@ interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
 
 export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement => {
   const [rowCount, setRowCount] = React.useState(props.minRowCount);
+  const maxRowCount = Math.max(props.maxRowCount, props.minRowCount);
 
   const onKeyUp = (event: React.KeyboardEvent<HTMLElement>): void => {
     if (props.onKeyUp) {
@@ -80,13 +81,13 @@ export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement 
       // eslint-disable-next-line no-param-reassign
       event.target.rows = Math.max(currentRows, props.minRowCount);
     }
-    if (currentRows >= props.maxRowCount) {
+    if (currentRows >= maxRowCount) {
       // eslint-disable-next-line no-param-reassign
-      event.target.rows = props.maxRowCount;
+      event.target.rows = maxRowCount;
       // eslint-disable-next-line no-param-reassign
       event.target.scrollTop = event.target.scrollHeight;
     }
-    setRowCount(currentRows < props.maxRowCount ? Math.max(currentRows, props.minRowCount) : props.maxRowCount);
+    setRowCount(currentRows < maxRowCount ? Math.max(currentRows, props.minRowCount) : maxRowCount);
     if (props.onValueChanged) {
       props.onValueChanged(event.target.value);
     }
