@@ -38,8 +38,8 @@ const StyledMultiLineTextArea = styled.textarea`
 interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
   value: string| null;
   isEnabled: boolean;
-  minRowCount?: number;
-  maxRowCount?: number;
+  minRowCount: number;
+  maxRowCount: number;
   placeholderText?: string;
   messageText?: string;
   name?: string;
