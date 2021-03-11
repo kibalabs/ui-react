@@ -68,15 +68,15 @@ export const ButtonThemeExample = () => {
       <Box maxHeight='500px' variant='bordered'>
         <Stack direction={Direction.Vertical}>
           <TabBar selectedTabKey={permanentState} onTabKeySelected={setPermanentState}>
-            <TabBar.Item tabKey='normal' text='Normal' />
-            <TabBar.Item tabKey='disabled' text='Disabled' />
+            <TabBar.Item tabKey='normal' isEnabled={true} isExpandable={false} text='Normal' />
+            <TabBar.Item tabKey='disabled' isEnabled={true} isExpandable={false} text='Disabled' />
           </TabBar>
           <Box variant='bordered'>
             <TabBar selectedTabKey={temporaryState} onTabKeySelected={setTemporaryState}>
-              <TabBar.Item tabKey='default' text='Default' />
-              <TabBar.Item tabKey='hover' text='Hover' />
-              <TabBar.Item tabKey='focus' text='Focus' />
-              <TabBar.Item tabKey='press' text='Press' />
+              <TabBar.Item tabKey='default' isEnabled={true} isExpandable={false} text='Default' />
+              <TabBar.Item tabKey='hover' isEnabled={true} isExpandable={false} text='Hover' />
+              <TabBar.Item tabKey='focus' isEnabled={true} isExpandable={false} text='Focus' />
+              <TabBar.Item tabKey='press' isEnabled={true} isExpandable={false} text='Press' />
             </TabBar>
             <Stack direction={Direction.Vertical} defaultGutter={PaddingSize.Wide} shouldAddGutters={true}>
               <MultiLineInput minRowCount={10} value={themeEditorField} onValueChanged={setThemeEditorField} />
