@@ -9,13 +9,13 @@ import { buildTheme, ThemeProvider, useTheme } from '../../theming';
 
 export const ButtonThemeExample = () => {
   const defaultTheme = useTheme();
-  const [themeData, setThemeData] = React.useState({});
-  const [permanentState, setPermanentState] = React.useState('normal');
-  const [temporaryState, setTemporaryState] = React.useState('default');
-  const [themeEditorField, setThemeEditorField] = React.useState(JSON.stringify(defaultTheme.buttons.default[permanentState][temporaryState], undefined, 4));
-  const [theme, setTheme] = React.useState(defaultTheme);
+  const [themeData, setThemeData] = React.useState<any>({});
+  const [permanentState, setPermanentState] = React.useState<string>('normal');
+  const [temporaryState, setTemporaryState] = React.useState<string>('default');
+  const [themeEditorField, setThemeEditorField] = React.useState<string>(JSON.stringify(defaultTheme.buttons.default[permanentState][temporaryState], undefined, 4));
+  const [theme, setTheme] = React.useState<any>(defaultTheme);
 
-  React.useEffect(() => {
+  React.useEffect((): void => {
     const value = theme.buttons.default[permanentState][temporaryState];
     if (value === undefined) {
       setThemeEditorField('{}');
@@ -38,6 +38,7 @@ export const ButtonThemeExample = () => {
           default: {
             ...(theme.buttons.default),
             [permanentState]: {
+              // eslint disable-next-line
               ...otherStates,
               [temporaryState]: {
                 ...themeData,
