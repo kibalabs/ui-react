@@ -63,10 +63,10 @@ const StyledStack = styled.div<IStyledStackProps>`
   ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$direction, props.theme, getDirectionCss)};
   ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.childAlignment, props.theme, getChildAlignmentCss)};
   ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.contentAlignment, props.theme, getContentAlignmentCss)};
-  .scrollableVertically {
+  &.scrollableVertically {
     overflow-y: auto;
   }
-  .scrollableHorizontally {
+  &.scrollableHorizontally {
     overflow-x: auto;
   }
 `;
