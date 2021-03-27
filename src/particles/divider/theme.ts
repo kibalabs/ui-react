@@ -7,4 +7,4 @@ export interface IDividerTheme extends CssTheme, ThemeType {
   'width': string;
   'height': string;
   'margin': string;
-};
+}

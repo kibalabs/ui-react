@@ -5,8 +5,8 @@ import { IMultiChildProps, OptionalProppedElement } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IListItemProps, IListItemTheme, ListItem } from '../../atoms/listItem';
-import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 import { Divider } from '../../particles';
+import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface IListTheme {
   listItemTheme: IListItemTheme;
@@ -60,22 +60,22 @@ export const List = (props: IListProps): React.ReactElement => {
         }
         return (
           <React.Fragment>
-          <ListItem
-            key={child.props.itemKey}
-            id={child.props.id}
-            className={child.props.className}
-            theme={props.theme?.listItemTheme}
-            variant={child.props.variant}
-            itemKey={child.props.itemKey}
-            isDisabled={child.props.isDisabled}
-            isSelected={props.selectedItemKey === child.props.itemKey}
-            onClicked={onItemClicked}
-          >
-            {child.props.children}
-          </ListItem>
-          {(props.shouldShowDividers && index !==  props.children.length - 1 ) && 
-          <Divider  />
-          }
+            <ListItem
+              key={child.props.itemKey}
+              id={child.props.id}
+              className={child.props.className}
+              theme={props.theme?.listItemTheme}
+              variant={child.props.variant}
+              itemKey={child.props.itemKey}
+              isDisabled={child.props.isDisabled}
+              isSelected={props.selectedItemKey === child.props.itemKey}
+              onClicked={onItemClicked}
+            >
+              {child.props.children}
+            </ListItem>
+            {(props.children && props.shouldShowDividers && index !== props.children.length - 1)
+          && <Divider />
+            }
           </React.Fragment>
         );
       })}
@@ -86,6 +86,6 @@ export const List = (props: IListProps): React.ReactElement => {
 List.displayName = 'List';
 List.defaultProps = {
   ...defaultMoleculeProps,
-  shouldShowDividers: true
+  shouldShowDividers: true,
 };
 List.Item = ListItemInner;
