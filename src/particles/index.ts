@@ -4,6 +4,7 @@ export * from './dimensions';
 export * from './icon';
 export * from './image';
 export * from './kibaIcon';
+export * from './divider';
 export * from './loadingSpinner';
 export * from './media';
 export * from './portal';
