@@ -7,18 +7,29 @@ import { IDividerTheme } from './theme';
 
 export const buildDividerThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: RecursivePartial<Record<string, IDividerTheme>>): ThemeMap<IDividerTheme> => {
   const defaultDividerTheme = mergeTheme<IDividerTheme>({
-    'background': "#aaa",
-    'border-radius': "0",
-    'border-color': "#aaa",
-    'border-width': "0.05rem",
-    'border-style': "solid",
+    'background': "#bbb",
+    'border-radius': "0.2rem",
+    'border-color': "#bbb",
     'padding': "0",
     'width': "100%",
+    'height': "0.2rem",
     'margin': "0 auto"
   }, base?.default);
+
+  const halfDividerTheme = mergeThemePartial<IDividerTheme>({
+    'width': "60%"
+  }, base?.half);
+
+  const thickDividerTheme = mergeThemePartial<IDividerTheme>({
+    height: "0.4rem",
+    'border-radius': "0.4rem"
+  }, base?.thick);
+
 
   return {
     ...(base || {}),
     default: defaultDividerTheme,
+    half: halfDividerTheme,
+    thick: thickDividerTheme
   };
 }
