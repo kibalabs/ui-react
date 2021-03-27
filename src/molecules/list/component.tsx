@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { IListItemProps, IListItemTheme, ListItem } from '../../atoms/listItem';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
+import { Divider } from '../../particles';
 
 export interface IListTheme {
   listItemTheme: IListItemTheme;
@@ -39,6 +40,7 @@ class ListItemInner extends React.Component<IListItemInnerProps> {
 interface IListProps extends IMoleculeProps<IListTheme>, IMultiChildProps<IListItemInnerProps> {
   isFullWidth?: boolean;
   selectedItemKey?: string;
+  shouldShowDividers?: boolean;
   onItemClicked(itemKey: string): void;
 }
 
@@ -52,11 +54,12 @@ export const List = (props: IListProps): React.ReactElement => {
       id={props.id}
       className={getClassName(List.displayName, props.className, props.isFullWidth && 'fullWidth')}
     >
-      { React.Children.map(props.children, (child: OptionalProppedElement<IListItemInnerProps>): React.ReactElement | null => {
+      { React.Children.map(props.children, (child: OptionalProppedElement<IListItemInnerProps>, index: number): React.ReactElement | null => {
         if (!child) {
           return null;
         }
         return (
+          <React.Fragment>
           <ListItem
             key={child.props.itemKey}
             id={child.props.id}
@@ -70,6 +73,10 @@ export const List = (props: IListProps): React.ReactElement => {
           >
             {child.props.children}
           </ListItem>
+          {(props.shouldShowDividers && index !==  props.children.length - 2 ) && 
+          <Divider  />
+          }
+          </React.Fragment>
         );
       })}
     </StyledList>
@@ -79,5 +86,6 @@ export const List = (props: IListProps): React.ReactElement => {
 List.displayName = 'List';
 List.defaultProps = {
   ...defaultMoleculeProps,
+  shouldShowDividers: true
 };
 List.Item = ListItemInner;

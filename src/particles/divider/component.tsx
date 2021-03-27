@@ -13,6 +13,7 @@ interface IStyledDividerProps {
 
 const StyledDivider = styled.hr<IStyledDividerProps>`
   ${(props: IStyledDividerProps): string => themeToCss(props.theme)};
+  border: none;
 `;
 
 interface IDividerProps extends IComponentProps<IDividerTheme> {

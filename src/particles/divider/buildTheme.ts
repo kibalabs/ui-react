@@ -9,11 +9,10 @@ export const buildDividerThemes = (colors: IColorGuide, dimensions: IDimensionGu
   const defaultDividerTheme = mergeTheme<IDividerTheme>({
     'background': "#bbb",
     'border-radius': "0.2rem",
-    'border-color': "#bbb",
     'padding': "0",
     'width': "100%",
     'height': "0.2rem",
-    'margin': "0 auto"
+    'margin': "1rem auto"
   }, base?.default);
 
   const halfDividerTheme = mergeThemePartial<IDividerTheme>({
