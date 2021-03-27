@@ -39,6 +39,7 @@ class ListItemInner extends React.Component<IListItemInnerProps> {
 interface IListProps extends IMoleculeProps<IListTheme>, IMultiChildProps<IListItemInnerProps> {
   isFullWidth?: boolean;
   selectedItemKey?: string;
+  dividerColor?: string;
   onItemClicked(itemKey: string): void;
 }
 
@@ -46,7 +47,6 @@ export const List = (props: IListProps): React.ReactElement => {
   const onItemClicked = !props.onItemClicked ? undefined : (itemKey: string): void => {
     props.onItemClicked(itemKey);
   };
-
   return (
     <StyledList
       id={props.id}
@@ -63,6 +63,7 @@ export const List = (props: IListProps): React.ReactElement => {
             className={child.props.className}
             theme={props.theme?.listItemTheme}
             variant={child.props.variant}
+            dividerColor={props.dividerColor}
             itemKey={child.props.itemKey}
             isDisabled={child.props.isDisabled}
             isSelected={props.selectedItemKey === child.props.itemKey}

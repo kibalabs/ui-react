@@ -4,15 +4,28 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { defaultComponentProps, Direction, IComponentProps } from '../../model';
 import { useBuiltTheme } from '../../theming';
 import { themeToCss } from '../../util';
 import { IListItemTheme } from './theme';
+import { Stack } from '../../layouts';
 
 interface IStyledListItemProps {
   theme: IListItemTheme;
   isClickable: boolean;
 }
+
+interface IStyledHRProps {
+  dividerColor: string;
+};
+
+const StyledHR = styled.hr`
+  border-top: 1px solid ${(props: IStyledHRProps) => props.dividerColor};
+  border-bottom: 1px solid ${(props: IStyledHRProps) => props.dividerColor};
+  width: 80%;
+  margin: 0.5rem auto 0.5rem auto;
+  
+`;
 
 const StyledListItem = styled.div<IStyledListItemProps>`
   ${(props: IStyledListItemProps): string => themeToCss(props.theme.normal.default.background)};
@@ -65,6 +78,7 @@ export interface IListItemProps extends IComponentProps<IListItemTheme>, ISingle
   itemKey: string;
   isDisabled?: boolean;
   isSelected?: boolean;
+  dividerColor?: string;
   onClicked?(itemKey: string): void;
 }
 
@@ -74,18 +88,22 @@ export const ListItem = (props: IListItemProps): React.ReactElement => {
     props.onClicked(props.itemKey);
   };
 
+  const dividerColor = props.dividerColor || '#aaa';
   const theme = useBuiltTheme('listItems', props.variant, props.theme);
   return (
-    <StyledListItem
-      id={props.id}
-      key={props.itemKey}
-      className={getClassName(ListItem.displayName, props.className, props.isDisabled && 'disabled', props.isSelected && 'selected')}
-      theme={theme}
-      onClick={onClicked}
-      isClickable={onClicked != null}
-    >
-      { props.children }
-    </StyledListItem>
+    <Stack direction={Direction.Vertical}>
+      <StyledListItem
+        id={props.id}
+        key={props.itemKey}
+        className={getClassName(ListItem.displayName, props.className, props.isDisabled && 'disabled', props.isSelected && 'selected')}
+        theme={theme}
+        onClick={onClicked}
+        isClickable={onClicked != null}
+      >
+        { props.children }
+      </StyledListItem>
+      <StyledHR dividerColor={dividerColor}/>
+    </Stack>
   );
 };
 
