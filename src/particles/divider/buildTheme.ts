@@ -12,7 +12,7 @@ export const buildDividerThemes = (colors: IColorGuide, dimensions: IDimensionGu
     'padding': "0",
     'width': "100%",
     'height': "0.2rem",
-    'margin': "1rem auto"
+    'margin': "0.2rem auto"
   }, base?.default);
 
   const halfDividerTheme = mergeThemePartial<IDividerTheme>({

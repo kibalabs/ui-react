@@ -73,7 +73,7 @@ export const List = (props: IListProps): React.ReactElement => {
           >
             {child.props.children}
           </ListItem>
-          {(props.shouldShowDividers && index !==  props.children.length - 2 ) && 
+          {(props.shouldShowDividers && index !==  props.children.length - 1 ) && 
           <Divider  />
           }
           </React.Fragment>
