@@ -4,11 +4,11 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
+import { Stack } from '../../layouts';
 import { defaultComponentProps, Direction, IComponentProps } from '../../model';
 import { useBuiltTheme } from '../../theming';
 import { themeToCss } from '../../util';
 import { IListItemTheme } from './theme';
-import { Stack } from '../../layouts';
 
 interface IStyledListItemProps {
   theme: IListItemTheme;
@@ -17,7 +17,7 @@ interface IStyledListItemProps {
 
 interface IStyledHRProps {
   dividerColor: string;
-};
+}
 
 const StyledHR = styled.hr`
   border-top: 1px solid ${(props: IStyledHRProps) => props.dividerColor};
@@ -102,7 +102,7 @@ export const ListItem = (props: IListItemProps): React.ReactElement => {
       >
         { props.children }
       </StyledListItem>
-      <StyledHR dividerColor={dividerColor}/>
+      <StyledHR dividerColor={dividerColor} />
     </Stack>
   );
 };
