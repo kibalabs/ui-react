@@ -44,5 +44,5 @@ export const Divider = (props: IDividerProps): React.ReactElement => {
 Divider.displayName = 'Divider';
 Divider.defaultProps = {
   ...defaultComponentProps,
-  orientation: 'horizontal'
+  orientation: 'horizontal',
 };
