@@ -12,10 +12,21 @@ interface IStyledDividerProps {
 
 const StyledDivider = styled.hr<IStyledDividerProps>`
   ${(props: IStyledDividerProps): string => themeToCss(props.theme)};
-  border: none;
+
+  &.horizontal {
+    border-bottom-width: 'thin';
+    width: 100%;
+  }
+
+  &.vertical {
+    border-right-width: 'thin';
+    height: 100%;
+  }
+
 `;
 
 interface IDividerProps extends IComponentProps<IDividerTheme> {
+  orientation?: string;
 }
 
 export const Divider = (props: IDividerProps): React.ReactElement => {
@@ -25,7 +36,7 @@ export const Divider = (props: IDividerProps): React.ReactElement => {
     <StyledDivider
       id={props.id}
       theme={theme}
-      className={getClassName(Divider.displayName, props.className)}
+      className={getClassName(Divider.displayName, props.className, props.orientation)}
     />
   );
 };
@@ -33,4 +44,5 @@ export const Divider = (props: IDividerProps): React.ReactElement => {
 Divider.displayName = 'Divider';
 Divider.defaultProps = {
   ...defaultComponentProps,
+  orientation: 'horizontal'
 };
