@@ -12,6 +12,8 @@ interface IStyledDividerProps {
 
 const StyledDivider = styled.hr<IStyledDividerProps>`
   ${(props: IStyledDividerProps): string => themeToCss(props.theme)};
+  flex-shrink: 0;
+  border-style: 'solid';
 
   &.horizontal {
     border-bottom-width: 'thin';
@@ -19,7 +21,10 @@ const StyledDivider = styled.hr<IStyledDividerProps>`
   }
 
   &.vertical {
+    flex-direction: column;
     border-right-width: 'thin';
+    border-bottom-width: 0;
+    width: 1px;
     height: 100%;
   }
 
