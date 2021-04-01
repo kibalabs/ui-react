@@ -33,9 +33,9 @@ export enum Placement {
   topLeft = 'top-left',
   topCenter = 'top-center',
   topRight = 'top-right'
-};
+}
 
-export function getOffsetTop(rect, vertical) {
+export function getOffsetTop(rect: any, vertical: number | string): number {
   let offset = 0;
   if (typeof vertical === 'number') {
     offset = vertical;
@@ -48,7 +48,7 @@ export function getOffsetTop(rect, vertical) {
   return offset;
 }
 
-export function getOffsetLeft(rect, horizontal) {
+export function getOffsetLeft(rect: any, horizontal: number | string) {
   let offset = 0;
 
   if (typeof horizontal === 'number') {
@@ -87,6 +87,7 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
     setPositionTop(anchorElementNodeRect.top + getOffsetTop(anchorElementNodeRect, props.placement.split('-')[0]));
     setPositionLeft(anchorElementNodeRect.left + getOffsetLeft(anchorElementNodeRect, props.placement.split('-')[1]));
     // setWidth(anchorElementNodeRect.width);
+    setWidth(props.width || 0);
   }, [props.anchorElement]);
 
   useEventListener(window, 'resize', (): void => {
