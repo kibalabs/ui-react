@@ -26,7 +26,7 @@ const StyledPortal = styled.div<IStyledPortalProps>`
   background: pink;
 `;
 
-enum Placement {
+export enum Placement {
   bottomLeft = 'bottom-left',
   bottomCenter = 'bottom-center',
   bottomRight = 'bottom-right',
