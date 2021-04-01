@@ -1,0 +1,53 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { Portal, IPortalProps } from '.';
+
+<Meta
+  component={Portal}
+  title={'Particles/Portal'}
+/>
+
+# Portal
+
+<br/>
+
+export const Template = (args) => (
+  <Portal {...args}>
+    <Text>Hello</Text>
+  </Portal>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Simple'>
+    {
+      () => {
+        const ref = React.createRef();
+        return (
+          <React.Fragment>
+          <button ref={ref}>Open Portal</button>
+          <br />
+          <br />
+          <Portal anchorElement={ref} placement='bottom-right' width='200'>
+            <Text>How are you</Text>
+          </Portal>
+          </React.Fragment>
+        );
+      }
+    }
+    
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO
