@@ -94,9 +94,9 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
     updateSizes();
   });
 
-  useEventListener(window, 'scroll', (): void => {
-    updateSizes();
-  });
+  // useEventListener(window, 'scroll', (): void => {
+  //   updateSizes();
+  // });
 
   React.useEffect((): void => {
     updateSizes();
