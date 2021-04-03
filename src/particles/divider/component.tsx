@@ -3,7 +3,8 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
+import { valueToCss } from '../../util';
 import { IDividerTheme } from './theme';
 
 interface IStyledDividerProps {
@@ -11,23 +12,22 @@ interface IStyledDividerProps {
 }
 
 const StyledDivider = styled.hr<IStyledDividerProps>`
-  ${(props: IStyledDividerProps): string => themeToCss(props.theme)};
+  color: ${(props: IStyledDividerProps): string => valueToCss(props.theme.color)};
   flex-shrink: 0;
+  margin: 0;
   border-style: 'solid';
+  border-width: 0;
 
   &.horizontal {
-    border-bottom-width: 'thin';
+    border-bottom-width: ${(props: IStyledDividerProps): string => props.theme.width};
     width: 100%;
   }
 
   &.vertical {
     flex-direction: column;
-    border-right-width: 'thin';
-    border-bottom-width: 0;
-    width: 1px;
+    border-right-width: ${(props: IStyledDividerProps): string => props.theme.width};
     height: 100%;
   }
-
 `;
 
 interface IDividerProps extends IComponentProps<IDividerTheme> {

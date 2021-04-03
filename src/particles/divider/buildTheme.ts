@@ -7,7 +7,8 @@ import { IDividerTheme } from './theme';
 
 export const buildDividerThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: RecursivePartial<Record<string, IDividerTheme>>): ThemeMap<IDividerTheme> => {
   const defaultDividerTheme = mergeTheme<IDividerTheme>({
-    'border-color': '#bbb',
+    color: '$colors.backgroundDark05',
+    width: '1px',
     padding: '0',
   }, base?.default);
 

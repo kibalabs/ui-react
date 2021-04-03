@@ -41,13 +41,13 @@ interface IListProps extends IMoleculeProps<IListTheme>, IMultiChildProps<IListI
   isFullWidth?: boolean;
   selectedItemKey?: string;
   shouldShowDividers?: boolean;
-  onItemClicked(itemKey: string): void;
+  onItemClicked?(itemKey: string): void;
 }
 
 export const List = (props: IListProps): React.ReactElement => {
-  const onItemClicked = !props.onItemClicked ? undefined : (itemKey: string): void => {
-    props.onItemClicked(itemKey);
-  };
+  const onItemClicked = props.onItemClicked && ((itemKey: string): void => {
+    props.onItemClicked!(itemKey);
+  });
 
   return (
     <StyledList
@@ -73,9 +73,9 @@ export const List = (props: IListProps): React.ReactElement => {
             >
               {child.props.children}
             </ListItem>
-            {(props.children && props.shouldShowDividers && index !== props.children.length - 1)
-          && <Divider />
-            }
+            {(props.children && props.shouldShowDividers && index !== React.Children.count(props.children) - 1) && (
+              <Divider />
+            )}
           </React.Fragment>
         );
       })}
@@ -86,6 +86,5 @@ export const List = (props: IListProps): React.ReactElement => {
 List.displayName = 'List';
 List.defaultProps = {
   ...defaultMoleculeProps,
-  shouldShowDividers: true,
 };
 List.Item = ListItemInner;

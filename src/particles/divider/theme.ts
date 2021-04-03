@@ -1,6 +1,7 @@
 import { CssTheme, ThemeType } from '../../util';
 
 export interface IDividerTheme extends CssTheme, ThemeType {
-  'border-color': string;
+  'color': string;
+  'width': string;
   'padding': string;
 }
