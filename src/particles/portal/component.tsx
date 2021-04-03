@@ -34,7 +34,7 @@ export enum Placement {
   topRight = 'top-right'
 }
 
-export function getOffsetTop(rect: any, vertical: number | string): number {
+export function getOffsetTop(rect: DOMRect, vertical: number | string): number {
   let offset = 0;
   if (typeof vertical === 'number') {
     offset = vertical;
@@ -47,7 +47,7 @@ export function getOffsetTop(rect: any, vertical: number | string): number {
   return offset;
 }
 
-export function getOffsetLeft(rect: any, horizontal: number | string) {
+export function getOffsetLeft(rect: DOMRect, horizontal: number | string): number {
   let offset = 0;
 
   if (typeof horizontal === 'number') {
