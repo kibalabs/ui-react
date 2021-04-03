@@ -48,6 +48,48 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
+<Canvas>
+  <Story name='Overide left position'>
+    {
+      () => {
+        const ref = React.createRef();
+        return (
+          <React.Fragment>
+          <button ref={ref}>Open Portal</button>
+          <br />
+          <br />
+          <Portal anchorElement={ref} placement='bottom-right' offsetX={250} width='200'>
+            <Text>How are you</Text>
+          </Portal>
+          </React.Fragment>
+        );
+      }
+    }
+    
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Overide top position'>
+    {
+      () => {
+        const ref = React.createRef();
+        return (
+          <React.Fragment>
+          <button ref={ref}>Open Portal</button>
+          <br />
+          <br />
+          <Portal anchorElement={ref} placement='bottom-right' offsetY={768} width='200'>
+            <Text>How are you</Text>
+          </Portal>
+          </React.Fragment>
+        );
+      }
+    }
+    
+  </Story>
+</Canvas>
+
 ### Theming
 
 TODO

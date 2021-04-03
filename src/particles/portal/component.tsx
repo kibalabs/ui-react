@@ -15,7 +15,7 @@ interface IStyledPortalProps {
   positionLeft: number;
   width: number;
 }
-/* I have given background so that we can test easily  */
+
 const StyledPortal = styled.div<IStyledPortalProps>`
   position: absolute;
   top: ${(props: IStyledPortalProps): string => `${props.positionTop}px`};
@@ -23,7 +23,6 @@ const StyledPortal = styled.div<IStyledPortalProps>`
   width: ${(props: IStyledPortalProps): string => `${props.width}px`};
   display: ${(props: IStyledPortalProps): string => (props.width > 0 ? 'block' : 'none')};
   ${(props: IStyledPortalProps): string => themeToCss(props.theme.background)};
-  background: pink;
 `;
 
 export enum Placement {
@@ -84,19 +83,18 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
       return;
     }
 
-    setPositionTop(anchorElementNodeRect.top + getOffsetTop(anchorElementNodeRect, props.placement.split('-')[0]));
-    setPositionLeft(anchorElementNodeRect.left + getOffsetLeft(anchorElementNodeRect, props.placement.split('-')[1]));
-    // setWidth(anchorElementNodeRect.width);
+    const offsetTop = props.offsetY ? getOffsetTop(anchorElementNodeRect, props.offsetY) : anchorElementNodeRect.top + getOffsetTop(anchorElementNodeRect, props.placement.split('-')[0]);
+    const offsetLeft = props.offsetX ? getOffsetLeft(anchorElementNodeRect, props.offsetX) : anchorElementNodeRect.left + getOffsetLeft(anchorElementNodeRect, props.placement.split('-')[1]);
+
+    setPositionTop(offsetTop);
+    setPositionLeft(offsetLeft);
+
     setWidth(props.width || 0);
-  }, [props.anchorElement]);
+  }, [props.anchorElement, props.offsetX, props.offsetY]);
 
   useEventListener(window, 'resize', (): void => {
     updateSizes();
   });
-
-  // useEventListener(window, 'scroll', (): void => {
-  //   updateSizes();
-  // });
 
   React.useEffect((): void => {
     updateSizes();
