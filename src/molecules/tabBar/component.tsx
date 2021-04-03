@@ -38,7 +38,7 @@ class TabBarItemInner extends React.Component<ITabBarItemInnerProps> {
 }
 
 interface ITabBarProps extends IMoleculeProps<ITabBarTheme>, IMultiChildProps<ITabBarItemInnerProps> {
-  isFullWidth: boolean;
+  isFullWidth?: boolean;
   selectedTabKey: string;
   onTabKeySelected(tabKey: string): void;
 }
@@ -84,7 +84,6 @@ export const TabBar = (props: ITabBarProps): React.ReactElement => {
 TabBar.displayName = 'TabBar';
 TabBar.defaultProps = {
   ...defaultMoleculeProps,
-  isFullWidth: false,
 };
 TabBar.Item = TabBarItemInner;
 
