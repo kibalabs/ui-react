@@ -18,6 +18,7 @@ import { IWebViewTheme } from '../atoms/webView';
 import { IBoxTheme } from '../particles/box';
 import { IColorGuide } from '../particles/colors';
 import { IDimensionGuide } from '../particles/dimensions';
+import { IDividerTheme } from '../particles/divider';
 import { IFont } from '../particles/fonts';
 import { IIconTheme } from '../particles/icon';
 import { IImageTheme } from '../particles/image';
@@ -39,6 +40,7 @@ export interface ITheme extends ThemeType {
   texts: ThemeMap<ITextTheme>,
   icons: ThemeMap<IIconTheme>,
   images: ThemeMap<IImageTheme>,
+  dividers: ThemeMap<IDividerTheme>,
   loadingSpinners: ThemeMap<ILoadingSpinnerTheme>,
   pills: ThemeMap<IPillTheme>,
   portals: ThemeMap<IPortalTheme>,

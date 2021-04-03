@@ -21,6 +21,7 @@ import { buildWebViewThemes } from '../atoms/webView';
 import { buildBoxThemes } from '../particles/box';
 import { buildAlternateColors, buildColors } from '../particles/colors';
 import { buildDimensions } from '../particles/dimensions';
+import { buildDividerThemes } from '../particles/divider';
 import { buildFonts } from '../particles/fonts';
 import { buildIconThemes } from '../particles/icon';
 import { buildImageThemes } from '../particles/image';
@@ -40,6 +41,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const iconThemes = buildIconThemes(colors, dimensions, boxThemes, inputTheme?.icons);
   const imageThemes = buildImageThemes(colors, dimensions, boxThemes, inputTheme?.images);
   const loadingSpinnerThemes = buildLoadingSpinnerThemes(colors, dimensions, inputTheme?.loadingSpinners);
+  const dividerThemes = buildDividerThemes(colors, dimensions, inputTheme?.dividers);
   const portalThemes = buildPortalThemes(colors, dimensions, boxThemes, inputTheme?.portals);
   const videoThemes = buildVideoThemes(colors, dimensions, inputTheme?.videos);
 
@@ -73,6 +75,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     texts: textThemes,
     icons: iconThemes,
     images: imageThemes,
+    dividers: dividerThemes,
     loadingSpinners: loadingSpinnerThemes,
     pills: pillThemes,
     portals: portalThemes,
