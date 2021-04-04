@@ -85,10 +85,10 @@ const StyledTabBarItem = styled.button<IStyledTabBarItemProps>`
 export interface ITabBarItemProps extends IComponentProps<ITabBarItemTheme> {
   tabKey: string;
   text: string;
-  isEnabled: boolean;
+  isEnabled?: boolean;
   isSelected?: boolean;
   isCollapsible?: boolean;
-  isExpandable: boolean;
+  isExpandable?: boolean;
   onClicked?(tabKey: string): void;
 }
 
@@ -99,14 +99,16 @@ export const TabBarItem = (props: ITabBarItemProps): React.ReactElement => {
     }
   };
 
+  const isEnabled = props.isEnabled == null ? true : props.isEnabled;
+  const isExpandable = props.isExpandable == null ? true : props.isExpandable;
   const theme = useBuiltTheme('tabBarItems', props.variant, props.theme);
   return (
     <StyledTabBarItem
       id={props.id}
-      className={getClassName(TabBarItem.displayName, props.className, !props.isEnabled && 'disabled', props.isSelected && 'selected', props.isCollapsible && 'collapsible', props.isExpandable && 'expandable')}
+      className={getClassName(TabBarItem.displayName, props.className, !isEnabled && 'disabled', props.isSelected && 'selected', props.isCollapsible && 'collapsible', isExpandable && 'expandable')}
       theme={theme}
       onClick={onClicked}
-      disabled={!props.isEnabled}
+      disabled={!isEnabled}
     >
       { props.text }
     </StyledTabBarItem>
@@ -116,6 +118,4 @@ export const TabBarItem = (props: ITabBarItemProps): React.ReactElement => {
 TabBarItem.displayName = 'TabBarItem';
 TabBarItem.defaultProps = {
   ...defaultComponentProps,
-  isEnabled: true,
-  isExpandable: true,
 };
