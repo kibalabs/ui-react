@@ -13,15 +13,13 @@ interface IStyledPortalProps {
   theme: IPortalTheme;
   positionTop: number;
   positionLeft: number;
-  width: number;
 }
 
 const StyledPortal = styled.div<IStyledPortalProps>`
   position: absolute;
+  display: block;
   top: ${(props: IStyledPortalProps): string => `${props.positionTop}px`};
   left: ${(props: IStyledPortalProps): string => `${props.positionLeft}px`};
-  width: ${(props: IStyledPortalProps): string => `${props.width}px`};
-  display: ${(props: IStyledPortalProps): string => (props.width > 0 ? 'block' : 'none')};
   ${(props: IStyledPortalProps): string => themeToCss(props.theme.background)};
 `;
 
@@ -66,7 +64,6 @@ export interface IPortalProps extends IComponentProps<IPortalTheme>, ISingleAnyC
   placement: Placement | string;
   offsetX?: number;
   offsetY?: number;
-  width?: number;
   positionTop?: number;
   positionLeft?: number;
 }
@@ -75,7 +72,6 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
   const theme = useBuiltTheme('portals', props.variant, props.theme);
   const [positionTop, setPositionTop] = React.useState<number>(props.positionTop || 0);
   const [positionLeft, setPositionLeft] = React.useState<number>(props.positionLeft || 0);
-  const [width, setWidth] = React.useState<number>(props.width || 0);
 
   const updateSizes = React.useCallback((): void => {
     const anchorElementNodeRect = props.anchorElement?.current?.getBoundingClientRect();
@@ -88,9 +84,7 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
 
     setPositionTop(offsetTop);
     setPositionLeft(offsetLeft);
-
-    setWidth(props.width || 0);
-  }, [props.anchorElement, props.offsetX, props.offsetY]);
+  }, [props.anchorElement, props.offsetX, props.offsetY, props.placement]);
 
   useEventListener(window, 'resize', (): void => {
     updateSizes();
@@ -107,7 +101,6 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
       theme={theme}
       positionTop={positionTop}
       positionLeft={positionLeft}
-      width={width}
       ref={ref}
     >
       {props.children}

@@ -12,9 +12,7 @@ import { Portal, IPortalProps } from '.';
 <br/>
 
 export const Template = (args) => (
-  <Portal {...args}>
-    <Text>Hello</Text>
-  </Portal>
+  <Portal {...args} />
 );
 
 <Canvas withToolbar={true} withSource={'none'}>
@@ -28,65 +26,110 @@ export const Template = (args) => (
 ### Examples
 
 <Canvas>
-  <Story name='Simple'>
-    {
-      () => {
-        const ref = React.createRef();
-        return (
-          <React.Fragment>
+  <Story name='Placed at bottom-right'>
+    {() => {
+      const ref = React.createRef();
+      return (
+        <React.Fragment>
           <button ref={ref}>Open Portal</button>
-          <br />
-          <br />
-          <Portal anchorElement={ref} placement='bottom-right' width='200'>
-            <Text>How are you</Text>
+          <Portal anchorElement={ref} placement='bottom-right'>
+            <Box width='200px'>
+              <Text>I'm anchored at the bottom-right</Text>
+            </Box>
           </Portal>
-          </React.Fragment>
-        );
-      }
-    }
-    
+        </React.Fragment>
+      );
+    }}
   </Story>
 </Canvas>
 
 <Canvas>
-  <Story name='Overide left position'>
-    {
-      () => {
-        const ref = React.createRef();
-        return (
-          <React.Fragment>
+  <Story name='Placed at bottom-left'>
+    {() => {
+      const ref = React.createRef();
+      return (
+        <React.Fragment>
           <button ref={ref}>Open Portal</button>
-          <br />
-          <br />
-          <Portal anchorElement={ref} placement='bottom-right' offsetX={250} width='200'>
-            <Text>How are you</Text>
+          <Portal anchorElement={ref} placement='bottom-left'>
+            <Box width='200px'>
+              <Text>I'm anchored at the bottom-left</Text>
+            </Box>
           </Portal>
-          </React.Fragment>
-        );
-      }
-    }
-    
+        </React.Fragment>
+      );
+    }}
   </Story>
 </Canvas>
 
 <Canvas>
-  <Story name='Overide top position'>
-    {
-      () => {
-        const ref = React.createRef();
-        return (
-          <React.Fragment>
+  <Story name='Placed at bottom-center'>
+    {() => {
+      const ref = React.createRef();
+      return (
+        <React.Fragment>
           <button ref={ref}>Open Portal</button>
-          <br />
-          <br />
-          <Portal anchorElement={ref} placement='bottom-right' offsetY={768} width='200'>
-            <Text>How are you</Text>
+          <Portal anchorElement={ref} placement='bottom-center'>
+            <Box width='200px'>
+              <Text>I'm anchored at the bottom-center</Text>
+            </Box>
           </Portal>
-          </React.Fragment>
-        );
-      }
-    }
-    
+        </React.Fragment>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Placed at top-right'>
+    {() => {
+      const ref = React.createRef();
+      return (
+        <React.Fragment>
+          <button ref={ref}>Open Portal</button>
+          <Portal anchorElement={ref} placement='top-right'>
+            <Box width='200px'>
+              <Text>I'm anchored at the top-right</Text>
+            </Box>
+          </Portal>
+        </React.Fragment>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Placed at top-left'>
+    {() => {
+      const ref = React.createRef();
+      return (
+        <React.Fragment>
+          <button ref={ref}>Open Portal</button>
+          <Portal anchorElement={ref} placement='top-left'>
+            <Box width='200px'>
+              <Text>I'm anchored at the top-left</Text>
+            </Box>
+          </Portal>
+        </React.Fragment>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Placed at top-center'>
+    {() => {
+      const ref = React.createRef();
+      return (
+        <React.Fragment>
+          <button ref={ref}>Open Portal</button>
+          <Portal anchorElement={ref} placement='top-center'>
+            <Box width='200px'>
+              <Text>I'm anchored at the top-center</Text>
+            </Box>
+          </Portal>
+        </React.Fragment>
+      );
+    }}
   </Story>
 </Canvas>
 
