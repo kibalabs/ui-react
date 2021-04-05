@@ -18,6 +18,7 @@ interface IStyledPortalProps {
 const StyledPortal = styled.div<IStyledPortalProps>`
   position: absolute;
   display: block;
+  z-index: 999;
   top: ${(props: IStyledPortalProps): string => `${props.positionTop}px`};
   left: ${(props: IStyledPortalProps): string => `${props.positionLeft}px`};
   ${(props: IStyledPortalProps): string => themeToCss(props.theme.background)};
@@ -62,8 +63,6 @@ export function getOffsetLeft(rect: DOMRect, horizontal: number | string): numbe
 export interface IPortalProps extends IComponentProps<IPortalTheme>, ISingleAnyChildProps {
   anchorElement: React.RefObject<HTMLDivElement>;
   placement: Placement | string;
-  offsetX?: number;
-  offsetY?: number;
   positionTop?: number;
   positionLeft?: number;
 }
@@ -79,12 +78,9 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
       return;
     }
 
-    const offsetTop = props.offsetY ? getOffsetTop(anchorElementNodeRect, props.offsetY) : anchorElementNodeRect.top + getOffsetTop(anchorElementNodeRect, props.placement.split('-')[0]);
-    const offsetLeft = props.offsetX ? getOffsetLeft(anchorElementNodeRect, props.offsetX) : anchorElementNodeRect.left + getOffsetLeft(anchorElementNodeRect, props.placement.split('-')[1]);
-
-    setPositionTop(offsetTop);
-    setPositionLeft(offsetLeft);
-  }, [props.anchorElement, props.offsetX, props.offsetY, props.placement]);
+    setPositionTop(anchorElementNodeRect.top + getOffsetTop(anchorElementNodeRect, props.placement.split('-')[0]));
+    setPositionLeft(anchorElementNodeRect.left + getOffsetLeft(anchorElementNodeRect, props.placement.split('-')[1]));
+  }, [props.anchorElement, props.placement]);
 
   useEventListener(window, 'resize', (): void => {
     updateSizes();
