@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { ISingleAnyChildProps } from '@kibalabs/core-react';
+
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 interface IMenuItemTheme {
 }
 
-export interface IMenuItemProps extends IMoleculeProps<IMenuItemTheme> {
+export interface IMenuItemProps extends IMoleculeProps<IMenuItemTheme>, ISingleAnyChildProps {
   itemKey: string;
   itemText?: string;
   itemTextVariant?: string;

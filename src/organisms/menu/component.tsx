@@ -84,10 +84,15 @@ export const Menu = (props: IMenuProps): React.ReactElement => {
                 itemKey={child.props.itemKey || String(index)}
                 theme={props.theme?.listItemTheme}
               >
-                <Stack direction={Direction.Horizontal} shouldAddGutters={true} childAlignment={Alignment.Center} defaultGutter={PaddingSize.Default}>
-                  {child.props.itemIconId && <KibaIcon variant={child.props.itemIconVariant || 'default'} iconId={child.props.itemIconId} />}
-                  {child.props.itemText && <Text variant={`bold-${child.props.itemTextVariant || 'default'}`}>{child.props.itemText}</Text>}
-                </Stack>
+                {child.props.children
+                  ? child.props.children
+                  : (
+                    <Stack direction={Direction.Horizontal} shouldAddGutters={true} childAlignment={Alignment.Center} defaultGutter={PaddingSize.Default}>
+                      {child.props.itemIconId && <KibaIcon variant={child.props.itemIconVariant || 'default'} iconId={child.props.itemIconId} />}
+                      {child.props.itemText && <Text variant={`bold-${child.props.itemTextVariant || 'default'}`}>{child.props.itemText}</Text>}
+                    </Stack>
+                  )
+                }
               </ListItem>
             );
           })}
