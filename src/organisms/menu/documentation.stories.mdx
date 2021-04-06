@@ -1,0 +1,48 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { Menu } from '.';
+import { Button } from '../../atoms';
+
+<Meta
+  component={Menu}
+  title={'Organism/Menu'}
+/>
+
+# Menu
+
+<br/>
+
+export const Template = (args) => {
+  
+  return <Menu></Menu>;
+};
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Placed at bottom-right'>
+    {() => {
+      const [selectedItemKey, setSelectedItemKey] = React.useState();
+      const [isOpen, setIsOpen] = React.useState(true);
+      const buttonRef = React.createRef();
+      return (
+        <React.Fragment>
+          <Button ref={buttonRef} text='Open Menu' onClicked={() => setIsOpen(!isOpen)}/>
+          <Menu anchorElement={buttonRef} placement='bottom-right' isOpen={isOpen} onClose={() => { setIsOpen(false)}} selectedItemKey={selectedItemKey} onItemClicked={setSelectedItemKey}>
+            <Menu.Item itemKey={String(1)} itemTextVariant='colored' itemText='Hello' itemIconId='ion-globe' />
+            <Menu.Item itemKey={String(2)} itemText='Hello' itemIconId='ion-globe' />
+            <Menu.Item itemKey={String(3)} itemText='Hello' itemIconId='ion-globe' />
+          </Menu>
+        </React.Fragment>
+      )}
+    }
+  </Story>
+</Canvas>

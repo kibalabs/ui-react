@@ -22,6 +22,10 @@ const StyledPortal = styled.div<IStyledPortalProps>`
   top: ${(props: IStyledPortalProps): string => `${props.positionTop}px`};
   left: ${(props: IStyledPortalProps): string => `${props.positionLeft}px`};
   ${(props: IStyledPortalProps): string => themeToCss(props.theme.background)};
+
+  &.close {
+    display: none;
+  }
 `;
 
 export enum Placement {
@@ -42,13 +46,11 @@ export function getOffsetTop(rect: DOMRect, vertical: number | string): number {
   } else if (vertical === 'bottom') {
     offset = rect.height;
   }
-
   return offset;
 }
 
 export function getOffsetLeft(rect: DOMRect, horizontal: number | string): number {
   let offset = 0;
-
   if (typeof horizontal === 'number') {
     offset = horizontal;
   } else if (horizontal === 'center') {
@@ -56,7 +58,6 @@ export function getOffsetLeft(rect: DOMRect, horizontal: number | string): numbe
   } else if (horizontal === 'right') {
     offset = rect.width;
   }
-
   return offset;
 }
 
@@ -65,19 +66,20 @@ export interface IPortalProps extends IComponentProps<IPortalTheme>, ISingleAnyC
   placement: Placement | string;
   positionTop?: number;
   positionLeft?: number;
+  isOpen: boolean;
 }
 
-export const Portal = React.forwardRef((props: IPortalProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
+export const Portal = React.forwardRef((props: IPortalProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement | null => {
   const theme = useBuiltTheme('portals', props.variant, props.theme);
   const [positionTop, setPositionTop] = React.useState<number>(props.positionTop || 0);
   const [positionLeft, setPositionLeft] = React.useState<number>(props.positionLeft || 0);
+  const isOpen = props.isOpen;
 
   const updateSizes = React.useCallback((): void => {
     const anchorElementNodeRect = props.anchorElement?.current?.getBoundingClientRect();
     if (!anchorElementNodeRect) {
       return;
     }
-
     setPositionTop(anchorElementNodeRect.top + getOffsetTop(anchorElementNodeRect, props.placement.split('-')[0]));
     setPositionLeft(anchorElementNodeRect.left + getOffsetLeft(anchorElementNodeRect, props.placement.split('-')[1]));
   }, [props.anchorElement, props.placement]);
@@ -93,7 +95,7 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
   return ReactDOM.createPortal((
     <StyledPortal
       id={props.id}
-      className={getClassName(Portal.displayName, props.className)}
+      className={getClassName(Portal.displayName, !isOpen ? 'close' : undefined, props.className)}
       theme={theme}
       positionTop={positionTop}
       positionLeft={positionLeft}

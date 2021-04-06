@@ -69,8 +69,9 @@ export interface ILinkBaseProps extends IComponentProps<ILinkBaseTheme>, ISingle
 }
 
 export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
-  const onClicked = (): void => {
+  const onClicked = (event: React.SyntheticEvent<HTMLElement>): void => {
     if (props.onClicked) {
+      event.stopPropagation();
       props.onClicked();
     }
   };
