@@ -78,7 +78,7 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   onClicked?(): void;
 }
 
-export const Button = React.forwardRef((props: IButtonProps, ref: React.ForwardedRef<HTMLButtonElement>): React.ReactElement => {
+export const Button = (props: IButtonProps): React.ReactElement => {
   const onClicked = (event: React.SyntheticEvent<HTMLElement>): void => {
     if (props.isLoading) {
       return;
@@ -101,7 +101,6 @@ export const Button = React.forwardRef((props: IButtonProps, ref: React.Forwarde
       id={props.id}
       className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', !props.isEnabled && 'disabled')}
       theme={theme}
-      ref={ref}
       onClick={onClicked}
       isLoading={props.isLoading}
       disabled={!props.isEnabled}
@@ -131,7 +130,7 @@ export const Button = React.forwardRef((props: IButtonProps, ref: React.Forwarde
       )}
     </StyledButton>
   );
-});
+};
 
 Button.displayName = 'Button';
 Button.defaultProps = {

@@ -2,6 +2,7 @@ import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 import { Menu } from '.';
 import { Button } from '../../atoms';
+import { Box } from '../../particles';
 
 <Meta
   component={Menu}
@@ -35,7 +36,9 @@ export const Template = (args) => {
       const buttonRef = React.createRef();
       return (
         <React.Fragment>
-          <Button ref={buttonRef} text='Open Menu' onClicked={() => setIsOpen(!isOpen)}/>
+          <Box ref={buttonRef} isFullWidth={false}>
+            <Button text='Open Menu' onClicked={() => setIsOpen(!isOpen)}/>
+          </Box>
           <Menu anchorElement={buttonRef} placement='bottom-right' isOpen={isOpen} onClose={() => { setIsOpen(false)}} selectedItemKey={selectedItemKey} onItemClicked={setSelectedItemKey}>
             <Menu.Item itemKey={String(1)} itemTextVariant='colored' itemText='Hello' itemIconId='ion-globe' />
             <Menu.Item itemKey={String(2)} itemText='Hello' itemIconId='ion-globe' />

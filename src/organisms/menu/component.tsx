@@ -10,7 +10,7 @@ import { Alignment, Direction } from '../../model';
 import { List } from '../../molecules';
 import { IMenuItemProps } from '../../molecules/menuItem';
 import { KibaIcon, PaddingSize, Text } from '../../particles';
-import { Placement, Portal } from '../../particles/portal';
+import { IPortalTheme, Placement, Portal } from '../../particles/portal';
 import { defaultOrganismProps, IOrganismProps } from '../organismProps';
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
@@ -26,6 +26,7 @@ class MenuItemInner extends React.Component<IMenuItemInnerProps> {
 export interface IMenuTheme {
   // list theme specific to menu and also portal theme
   listItemTheme: IListItemTheme;
+  portalTheme: IPortalTheme;
 }
 
 interface IStyledMenuProps{
@@ -73,7 +74,7 @@ export const Menu = (props: IMenuProps): React.ReactElement => {
       ref={menuRef}
       onClick={onBackdropClicked}
     >
-      <Portal anchorElement={props.anchorElement} isOpen={props.isOpen} placement={props.placement}>
+      <Portal theme={props.theme?.portalTheme} anchorElement={props.anchorElement} isOpen={props.isOpen} placement={props.placement}>
         <List onItemClicked={props.onItemClicked} shouldShowDividers={true} selectedItemKey={props.selectedItemKey}>
           {React.Children.map(props.children, (child: OptionalProppedElement<IMenuItemInnerProps>, index: number): React.ReactElement | null => {
             if (!child) {
