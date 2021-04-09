@@ -92,7 +92,7 @@ interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   childAlignmentResponsive?: ResponsiveField<Alignment>;
   contentAlignment: Alignment;
   contentAlignmentResponsive?: ResponsiveField<Alignment>;
-  shouldWrapItem?: boolean;
+  shouldWrapItems?: boolean;
 }
 
 export const Stack = (props: IStackProps): React.ReactElement => {
@@ -107,12 +107,12 @@ export const Stack = (props: IStackProps): React.ReactElement => {
 
   const defaultGutter = props.defaultGutter || PaddingSize.Default;
   const shouldAddGutters = props.shouldAddGutters && defaultGutter !== PaddingSize.None;
-  const shouldWrapItem = props.shouldWrapItem || false;
+  const shouldWrapItems = props.shouldWrapItems || false;
   return (
     <PaddingView paddingTop={paddingTop} paddingBottom={paddingBottom} paddingRight={paddingRight} paddingLeft={paddingLeft} {...props as IPaddingViewPaddingProps}>
       <StyledStack
         id={props.id}
-        className={getClassName(Stack.displayName, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally', shouldWrapItem && 'wrapItems')}
+        className={getClassName(Stack.displayName, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally', shouldWrapItems && 'wrapItems')}
         theme={theme}
         $direction={{ base: props.direction, ...props.directionResponsive }}
         childAlignment={{ base: props.childAlignment, ...props.childAlignmentResponsive }}

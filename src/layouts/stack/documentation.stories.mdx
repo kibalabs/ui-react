@@ -2,7 +2,7 @@ import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 import { Stack, IStackProps } from '.';
 import { Direction } from '../../model';
-import { KibaIcon } from '../../particles';
+import { Box, KibaIcon } from '../../particles';
 
 <Meta
   component={Stack}
@@ -56,6 +56,28 @@ export const Template = (args) => (
       <KibaIcon iconId={'ion-american-football'} />
       <Stack.Item growthFactor={1} shrinkFactor={1} />
       <KibaIcon iconId={'ion-battery-full'} />
+    </Stack>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Wrapped Items'>
+    <Stack direction={Direction.Horizontal} shouldWrapItems={true}>
+      <KibaIcon iconId={'ion-accessibility'} />
+      <KibaIcon iconId={'ion-american-football'} />
+      <KibaIcon iconId={'ion-at'} />
+      <Box isFullWidth={false}>
+        <Stack direction={Direction.Horizontal}>
+          <KibaIcon iconId={'ion-albums'} />
+          <KibaIcon iconId={'ion-bag'} />
+        </Stack>
+      </Box>
+      <Box variant='padded'>
+        <Stack direction={Direction.Horizontal}>
+          <KibaIcon iconId={'ion-bonfire'} />
+          <KibaIcon iconId={'ion-battery-full'} />
+        </Stack>
+      </Box>
     </Stack>
   </Story>
 </Canvas>
