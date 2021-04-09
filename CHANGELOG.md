@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `LayerContainer` wrapper component
 - [MINOR] Correct scrollability in `Stack`
 - [MINOR] Updated `Stack` to have `shouldWrapItems` props to wrap items when it overflows
+- [MINOR] Updated `Box` props so that children are optional
 
 ### Removed
 
