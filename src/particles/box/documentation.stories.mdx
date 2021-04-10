@@ -76,4 +76,39 @@ export const Template = (args) => (
 
 ### Theming
 
+**Box** is a type of `particle`. It is the same as a styled `div`. Box is a basic building block for most of the advance components like `Button, Dialog, Portal, etc`.
+The key for Box theme for most of the components is `background`.
+The theming structure of a **Box** is as follows:
+```ts
+interface IBoxTheme extends CssTheme, ThemeType {
+  'background-color': string;
+  'border-radius': string;
+  'border-color': string;
+  'border-width': string;
+  'border-style': string;
+  'padding': string;
+  'box-shadow': string;
+  'margin': string;
+  'outline-style': string;
+  'outline-color': string;
+  'outline-width': string;
+  'outline-offset': string;
+}
+```
+
+**Example :**
+```ts
+// default box theme
+boxes: {
+  default: {
+    'background-color': '$colors.backgroundLight10',
+    'border-color': '$colors.backgroundDark05',
+    'box-shadow': '0px 8px 8px -6px rgba(0,0,0,0.15)',
+    'margin': '0px 4px 12px 4px'
+  },
+  newVariant: {
+    'background-color': '$colors.backgroundDark10'
+  }
+}
+```
 TODO
