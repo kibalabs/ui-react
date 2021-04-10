@@ -15,7 +15,7 @@ import { mergeTheme } from '../../util';
 export const BoxThemeExample = (): React.ReactElement => {
   const defaultTheme = useTheme();
   const [theme, setTheme] = React.useState<IBoxTheme>(defaultTheme.boxes.default);
-  const [themeEditorField, setThemeEditorField] = React.useState<string>('{\n\t\n}');
+  const [themeEditorField, setThemeEditorField] = React.useState<string>('');
   const [setThemeCallback, clearSetThemeCallback] = useDebouncedCallback(1000);
   const currentThemeValue = React.useRef<IBoxTheme>(theme);
 
