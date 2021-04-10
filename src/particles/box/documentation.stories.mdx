@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
-import { Box, IBoxProps } from '.';
+import { Box, IBoxProps, BoxThemeExample } from '.';
 import { PaddingSize, KibaIcon } from '../../particles';
 
 <Meta
@@ -97,18 +97,11 @@ interface IBoxTheme extends CssTheme, ThemeType {
 ```
 
 **Example :**
-```ts
-// default box theme
-boxes: {
-  default: {
-    'background-color': '$colors.backgroundLight10',
-    'border-color': '$colors.backgroundDark05',
-    'box-shadow': '0px 8px 8px -6px rgba(0,0,0,0.15)',
-    'margin': '0px 4px 12px 4px'
-  },
-  newVariant: {
-    'background-color': '$colors.backgroundDark10'
-  }
-}
-```
+
+<Canvas withSource={'none'}>
+  <Story name='comTestBlock'>
+    <BoxThemeExample />
+  </Story>
+</Canvas>
+
 TODO
