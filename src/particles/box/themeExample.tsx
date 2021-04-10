@@ -4,7 +4,7 @@ import { deepCompare } from '@kibalabs/core';
 import { useDebouncedCallback } from '@kibalabs/core-react';
 
 import { Box, IBoxTheme } from '.';
-import { Text } from '../';
+import { Text } from '..';
 import { Stack } from '../../layouts';
 import { Direction } from '../../model';
 import { MultiLineInput } from '../../molecules';
@@ -21,8 +21,8 @@ export const BoxThemeExample = (): React.ReactElement => {
 
   React.useEffect((): void => {
     currentThemeValue.current = theme;
-    currentThemeValue.current['background-color'] = '$colors.brandPrimary'
-    setThemeEditorField(JSON.stringify(currentThemeValue.current , undefined ,4));
+    currentThemeValue.current['background-color'] = '$colors.brandPrimary';
+    setThemeEditorField(JSON.stringify(currentThemeValue.current, undefined, 4));
   }, [theme]);
 
   React.useEffect(() => {
