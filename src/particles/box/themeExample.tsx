@@ -14,14 +14,14 @@ import { mergeTheme } from '../../util';
 
 export const BoxThemeExample = (): React.ReactElement => {
   const defaultTheme = useTheme();
-  const [theme, setTheme] = React.useState<IBoxTheme>(defaultTheme.boxes.default);
+  // Note : I had to concat the default variant with the bordered one, so that the whole box theme is visible to the user
+  const [theme, setTheme] = React.useState<IBoxTheme>({ ...defaultTheme.boxes.default,...defaultTheme.boxes.bordered });
   const [themeEditorField, setThemeEditorField] = React.useState<string>('');
   const [setThemeCallback, clearSetThemeCallback] = useDebouncedCallback(1000);
   const currentThemeValue = React.useRef<IBoxTheme>(theme);
 
   React.useEffect((): void => {
     currentThemeValue.current = theme;
-    currentThemeValue.current['background-color'] = '$colors.brandPrimary';
     setThemeEditorField(JSON.stringify(currentThemeValue.current, undefined, 4));
   }, [theme]);
 
@@ -45,7 +45,7 @@ export const BoxThemeExample = (): React.ReactElement => {
         </Stack>
       </Box>
       <Spacing variant={PaddingSize.Wide} />
-      <Text>Default Theme</Text>
+      <Text>Bordered Box Theme</Text>
       <MultiLineInput minRowCount={10} value={themeEditorField} onValueChanged={setThemeEditorField} />
     </Stack>
   );
