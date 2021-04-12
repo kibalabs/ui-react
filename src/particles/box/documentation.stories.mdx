@@ -1,6 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
-import { Box, IBoxProps, BoxThemeExample } from '.';
+import { Box, IBoxProps } from '.';
+import { BoxThemeExample } from './themeExample';
 import { PaddingSize, KibaIcon } from '../../particles';
 
 <Meta
@@ -76,8 +77,7 @@ export const Template = (args) => (
 
 ### Theming
 
-**Box** is a type of `particle`. It is the same as a styled `div`. Box is a basic building block for most of the advance components like `Button, Dialog, Portal, etc`.
-The key for Box theme for most of the components is `background`.
+**Box** is a type of `particle`. Boxes provide a basic building block for structuring UIs.
 The theming structure of a **Box** is as follows:
 ```ts
 interface IBoxTheme extends CssTheme, ThemeType {
@@ -96,12 +96,10 @@ interface IBoxTheme extends CssTheme, ThemeType {
 }
 ```
 
-**Example :**
+#### Example
 
 <Canvas withSource={'none'}>
   <Story name='comTestBlock'>
     <BoxThemeExample />
   </Story>
 </Canvas>
-
-TODO
