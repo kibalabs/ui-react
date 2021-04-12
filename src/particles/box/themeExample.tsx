@@ -21,7 +21,6 @@ export const BoxThemeExample = (): React.ReactElement => {
 
   React.useEffect((): void => {
     currentThemeValue.current = theme;
-    currentThemeValue.current['background-color'] = '$colors.brandPrimary';
     setThemeEditorField(JSON.stringify(currentThemeValue.current, undefined, 4));
   }, [theme]);
 
@@ -40,7 +39,7 @@ export const BoxThemeExample = (): React.ReactElement => {
     <Stack direction={Direction.Vertical} shouldAddGutters={true}>
       <Box variant='card'>
         <Stack direction={Direction.Vertical} shouldAddGutters={true}>
-          <Text>Change the theme and see the changes in the below box</Text>
+          <Text>Change the theme and see the changes in the box below</Text>
           <Box theme={theme} width='200px' height='50px' />
         </Stack>
       </Box>
