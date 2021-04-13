@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Correct scrollability in `Stack`
 - [MINOR] Updated `Stack` to have `shouldWrapItems` prop to wrap items when it overflows
 - [MINOR] Updated `Box` props so that children are optional
-- [MINOR] Updated `Box` props to have tooltip
+- [MINOR] Updated `Box` props to have `title` prop to have a tooltip
 
 ### Removed
 
