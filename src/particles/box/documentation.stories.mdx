@@ -55,7 +55,7 @@ export const Template = (args) => (
 <Canvas>
   <Story name='Scrollable Horizontally'>
     <Box width={'100px'} isScrollableHorizontally={true} isFullHeight={true}>
-      <div style={{backgroundColor: '#dddddd', width: '1000px', height: '50px'}}/>
+      <div style={{backgroundColor: '#dddddd', width: '1000px', height: '50px'}} />
     </Box>
   </Story>
 </Canvas>
@@ -63,14 +63,14 @@ export const Template = (args) => (
 <Canvas>
   <Story name='Scrollable Vertically'>
     <Box height={'100px'} isScrollableVertically={true} isFullWidth={false}>
-      <div style={{backgroundColor: '#dddddd', height: '1000px', width: '50px'}}/>
+      <div style={{backgroundColor: '#dddddd', height: '1000px', width: '50px'}} />
     </Box>
   </Story>
 </Canvas>
 
 <Canvas>
-<Story name='Empty Card'>
-    <Box variant='card' isFullWidth={false}/>
+  <Story name='Empty Card with Tooltip'>
+    <Box variant='card' title='Tooltip on the Box' isFullWidth={false} />
   </Story>
 </Canvas>
 
