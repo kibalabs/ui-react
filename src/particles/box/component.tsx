@@ -40,6 +40,7 @@ export interface IBoxProps extends IComponentProps<IBoxTheme>, IOptionalSingleAn
   maxHeight?: string;
   maxWidth?: string;
   zIndex?: number;
+  title?: string;
   isFullHeight?: boolean;
   isFullWidth?: boolean;
   isScrollableVertically?: boolean;
@@ -58,6 +59,7 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
       id={props.id}
       className={getClassName(Box.displayName, props.className, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally')}
       theme={theme}
+      title={props.title}
       ref={ref}
       $height={height}
       $width={width}
