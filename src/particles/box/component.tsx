@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import { IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
@@ -34,7 +34,7 @@ const StyledBox = styled.div<IStyledBoxProps>`
   }
 `;
 
-export interface IBoxProps extends IComponentProps<IBoxTheme>, ISingleAnyChildProps {
+export interface IBoxProps extends IComponentProps<IBoxTheme>, IOptionalSingleAnyChildProps {
   height?: string;
   width?: string;
   maxHeight?: string;
