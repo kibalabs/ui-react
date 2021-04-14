@@ -12,10 +12,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Created `MessageDialog` molecule component
 - [MINOR] Created `List` molecule and `List.Item` atom
 - [MINOR] Created `Divider` particle for use in `List`s
+- [PATCH] Added a `Portal` example to storybook
 
 ### Changed
 - [MINOR] Updated `LayerContainer` wrapper component
 - [MINOR] Correct scrollability in `Stack`
+- [MINOR] Updated to `Portal` to have offset and placement props
 
 ### Removed
 
