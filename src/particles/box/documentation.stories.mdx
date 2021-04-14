@@ -1,6 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 import { Box, IBoxProps } from '.';
+import { BoxThemeExample } from './themeExample';
 import { PaddingSize, KibaIcon } from '../../particles';
 
 <Meta
@@ -76,4 +77,29 @@ export const Template = (args) => (
 
 ### Theming
 
-TODO
+**Box** is a type of `particle`. Boxes provide a basic building block for structuring UIs.
+The theming structure of a **Box** is as follows:
+```ts
+interface IBoxTheme extends CssTheme, ThemeType {
+  'background-color': string;
+  'border-radius': string;
+  'border-color': string;
+  'border-width': string;
+  'border-style': string;
+  'padding': string;
+  'box-shadow': string;
+  'margin': string;
+  'outline-style': string;
+  'outline-color': string;
+  'outline-width': string;
+  'outline-offset': string;
+}
+```
+
+#### Example
+
+<Canvas withSource={'none'}>
+  <Story name='comTestBlock'>
+    <BoxThemeExample />
+  </Story>
+</Canvas>
