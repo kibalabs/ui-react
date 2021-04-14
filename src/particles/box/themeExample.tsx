@@ -14,7 +14,6 @@ import { mergeTheme } from '../../util';
 
 export const BoxThemeExample = (): React.ReactElement => {
   const defaultTheme = useTheme();
-  // Note : I had to concat the default variant with the bordered one, so that the whole box theme is visible to the user
   const [theme, setTheme] = React.useState<IBoxTheme>({ ...defaultTheme.boxes.default, ...defaultTheme.boxes.bordered });
   const [themeEditorField, setThemeEditorField] = React.useState<string>('');
   const [setThemeCallback, clearSetThemeCallback] = useDebouncedCallback(1000);
