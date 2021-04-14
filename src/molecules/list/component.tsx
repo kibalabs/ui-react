@@ -46,7 +46,9 @@ interface IListProps extends IMoleculeProps<IListTheme>, IMultiChildProps<IListI
 
 export const List = (props: IListProps): React.ReactElement => {
   const onItemClicked = props.onItemClicked && ((itemKey: string): void => {
-    props.onItemClicked!(itemKey);
+    if (props.onItemClicked) {
+      props.onItemClicked(itemKey);
+    }
   });
 
   return (
