@@ -1,6 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 import { Grid, IGridProps } from '.';
+import { PaddingSize } from '../../';
 import { Direction } from '../../model';
 import { KibaIcon } from '../../particles';
 
@@ -65,6 +66,31 @@ export const Template = (args) => (
         <KibaIcon iconId={'ion-bag'} />
       </Grid.Item>
       <Grid.Item size={6}>
+        <KibaIcon iconId={'ion-bonfire'} />
+      </Grid.Item>
+    </Grid>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Gutter applied'>
+    <Grid shouldAddGutters={true}>
+      <Grid.Item size={1}>
+        <KibaIcon iconId={'ion-airplane'} />
+      </Grid.Item>
+      <Grid.Item size={1}>
+        <KibaIcon iconId={'ion-american-football'} />
+      </Grid.Item>
+      <Grid.Item size={1}>
+        <KibaIcon iconId={'ion-at'} />
+      </Grid.Item>
+      <Grid.Item size={1}>
+        <KibaIcon iconId={'ion-albums'} />
+      </Grid.Item>
+      <Grid.Item size={1}>
+        <KibaIcon iconId={'ion-bag'} />
+      </Grid.Item>
+      <Grid.Item size={1}>
         <KibaIcon iconId={'ion-bonfire'} />
       </Grid.Item>
     </Grid>

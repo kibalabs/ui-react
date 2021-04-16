@@ -4,8 +4,8 @@ import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiChildProps, IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
-import { Alignment, getFlexContentAlignment, getFlexItemAlignment } from '../../model';
-import { IDimensionGuide } from '../../particles';
+import { Alignment, getFlexContentAlignment, getFlexItemAlignment, PaddingSize, PaddingSizeProp } from '../..';
+import { getPaddingSize, IDimensionGuide } from '../../particles';
 import { useDimensions } from '../../theming';
 import { getResponsiveCss, ResponsiveField } from '../../util';
 import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
@@ -51,12 +51,16 @@ export interface IGridProps extends IMultiChildProps<IGridItemProps>, IPaddingVi
   theme?: IDimensionGuide;
   isFullHeight?: boolean;
   shouldAddGutters?: boolean;
+  defaultGutter?: PaddingSizeProp;
   childAlignment: Alignment;
   contentAlignment: Alignment;
 }
 
 export const Grid = (props: IGridProps): React.ReactElement => {
   const theme = useDimensions(props.theme);
+  const defaultGutter = props.defaultGutter || PaddingSize.Default;
+  const shouldAddGutters = props.shouldAddGutters && defaultGutter !== PaddingSize.None;
+
   const children = flattenChildren(props.children).map((child: React.ReactChild, index: number): React.ReactElement<IGridItemProps> => (
     typeof child === 'object' && 'type' in child && child.type === GridItem ? child : <GridItem key={index}>{ child }</GridItem>
   ));
@@ -77,7 +81,7 @@ export const Grid = (props: IGridProps): React.ReactElement => {
             theme={theme}
             size={{ base: child.props.size, ...child.props.sizeResponsive }}
             isFullHeight={child.props.isFullHeight}
-            gutter={props.shouldAddGutters ? theme.gutter : '0px'}
+            gutter={shouldAddGutters ? getPaddingSize(defaultGutter, theme) : '0'}
             alignment={child.props.alignment}
           >
             {child.props.children}
