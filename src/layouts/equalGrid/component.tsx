@@ -3,7 +3,7 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiAnyChildProps } from '@kibalabs/core-react';
 
-import { Alignment } from '../../model';
+import { Alignment, PaddingSizeProp } from '../..';
 import { IDimensionGuide } from '../../particles';
 import { ResponsiveField } from '../../util';
 import { Grid } from '../grid';
@@ -14,6 +14,7 @@ export interface IEqualGridProps extends IMultiAnyChildProps {
   theme?: IDimensionGuide;
   isFullHeight?: boolean;
   shouldAddGutters?: boolean;
+  defaultGutter?: PaddingSizeProp;
   childAlignment?: Alignment;
   contentAlignment?: Alignment;
   childSize?: number;
