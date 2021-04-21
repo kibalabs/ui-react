@@ -36,7 +36,7 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
       </Box>
       <HidingView isHidden={!isOpen}>
         <Box variant='bordered' isFullWidth={false}>
-          <List onItemClicked={onItemClicked} shouldShowDividers={true} isFullWidth={false}>
+          <List onItemClicked={onItemClicked} shouldShowDividers={true} isFullWidth={true}>
             {props.options.map((option) => <List.Item itemKey={option.itemKey} isDisabled={option.isDisabled} isSelected={option.itemKey === props.selectedItemKey}><Text>{option.text}</Text></List.Item>)}
           </List>
         </Box>

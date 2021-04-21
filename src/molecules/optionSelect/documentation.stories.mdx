@@ -22,7 +22,7 @@ import { OptionSelect } from '.';
     {() => {
   const [selectedItemKey, setSelectedItemKey] = React.useState();
   const options=[{itemKey: '1' , text: '1'},{itemKey: '2' , text: '2'},{itemKey: '3' , text: '3'}];
-  return <OptionSelect options={options} isOpen={isOpen} onItemClicked={setSelectedItemKey} />;
+  return <OptionSelect options={options} onItemClicked={setSelectedItemKey} />;
   }}
   </Story>
 </Canvas>
