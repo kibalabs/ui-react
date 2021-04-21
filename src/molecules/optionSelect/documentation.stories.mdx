@@ -1,0 +1,28 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { OptionSelect } from '.';
+
+<Meta
+  component={OptionSelect}
+  title={'Molecules/OptionSelect'}
+/>
+
+# OptionSelect
+
+<br/>
+
+
+
+<ArgsTable story={'Default'} />
+
+# Examples
+
+<Canvas >
+  <Story name='Default'>
+    {() => {
+  const [selectedItemKey, setSelectedItemKey] = React.useState();
+  const options=[{itemKey: '1' , text: '1'},{itemKey: '2' , text: '2'},{itemKey: '3' , text: '3'}];
+  return <OptionSelect options={options} isOpen={isOpen} onItemClicked={setSelectedItemKey} />;
+  }}
+  </Story>
+</Canvas>
