@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Box, HidingView, Text } from "../..";
+import { Box, HidingView, Text } from '../..';
+import { IBoxTheme } from '../../particles';
 import { IListTheme, List } from '../list';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 import { ISingleLineInputTheme, SingleLineInput } from '../singleLineInput';
-import { IBoxTheme } from '../../particles';
 
 interface IOption {
   text: string;
@@ -29,18 +29,18 @@ interface IOptionSelectProps extends IMoleculeProps<IOptionSelectTheme> {
 
 export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
   const [isOpen, setIsOpen] = React.useState(false);
-  
+
   const selectedItem = (itemKey: string) => {
     return props.options.filter((option) => option.itemKey === itemKey).pop();
-  }
+  };
 
   const onItemClicked = (itemKey: string) => {
     props.onItemClicked(itemKey);
     setIsOpen(false);
-  }
+  };
   return (
     <Box>
-      <SingleLineInput theme={props.theme?.inputHandler} value={selectedItem(props.selectedItemKey)?.text} onValueChanged={() => {}} onClick={() => {setIsOpen(!isOpen)}}/>
+      <SingleLineInput theme={props.theme?.inputHandler} value={selectedItem(props.selectedItemKey)?.text} onValueChanged={() => null} onClick={() => { setIsOpen(!isOpen); }} />
       <HidingView isHidden={!isOpen}>
         <Box theme={props.theme?.optionsContainer}>
           <List theme={props.theme?.optionList} onItemClicked={onItemClicked} shouldShowDividers={true} isFullWidth={true}>
@@ -50,7 +50,7 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
       </HidingView>
     </Box>
   );
-}
+};
 
 OptionSelect.displayName = 'OptionSelect';
 OptionSelect.defaultProps = {
