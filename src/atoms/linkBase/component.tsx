@@ -26,6 +26,10 @@ const StyledLinkBase = styled.a<IStyledLinkBaseProps>`
     width: 100%;
   }
 
+  &.fullHeight {
+    height: 100%;
+  }
+
   ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.normal.default.background)};
   ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.normal.default.linkBase)};
   &:hover {
@@ -62,6 +66,7 @@ const StyledLinkBase = styled.a<IStyledLinkBaseProps>`
 export interface ILinkBaseProps extends IComponentProps<ILinkBaseTheme>, ISingleAnyChildProps {
   isEnabled: boolean;
   isFullWidth: boolean;
+  isFullHeight: boolean;
   label?: string;
   target?: string;
   targetShouldOpenSameTab?: boolean;
@@ -80,7 +85,7 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
   return (
     <StyledLinkBase
       id={props.id}
-      className={getClassName(LinkBase.displayName, props.className, props.isFullWidth && 'fullWidth', !props.isEnabled && 'disabled')}
+      className={getClassName(LinkBase.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !props.isEnabled && 'disabled')}
       theme={theme}
       onClick={onClicked}
       aria-label={props.label}
@@ -98,4 +103,5 @@ LinkBase.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,
   isFullWidth: false,
+  isFullHeight: false
 };
