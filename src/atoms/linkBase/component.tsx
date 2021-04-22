@@ -103,5 +103,5 @@ LinkBase.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,
   isFullWidth: false,
-  isFullHeight: false
+  isFullHeight: false,
 };
