@@ -20,9 +20,9 @@ import { OptionSelect } from '.';
 <Canvas >
   <Story name='Default'>
     {() => {
-  const [selectedItemKey, setSelectedItemKey] = React.useState('1');
-  const options=[{itemKey: '1' , text: '1'},{itemKey: '2' , text: '2'},{itemKey: '3' , text: '3'}];
-  return <OptionSelect selectedItemKey={selectedItemKey} options={options} onItemClicked={setSelectedItemKey} />;
+  const [selectedItemKey, setSelectedItemKey] = React.useState('');
+  const options=[{itemKey: '1' , text: '1'},{itemKey: '2' , text: '2'},{itemKey: '3' , text: 'This is a very very long option'}];
+  return <OptionSelect isFullWidth={false} selectedItemKey={selectedItemKey} options={options} onItemClicked={setSelectedItemKey} />;
   }}
   </Story>
 </Canvas>

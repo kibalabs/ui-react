@@ -1,10 +1,16 @@
 import React from 'react';
 
-import { Box, HidingView, Text } from '../..';
-import { IBoxTheme } from '../../particles';
-import { IListTheme, List } from '../list';
+import styled from 'styled-components';
+
+import { IInputFrameTheme, IListTheme, InputFrame, List } from '../..';
+import { IconButton } from '../../atoms';
+import { Stack } from '../../layouts';
+import { Alignment, Direction } from '../../model';
+import { Box, IBoxTheme, KibaIcon, Text } from '../../particles';
+import { useBuiltTheme } from '../../theming';
+import { themeToCss } from '../../util';
+import { HidingView } from '../../wrappers';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
-import { ISingleLineInputTheme, SingleLineInput } from '../singleLineInput';
 
 interface IOption {
   text: string;
@@ -15,23 +21,45 @@ interface IOption {
 export interface IOptionSelectTheme {
   // (I think so) Need to write a buildTheme file for OptionSelect, to give default style the components
   // or should I be using styled components
-  inputHandler: ISingleLineInputTheme;
+  inputHandler: IInputFrameTheme;
   optionsContainer: IBoxTheme;
   optionList: IListTheme;
 }
+
+
+const StyledClickableBox = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+interface IStyledOptionsContainer {
+  theme: IBoxTheme;
+}
+
+const StyledOptionsContainer = styled.div<IStyledOptionsContainer>`
+  z-index: 999;
+  ${(props: IStyledOptionsContainer): string => themeToCss(props.theme)};
+`;
 
 interface IOptionSelectProps extends IMoleculeProps<IOptionSelectTheme> {
   onItemClicked: (itemKey: string) => void;
   options: IOption[];
   selectedItemKey?: string;
+  isEnabled?:boolean;
+  width?: string;
+  messageText?: string;
+  isFullWidth?: boolean;
 }
 
 
 export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const width = props.isFullWidth ? '100%' : props.width || '200px';
+
+  const optionsContainerTheme = useBuiltTheme('boxes', 'card', { padding: '0', margin: '1rem 0', ...props.theme?.optionsContainer });
 
   const selectedItem = (itemKey: string) => {
-    return props.options.filter((option) => option.itemKey === itemKey).pop();
+    return props.options.find((option) => option.itemKey === itemKey);
   };
 
   const onItemClicked = (itemKey: string) => {
@@ -39,14 +67,22 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
     setIsOpen(false);
   };
   return (
-    <Box>
-      <SingleLineInput theme={props.theme?.inputHandler} value={selectedItem(props.selectedItemKey)?.text} onValueChanged={() => null} onClick={() => { setIsOpen(!isOpen); }} />
+    <Box isFullWidth={props.isFullWidth} width={width}>
+      <StyledClickableBox onClick={() => setIsOpen(!isOpen)}>
+        <InputFrame theme={props.theme?.inputHandler} isEnabled={props.isEnabled} messageText={props.messageText}>
+          <Stack direction={Direction.Horizontal} childAlignment={Alignment.Center}>
+            <Text>{selectedItem(props.selectedItemKey)?.text || 'Select an option'}</Text>
+            <Stack.Item growthFactor={1} shrinkFactor={1} />
+            {isOpen && <IconButton variant='unpadded' icon={<KibaIcon iconId='ion-close-outline' />} onClicked={() => setIsOpen(false)} />}
+          </Stack>
+        </InputFrame>
+      </StyledClickableBox>
       <HidingView isHidden={!isOpen}>
-        <Box theme={props.theme?.optionsContainer}>
+        <StyledOptionsContainer theme={optionsContainerTheme}>
           <List theme={props.theme?.optionList} onItemClicked={onItemClicked} shouldShowDividers={true} isFullWidth={true}>
             {props.options.map((option) => <List.Item key={option.itemKey} itemKey={option.itemKey} isDisabled={option.isDisabled} isSelected={option.itemKey === props.selectedItemKey}><Text>{option.text}</Text></List.Item>)}
           </List>
-        </Box>
+        </StyledOptionsContainer>
       </HidingView>
     </Box>
   );
@@ -55,4 +91,6 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
 OptionSelect.displayName = 'OptionSelect';
 OptionSelect.defaultProps = {
   ...defaultMoleculeProps,
+  isEnabled: true,
+  isFullWidth: false,
 };

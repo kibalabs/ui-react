@@ -88,6 +88,16 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
     },
   }, base?.secondary);
 
+  const unpaddedIconButtonTheme = mergeThemePartial<IIconButtonTheme>({
+    normal: {
+      default: {
+        background: {
+          padding: '0',
+        },
+      },
+    },
+  }, base?.secondary);
+
   const passiveIconButtonTheme = mergeThemePartial<IIconButtonTheme>({
     normal: {
       default: {
@@ -106,5 +116,6 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
     tertiary: defaultIconButtonTheme,
     small: smallIconButtonTheme,
     passive: passiveIconButtonTheme,
+    unpadded: unpaddedIconButtonTheme,
   };
 };
