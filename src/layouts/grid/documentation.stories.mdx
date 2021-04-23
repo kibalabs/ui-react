@@ -97,6 +97,22 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
+<Canvas>
+  <Story name='Gutters'>
+    <Grid shouldAddGutters={true} defaultGutter={PaddingSize.Wide}>
+      <Grid.Item size={3}>
+        <Box variant='card' isFullWidth={true}/>
+      </Grid.Item>
+      <Grid.Item size={3}>
+        <Box variant='card' isFullWidth={true}/>
+      </Grid.Item>
+      <Grid.Item size={6}>
+        <Box variant='card' isFullWidth={true}/>
+      </Grid.Item>
+    </Grid>
+  </Story>
+</Canvas>
+
 ### Theming
 
 TODO
