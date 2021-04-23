@@ -33,6 +33,14 @@ export const Template = (args) => {
 ### Examples
 
 <Canvas>
+  <Story name='Content Alignment'>
+    <TabBar contentAlignment='center' isFullWidth={false}>
+      <TabBar.Item tabKey={String(1)} text='First' />
+    </TabBar>
+  </Story>
+</Canvas>
+
+<Canvas>
   <Story name='Full width'>
     <TabBar isFullWidth={true}>
       <TabBar.Item tabKey={String(1)} text='First' />

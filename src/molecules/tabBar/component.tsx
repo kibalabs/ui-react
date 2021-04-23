@@ -4,8 +4,10 @@ import { getClassName } from '@kibalabs/core';
 import { IMultiChildProps, OptionalProppedElement } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
-
 import { ITabBarItemProps, ITabBarItemTheme, TabBarItem } from '../../atoms/tabBarItem';
+import { Alignment, getFlexContentAlignment } from '../../model';
+import { useDimensions } from '../../theming';
+import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface ITabBarTheme {
@@ -14,13 +16,19 @@ export interface ITabBarTheme {
 
 interface IStyledTabBarProps {
   theme: ITabBarTheme;
+  contentAlignment: ResponsiveField<Alignment>;
 }
+
+const getContentAlignmentCss: CssConverter<Alignment> = (field: Alignment): string => {
+  return `justify-content: ${getFlexContentAlignment(field)};`;
+};
 
 const StyledTabBar = styled.div<IStyledTabBarProps>`
   display: flex;
   flex-direction: row;
   max-width: 100%;
   overflow: auto;
+  ${(props: IStyledTabBarProps): string => fieldToResponsiveCss(props.contentAlignment, useDimensions(), getContentAlignmentCss)};
 
   &.fullWidth {
     width: 100%;
@@ -40,6 +48,8 @@ class TabBarItemInner extends React.Component<ITabBarItemInnerProps> {
 interface ITabBarProps extends IMoleculeProps<ITabBarTheme>, IMultiChildProps<ITabBarItemInnerProps> {
   isFullWidth?: boolean;
   selectedTabKey: string;
+  contentAlignment: Alignment;
+  contentAlignmentResponsive?: ResponsiveField<Alignment>;
   onTabKeySelected(tabKey: string): void;
 }
 
@@ -56,6 +66,7 @@ export const TabBar = (props: ITabBarProps): React.ReactElement => {
     <StyledTabBar
       id={props.id}
       className={getClassName(TabBar.displayName, props.className, props.isFullWidth && 'fullWidth')}
+      contentAlignment={{ base: props.contentAlignment, ...props.contentAlignmentResponsive }}
     >
       { React.Children.map(props.children, (child: OptionalProppedElement<ITabBarItemInnerProps>, index: number): React.ReactElement | null => {
         if (!child) {
@@ -84,6 +95,7 @@ export const TabBar = (props: ITabBarProps): React.ReactElement => {
 TabBar.displayName = 'TabBar';
 TabBar.defaultProps = {
   ...defaultMoleculeProps,
+  contentAlignment: Alignment.Fill,
 };
 TabBar.Item = TabBarItemInner;
 
