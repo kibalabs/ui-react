@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useWindowSize } from "@kibalabs/core-react";
+import { useWindowSize } from '@kibalabs/core-react';
 
 import { useDimensions } from '../../theming';
 import { ThemeType } from '../../util';
