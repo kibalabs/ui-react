@@ -31,6 +31,7 @@ export interface IDimensionGuide extends ThemeType {
 }
 
 export enum ScreenSize {
+  Base = 'base',
   Small = 'small',
   Medium = 'medium',
   Large = 'large',
