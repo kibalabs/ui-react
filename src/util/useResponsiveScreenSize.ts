@@ -2,8 +2,8 @@ import React from 'react';
 
 import { useWindowSize } from '@kibalabs/core-react';
 
+import { getScreenSize, IDimensionGuide, ScreenSize } from '../particles';
 import { useDimensions } from '../theming';
-import { ScreenSize, IDimensionGuide, getScreenSize} from '../particles'
 
 export const ResponsiveScreenSizeContext = React.createContext<ScreenSize>(ScreenSize.Base);
 
