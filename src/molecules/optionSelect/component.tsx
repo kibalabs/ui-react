@@ -45,6 +45,7 @@ interface IOptionSelectProps extends IMoleculeProps<IOptionSelectTheme> {
   selectedItemKey?: string;
   isEnabled?:boolean;
   width?: string;
+  closeIconId?: string;
   messageText?: string;
   isFullWidth?: boolean;
 }
@@ -72,7 +73,7 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
             <Stack.Item growthFactor={1} shrinkFactor={1}>
               <Text>{selectedItem(props.selectedItemKey)?.text || 'Select an option'}</Text>
             </Stack.Item>
-            {isOpen && <IconButton variant='unpadded' icon={<KibaIcon iconId='ion-close-outline' />} onClicked={() => setIsOpen(false)} />}
+            {isOpen && <IconButton variant='unpadded' icon={<KibaIcon iconId={props.closeIconId || 'ion-close-outline'} />} onClicked={() => setIsOpen(false)} />}
           </Stack>
         </InputFrame>
       </StyledClickableBox>
