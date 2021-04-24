@@ -8,4 +8,5 @@ export * from './particles';
 export * from './molecules';
 
 export * from './theming';
+export * from './hooks';
 export * from './app';

@@ -58,6 +58,10 @@ export const getScreenSize = (size: ScreenSize, theme: IDimensionGuide): string 
   }
 };
 
+export const getScreenSizeValue = (size: ScreenSize, theme: IDimensionGuide): number => {
+  return Number(getScreenSize(size, theme).replace('px', ''));
+};
+
 export enum PaddingSize {
   None = 'none',
   Default = 'default',
