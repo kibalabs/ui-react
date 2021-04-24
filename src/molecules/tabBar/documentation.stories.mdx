@@ -1,6 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 import { TabBar } from '.';
+import { Alignment } from '../../model';
 
 <Meta
   component={TabBar}
@@ -34,8 +35,14 @@ export const Template = (args) => {
 
 <Canvas>
   <Story name='Content Alignment'>
-    <TabBar contentAlignment='center' isFullWidth={false}>
-      <TabBar.Item tabKey={String(1)} text='First' />
+    <TabBar contentAlignment={Alignment.Start} isFullWidth={false}>
+      <TabBar.Item tabKey={String(1)} text='Left Aligned' />
+    </TabBar>
+    <TabBar contentAlignment={Alignment.Center} isFullWidth={false}>
+      <TabBar.Item tabKey={String(1)} text='Center Aligned' />
+    </TabBar>
+    <TabBar contentAlignment={Alignment.End} isFullWidth={false}>
+      <TabBar.Item tabKey={String(1)} text='Right Aligned' />
     </TabBar>
   </Story>
 </Canvas>
