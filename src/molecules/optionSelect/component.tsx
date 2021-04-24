@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { IInputFrameTheme, IListTheme, InputFrame, List } from '../..';
 import { IconButton } from '../../atoms';
-import { Stack } from '../../layouts';
+import { Grid, Stack } from '../../layouts';
 import { Alignment, Direction } from '../../model';
 import { Box, IBoxTheme, KibaIcon, Text } from '../../particles';
 import { useBuiltTheme } from '../../theming';
@@ -18,9 +18,7 @@ interface IOption {
   isDisabled?: boolean;
 }
 
-export interface IOptionSelectTheme {
-  // (I think so) Need to write a buildTheme file for OptionSelect, to give default style the components
-  // or should I be using styled components
+export interface IOptionSelectTheme { 
   inputHandler: IInputFrameTheme;
   optionsContainer: IBoxTheme;
   optionList: IListTheme;
@@ -71,8 +69,9 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
       <StyledClickableBox onClick={() => setIsOpen(!isOpen)}>
         <InputFrame theme={props.theme?.inputHandler} isEnabled={props.isEnabled} messageText={props.messageText}>
           <Stack direction={Direction.Horizontal} childAlignment={Alignment.Center}>
-            <Text>{selectedItem(props.selectedItemKey)?.text || 'Select an option'}</Text>
-            <Stack.Item growthFactor={1} shrinkFactor={1} />
+            <Stack.Item growthFactor={1} shrinkFactor={1}>
+              <Text>{selectedItem(props.selectedItemKey)?.text || 'Select an option'}</Text>
+            </Stack.Item>
             {isOpen && <IconButton variant='unpadded' icon={<KibaIcon iconId='ion-close-outline' />} onClicked={() => setIsOpen(false)} />}
           </Stack>
         </InputFrame>
