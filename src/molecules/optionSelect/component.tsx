@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { IInputFrameTheme, IListTheme, InputFrame, List } from '../..';
 import { IconButton } from '../../atoms';
-import { Grid, Stack } from '../../layouts';
+import { Stack } from '../../layouts';
 import { Alignment, Direction } from '../../model';
 import { Box, IBoxTheme, KibaIcon, Text } from '../../particles';
 import { useBuiltTheme } from '../../theming';
@@ -18,7 +18,7 @@ interface IOption {
   isDisabled?: boolean;
 }
 
-export interface IOptionSelectTheme { 
+export interface IOptionSelectTheme {
   inputHandler: IInputFrameTheme;
   optionsContainer: IBoxTheme;
   optionList: IListTheme;
