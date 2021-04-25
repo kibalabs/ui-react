@@ -34,16 +34,18 @@ export const Template = (args) => {
 ### Examples
 
 <Canvas>
-  <Story name='Content Alignment'>
+  <Story name='Full width'>
+    <TabBar isFullWidth={true}>
+      <TabBar.Item tabKey={String(1)} text='First' />
+      <TabBar.Item tabKey={String(2)} text='Second' />
+      <TabBar.Item tabKey={String(3)} text='Third' />
+    </TabBar>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Content Alignment - Start'>
     <TabBar contentAlignment={Alignment.Start} isFullWidth={false}>
-      <TabBar.Item tabKey={String(1)} text='First' />
-      <TabBar.Item tabKey={String(2)} text='Second' />
-    </TabBar>
-    <TabBar contentAlignment={Alignment.Center} isFullWidth={false}>
-      <TabBar.Item tabKey={String(1)} text='First' />
-      <TabBar.Item tabKey={String(2)} text='Second' />
-    </TabBar>
-    <TabBar contentAlignment={Alignment.End} isFullWidth={false}>
       <TabBar.Item tabKey={String(1)} text='First' />
       <TabBar.Item tabKey={String(2)} text='Second' />
     </TabBar>
@@ -51,11 +53,19 @@ export const Template = (args) => {
 </Canvas>
 
 <Canvas>
-  <Story name='Full width'>
-    <TabBar isFullWidth={true}>
+  <Story name='Content Alignment - Center'>
+    <TabBar contentAlignment={Alignment.Center} isFullWidth={false}>
       <TabBar.Item tabKey={String(1)} text='First' />
       <TabBar.Item tabKey={String(2)} text='Second' />
-      <TabBar.Item tabKey={String(3)} text='Third' />
+    </TabBar>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Content Alignment - End'>
+    <TabBar contentAlignment={Alignment.End} isFullWidth={false}>
+      <TabBar.Item tabKey={String(1)} text='First' />
+      <TabBar.Item tabKey={String(2)} text='Second' />
     </TabBar>
   </Story>
 </Canvas>
