@@ -81,7 +81,7 @@ export const Grid = (props: IGridProps): React.ReactElement => {
             theme={theme}
             size={{ base: child.props.size, ...child.props.sizeResponsive }}
             isFullHeight={child.props.isFullHeight}
-            gutter={shouldAddGutters ? getPaddingSize(defaultGutter, theme) : '0'}
+            gutter={shouldAddGutters ? getPaddingSize(defaultGutter, theme) : '0px'}
             alignment={child.props.alignment}
           >
             {child.props.children}
