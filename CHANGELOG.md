@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `Box` props to have `title` prop to have a tooltip
 - [MINOR] Updated `Grid` and `EqualGrid` to have `defaultGutter` prop to change the gutter size
 - [MINOR] Updated `LinkBase` props to have `isFullHeight` prop
+- [MINOR] Updated `TabBar` props to have `contentAlignment` prop to horizontally alignment of tabs
 
 ### Removed
 
