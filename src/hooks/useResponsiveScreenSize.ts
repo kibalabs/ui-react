@@ -2,17 +2,10 @@ import React from 'react';
 
 import { useWindowSize } from '@kibalabs/core-react';
 
-import { getScreenSize, IDimensionGuide, ScreenSize } from '../particles';
+import { getScreenSizeValue, ScreenSize } from '../particles';
 import { useDimensions } from '../theming';
 
 export const ResponsiveScreenSizeContext = React.createContext<ScreenSize>(ScreenSize.Base);
-
-const getScreenSizeValue = (size: ScreenSize, theme: IDimensionGuide): number => {
-  if (size === ScreenSize.Base) {
-    return 0;
-  }
-  return Number(getScreenSize(size as string as ScreenSize, theme).replace('px', ''));
-};
 
 export function useResponsiveScreenSize(): ScreenSize {
   const dimensions = useDimensions();
