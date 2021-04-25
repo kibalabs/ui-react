@@ -98,7 +98,26 @@ export const Template = (args) => (
 </Canvas>
 
 <Canvas>
-  <Story name='Gutters'>
+  <Story name='Default Gutters'>
+    <Box>
+      <Text>Boxes seperated by default gutters</Text>
+      <Grid shouldAddGutters={true}>
+        <Grid.Item size={3}>
+          <Box variant='card' isFullWidth={true}/>
+        </Grid.Item>
+        <Grid.Item size={3}>
+          <Box variant='card' isFullWidth={true}/>
+        </Grid.Item>
+        <Grid.Item size={5}>
+          <Box variant='card' isFullWidth={true}/>
+        </Grid.Item>
+      </Grid>
+    </Box>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Wide Gutters'>
     <Box>
       <Text>Boxes seperated by wide gutters</Text>
       <Grid shouldAddGutters={true} defaultGutter={PaddingSize.Wide}>
@@ -112,20 +131,15 @@ export const Template = (args) => (
           <Box variant='card' isFullWidth={true}/>
         </Grid.Item>
       </Grid>
+    </Box>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='No Gutters'>
+    <Box>
       <Text>Boxes seperated by no gutter</Text>
       <Grid shouldAddGutters={false}>
-        <Grid.Item size={3}>
-          <Box variant='card' isFullWidth={true}/>
-        </Grid.Item>
-        <Grid.Item size={3}>
-          <Box variant='card' isFullWidth={true}/>
-        </Grid.Item>
-        <Grid.Item size={5}>
-          <Box variant='card' isFullWidth={true}/>
-        </Grid.Item>
-      </Grid>
-      <Text>Boxes seperated by default gutters</Text>
-      <Grid shouldAddGutters={true}>
         <Grid.Item size={3}>
           <Box variant='card' isFullWidth={true}/>
         </Grid.Item>
