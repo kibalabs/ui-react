@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { IconButton, IIconButtonTheme } from '../../atoms';
 import { Stack } from '../../layouts';
 import { Alignment, Direction } from '../../model';
-import { getScreenSize, IDimensionGuide, KibaIcon, ScreenSize } from '../../particles';
+import { getScreenSizeValue, IDimensionGuide, KibaIcon, ScreenSize } from '../../particles';
 import { useDimensions } from '../../theming';
 import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
@@ -129,10 +129,6 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
   const slidesPerPageMedium = props.slidesPerPageResponsive?.medium || slidesPerPageSmall;
   const slidesPerPageLarge = props.slidesPerPageResponsive?.large || slidesPerPageMedium;
   const slidesPerPageExtraLarge = props.slidesPerPageResponsive?.extraLarge || slidesPerPageLarge;
-
-  const getScreenSizeValue = (size: ScreenSize, theme: IDimensionGuide): number => {
-    return Number(getScreenSize(size, theme).replace('px', ''));
-  };
 
   useScrollListener(sliderRef.current, (): void => {
     if (!sliderRef.current) {
