@@ -105,7 +105,7 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
   const [isFocussed, setIsFocussed] = React.useState(false);
   const theme = useBuiltTheme('inputWrappers', props.variant, props.theme);
 
-  const onClick = () => {
+  const onClicked = (): void => {
     if (props.onClicked) {
       props.onClicked();
     }
