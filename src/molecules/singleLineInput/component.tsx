@@ -78,10 +78,10 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
   };
 
   const onClick = () => {
-    if(props.onClick){
+    if (props.onClick) {
       props.onClick();
     }
-  }
+  };
 
   return (
     <InputFrame
