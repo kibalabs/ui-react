@@ -14,7 +14,7 @@ export interface IFormTheme extends ThemeType {
   loadingSpinnerTheme: ILoadingSpinnerTheme;
 }
 
-// TODO(krish): this should not be relatives when it uses layers
+// TODO(krishan711): this should not be relatives when it uses layers
 const StyledForm = styled.form`
   position: relative;
 `;
@@ -44,7 +44,7 @@ export const Form = (props: IFormProps): React.ReactElement => {
     props.onFormSubmitted();
   };
 
-  // TODO(krish): this should use layers
+  // TODO(krishan711): this should use layers
   return (
     <Box
       id={props.id}

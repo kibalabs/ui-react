@@ -44,7 +44,7 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
   /* eslint-disable react/display-name */
   const renderers: ReactMarkdownTypes.Renderers = {
     root: (rendererProps: RendererProps): React.ReactElement => {
-      // TODO(krish): what should this check? It cant run the below check cos would fail for markdown like: "**Hello** world"
+      // TODO(krishan711): what should this check? It cant run the below check cos would fail for markdown like: "**Hello** world"
       // const childrenKeys = React.Children.map(rendererProps.children, (child: React.ReactElement): string => String(child.key).split('-')[0]);
       // if (React.Children.count(rendererProps.children) > 1 && childrenKeys[0] !== 'text') {
       //   throw new Error('MarkdownText only supports having one text child!')

@@ -103,13 +103,13 @@ Grid.defaultProps = {
 Grid.Item = GridItem;
 
 const getCssSize = (totalColumnCount: number, gutter: string, columnCount: number): string => {
-  // TODO(krish): it should be display: unset below (not block) but ie11 doesn't like this. find a nicer way!
+  // TODO(krishan711): it should be display: unset below (not block) but ie11 doesn't like this. find a nicer way!
   return `width: calc(${(100.0 * columnCount) / totalColumnCount}% - 2 * ${gutter});
     ${columnCount === 0 ? 'display: none' : 'display: block'};
   `;
 };
 
-// TODO(krish): this can be consolidated with responsiveUtil.fieldToResponsiveCss with some kind of currying for the above function.
+// TODO(krishan711): this can be consolidated with responsiveUtil.fieldToResponsiveCss with some kind of currying for the above function.
 const columnCountsToCss = (field: ResponsiveField<number>, theme: IDimensionGuide, gutter: string): string => {
   const output = [];
   if (field?.base !== undefined) {
