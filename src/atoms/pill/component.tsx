@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
+import { OptionalProppedElement } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
@@ -28,8 +29,8 @@ const StyledPill = styled.div<IStyledPillProps>`
 export interface IPillProps extends IComponentProps<IPillTheme> {
   text: string;
   isFullWidth: boolean;
-  iconRight?: React.ComponentClass<IIconProps>;
-  iconLeft?: React.ComponentClass<IIconProps>;
+  iconRight?: OptionalProppedElement<IIconProps>;
+  iconLeft?: OptionalProppedElement<IIconProps>;
   iconGutter?: PaddingSize;
 }
 
