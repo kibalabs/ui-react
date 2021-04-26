@@ -77,7 +77,7 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
     }
   };
 
-  const onClick = () => {
+  const onClicked = () => {
     if (props.onClick) {
       props.onClick();
     }
@@ -99,7 +99,7 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
         name={props.name}
         autoComplete={getAutocompleteType(props.inputType)}
         value={props.value || ''}
-        onClick={onClick}
+        onClick={onClicked}
         onKeyUp={onKeyUp}
         onKeyDown={onKeyDown}
         onChange={onValueChanged}

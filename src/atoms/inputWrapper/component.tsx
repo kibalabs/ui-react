@@ -120,7 +120,7 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
         id={props.id && `${props.id}-inner`}
         className={getClassName(InputWrapperInner.displayName, props.messageText && 'message-showing', isFocussed && 'focus', !props.isEnabled && 'disabled')}
         theme={theme}
-        onClick={onClick}
+        onClick={onClicked}
         onFocus={(): void => setIsFocussed(true)}
         onBlur={(): void => setIsFocussed(false)}
       >
