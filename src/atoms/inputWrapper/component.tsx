@@ -96,6 +96,7 @@ const StyledMessage = styled.p`
 export interface IInputWrapperProps extends IComponentProps<IInputWrapperTheme>, ISingleAnyChildProps {
   messageText?: string;
   isEnabled?: boolean;
+  onClicked?: () => void;
   // isFocussed?: boolean;
 }
 
@@ -103,6 +104,12 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
   // :focus-within is not supported on all browsers so we manually maintain if this particle has a isFocussed child
   const [isFocussed, setIsFocussed] = React.useState(false);
   const theme = useBuiltTheme('inputWrappers', props.variant, props.theme);
+
+  const onClick = () => {
+    if (props.onClicked) {
+      props.onClicked();
+    }
+  };
   // TODO(krish): check that the first child is an input, textarea or .wrapped-input
   return (
     <StyledInputWrapper
@@ -113,6 +120,7 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
         id={props.id && `${props.id}-inner`}
         className={getClassName(InputWrapperInner.displayName, props.messageText && 'message-showing', isFocussed && 'focus', !props.isEnabled && 'disabled')}
         theme={theme}
+        onClick={onClick}
         onFocus={(): void => setIsFocussed(true)}
         onBlur={(): void => setIsFocussed(false)}
       >

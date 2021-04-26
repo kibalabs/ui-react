@@ -14,6 +14,7 @@ export interface IInputFrameProps extends IMoleculeProps<IInputFrameTheme>, ISin
   messageText?: string;
   isEnabled: boolean;
   inputWrapperVariant?: string;
+  onClicked?: () => void;
 }
 
 // NOTE(krish): this component is intended to hold anything that would commonly be used alongside input wrapper (e.g. buttons)
@@ -26,6 +27,7 @@ export const InputFrame = (props: IInputFrameProps): React.ReactElement => {
       variant={props.inputWrapperVariant}
       messageText={props.messageText}
       isEnabled={props.isEnabled}
+      onClicked={props.onClicked}
     >
       {props.children}
     </InputWrapper>
