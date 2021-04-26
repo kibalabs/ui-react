@@ -54,6 +54,7 @@ export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTh
   inputWrapperVariant?: string;
   onKeyUp?: (key: string) => void;
   onKeyDown?: (key: string) => void;
+  // TODO(krishan711): update this to onClicked for the next breaking change
   onClick?: () => void;
   onValueChanged: (value: string) => void;
 }
