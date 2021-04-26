@@ -70,7 +70,9 @@ const StyledStack = styled.div<IStyledStackProps>`
     overflow-x: auto;
   }
   &.wrapItems {
+    display: inline-flex;
     flex-wrap: wrap;
+    row-gap: ${(props: IStyledStackProps): string => props.theme.gutter}
   }
 `;
 
