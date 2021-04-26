@@ -54,7 +54,7 @@ export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTh
   inputWrapperVariant?: string;
   onKeyUp?: (key: string) => void;
   onKeyDown?: (key: string) => void;
-  onClicked?: () => void;
+  onClick?: () => void;
   onValueChanged: (value: string) => void;
 }
 
@@ -77,6 +77,12 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
     }
   };
 
+  const onClick = () => {
+    if(props.onClick){
+      props.onClick();
+    }
+  }
+
   return (
     <InputFrame
       id={props.id}
@@ -85,7 +91,6 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
       inputWrapperVariant={props.inputWrapperVariant}
       messageText={props.messageText}
       isEnabled={props.isEnabled}
-      onClicked={props.onClicked}
     >
       <StyledSingleLineInput
         id={props.id && `${props.id}-textarea`}
@@ -94,6 +99,7 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
         name={props.name}
         autoComplete={getAutocompleteType(props.inputType)}
         value={props.value || ''}
+        onClick={onClick}
         onKeyUp={onKeyUp}
         onKeyDown={onKeyDown}
         onChange={onValueChanged}
