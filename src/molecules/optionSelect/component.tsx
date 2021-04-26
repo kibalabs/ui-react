@@ -55,7 +55,7 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
   const [isOpen, setIsOpen] = React.useState(false);
   const width = props.isFullWidth ? '100%' : props.width || '200px';
 
-  const optionsContainerTheme = useBuiltTheme('boxes', 'card', { padding: '0', margin: '1rem 0', ...props.theme?.optionsContainer });
+  const optionsContainerTheme = useBuiltTheme('boxes', 'card', { padding: '0', ...props.theme?.optionsContainer });
 
   const selectedItem = (itemKey: string) => {
     return props.options.find((option) => option.itemKey === itemKey);
