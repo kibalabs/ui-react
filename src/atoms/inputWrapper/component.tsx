@@ -110,6 +110,7 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
       props.onClicked();
     }
   };
+
   // TODO(krish): check that the first child is an input, textarea or .wrapped-input
   return (
     <StyledInputWrapper
