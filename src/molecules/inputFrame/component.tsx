@@ -17,7 +17,7 @@ export interface IInputFrameProps extends IMoleculeProps<IInputFrameTheme>, ISin
   onClicked?: () => void;
 }
 
-// NOTE(krish): this component is intended to hold anything that would commonly be used alongside input wrapper (e.g. buttons)
+// NOTE(krishan711): this component is intended to hold anything that would commonly be used alongside input wrapper (e.g. buttons)
 export const InputFrame = (props: IInputFrameProps): React.ReactElement => {
   return (
     <InputWrapper

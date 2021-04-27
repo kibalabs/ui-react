@@ -45,7 +45,6 @@ const StyledVideo = styled.video<IStyledVideoProps>`
     transition: opacity 0.15s;
   }
 
-  // TODO(krish): should all things be like this?
   &.centered {
     margin-left: auto;
     margin-right: auto;

@@ -30,8 +30,8 @@ const getLayersCss = (backgroundLayers: IBackgroundLayer[], colors: IColorGuide)
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getLayerCss = (backgroundLayer: IBackgroundLayer, colors: IColorGuide): string => {
   const layers = [];
-  // TODO(krish): this resolve doesn't do the "full resolution" thing for IE
-  // TODO(krish): resolve values for linear and radial gradients too
+  // TODO(krishan711): this resolve doesn't do the "full resolution" thing for IE
+  // TODO(krishan711): resolve values for linear and radial gradients too
   if (backgroundLayer.color) {
     layers.push(`linear-gradient(${valueToCss(backgroundLayer.color)}, ${valueToCss(backgroundLayer.color)})`);
   }

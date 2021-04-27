@@ -1,7 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 import { Stack, IStackProps } from '.';
-import { Direction } from '../../model';
+import { Direction, Alignment } from '../../model';
 import { Box, KibaIcon } from '../../particles';
 import { BackgroundView } from '../../wrappers';
 
@@ -73,6 +73,32 @@ export const Template = (args) => (
       <BackgroundView color='#afdfed'>
         <Box width='500px' height='50px' />
       </BackgroundView>
+    </Stack>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Wrapped Pills'>
+    <Stack direction={Direction.Horizontal} shouldAddGutters={true} shouldWrapItems={true} contentAlignmentResponsive={Alignment.Start}>
+      <BackgroundView color='#afefef'>
+        <Box width='300px' height='50px' />
+      </BackgroundView>
+      <BackgroundView color='#afefef'>
+        <Box width='300px' height='50px' />
+      </BackgroundView>
+      <BackgroundView color='#afefef'>
+        <Box width='300px' height='50px' />
+      </BackgroundView>
+      <BackgroundView color='#afefef'>
+        <Box width='300px' height='50px' />
+      </BackgroundView>
+      <BackgroundView color='#afefef'>
+        <Box width='300px' height='50px' />
+      </BackgroundView>
+      <BackgroundView color='#afefef'>
+        <Box width='300px' height='50px' />
+      </BackgroundView>
+      <Box isFullWidth={true} />
     </Stack>
   </Story>
 </Canvas>

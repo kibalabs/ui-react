@@ -19,7 +19,7 @@ interface IInputWrapperInnerProps {
 
 const InputWrapperInner = styled.div<IInputWrapperInnerProps>`
   & input, & textarea, & .wrapped-input {
-    /* NOTE(krish): these are all the fields of the ITextTheme, can it be done in one line? */
+    /* NOTE(krishan711): these are all the fields of the ITextTheme, can it be done in one line? */
     font-size: inherit;
     font-family: inherit;
     font-weight: inherit;
@@ -111,7 +111,7 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
     }
   };
 
-  // TODO(krish): check that the first child is an input, textarea or .wrapped-input
+  // TODO(krishan711): check that the first child is an input, textarea or .wrapped-input
   return (
     <StyledInputWrapper
       id={props.id}

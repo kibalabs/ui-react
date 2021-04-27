@@ -10,8 +10,8 @@ import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util'
 import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
 import { wrappingComponent } from '../../wrappers/wrappingComponent';
 
-// NOTE(krish): if the child of the stack.item declares 100% height (on vertical stack) it doesn't work on safari unless it has flex-basis: 0 (https://github.com/philipwalton/flexbugs/issues/197)
-// NOTE(krish): behavior of the above is also different on IE11, be careful!
+// NOTE(krishan711): if the child of the stack.item declares 100% height (on vertical stack) it doesn't work on safari unless it has flex-basis: 0 (https://github.com/philipwalton/flexbugs/issues/197)
+// NOTE(krishan711): behavior of the above is also different on IE11, be careful!
 
 const getContentAlignmentCss: CssConverter<Alignment> = (field: Alignment): string => {
   return `justify-content: ${getFlexContentAlignment(field)};`;
@@ -41,7 +41,7 @@ class StackItem extends React.Component<IStackItemProps> {
     className: '',
     growthFactor: 0,
     shrinkFactor: 0,
-    // NOTE(krish): see note above
+    // NOTE(krishan711): see note above
     baseSize: 'auto',
     isHidden: false,
   };
@@ -63,14 +63,19 @@ const StyledStack = styled.div<IStyledStackProps>`
   ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$direction, props.theme, getDirectionCss)};
   ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.childAlignment, props.theme, getChildAlignmentCss)};
   ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.contentAlignment, props.theme, getContentAlignmentCss)};
+
   &.scrollableVertically {
     overflow-y: auto;
   }
+
   &.scrollableHorizontally {
     overflow-x: auto;
   }
+
   &.wrapItems {
     flex-wrap: wrap;
+    /* NOTE(krishan711): this only works for Chrome>84 and similar. It does not work for IE or safari: https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap */
+    row-gap: ${(props: IStyledStackProps): string => props.theme.gutter}
   }
 `;
 

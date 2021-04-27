@@ -47,7 +47,6 @@ const StyledImage = styled.img<IStyledImageProps>`
     transition: opacity 0.15s;
   }
 
-  // TODO(krish): should all things be like this?
   &.centered {
     margin-left: auto;
     margin-right: auto;
