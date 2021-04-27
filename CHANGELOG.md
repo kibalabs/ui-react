@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `Grid` and `EqualGrid` to have `defaultGutter` prop to change the gutter size
 - [MINOR] Updated `LinkBase` props to have `isFullHeight` prop
 - [MINOR] Updated `TabBar` props to have `contentAlignment` prop to control horizontal alignment of tabs
+- [MINOR] Updated `InputWrapper` and related component props to have `onClick` event on the component
 - [MINOR] Updated `Stack` to have vertical gutters between wrapped items
 
 ### Removed
