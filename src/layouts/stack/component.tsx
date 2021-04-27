@@ -73,7 +73,6 @@ const StyledStack = styled.div<IStyledStackProps>`
   }
 
   &.wrapItems {
-    display: inline-flex;
     flex-wrap: wrap;
     /* NOTE(krishan711): this only works for Chrome>84 and similar. It does not work for IE or safari: https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap */
     row-gap: ${(props: IStyledStackProps): string => props.theme.gutter}
