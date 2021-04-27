@@ -99,7 +99,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     tabBarItems: tabBarItemThemes,
     titledCollapsibleBoxes: titledCollapsibleBoxThemes,
   }, inputTheme, {
-    // NOTE(krish): this is here so the font replacement doesn't get overridden
+    // NOTE(krishan711): this is here so the font replacement doesn't get overridden
     fonts,
   });
 };

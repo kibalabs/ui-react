@@ -23,7 +23,7 @@ const StyledProgressCounter = styled.div<IStyledProgressCounterProps>`
   overflow: auto;
 `;
 
-// TODO(krish): this can probably be abstracted into a tabbar + tab component
+// TODO(krishan711): this can probably be abstracted into a tabbar + tab component
 export interface IProgressCounterProps extends IMoleculeProps<IProgressCounterTheme> {
   stepCount: number;
   selectedStepIndex: number;

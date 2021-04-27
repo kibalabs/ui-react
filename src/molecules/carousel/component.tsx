@@ -76,7 +76,7 @@ export interface ICarouselProps extends IMoleculeProps<ICarouselTheme>, IMultiAn
   onIndexChanged?: (slideIndex: number) => void;
 }
 
-// NOTE(krish): the slider could potentially be its own component here!
+// NOTE(krishan711): the slider could potentially be its own component here!
 export const Carousel = (props: ICarouselProps): React.ReactElement => {
   const initialIndex = props.initialIndex || 0;
   const dimensions = useDimensions();
@@ -135,7 +135,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
       return;
     }
     const position = Math.ceil(sliderRef.current.scrollLeft);
-    // TODO(krish): this doesn't work in everypage console because it refers to the global document, not the local (inside iframe) one
+    // TODO(krishan711): this doesn't work in everypage console because it refers to the global document, not the local (inside iframe) one
     const screenWidth = Math.ceil(document.body.clientWidth);
     let slideCount = slidesPerPage;
     if (screenWidth > getScreenSizeValue(ScreenSize.Small, dimensions)) {

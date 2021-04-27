@@ -23,7 +23,7 @@ const StyledMainView = styled.div`
 `;
 
 export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
-  // NOTE(krish): the default is false because if this is rehydrating it would be false on the server and needs to match.
+  // NOTE(krishan711): the default is false because if this is rehydrating it would be false on the server and needs to match.
   const [isRunningOnBrowser, setIsRunningOnBrowser] = React.useState<boolean>(!props.isRehydrating);
 
   useInitialization((): void => {
