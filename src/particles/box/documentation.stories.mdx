@@ -3,6 +3,8 @@ import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 import { Box, IBoxProps } from '.';
 import { BoxThemeExample } from './themeExample';
 import { PaddingSize, KibaIcon } from '../../particles';
+import { LayerContainer } from '../../layouts';
+import { Alignment } from '../../model';
 
 <Meta
   component={Box}
@@ -72,6 +74,33 @@ export const Template = (args) => (
 <Canvas>
   <Story name='Empty Card with Tooltip'>
     <Box variant='card' title='Tooltip on the Box' isFullWidth={false} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Clipped Content'>
+    <Box width='205px' height='100px'>
+      <LayerContainer>
+        <Box
+          variant='card'
+          width='200px'
+          height='100px'
+          shouldClipContent={true}
+        />
+        <LayerContainer.Layer isFullWidth={false} isFullHeight={false} alignmentHorizontal={Alignment.Start}>
+          <KibaIcon iconId='ion-radio-button-off'/>
+        </LayerContainer.Layer>
+        <LayerContainer.Layer isFullWidth={false} isFullHeight={false} alignmentHorizontal={Alignment.End}>
+          <KibaIcon iconId='ion-radio-button-off'/>
+        </LayerContainer.Layer>
+        <LayerContainer.Layer isFullWidth={false} isFullHeight={false} alignmentHorizontal={Alignment.Start} alignmentVertical={Alignment.End}>
+          <KibaIcon iconId='ion-radio-button-off'/>
+        </LayerContainer.Layer>
+        <LayerContainer.Layer isFullWidth={false} isFullHeight={false} alignmentHorizontal={Alignment.End} alignmentVertical={Alignment.End}>
+          <KibaIcon iconId='ion-radio-button-off'/>
+        </LayerContainer.Layer>
+      </LayerContainer>
+    </Box>
   </Story>
 </Canvas>
 
