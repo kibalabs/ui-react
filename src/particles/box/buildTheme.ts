@@ -56,6 +56,10 @@ export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide,
     'border-color': '$colors.backgroundDark50',
   }, base?.focussed);
 
+  const roundedBoxTheme = mergeThemePartial<IBoxTheme>({
+    'border-radius': '50%'
+  }, base?.rounded);
+
   return {
     ...(base || {}),
     default: defaultBoxTheme,
@@ -65,5 +69,6 @@ export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide,
     bordered: borderedBoxTheme,
     focusable: focusableBoxTheme,
     focussed: focussedBoxTheme,
+    rounded: roundedBoxTheme
   };
 };
