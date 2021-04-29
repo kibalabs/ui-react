@@ -79,10 +79,10 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
       default: {
         background: {
           padding: `${dimensions.paddingNarrow} ${dimensions.padding}`,
-          "border-radius": `${dimensions.paddingWide}`
-        }
-      }
-    }
+          'border-radius': `${dimensions.paddingWide}`,
+        },
+      },
+    },
   }, base?.primary);
 
   return {
@@ -92,6 +92,6 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     secondary: secondaryPillTheme,
     error: errorPillTheme,
     success: successPillTheme,
-    squared: squaredPillTheme
+    squared: squaredPillTheme,
   };
 };
