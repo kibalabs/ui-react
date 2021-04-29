@@ -74,17 +74,6 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     },
   });
 
-  const squaredPillTheme = mergeThemePartial<IPillTheme>({
-    normal: {
-      default: {
-        background: {
-          padding: `${dimensions.paddingNarrow} ${dimensions.padding}`,
-          'border-radius': `${dimensions.paddingWide}`,
-        },
-      },
-    },
-  }, base?.primary);
-
   return {
     ...(base || {}),
     default: defaultPillTheme,
@@ -92,6 +81,5 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     secondary: secondaryPillTheme,
     error: errorPillTheme,
     success: successPillTheme,
-    squared: squaredPillTheme,
   };
 };
