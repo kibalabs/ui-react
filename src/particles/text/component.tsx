@@ -69,24 +69,37 @@ interface IStyledTextProps {
 const StyledText = styled.span<IStyledTextProps>`
   ${(props: IStyledTextProps): string => themeToCss(props.theme)};
   ${(props: IStyledTextProps): string => (props.alignment ? `text-align: ${props.alignment}` : '')};
+
+  &.singleLine {
+    white-space: nowrap;
+    overflow: hidden;
+  }
 `;
 
 export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChildProps {
   alignment?: TextAlignment;
   tag?: TextTag;
+  isSingleLine?: boolean;
 }
 
 export const Text = (props: ITextProps): React.ReactElement => {
   const theme = useBuiltTheme('texts', props.variant, props.theme);
+  const [expandText, setExpandText] = React.useState(false);
+
+  const onClick = () => {
+    setExpandText(!expandText);
+  }
+
   return (
     <StyledText
       id={props.id}
-      className={getClassName(Text.displayName, props.className)}
+      className={getClassName(Text.displayName, props.className, props.isSingleLine && 'singleLine')}
       theme={theme}
       alignment={props.alignment}
       as={props.tag || getTextTag(props.variant)}
     >
       { props.children }
+      {props.isSingleLine && <a onClick={onClick}>Read more</a>}
     </StyledText>
   );
 };
@@ -94,4 +107,5 @@ export const Text = (props: ITextProps): React.ReactElement => {
 Text.displayName = 'Text';
 Text.defaultProps = {
   ...defaultComponentProps,
+  isSingleLine: false
 };
