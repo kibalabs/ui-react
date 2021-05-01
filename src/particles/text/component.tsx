@@ -64,6 +64,7 @@ export const getTextTag = (variant?: string): TextTag => {
 interface IStyledTextProps {
   theme: ITextTheme;
   alignment?: TextAlignment;
+  clipToLines?: number;
 }
 
 const StyledText = styled.span<IStyledTextProps>`
@@ -71,7 +72,11 @@ const StyledText = styled.span<IStyledTextProps>`
   ${(props: IStyledTextProps): string => (props.alignment ? `text-align: ${props.alignment}` : '')};
 
   &.singleLine {
-    white-space: nowrap;
+    white-wrap: nowrap;
+    text-overflow: ellipses;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    ${(props: IStyledTextProps): string => (props.clipToLines ? `-webkit-line-clamp: ${props.clipToLines};` : '')}
     overflow: hidden;
   }
 `;
@@ -79,27 +84,22 @@ const StyledText = styled.span<IStyledTextProps>`
 export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChildProps {
   alignment?: TextAlignment;
   tag?: TextTag;
-  isSingleLine?: boolean;
+  clipToLines?: number;
 }
 
 export const Text = (props: ITextProps): React.ReactElement => {
   const theme = useBuiltTheme('texts', props.variant, props.theme);
-  const [expandText, setExpandText] = React.useState(false);
-
-  const onClick = () => {
-    setExpandText(!expandText);
-  }
 
   return (
     <StyledText
       id={props.id}
-      className={getClassName(Text.displayName, props.className, props.isSingleLine && 'singleLine')}
+      className={getClassName(Text.displayName, props.className, props.clipToLines && 'singleLine')}
       theme={theme}
       alignment={props.alignment}
+      clipToLines={props.clipToLines}
       as={props.tag || getTextTag(props.variant)}
     >
       { props.children }
-      {props.isSingleLine && <a onClick={onClick}>Read more</a>}
     </StyledText>
   );
 };
@@ -107,5 +107,5 @@ export const Text = (props: ITextProps): React.ReactElement => {
 Text.displayName = 'Text';
 Text.defaultProps = {
   ...defaultComponentProps,
-  isSingleLine: false
+  isSingleLine: false,
 };
