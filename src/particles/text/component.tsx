@@ -90,13 +90,19 @@ export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChild
 export const Text = (props: ITextProps): React.ReactElement => {
   const theme = useBuiltTheme('texts', props.variant, props.theme);
 
+  let clipToLines = props.clipToLines;
+  if (props.clipToLines && props.clipToLines <= 0) {
+    console.error('The clipToLines prop should be a positive integer');
+    clipToLines = undefined;
+  }
+
   return (
     <StyledText
       id={props.id}
-      className={getClassName(Text.displayName, props.className, props.clipToLines && 'singleLine')}
+      className={getClassName(Text.displayName, props.className, clipToLines && 'singleLine')}
       theme={theme}
       alignment={props.alignment}
-      clipToLines={props.clipToLines}
+      clipToLines={clipToLines}
       as={props.tag || getTextTag(props.variant)}
     >
       { props.children }
