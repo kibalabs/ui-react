@@ -26,7 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `TabBar` props to have `contentAlignment` prop to control horizontal alignment of tabs
 - [MINOR] Updated `InputWrapper` and related component props to have `onClick` event on the component
 - [MINOR] Updated `Stack` to have vertical gutters between wrapped items
-- [MINOR] Updated `Box` to have `shouldClipContent` prop to clip content on the box
+- [MINOR] Updated `Box` to have `shouldClipContent` prop to clip content wihtin the box
 
 ### Removed
 
