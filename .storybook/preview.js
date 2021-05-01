@@ -6,6 +6,22 @@ const theme = buildTheme({
     brandPrimary: '#4b6cb7',
     brandSecondary: '#182848',
   },
+  boxes: {
+    overlay: {
+      "background-color": 'rgba(0,0,0, 0.5)',
+      "border-radius": '0px'
+    },
+    borderColored: {
+      "border-color": '$colors.brandPrimaryClear20',
+      "border-width": '2px'
+    }
+  },
+  texts: {
+    imageCaption: {
+      color: '$colors.textLight80',
+      "font-size": '0.85rem'
+    }
+  }
 });
 
 export const decorators = [
