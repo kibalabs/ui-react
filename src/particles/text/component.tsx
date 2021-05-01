@@ -74,6 +74,10 @@ const StyledText = styled.span<IStyledTextProps>`
   &.singleLine {
     white-wrap: nowrap;
     text-overflow: ellipses;
+    overflow: hidden;
+  }
+
+  &.fixedLines {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     ${(props: IStyledTextProps): string => (props.clipToLines ? `-webkit-line-clamp: ${props.clipToLines};` : '')}
@@ -99,7 +103,7 @@ export const Text = (props: ITextProps): React.ReactElement => {
   return (
     <StyledText
       id={props.id}
-      className={getClassName(Text.displayName, props.className, clipToLines && 'singleLine')}
+      className={getClassName(Text.displayName, props.className, clipToLines == 1 && 'singleLine' , clipToLines >= 2 && 'fixedLines')}
       theme={theme}
       alignment={props.alignment}
       clipToLines={clipToLines}
