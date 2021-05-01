@@ -72,8 +72,9 @@ const StyledText = styled.span<IStyledTextProps>`
   ${(props: IStyledTextProps): string => (props.alignment ? `text-align: ${props.alignment}` : '')};
 
   &.singleLine {
-    white-wrap: nowrap;
-    text-overflow: ellipses;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     overflow: hidden;
   }
 
@@ -81,7 +82,7 @@ const StyledText = styled.span<IStyledTextProps>`
   &.fixedLines {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    ${(props: IStyledTextProps): string => (props.lineLimit ? `-webkit-line-clamp: ${props.lineLimit};` : '')}
+    -webkit-line-clamp: ${(props: IStyledTextProps): string => String(props.lineLimit)};
     overflow: hidden;
   }
 `;
@@ -104,7 +105,7 @@ export const Text = (props: ITextProps): React.ReactElement => {
   return (
     <StyledText
       id={props.id}
-      className={getClassName(Text.displayName, props.className, lineLimit && lineLimit === 1 && 'singleLine', lineLimit && lineLimit >= 2 && 'fixedLines')}
+      className={getClassName(Text.displayName, props.className, lineLimit === 1 && 'singleLine', lineLimit >= 2 && 'fixedLines')}
       theme={theme}
       alignment={props.alignment}
       lineLimit={lineLimit}
