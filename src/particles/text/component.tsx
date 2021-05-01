@@ -64,26 +64,51 @@ export const getTextTag = (variant?: string): TextTag => {
 interface IStyledTextProps {
   theme: ITextTheme;
   alignment?: TextAlignment;
+  lineLimit?: number;
 }
 
 const StyledText = styled.span<IStyledTextProps>`
   ${(props: IStyledTextProps): string => themeToCss(props.theme)};
   ${(props: IStyledTextProps): string => (props.alignment ? `text-align: ${props.alignment}` : '')};
+
+  &.singleLine {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  // NOTE(krishan711): fixedLines class is not supported in IE11
+  &.fixedLines {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: ${(props: IStyledTextProps): string => String(props.lineLimit)};
+    overflow: hidden;
+  }
 `;
 
 export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChildProps {
   alignment?: TextAlignment;
   tag?: TextTag;
+  lineLimit?: number;
 }
 
 export const Text = (props: ITextProps): React.ReactElement => {
   const theme = useBuiltTheme('texts', props.variant, props.theme);
+
+  let lineLimit = props.lineLimit;
+  if (props.lineLimit && props.lineLimit <= 0) {
+    console.error('The lineLimit prop should be a positive integer');
+    lineLimit = undefined;
+  }
+
   return (
     <StyledText
       id={props.id}
-      className={getClassName(Text.displayName, props.className)}
+      className={getClassName(Text.displayName, props.className, lineLimit && lineLimit === 1 && 'singleLine', lineLimit && lineLimit >= 2 && 'fixedLines')}
       theme={theme}
       alignment={props.alignment}
+      lineLimit={lineLimit}
       as={props.tag || getTextTag(props.variant)}
     >
       { props.children }
@@ -94,4 +119,5 @@ export const Text = (props: ITextProps): React.ReactElement => {
 Text.displayName = 'Text';
 Text.defaultProps = {
   ...defaultComponentProps,
+  isSingleLine: false,
 };
