@@ -103,7 +103,7 @@ export const Text = (props: ITextProps): React.ReactElement => {
   return (
     <StyledText
       id={props.id}
-      className={getClassName(Text.displayName, props.className, clipToLines == 1 && 'singleLine' , clipToLines >= 2 && 'fixedLines')}
+      className={getClassName(Text.displayName, props.className, clipToLines === 1 && 'singleLine', clipToLines >= 2 && 'fixedLines')}
       theme={theme}
       alignment={props.alignment}
       clipToLines={clipToLines}
