@@ -77,7 +77,7 @@ const StyledText = styled.span<IStyledTextProps>`
     overflow: hidden;
   }
 
-  // Note : fixedLines class is not supported in IE11 browser
+  // NOTE(krishan711): fixedLines class is not supported in IE11
   &.fixedLines {
     display: -webkit-box;
     -webkit-box-orient: vertical;
