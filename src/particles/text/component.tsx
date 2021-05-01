@@ -64,7 +64,7 @@ export const getTextTag = (variant?: string): TextTag => {
 interface IStyledTextProps {
   theme: ITextTheme;
   alignment?: TextAlignment;
-  clipToLines?: number;
+  lineLimit?: number;
 }
 
 const StyledText = styled.span<IStyledTextProps>`
@@ -81,7 +81,7 @@ const StyledText = styled.span<IStyledTextProps>`
   &.fixedLines {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    ${(props: IStyledTextProps): string => (props.clipToLines ? `-webkit-line-clamp: ${props.clipToLines};` : '')}
+    ${(props: IStyledTextProps): string => (props.lineLimit ? `-webkit-line-clamp: ${props.lineLimit};` : '')}
     overflow: hidden;
   }
 `;
@@ -89,25 +89,25 @@ const StyledText = styled.span<IStyledTextProps>`
 export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChildProps {
   alignment?: TextAlignment;
   tag?: TextTag;
-  clipToLines?: number;
+  lineLimit?: number;
 }
 
 export const Text = (props: ITextProps): React.ReactElement => {
   const theme = useBuiltTheme('texts', props.variant, props.theme);
 
-  let clipToLines = props.clipToLines;
-  if (props.clipToLines && props.clipToLines <= 0) {
-    console.error('The clipToLines prop should be a positive integer');
-    clipToLines = undefined;
+  let lineLimit = props.lineLimit;
+  if (props.lineLimit && props.lineLimit <= 0) {
+    console.error('The lineLimit prop should be a positive integer');
+    lineLimit = undefined;
   }
 
   return (
     <StyledText
       id={props.id}
-      className={getClassName(Text.displayName, props.className, clipToLines && clipToLines === 1 && 'singleLine', clipToLines && clipToLines >= 2 && 'fixedLines')}
+      className={getClassName(Text.displayName, props.className, lineLimit && lineLimit === 1 && 'singleLine', lineLimit && lineLimit >= 2 && 'fixedLines')}
       theme={theme}
       alignment={props.alignment}
-      clipToLines={clipToLines}
+      lineLimit={lineLimit}
       as={props.tag || getTextTag(props.variant)}
     >
       { props.children }
