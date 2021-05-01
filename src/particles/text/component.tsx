@@ -105,7 +105,7 @@ export const Text = (props: ITextProps): React.ReactElement => {
   return (
     <StyledText
       id={props.id}
-      className={getClassName(Text.displayName, props.className, lineLimit === 1 && 'singleLine', lineLimit >= 2 && 'fixedLines')}
+      className={getClassName(Text.displayName, props.className, lineLimit && lineLimit === 1 && 'singleLine', lineLimit && lineLimit >= 2 && 'fixedLines')}
       theme={theme}
       alignment={props.alignment}
       lineLimit={lineLimit}
