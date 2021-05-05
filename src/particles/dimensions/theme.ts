@@ -31,6 +31,7 @@ export interface IDimensionGuide extends ThemeType {
 }
 
 export enum ScreenSize {
+  Base = 'base',
   Small = 'small',
   Medium = 'medium',
   Large = 'large',
@@ -55,6 +56,10 @@ export const getScreenSize = (size: ScreenSize, theme: IDimensionGuide): string 
       return '0';
     }
   }
+};
+
+export const getScreenSizeValue = (size: ScreenSize, theme: IDimensionGuide): number => {
+  return Number(getScreenSize(size, theme).replace('px', ''));
 };
 
 export enum PaddingSize {

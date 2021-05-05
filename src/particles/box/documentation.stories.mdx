@@ -2,7 +2,9 @@ import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 import { Box, IBoxProps } from '.';
 import { BoxThemeExample } from './themeExample';
-import { PaddingSize, KibaIcon } from '../../particles';
+import { PaddingSize, KibaIcon, Image, Text } from '../../particles';
+import { LayerContainer, Stack } from '../../layouts';
+import { Alignment } from '../../model';
 
 <Meta
   component={Box}
@@ -72,6 +74,29 @@ export const Template = (args) => (
 <Canvas>
   <Story name='Empty Card with Tooltip'>
     <Box variant='card' title='Tooltip on the Box' isFullWidth={false} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Clipped Content'>
+    <Box variant='rounded-borderColored' shouldClipContent={true} width='200px' height='200px'>
+      <LayerContainer>
+        <Box isFullWidth={true} isFullHeight={true}>
+          <Image fitType='cover' isFullHeight={true} isFullWidth={true} source='https://unsplash.com/photos/gsf4OfORp5c/download?force=true&w=640'/>
+        </Box>
+        <LayerContainer.Layer isFullWidth={true} isFullHeight={true}>
+          <Box isFullHeight={true}>
+            <Stack isFullHeight={true} isFullWidth={true}>
+              <Stack.Item growthFactor={1} shrinkFactor={1} />
+              <Box variant='padded-overlay'>
+                <Text variant='paragraph-imageCaption' alignment='center'>Hot air balloon</Text>
+                <br />
+              </Box>
+            </Stack>
+          </Box>
+        </LayerContainer.Layer>
+  </LayerContainer>
+    </Box>
   </Story>
 </Canvas>
 

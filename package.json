@@ -29,7 +29,7 @@
   "sideEffects": false,
   "dependencies": {
     "@kibalabs/core": "^0.5.3",
-    "@kibalabs/core-react": "^0.6.1-next.0",
+    "@kibalabs/core-react": "^0.6.1-next.1",
     "lazysizes": "^5.3.0",
     "polished": "^4.1.0",
     "react-markdown": "^5.0.3"

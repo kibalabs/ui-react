@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Created `MessageDialog` molecule component
 - [MINOR] Created `List` molecule and `List.Item` atom
 - [MINOR] Created `Divider` particle for use in `List`s
-- [PATCH] Added a `Portal` example to storybook
+- [MINOR] Created `useResponsiveScreenSize` hook to get screen size
 
 ### Changed
 - [MINOR] Updated `LayerContainer` wrapper component
@@ -23,6 +23,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `Box` props to have `title` prop to have a tooltip
 - [MINOR] Updated `Grid` and `EqualGrid` to have `defaultGutter` prop to change the gutter size
 - [MINOR] Updated `LinkBase` props to have `isFullHeight` prop
+- [MINOR] Updated `TabBar` props to have `contentAlignment` prop to control horizontal alignment of tabs
+- [MINOR] Updated `InputWrapper` and related component props to have `onClick` event on the component
+- [MINOR] Updated `Stack` to have vertical gutters between wrapped items
+- [MINOR] Updated `Box` to have `shouldClipContent` prop to clip content wihtin the box
+- [MINOR] Updated `Text` to have `lineLimit` prop to truncate text to a specific number of lines
 
 ### Removed
 
