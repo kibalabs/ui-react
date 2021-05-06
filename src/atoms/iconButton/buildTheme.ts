@@ -92,7 +92,7 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
     normal: {
       default: {
         background: {
-          padding: '0',
+          padding: '0px',
         },
       },
     },

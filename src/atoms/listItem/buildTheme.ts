@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
-import { mergeTheme, ThemeMap } from '../../util';
+import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IListItemTheme } from './theme';
 
 export const buildListItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IListItemTheme>>): ThemeMap<IListItemTheme> => {
@@ -45,8 +45,19 @@ export const buildListItemThemes = (colors: IColorGuide, dimensions: IDimensionG
     },
   }, base?.default);
 
+  const lessPaddingListItemTheme = mergeThemePartial<IListItemTheme>({
+    normal: {
+      default: {
+        background: mergeTheme(boxThemes.default, boxThemes.focusable, {
+          padding: `${dimensions.padding} ${dimensions.padding}`
+        })
+      }
+    }
+  }, base?.lessPadded);
+
   return {
     ...base,
     default: defaultListItemTheme,
+    lessPadded: lessPaddingListItemTheme
   };
 };
