@@ -65,11 +65,11 @@ export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimens
           'border-bottom-right-radius': '0px',
           'border-width': dimensions.borderWidthNarrow,
           'border-color': '$colors.backgroundDark05',
-          'border-style': 'solid'
-        })
-      }
+          'border-style': 'solid',
+        }),
+      },
 
-    }
+    },
   }, base?.lessPadded);
 
   const errorInputWrapperTheme = mergeThemePartial<IInputWrapperTheme>({
@@ -125,6 +125,6 @@ export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimens
     default: defaultInputWrapperTheme,
     error: errorInputWrapperTheme,
     success: successInputWrapperTheme,
-    lessPadded: lessPaddingInputWrapperTheme
+    lessPadded: lessPaddingInputWrapperTheme,
   };
 };

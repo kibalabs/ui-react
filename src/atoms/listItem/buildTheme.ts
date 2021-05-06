@@ -49,15 +49,15 @@ export const buildListItemThemes = (colors: IColorGuide, dimensions: IDimensionG
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          padding: `${dimensions.padding} ${dimensions.padding}`
-        })
-      }
-    }
+          padding: `${dimensions.padding} ${dimensions.padding}`,
+        }),
+      },
+    },
   }, base?.lessPadded);
 
   return {
     ...base,
     default: defaultListItemTheme,
-    lessPadded: lessPaddingListItemTheme
+    lessPadded: lessPaddingListItemTheme,
   };
 };

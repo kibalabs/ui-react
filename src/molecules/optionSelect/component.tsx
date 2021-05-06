@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import { IInputFrameTheme, IListTheme, InputFrame, List } from '../..';
 import { IconButton } from '../../atoms';
@@ -8,7 +8,7 @@ import { Stack } from '../../layouts';
 import { Alignment, Direction } from '../../model';
 import { Box, IBoxTheme, ITextTheme, KibaIcon, Text } from '../../particles';
 import { useBuiltTheme } from '../../theming';
-import { themeToCss, mergeTheme } from '../../util';
+import { themeToCss } from '../../util';
 import { HidingView } from '../../wrappers';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
@@ -52,13 +52,13 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
   const [isOpen, setIsOpen] = React.useState(false);
   const width = props.isFullWidth ? '100%' : props.width || '200px';
 
-  const inputFrameTheme = useBuiltTheme('inputWrappers' , 'lessPadded' , props.theme?.inputHandler.inputWrapperTheme);
+  const inputFrameTheme = useBuiltTheme('inputWrappers', 'lessPadded', props.theme?.inputHandler.inputWrapperTheme);
 
-  const optionsContainerTheme = useBuiltTheme('boxes', 'card', { margin: '0px', padding: '0px', "border-top-left-radius": '0px', 'border-top-right-radius': '0px', ...props.theme?.optionsContainer });
+  const optionsContainerTheme = useBuiltTheme('boxes', 'card', { margin: '0px', padding: '0px', 'border-top-left-radius': '0px', 'border-top-right-radius': '0px', ...props.theme?.optionsContainer });
 
-  const textTheme = useBuiltTheme('texts' ,'default' , { 'font-size': '0.9rem' , ...props.theme?.optionText});
+  const textTheme = useBuiltTheme('texts', 'default', { 'font-size': '0.9rem', ...props.theme?.optionText });
 
-  const listTheme = useBuiltTheme('listItems', 'lessPadded', props.theme?.optionList['listItems']);
+  const listTheme = useBuiltTheme('listItems', 'lessPadded', props.theme?.optionList.listItems);
 
   const selectedItem = (itemKey: string) => {
     return props.options.find((option) => option.itemKey === itemKey);
@@ -70,7 +70,7 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
   };
   return (
     <Box isFullWidth={props.isFullWidth} width={width}>
-      <InputFrame onClicked={() => setIsOpen(!isOpen)} theme={isOpen && {inputWrapperTheme : inputFrameTheme}} isEnabled={props.isEnabled} messageText={props.messageText}>
+      <InputFrame onClicked={() => setIsOpen(!isOpen)} theme={isOpen && { inputWrapperTheme: inputFrameTheme }} isEnabled={props.isEnabled} messageText={props.messageText}>
         <Stack direction={Direction.Horizontal} childAlignment={Alignment.Center}>
           <Stack.Item growthFactor={1} shrinkFactor={1}>
             <Text theme={textTheme}>{selectedItem(props.selectedItemKey)?.text || 'Select an option'}</Text>
@@ -80,7 +80,7 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
       </InputFrame>
       <HidingView isHidden={!isOpen}>
         <StyledOptionsContainer theme={optionsContainerTheme}>
-          <List theme={{ listItemTheme: listTheme}} onItemClicked={onItemClicked} shouldShowDividers={true} isFullWidth={true}>
+          <List theme={{ listItemTheme: listTheme }} onItemClicked={onItemClicked} shouldShowDividers={true} isFullWidth={true}>
             {props.options.map((option) => <List.Item key={option.itemKey} itemKey={option.itemKey} isDisabled={option.isDisabled} isSelected={option.itemKey === props.selectedItemKey}><Text theme={textTheme}>{option.text}</Text></List.Item>)}
           </List>
         </StyledOptionsContainer>
