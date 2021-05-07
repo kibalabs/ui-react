@@ -28,11 +28,15 @@ export interface IOptionSelectTheme {
 
 interface IStyledOptionsContainer {
   theme: IBoxTheme;
+  width: string;
 }
 
 const StyledOptionsContainer = styled.div<IStyledOptionsContainer>`
-  z-index: 999;
   ${(props: IStyledOptionsContainer): string => themeToCss(props.theme)};
+  position: absolute;
+  display: block;
+  z-index: 999;
+  width: ${(props: IStyledOptionsContainer): string => props.width}
 `;
 
 interface IOptionSelectProps extends IMoleculeProps<IOptionSelectTheme> {
@@ -79,7 +83,7 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
         </Stack>
       </InputFrame>
       <HidingView isHidden={!isOpen}>
-        <StyledOptionsContainer theme={optionsContainerTheme}>
+        <StyledOptionsContainer theme={optionsContainerTheme} width={width}>
           <List theme={{ listItemTheme: listTheme }} onItemClicked={onItemClicked} shouldShowDividers={true} isFullWidth={true}>
             {props.options.map((option) => <List.Item key={option.itemKey} itemKey={option.itemKey} isDisabled={option.isDisabled} isSelected={option.itemKey === props.selectedItemKey}><Text theme={textTheme}>{option.text}</Text></List.Item>)}
           </List>
