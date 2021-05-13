@@ -70,6 +70,7 @@ export interface ILinkBaseProps extends IComponentProps<ILinkBaseTheme>, ISingle
   label?: string;
   target?: string;
   targetShouldOpenSameTab?: boolean;
+  tabIndex?: number;
   onClicked?(): void;
 }
 
@@ -91,6 +92,7 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
       aria-label={props.label}
       href={props.target}
       rel={props.target ? 'noopener' : undefined}
+      tabIndex={props.tabIndex || 0}
       target={props.target && (targetShouldOpenSameTab ? '_self' : '_blank')}
     >
       {props.children}
