@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `Stack` to have vertical gutters between wrapped items
 - [MINOR] Updated `Box` to have `shouldClipContent` prop to clip content wihtin the box
 - [MINOR] Updated `Text` to have `lineLimit` prop to truncate text to a specific number of lines
+- [MINOR] Updated `Button`, `Link`, `LinkBase` to have `TabIndex` Prop
 
 ### Removed
 

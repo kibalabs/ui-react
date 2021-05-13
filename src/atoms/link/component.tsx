@@ -40,6 +40,7 @@ export interface ILinkProps extends IComponentProps<ILinkTheme> {
   isEnabled: boolean;
   shouldOpenSameTab: boolean;
   target: string;
+  tabIndex?: number;
   text: string;
 }
 
@@ -52,6 +53,7 @@ export const Link = (props: ILinkProps): React.ReactElement => {
       className={getClassName(Link.displayName, props.className, !props.isEnabled && 'disabled')}
       theme={theme}
       href={props.isEnabled ? props.target : undefined}
+      tabIndex={props.tabIndex || 0}
       target={shouldOpenSameTab ? '_self' : '_blank'}
       rel={'noopener'}
     >

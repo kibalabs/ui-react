@@ -75,6 +75,7 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   iconGutter?: PaddingSize;
   target?: string;
   targetShouldOpenSameTab?: boolean;
+  tabIndex?: number;
   onClicked?(): void;
 }
 
@@ -106,6 +107,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       href={props.target}
       as={props.target ? 'a' : undefined}
       rel={props.target && 'noopener'}
+      tabIndex={props.tabIndex || 0}
       target={props.target && (targetShouldOpenSameTab ? '_self' : '_blank')}
     >
       { !props.isLoading && props.iconLeft && (

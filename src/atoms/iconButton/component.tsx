@@ -59,6 +59,7 @@ export interface IIconButtonProps extends IComponentProps<IIconButtonTheme> {
   label?: string;
   target?: string;
   targetShouldOpenSameTab?: boolean;
+  tabIndex?: number;
   onClicked?(): void;
 }
 
@@ -84,6 +85,7 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
       href={props.target}
       as={props.target ? 'a' : undefined}
       rel={props.target && 'noopener'}
+      tabIndex={props.tabIndex || 0}
       target={props.target && (targetShouldOpenSameTab ? '_self' : '_blank')}
     >
       {props.icon}
