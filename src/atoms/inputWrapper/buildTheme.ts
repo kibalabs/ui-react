@@ -56,22 +56,6 @@ export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimens
     },
   }, base?.default);
 
-  const lessPaddingInputWrapperTheme = mergeThemePartial<IInputWrapperTheme>({
-    normal: {
-      default: {
-        background: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          padding: `${dimensions.padding} ${dimensions.padding}`,
-          'border-bottom-left-radius': '0px',
-          'border-bottom-right-radius': '0px',
-          'border-width': dimensions.borderWidthNarrow,
-          'border-color': '$colors.backgroundDark05',
-          'border-style': 'solid',
-        }),
-      },
-
-    },
-  }, base?.lessPadded);
-
   const errorInputWrapperTheme = mergeThemePartial<IInputWrapperTheme>({
     normal: {
       default: {
@@ -125,6 +109,5 @@ export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimens
     default: defaultInputWrapperTheme,
     error: errorInputWrapperTheme,
     success: successInputWrapperTheme,
-    lessPadded: lessPaddingInputWrapperTheme,
   };
 };

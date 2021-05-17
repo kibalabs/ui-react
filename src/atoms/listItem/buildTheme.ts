@@ -45,19 +45,19 @@ export const buildListItemThemes = (colors: IColorGuide, dimensions: IDimensionG
     },
   }, base?.default);
 
-  const lessPaddingListItemTheme = mergeThemePartial<IListItemTheme>({
+  const slimListItemTheme = mergeThemePartial<IListItemTheme>({
     normal: {
       default: {
-        background: mergeTheme(boxThemes.default, boxThemes.focusable, {
+        background: {
           padding: `${dimensions.padding} ${dimensions.padding}`,
-        }),
+        },
       },
     },
-  }, base?.lessPadded);
+  }, base?.slim);
 
   return {
     ...base,
     default: defaultListItemTheme,
-    lessPadded: lessPaddingListItemTheme,
+    slim: slimListItemTheme,
   };
 };

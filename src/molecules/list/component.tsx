@@ -41,6 +41,7 @@ interface IListProps extends IMoleculeProps<IListTheme>, IMultiChildProps<IListI
   isFullWidth?: boolean;
   selectedItemKey?: string;
   shouldShowDividers?: boolean;
+  itemVariant?: string;
   onItemClicked?(itemKey: string): void;
 }
 
@@ -67,7 +68,7 @@ export const List = (props: IListProps): React.ReactElement => {
               id={child.props.id}
               className={child.props.className}
               theme={props.theme?.listItemTheme}
-              variant={child.props.variant}
+              variant={props.itemVariant || child.props.variant}
               itemKey={child.props.itemKey}
               isDisabled={child.props.isDisabled}
               isSelected={props.selectedItemKey === child.props.itemKey}
