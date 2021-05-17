@@ -9,6 +9,7 @@ export * from './markdown';
 export * from './markdownText';
 export * from './messageDialog';
 export * from './multiLineInput';
+export * from './optionSelect';
 export * from './progressCounter';
 export * from './singleLineInput';
 export * from './tabBar';

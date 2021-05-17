@@ -60,6 +60,14 @@ export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide,
     'border-radius': '50%',
   }, base?.rounded);
 
+  const unpaddedBoxTheme = mergeThemePartial<IBoxTheme>({
+    padding: '0',
+  }, base?.unpaddeded);
+
+  const unmarginedBoxTheme = mergeThemePartial<IBoxTheme>({
+    margin: '0',
+  }, base?.unmargined);
+
   return {
     ...(base || {}),
     default: defaultBoxTheme,
@@ -70,5 +78,7 @@ export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide,
     focusable: focusableBoxTheme,
     focussed: focussedBoxTheme,
     rounded: roundBoxTheme,
+    unpadded: unpaddedBoxTheme,
+    unmargined: unmarginedBoxTheme,
   };
 };

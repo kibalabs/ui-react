@@ -1,0 +1,47 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+
+import { OptionSelect } from '.';
+
+<Meta
+  component={OptionSelect}
+  title={'Molecules/OptionSelect'}
+/>
+
+# OptionSelect
+
+<br/>
+
+export const Template = (args) => {
+  const [selectedItemKey, setSelectedItemKey] = React.useState('');
+  const options=[{itemKey: '1' , text: 'First Option'},{itemKey: '2' , text: 'Second Option'},{itemKey: '3' , text: 'Third Option'}];
+  return (
+    <div style={{height: '250px'}}>
+      <OptionSelect {...args} selectedItemKey={args.selectedItemKey || selectedItemKey} options={args.options || options} onItemClicked={args.onItemClicked || setSelectedItemKey} />
+    </div>
+    );
+};
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+
+<ArgsTable story={'Default'} />
+
+# Examples
+
+<Canvas >
+  <Story name='Long option'>
+    {() => {
+      const [selectedItemKey, setSelectedItemKey] = React.useState('');
+      const options=[{itemKey: '1' , text: '1'},{itemKey: '2' , text: '2'},{itemKey: '3' , text: 'This is a very very long option'}];
+      return (
+        <div style={{height: '250px'}}>
+          <OptionSelect isFullWidth={false} selectedItemKey={selectedItemKey} options={options} onItemClicked={setSelectedItemKey} />
+        </div>
+      );
+    }}
+  </Story>
+</Canvas>

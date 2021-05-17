@@ -65,6 +65,10 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     'font-size': 'smaller',
   }, base?.small);
 
+  const smallerTextTheme = mergeThemePartial<ITextTheme>({
+    'font-size': 'smaller',
+  }, base?.smaller);
+
   const largeTextTheme = mergeThemePartial<ITextTheme>({
     'font-size': 'larger',
   }, base?.large);
@@ -180,6 +184,7 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     underline: underlineTextTheme,
     mark: markTextTheme,
     small: smallTextTheme,
+    smaller: smallerTextTheme,
     large: largeTextTheme,
     deleted: deletedTextTheme,
     inserted: insertedTextTheme,
