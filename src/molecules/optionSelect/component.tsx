@@ -12,7 +12,7 @@ import { themeToCss } from '../../util';
 import { HidingView } from '../../wrappers';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
-interface IOption {
+export interface IOption {
   text: string;
   itemKey: string;
   listItemVariant?: string;
