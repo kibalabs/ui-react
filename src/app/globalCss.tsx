@@ -6,6 +6,7 @@ import { colorsToCss, themeToCss } from '../util';
 interface IGlobalCssProps {
   theme: ITheme;
   resetCss: string;
+  extraCss?: string;
 }
 
 export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
@@ -101,4 +102,6 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
       ${(props: IGlobalCssProps): string => themeToCss(props.theme.bulletTexts.default.normal.default.bullet)};
     }
   }
+
+  ${(props: IGlobalCssProps): string => props.extraCss || ''};
 `;
