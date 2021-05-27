@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { ITheme, ThemeProvider } from '../theming';
 import { GlobalCss } from './globalCss';
 import { resetCss } from './resetCss';
+import { Head, HeadRootProvider } from '../util';
 
 import 'lazysizes';
 import 'lazysizes/plugins/attrchange/ls.attrchange';
@@ -14,6 +15,7 @@ import 'lazysizes/plugins/attrchange/ls.attrchange';
 interface IKibaAppProps extends IMultiAnyChildProps {
   theme: ITheme;
   isRehydrating?: boolean;
+  headRoot?: Element;
 }
 
 const StyledMainView = styled.div`
@@ -31,14 +33,16 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
   });
 
   return (
-    <ThemeProvider theme={props.theme}>
-      <GlobalCss
-        theme={props.theme}
-        resetCss={resetCss}
-      />
-      <StyledMainView className={getClassName(isRunningOnBrowser ? 'js' : 'no-js')}>
-        {props.children}
-      </StyledMainView>
-    </ThemeProvider>
+    <HeadRootProvider root={props.headRoot}>
+      <ThemeProvider theme={props.theme}>
+        <GlobalCss
+          theme={props.theme}
+          resetCss={resetCss}
+        />
+        <StyledMainView className={getClassName(isRunningOnBrowser ? 'js' : 'no-js')}>
+          {props.children}
+        </StyledMainView>
+      </ThemeProvider>
+    </HeadRootProvider>
   );
 };
