@@ -4,8 +4,6 @@ import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
-import { Stack } from '../../layouts';
-import { Alignment, Direction } from '../../model';
 import { PaddingSize } from '../../particles';
 import { ISwitchTheme } from './theme';
 
@@ -21,6 +19,7 @@ const StyledSwitchBackground = styled.div<IStyledSwitchProps>`
   width: ${(props: IStyledSwitchProps): string => props.width};
   height: ${(props: IStyledSwitchProps): string => props.height};
   border-radius: ${(props: IStyledSwitchProps): string => props.height};
+  cursor: pointer;
 
   &:hover {
     ${(props: IStyledSwitchProps): string => themeToCss(props.theme.unchecked.hover?.switchBackground)};
@@ -74,6 +73,9 @@ const StyledSwitch = styled.div<IStyledSwitchProps>`
   width: ${(props: IStyledSwitchProps): string => props.width};
   height: ${(props: IStyledSwitchProps): string => props.height};
   border-radius: 50%;
+  float: left;
+  cursor: pointer;
+  transition: transform 700ms;
 
   &:hover {
     ${(props: IStyledSwitchProps): string => themeToCss(props.theme.unchecked.hover?.switch)};
@@ -107,6 +109,7 @@ const StyledSwitch = styled.div<IStyledSwitchProps>`
   &.checked {
     ${(props: IStyledSwitchProps): string => themeToCss(props.theme.checked.default?.switch)};
     border-radius: 36px;
+    transform: translate(30px, 0px);
 
     &:hover {
       ${(props: IStyledSwitchProps): string => themeToCss(props.theme.checked.hover?.switch)};
@@ -141,13 +144,9 @@ export const Switch = (props: ISwitchProps): React.ReactElement => {
   };
 
   return (
-    <div onClick={onToggled}>
-      <StyledSwitchBackground width={props.width || '72px'} height={props.height || '36px'} theme={theme} className={getClassName(Switch.displayName, props.className, !isEnabled && 'disabled', props.isChecked && 'checked')}>
-        <Stack direction={Direction.Horizontal} paddingHorizontal={PaddingSize.Narrow} isFullHeight={true} contentAlignment={props.isChecked ? Alignment.End : Alignment.Start} childAlignment={Alignment.Center}>
-          <StyledSwitch width='30px' height='30px' theme={theme} className={getClassName(Switch.displayName, props.className, !isEnabled && 'disabled', props.isChecked && 'checked')} />
-        </Stack>
-      </StyledSwitchBackground>
-    </div>
+    <StyledSwitchBackground onClick={onToggled} width={props.width || '64px'} height={props.height || '36px'} theme={theme} className={getClassName(Switch.displayName, props.className, !isEnabled && 'disabled', props.isChecked && 'checked')}>
+      <StyledSwitch width='30px' height='30px' theme={theme} className={getClassName(!isEnabled && 'disabled', props.isChecked && 'checked')} />
+    </StyledSwitchBackground>
   );
 };
 
