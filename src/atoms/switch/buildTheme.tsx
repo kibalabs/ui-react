@@ -4,13 +4,12 @@ import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../parti
 import { mergeTheme, ThemeMap } from '../../util';
 import { ISwitchTheme } from './theme';
 
-export const buildSwitchTheme = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ISwitchTheme>>): ThemeMap<ISwitchTheme> => {
+export const buildSwitchThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ISwitchTheme>>): ThemeMap<ISwitchTheme> => {
   const defaultSwitchTheme = mergeTheme<ISwitchTheme>({
     unchecked: {
       default: {
         switchBackground: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          "background-color": "skyblue",
-          "border-radius": '36px'
+          "background-color": "#ccc"
         }),
         switch: mergeTheme(boxThemes.default, {
           "background-color": 'white'
@@ -18,12 +17,12 @@ export const buildSwitchTheme = (colors: IColorGuide, dimensions: IDimensionGuid
       },
       hover: {
         switchBackground: {
-          'background-color': '$colors.brandPrimaryClear80',
-        },
+          'background-color': 'rgba(33, 150, 243, 0.5)',
+        }
       },
       press: {
         switchBackground: {
-          'background-color': '$colors.brandPrimaryClear50',
+          'background-color': '#2196F3',
         },
       },
       focus: {
@@ -33,8 +32,7 @@ export const buildSwitchTheme = (colors: IColorGuide, dimensions: IDimensionGuid
     checked: {
       default: {
         switchBackground: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          'background-color': '$colors.brandPrimary',
-          'border-color': '$colors.brandPrimary',
+          "background-color": "rgb(33, 150, 243)",
         }),
         switch: mergeTheme(boxThemes.default, {
           "background-color": "white"
@@ -42,12 +40,12 @@ export const buildSwitchTheme = (colors: IColorGuide, dimensions: IDimensionGuid
       },
       hover: {
         switchBackground: {
-          'background-color': '$colors.brandPrimaryClear80',
-        },
+          'background-color': 'rgba(33, 150, 243,  0.8)',
+        }
       },
       press: {
         switchBackground: {
-          'background-color': '$colors.brandPrimaryClear50',
+          'background-color': '#ddd',
         },
       },
       focus: {

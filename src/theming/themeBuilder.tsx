@@ -1,7 +1,7 @@
 import { merge, RecursivePartial } from '@kibalabs/core';
 
 import { ITheme } from '.';
-import { buildCheckboxThemes } from '../atoms';
+import { buildCheckboxThemes, buildSwitchThemes } from '../atoms';
 import { buildBulletListThemes } from '../atoms/bulletList';
 import { buildBulletTextThemes } from '../atoms/bulletText';
 import { buildButtonThemes } from '../atoms/button';
@@ -57,6 +57,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const listItemTheme = buildListItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.listItems);
   const pillThemes = buildPillThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.pills);
   const prettyTextThemes = buildPrettyTextThemes(colors, dimensions, textThemes, inputTheme?.prettyTexts);
+  const switchThemes = buildSwitchThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.switches);
   const webViewThemes = buildWebViewThemes(colors, dimensions, boxThemes, inputTheme?.webViews);
   const linePagerThemes = buildLinePagerThemes(colors, dimensions, boxThemes, inputTheme?.linePagers);
   const progressCounterItemThemes = buildProgressCounterItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.progressCounterItems);
@@ -93,6 +94,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     links: linkThemes,
     listItems: listItemTheme,
     prettyTexts: prettyTextThemes,
+    switches: switchThemes,
     webViews: webViewThemes,
     linePagers: linePagerThemes,
     progressCounterItems: progressCounterItemThemes,
