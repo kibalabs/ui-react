@@ -131,14 +131,14 @@ const StyledCheckbox = styled.div<IStyledCheckboxProps>`
 interface ICheckBoxProps extends IComponentProps<ICheckboxTheme> {
   text: string;
   isChecked: boolean;
-  isDisabled?: boolean;
+  isEnabled?: boolean;
   gutter?: PaddingSize;
   onToggled?(): void;
 }
 
 export const Checkbox = (props: ICheckBoxProps): React.ReactElement => {
   const onToggled = (event: React.SyntheticEvent<HTMLElement>): void => {
-    if (!props.isDisabled && props.onToggled) {
+    if (props.isEnabled && props.onToggled) {
       props.onToggled();
     }
     event.preventDefault();
@@ -148,7 +148,7 @@ export const Checkbox = (props: ICheckBoxProps): React.ReactElement => {
   return (
     <StyledContainer
       id={props.id}
-      className={getClassName(Checkbox.displayName, props.className, props.isDisabled && 'disabled', props.isChecked && 'checked')}
+      className={getClassName(Checkbox.displayName, props.className, !props.isEnabled && 'disabled', props.isChecked && 'checked')}
       theme={theme}
       onClick={onToggled}
     >
