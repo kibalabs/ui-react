@@ -127,6 +127,8 @@ export interface ISwitchProps extends IComponentProps<ISwitchTheme> {
   onToggled?(): void;
   isChecked: boolean;
   gutter?: PaddingSize;
+  width?: string;
+  height?: string;
 }
 
 export const Switch = (props: ISwitchProps): React.ReactElement => {
@@ -140,7 +142,7 @@ export const Switch = (props: ISwitchProps): React.ReactElement => {
 
   return (
     <div onClick={onToggled}>
-      <StyledSwitchBackground width='72px' height='36px' theme={theme} className={getClassName(Switch.displayName, props.className, !isEnabled && 'disabled', props.isChecked && 'checked')}>
+      <StyledSwitchBackground width={props.width || '72px'} height={props.height || '36px'} theme={theme} className={getClassName(Switch.displayName, props.className, !isEnabled && 'disabled', props.isChecked && 'checked')}>
         <Stack direction={Direction.Horizontal} paddingHorizontal={PaddingSize.Narrow} isFullHeight={true} contentAlignment={props.isChecked ? Alignment.End : Alignment.Start} childAlignment={Alignment.Center}>
           <StyledSwitch width='30px' height='30px' theme={theme} className={getClassName(Switch.displayName, props.className, !isEnabled && 'disabled', props.isChecked && 'checked')} />
         </Stack>
