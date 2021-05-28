@@ -1,10 +1,10 @@
 import { RecursivePartial } from '@kibalabs/core';
 
-import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
+import { IBoxTheme, IColorGuide, IDimensionGuide } from '../../particles';
 import { mergeTheme, ThemeMap } from '../../util';
 import { ISwitchTheme } from './theme';
 
-export const buildSwitchThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ISwitchTheme>>): ThemeMap<ISwitchTheme> => {
+export const buildSwitchThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ISwitchTheme>>): ThemeMap<ISwitchTheme> => {
   const defaultSwitchTheme = mergeTheme<ISwitchTheme>({
     unchecked: {
       default: {
@@ -56,9 +56,6 @@ export const buildSwitchThemes = (colors: IColorGuide, dimensions: IDimensionGui
       default: {
         switchBackground: {
           'background-color': '$colors.disabled',
-        },
-        text: {
-          color: '$colors.disabledText',
         },
       },
     },
