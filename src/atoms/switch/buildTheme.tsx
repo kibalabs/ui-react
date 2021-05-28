@@ -9,16 +9,16 @@ export const buildSwitchThemes = (colors: IColorGuide, dimensions: IDimensionGui
     unchecked: {
       default: {
         switchBackground: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          "background-color": "#ccc"
+          'background-color': '#ccc',
         }),
         switch: mergeTheme(boxThemes.default, {
-          "background-color": 'white'
-        })
+          'background-color': 'white',
+        }),
       },
       hover: {
         switchBackground: {
           'background-color': 'rgba(33, 150, 243, 0.5)',
-        }
+        },
       },
       press: {
         switchBackground: {
@@ -32,16 +32,16 @@ export const buildSwitchThemes = (colors: IColorGuide, dimensions: IDimensionGui
     checked: {
       default: {
         switchBackground: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          "background-color": "rgb(33, 150, 243)",
+          'background-color': 'rgb(33, 150, 243)',
         }),
         switch: mergeTheme(boxThemes.default, {
-          "background-color": "white"
-        })
+          'background-color': 'white',
+        }),
       },
       hover: {
         switchBackground: {
           'background-color': 'rgba(33, 150, 243,  0.8)',
-        }
+        },
       },
       press: {
         switchBackground: {

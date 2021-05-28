@@ -1,20 +1,20 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
+import styled from 'styled-components';
 
-import { Box, defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
-import { PaddingSize } from '../../particles';
+import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { Stack } from '../../layouts';
 import { Alignment, Direction } from '../../model';
+import { PaddingSize } from '../../particles';
 import { ISwitchTheme } from './theme';
-import styled from 'styled-components';
 
 
 interface IStyledSwitchProps {
   theme: ISwitchTheme;
   width: string;
   height: string;
-};
+}
 
 const StyledSwitchBackground = styled.div<IStyledSwitchProps>`
   ${(props: IStyledSwitchProps): string => themeToCss(props.theme.unchecked.default?.switchBackground)};
@@ -127,18 +127,16 @@ export interface ISwitchProps extends IComponentProps<ISwitchTheme> {
   onToggled?(): void;
   isChecked: boolean;
   gutter?: PaddingSize;
-};
+}
 
 export const Switch = (props: ISwitchProps): React.ReactElement => {
-
-  const isEnabled = props.isEnabled != undefined ? props.isEnabled : true;
-  console.log(props.theme);
+  const isEnabled = props.isEnabled !== undefined ? props.isEnabled : true;
   const theme = useBuiltTheme('switches', props.variant, props.theme);
   const onToggled = () => {
     if (isEnabled && props.onToggled) {
       props.onToggled();
     }
-  }
+  };
 
   return (
     <div onClick={onToggled}>
@@ -149,7 +147,7 @@ export const Switch = (props: ISwitchProps): React.ReactElement => {
       </StyledSwitchBackground>
     </div>
   );
-}
+};
 
 Switch.displayName = 'Switch';
 Switch.defaultProps = {
