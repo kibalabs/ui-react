@@ -1,3 +1,4 @@
+import { ISwitchTheme } from '../atoms';
 import { IBulletListTheme } from '../atoms/bulletList';
 import { IBulletTextTheme } from '../atoms/bulletText';
 import { IButtonTheme } from '../atoms/button';
@@ -58,6 +59,7 @@ export interface ITheme extends ThemeType {
   links: ThemeMap<ILinkTheme>,
   listItems: ThemeMap<IListItemTheme>,
   prettyTexts: ThemeMap<IPrettyTextTheme>,
+  switches: ThemeMap<ISwitchTheme>,
   webViews: ThemeMap<IWebViewTheme>,
   linePagers: ThemeMap<ILinePagerTheme>,
   progressCounterItems: ThemeMap<IProgressCounterItemTheme>,

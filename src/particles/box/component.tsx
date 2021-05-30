@@ -57,7 +57,7 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
   const width = props.width || (props.isFullWidth ? '100%' : 'auto');
   const maxHeight = props.maxHeight || 'none';
   const maxWidth = props.maxWidth || 'none';
-  const blockType = width === '100%' ? 'block' : 'inline-block';
+  const blockType = width === '100%' ? 'block' : 'flex';
   const shouldClipContent = props.shouldClipContent;
 
   if ((props.isScrollableHorizontally || props.isScrollableVertically) && props.shouldClipContent) {
