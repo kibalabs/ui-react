@@ -128,7 +128,7 @@ export interface ISwitchProps extends IComponentProps<ISwitchTheme> {
 export const Switch = (props: ISwitchProps): React.ReactElement => {
   const isEnabled = props.isEnabled !== undefined ? props.isEnabled : true;
   const theme = useBuiltTheme('switches', props.variant, props.theme);
-  
+
   const onToggled = () => {
     if (isEnabled && props.onToggled) {
       props.onToggled();
