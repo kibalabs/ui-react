@@ -10,15 +10,15 @@ export const buildSwitchThemes = (colors: IColorGuide, dimensions: IDimensionGui
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
           'background-color': '$colors.backgroundDark10',
-          'border-radius': '15px',
+          'border-radius': '10px',
         }),
         switch: mergeTheme(boxThemes.default, {
           'background-color': 'white',
           'border-radius': '50%',
         }),
-        switchWidth: '30px',
-        switchHeight: '30px',
-        backgroundWidth: '60px',
+        switchWidth: '20px',
+        switchHeight: '20px',
+        backgroundWidth: '40px',
       },
       hover: {
         background: {
