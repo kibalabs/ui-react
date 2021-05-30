@@ -6,55 +6,44 @@ import { ISwitchTheme } from './theme';
 
 export const buildSwitchThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ISwitchTheme>>): ThemeMap<ISwitchTheme> => {
   const defaultSwitchTheme = mergeTheme<ISwitchTheme>({
-    unchecked: {
+    normal: {
       default: {
-        switchBackground: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          'background-color': '#ccc',
+        background: mergeTheme(boxThemes.default, boxThemes.focusable, {
+          'background-color': '$colors.backgroundDark10',
+          'border-radius': '15px',
         }),
         switch: mergeTheme(boxThemes.default, {
           'background-color': 'white',
+          'border-radius': '50%',
         }),
+        switchWidth: '30px',
+        switchHeight: '30px',
+        backgroundWidth: '60px',
       },
       hover: {
-        switchBackground: {
-          'background-color': 'rgba(33, 150, 243, 0.5)',
+        background: {
+          'background-color': '$colors.brandSecondary',
         },
       },
       press: {
-        switchBackground: {
-          'background-color': '#2196F3',
+        background: {
+          'background-color': '$colors.brandSecondaryDark10',
         },
       },
       focus: {
-        switchBackground: boxThemes.focussed,
+        background: boxThemes.focussed,
       },
     },
     checked: {
       default: {
-        switchBackground: mergeTheme(boxThemes.default, boxThemes.focusable, {
-          'background-color': 'rgb(33, 150, 243)',
-        }),
-        switch: mergeTheme(boxThemes.default, {
-          'background-color': 'white',
-        }),
-      },
-      hover: {
-        switchBackground: {
-          'background-color': 'rgba(33, 150, 243,  0.8)',
+        background: {
+          'background-color': '$colors.brandPrimary',
         },
-      },
-      press: {
-        switchBackground: {
-          'background-color': '#ddd',
-        },
-      },
-      focus: {
-        switchBackground: boxThemes.focussed,
       },
     },
     disabled: {
       default: {
-        switchBackground: {
+        background: {
           'background-color': '$colors.disabled',
         },
       },

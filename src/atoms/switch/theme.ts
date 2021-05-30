@@ -6,7 +6,10 @@ import { ThemeType } from '../../util';
 
 export interface ISwitchThemeBase extends ThemeType {
   switch: IBoxTheme;
-  switchBackground: IBoxTheme;
+  background: IBoxTheme;
+  switchWidth: string;
+  switchHeight: string;
+  backgroundWidth: string;
 }
 
 export interface ISwitchThemeState extends ThemeType {
@@ -17,7 +20,7 @@ export interface ISwitchThemeState extends ThemeType {
 }
 
 export interface ISwitchTheme extends ThemeType {
-  unchecked: ISwitchThemeState;
+  normal: ISwitchThemeState;
   checked: RecursivePartial<ISwitchThemeState>;
   disabled: RecursivePartial<ISwitchThemeState>;
 }
