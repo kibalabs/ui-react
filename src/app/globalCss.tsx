@@ -9,14 +9,17 @@ interface IGlobalCssProps {
 }
 
 export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
-  ${(props: IGlobalCssProps): string => props.resetCss}
+  ${(props: IGlobalCssProps): string => props.resetCss};
+
+  :root {
+    ${(props: IGlobalCssProps): string => colorsToCss(props.theme.colors)};
+  }
 
   html {
     scroll-behavior: smooth;
     image-rendering: pixelated;
     image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
     -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
-    ${(props: IGlobalCssProps): string => colorsToCss(props.theme.colors)};
   }
 
   body {
