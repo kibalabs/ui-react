@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+## [0.9.0] - 2021-07-06
+
+### Added
 - [MINOR] Created `Dialog` atom component
 - [MINOR] Created `MessageDialog` molecule component
 - [MINOR] Created `List` molecule and `List.Item` atom
