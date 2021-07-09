@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
-- [MINOR] Fix `Box` to align children correctly when not full width
+- [PATCH] Fix `Box` to align children correctly when not full width
 
 ### Removed
 
