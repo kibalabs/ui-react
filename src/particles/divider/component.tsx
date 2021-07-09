@@ -15,7 +15,7 @@ const StyledDivider = styled.hr<IStyledDividerProps>`
   color: ${(props: IStyledDividerProps): string => valueToCss(props.theme.color)};
   flex-shrink: 0;
   margin: 0;
-  border-style: 'solid';
+  border-style: solid;
   border-width: 0;
 
   &.horizontal {

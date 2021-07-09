@@ -37,16 +37,13 @@ export const Template = (args) => (
 
 <Canvas>
   <Story name='Vertical Divider'>
-    <Box width='150px' height='150px' >
-      <Stack diection={Direction.Horizontal}>
-      <Text> Hello </Text>
-      <Divider orientation='vertical'/>
-
-      </Stack>
-    </Box>
+    <Stack direction={Direction.Horizontal}>
+      <Text>Hello</Text>
+      <Divider orientation='vertical' />
+      <Text>World</Text>
+    </Stack>
   </Story>
 </Canvas>
-
 
 ### Theming
 
