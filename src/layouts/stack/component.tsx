@@ -32,8 +32,9 @@ export interface IStackItemProps extends IOptionalSingleAnyChildProps {
   baseSize: string;
   isHidden: boolean;
   alignment?: Alignment;
-  gutterBefore?: PaddingSizeProp,
-  gutterAfter?: PaddingSizeProp,
+  gutterBefore?: PaddingSizeProp;
+  gutterAfter?: PaddingSizeProp;
+  shouldShrinkBelowContentSize?: boolean;
 }
 
 class StackItem extends React.Component<IStackItemProps> {
@@ -136,6 +137,9 @@ export const Stack = (props: IStackProps): React.ReactElement => {
               shrinkFactor={child.props.shrinkFactor}
               baseSize={child.props.baseSize}
               alignment={child.props.alignment}
+              // NOTE(krishan711): ideally the mins should only be 0 in the correct direction but we can't know the direction in a responsive way
+              minWidth={child.props.shrinkFactor && child.props.shouldShrinkBelowContentSize ? '0' : 'auto'}
+              minHeight={child.props.shrinkFactor && child.props.shouldShrinkBelowContentSize ? '0' : 'auto'}
             >
               {React.Children.count(child.props.children) > 0 ? child.props.children : <div />}
             </StyledStackItem>
@@ -169,6 +173,8 @@ interface IStyledStackItemProps extends ISingleAnyChildProps {
   shrinkFactor: number;
   baseSize: string;
   alignment?: Alignment;
+  minWidth: string;
+  minHeight: string;
 }
 
 const StyledStackItem = wrappingComponent((Component: React.ComponentType<IStyledStackItemProps>): React.ComponentType<IStyledStackItemProps> => {
@@ -176,7 +182,8 @@ const StyledStackItem = wrappingComponent((Component: React.ComponentType<IStyle
     flex-basis: ${(props: IStyledStackItemProps): string => props.baseSize};
     flex-grow: ${(props: IStyledStackItemProps): number => props.growthFactor};
     flex-shrink: ${(props: IStyledStackItemProps): number => props.shrinkFactor};
-    min-width: ${(props: IStyledStackItemProps): string => (props.shrinkFactor ? '0' : 'none')};
+    min-width: ${(props: IStyledStackItemProps): string => props.minWidth};
+    min-height: ${(props: IStyledStackItemProps): string => props.minHeight};
     align-self: ${(props: IStyledStackItemProps): string => (props.alignment ? getFlexItemAlignment(props.alignment) : 'auto')};
     /* Fix for https://github.com/philipwalton/flexbugs#flexbug-2 */
     @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
