@@ -25,6 +25,7 @@ const StyledBox = styled.div<IStyledBoxProps>`
   max-height: ${(props: IStyledBoxProps): string => props.maxHeight};
   max-width: ${(props: IStyledBoxProps): string => props.maxWidth};
   display: ${(props: IStyledBoxProps): string => props.blockType};
+  flex-direction: column;
   z-index: ${(props: IStyledBoxProps): string => (props.zIndex ? `${props.zIndex}` : 'auto')};
   &.clipContent {
     overflow: hidden;
