@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [MINOR] Added `shouldShrinkBelowContentSize` to `Stack.Item`
 
 ### Changed
 - [PATCH] Fix `Box` to align children correctly when not full width
