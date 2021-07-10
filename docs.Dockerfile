@@ -11,13 +11,6 @@ COPY . .
 
 RUN npm run build-docs
 
-# Deploy with nginx
-FROM nginx:1.17.10
-
-WORKDIR /app
-COPY nginx.conf .
-COPY start.sh .
+# Serve with nginx
+FROM ghcr.io/kibalabs/app-serve:latest
 COPY --from=build /app/dist /usr/share/nginx/html
-
-EXPOSE 80
-CMD ["./start.sh"]
