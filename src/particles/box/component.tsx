@@ -25,6 +25,7 @@ const StyledBox = styled.div<IStyledBoxProps>`
   max-height: ${(props: IStyledBoxProps): string => props.maxHeight};
   max-width: ${(props: IStyledBoxProps): string => props.maxWidth};
   display: ${(props: IStyledBoxProps): string => props.blockType};
+  flex-direction: column;
   z-index: ${(props: IStyledBoxProps): string => (props.zIndex ? `${props.zIndex}` : 'auto')};
   &.clipContent {
     overflow: hidden;
@@ -57,7 +58,7 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
   const width = props.width || (props.isFullWidth ? '100%' : 'auto');
   const maxHeight = props.maxHeight || 'none';
   const maxWidth = props.maxWidth || 'none';
-  const blockType = width === '100%' ? 'block' : 'inline-block';
+  const blockType = width === '100%' ? 'block' : 'flex';
   const shouldClipContent = props.shouldClipContent;
 
   if ((props.isScrollableHorizontally || props.isScrollableVertically) && props.shouldClipContent) {
