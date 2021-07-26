@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [MINOR] Added `isFullPageApp` to `KibaApp` to force root elements to 100% width and height
+- [MINOR] Added `extraGlobalCss` to `KibaApp` to allow manual additions to global CSS
 
 ### Changed
 

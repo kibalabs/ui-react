@@ -14,12 +14,25 @@ import 'lazysizes/plugins/attrchange/ls.attrchange';
 interface IKibaAppProps extends IMultiAnyChildProps {
   theme: ITheme;
   isRehydrating?: boolean;
+  isFullPageApp?: boolean;
+  extraGlobalCss?: string;
+  extraCss?: string;
+}
+
+interface IStyledMainViewProps {
+  extraCss?: string;
 }
 
 const StyledMainView = styled.div`
   min-height: 100vh;
   /* NOTE(krishan711): the min-height doesn't propagate to children that have height:100% unless this is here (https://stackoverflow.com/questions/8468066) */
   height: 1px;
+
+  &.fullPage {
+    min-height: 100%;
+  }
+
+  ${(props: IStyledMainViewProps): string => props.extraCss || ''};
 `;
 
 export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
@@ -35,8 +48,13 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
       <GlobalCss
         theme={props.theme}
         resetCss={resetCss}
+        extraCss={props.extraGlobalCss}
+        isFullPageApp={props.isFullPageApp}
       />
-      <StyledMainView className={getClassName(isRunningOnBrowser ? 'js' : 'no-js')}>
+      <StyledMainView
+        className={getClassName(isRunningOnBrowser ? 'js' : 'no-js', props.isFullPageApp && 'fullPage')}
+        extraCss={props.extraCss}
+      >
         {props.children}
       </StyledMainView>
     </ThemeProvider>
