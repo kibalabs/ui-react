@@ -13,19 +13,6 @@ interface IGlobalCssProps {
 export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
   ${(props: IGlobalCssProps): string => props.resetCss};
 
-  ${(props: IGlobalCssProps): string => props.isFullPageApp && `
-    html, body {
-      width: 100%;
-      height: 100%;
-      overscroll-behavior: none;
-    }
-
-    #root {
-      width: 100%;
-      height: 100%;
-    }
-  `};
-
   :root {
     ${(props: IGlobalCssProps): string => colorsToCss(props.theme.colors)};
   }
@@ -43,6 +30,19 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
     ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.default)};
     text-align: left;
   }
+
+  ${(props: IGlobalCssProps): string => props.isFullPageApp && `
+    html, body {
+      width: 100%;
+      height: 100%;
+      overscroll-behavior: none;
+    }
+
+    #root {
+      width: 100%;
+      height: 100%;
+    }
+  `};
 
   /* NOTE(krishan711): the :not(.button) needs to be specified as Buttons can act as links and these styles will be used on hover */
   /* since this overall ":hover" is more specific than the generic styles for the default button (with no modifier) */
