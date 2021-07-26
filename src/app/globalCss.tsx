@@ -7,10 +7,24 @@ interface IGlobalCssProps {
   theme: ITheme;
   resetCss: string;
   extraCss?: string;
+  isFullPageApp?: boolean;
 }
 
 export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
   ${(props: IGlobalCssProps): string => props.resetCss};
+
+  ${(props: IGlobalCssProps): string => props.isFullPageApp && `
+    html, body {
+      width: 100%;
+      height: 100%;
+      overscroll-behavior: none;
+    }
+
+    #root {
+      width: 100%;
+      height: 100%;
+    }
+  `};
 
   :root {
     ${(props: IGlobalCssProps): string => colorsToCss(props.theme.colors)};
