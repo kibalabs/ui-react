@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Added `extraGlobalCss` to `KibaApp` to allow manual additions to global CSS
 
 ### Changed
+- [PATCH] Update `Media` to process urls more accurately (e.g. ignore query params)
 
 ### Removed
 
