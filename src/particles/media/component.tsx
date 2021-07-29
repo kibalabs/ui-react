@@ -19,12 +19,13 @@ export interface IMediaProps extends IComponentProps<IMediaTheme> {
 }
 
 export const Media = (props: IMediaProps): React.ReactElement => {
-  const isVideo = (): boolean => {
-    const fileExtension = props.source.split('.').pop()?.toLowerCase() || '';
+  const isVideo = React.useMemo((): boolean => {
+    const source = new URL(props.source);
+    const fileExtension = source.pathname.split('.').pop()?.toLowerCase() || '';
     return fileExtension === 'mp4' || fileExtension === 'webm' || fileExtension === 'ogg';
-  };
+  }, [props.source]);
 
-  return isVideo() ? (
+  return isVideo ? (
     <Video shouldShowControls={false} shouldLoop={true} shouldMute={true} shouldAutoplay={true} {...props} />
   ) : (
     <Image {...props as IImageProps} />
