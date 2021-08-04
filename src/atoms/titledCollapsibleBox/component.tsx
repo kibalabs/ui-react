@@ -84,9 +84,12 @@ export const TitledCollapsibleBox = (props: ITitledCollapsibleBoxProps): React.R
       id={props.id}
       className={getClassName(TitledCollapsibleBox.displayName, props.className, props.isCollapsed && 'collapsed')}
       theme={theme}
-      onClick={onCollapseToggled}
     >
-      <StyledHeader theme={theme} className={getClassName(props.isCollapsed && 'collapsed')}>
+      <StyledHeader
+        className={getClassName(props.isCollapsed && 'collapsed')}
+        theme={theme}
+        onClick={onCollapseToggled}
+      >
         <span>{props.title}</span>
         <KibaIcon iconId={props.isCollapsed ? 'ion-chevron-down' : 'ion-chevron-up'} />
       </StyledHeader>
