@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Changed
 - [PATCH] Update `Media` to process urls more accurately (e.g. ignore query params)
 - [PATCH] Update `TitledCollapsibleBox` to clip children so borders look nice
+- [PATCH] Fix `TitledCollapsibleBox` to only collapse when clicking on the title area
 
 ### Removed
 
