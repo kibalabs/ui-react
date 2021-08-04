@@ -14,6 +14,7 @@ interface IStyledTitledCollapsibleBoxProps {
 
 const StyledCollapsibleBox = styled.div<IStyledTitledCollapsibleBoxProps>`
   width: 100%;
+  overflow: hidden;
   ${(props: IStyledTitledCollapsibleBoxProps): string => themeToCss(props.theme.normal.default.background)};
 
   &.collapsed {
