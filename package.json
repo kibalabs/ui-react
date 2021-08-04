@@ -35,12 +35,12 @@
     "react-markdown": "^5.0.3"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.7.0",
-    "@storybook/addon-essentials": "6.3.4",
-    "@storybook/addon-links": "6.3.4",
-    "@storybook/react": "6.3.4",
-    "@types/react": "17.0.14",
-    "@types/react-dom": "17.0.5",
+    "@kibalabs/build": "0.7.1",
+    "@storybook/addon-essentials": "6.3.6",
+    "@storybook/addon-links": "6.3.6",
+    "@storybook/react": "6.3.6",
+    "@types/react": "17.0.15",
+    "@types/react-dom": "17.0.9",
     "@types/styled-components": "5.1.11",
     "dotenv-webpack": "^6.0.4",
     "react": "17.0.2",
