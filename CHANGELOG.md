@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+## [0.9.2] - 2021-08-10
+
+### Added
 - [MINOR] Added `isFullPageApp` to `KibaApp` to force root elements to 100% width and height
 - [MINOR] Added `extraGlobalCss` to `KibaApp` to allow manual additions to global CSS
 
@@ -16,8 +24,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [PATCH] Update `TitledCollapsibleBox` to clip children so borders look nice
 - [PATCH] Fix `TitledCollapsibleBox` to only collapse when clicking on the title area
 
-### Removed
-
 ## [0.9.1] - 2021-07-09
 
 ### Added
@@ -25,8 +31,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Changed
 - [PATCH] Fix `Box` to align children correctly when not full width
-
-### Removed
 
 ## [0.9.0] - 2021-07-06
 
@@ -55,17 +59,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `Button`, `Link`, `LinkBase` to have `TabIndex` Prop
 - [MINOR] Moved colors css to `:root`
 
-### Removed
-
 ## [0.8.4] - 2021-02-06
-
-### Added
 
 ### Changed
 - [MINOR] Updated `ResponsiveContainingView` to have `isCenteredHorizontally` prop to center contents horizontally
 - [MINOR] Updated `KibaApp` to have a height so it can have children with `height:100%`
-
-### Removed
 
 ## [0.8.3] - 2021-01-19
 
@@ -83,8 +81,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [PATCH] Memoize `Markdown` and `MarkdownText` to prevent expensive re-renders
 - [PATCH] Update `Link` to only use inherited text styles with the `inherit` variant
 
-### Removed
-
 ## [0.8.2] - 2021-01-07
 
 ### Added
@@ -96,18 +92,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Fix typing for `Button`'s `leftIcon` and `rightIcon` props
 - [PATCH] Add a default `errorView` to `WebView`
 
-### Removed
-
 ## [0.8.1] - 2020-12-23
 
 ### Added
 - [PATCH] Change `WebView` to be lazyLoadable
 - [MINOR] Extract hard-coded aspect-ratio from `WebView` into `aspectRatio` prop
 - [PATCH] Added a `MarkdownText` example to storybook
-
-### Changed
-
-### Removed
 
 ## [0.8.0] - 2020-12-23
 
@@ -122,8 +112,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Update `Image` and `Video` to not populate `data-src` if not lazy-loading
 - [PATCH] Update useBuiltTheme to defer resolving values (for SSR on IE11)
 
-### Removed
-
 ## [0.7.4] - 2020-11-22
 
 ### Added
@@ -133,8 +121,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Changed
 - [MINOR] Renamed subatoms to particles
 
-### Removed
-
 ## [0.7.3] - 2020-11-05
 
 ### Added
@@ -142,18 +128,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Added `maxHeight`, `maxWidth` and `zIndex` props to `Box`
 - [MINOR] Added `inheritTextTheme` to `Text` themes + Use this for base `Link` theme
 
-### Changed
-
-### Removed
-
 ## [0.7.2] - 2020-10-29
 
 ### Added
 - [PATCH] Added `TabBar` molecule + `TabBarItem` atom
-
-### Changed
-
-### Removed
 
 ## [0.7.1] - 2020-10-20
 
@@ -162,8 +140,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Changed
 - [PATCH] Added workflow to build pull requests.
-
-### Removed
 
 ## [0.7.0] - 2020-10-06
 
