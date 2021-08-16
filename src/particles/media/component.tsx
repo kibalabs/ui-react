@@ -23,7 +23,9 @@ export const Media = (props: IMediaProps): React.ReactElement => {
     if (!props.source) {
       return false;
     }
-    const source = new URL(props.source);
+    console.log('props.source', props.source)
+    // NOTE(krishan711): the url is only used to check the type so it doesn't matter if it's actually the correct url or not (for now).
+    const source = new URL(props.source, location ? location.href : 'https://kibalabs.com');
     const fileExtension = source.pathname.split('.').pop()?.toLowerCase() || '';
     return fileExtension === 'mp4' || fileExtension === 'webm' || fileExtension === 'ogg';
   }, [props.source]);

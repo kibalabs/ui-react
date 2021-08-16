@@ -18,8 +18,8 @@
     "lint-fix": "lint --fix",
     "type-check": "type-check",
     "publish-next": "kiba-publish --next",
-    "docs": "start-storybook --docs --port 6006",
-    "build-docs": "build-storybook --docs --output-dir dist"
+    "docs": "start-storybook --static-dir ./.storybook/public --docs --port 6006",
+    "build-docs": "build-storybook --static-dir ./.storybook/public --docs --output-dir dist"
   },
   "files": [
     "dist/*"
