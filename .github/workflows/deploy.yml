@@ -26,3 +26,49 @@ jobs:
       - name: Publish next package to npm
         if: steps.vars.outputs.commit_count != '0'
         run: docker run -v $(pwd)/.npmrc:/root/.npmrc package /bin/bash -c "npm run publish-next -- --next-version ${{ steps.vars.outputs.commit_count }}"
+  deploy-docs-next:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    env:
+      DOCKER_IMAGE: ghcr.io/${{ github.repository }}-docs:next
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Login to GitHub container registry
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+      - name: Build docker image
+        run: docker build --tag $DOCKER_IMAGE .
+      - name: Push to container registry
+        run: docker push $DOCKER_IMAGE
+  run-docs-next:
+    needs: deploy-docs-next
+    runs-on: ubuntu-latest
+    env:
+      NAME: ui-react-docs-next
+      DOCKER_IMAGE: ghcr.io/${{ github.repository }}-docs:next
+    steps:
+      - name: executing remote ssh commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.FREEBOX_URL }}
+          username: ${{ secrets.FREEBOX_USER }}
+          key: ${{ secrets.FREEBOX_SSH_KEY }}
+          envs: DOCKER_IMAGE,NAME
+          script_stop: true
+          script: |
+            url="ui-react-docs-next.kibalabs.com"
+            varsFile=~/.${NAME}.vars
+            docker pull ${DOCKER_IMAGE}
+            docker stop ${NAME} && docker rm ${NAME} || true
+            docker run \
+                --name ${NAME} \
+                --detach \
+                --publish-all \
+                --restart on-failure \
+                --env NAME=${NAME} \
+                --env VIRTUAL_HOST=${url} \
+                --env LETSENCRYPT_HOST=${url} \
+                --env-file ${varsFile} \
+                ${DOCKER_IMAGE}
