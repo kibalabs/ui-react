@@ -25,7 +25,7 @@ const LoadingOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.05);
   z-index: 5;
   display: flex;
   flex-direction: column;
