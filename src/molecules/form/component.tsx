@@ -4,7 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
-import { Box, IBoxTheme, IColorGuide, ILoadingSpinnerTheme, LoadingSpinner } from '../../particles';
+import { Box, IBoxTheme, ILoadingSpinnerTheme, LoadingSpinner } from '../../particles';
 import { ThemeType, valueToCss } from '../../util';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
@@ -21,7 +21,7 @@ const StyledForm = styled.form`
 `;
 
 interface ILoadingOverlayProps {
-  overlayColor: string;
+  overlayColor?: string;
 }
 
 const LoadingOverlay = styled.div<ILoadingOverlayProps>`
@@ -30,7 +30,7 @@ const LoadingOverlay = styled.div<ILoadingOverlayProps>`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: ${(props: ILoadingOverlayProps): string => props.overlayColor ? valueToCss(props.overlayColor) : `rgba(245,245,245, 0.5)`};
+  background-color: ${(props: ILoadingOverlayProps): string => (props.overlayColor ? valueToCss(props.overlayColor) : 'rgba(245,245,245, 0.5)')};
   // opacity: 0.5;
   z-index: 5;
   display: flex;
