@@ -12,5 +12,9 @@ COPY . .
 RUN npm run build-docs
 
 # Serve with nginx
-FROM ghcr.io/kibalabs/app-serve:latest
+FROM nginx:1.16.0-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/config.d
+
+EXPOSE 80
+CMD ["nginx" , "-g", "daemon off;"]
