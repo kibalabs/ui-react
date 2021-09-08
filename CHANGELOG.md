@@ -10,9 +10,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
-- [MINOR] update `Media` to work with local files
 
 ### Removed
+
+## [0.9.3] - 2021-09-08
+
+### Changed
+- [MINOR] update `Media` to work with local files
 
 ## [0.9.2] - 2021-08-10
 
