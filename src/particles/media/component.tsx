@@ -37,10 +37,13 @@ export const Media = (props: IMediaProps): React.ReactElement => {
     fetch(props.source)
       .then((response) => {
         if (response.status >= 300) {
-          throw new Error(`Failed to fetch icon: ${response}`);
+          throw new Error(`Failed to fetch content type: ${response}`);
         }
         const contentType = response.headers.get('Content-Type');
-        // image/jpeg
+        if (!contentType) {
+          setMediaType(null);
+          return;
+        }
         const arr = contentType.split('/'); // ['image', 'jpeg'] | ['video', 'mp4']
         if (arr.length === 0) {
           setMediaType(null);
