@@ -54,7 +54,6 @@ export const Media = (props: IMediaProps): React.ReactElement => {
       .catch(() => {
         setMediaType(null);
       });
-    // setMediaType(media);
   }, [props.source]);
 
   return (isVideo || mediaType === 'video') ? (
