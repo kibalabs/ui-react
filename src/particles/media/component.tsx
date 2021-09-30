@@ -52,8 +52,8 @@ export const Media = (props: IMediaProps): React.ReactElement => {
         setMediaType(contentTypeParts[0]);
       })
       .catch((error : Error) => {
+        console.error(error);
         setMediaType(null);
-        console.log(error);
       });
   }, [props.source]);
 
