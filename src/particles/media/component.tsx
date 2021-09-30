@@ -34,7 +34,7 @@ export const Media = (props: IMediaProps): React.ReactElement => {
       setMediaType(null);
       return;
     }
-    fetch(props.source)
+    fetch(props.source, { method: 'HEAD' })
       .then((response : Response) => {
         if (response.status >= 300) {
           throw new Error(`Failed to fetch content type: ${response}`);
@@ -51,8 +51,9 @@ export const Media = (props: IMediaProps): React.ReactElement => {
         }
         setMediaType(contentTypeParts[0]);
       })
-      .catch(() => {
+      .catch((error : Error) => {
         setMediaType(null);
+        console.log(error);
       });
   }, [props.source]);
 
