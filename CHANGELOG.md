@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
+- [MINOR] update `Media` to check Content-Type of links without extension
+- [MINOR] update `Link` to not have a default value for shouldOpenSameTab
 
 ### Removed
 

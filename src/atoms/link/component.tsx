@@ -38,10 +38,10 @@ const StyledLink = styled.a<IStyledLinkProps>`
 
 export interface ILinkProps extends IComponentProps<ILinkTheme> {
   isEnabled: boolean;
-  shouldOpenSameTab: boolean;
   target: string;
-  tabIndex?: number;
   text: string;
+  tabIndex?: number;
+  shouldOpenSameTab?: boolean;
 }
 
 export const Link = (props: ILinkProps): React.ReactElement => {
@@ -66,5 +66,4 @@ Link.displayName = 'Link';
 Link.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,
-  shouldOpenSameTab: false,
 };
