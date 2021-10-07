@@ -7,6 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ## [Unreleased]
 
+### Changed
+- [MINOR] update `linkbase` to render `<a>` when href is set else render `<button>`
+
+## [0.9.4] - 2021-10-07
+
 ### Added
 
 ### Changed

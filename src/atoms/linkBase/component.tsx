@@ -84,6 +84,7 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
   const theme = useBuiltTheme('linkBases', props.variant, props.theme);
   const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab == null && props.target && (props.target.startsWith('#') || props.target.startsWith('/')));
   return (
+    // @ts-ignore: as prop doesn't match type required
     <StyledLinkBase
       id={props.id}
       className={getClassName(LinkBase.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !props.isEnabled && 'disabled')}
