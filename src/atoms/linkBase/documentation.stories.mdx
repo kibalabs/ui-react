@@ -52,6 +52,22 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
+<Canvas>
+  <Story name='Link with href set'>
+    <LinkBase variant='card' target = 'https://www.everypagehq.com'>
+      <span> This is anchored </span>
+    </LinkBase>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Link without href set'>
+    <LinkBase variant='card' target = ''>
+      <span> This is in a button </span>
+    </LinkBase>
+  </Story>
+</Canvas>
+
 ### Theming
 
 TODO
