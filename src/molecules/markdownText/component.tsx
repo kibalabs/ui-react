@@ -26,7 +26,8 @@ interface RendererProps extends IMultiAnyChildProps {
 }
 
 export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactElement => {
-  const shouldAllowNode = (node: MarkdownAST, index: number, parent: ReactMarkdown.NodeType): boolean => {
+  // @ts-ignore
+  const shouldAllowNode = (node: MarkdownAST, index: number, parent: any): boolean => {
     if (node.type === 'paragraph') {
       if ((parent as unknown as Parent).children.length === 1) {
         return false;
@@ -85,6 +86,7 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
 
   return (
     <ReactMarkdown
+      // @ts-ignore
       id={props.id}
       className={getClassName(MarkdownText.displayName, props.className)}
       allowNode={shouldAllowNode}
