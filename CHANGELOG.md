@@ -13,17 +13,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Removed
 
-## [0.9.5] - 2021-10-11
+## [0.9.4] - 2021-10-11
 
 ### Changed
 - [MINOR] update `linkbase` to render `<a>` when href is set else render `<button>`
 - [MINOR] update `KibaApp` to disable all `body` scrolling on ios if `isFullPageApp`
-
-## [0.9.4] - 2021-10-07
-
-### Added
-
-### Changed
 - [MINOR] update `Media` to check Content-Type of links without extension
 - [MINOR] update `Link` to not have a default value for shouldOpenSameTab
 
