@@ -38,6 +38,11 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
       overscroll-behavior: none;
     }
 
+    // NOTE(krishan711): for ios only disable all body scrolling
+    _::-webkit-full-page-media, _:future, :root body {
+      overflow: hidden;
+    }
+
     #root {
       width: 100%;
       height: 100%;
