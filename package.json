@@ -36,9 +36,9 @@
   },
   "devDependencies": {
     "@kibalabs/build": "0.8.0",
-    "@storybook/addon-essentials": "6.3.10",
-    "@storybook/addon-links": "6.3.10",
-    "@storybook/react": "6.3.10",
+    "@storybook/addon-essentials": "6.3.8",
+    "@storybook/addon-links": "6.3.8",
+    "@storybook/react": "6.3.8",
     "@types/react": "17.0.20",
     "@types/react-dom": "17.0.9",
     "@types/styled-components": "5.1.15",
