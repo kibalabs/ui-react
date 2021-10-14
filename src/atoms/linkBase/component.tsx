@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import { ISingleAnyChildProps, Link as ReactLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
@@ -75,6 +75,7 @@ export interface ILinkBaseProps extends IComponentProps<ILinkBaseTheme>, ISingle
 }
 
 export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
+  const isUsingCoreRouting = useIsCoreRoutingEnabled();
   const onClicked = (): void => {
     if (props.onClicked) {
       props.onClicked();
@@ -95,7 +96,7 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
       rel={props.target ? 'noopener' : undefined}
       tabIndex={props.tabIndex || 0}
       target={props.target && (targetShouldOpenSameTab ? '_self' : '_blank')}
-      as={props.target ? 'a' : 'button'}
+      as={isUsingCoreRouting ? ReactLink : 'button'}
     >
       {props.children}
     </StyledLinkBase>
