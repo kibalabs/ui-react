@@ -154,6 +154,25 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
+<Canvas>
+ <Story name='Responsive Grid'>
+    <Box>
+      <Text>Boxes that are Responsive</Text>
+      <Grid shouldAddGutters={true}>
+        <Grid.Item  sizeResponsive={{base:6 , medium:4}}>
+          <Box variant='card' isFullWidth={true}/>
+        </Grid.Item>
+        <Grid.Item  sizeResponsive={{base:6 , medium:4}}>
+          <Box variant='card' isFullWidth={true}/>
+        </Grid.Item>
+        <Grid.Item  sizeResponsive={{base:6 , medium:4}}>
+          <Box variant='card' isFullWidth={true}/>
+        </Grid.Item>
+      </Grid>
+    </Box>
+  </Story>
+</Canvas>
+
 ### Theming
 
 TODO
