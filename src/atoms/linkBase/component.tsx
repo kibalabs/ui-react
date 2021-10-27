@@ -76,7 +76,7 @@ export interface ILinkBaseProps extends IComponentProps<ILinkBaseTheme>, ISingle
 
 export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
-  
+
   const onClicked = (): void => {
     if (props.onClicked) {
       props.onClicked();
