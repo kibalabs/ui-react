@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { Link as ReactLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
+import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
@@ -57,7 +57,7 @@ export const Link = (props: ILinkProps): React.ReactElement => {
       href={props.isEnabled ? props.target : undefined}
       tabIndex={props.tabIndex || 0}
       target={shouldOpenSameTab ? '_self' : '_blank'}
-      as={isUsingCoreRouting ? ReactLink : 'a'}
+      as={isUsingCoreRouting ? CoreLink : undefined}
       rel={'noopener'}
     >
       {props.text}
