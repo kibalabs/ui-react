@@ -81,6 +81,7 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
 
 export const Button = (props: IButtonProps): React.ReactElement => {
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
+
   const onClicked = (): void => {
     if (props.isLoading) {
       return;
