@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
+import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
@@ -45,9 +46,11 @@ export interface ILinkProps extends IComponentProps<ILinkTheme> {
 }
 
 export const Link = (props: ILinkProps): React.ReactElement => {
+  const isUsingCoreRouting = useIsCoreRoutingEnabled();
   const theme = useBuiltTheme('links', props.variant, props.theme);
   const shouldOpenSameTab = props.shouldOpenSameTab || (props.shouldOpenSameTab === undefined && props.target && (props.target.startsWith('#') || props.target.startsWith('/')));
   return (
+  // @ts-ignore: as prop doesn't match type required
     <StyledLink
       id={props.id}
       className={getClassName(Link.displayName, props.className, !props.isEnabled && 'disabled')}
@@ -55,6 +58,7 @@ export const Link = (props: ILinkProps): React.ReactElement => {
       href={props.isEnabled ? props.target : undefined}
       tabIndex={props.tabIndex || 0}
       target={shouldOpenSameTab ? '_self' : '_blank'}
+      as={isUsingCoreRouting ? CoreLink : undefined}
       rel={'noopener'}
     >
       {props.text}

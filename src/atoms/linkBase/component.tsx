@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import { Link as CoreLink, ISingleAnyChildProps, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
@@ -11,7 +11,7 @@ interface IStyledLinkBaseProps {
   theme: ILinkBaseTheme;
 }
 
-const StyledLinkBase = styled.a<IStyledLinkBaseProps>`
+const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
   color: currentColor;
   cursor: pointer;
   outline: none;
@@ -75,6 +75,8 @@ export interface ILinkBaseProps extends IComponentProps<ILinkBaseTheme>, ISingle
 }
 
 export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
+  const isUsingCoreRouting = useIsCoreRoutingEnabled();
+
   const onClicked = (): void => {
     if (props.onClicked) {
       props.onClicked();
@@ -94,8 +96,8 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
       href={props.target}
       rel={props.target ? 'noopener' : undefined}
       tabIndex={props.tabIndex || 0}
-      target={props.target && (targetShouldOpenSameTab ? '_self' : '_blank')}
-      as={props.target ? 'a' : 'button'}
+      target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
+      as={props.target ? (isUsingCoreRouting ? CoreLink : 'a') : undefined}
     >
       {props.children}
     </StyledLinkBase>

@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
+-[MINOR] Updated `Linkbase` to work with core-routing 
+-[MINOR] Updated `Link` to work with core-routing
+-[MINOR] Updated `Button` to work with core-routing
+-[MINOR] Updated `IconButton` to work with core-routing
 
 ### Removed
 

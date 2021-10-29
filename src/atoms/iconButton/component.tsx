@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
+import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
@@ -64,6 +65,8 @@ export interface IIconButtonProps extends IComponentProps<IIconButtonTheme> {
 }
 
 export const IconButton = (props: IIconButtonProps): React.ReactElement => {
+  const isUsingCoreRouting = useIsCoreRoutingEnabled();
+
   const onClicked = (event: React.SyntheticEvent): void => {
     if (props.onClicked) {
       event.stopPropagation();
@@ -83,10 +86,10 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
       disabled={!props.isEnabled}
       aria-label={props.label}
       href={props.target}
-      as={props.target ? 'a' : undefined}
+      as={props.target ? (isUsingCoreRouting ? CoreLink : 'a') : undefined}
       rel={props.target && 'noopener'}
       tabIndex={props.tabIndex || 0}
-      target={props.target && (targetShouldOpenSameTab ? '_self' : '_blank')}
+      target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
     >
       {props.icon}
     </StyledIconButton>
