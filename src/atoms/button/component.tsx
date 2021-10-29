@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { OptionalProppedElement, Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
+import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
@@ -107,7 +107,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       isLoading={props.isLoading}
       disabled={!props.isEnabled}
       href={props.target}
-      as={props.target ? (isUsingCoreRouting ? CoreLink : 'a' ) : undefined}
+      as={props.target ? (isUsingCoreRouting ? CoreLink : 'a') : undefined}
       rel={props.target && 'noopener'}
       tabIndex={props.tabIndex || 0}
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
