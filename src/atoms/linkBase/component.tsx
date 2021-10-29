@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { ISingleAnyChildProps, Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
+import { Link as CoreLink, ISingleAnyChildProps, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
@@ -97,7 +97,7 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
       rel={props.target ? 'noopener' : undefined}
       tabIndex={props.tabIndex || 0}
       target={props.target && (targetShouldOpenSameTab ? '_self' : '_blank')}
-      as={props.target && isUsingCoreRouting ? CoreLink : undefined}
+      as={props.target ? (isUsingCoreRouting ? CoreLink : 'a') : undefined}
     >
       {props.children}
     </StyledLinkBase>

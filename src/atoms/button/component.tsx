@@ -107,7 +107,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       isLoading={props.isLoading}
       disabled={!props.isEnabled}
       href={props.target}
-      as={props.target && isUsingCoreRouting ? CoreLink : undefined}
+      as={props.target ? (isUsingCoreRouting ? CoreLink : 'a' ) : undefined}
       rel={props.target && 'noopener'}
       tabIndex={props.tabIndex || 0}
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
