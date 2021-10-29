@@ -96,7 +96,7 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
       href={props.target}
       rel={props.target ? 'noopener' : undefined}
       tabIndex={props.tabIndex || 0}
-      target={props.target && (targetShouldOpenSameTab ? '_self' : '_blank')}
+      target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       as={props.target ? (isUsingCoreRouting ? CoreLink : 'a') : undefined}
     >
       {props.children}

@@ -89,7 +89,7 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
       as={props.target ? (isUsingCoreRouting ? CoreLink : 'a') : undefined}
       rel={props.target && 'noopener'}
       tabIndex={props.tabIndex || 0}
-      target={props.target && (targetShouldOpenSameTab ? '_self' : '_blank')}
+      target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
     >
       {props.icon}
     </StyledIconButton>

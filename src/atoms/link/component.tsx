@@ -50,6 +50,7 @@ export const Link = (props: ILinkProps): React.ReactElement => {
   const theme = useBuiltTheme('links', props.variant, props.theme);
   const shouldOpenSameTab = props.shouldOpenSameTab || (props.shouldOpenSameTab === undefined && props.target && (props.target.startsWith('#') || props.target.startsWith('/')));
   return (
+  // @ts-ignore: as prop doesn't match type required
     <StyledLink
       id={props.id}
       className={getClassName(Link.displayName, props.className, !props.isEnabled && 'disabled')}
