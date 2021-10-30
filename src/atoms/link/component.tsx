@@ -56,10 +56,10 @@ export const Link = (props: ILinkProps): React.ReactElement => {
       className={getClassName(Link.displayName, props.className, !props.isEnabled && 'disabled')}
       theme={theme}
       href={props.isEnabled ? props.target : undefined}
+      rel={'noopener'}
       tabIndex={props.tabIndex || 0}
       target={shouldOpenSameTab ? '_self' : '_blank'}
-      as={isUsingCoreRouting ? CoreLink : undefined}
-      rel={'noopener'}
+      as={isUsingCoreRouting && shouldOpenSameTab ? CoreLink : undefined}
     >
       {props.text}
     </StyledLink>
