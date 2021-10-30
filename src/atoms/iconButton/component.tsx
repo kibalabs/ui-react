@@ -86,10 +86,10 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
       disabled={!props.isEnabled}
       aria-label={props.label}
       href={props.target}
-      as={props.target ? (isUsingCoreRouting ? CoreLink : 'a') : undefined}
       rel={props.target && 'noopener'}
       tabIndex={props.tabIndex || 0}
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
+      as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab ? CoreLink : 'a') : undefined}
     >
       {props.icon}
     </StyledIconButton>
