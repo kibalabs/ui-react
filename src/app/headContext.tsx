@@ -48,7 +48,7 @@ const convertChildrenToHead = (children: React.ReactNode | React.ReactNode[], he
 };
 
 const mergeHeads = (heads: IHead[]): IHead => {
-  const mergedHead: IHead = {title: null, base: null, links: [], metas: [], styles: [], scripts: [], noscripts: []};
+  const mergedHead: IHead = { title: null, base: null, links: [], metas: [], styles: [], scripts: [], noscripts: [] };
   mergedHead.title = heads.reduce((current: IHeadTag | null, head: IHead): IHeadTag | null => {
     return head.title ?? current;
   }, null);
@@ -78,7 +78,7 @@ export const createElement = (type: string, headId: string): Element => {
   const element = document.createElement(type);
   element.setAttribute('ui-react-head', headId);
   return element;
-}
+};
 
 export const resolveElementsAndTags = (elements: Element[], tags: IHeadTag[], elementsToRemove: Set<Element>, tagsToAdd: Set<IHeadTag>): void => {
   elements.forEach((element: Element): void => { elementsToRemove.add(element); });
@@ -193,7 +193,7 @@ interface IHeadProps extends IMultiAnyChildProps {
 export const Head = (props: IHeadProps): React.ReactElement | null => {
   const headRoot = useHeadRoot();
   const headId = React.useMemo((): string => props.headId || generateUUID(), [props.headId]);
-  const headRef = React.useRef<IHead>({title: null, base: null, links: [], metas: [], styles: [], scripts: [], noscripts: []});
+  const headRef = React.useRef<IHead>({ title: null, base: null, links: [], metas: [], styles: [], scripts: [], noscripts: [] });
 
   React.useEffect((): (() => void) => {
     headRoot.addHead(headRef.current);
