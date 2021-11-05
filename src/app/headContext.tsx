@@ -6,7 +6,7 @@ import { flattenChildren, IMultiAnyChildProps, useDeepCompareEffect } from '@kib
 interface IHeadTag {
   type: string;
   attributes: Record<string, string>;
-  content: string | null;
+  content?: string;
   headId: string;
 }
 

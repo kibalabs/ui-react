@@ -8,12 +8,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [MINOR] Added `HeadProvider` and `Head` to replace Helmet in apps
+- [MINOR] Updated `KibaApp` to wrap children with a `HeadProvider`
+- [MINOR] Updated `KibaApp` to load theme fonts
 
 ### Changed
--[MINOR] Updated `Linkbase` to work with core-routing 
--[MINOR] Updated `Link` to work with core-routing
--[MINOR] Updated `Button` to work with core-routing
--[MINOR] Updated `IconButton` to work with core-routing
+- [MINOR] Updated `Linkbase` to work with core-routing
+- [MINOR] Updated `Link` to work with core-routing
+- [MINOR] Updated `Button` to work with core-routing
+- [MINOR] Updated `IconButton` to work with core-routing
 
 ### Removed
 
