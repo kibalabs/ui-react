@@ -108,21 +108,22 @@ export interface IHeadRootProviderProps extends IMultiAnyChildProps {
 
 export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElement => {
   const headsRef = React.useRef<IHead[]>([]);
+  const setHead = props.setHead;
 
   const refresh = React.useCallback((): void => {
     const mergedHead = mergeHeads(headsRef.current);
-    if (props.setHead) {
-      props.setHead(mergedHead);
+    if (setHead) {
+      setHead(mergedHead);
     } else if (typeof document === 'undefined') {
       console.error('No setHead provided to HeadRootProvider and no document to edit so Heads are being ignored.');
       return;
     }
-    if (mergedHead.title && document.title != mergedHead.title.content) {
+    if (mergedHead.title && document.title !== mergedHead.title.content) {
       const titleElement = document.querySelector('title');
       titleElement.setAttribute('ui-react-head', mergedHead.title.headId);
       titleElement.textContent = mergedHead.title.content;
     }
-    if (mergedHead.base && document.baseURI != mergedHead.base.content) {
+    if (mergedHead.base && document.baseURI !== mergedHead.base.content) {
       const baseElement = document.querySelector('base');
       baseElement.setAttribute('ui-react-head', mergedHead.base.headId);
       baseElement.textContent = mergedHead.base.content;
@@ -150,7 +151,7 @@ export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElem
     elementsToRemove.forEach((tag: Element): void => {
       tag.parentNode.removeChild(tag);
     });
-  }, [headsRef]);
+  }, [setHead, headsRef]);
 
   const addHead = React.useCallback((head: IHead): void => {
     headsRef.current.push(head);
@@ -158,7 +159,7 @@ export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElem
   }, [headsRef, refresh]);
 
   const removeHead = React.useCallback((head: IHead): void => {
-    headsRef.current = headsRef.current.filter((currentHead: IHead): boolean => currentHead != head);
+    headsRef.current = headsRef.current.filter((currentHead: IHead): boolean => currentHead !== head);
     refresh();
   }, [headsRef, refresh]);
 
@@ -190,10 +191,11 @@ export const Head = (props: IHeadProps): React.ReactElement | null => {
 
   React.useEffect((): (() => void) => {
     headRoot.addHead(headRef.current);
+    const head = headRef.current;
     return ((): void => {
-      headRoot.removeHead(headRef.current);
+      headRoot.removeHead(head);
     });
-  }, [headId]);
+  }, [headId, headRef, headRoot]);
 
   useDeepCompareEffect((): void => {
     const newHead = convertChildrenToHead(props.children, headId);
