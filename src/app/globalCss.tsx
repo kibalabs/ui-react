@@ -6,17 +6,22 @@ import { colorsToCss, themeToCss } from '../util';
 interface IGlobalCssProps {
   theme: ITheme;
   resetCss: string;
+  extraCss?: string;
+  isFullPageApp?: boolean;
 }
 
 export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
-  ${(props: IGlobalCssProps): string => props.resetCss}
+  ${(props: IGlobalCssProps): string => props.resetCss};
+
+  :root {
+    ${(props: IGlobalCssProps): string => colorsToCss(props.theme.colors)};
+  }
 
   html {
     scroll-behavior: smooth;
     image-rendering: pixelated;
     image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
     -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
-    ${(props: IGlobalCssProps): string => colorsToCss(props.theme.colors)};
   }
 
   body {
@@ -25,6 +30,24 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
     ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.default)};
     text-align: left;
   }
+
+  ${(props: IGlobalCssProps): string => (props.isFullPageApp ? `
+    html, body {
+      width: 100%;
+      height: 100%;
+      overscroll-behavior: none;
+    }
+
+    // NOTE(krishan711): for ios only disable all body scrolling
+    _::-webkit-full-page-media, _:future, :root body {
+      overflow: hidden;
+    }
+
+    #root {
+      width: 100%;
+      height: 100%;
+    }
+  ` : '')};
 
   /* NOTE(krishan711): the :not(.button) needs to be specified as Buttons can act as links and these styles will be used on hover */
   /* since this ":hover" is more specific (when hovering) than the generic styles for the default button (with no modifier) */
@@ -101,4 +124,6 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
       ${(props: IGlobalCssProps): string => themeToCss(props.theme.bulletTexts.default.normal.default.bullet)};
     }
   }
+
+  ${(props: IGlobalCssProps): string => props.extraCss || ''};
 `;

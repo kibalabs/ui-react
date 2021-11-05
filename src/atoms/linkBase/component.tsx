@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import { Link as CoreLink, ISingleAnyChildProps, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
@@ -11,7 +11,7 @@ interface IStyledLinkBaseProps {
   theme: ILinkBaseTheme;
 }
 
-const StyledLinkBase = styled.a<IStyledLinkBaseProps>`
+const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
   color: currentColor;
   cursor: pointer;
   outline: none;
@@ -75,6 +75,8 @@ export interface ILinkBaseProps extends IComponentProps<ILinkBaseTheme>, ISingle
 }
 
 export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
+  const isUsingCoreRouting = useIsCoreRoutingEnabled();
+
   const onClicked = (): void => {
     if (props.onClicked) {
       props.onClicked();
@@ -84,6 +86,7 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
   const theme = useBuiltTheme('linkBases', props.variant, props.theme);
   const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab == null && props.target && (props.target.startsWith('#') || props.target.startsWith('/')));
   return (
+    // @ts-ignore: as prop doesn't match type required
     <StyledLinkBase
       id={props.id}
       className={getClassName(LinkBase.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !props.isEnabled && 'disabled')}
@@ -93,7 +96,8 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
       href={props.target}
       rel={props.target ? 'noopener' : undefined}
       tabIndex={props.tabIndex || 0}
-      target={props.target && (targetShouldOpenSameTab ? '_self' : '_blank')}
+      target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
+      as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab ? CoreLink : 'a') : undefined}
     >
       {props.children}
     </StyledLinkBase>

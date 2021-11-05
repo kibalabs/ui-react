@@ -1,0 +1,69 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+
+import { Box } from '../box';
+import { Media, IMediaProps } from '.';
+
+<Meta
+  component={Media}
+  title={'Particles/Media'}
+/>
+
+# Media
+
+<br/>
+
+export const Template = (args) => (
+  <Media {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{source: 'https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg', isLazyLoadable: false}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Examples
+
+<Canvas>
+  <Story name='Circular'>
+    <Media variant='circular' source='https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg' />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Video'>
+    <Media source='https://everysize.evrpg.com/_bh20200903213922/assets/hero.mp4' />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Relative'>
+    <Media source='/sample.mp4' />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Video Without Extension'>
+    <Media source='https://gateway.pinata.cloud/ipfs/QmZ3yCYX2c6Z2BNSTyx1zuBoPUJTB8dyE74zwngdweaFV6' />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Image Without Extension'>
+    <Media source='https://lh3.googleusercontent.com/Xw_XUk3QoLH3i6ihkw_jIzj4a77nQfT_4BOw9FZ4ecvJ2L1Q5XwCy_6Oahw6xbuESg4cQxxh1HNPhTy-cm_APvw28zJhT8f_97zUJg' />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Unknown Content Type Without Extension'>
+    <Box height={'500px'}>
+     <Media source='https://genesisblocks.art/api/tokens/show/1539' />
+    </Box>
+  </Story>
+</Canvas>
+
+### Theming
+
+TODO

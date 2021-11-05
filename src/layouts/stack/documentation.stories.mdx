@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 
 import { Stack, IStackProps } from '.';
 import { Direction, Alignment } from '../../model';
@@ -79,7 +79,7 @@ export const Template = (args) => (
 
 <Canvas>
   <Story name='Wrapped Pills'>
-    <Stack direction={Direction.Horizontal} shouldAddGutters={true} shouldWrapItems={true} contentAlignmentResponsive={Alignment.Start}>
+    <Stack direction={Direction.Horizontal} shouldWrapItems={true} isFullHeight={true}>
       <BackgroundView color='#afefef'>
         <Box width='300px' height='50px' />
       </BackgroundView>
@@ -100,6 +100,25 @@ export const Template = (args) => (
       </BackgroundView>
       <Box isFullWidth={true} />
     </Stack>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Shrink below size'>
+    <Box height='100px'>
+      <Stack direction={Direction.Vertical} isFullHeight={true}>
+        <BackgroundView color='#afefef'>
+          <Box height='50px' />
+        </BackgroundView>
+        <Stack.Item shrinkFactor={1} shouldShrinkBelowContentSize={true}>
+          <BackgroundView color='#f5a5b5'>
+            <Box isScrollableVertically={true}>
+              <Box height='500px' />
+            </Box>
+          </BackgroundView>
+        </Stack.Item>
+      </Stack>
+    </Box>
   </Story>
 </Canvas>
 

@@ -12,10 +12,20 @@ import { resetCss } from './resetCss';
 import 'lazysizes';
 import 'lazysizes/plugins/attrchange/ls.attrchange';
 
+interface IStyledMainViewProps {
+  extraCss?: string;
+}
+
 const StyledMainView = styled.div`
   min-height: 100vh;
   /* NOTE(krishan711): the min-height doesn't propagate to children that have height:100% unless this is here (https://stackoverflow.com/questions/8468066) */
   height: 1px;
+
+  &.fullPage {
+    min-height: 100%;
+  }
+
+  ${(props: IStyledMainViewProps): string => props.extraCss || ''};
 `;
 
 export interface IKibaAppProps extends IMultiAnyChildProps, IHeadRootProviderProps {
