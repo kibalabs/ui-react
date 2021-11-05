@@ -6,19 +6,19 @@ import { flattenChildren, IMultiAnyChildProps, useDeepCompareEffect } from '@kib
 interface IHeadTag {
   type: string;
   attributes: Record<string, string>;
-  content?: string;
+  content: string | null;
   headId: string;
 }
 
 // NOTE(krishan711): can everything that's not title and base be merged?
 interface IHead {
-  base?: IHeadTag,
-  title?: IHeadTag,
-  links?: IHeadTag[],
-  metas?: IHeadTag[],
-  styles?: IHeadTag[],
-  scripts?: IHeadTag[],
-  noscripts?: IHeadTag[],
+  base: IHeadTag | null,
+  title: IHeadTag | null,
+  links: IHeadTag[],
+  metas: IHeadTag[],
+  styles: IHeadTag[],
+  scripts: IHeadTag[],
+  noscripts: IHeadTag[],
 }
 
 const getHeadTag = (element: React.ReactElement, headId: string): IHeadTag => {
@@ -27,7 +27,7 @@ const getHeadTag = (element: React.ReactElement, headId: string): IHeadTag => {
     type: String(element.type),
     attributes: props,
     headId,
-    content: nestedChildren ? String(nestedChildren) : undefined,
+    content: nestedChildren ? String(nestedChildren) : null,
   };
 };
 
@@ -36,8 +36,8 @@ const convertChildrenToHead = (children: React.ReactNode | React.ReactNode[], he
   const titleElement = flattenedChildren.filter((child: React.ReactElement): boolean => child.type === 'title').shift();
   const baseElement = flattenedChildren.filter((child: React.ReactElement): boolean => child.type === 'base').shift();
   const head: IHead = {
-    title: titleElement ? getHeadTag(titleElement, headId) : undefined,
-    base: baseElement ? getHeadTag(baseElement, headId) : undefined,
+    title: titleElement ? getHeadTag(titleElement, headId) : null,
+    base: baseElement ? getHeadTag(baseElement, headId) : null,
     links: flattenedChildren.filter((child: React.ReactElement): boolean => child.type === 'link').map((child: React.ReactElement): IHeadTag => getHeadTag(child, headId)),
     metas: flattenedChildren.filter((child: React.ReactElement): boolean => child.type === 'meta').map((child: React.ReactElement): IHeadTag => getHeadTag(child, headId)),
     styles: flattenedChildren.filter((child: React.ReactElement): boolean => child.type === 'style').map((child: React.ReactElement): IHeadTag => getHeadTag(child, headId)),
@@ -48,10 +48,7 @@ const convertChildrenToHead = (children: React.ReactNode | React.ReactNode[], he
 };
 
 const mergeHeads = (heads: IHead[]): IHead => {
-  if (heads.length === 0) {
-    return {};
-  }
-  const mergedHead: IHead = {};
+  const mergedHead: IHead = {title: null, base: null, links: [], metas: [], styles: [], scripts: [], noscripts: []};
   mergedHead.title = heads.reduce((current: IHeadTag | null, head: IHead): IHeadTag | null => {
     return head.title ?? current;
   }, null);
@@ -119,12 +116,18 @@ export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElem
       return;
     }
     if (mergedHead.title && document.title !== mergedHead.title.content) {
-      const titleElement = document.querySelector('title');
+      let titleElement = document.querySelector('title');
+      if (!titleElement) {
+        titleElement = document.createElement('title');
+      }
       titleElement.setAttribute('ui-react-head', mergedHead.title.headId);
       titleElement.textContent = mergedHead.title.content;
     }
     if (mergedHead.base && document.baseURI !== mergedHead.base.content) {
-      const baseElement = document.querySelector('base');
+      let baseElement = document.querySelector('base');
+      if (!baseElement) {
+        baseElement = document.createElement('base');
+      }
       baseElement.setAttribute('ui-react-head', mergedHead.base.headId);
       baseElement.textContent = mergedHead.base.content;
     }
@@ -149,7 +152,7 @@ export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElem
       document.head.appendChild(tagElement);
     });
     elementsToRemove.forEach((tag: Element): void => {
-      tag.parentNode.removeChild(tag);
+      tag.parentNode?.removeChild(tag);
     });
   }, [setHead, headsRef]);
 
@@ -170,7 +173,7 @@ export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElem
   );
 };
 
-export function useHeadRoot(): IHeadRoot | null {
+export function useHeadRoot(): IHeadRoot {
   const headRoot = React.useContext(HeadRootContext);
   if (!headRoot) {
     throw Error('No headRoot has been set!');
@@ -187,7 +190,7 @@ interface IHeadProps extends IMultiAnyChildProps {
 export const Head = (props: IHeadProps): React.ReactElement | null => {
   const headRoot = useHeadRoot();
   const headId = React.useMemo((): string => props.headId || generateUUID(), [props.headId]);
-  const headRef = React.useRef<IHead>({});
+  const headRef = React.useRef<IHead>({title: null, base: null, links: [], metas: [], styles: [], scripts: [], noscripts: []});
 
   React.useEffect((): (() => void) => {
     headRoot.addHead(headRef.current);
