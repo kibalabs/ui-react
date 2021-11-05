@@ -41,7 +41,6 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
     return true;
   };
 
-  /* eslint-disable react/display-name */
   const renderers: ReactMarkdownTypes.Renderers = {
     root: (rendererProps: RendererProps): React.ReactElement => {
       // TODO(krishan711): what should this check? It cant run the below check cos would fail for markdown like: "**Hello** world"

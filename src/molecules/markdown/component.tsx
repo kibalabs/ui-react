@@ -38,7 +38,6 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
     return true;
   };
 
-  /* eslint-disable react/display-name */
   const renderers: ReactMarkdownTypes.Renderers = {
     // TODO(krishan711): this should use pretty text eventually
     // NOTE(krishan711): full list here: https://github.com/rexxars/react-markdown/blob/main/src/renderers.js
