@@ -74,13 +74,11 @@ const mergeHeads = (heads: IHead[]): IHead => {
   return mergedHead;
 };
 
-interface IHeadRoot {
-  addHead: (head: IHead) => void;
-  removeHead: (head: IHead) => void;
-  refresh: () => void;
+export const createElement = (type: string, headId: string): Element => {
+  const element = document.createElement(type);
+  element.setAttribute('ui-react-head', headId);
+  return element;
 }
-
-export const HeadRootContext = React.createContext<IHeadRoot | null>(null);
 
 export const resolveElementsAndTags = (elements: Element[], tags: IHeadTag[], elementsToRemove: Set<Element>, tagsToAdd: Set<IHeadTag>): void => {
   elements.forEach((element: Element): void => { elementsToRemove.add(element); });
@@ -99,6 +97,14 @@ export const resolveElementsAndTags = (elements: Element[], tags: IHeadTag[], el
   });
 };
 
+interface IHeadRoot {
+  addHead: (head: IHead) => void;
+  removeHead: (head: IHead) => void;
+  refresh: () => void;
+}
+
+export const HeadRootContext = React.createContext<IHeadRoot | null>(null);
+
 export interface IHeadRootProviderProps extends IMultiAnyChildProps {
   setHead?: (head: IHead) => void;
 }
@@ -116,19 +122,17 @@ export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElem
       return;
     }
     if (mergedHead.title && document.title !== mergedHead.title.content) {
-      let titleElement = document.querySelector('title');
+      let titleElement = document.querySelector('title') as Element | undefined;
       if (!titleElement) {
-        titleElement = document.createElement('title');
+        titleElement = createElement('title', mergedHead.title.headId);
       }
-      titleElement.setAttribute('ui-react-head', mergedHead.title.headId);
       titleElement.textContent = mergedHead.title.content;
     }
     if (mergedHead.base && document.baseURI !== mergedHead.base.content) {
-      let baseElement = document.querySelector('base');
+      let baseElement = document.querySelector('base') as Element | undefined;
       if (!baseElement) {
-        baseElement = document.createElement('base');
+        baseElement = createElement('base', mergedHead.base.headId);
       }
-      baseElement.setAttribute('ui-react-head', mergedHead.base.headId);
       baseElement.textContent = mergedHead.base.content;
     }
     const elementsToRemove = new Set<Element>();
@@ -144,8 +148,7 @@ export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElem
     const noscriptElements = Array.from(document.head.querySelectorAll('noscript[ui-react-head]'));
     resolveElementsAndTags(noscriptElements, mergedHead.noscripts, elementsToRemove, tagsToAdd);
     tagsToAdd.forEach((headTag: IHeadTag): void => {
-      const tagElement = document.createElement(headTag.type);
-      tagElement.setAttribute('ui-react-head', headTag.headId);
+      const tagElement = createElement(headTag.type, headTag.headId);
       Object.keys(headTag.attributes).forEach((attributeKey: string): void => {
         tagElement.setAttribute(attributeKey, headTag.attributes[attributeKey]);
       });
