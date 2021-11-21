@@ -3,7 +3,7 @@ import React from 'react';
 import { generateUUID } from '@kibalabs/core';
 import { flattenChildren, IMultiAnyChildProps, useDeepCompareEffect } from '@kibalabs/core-react';
 
-interface IHeadTag {
+export interface IHeadTag {
   type: string;
   attributes: Record<string, string>;
   content: string | null;
@@ -11,7 +11,8 @@ interface IHeadTag {
 }
 
 // NOTE(krishan711): can everything that's not title and base be merged?
-interface IHead {
+export interface IHead {
+  headId: string;
   base: IHeadTag | null,
   title: IHeadTag | null,
   links: IHeadTag[],
@@ -36,6 +37,7 @@ const convertChildrenToHead = (children: React.ReactNode | React.ReactNode[], he
   const titleElement = flattenedChildren.filter((child: React.ReactElement): boolean => child.type === 'title').shift();
   const baseElement = flattenedChildren.filter((child: React.ReactElement): boolean => child.type === 'base').shift();
   const head: IHead = {
+    headId,
     title: titleElement ? getHeadTag(titleElement, headId) : null,
     base: baseElement ? getHeadTag(baseElement, headId) : null,
     links: flattenedChildren.filter((child: React.ReactElement): boolean => child.type === 'link').map((child: React.ReactElement): IHeadTag => getHeadTag(child, headId)),
@@ -48,7 +50,7 @@ const convertChildrenToHead = (children: React.ReactNode | React.ReactNode[], he
 };
 
 const mergeHeads = (heads: IHead[]): IHead => {
-  const mergedHead: IHead = { title: null, base: null, links: [], metas: [], styles: [], scripts: [], noscripts: [] };
+  const mergedHead: IHead = { headId: '', title: null, base: null, links: [], metas: [], styles: [], scripts: [], noscripts: [] };
   mergedHead.title = heads.reduce((current: IHeadTag | null, head: IHead): IHeadTag | null => {
     return head.title ?? current;
   }, null);
@@ -74,9 +76,14 @@ const mergeHeads = (heads: IHead[]): IHead => {
   return mergedHead;
 };
 
-export const createElement = (type: string, headId: string): Element => {
+export const createElement = (type: string, headId: string, attributes?: Record<string, string>): Element => {
   const element = document.createElement(type);
   element.setAttribute('ui-react-head', headId);
+  if (attributes) {
+    Object.keys(attributes).forEach((attributeKey: string): void => {
+      element.setAttribute(attributeKey, attributes[attributeKey]);
+    });
+  }
   return element;
 };
 
@@ -117,7 +124,8 @@ export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElem
     const mergedHead = mergeHeads(headsRef.current);
     if (setHead) {
       setHead(mergedHead);
-    } else if (typeof document === 'undefined') {
+      return;
+    } if (typeof document === 'undefined') {
       console.error('No setHead provided to HeadRootProvider and no document to edit so Heads are being ignored.');
       return;
     }
@@ -148,11 +156,7 @@ export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElem
     const noscriptElements = Array.from(document.head.querySelectorAll('noscript[ui-react-head]'));
     resolveElementsAndTags(noscriptElements, mergedHead.noscripts, elementsToRemove, tagsToAdd);
     tagsToAdd.forEach((headTag: IHeadTag): void => {
-      const tagElement = createElement(headTag.type, headTag.headId);
-      Object.keys(headTag.attributes).forEach((attributeKey: string): void => {
-        tagElement.setAttribute(attributeKey, headTag.attributes[attributeKey]);
-      });
-      document.head.appendChild(tagElement);
+      document.head.appendChild(createElement(headTag.type, headTag.headId, headTag.attributes));
     });
     elementsToRemove.forEach((tag: Element): void => {
       tag.parentNode?.removeChild(tag);
@@ -160,14 +164,19 @@ export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElem
   }, [setHead, headsRef]);
 
   const addHead = React.useCallback((head: IHead): void => {
-    headsRef.current.push(head);
+    const matchingHeads = headsRef.current.filter((currentHead: IHead): boolean => currentHead.headId === head.headId);
+    if (matchingHeads.length > 0) {
+      console.warn('Skipping head with the same headId as another that is already added');
+    } else {
+      headsRef.current.push(head);
+    }
     refresh();
-  }, [headsRef, refresh]);
+  }, [refresh, headsRef]);
 
   const removeHead = React.useCallback((head: IHead): void => {
-    headsRef.current = headsRef.current.filter((currentHead: IHead): boolean => currentHead !== head);
+    headsRef.current = headsRef.current.filter((currentHead: IHead): boolean => currentHead.headId !== head.headId);
     refresh();
-  }, [headsRef, refresh]);
+  }, [refresh, headsRef]);
 
   return (
     <HeadRootContext.Provider value={{ addHead, removeHead, refresh }}>
@@ -193,17 +202,10 @@ interface IHeadProps extends IMultiAnyChildProps {
 export const Head = (props: IHeadProps): React.ReactElement | null => {
   const headRoot = useHeadRoot();
   const headId = React.useMemo((): string => props.headId || generateUUID(), [props.headId]);
-  const headRef = React.useRef<IHead>({ title: null, base: null, links: [], metas: [], styles: [], scripts: [], noscripts: [] });
+  const headRef = React.useRef<IHead>({ headId, title: null, base: null, links: [], metas: [], styles: [], scripts: [], noscripts: [] });
+  const isRendered = React.useRef<boolean>(false);
 
-  React.useEffect((): (() => void) => {
-    headRoot.addHead(headRef.current);
-    const head = headRef.current;
-    return ((): void => {
-      headRoot.removeHead(head);
-    });
-  }, [headId, headRef, headRoot]);
-
-  useDeepCompareEffect((): void => {
+  const updateHead = React.useCallback((): void => {
     const newHead = convertChildrenToHead(props.children, headId);
     headRef.current.title = newHead.title;
     headRef.current.base = newHead.base;
@@ -213,7 +215,29 @@ export const Head = (props: IHeadProps): React.ReactElement | null => {
     headRef.current.scripts = newHead.scripts;
     headRef.current.noscripts = newHead.noscripts;
     headRoot.refresh();
-  }, [props.children, headId, headRoot]);
+  }, [props.children, headId, headRef, headRoot]);
+
+  useDeepCompareEffect((): void => {
+    updateHead();
+  }, [updateHead]);
+
+  if (!isRendered.current) {
+    headRoot.addHead(headRef.current);
+    isRendered.current = true;
+    updateHead();
+  }
+
+  React.useEffect((): (() => void) => {
+    const head = headRef.current;
+    if (!isRendered.current) {
+      headRoot.addHead(head);
+      isRendered.current = true;
+    }
+    return ((): void => {
+      headRoot.removeHead(head);
+      isRendered.current = false;
+    });
+  }, [headRef, headRoot]);
 
   return null;
 };
