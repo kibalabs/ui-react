@@ -5,10 +5,10 @@ import { getIsRunningOnBrowser, IMultiAnyChildProps, useInitialization } from '@
 import styled from 'styled-components';
 
 import { ITheme, ThemeProvider } from '../theming';
+import { BackgroundView, IBackgroundConfig } from '../wrappers';
 import { GlobalCss } from './globalCss';
 import { Head, HeadRootProvider, IHeadRootProviderProps } from './headContext';
 import { resetCss } from './resetCss';
-import { IBackgroundConfig, BackgroundView } from '../wrappers';
 
 import 'lazysizes';
 import 'lazysizes/plugins/attrchange/ls.attrchange';
