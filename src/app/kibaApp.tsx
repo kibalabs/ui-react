@@ -8,6 +8,7 @@ import { ITheme, ThemeProvider } from '../theming';
 import { GlobalCss } from './globalCss';
 import { Head, HeadRootProvider, IHeadRootProviderProps } from './headContext';
 import { resetCss } from './resetCss';
+import { IBackgroundConfig, BackgroundView } from '../wrappers';
 
 import 'lazysizes';
 import 'lazysizes/plugins/attrchange/ls.attrchange';
@@ -18,10 +19,10 @@ interface IStyledMainViewProps {
 
 const StyledMainView = styled.div`
   min-height: 100vh;
-  /* NOTE(krishan711): the min-height doesn't propagate to children that have height:100% unless this is here (https://stackoverflow.com/questions/8468066) */
-  height: 1px;
 
   &.fullPage {
+    /* NOTE(krishan711): the min-height doesn't propagate to children that have height:100% unless this is here (https://stackoverflow.com/questions/8468066) */
+    height: 1px;
     min-height: 100%;
   }
 
@@ -34,6 +35,7 @@ export interface IKibaAppProps extends IMultiAnyChildProps, IHeadRootProviderPro
   isFullPageApp?: boolean;
   extraGlobalCss?: string;
   extraCss?: string;
+  background?: IBackgroundConfig;
 }
 
 export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
@@ -65,12 +67,14 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
             </React.Fragment>
           ))}
         </Head>
-        <StyledMainView
-          className={getClassName(isRunningOnBrowser ? 'js' : 'no-js', props.isFullPageApp && 'fullPage')}
-          extraCss={props.extraCss}
-        >
-          {props.children}
-        </StyledMainView>
+        <BackgroundView { ...props.background }>
+          <StyledMainView
+            className={getClassName(isRunningOnBrowser ? 'js' : 'no-js', props.isFullPageApp && 'fullPage')}
+            extraCss={props.extraCss}
+          >
+            {props.children}
+          </StyledMainView>
+        </BackgroundView>
       </HeadRootProvider>
     </ThemeProvider>
   );
