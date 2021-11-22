@@ -15,8 +15,8 @@ export const buildColors = (base?: Partial<IColorGuide>): IColorGuide => {
   const brandPrimary = base?.brandPrimary || '#333333';
   const brandSecondary = base?.brandSecondary || darken(0.2, brandPrimary);
   const background = base?.background || '#f5f5f5';
-  const text = base?.text || getLuminance(background) > 0.5 ? '#222222' : '#eeeeee';
-  const textOnBrand = base?.textOnBrand || getLuminance(brandPrimary) > 0.5 ? '#222222' : '#eeeeee';
+  const text = base?.text || (getLuminance(background) > 0.5 ? '#222222' : '#eeeeee');
+  const textOnBrand = base?.textOnBrand || (getLuminance(brandPrimary) > 0.5 ? '#222222' : '#eeeeee');
   const disabled = base?.disabled || '#777777';
   const disabledText = base?.disabledText || '#444444';
   const error = base?.error || '#ff0033';
