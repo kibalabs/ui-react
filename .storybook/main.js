@@ -9,4 +9,13 @@ module.exports = {
   typescript: {
     check: false,
   },
+  core: {
+    builder: 'webpack5',
+  },
+  webpackFinal: async (config, { configType }) => {
+    config.resolve = config.resolve || {};
+    config.resolve.fallback = config.resolve.fallback || {};
+    config.resolve.fallback.fs = false;
+    return config;
+  },
 };

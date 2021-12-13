@@ -1,6 +1,4 @@
-import { merge, mergePartial, RecursivePartial } from '@kibalabs/core';
-
-import { camelCaseToKebabCase } from './stringUtil';
+import { camelCaseToKebabCase, merge, mergePartial, RecursivePartial } from '@kibalabs/core';
 
 export type CssTheme = {
   [key: string]: Readonly<string>

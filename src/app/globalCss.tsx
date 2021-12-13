@@ -38,6 +38,11 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
       overscroll-behavior: none;
     }
 
+    // NOTE(krishan711): for ios only disable all body scrolling
+    _::-webkit-full-page-media, _:future, :root body {
+      overflow: hidden;
+    }
+
     #root {
       width: 100%;
       height: 100%;
@@ -45,7 +50,7 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
   ` : '')};
 
   /* NOTE(krishan711): the :not(.button) needs to be specified as Buttons can act as links and these styles will be used on hover */
-  /* since this overall ":hover" is more specific than the generic styles for the default button (with no modifier) */
+  /* since this ":hover" is more specific (when hovering) than the generic styles for the default button (with no modifier) */
   a:not(.Button):not(.LinkBase):not(.IconButton) {
     ${(props: IGlobalCssProps): string => themeToCss(props.theme.links.default.normal.default.text)};
     :hover {

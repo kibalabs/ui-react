@@ -8,8 +8,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [MINOR] Added `background` prop to `KibaApp`
 
 ### Changed
+- [MINOR] Fixed colors theme creation to calculate text and textOnBrand correctly when background is dark
+- [MINOR] Fixed `InputWrapper` to set placeholder on correct elements
+
+### Removed
+
+## [0.9.5] - 2021-11-21
+
+### Added
+- [MINOR] Added `HeadProvider` and `Head` to replace Helmet in apps
+
+### Changed
+- [MINOR] Updated `Linkbase` to work with core-routing
+- [MINOR] Updated `Link` to work with core-routing
+- [MINOR] Updated `Button` to work with core-routing
+- [MINOR] Updated `IconButton` to work with core-routing
+- [MINOR] Updated `KibaApp` to wrap children with a `HeadProvider`
+- [MINOR] Updated `KibaApp` to load theme fonts
+
+## [0.9.4] - 2021-10-11
+
+### Changed
+- [MINOR] update `linkbase` to render `<a>` when href is set else render `<button>`
+- [MINOR] update `KibaApp` to disable all `body` scrolling on ios if `isFullPageApp`
 - [MINOR] update `Media` to check Content-Type of links without extension
 - [MINOR] update `Link` to not have a default value for shouldOpenSameTab
 
