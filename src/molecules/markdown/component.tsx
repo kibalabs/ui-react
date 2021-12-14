@@ -2,8 +2,8 @@ import React from 'react';
 
 import { deepCompare, getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
+import { Element, ElementContent, Root, RootContent } from 'hast';
 import ReactMarkdown from 'react-markdown';
-import { Element, Root, RootContent, ElementContent } from 'hast';
 
 import { Link, PrettyText } from '../../atoms';
 import { Box, Media, TextAlignment } from '../../particles';
