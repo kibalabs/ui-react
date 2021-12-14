@@ -38,7 +38,7 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
     return true;
   };
 
-  // NOTE(krishan711): full list here: https://github.com/remarkjs/react-markdown/#appendix-b-components
+  // NOTE(krishan711): full list: https://github.com/remarkjs/react-markdown/#appendix-b-components
   const components: ReactMarkdownTypes.Renderers = {
     img: (rendererProps: { src: string, alt: string } & RendererProps): React.ReactElement => {
       return <Media isCenteredHorizontally={true} source={rendererProps.src} alternativeText={rendererProps.alt} />;
