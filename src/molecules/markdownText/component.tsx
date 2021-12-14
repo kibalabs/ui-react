@@ -51,16 +51,8 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
       if (React.Children.count(rendererProps.children) > 1) {
         console.error(`Link in markdown has more than one child: ${rendererProps.children}`);
       }
-      // @ts-ignore
-      return <Link target={rendererProps.href} text={String(rendererProps.children[0].props.children)} />;
+      return <Link target={rendererProps.href} text={String(React.Children.toArray(rendererProps.children)[0])} />;
     },
-    // linkReference: (rendererProps: {href: string} & RendererProps): React.ReactElement => {
-    //   if (React.Children.count(rendererProps.children) > 1) {
-    //     console.error(`Link in markdown has more than one child: ${rendererProps.children}`);
-    //   }
-    //   // @ts-ignore
-    //   return <Link variant='inherit' target={rendererProps.href} text={String(rendererProps.children[0].props.children)} />;
-    // },
     em: (rendererProps: RendererProps): React.ReactElement => {
       return <em>{rendererProps.children}</em>;
     },
