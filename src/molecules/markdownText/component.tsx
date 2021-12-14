@@ -2,9 +2,8 @@ import React from 'react';
 
 import { deepCompare, getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
-import { Parent } from 'mdast';
 import ReactMarkdown from 'react-markdown';
-import { Element, Root } from 'react-markdown/lib/rehype-filter';
+import { Element, Root, RootContent, ElementContent } from 'hast';
 
 import { Link, PrettyText } from '../../atoms';
 import { TextAlignment, TextTag } from '../../particles';
@@ -29,7 +28,7 @@ interface RendererProps extends IMultiAnyChildProps {
 export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactElement => {
   const shouldAllowElement = (element: Element, index: number, parent: Element | Root): boolean => {
     if (element.tagName === 'p') {
-      if ((parent as unknown as Parent).children.length === 1) {
+      if (parent.children.filter((child: RootContent | ElementContent): boolean => child.type !== 'text' || child.value !== '\n').length === 1) {
         return false;
       }
       if (element.children.length === 0) {
