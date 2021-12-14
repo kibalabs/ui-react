@@ -16,7 +16,7 @@ export const Template = (args) => (
 );
 
 <Canvas withToolbar={true} withSource={'none'}>
-  <Story name='Default' args={{source: 'this is an **example**\n\n![cool image](https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg)'}}>
+  <Story name='Default' args={{source: 'this is an **example**\n\nIt\'s got [links](https://www.kibalabs.com)\n\n![cool image](https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg)'}}>
     {Template.bind({})}
   </Story>
 </Canvas>
@@ -34,6 +34,18 @@ export const Template = (args) => (
 <Canvas>
   <Story name='Markdown with just strong'>
     <Markdown source={'**Lorem ipsum dolor sit amet, consectetur adipiscing elit**'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Markdown with titles'>
+    <Markdown source={'# H1 \n\n ## H2 \n\n ### H3 \n\n #### H4 \n\n ##### H5 \n\n ###### H6'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Markdown with bullet points'>
+    <Markdown source={'Why UI-React is awesome:\n\n* it just is\n* i told you so'} />
   </Story>
 </Canvas>
 

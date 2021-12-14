@@ -2,10 +2,10 @@ import React from 'react';
 
 import { deepCompare, getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
-import { Content as MarkdownAST, Parent } from 'mdast';
+import { Element, ElementContent, Root, RootContent } from 'hast';
 import ReactMarkdown from 'react-markdown';
 
-import { PrettyText } from '../../atoms';
+import { Link, PrettyText } from '../../atoms';
 import { Box, Media, TextAlignment } from '../../particles';
 import { ReactMarkdownTypes } from '../reactMarkdown';
 
@@ -23,49 +23,58 @@ interface RendererProps extends IMultiAnyChildProps {
 }
 
 export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement => {
-  const shouldAllowNode = (node: MarkdownAST, index: number, parent: ReactMarkdown.NodeType): boolean => {
-    if (node.type === 'paragraph') {
-      if ((parent as unknown as Parent).children.length === 1) {
+  const shouldAllowElement = (element: Element, index: number, parent: Element | Root): boolean => {
+    if (element.tagName === 'p') {
+      if (parent.children.filter((child: RootContent | ElementContent): boolean => child.type !== 'text' || child.value !== '\n').length === 1) {
         return false;
       }
-      if (node.children.length === 0) {
+      if (element.children.length === 0) {
         return false;
       }
-      if (node.children.length === 1 && node.children[0].type !== 'text') {
+      if (element.children.length === 1 && element.children[0].type !== 'text') {
         return false;
       }
     }
     return true;
   };
 
-  const renderers: ReactMarkdownTypes.Renderers = {
-    // TODO(krishan711): this should use pretty text eventually
-    // NOTE(krishan711): full list here: https://github.com/rexxars/react-markdown/blob/main/src/renderers.js
-    root: (rendererProps: RendererProps): React.ReactElement => {
-      return (
-        <Box
-          id={props.id}
-          variant={props.rootBoxVariant}
-          className={rendererProps.className}
-        >
-          {rendererProps.children}
-        </Box>
-      );
-    },
-    image: (rendererProps: { src: string, alt: string } & RendererProps): React.ReactElement => {
+  // NOTE(krishan711): full list: https://github.com/remarkjs/react-markdown/#appendix-b-components
+  const components: ReactMarkdownTypes.Renderers = {
+    img: (rendererProps: { src: string, alt: string } & RendererProps): React.ReactElement => {
       return <Media isCenteredHorizontally={true} source={rendererProps.src} alternativeText={rendererProps.alt} />;
     },
-    paragraph: (rendererProps: RendererProps): React.ReactElement => {
+    p: (rendererProps: RendererProps): React.ReactElement => {
       const childrenKeys = React.Children.map(rendererProps.children, (child: React.ReactNode): string | null => (
         (child && typeof child === 'object' && 'key' in child) ? String(child.key).split('-')[0] : null
       )) || [];
       const isCaption = childrenKeys.indexOf('image') > -1;
       return <PrettyText variant='paragraph' alignment={isCaption ? TextAlignment.Center : TextAlignment.Left}>{rendererProps.children}</PrettyText>;
     },
-    heading: (rendererProps: { level: number } & RendererProps): React.ReactElement => {
+    h1: (rendererProps: { level: number } & RendererProps): React.ReactElement => {
       return <PrettyText variant={`header${rendererProps.level}`} alignment={TextAlignment.Left}>{rendererProps.children}</PrettyText>;
     },
-    emphasis: (rendererProps: RendererProps): React.ReactElement => {
+    h2: (rendererProps: { level: number } & RendererProps): React.ReactElement => {
+      return <PrettyText variant={`header${rendererProps.level}`} alignment={TextAlignment.Left}>{rendererProps.children}</PrettyText>;
+    },
+    h3: (rendererProps: { level: number } & RendererProps): React.ReactElement => {
+      return <PrettyText variant={`header${rendererProps.level}`} alignment={TextAlignment.Left}>{rendererProps.children}</PrettyText>;
+    },
+    h4: (rendererProps: { level: number } & RendererProps): React.ReactElement => {
+      return <PrettyText variant={`header${rendererProps.level}`} alignment={TextAlignment.Left}>{rendererProps.children}</PrettyText>;
+    },
+    h5: (rendererProps: { level: number } & RendererProps): React.ReactElement => {
+      return <PrettyText variant={`header${rendererProps.level}`} alignment={TextAlignment.Left}>{rendererProps.children}</PrettyText>;
+    },
+    h6: (rendererProps: { level: number } & RendererProps): React.ReactElement => {
+      return <PrettyText variant={`header${rendererProps.level}`} alignment={TextAlignment.Left}>{rendererProps.children}</PrettyText>;
+    },
+    a: (rendererProps: {href: string} & RendererProps): React.ReactElement => {
+      if (React.Children.count(rendererProps.children) > 1) {
+        console.error(`Link in markdown has more than one child: ${rendererProps.children}`);
+      }
+      return <Link target={rendererProps.href} text={String(React.Children.toArray(rendererProps.children)[0])} />;
+    },
+    em: (rendererProps: RendererProps): React.ReactElement => {
       if (rendererProps.parentChildCount === 1) {
         return <PrettyText variant='paragraph'><em>{rendererProps.children}</em></PrettyText>;
       }
@@ -78,20 +87,22 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
       return <strong>{rendererProps.children}</strong>;
     },
   };
-  /* eslint-enable react/display-name */
 
   return (
-    <ReactMarkdown
+    <Box
       id={props.id}
       className={getClassName(Markdown.displayName, props.className)}
-      allowNode={shouldAllowNode}
-      unwrapDisallowed={true}
-      // @ts-ignore
-      renderers={renderers}
-      includeNodeIndex={true}
+      variant={props.rootBoxVariant}
     >
-      {props.source}
-    </ReactMarkdown>
+      <ReactMarkdown
+        allowElement={shouldAllowElement}
+        unwrapDisallowed={true}
+        components={components}
+        includeElementIndex={true}
+      >
+        {props.source}
+      </ReactMarkdown>
+    </Box>
   );
 }, deepCompare);
 

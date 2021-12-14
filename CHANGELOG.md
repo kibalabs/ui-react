@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Changed
 - [MINOR] Fixed colors theme creation to calculate text and textOnBrand correctly when background is dark
 - [MINOR] Fixed `InputWrapper` to set placeholder on correct elements
+- [MINOR] Updated to react-markdown v7
 
 ### Removed
 
