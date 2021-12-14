@@ -16,7 +16,7 @@ export const Template = (args) => (
 );
 
 <Canvas withToolbar={true} withSource={'none'}>
-  <Story name='Default' args={{source: 'this is an **example**\n\n![cool image](https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg)'}}>
+  <Story name='Default' args={{source: 'this is an **example**\n\nIt\'s got [links](https://www.kibalabs.com)\n\n![cool image](https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg)'}}>
     {Template.bind({})}
   </Story>
 </Canvas>

@@ -5,7 +5,7 @@ import { IMultiAnyChildProps } from '@kibalabs/core-react';
 import ReactMarkdown from 'react-markdown';
 import { Element, Root, RootContent, ElementContent } from 'hast';
 
-import { PrettyText } from '../../atoms';
+import { Link, PrettyText } from '../../atoms';
 import { Box, Media, TextAlignment } from '../../particles';
 import { ReactMarkdownTypes } from '../reactMarkdown';
 
@@ -67,6 +67,12 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
     },
     h6: (rendererProps: { level: number } & RendererProps): React.ReactElement => {
       return <PrettyText variant={`header${rendererProps.level}`} alignment={TextAlignment.Left}>{rendererProps.children}</PrettyText>;
+    },
+    a: (rendererProps: {href: string} & RendererProps): React.ReactElement => {
+      if (React.Children.count(rendererProps.children) > 1) {
+        console.error(`Link in markdown has more than one child: ${rendererProps.children}`);
+      }
+      return <Link target={rendererProps.href} text={String(React.Children.toArray(rendererProps.children)[0])} />;
     },
     em: (rendererProps: RendererProps): React.ReactElement => {
       if (rendererProps.parentChildCount === 1) {
