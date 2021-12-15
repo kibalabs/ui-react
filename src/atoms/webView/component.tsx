@@ -151,7 +151,6 @@ WebView.displayName = 'WebView';
 WebView.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,
-  shouldOpenSameTab: false,
   shouldShowLoadingSpinner: true,
   title: 'Embedded View',
   permissions: [],
