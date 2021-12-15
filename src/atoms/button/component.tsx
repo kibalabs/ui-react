@@ -96,7 +96,8 @@ export const Button = (props: IButtonProps): React.ReactElement => {
   }
 
   const theme = useBuiltTheme('buttons', props.variant, props.theme);
-  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab == null && props.target && (props.target.startsWith('#') || props.target.startsWith('/')));
+  const isTargetWithinApp = props.target.startsWith('#') || props.target.startsWith('/');
+  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab == null && props.target && isTargetWithinApp);
   return (
     // @ts-ignore: as prop doesn't match type required
     <StyledButton
@@ -110,7 +111,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       rel={props.target && 'noopener'}
       tabIndex={props.tabIndex || 0}
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
-      as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab ? CoreLink : 'a') : undefined}
+      as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
     >
       { !props.isLoading && props.iconLeft && (
         <React.Fragment>
