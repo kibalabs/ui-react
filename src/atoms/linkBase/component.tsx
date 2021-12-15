@@ -84,8 +84,8 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
   };
 
   const theme = useBuiltTheme('linkBases', props.variant, props.theme);
-  const isTargetWithinApp = props.target.startsWith('#') || props.target.startsWith('/');
-  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab == null && props.target && isTargetWithinApp);
+  const isTargetWithinApp = props.target && (props.target.startsWith('#') || props.target.startsWith('/'));
+  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
   return (
     // @ts-ignore: as prop doesn't match type required
     <StyledLinkBase
