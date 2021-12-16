@@ -10,7 +10,7 @@ import { IButtonTheme } from './theme';
 
 interface IStyledButtonProps {
   theme: IButtonTheme;
-  isLoading: boolean;
+  $isLoading: boolean;
 }
 
 const StyledButton = styled.button<IStyledButtonProps>`
@@ -21,7 +21,7 @@ const StyledButton = styled.button<IStyledButtonProps>`
     ${(props: IStyledButtonProps): string => themeToCss(props.theme.normal.default.text)};
     ${(props: IStyledButtonProps): string => themeToCss(props.theme.normal.default.background)};
   }
-  cursor: ${(props: IStyledButtonProps): string => (props.isLoading ? 'default' : 'pointer')};
+  cursor: ${(props: IStyledButtonProps): string => (props.$isLoading ? 'default' : 'pointer')};
   outline: none;
   display: flex;
   flex-direction: row;
@@ -105,7 +105,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', !props.isEnabled && 'disabled')}
       theme={theme}
       onClick={onClicked}
-      isLoading={props.isLoading}
+      $isLoading={props.isLoading}
       disabled={!props.isEnabled}
       href={props.target}
       rel={props.target && 'noopener'}
