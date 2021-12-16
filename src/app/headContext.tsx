@@ -76,7 +76,7 @@ const mergeHeads = (heads: IHead[]): IHead => {
   return mergedHead;
 };
 
-export const createElement = (type: string, headId: string, attributes?: Record<string, string>): Element => {
+const createElement = (type: string, headId: string, attributes?: Record<string, string>): Element => {
   const element = document.createElement(type);
   element.setAttribute('ui-react-head', headId);
   if (attributes) {
@@ -87,7 +87,7 @@ export const createElement = (type: string, headId: string, attributes?: Record<
   return element;
 };
 
-export const resolveElementsAndTags = (elements: Element[], tags: IHeadTag[], elementsToRemove: Set<Element>, tagsToAdd: Set<IHeadTag>): void => {
+const resolveElementsAndTags = (elements: Element[], tags: IHeadTag[], elementsToRemove: Set<Element>, tagsToAdd: Set<IHeadTag>): void => {
   elements.forEach((element: Element): void => { elementsToRemove.add(element); });
   tags.forEach((tag: IHeadTag): void => {
     tagsToAdd.add(tag);
@@ -103,6 +103,41 @@ export const resolveElementsAndTags = (elements: Element[], tags: IHeadTag[], el
     });
   });
 };
+
+export const renderHead = (head: IHead, document: Document): void => {
+  if (head.title && document.title !== head.title.content) {
+    let titleElement = document.querySelector('title') as Element | undefined;
+    if (!titleElement) {
+      titleElement = createElement('title', head.title.headId);
+    }
+    titleElement.textContent = head.title.content;
+  }
+  if (head.base && document.baseURI !== head.base.content) {
+    let baseElement = document.querySelector('base') as Element | undefined;
+    if (!baseElement) {
+      baseElement = createElement('base', head.base.headId);
+    }
+    baseElement.textContent = head.base.content;
+  }
+  const elementsToRemove = new Set<Element>();
+  const tagsToAdd = new Set<IHeadTag>();
+  const linkElements = Array.from(document.head.querySelectorAll('link[ui-react-head]'));
+  resolveElementsAndTags(linkElements, head.links, elementsToRemove, tagsToAdd);
+  const metaElements = Array.from(document.head.querySelectorAll('meta[ui-react-head]'));
+  resolveElementsAndTags(metaElements, head.metas, elementsToRemove, tagsToAdd);
+  const styleElements = Array.from(document.head.querySelectorAll('style[ui-react-head]'));
+  resolveElementsAndTags(styleElements, head.styles, elementsToRemove, tagsToAdd);
+  const scriptElements = Array.from(document.head.querySelectorAll('script[ui-react-head]'));
+  resolveElementsAndTags(scriptElements, head.scripts, elementsToRemove, tagsToAdd);
+  const noscriptElements = Array.from(document.head.querySelectorAll('noscript[ui-react-head]'));
+  resolveElementsAndTags(noscriptElements, head.noscripts, elementsToRemove, tagsToAdd);
+  tagsToAdd.forEach((headTag: IHeadTag): void => {
+    document.head.appendChild(createElement(headTag.type, headTag.headId, headTag.attributes));
+  });
+  elementsToRemove.forEach((tag: Element): void => {
+    tag.parentNode?.removeChild(tag);
+  });
+}
 
 interface IHeadRoot {
   addHead: (head: IHead) => void;
@@ -129,38 +164,7 @@ export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElem
       console.error('No setHead provided to HeadRootProvider and no document to edit so Heads are being ignored.');
       return;
     }
-    if (mergedHead.title && document.title !== mergedHead.title.content) {
-      let titleElement = document.querySelector('title') as Element | undefined;
-      if (!titleElement) {
-        titleElement = createElement('title', mergedHead.title.headId);
-      }
-      titleElement.textContent = mergedHead.title.content;
-    }
-    if (mergedHead.base && document.baseURI !== mergedHead.base.content) {
-      let baseElement = document.querySelector('base') as Element | undefined;
-      if (!baseElement) {
-        baseElement = createElement('base', mergedHead.base.headId);
-      }
-      baseElement.textContent = mergedHead.base.content;
-    }
-    const elementsToRemove = new Set<Element>();
-    const tagsToAdd = new Set<IHeadTag>();
-    const linkElements = Array.from(document.head.querySelectorAll('link[ui-react-head]'));
-    resolveElementsAndTags(linkElements, mergedHead.links, elementsToRemove, tagsToAdd);
-    const metaElements = Array.from(document.head.querySelectorAll('meta[ui-react-head]'));
-    resolveElementsAndTags(metaElements, mergedHead.metas, elementsToRemove, tagsToAdd);
-    const styleElements = Array.from(document.head.querySelectorAll('style[ui-react-head]'));
-    resolveElementsAndTags(styleElements, mergedHead.styles, elementsToRemove, tagsToAdd);
-    const scriptElements = Array.from(document.head.querySelectorAll('script[ui-react-head]'));
-    resolveElementsAndTags(scriptElements, mergedHead.scripts, elementsToRemove, tagsToAdd);
-    const noscriptElements = Array.from(document.head.querySelectorAll('noscript[ui-react-head]'));
-    resolveElementsAndTags(noscriptElements, mergedHead.noscripts, elementsToRemove, tagsToAdd);
-    tagsToAdd.forEach((headTag: IHeadTag): void => {
-      document.head.appendChild(createElement(headTag.type, headTag.headId, headTag.attributes));
-    });
-    elementsToRemove.forEach((tag: Element): void => {
-      tag.parentNode?.removeChild(tag);
-    });
+    renderHead(mergedHead, document);
   }, [setHead, headsRef]);
 
   const addHead = React.useCallback((head: IHead): void => {
