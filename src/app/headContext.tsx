@@ -137,7 +137,7 @@ export const renderHead = (head: IHead, document: Document): void => {
   elementsToRemove.forEach((tag: Element): void => {
     tag.parentNode?.removeChild(tag);
   });
-}
+};
 
 interface IHeadRoot {
   addHead: (head: IHead) => void;
