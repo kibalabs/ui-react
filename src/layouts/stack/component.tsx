@@ -49,21 +49,21 @@ class StackItem extends React.Component<IStackItemProps> {
 }
 
 interface IStyledStackProps {
-  theme: IDimensionGuide;
-  isFullWidth: boolean;
-  isFullHeight: boolean;
+  $theme: IDimensionGuide;
+  $isFullWidth: boolean;
+  $isFullHeight: boolean;
   $direction: ResponsiveField<Direction>;
-  childAlignment: ResponsiveField<Alignment>;
-  contentAlignment: ResponsiveField<Alignment>;
+  $childAlignment: ResponsiveField<Alignment>;
+  $contentAlignment: ResponsiveField<Alignment>;
 }
 
 const StyledStack = styled.div<IStyledStackProps>`
   display: flex;
-  width: ${(props: IStyledStackProps): string => (props.isFullWidth ? '100%' : 'auto')};
-  height: ${(props: IStyledStackProps): string => (props.isFullHeight ? '100%' : 'auto')};
-  ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$direction, props.theme, getDirectionCss)};
-  ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.childAlignment, props.theme, getChildAlignmentCss)};
-  ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.contentAlignment, props.theme, getContentAlignmentCss)};
+  width: ${(props: IStyledStackProps): string => (props.$isFullWidth ? '100%' : 'auto')};
+  height: ${(props: IStyledStackProps): string => (props.$isFullHeight ? '100%' : 'auto')};
+  ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$direction, props.$theme, getDirectionCss)};
+  ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$childAlignment, props.$theme, getChildAlignmentCss)};
+  ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$contentAlignment, props.$theme, getContentAlignmentCss)};
 
   &.scrollableVertically {
     overflow-y: auto;
@@ -76,7 +76,7 @@ const StyledStack = styled.div<IStyledStackProps>`
   &.wrapItems {
     flex-wrap: wrap;
     /* NOTE(krishan711): this only works for Chrome>84 and similar. It does not work for IE or safari: https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap */
-    row-gap: ${(props: IStyledStackProps): string => props.theme.gutter}
+    row-gap: ${(props: IStyledStackProps): string => props.$theme.gutter}
   }
 `;
 
@@ -119,12 +119,12 @@ export const Stack = (props: IStackProps): React.ReactElement => {
       <StyledStack
         id={props.id}
         className={getClassName(Stack.displayName, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally', shouldWrapItems && 'wrapItems')}
-        theme={theme}
+        $theme={theme}
         $direction={{ base: props.direction, ...props.directionResponsive }}
-        childAlignment={{ base: props.childAlignment, ...props.childAlignmentResponsive }}
-        contentAlignment={{ base: props.contentAlignment, ...props.contentAlignmentResponsive }}
-        isFullWidth={props.isFullWidth}
-        isFullHeight={props.isFullHeight}
+        $childAlignment={{ base: props.childAlignment, ...props.childAlignmentResponsive }}
+        $contentAlignment={{ base: props.contentAlignment, ...props.contentAlignmentResponsive }}
+        $isFullWidth={props.isFullWidth}
+        $isFullHeight={props.isFullHeight}
       >
         { children.map((child: React.ReactElement, index: number): React.ReactElement<IStackItemProps> => (
           <React.Fragment key={index}>

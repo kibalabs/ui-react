@@ -16,7 +16,7 @@ export interface ITabBarTheme {
 
 interface IStyledTabBarProps {
   theme: ITabBarTheme;
-  contentAlignment: ResponsiveField<Alignment>;
+  $contentAlignment: ResponsiveField<Alignment>;
 }
 
 const getContentAlignmentCss: CssConverter<Alignment> = (field: Alignment): string => {
@@ -28,7 +28,7 @@ const StyledTabBar = styled.div<IStyledTabBarProps>`
   flex-direction: row;
   max-width: 100%;
   overflow: auto;
-  ${(props: IStyledTabBarProps): string => fieldToResponsiveCss(props.contentAlignment, useDimensions(), getContentAlignmentCss)};
+  ${(props: IStyledTabBarProps): string => fieldToResponsiveCss(props.$contentAlignment, useDimensions(), getContentAlignmentCss)};
 
   &.fullWidth {
     width: 100%;
@@ -66,7 +66,7 @@ export const TabBar = (props: ITabBarProps): React.ReactElement => {
     <StyledTabBar
       id={props.id}
       className={getClassName(TabBar.displayName, props.className, props.isFullWidth && 'fullWidth')}
-      contentAlignment={{ base: props.contentAlignment, ...props.contentAlignmentResponsive }}
+      $contentAlignment={{ base: props.contentAlignment, ...props.contentAlignmentResponsive }}
     >
       { React.Children.map(props.children, (child: OptionalProppedElement<ITabBarItemInnerProps>, index: number): React.ReactElement | null => {
         if (!child) {

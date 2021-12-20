@@ -9,12 +9,12 @@ import { IIconProps, PaddingSize, Spacing } from '../../particles';
 import { IPillTheme } from './theme';
 
 interface IStyledPillProps {
-  theme: IPillTheme;
+  $theme: IPillTheme;
 }
 
 const StyledPill = styled.div<IStyledPillProps>`
-  ${(props: IStyledPillProps): string => themeToCss(props.theme.normal.default.text)};
-  ${(props: IStyledPillProps): string => themeToCss(props.theme.normal.default.background)};
+  ${(props: IStyledPillProps): string => themeToCss(props.$theme.normal.default.text)};
+  ${(props: IStyledPillProps): string => themeToCss(props.$theme.normal.default.background)};
   outline: none;
   display: inline-flex;
   flex-direction: row;
@@ -40,7 +40,7 @@ export const Pill = (props: IPillProps): React.ReactElement => {
     <StyledPill
       id={props.id}
       className={getClassName(Pill.displayName, props.className, props.isFullWidth && 'fullWidth')}
-      theme={theme}
+      $theme={theme}
     >
       { props.iconLeft && (
         <React.Fragment>

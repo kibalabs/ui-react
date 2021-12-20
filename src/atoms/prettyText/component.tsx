@@ -11,20 +11,20 @@ import { themeToCss } from '../../util';
 import { IPrettyTextTheme } from './theme';
 
 interface IStyledPrettyTextProps {
-  theme: IPrettyTextTheme;
-  alignment?: TextAlignment;
+  $theme: IPrettyTextTheme;
+  $alignment?: TextAlignment;
 }
 
 const StyledPrettyText = styled.span<IStyledPrettyTextProps>`
-  ${(props: IStyledPrettyTextProps): string => themeToCss(props.theme.normal.default.text)};
-  ${(props: IStyledPrettyTextProps): string => (props.alignment ? `text-align: ${props.alignment}` : '')};
+  ${(props: IStyledPrettyTextProps): string => themeToCss(props.$theme.normal.default.text)};
+  ${(props: IStyledPrettyTextProps): string => (props.$alignment ? `text-align: ${props.$alignment}` : '')};
   & > em {
     display: inline-block;
-    ${(props: IStyledPrettyTextProps): string => themeToCss(props.theme.normal.emphasis?.text)};
+    ${(props: IStyledPrettyTextProps): string => themeToCss(props.$theme.normal.emphasis?.text)};
   }
   & > strong {
     display: inline-block;
-    ${(props: IStyledPrettyTextProps): string => themeToCss(props.theme.normal.strong?.text)};
+    ${(props: IStyledPrettyTextProps): string => themeToCss(props.$theme.normal.strong?.text)};
   }
 `;
 
@@ -39,8 +39,8 @@ export const PrettyText = (props: IPrettyTextProps): React.ReactElement => {
     <StyledPrettyText
       id={props.id}
       className={getClassName(PrettyText.displayName, props.className)}
-      theme={theme}
-      alignment={props.alignment}
+      $theme={theme}
+      $alignment={props.alignment}
       as={props.tag || getTextTag(props.variant)}
     >
       { props.children }

@@ -10,13 +10,13 @@ import { themeToCss } from '../../util';
 import { IListItemTheme } from './theme';
 
 interface IStyledListItemProps {
-  theme: IListItemTheme;
-  isClickable: boolean;
+  $theme: IListItemTheme;
+  $isClickable: boolean;
 }
 
 const StyledListItem = styled.div<IStyledListItemProps>`
-  ${(props: IStyledListItemProps): string => themeToCss(props.theme.normal.default.background)};
-  cursor: ${(props: IStyledListItemProps): string => (props.isClickable ? 'pointer' : 'default')};
+  ${(props: IStyledListItemProps): string => themeToCss(props.$theme.normal.default.background)};
+  cursor: ${(props: IStyledListItemProps): string => (props.$isClickable ? 'pointer' : 'default')};
   outline: none;
   display: flex;
   flex-direction: row;
@@ -26,37 +26,37 @@ const StyledListItem = styled.div<IStyledListItemProps>`
   transition-duration: 0.3s;
 
   &:hover {
-    ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.normal.hover?.background) : '')};
+    ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.normal.hover?.background) : '')};
   }
   &:active {
-    ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.normal.press?.background) : '')};
+    ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.normal.press?.background) : '')};
   }
   &:focus {
-    ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.normal.focus?.background) : '')};
+    ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.normal.focus?.background) : '')};
   }
   &.disabled {
     cursor: auto;
-    ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.disabled?.default?.background) : '')};
+    ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.disabled?.default?.background) : '')};
     &:hover {
-      ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.disabled?.hover?.background) : '')};
+      ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.disabled?.hover?.background) : '')};
     }
     &:active {
-      ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.disabled?.press?.background) : '')};
+      ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.disabled?.press?.background) : '')};
     }
     &:focus {
-      ${(props: IStyledListItemProps): string => (props.isClickable ? themeToCss(props.theme.disabled?.focus?.background) : '')};
+      ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.disabled?.focus?.background) : '')};
     }
   }
   &.selected {
-    ${(props: IStyledListItemProps): string => themeToCss(props.theme.selected?.default?.background)};
+    ${(props: IStyledListItemProps): string => themeToCss(props.$theme.selected?.default?.background)};
     &:hover {
-      ${(props: IStyledListItemProps): string => themeToCss(props.theme.selected?.hover?.background)};
+      ${(props: IStyledListItemProps): string => themeToCss(props.$theme.selected?.hover?.background)};
     }
     &:active {
-      ${(props: IStyledListItemProps): string => themeToCss(props.theme.selected?.press?.background)};
+      ${(props: IStyledListItemProps): string => themeToCss(props.$theme.selected?.press?.background)};
     }
     &:focus {
-      ${(props: IStyledListItemProps): string => themeToCss(props.theme.selected?.focus?.background)};
+      ${(props: IStyledListItemProps): string => themeToCss(props.$theme.selected?.focus?.background)};
     }
   }
 `;
@@ -80,9 +80,9 @@ export const ListItem = (props: IListItemProps): React.ReactElement => {
       id={props.id}
       key={props.itemKey}
       className={getClassName(ListItem.displayName, props.className, props.isDisabled && 'disabled', props.isSelected && 'selected')}
-      theme={theme}
+      $theme={theme}
+      $isClickable={onClicked != null}
       onClick={onClicked}
-      isClickable={onClicked != null}
     >
       { props.children }
     </StyledListItem>

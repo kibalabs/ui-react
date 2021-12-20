@@ -7,10 +7,10 @@ import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } fro
 import { IImageTheme } from './theme';
 
 export interface IStyledImageProps {
-  theme: IImageTheme;
-  isFullWidth: boolean;
-  isFullHeight: boolean;
-  fitType: 'crop' | 'cover' | 'scale' | 'contain';
+  $theme: IImageTheme;
+  $isFullWidth: boolean;
+  $isFullHeight: boolean;
+  $fitType: 'crop' | 'cover' | 'scale' | 'contain';
 }
 
 const getImageFit = (fitType: string): string => {
@@ -24,12 +24,12 @@ const getImageFit = (fitType: string): string => {
 };
 
 const StyledImage = styled.img<IStyledImageProps>`
-  ${(props: IStyledImageProps): string => themeToCss(props.theme.background)};
+  ${(props: IStyledImageProps): string => themeToCss(props.$theme.background)};
   display: block;
   pointer-events: none;
-  width: ${(props: IStyledImageProps): string => (props.isFullWidth ? '100%' : 'auto')};
-  height: ${(props: IStyledImageProps): string => (props.isFullHeight ? '100%' : 'auto')};
-  object-fit: ${(props: IStyledImageProps): string => getImageFit(props.fitType)};
+  width: ${(props: IStyledImageProps): string => (props.$isFullWidth ? '100%' : 'auto')};
+  height: ${(props: IStyledImageProps): string => (props.$isFullHeight ? '100%' : 'auto')};
+  object-fit: ${(props: IStyledImageProps): string => getImageFit(props.$fitType)};
   max-width: 100%;
   max-height: 100%;
 
@@ -71,25 +71,25 @@ export const Image = (props: IImageProps): React.ReactElement => {
       <StyledImage
         id={props.id}
         className={getClassName(Image.displayName, props.className, props.isLazyLoadable ? 'lazyload' : 'unlazy', props.isCenteredHorizontally && 'centered')}
-        theme={theme}
+        $theme={theme}
         src={props.isLazyLoadable ? undefined : props.source}
         data-src={props.isLazyLoadable ? props.source : undefined}
         alt={props.alternativeText}
-        fitType={fitType}
-        isFullWidth={Boolean(props.isFullWidth)}
-        isFullHeight={Boolean(props.isFullHeight)}
+        $fitType={fitType}
+        $isFullWidth={Boolean(props.isFullWidth)}
+        $isFullHeight={Boolean(props.isFullHeight)}
       />
       {props.isLazyLoadable && (
         <noscript>
           <StyledImage
             id={props.id}
             className={getClassName(Image.displayName, props.className, 'unlazy', props.isCenteredHorizontally && 'centered')}
-            theme={theme}
+            $theme={theme}
+            $fitType={fitType}
+            $isFullWidth={Boolean(props.isFullWidth)}
+            $isFullHeight={Boolean(props.isFullHeight)}
             src={props.source}
             alt={props.alternativeText}
-            fitType={fitType}
-            isFullWidth={Boolean(props.isFullWidth)}
-            isFullHeight={Boolean(props.isFullHeight)}
           />
         </noscript>
       )}

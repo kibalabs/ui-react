@@ -9,19 +9,19 @@ import { IIconProps, PaddingSize, Spacing } from '../../particles';
 import { IButtonTheme } from './theme';
 
 interface IStyledButtonProps {
-  theme: IButtonTheme;
-  isLoading: boolean;
+  $theme: IButtonTheme;
+  $isLoading: boolean;
 }
 
 const StyledButton = styled.button<IStyledButtonProps>`
-  ${(props: IStyledButtonProps): string => themeToCss(props.theme.normal.default.text)};
-  ${(props: IStyledButtonProps): string => themeToCss(props.theme.normal.default.background)};
+  ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.text)};
+  ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.background)};
   /* Since it can be rendered as an <a>, unset everything for visited */
   &:visited {
-    ${(props: IStyledButtonProps): string => themeToCss(props.theme.normal.default.text)};
-    ${(props: IStyledButtonProps): string => themeToCss(props.theme.normal.default.background)};
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.text)};
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.background)};
   }
-  cursor: ${(props: IStyledButtonProps): string => (props.isLoading ? 'default' : 'pointer')};
+  cursor: ${(props: IStyledButtonProps): string => (props.$isLoading ? 'default' : 'pointer')};
   outline: none;
   display: flex;
   flex-direction: row;
@@ -34,32 +34,32 @@ const StyledButton = styled.button<IStyledButtonProps>`
   }
 
   &:hover {
-    ${(props: IStyledButtonProps): string => themeToCss(props.theme.normal.hover?.text)};
-    ${(props: IStyledButtonProps): string => themeToCss(props.theme.normal.hover?.background)};
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.hover?.text)};
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.hover?.background)};
   }
   &:active {
-    ${(props: IStyledButtonProps): string => themeToCss(props.theme.normal.press?.text)};
-    ${(props: IStyledButtonProps): string => themeToCss(props.theme.normal.press?.background)};
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.press?.text)};
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.press?.background)};
   }
   &:focus {
-    ${(props: IStyledButtonProps): string => themeToCss(props.theme.normal.focus?.text)};
-    ${(props: IStyledButtonProps): string => themeToCss(props.theme.normal.focus?.background)};
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.focus?.text)};
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.focus?.background)};
   }
   &.disabled {
     cursor: not-allowed;
-    ${(props: IStyledButtonProps): string => themeToCss(props.theme.disabled.default?.text)};
-    ${(props: IStyledButtonProps): string => themeToCss(props.theme.disabled.default?.background)};
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.default?.text)};
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.default?.background)};
     &:hover {
-      ${(props: IStyledButtonProps): string => themeToCss(props.theme.disabled.hover?.text)};
-      ${(props: IStyledButtonProps): string => themeToCss(props.theme.disabled.hover?.background)};
+      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.hover?.text)};
+      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.hover?.background)};
     }
     &:active {
-      ${(props: IStyledButtonProps): string => themeToCss(props.theme.disabled.press?.text)};
-      ${(props: IStyledButtonProps): string => themeToCss(props.theme.disabled.press?.background)};
+      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.press?.text)};
+      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.press?.background)};
     }
     &:focus {
-      ${(props: IStyledButtonProps): string => themeToCss(props.theme.disabled.focus?.text)};
-      ${(props: IStyledButtonProps): string => themeToCss(props.theme.disabled.focus?.background)};
+      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.focus?.text)};
+      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.focus?.background)};
     }
   }
 `;
@@ -103,9 +103,9 @@ export const Button = (props: IButtonProps): React.ReactElement => {
     <StyledButton
       id={props.id}
       className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', !props.isEnabled && 'disabled')}
-      theme={theme}
+      $theme={theme}
+      $isLoading={props.isLoading}
       onClick={onClicked}
-      isLoading={props.isLoading}
       disabled={!props.isEnabled}
       href={props.target}
       rel={props.target && 'noopener'}

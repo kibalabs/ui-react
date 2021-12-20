@@ -9,13 +9,13 @@ import { IBulletListProps } from '../bulletList';
 import { IBulletTextTheme } from './theme';
 
 interface IStyledBulletTextProps {
-  theme: IBulletTextTheme;
+  $theme: IBulletTextTheme;
 }
 
 const StyledBulletText = styled.li<IStyledBulletTextProps>`
-  ${(props: IStyledBulletTextProps): string => themeToCss(props.theme.normal.default.text)};
+  ${(props: IStyledBulletTextProps): string => themeToCss(props.$theme.normal.default.text)};
   &:before {
-    ${(props: IStyledBulletTextProps): string => themeToCss(props.theme.normal.default.bullet)};
+    ${(props: IStyledBulletTextProps): string => themeToCss(props.$theme.normal.default.bullet)};
     display: inline-block;
   }
 `;
@@ -30,7 +30,7 @@ export const BulletText = (props: IBulletTextProps): React.ReactElement => {
     <StyledBulletText
       id={props.id}
       className={getClassName(BulletText.displayName, props.className)}
-      theme={theme}
+      $theme={theme}
     >
       {props.text}
       {props.children}

@@ -8,15 +8,15 @@ import { IDimensionGuide } from '../../particles';
 import { useDimensions } from '../../theming';
 
 interface IStyledContainerProps {
-  theme: IDimensionGuide;
-  isFullHeight: boolean;
+  $theme: IDimensionGuide;
+  $isFullHeight: boolean;
 }
 
 const StyledContainer = styled.div<IStyledContainerProps>`
   width: 100%;
-  max-width: ${(props: IStyledContainerProps): string => props.theme.screenWidthMax};
-  height: ${(props: IStyledContainerProps): string => (props.isFullHeight ? '100%' : 'auto')};
-  overflow-y: ${(props: IStyledContainerProps): string => (props.isFullHeight ? 'auto' : 'visible')};
+  max-width: ${(props: IStyledContainerProps): string => props.$theme.screenWidthMax};
+  height: ${(props: IStyledContainerProps): string => (props.$isFullHeight ? '100%' : 'auto')};
+  overflow-y: ${(props: IStyledContainerProps): string => (props.$isFullHeight ? 'auto' : 'visible')};
   margin-right: auto;
   margin-left: auto;
 `;
@@ -34,8 +34,8 @@ export const Container = (props: IContainerProps): React.ReactElement => {
     <StyledContainer
       id={props.id}
       className={getClassName(Container.displayName, props.className)}
-      theme={theme}
-      isFullHeight={props.isFullHeight}
+      $theme={theme}
+      $isFullHeight={props.isFullHeight}
     >
       {props.children}
     </StyledContainer>

@@ -12,16 +12,11 @@ export interface IListTheme {
   listItemTheme: IListItemTheme;
 }
 
-interface IStyledListProps {
-  theme: IListTheme;
-}
-
-const StyledList = styled.div<IStyledListProps>`
+const StyledList = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 100%;
   overflow: auto;
-
   &.fullWidth {
     width: 100%;
   }

@@ -10,18 +10,18 @@ import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } fro
 import { IPortalTheme } from './theme';
 
 interface IStyledPortalProps {
-  theme: IPortalTheme;
-  positionTop: number;
-  positionLeft: number;
+  $theme: IPortalTheme;
+  $positionTop: number;
+  $positionLeft: number;
 }
 
 const StyledPortal = styled.div<IStyledPortalProps>`
   position: absolute;
   display: block;
   z-index: 999;
-  top: ${(props: IStyledPortalProps): string => `${props.positionTop}px`};
-  left: ${(props: IStyledPortalProps): string => `${props.positionLeft}px`};
-  ${(props: IStyledPortalProps): string => themeToCss(props.theme.background)};
+  top: ${(props: IStyledPortalProps): string => `${props.$positionTop}px`};
+  left: ${(props: IStyledPortalProps): string => `${props.$positionLeft}px`};
+  ${(props: IStyledPortalProps): string => themeToCss(props.$theme.background)};
 `;
 
 export enum Placement {
@@ -94,9 +94,9 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
     <StyledPortal
       id={props.id}
       className={getClassName(Portal.displayName, props.className)}
-      theme={theme}
-      positionTop={positionTop}
-      positionLeft={positionLeft}
+      $theme={theme}
+      $positionTop={positionTop}
+      $positionLeft={positionLeft}
       ref={ref}
     >
       {props.children}

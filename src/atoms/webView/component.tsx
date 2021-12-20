@@ -9,22 +9,22 @@ import { LoadingSpinner } from '../../particles';
 import { IWebViewTheme } from './theme';
 
 interface IStyledWebViewProps {
-  theme: IWebViewTheme;
-  aspectRatio?: number;
+  $theme: IWebViewTheme;
+  $aspectRatio?: number;
 }
 
 const StyledWebView = styled.div<IStyledWebViewProps>`
-  ${(props: IStyledWebViewProps): string => themeToCss(props.theme.normal?.default?.background)};
+  ${(props: IStyledWebViewProps): string => themeToCss(props.$theme.normal?.default?.background)};
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding-bottom: ${(props: IStyledWebViewProps): string => (props.aspectRatio ? `calc(${props.aspectRatio} * 100%)` : 'auto')};
+  padding-bottom: ${(props: IStyledWebViewProps): string => (props.$aspectRatio ? `calc(${props.$aspectRatio} * 100%)` : 'auto')};
 `;
 
-const LoadingWrapper = styled.div<IStyledWebViewProps>`
+const LoadingWrapper = styled.div`
   position: absolute;
 `;
 
@@ -108,8 +108,8 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
     <StyledWebView
       id={props.id}
       className={getClassName(WebView.displayName, props.className)}
-      theme={theme}
-      aspectRatio={props.aspectRatio}
+      $theme={theme}
+      $aspectRatio={props.aspectRatio}
     >
       <noscript>
         <StyledIframe

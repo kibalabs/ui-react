@@ -9,12 +9,12 @@ import { themeToCss } from '../../util';
 import { ITabBarItemTheme } from './theme';
 
 interface IStyledTabBarItemProps {
-  theme: ITabBarItemTheme;
+  $theme: ITabBarItemTheme;
 }
 
 const StyledTabBarItem = styled.button<IStyledTabBarItemProps>`
-  ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.normal.default.text)};
-  ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.normal.default.background)};
+  ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.normal.default.text)};
+  ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.normal.default.background)};
   cursor: pointer;
   outline: none;
   display: flex;
@@ -36,48 +36,48 @@ const StyledTabBarItem = styled.button<IStyledTabBarItemProps>`
   }
 
   &:hover {
-    ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.normal.hover?.text)};
-    ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.normal.hover?.background)};
+    ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.normal.hover?.text)};
+    ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.normal.hover?.background)};
   }
   &:active {
-    ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.normal.press?.text)};
-    ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.normal.press?.background)};
+    ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.normal.press?.text)};
+    ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.normal.press?.background)};
   }
   &:focus {
-    ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.normal.focus?.text)};
-    ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.normal.focus?.background)};
+    ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.normal.focus?.text)};
+    ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.normal.focus?.background)};
   }
   &.disabled {
     cursor: auto;
-    ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.disabled?.default?.text)};
-    ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.disabled?.default?.background)};
+    ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.disabled?.default?.text)};
+    ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.disabled?.default?.background)};
     &:hover {
-      ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.disabled?.hover?.text)};
-      ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.disabled?.hover?.background)};
+      ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.disabled?.hover?.text)};
+      ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.disabled?.hover?.background)};
     }
     &:active {
-      ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.disabled?.press?.text)};
-      ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.disabled?.press?.background)};
+      ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.disabled?.press?.text)};
+      ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.disabled?.press?.background)};
     }
     &:focus {
-      ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.disabled?.focus?.text)};
-      ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.disabled?.focus?.background)};
+      ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.disabled?.focus?.text)};
+      ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.disabled?.focus?.background)};
     }
   }
   &.selected {
-    ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.selected?.default?.text)};
-    ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.selected?.default?.background)};
+    ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.selected?.default?.text)};
+    ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.selected?.default?.background)};
     &:hover {
-      ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.selected?.hover?.text)};
-      ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.selected?.hover?.background)};
+      ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.selected?.hover?.text)};
+      ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.selected?.hover?.background)};
     }
     &:active {
-      ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.selected?.press?.text)};
-      ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.selected?.press?.background)};
+      ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.selected?.press?.text)};
+      ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.selected?.press?.background)};
     }
     &:focus {
-      ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.selected?.focus?.text)};
-      ${(props: IStyledTabBarItemProps): string => themeToCss(props.theme.selected?.focus?.background)};
+      ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.selected?.focus?.text)};
+      ${(props: IStyledTabBarItemProps): string => themeToCss(props.$theme.selected?.focus?.background)};
     }
   }
 `;
@@ -106,7 +106,7 @@ export const TabBarItem = (props: ITabBarItemProps): React.ReactElement => {
     <StyledTabBarItem
       id={props.id}
       className={getClassName(TabBarItem.displayName, props.className, !isEnabled && 'disabled', props.isSelected && 'selected', props.isCollapsible && 'collapsible', isExpandable && 'expandable')}
-      theme={theme}
+      $theme={theme}
       onClick={onClicked}
       disabled={!isEnabled}
     >
