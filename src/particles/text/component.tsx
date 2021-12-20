@@ -62,14 +62,14 @@ export const getTextTag = (variant?: string): TextTag => {
 };
 
 interface IStyledTextProps {
-  theme: ITextTheme;
-  alignment?: TextAlignment;
-  lineLimit?: number;
+  $theme: ITextTheme;
+  $alignment?: TextAlignment;
+  $lineLimit?: number;
 }
 
 const StyledText = styled.span<IStyledTextProps>`
-  ${(props: IStyledTextProps): string => themeToCss(props.theme)};
-  ${(props: IStyledTextProps): string => (props.alignment ? `text-align: ${props.alignment}` : '')};
+  ${(props: IStyledTextProps): string => themeToCss(props.$theme)};
+  ${(props: IStyledTextProps): string => (props.$alignment ? `text-align: ${props.$alignment}` : '')};
 
   &.singleLine {
     display: block;
@@ -82,7 +82,7 @@ const StyledText = styled.span<IStyledTextProps>`
   &.fixedLines {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: ${(props: IStyledTextProps): string => String(props.lineLimit)};
+    -webkit-line-clamp: ${(props: IStyledTextProps): string => String(props.$lineLimit)};
     overflow: hidden;
   }
 `;
@@ -106,9 +106,9 @@ export const Text = (props: ITextProps): React.ReactElement => {
     <StyledText
       id={props.id}
       className={getClassName(Text.displayName, props.className, lineLimit && lineLimit === 1 && 'singleLine', lineLimit && lineLimit >= 2 && 'fixedLines')}
-      theme={theme}
-      alignment={props.alignment}
-      lineLimit={lineLimit}
+      $theme={theme}
+      $alignment={props.alignment}
+      $lineLimit={lineLimit}
       as={props.tag || getTextTag(props.variant)}
     >
       { props.children }
