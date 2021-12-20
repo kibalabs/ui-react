@@ -85,11 +85,11 @@ export const Image = (props: IImageProps): React.ReactElement => {
             id={props.id}
             className={getClassName(Image.displayName, props.className, 'unlazy', props.isCenteredHorizontally && 'centered')}
             $theme={theme}
-            src={props.source}
-            alt={props.alternativeText}
             $fitType={fitType}
             $isFullWidth={Boolean(props.isFullWidth)}
             $isFullHeight={Boolean(props.isFullHeight)}
+            src={props.source}
+            alt={props.alternativeText}
           />
         </noscript>
       )}

@@ -66,18 +66,18 @@ const InputWrapperInner = styled.div<IInputWrapperInnerProps>`
     }
 
     &:hover {
-      ${(props) => themeToCss(props.$theme.disabled.hover.text)};
-      ${(props) => themeToCss(props.$theme.disabled.hover.background)};
+      ${(props) => themeToCss(props.$theme.disabled.hover?.text)};
+      ${(props) => themeToCss(props.$theme.disabled.hover?.background)};
       & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-        ${(props) => themeToCss(props.$theme.disabled.hover.placeholderText)};
+        ${(props) => themeToCss(props.$theme.disabled.hover?.placeholderText)};
       }
     }
 
     &.focus, &:focus {
-      ${(props) => themeToCss(props.$theme.disabled.focus.text)};
-      ${(props) => themeToCss(props.$theme.disabled.focus.background)};
+      ${(props) => themeToCss(props.$theme.disabled.focus?.text)};
+      ${(props) => themeToCss(props.$theme.disabled.focus?.background)};
       & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-        ${(props) => themeToCss(props.$theme.disabled.focus.placeholderText)};
+        ${(props) => themeToCss(props.$theme.disabled.focus?.placeholderText)};
       }
     }
   }

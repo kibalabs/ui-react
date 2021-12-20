@@ -81,8 +81,8 @@ export const ListItem = (props: IListItemProps): React.ReactElement => {
       key={props.itemKey}
       className={getClassName(ListItem.displayName, props.className, props.isDisabled && 'disabled', props.isSelected && 'selected')}
       $theme={theme}
-      onClick={onClicked}
       $isClickable={onClicked != null}
+      onClick={onClicked}
     >
       { props.children }
     </StyledListItem>

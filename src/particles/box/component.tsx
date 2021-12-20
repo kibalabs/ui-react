@@ -70,14 +70,14 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
       id={props.id}
       className={getClassName(Box.displayName, props.className, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally', shouldClipContent && 'clipContent')}
       $theme={theme}
-      title={props.title}
-      ref={ref}
       $height={height}
       $width={width}
       $maxHeight={maxHeight}
       $maxWidth={maxWidth}
       $blockType={blockType}
       $zIndex={props.zIndex}
+      title={props.title}
+      ref={ref}
     >
       {props.children}
     </StyledBox>

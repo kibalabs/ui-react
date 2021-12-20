@@ -14,7 +14,7 @@ interface IStyledLinePagerProps {
   $theme: ILinePagerTheme;
 }
 
-const StyledLinePager = styled.div<IStyledLinePagerProps>`
+const StyledLinePager = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;

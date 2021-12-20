@@ -74,14 +74,14 @@ export const Video = (props: IVideoProps): React.ReactElement => {
       id={props.id}
       className={getClassName(Video.displayName, props.className, props.isLazyLoadable ? 'lazyload' : 'unlazy', props.isCenteredHorizontally && 'centered')}
       $theme={theme}
+      $fitType={fitType}
+      $isFullWidth={Boolean(props.isFullWidth)}
+      $isFullHeight={Boolean(props.isFullHeight)}
       autoPlay={Boolean(props.shouldAutoplay)}
       muted={Boolean(props.shouldMute)}
       playsInline={true}
       controls={shouldShowControls}
       loop={Boolean(props.shouldLoop)}
-      $fitType={fitType}
-      $isFullWidth={Boolean(props.isFullWidth)}
-      $isFullHeight={Boolean(props.isFullHeight)}
     >
       <source
         src={props.isLazyLoadable ? undefined : props.source}
