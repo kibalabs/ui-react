@@ -27,11 +27,11 @@ export interface IOptionSelectTheme {
 }
 
 interface IStyledOptionsContainer {
-  theme: IBoxTheme;
+  $theme: IBoxTheme;
 }
 
 const StyledOptionsContainer = styled.div<IStyledOptionsContainer>`
-  ${(props: IStyledOptionsContainer): string => themeToCss(props.theme)};
+  ${(props: IStyledOptionsContainer): string => themeToCss(props.$theme)};
   position: absolute;
   display: block;
   z-index: 999;
@@ -96,7 +96,7 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
         </Stack>
       </InputFrame>
       <HidingView isHidden={!isOpen}>
-        <StyledOptionsContainer theme={optionsContainerTheme}>
+        <StyledOptionsContainer $theme={optionsContainerTheme}>
           <List theme={props.theme?.optionListTheme} itemVariant={props.optionListVariant || 'slim'} onItemClicked={onItemClicked} shouldShowDividers={true} isFullWidth={true}>
             {props.options.map((option) => (
               <List.Item
