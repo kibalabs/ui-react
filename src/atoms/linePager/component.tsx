@@ -11,7 +11,7 @@ import { ResponsiveHidingView } from '../../wrappers';
 import { ILinePagerTheme } from './theme';
 
 interface IStyledLinePagerProps {
-  theme: ILinePagerTheme;
+  $theme: ILinePagerTheme;
 }
 
 const StyledLinePager = styled.div<IStyledLinePagerProps>`
@@ -21,7 +21,7 @@ const StyledLinePager = styled.div<IStyledLinePagerProps>`
 `;
 
 const StyledLinePagerItem = styled.button<IStyledLinePagerProps>`
-  ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.normal.default.background)};
+  ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.normal.default.background)};
   cursor: pointer;
   outline: none;
   transition-duration: 0.3s;
@@ -29,24 +29,24 @@ const StyledLinePagerItem = styled.button<IStyledLinePagerProps>`
   flex-shrink: 1;
 
   &:hover {
-    ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.normal.hover?.background)};
+    ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.normal.hover?.background)};
   }
   &:active {
-    ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.normal.press?.background)};
+    ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.normal.press?.background)};
   }
   &:focus {
-    ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.normal.focus?.background)};
+    ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.normal.focus?.background)};
   }
   &.active {
-    ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.active?.default?.background)};
+    ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.active?.default?.background)};
     &:hover {
-      ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.active?.hover?.background)};
+      ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.active?.hover?.background)};
     }
     &:active {
-      ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.active?.press?.background)};
+      ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.active?.press?.background)};
     }
     &:focus {
-      ${(props: IStyledLinePagerProps): string => themeToCss(props.theme.active?.focus?.background)};
+      ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.active?.focus?.background)};
     }
   }
 `;
@@ -104,7 +104,7 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
           <ResponsiveHidingView key={index} hiddenAbove={getHiddenAboveSize(index)}>
             <StyledLinePagerItem
               className={getClassName(index === props.activePageIndex && 'active')}
-              theme={theme}
+              $theme={theme}
               aria-label={`Page ${index + 1}`}
               onClick={(): void => onPageClicked(index)}
             />

@@ -29,20 +29,20 @@ class GridItem extends React.Component<IGridItemProps> {
 }
 
 interface IStyledGridProps {
-  isFullHeight?: boolean;
-  childAlignment: Alignment;
-  contentAlignment: Alignment;
+  $isFullHeight?: boolean;
+  $childAlignment: Alignment;
+  $contentAlignment: Alignment;
 }
 
 const StyledGrid = styled.div<IStyledGridProps>`
-  height: ${(props: IStyledGridProps): string => (props.isFullHeight ? '100%' : 'auto')};
+  height: ${(props: IStyledGridProps): string => (props.$isFullHeight ? '100%' : 'auto')};
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   overflow-x: auto;
-  align-items: ${(props: IStyledGridProps): string => getFlexItemAlignment(props.childAlignment)};
-  justify-content: ${(props: IStyledGridProps): string => getFlexContentAlignment(props.contentAlignment)};
+  align-items: ${(props: IStyledGridProps): string => getFlexItemAlignment(props.$childAlignment)};
+  justify-content: ${(props: IStyledGridProps): string => getFlexContentAlignment(props.$contentAlignment)};
 `;
 
 export interface IGridProps extends IMultiChildProps<IGridItemProps>, IPaddingViewPaddingProps {
@@ -69,9 +69,9 @@ export const Grid = (props: IGridProps): React.ReactElement => {
       <StyledGrid
         id={props.id}
         className={getClassName(Grid.displayName, props.className)}
-        isFullHeight={props.isFullHeight}
-        childAlignment={props.childAlignment}
-        contentAlignment={props.contentAlignment}
+        $isFullHeight={props.isFullHeight}
+        $childAlignment={props.childAlignment}
+        $contentAlignment={props.contentAlignment}
       >
         { children.map((child: React.ReactElement<IGridItemProps>, index: number): React.ReactElement => (
           <StyledGridItem

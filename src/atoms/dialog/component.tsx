@@ -11,13 +11,13 @@ import { valueToCss } from '../../util';
 import { IDialogTheme } from './theme';
 
 interface IStyledBackdropProps {
-  backdropColor: string;
+  $backdropColor: string;
 }
 
 const StyledBackdrop = styled.div<IStyledBackdropProps>`
   width: 100%;
   height: 100%;
-  background: ${(props: IStyledBackdropProps): string => valueToCss(props.backdropColor)};
+  background: ${(props: IStyledBackdropProps): string => valueToCss(props.$backdropColor)};
   position: fixed;
   display: flex;
   justify-content: center;
@@ -66,7 +66,7 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
   return (
     <StyledBackdrop
       className={getClassName(Dialog.displayName, !props.isOpen && 'closed')}
-      backdropColor={theme.backdropColor}
+      $backdropColor={theme.backdropColor}
       ref={dialogRef}
       onClick={onBackdropClicked}
     >

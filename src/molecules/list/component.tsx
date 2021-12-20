@@ -13,7 +13,7 @@ export interface IListTheme {
 }
 
 interface IStyledListProps {
-  theme: IListTheme;
+  $theme: IListTheme;
 }
 
 const StyledList = styled.div<IStyledListProps>`
@@ -67,7 +67,7 @@ export const List = (props: IListProps): React.ReactElement => {
               key={child.props.itemKey}
               id={child.props.id}
               className={child.props.className}
-              theme={props.theme?.listItemTheme}
+              $theme={props.theme?.listItemTheme}
               variant={props.itemVariant || child.props.variant}
               itemKey={child.props.itemKey}
               isDisabled={child.props.isDisabled}

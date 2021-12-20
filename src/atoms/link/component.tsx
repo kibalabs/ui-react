@@ -8,31 +8,31 @@ import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } fro
 import { ILinkTheme } from './theme';
 
 interface IStyledLinkProps {
-  theme: ILinkTheme;
+  $theme: ILinkTheme;
 }
 
 const StyledLink = styled.a<IStyledLinkProps>`
-  ${(props: IStyledLinkProps): string => themeToCss(props.theme.normal?.default?.background)};
-  ${(props: IStyledLinkProps): string => themeToCss(props.theme.normal?.default?.text)};
+  ${(props: IStyledLinkProps): string => themeToCss(props.$theme.normal?.default?.background)};
+  ${(props: IStyledLinkProps): string => themeToCss(props.$theme.normal?.default?.text)};
   &:hover {
-    ${(props: IStyledLinkProps): string => themeToCss(props.theme.normal?.hover?.background)};
-    ${(props: IStyledLinkProps): string => themeToCss(props.theme.normal?.hover?.text)};
+    ${(props: IStyledLinkProps): string => themeToCss(props.$theme.normal?.hover?.background)};
+    ${(props: IStyledLinkProps): string => themeToCss(props.$theme.normal?.hover?.text)};
   }
   &.disabled {
-    ${(props: IStyledLinkProps): string => themeToCss(props.theme.disabled?.default?.background)};
-    ${(props: IStyledLinkProps): string => themeToCss(props.theme.disabled?.default?.text)};
+    ${(props: IStyledLinkProps): string => themeToCss(props.$theme.disabled?.default?.background)};
+    ${(props: IStyledLinkProps): string => themeToCss(props.$theme.disabled?.default?.text)};
     cursor: not-allowed;
     &:hover {
-      ${(props: IStyledLinkProps): string => themeToCss(props.theme.disabled?.hover?.background)};
-      ${(props: IStyledLinkProps): string => themeToCss(props.theme.disabled?.hover?.text)};
+      ${(props: IStyledLinkProps): string => themeToCss(props.$theme.disabled?.hover?.background)};
+      ${(props: IStyledLinkProps): string => themeToCss(props.$theme.disabled?.hover?.text)};
     }
   }
   &:visited {
-    ${(props: IStyledLinkProps): string => themeToCss(props.theme.visited?.default?.background)};
-    ${(props: IStyledLinkProps): string => themeToCss(props.theme.visited?.default?.text)};
+    ${(props: IStyledLinkProps): string => themeToCss(props.$theme.visited?.default?.background)};
+    ${(props: IStyledLinkProps): string => themeToCss(props.$theme.visited?.default?.text)};
     &:hover {
-      ${(props: IStyledLinkProps): string => themeToCss(props.theme.visited?.hover?.background)};
-      ${(props: IStyledLinkProps): string => themeToCss(props.theme.visited?.hover?.text)};
+      ${(props: IStyledLinkProps): string => themeToCss(props.$theme.visited?.hover?.background)};
+      ${(props: IStyledLinkProps): string => themeToCss(props.$theme.visited?.hover?.text)};
     }
   }
 `;
@@ -56,7 +56,7 @@ export const Link = (props: ILinkProps): React.ReactElement => {
     <StyledLink
       id={props.id}
       className={getClassName(Link.displayName, props.className, !props.isEnabled && 'disabled')}
-      theme={theme}
+      $theme={theme}
       href={props.isEnabled ? props.target : undefined}
       rel={'noopener'}
       tabIndex={props.tabIndex || 0}

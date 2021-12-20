@@ -9,12 +9,12 @@ import { IIconProps } from '../../particles/icon';
 import { IIconButtonTheme } from './theme';
 
 interface IStyledIconButtonProps {
-  theme: IIconButtonTheme;
+  $theme: IIconButtonTheme;
 }
 
 const StyledIconButton = styled.button<IStyledIconButtonProps>`
-  ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.normal.default.text)};
-  ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.normal.default.background)};
+  ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.default.text)};
+  ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.default.background)};
   cursor: pointer;
   outline: none;
   display: flex;
@@ -24,32 +24,32 @@ const StyledIconButton = styled.button<IStyledIconButtonProps>`
   background-clip: border-box;
   transition: 0.3s;
   &:hover {
-    ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.normal.hover?.text)};
-    ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.normal.hover?.background)};
+    ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.hover?.text)};
+    ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.hover?.background)};
   }
   &:active {
-    ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.normal.press?.text)};
-    ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.normal.press?.background)};
+    ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.press?.text)};
+    ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.press?.background)};
   }
   &:focus {
-    ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.normal.focus?.text)};
-    ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.normal.focus?.background)};
+    ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.focus?.text)};
+    ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.focus?.background)};
   }
   &.disabled {
     cursor: not-allowed;
-    ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.disabled.default?.text)};
-    ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.disabled.default?.background)};
+    ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.default?.text)};
+    ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.default?.background)};
     &:hover {
-      ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.disabled.hover?.text)};
-      ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.disabled.hover?.background)};
+      ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.hover?.text)};
+      ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.hover?.background)};
     }
     &:active {
-      ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.disabled.press?.text)};
-      ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.disabled.press?.background)};
+      ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.press?.text)};
+      ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.press?.background)};
     }
     &:focus {
-      ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.disabled.focus?.text)};
-      ${(props: IStyledIconButtonProps): string => themeToCss(props.theme.disabled.focus?.background)};
+      ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.focus?.text)};
+      ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.focus?.background)};
     }
   }
 `;
@@ -82,7 +82,7 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
     <StyledIconButton
       id={props.id}
       className={getClassName(IconButton.displayName, !props.isEnabled && 'disabled', props.className)}
-      theme={theme}
+      $theme={theme}
       onClick={onClicked}
       disabled={!props.isEnabled}
       aria-label={props.label}

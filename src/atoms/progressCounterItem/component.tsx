@@ -9,12 +9,12 @@ import { themeToCss } from '../../util';
 import { IProgressCounterItemTheme } from './theme';
 
 interface IStyledProgressCounterItemProps {
-  theme: IProgressCounterItemTheme;
+  $theme: IProgressCounterItemTheme;
 }
 
 const StyledProgressCounterItem = styled.button<IStyledProgressCounterItemProps>`
-  ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.normal.default.text)};
-  ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.normal.default.background)};
+  ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.normal.default.text)};
+  ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.normal.default.background)};
   cursor: pointer;
   outline: none;
   display: flex;
@@ -25,48 +25,48 @@ const StyledProgressCounterItem = styled.button<IStyledProgressCounterItemProps>
   transition-duration: 0.3s;
 
   &:hover {
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.normal.hover?.text)};
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.normal.hover?.background)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.normal.hover?.text)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.normal.hover?.background)};
   }
   &:active {
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.normal.press?.text)};
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.normal.press?.background)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.normal.press?.text)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.normal.press?.background)};
   }
   &:focus {
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.normal.focus?.text)};
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.normal.focus?.background)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.normal.focus?.text)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.normal.focus?.background)};
   }
   &.disabled {
     cursor: auto;
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.default?.text)};
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.default?.background)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.disabled?.default?.text)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.disabled?.default?.background)};
     &:hover {
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.hover?.text)};
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.hover?.background)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.disabled?.hover?.text)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.disabled?.hover?.background)};
     }
     &:active {
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.press?.text)};
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.press?.background)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.disabled?.press?.text)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.disabled?.press?.background)};
     }
     &:focus {
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.focus?.text)};
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.disabled?.focus?.background)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.disabled?.focus?.text)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.disabled?.focus?.background)};
     }
   }
   &.selected {
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.default?.text)};
-    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.default?.background)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.selected?.default?.text)};
+    ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.selected?.default?.background)};
     &:hover {
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.hover?.text)};
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.hover?.background)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.selected?.hover?.text)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.selected?.hover?.background)};
     }
     &:active {
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.press?.text)};
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.press?.background)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.selected?.press?.text)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.selected?.press?.background)};
     }
     &:focus {
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.focus?.text)};
-      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.theme.selected?.focus?.background)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.selected?.focus?.text)};
+      ${(props: IStyledProgressCounterItemProps): string => themeToCss(props.$theme.selected?.focus?.background)};
     }
   }
 `;
@@ -90,7 +90,7 @@ export const ProgressCounterItem = (props: IProgressCounterItemProps): React.Rea
     <StyledProgressCounterItem
       id={props.id}
       className={getClassName(ProgressCounterItem.displayName, props.className, !props.isEnabled && 'disabled', props.isSelected && 'selected')}
-      theme={theme}
+      $theme={theme}
       onClick={onClicked}
       disabled={!props.isEnabled}
     >

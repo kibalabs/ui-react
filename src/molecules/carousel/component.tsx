@@ -46,8 +46,8 @@ const StyledSlider = styled.div`
 StyledSlider.displayName = 'CarouselSlider';
 
 interface IStyledSlideProps {
-  theme: IDimensionGuide;
-  slidesPerPage: ResponsiveField<number>;
+  $theme: IDimensionGuide;
+  $slidesPerPage: ResponsiveField<number>;
 }
 
 const StyledSlide = styled.div<IStyledSlideProps>`
@@ -61,7 +61,7 @@ const StyledSlide = styled.div<IStyledSlideProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${(props: IStyledSlideProps): string => fieldToResponsiveCss(props.slidesPerPage, props.theme, getSlidesPerPageCss)};
+  ${(props: IStyledSlideProps): string => fieldToResponsiveCss(props.$slidesPerPage, props.$theme, getSlidesPerPageCss)};
 `;
 StyledSlide.displayName = 'CarouselSlide';
 
@@ -184,7 +184,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     >
       {props.shouldShowButtons && (
         <IconButton
-          theme={props.theme?.indexButtonTheme}
+        theme={props.theme?.indexButtonTheme}
           variant={props.indexButtonVariant}
           icon={<KibaIcon iconId='mui-chevron-left' />}
           label={'Previous'}
@@ -201,8 +201,8 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
               <StyledSlide
                 key={index}
                 className={getClassName(StyledSlide.displayName)}
-                theme={dimensions}
-                slidesPerPage={{ base: props.slidesPerPage, ...props.slidesPerPageResponsive }}
+                $theme={dimensions}
+                $slidesPerPage={{ base: props.slidesPerPage, ...props.slidesPerPageResponsive }}
               >
                 {child}
               </StyledSlide>

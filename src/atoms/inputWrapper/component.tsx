@@ -14,7 +14,7 @@ const StyledInputWrapper = styled.div`
 `;
 
 interface IInputWrapperInnerProps {
-  theme: IInputWrapperTheme;
+  $theme: IInputWrapperTheme;
 }
 
 const InputWrapperInner = styled.div<IInputWrapperInnerProps>`
@@ -26,8 +26,8 @@ const InputWrapperInner = styled.div<IInputWrapperInnerProps>`
     color: inherit;
     line-height: inherit;
   }
-  ${(props) => themeToCss(props.theme.normal.default.text)};
-  ${(props) => themeToCss(props.theme.normal.default.background)};
+  ${(props) => themeToCss(props.$theme.normal.default.text)};
+  ${(props) => themeToCss(props.$theme.normal.default.background)};
   width: 100%;
   overflow: hidden;
   transition-duration: 0.3s;
@@ -36,48 +36,48 @@ const InputWrapperInner = styled.div<IInputWrapperInnerProps>`
   }
 
   & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-    ${(props) => themeToCss(props.theme.normal.default.placeholderText)};
+    ${(props) => themeToCss(props.$theme.normal.default.placeholderText)};
   }
 
   &:hover {
     box-shadow: none;
-    ${(props) => themeToCss(props.theme.normal.hover.text)};
-    ${(props) => themeToCss(props.theme.normal.hover.background)};
+    ${(props) => themeToCss(props.$theme.normal.hover.text)};
+    ${(props) => themeToCss(props.$theme.normal.hover.background)};
     & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-      ${(props) => themeToCss(props.theme.normal.hover.placeholderText)};
+      ${(props) => themeToCss(props.$theme.normal.hover.placeholderText)};
     }
   }
 
   &.focus, &:focus {
-    ${(props) => themeToCss(props.theme.normal.focus.text)};
-    ${(props) => themeToCss(props.theme.normal.focus.background)};
+    ${(props) => themeToCss(props.$theme.normal.focus.text)};
+    ${(props) => themeToCss(props.$theme.normal.focus.background)};
     & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-      ${(props) => themeToCss(props.theme.normal.focus.placeholderText)};
+      ${(props) => themeToCss(props.$theme.normal.focus.placeholderText)};
     }
   }
 
   &.disabled {
     cursor: not-allowed;
     pointer-events: none;
-    ${(props) => themeToCss(props.theme.disabled.default?.text)};
-    ${(props) => themeToCss(props.theme.disabled.default?.background)};
+    ${(props) => themeToCss(props.$theme.disabled.default?.text)};
+    ${(props) => themeToCss(props.$theme.disabled.default?.background)};
     & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-      ${(props) => themeToCss(props.theme.disabled.default?.placeholderText)};
+      ${(props) => themeToCss(props.$theme.disabled.default?.placeholderText)};
     }
 
     &:hover {
-      ${(props) => themeToCss(props.theme.disabled.hover.text)};
-      ${(props) => themeToCss(props.theme.disabled.hover.background)};
+      ${(props) => themeToCss(props.$theme.disabled.hover.text)};
+      ${(props) => themeToCss(props.$theme.disabled.hover.background)};
       & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-        ${(props) => themeToCss(props.theme.disabled.hover.placeholderText)};
+        ${(props) => themeToCss(props.$theme.disabled.hover.placeholderText)};
       }
     }
 
     &.focus, &:focus {
-      ${(props) => themeToCss(props.theme.disabled.focus.text)};
-      ${(props) => themeToCss(props.theme.disabled.focus.background)};
+      ${(props) => themeToCss(props.$theme.disabled.focus.text)};
+      ${(props) => themeToCss(props.$theme.disabled.focus.background)};
       & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-        ${(props) => themeToCss(props.theme.disabled.focus.placeholderText)};
+        ${(props) => themeToCss(props.$theme.disabled.focus.placeholderText)};
       }
     }
   }
@@ -120,7 +120,7 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
       <InputWrapperInner
         id={props.id && `${props.id}-inner`}
         className={getClassName(InputWrapperInner.displayName, props.messageText && 'message-showing', isFocussed && 'focus', !props.isEnabled && 'disabled')}
-        theme={theme}
+        $theme={theme}
         onClick={onClicked}
         onFocus={(): void => setIsFocussed(true)}
         onBlur={(): void => setIsFocussed(false)}

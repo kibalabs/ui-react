@@ -8,7 +8,7 @@ import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } fro
 import { ILinkBaseTheme } from './theme';
 
 interface IStyledLinkBaseProps {
-  theme: ILinkBaseTheme;
+  $theme: ILinkBaseTheme;
 }
 
 const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
@@ -30,35 +30,35 @@ const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
     height: 100%;
   }
 
-  ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.normal.default.background)};
-  ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.normal.default.linkBase)};
+  ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.default.background)};
+  ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.default.linkBase)};
   &:hover {
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.normal.hover?.background)};
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.normal.hover?.linkBase)};
+    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.hover?.background)};
+    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.hover?.linkBase)};
   }
   &:active {
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.normal.press?.background)};
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.normal.press?.linkBase)};
+    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.press?.background)};
+    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.press?.linkBase)};
   }
   &:focus {
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.normal.focus?.background)};
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.normal.focus?.linkBase)};
+    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.focus?.background)};
+    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.focus?.linkBase)};
   }
   &.disabled {
     cursor: not-allowed;
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.disabled.default?.background)};
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.disabled.default?.linkBase)};
+    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.default?.background)};
+    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.default?.linkBase)};
     &:hover {
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.disabled.hover?.background)};
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.disabled.hover?.linkBase)};
+      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.hover?.background)};
+      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.hover?.linkBase)};
     }
     &:active {
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.disabled.press?.background)};
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.disabled.press?.linkBase)};
+      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.press?.background)};
+      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.press?.linkBase)};
     }
     &:focus {
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.disabled.focus?.background)};
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.theme.disabled.focus?.linkBase)};
+      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.focus?.background)};
+      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.focus?.linkBase)};
     }
   }
 `;
@@ -91,7 +91,7 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
     <StyledLinkBase
       id={props.id}
       className={getClassName(LinkBase.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !props.isEnabled && 'disabled')}
-      theme={theme}
+      $theme={theme}
       onClick={onClicked}
       aria-label={props.label}
       href={props.target}
