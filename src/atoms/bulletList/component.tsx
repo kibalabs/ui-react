@@ -9,11 +9,11 @@ import { IBulletTextProps } from '../bulletText';
 import { IBulletListTheme } from './theme';
 
 interface IStyledBulletListProps {
-  theme: IBulletListTheme;
+  $theme: IBulletListTheme;
 }
 
 const StyledBulletList = styled.ul<IStyledBulletListProps>`
-  ${(props: IStyledBulletListProps): string => themeToCss(props.theme.normal.default.bulletList)};
+  ${(props: IStyledBulletListProps): string => themeToCss(props.$theme.normal.default.bulletList)};
 `;
 
 export interface IBulletListProps extends IComponentProps<IBulletListTheme>, IMultiChildProps<IBulletTextProps> {
@@ -25,7 +25,7 @@ export const BulletList = (props: IBulletListProps): React.ReactElement => {
     <StyledBulletList
       id={props.id}
       className={getClassName(BulletList.displayName, props.className)}
-      theme={theme}
+      $theme={theme}
     >
       {props.children}
     </StyledBulletList>
