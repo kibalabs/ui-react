@@ -8,17 +8,17 @@ import { valueToCss } from '../../util';
 import { ILoadingSpinnerTheme } from './theme';
 
 interface IStyledLoadingSpinnerProps {
-  theme: ILoadingSpinnerTheme;
+  $theme: ILoadingSpinnerTheme;
 }
 
 const StyledLoadingSpinner = styled.div<IStyledLoadingSpinnerProps>`
   border-radius: 50%;
   border-style: solid;
-  border-width: ${(props: IStyledLoadingSpinnerProps): string => props.theme.width};
-  border-color: ${(props: IStyledLoadingSpinnerProps): string => valueToCss(props.theme.color)};
+  border-width: ${(props: IStyledLoadingSpinnerProps): string => props.$theme.width};
+  border-color: ${(props: IStyledLoadingSpinnerProps): string => valueToCss(props.$theme.color)};
   border-top-color: transparent;
-  width: ${(props: IStyledLoadingSpinnerProps): string => props.theme.size};
-  height: ${(props: IStyledLoadingSpinnerProps): string => props.theme.size};
+  width: ${(props: IStyledLoadingSpinnerProps): string => props.$theme.size};
+  height: ${(props: IStyledLoadingSpinnerProps): string => props.$theme.size};
   animation: spin 1.0s linear infinite;
   @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -35,7 +35,7 @@ export const LoadingSpinner = (props: ILoadingSpinnerProps): React.ReactElement 
     <StyledLoadingSpinner
       id={props.id}
       className={getClassName(LoadingSpinner.displayName, props.className)}
-      theme={theme}
+      $theme={theme}
     />
   );
 };

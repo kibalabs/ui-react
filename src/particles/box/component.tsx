@@ -8,25 +8,25 @@ import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } fro
 import { IBoxTheme } from './theme';
 
 interface IStyledBoxProps {
-  theme: IBoxTheme;
+  $theme: IBoxTheme;
   $height: string;
   $width: string;
-  maxHeight: string;
-  maxWidth: string;
-  blockType: string;
-  zIndex?: number;
+  $maxHeight: string;
+  $maxWidth: string;
+  $blockType: string;
+  $zIndex?: number;
 }
 
 const StyledBox = styled.div<IStyledBoxProps>`
-  ${(props: IStyledBoxProps): string => themeToCss(props.theme)};
+  ${(props: IStyledBoxProps): string => themeToCss(props.$theme)};
   box-sizing: border-box;
   height: ${(props: IStyledBoxProps): string => props.$height};
   width: ${(props: IStyledBoxProps): string => props.$width};
-  max-height: ${(props: IStyledBoxProps): string => props.maxHeight};
-  max-width: ${(props: IStyledBoxProps): string => props.maxWidth};
-  display: ${(props: IStyledBoxProps): string => props.blockType};
+  max-height: ${(props: IStyledBoxProps): string => props.$maxHeight};
+  max-width: ${(props: IStyledBoxProps): string => props.$maxWidth};
+  display: ${(props: IStyledBoxProps): string => props.$blockType};
   flex-direction: column;
-  z-index: ${(props: IStyledBoxProps): string => (props.zIndex ? `${props.zIndex}` : 'auto')};
+  z-index: ${(props: IStyledBoxProps): string => (props.$zIndex ? `${props.$zIndex}` : 'auto')};
   &.clipContent {
     overflow: hidden;
   }
@@ -69,15 +69,15 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
     <StyledBox
       id={props.id}
       className={getClassName(Box.displayName, props.className, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally', shouldClipContent && 'clipContent')}
-      theme={theme}
+      $theme={theme}
       title={props.title}
       ref={ref}
       $height={height}
       $width={width}
-      maxHeight={maxHeight}
-      maxWidth={maxWidth}
-      blockType={blockType}
-      zIndex={props.zIndex}
+      $maxHeight={maxHeight}
+      $maxWidth={maxWidth}
+      $blockType={blockType}
+      $zIndex={props.zIndex}
     >
       {props.children}
     </StyledBox>

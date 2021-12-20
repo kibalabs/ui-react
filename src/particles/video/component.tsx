@@ -7,10 +7,10 @@ import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
 import { IVideoTheme } from './theme';
 
 export interface IStyledVideoProps {
-  theme: IVideoTheme;
-  isFullWidth: boolean;
-  isFullHeight: boolean;
-  fitType: 'crop' | 'cover' | 'scale' | 'contain';
+  $theme: IVideoTheme;
+  $isFullWidth: boolean;
+  $isFullHeight: boolean;
+  $fitType: 'crop' | 'cover' | 'scale' | 'contain';
 }
 
 const getImageFit = (fitType: string): string => {
@@ -25,9 +25,9 @@ const getImageFit = (fitType: string): string => {
 
 const StyledVideo = styled.video<IStyledVideoProps>`
   display: block;
-  width: ${(props: IStyledVideoProps): string => (props.isFullWidth ? '100%' : 'auto')};
-  height: ${(props: IStyledVideoProps): string => (props.isFullHeight ? '100%' : 'auto')};
-  object-fit: ${(props: IStyledVideoProps): string => getImageFit(props.fitType)};
+  width: ${(props: IStyledVideoProps): string => (props.$isFullWidth ? '100%' : 'auto')};
+  height: ${(props: IStyledVideoProps): string => (props.$isFullHeight ? '100%' : 'auto')};
+  object-fit: ${(props: IStyledVideoProps): string => getImageFit(props.$fitType)};
   max-width: 100%;
   max-height: 100%;
 
@@ -73,15 +73,15 @@ export const Video = (props: IVideoProps): React.ReactElement => {
     <StyledVideo
       id={props.id}
       className={getClassName(Video.displayName, props.className, props.isLazyLoadable ? 'lazyload' : 'unlazy', props.isCenteredHorizontally && 'centered')}
-      theme={theme}
+      $theme={theme}
       autoPlay={Boolean(props.shouldAutoplay)}
       muted={Boolean(props.shouldMute)}
       playsInline={true}
       controls={shouldShowControls}
       loop={Boolean(props.shouldLoop)}
-      fitType={fitType}
-      isFullWidth={Boolean(props.isFullWidth)}
-      isFullHeight={Boolean(props.isFullHeight)}
+      $fitType={fitType}
+      $isFullWidth={Boolean(props.isFullWidth)}
+      $isFullHeight={Boolean(props.isFullHeight)}
     >
       <source
         src={props.isLazyLoadable ? undefined : props.source}
