@@ -24,7 +24,7 @@ const StyledWebView = styled.div<IStyledWebViewProps>`
   padding-bottom: ${(props: IStyledWebViewProps): string => (props.$aspectRatio ? `calc(${props.$aspectRatio} * 100%)` : 'auto')};
 `;
 
-const LoadingWrapper = styled.div<IStyledWebViewProps>`
+const LoadingWrapper = styled.div`
   position: absolute;
 `;
 

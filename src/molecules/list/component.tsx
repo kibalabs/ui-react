@@ -17,7 +17,6 @@ const StyledList = styled.div`
   flex-direction: column;
   max-width: 100%;
   overflow: auto;
-
   &.fullWidth {
     width: 100%;
   }
