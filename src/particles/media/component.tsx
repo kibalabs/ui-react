@@ -29,9 +29,21 @@ export const Media = (props: IMediaProps): React.ReactElement => {
     return fileExtension === 'mp4' || fileExtension === 'webm' || fileExtension === 'ogg';
   }, [props.source]);
 
+  const isImage = (url: string) => {
+    const imageType = new Set(['png', 'jpg', 'gif', 'jpeg', 'tif', 'tiff', 'raw']);
+    const source = new URL(url, typeof window !== 'undefined' && window?.location ? window.location.href : 'https://kibalabs.com');
+    const fileExtension = source.pathname.split('.').pop()?.toLowerCase() || '';
+    return imageType.has(fileExtension);
+  };
+
   React.useEffect((): void => {
     if (!props.source) {
       setMediaType(null);
+      return;
+    }
+
+    if (isImage(props.source)) {
+      setMediaType('image');
       return;
     }
     fetch(props.source, { method: 'HEAD' })
