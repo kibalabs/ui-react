@@ -30,17 +30,18 @@ export const Media = (props: IMediaProps): React.ReactElement => {
     if (!props.source) {
       return false;
     }
+    const videoTypes = new Set(['mp4', 'webm', 'ogg']);
     const fileExtension = getExtension(props.source);
-    return fileExtension === 'mp4' || fileExtension === 'webm' || fileExtension === 'ogg';
+    return videoTypes.has(fileExtension);
   }, [props.source]);
 
   const isImage = React.useMemo((): boolean => {
     if (!props.source) {
       return false;
     }
-    const imageType = new Set(['png', 'jpg', 'gif', 'jpeg', 'tif', 'tiff', 'raw']);
+    const imageTypes = new Set(['png', 'jpg', 'gif', 'jpeg', 'tif', 'tiff', 'raw']);
     const fileExtension = getExtension(props.source);
-    return imageType.has(fileExtension);
+    return imageTypes.has(fileExtension);
   }, [props.source]);
 
   React.useEffect((): void => {
