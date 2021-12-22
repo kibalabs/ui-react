@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 - [MINOR] Added `background` prop to `KibaApp`
 - [MINOR] Created `renderHead` for external head rendering
+- [MINOR] updated `Media` to check for url extension and trust if present before checking for content-type
 
 ### Changed
 - [MINOR] Fixed colors theme creation to calculate text and textOnBrand correctly when background is dark

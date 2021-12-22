@@ -17,21 +17,45 @@ export interface IMediaProps extends IComponentProps<IMediaTheme> {
   isLazyLoadable?: boolean;
 }
 
+const getExtension = (url: string): string => {
+  // NOTE(krishan711): the url is only used to check the type so it doesn't matter if it's actually the correct url or not (for now).
+  const source = new URL(url, typeof window !== 'undefined' && window?.location ? window.location.href : 'https://kibalabs.com');
+  const fileExtension = source.pathname.split('.').pop()?.toLowerCase() || '';
+  return fileExtension;
+};
+
 export const Media = (props: IMediaProps): React.ReactElement => {
   const [mediaType, setMediaType] = React.useState<string | null>(null);
   const isVideo = React.useMemo((): boolean => {
     if (!props.source) {
       return false;
     }
-    // NOTE(krishan711): the url is only used to check the type so it doesn't matter if it's actually the correct url or not (for now).
-    const source = new URL(props.source, typeof window !== 'undefined' && window?.location ? window.location.href : 'https://kibalabs.com');
-    const fileExtension = source.pathname.split('.').pop()?.toLowerCase() || '';
-    return fileExtension === 'mp4' || fileExtension === 'webm' || fileExtension === 'ogg';
+    const videoTypes = new Set(['mp4', 'webm', 'ogg']);
+    const fileExtension = getExtension(props.source);
+    return videoTypes.has(fileExtension);
+  }, [props.source]);
+
+  const isImage = React.useMemo((): boolean => {
+    if (!props.source) {
+      return false;
+    }
+    const imageTypes = new Set(['png', 'jpg', 'gif', 'jpeg', 'tif', 'tiff', 'raw']);
+    const fileExtension = getExtension(props.source);
+    return imageTypes.has(fileExtension);
   }, [props.source]);
 
   React.useEffect((): void => {
     if (!props.source) {
       setMediaType(null);
+      return;
+    }
+
+    if (isImage) {
+      setMediaType('image');
+      return;
+    }
+    if (isVideo) {
+      setMediaType('video');
       return;
     }
     fetch(props.source, { method: 'HEAD' })
@@ -55,7 +79,7 @@ export const Media = (props: IMediaProps): React.ReactElement => {
         console.error(error);
         setMediaType(null);
       });
-  }, [props.source]);
+  }, [props.source, isVideo, isImage]);
 
   return (isVideo || mediaType === 'video') ? (
     <Video shouldShowControls={false} shouldLoop={true} shouldMute={true} shouldAutoplay={true} {...props} />
