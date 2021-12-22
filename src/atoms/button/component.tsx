@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
+import setDefaults from '../../util/SetDefaultProps';
 import { IButtonTheme } from './theme';
 
 interface IStyledButtonProps {
@@ -79,11 +80,16 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   onClicked?(): void;
 }
 
-export const Button = (props: IButtonProps): React.ReactElement => {
+export const Button : FC <IButtonProps> = (props: IButtonProps): React.ReactElement => {
+  const buttonDefaultProp = setDefaults(props, { ...defaultComponentProps,
+    buttonType: 'button',
+    isLoading: false,
+    isEnabled: true,
+    isFullWidth: false,
+    iconGutter: PaddingSize.Default });
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
-
   const onClicked = (): void => {
-    if (props.isLoading) {
+    if (buttonDefaultProp.isLoading) {
       return;
     }
     if (props.onClicked) {
@@ -91,7 +97,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
     }
   };
 
-  if (props.onClicked && props.buttonType === 'submit') {
+  if (props.onClicked && buttonDefaultProp.buttonType === 'submit') {
     throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
   }
 
@@ -102,31 +108,31 @@ export const Button = (props: IButtonProps): React.ReactElement => {
     // @ts-ignore: as prop doesn't match type required
     <StyledButton
       id={props.id}
-      className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', !props.isEnabled && 'disabled')}
+      className={getClassName(Button.displayName, props.className, buttonDefaultProp.isFullWidth && 'fullWidth', !buttonDefaultProp.isEnabled && 'disabled')}
       $theme={theme}
-      $isLoading={props.isLoading}
+      $isLoading={buttonDefaultProp.isLoading}
       onClick={onClicked}
-      disabled={!props.isEnabled}
+      disabled={!buttonDefaultProp.isEnabled}
       href={props.target}
       rel={props.target && 'noopener'}
       tabIndex={props.tabIndex || 0}
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
     >
-      { !props.isLoading && props.iconLeft && (
+      { !buttonDefaultProp.isLoading && props.iconLeft && (
         <React.Fragment>
           {props.iconLeft}
-          <Spacing variant={props.iconGutter} />
+          <Spacing variant={buttonDefaultProp.iconGutter} />
         </React.Fragment>
       )}
-      { !props.isLoading && props.text }
-      { !props.isLoading && props.iconRight && (
+      { !buttonDefaultProp.isLoading && props.text }
+      { !buttonDefaultProp.isLoading && props.iconRight && (
         <React.Fragment>
-          <Spacing variant={props.iconGutter} />
+          <Spacing variant={buttonDefaultProp.iconGutter} />
           {props.iconRight}
         </React.Fragment>
       )}
-      { props.isLoading && (
+      { buttonDefaultProp.isLoading && (
         <LoadingSpinner
           id={props.id && `${props.id}-loading-spinner`}
           variant='light-small'
@@ -137,11 +143,11 @@ export const Button = (props: IButtonProps): React.ReactElement => {
 };
 
 Button.displayName = 'Button';
-Button.defaultProps = {
-  ...defaultComponentProps,
-  buttonType: 'button',
-  isLoading: false,
-  isEnabled: true,
-  isFullWidth: false,
-  iconGutter: PaddingSize.Default,
-};
+// Button.defaultProps = {
+//   ...defaultComponentProps,
+//   buttonType: 'button',
+//   isLoading: false,
+//   isEnabled: true,
+//   isFullWidth: false,
+//   iconGutter: PaddingSize.Default,
+// };
