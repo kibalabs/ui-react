@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
@@ -66,11 +66,11 @@ const StyledButton = styled.button<IStyledButtonProps>`
 `;
 
 export interface IButtonProps extends IComponentProps<IButtonTheme> {
-  buttonType: 'button' | 'reset' | 'submit';
+  buttonType?: 'button' | 'reset' | 'submit';
   text: string;
-  isEnabled: boolean;
-  isLoading: boolean;
-  isFullWidth: boolean;
+  isEnabled?: boolean;
+  isLoading?: boolean;
+  isFullWidth?: boolean;
   iconRight?: OptionalProppedElement<IIconProps>;
   iconLeft?: OptionalProppedElement<IIconProps>;
   iconGutter?: PaddingSize;
@@ -80,7 +80,7 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   onClicked?(): void;
 }
 
-export const Button : FC <IButtonProps> = (props: IButtonProps): React.ReactElement => {
+export const Button = (props: IButtonProps): React.ReactElement => {
   const buttonDefaultProp = setDefaults(props, { ...defaultComponentProps,
     buttonType: 'button',
     isLoading: false,
@@ -143,11 +143,3 @@ export const Button : FC <IButtonProps> = (props: IButtonProps): React.ReactElem
 };
 
 Button.displayName = 'Button';
-// Button.defaultProps = {
-//   ...defaultComponentProps,
-//   buttonType: 'button',
-//   isLoading: false,
-//   isEnabled: true,
-//   isFullWidth: false,
-//   iconGutter: PaddingSize.Default,
-// };
