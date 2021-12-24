@@ -1,4 +1,5 @@
-export default function setDefaults<Props, Defaults>(props: Props, defaults: Defaults): Required<Props> {
+// NOTE(Ajadi-Abiola): copied from <'https://dev.to/bytebodger/default-props-in-react-ts-part-deux-2ic3'>
+export const setDefaults = <Props, Defaults> (props: Props, defaults: Defaults): Required<Props> => {
   const newProps: Required<Props> = { ...props } as Required<Props>;
   const defaultKeys = Object.keys(defaults) as (string)[];
   defaultKeys.forEach((key) => {
@@ -9,4 +10,4 @@ export default function setDefaults<Props, Defaults>(props: Props, defaults: Def
     });
   });
   return newProps;
-}
+};

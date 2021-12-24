@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
-import setDefaults from '../../util/SetDefaultProps';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IButtonTheme } from './theme';
 
 interface IStyledButtonProps {
@@ -80,8 +80,8 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   onClicked?(): void;
 }
 
-export const Button = (props: IButtonProps): React.ReactElement => {
-  const buttonDefaultProp = setDefaults(props, { ...defaultComponentProps,
+export const Button = (inputProps: IButtonProps): React.ReactElement => {
+  const props = setDefaults(inputProps, { ...defaultComponentProps,
     buttonType: 'button',
     isLoading: false,
     isEnabled: true,
@@ -89,7 +89,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
     iconGutter: PaddingSize.Default });
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
   const onClicked = (): void => {
-    if (buttonDefaultProp.isLoading) {
+    if (props.isLoading) {
       return;
     }
     if (props.onClicked) {
@@ -97,7 +97,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
     }
   };
 
-  if (props.onClicked && buttonDefaultProp.buttonType === 'submit') {
+  if (props.onClicked && props.buttonType === 'submit') {
     throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
   }
 
@@ -108,31 +108,31 @@ export const Button = (props: IButtonProps): React.ReactElement => {
     // @ts-ignore: as prop doesn't match type required
     <StyledButton
       id={props.id}
-      className={getClassName(Button.displayName, props.className, buttonDefaultProp.isFullWidth && 'fullWidth', !buttonDefaultProp.isEnabled && 'disabled')}
+      className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', !props.isEnabled && 'disabled')}
       $theme={theme}
-      $isLoading={buttonDefaultProp.isLoading}
+      $isLoading={props.isLoading}
       onClick={onClicked}
-      disabled={!buttonDefaultProp.isEnabled}
+      disabled={!props.isEnabled}
       href={props.target}
       rel={props.target && 'noopener'}
       tabIndex={props.tabIndex || 0}
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
     >
-      { !buttonDefaultProp.isLoading && props.iconLeft && (
+      { !props.isLoading && props.iconLeft && (
         <React.Fragment>
           {props.iconLeft}
-          <Spacing variant={buttonDefaultProp.iconGutter} />
+          <Spacing variant={props.iconGutter} />
         </React.Fragment>
       )}
-      { !buttonDefaultProp.isLoading && props.text }
-      { !buttonDefaultProp.isLoading && props.iconRight && (
+      { !props.isLoading && props.text }
+      { !props.isLoading && props.iconRight && (
         <React.Fragment>
-          <Spacing variant={buttonDefaultProp.iconGutter} />
+          <Spacing variant={props.iconGutter} />
           {props.iconRight}
         </React.Fragment>
       )}
-      { buttonDefaultProp.isLoading && (
+      { props.isLoading && (
         <LoadingSpinner
           id={props.id && `${props.id}-loading-spinner`}
           variant='light-small'
