@@ -97,7 +97,7 @@ export const Button = (inputProps: IButtonProps): React.ReactElement => {
     }
   };
 
-  if (props.onClicked && props.buttonType === 'submit') {
+  if (props.buttonType === 'submit' && props.onClicked) {
     throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
   }
 
