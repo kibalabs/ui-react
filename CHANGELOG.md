@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+## [0.9.6] - 2021-12-22
+
+### Added
 - [MINOR] Added `background` prop to `KibaApp`
 - [MINOR] Created `renderHead` for external head rendering
 - [MINOR] updated `Media` to check for url extension and trust if present before checking for content-type
@@ -17,8 +25,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Fixed `InputWrapper` to set placeholder on correct elements
 - [MINOR] Updated to react-markdown v6
 - [MINOR] Fixed `Button`, `IconButton`, `Link` and `LinkBase` to only use `CoreLink` for internal links
-
-### Removed
 
 ## [0.9.5] - 2021-11-21
 
