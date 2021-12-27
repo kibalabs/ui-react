@@ -81,12 +81,15 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
 }
 
 export const Button = (inputProps: IButtonProps): React.ReactElement => {
-  const props = setDefaults(inputProps, { ...defaultComponentProps,
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
     buttonType: 'button',
     isLoading: false,
     isEnabled: true,
     isFullWidth: false,
-    iconGutter: PaddingSize.Default });
+    iconGutter: PaddingSize.Default,
+  });
+
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
   const onClicked = (): void => {
     if (props.isLoading) {
@@ -97,7 +100,7 @@ export const Button = (inputProps: IButtonProps): React.ReactElement => {
     }
   };
 
-  if (props.buttonType === 'submit' && props.onClicked) {
+  if (props.onClicked && props.buttonType === 'submit') {
     throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
   }
 
