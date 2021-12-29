@@ -90,18 +90,20 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
     updateSizes();
   }, [updateSizes]);
 
-  return ReactDOM.createPortal((
-    <StyledPortal
-      id={props.id}
-      className={getClassName(Portal.displayName, props.className)}
-      $theme={theme}
-      $positionTop={positionTop}
-      $positionLeft={positionLeft}
-      ref={ref}
-    >
-      {props.children}
-    </StyledPortal>
-  ), window.document.body);
+  return ReactDOM.createPortal(
+    (
+      <StyledPortal
+        id={props.id}
+        className={getClassName(Portal.displayName, props.className)}
+        $theme={theme}
+        $positionTop={positionTop}
+        $positionLeft={positionLeft}
+        ref={ref}
+      >
+        {props.children}
+      </StyledPortal>
+    ), window.document.body,
+  );
 });
 
 Portal.displayName = 'Portal';
