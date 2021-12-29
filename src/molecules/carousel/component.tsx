@@ -88,9 +88,9 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
   const onPreviousClicked = (): void => {
     if (sliderRef.current && !sliderRef.current.scrollTo) {
       // ie 11 doesn't support scrollTo (this doesn't animate nicely)
-      sliderRef.current.scrollLeft = (slideIndex - 1) * sliderRef.current?.clientWidth;
+      sliderRef.current.scrollLeft = (slideIndex - 1) * sliderRef.current.clientWidth;
     } else {
-      sliderRef.current?.scrollTo((slideIndex - 1) * sliderRef.current?.clientWidth, 0);
+      sliderRef.current?.scrollTo((slideIndex - 1) * (sliderRef.current?.clientWidth || 0), 0);
     }
   };
 
@@ -101,9 +101,9 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
   const goToNext = (): void => {
     if (sliderRef.current && !sliderRef.current.scrollTo) {
       // ie 11 doesn't support scrollTo (this doesn't animate nicely)
-      sliderRef.current.scrollLeft = (slideIndex + 1) * sliderRef.current?.clientWidth;
+      sliderRef.current.scrollLeft = (slideIndex + 1) * sliderRef.current.clientWidth;
     } else {
-      sliderRef.current?.scrollTo((slideIndex + 1) * sliderRef.current?.clientWidth, 0);
+      sliderRef.current?.scrollTo((slideIndex + 1) * (sliderRef.current?.clientWidth || 0), 0);
     }
   };
 
@@ -119,7 +119,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
         // ie 11 doesn't support scrollTo (this doesn't animate nicely)
         sliderRef.current.scrollLeft = sliderRef.current.clientWidth * initialIndex;
       } else {
-        sliderRef.current?.scrollTo(sliderRef.current?.clientWidth * initialIndex, 0);
+        sliderRef.current?.scrollTo((sliderRef.current?.clientWidth || 0) * initialIndex, 0);
       }
     }, 50);
   }, [initialIndex, sliderRef]);
