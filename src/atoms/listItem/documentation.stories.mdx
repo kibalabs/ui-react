@@ -1,6 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 
 import { ListItem, IListItemProps } from '.';
+import { Text} from '../../particles';
 
 <Meta
   component={ListItem}
@@ -12,5 +13,12 @@ import { ListItem, IListItemProps } from '.';
 This component is only intended to be used with [Molecules/List](/?path=/docs/molecules-list).
 
 ### Theming
+<Canvas>
+  <Story name='Hello'>
+    <ListItem>
+    <Text>hello</Text>
+    </ListItem>
+  </Story>
+</Canvas>
 
 TODO
