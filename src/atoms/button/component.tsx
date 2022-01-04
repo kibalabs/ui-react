@@ -77,7 +77,7 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   target?: string;
   targetShouldOpenSameTab?: boolean;
   tabIndex?: number;
-  onClicked?(): void;
+  onClicked?: () => void;
 }
 
 export const Button = (inputProps: IButtonProps): React.ReactElement => {
@@ -99,8 +99,7 @@ export const Button = (inputProps: IButtonProps): React.ReactElement => {
       props.onClicked();
     }
   };
-
-  if (props.onClicked && props.buttonType === 'submit') {
+  if ((props.onClicked !== undefined && props.onClicked) && props.buttonType === 'submit') {
     throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
   }
 
