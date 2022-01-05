@@ -5,6 +5,7 @@ import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react'
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { ILinkTheme } from './theme';
 
 interface IStyledLinkProps {
@@ -38,18 +39,22 @@ const StyledLink = styled.a<IStyledLinkProps>`
 `;
 
 export interface ILinkProps extends IComponentProps<ILinkTheme> {
-  isEnabled: boolean;
+  isEnabled?: boolean;
   target: string;
   text: string;
   tabIndex?: number;
   shouldOpenSameTab?: boolean;
 }
 
-export const Link = (props: ILinkProps): React.ReactElement => {
+export const Link = (inputProps: ILinkProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    isEnabled: true,
+  });
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
 
   const theme = useBuiltTheme('links', props.variant, props.theme);
-  const isTargetWithinApp = props.target.startsWith('#') || props.target.startsWith('/');
+  const isTargetWithinApp = props.target && (props.target.startsWith('#') || props.target.startsWith('/'));
   const targetShouldOpenSameTab = props.shouldOpenSameTab || (props.shouldOpenSameTab == null && props.target && isTargetWithinApp);
   return (
   // @ts-ignore: as prop doesn't match type required
@@ -69,7 +74,3 @@ export const Link = (props: ILinkProps): React.ReactElement => {
 };
 
 Link.displayName = 'Link';
-Link.defaultProps = {
-  ...defaultComponentProps,
-  isEnabled: true,
-};

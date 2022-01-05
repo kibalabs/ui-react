@@ -5,6 +5,7 @@ import { Link as CoreLink, ISingleAnyChildProps, useIsCoreRoutingEnabled } from 
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { ILinkBaseTheme } from './theme';
 
 interface IStyledLinkBaseProps {
@@ -74,7 +75,13 @@ export interface ILinkBaseProps extends IComponentProps<ILinkBaseTheme>, ISingle
   onClicked?(): void;
 }
 
-export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
+export const LinkBase = (inputProps: ILinkBaseProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    isEnabled: true,
+    isFullWidth: false,
+    isFullHeight: false,
+  });
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
 
   const onClicked = (): void => {
@@ -106,9 +113,3 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
 };
 
 LinkBase.displayName = 'LinkBase';
-LinkBase.defaultProps = {
-  ...defaultComponentProps,
-  isEnabled: true,
-  isFullWidth: false,
-  isFullHeight: false,
-};

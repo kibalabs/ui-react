@@ -7,8 +7,10 @@ import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } fro
 import { Direction } from '../../model';
 import { ScreenSize, Spacing } from '../../particles';
 import { ResponsiveField } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { ResponsiveHidingView } from '../../wrappers';
 import { ILinePagerTheme } from './theme';
+
 
 interface IStyledLinePagerProps {
   $theme: ILinePagerTheme;
@@ -58,7 +60,11 @@ interface ILinePagerProps extends IComponentProps<ILinePagerTheme> {
   onPageClicked?(index: number): void;
 }
 
-export const LinePager = (props: ILinePagerProps): React.ReactElement => {
+export const LinePager = (inputProps: ILinePagerProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+
+  });
   const theme = useBuiltTheme('linePagers', props.variant, props.theme);
   if (props.pageCount == null && props.pageCountResponsive?.base == null) {
     throw new Error(`One of {pageCount, pageCountResponsive.base} must be passed to ${LinePager.displayName}`);

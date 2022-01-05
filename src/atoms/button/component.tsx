@@ -88,7 +88,7 @@ export const Button = (inputProps: IButtonProps): React.ReactElement => {
     isEnabled: true,
     isFullWidth: false,
     iconGutter: PaddingSize.Default,
-  });
+  })as unknown as IButtonProps;
 
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
   const onClicked = (): void => {
@@ -99,7 +99,7 @@ export const Button = (inputProps: IButtonProps): React.ReactElement => {
       props.onClicked();
     }
   };
-  if ((props.onClicked !== undefined && props.onClicked) && props.buttonType === 'submit') {
+  if (props.onClicked && props.buttonType === 'submit') {
     throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
   }
 
@@ -112,7 +112,7 @@ export const Button = (inputProps: IButtonProps): React.ReactElement => {
       id={props.id}
       className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', !props.isEnabled && 'disabled')}
       $theme={theme}
-      $isLoading={props.isLoading}
+      $isLoading={true}
       onClick={onClicked}
       disabled={!props.isEnabled}
       href={props.target}

@@ -5,8 +5,10 @@ import { IOptionalSingleChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IBulletListProps } from '../bulletList';
 import { IBulletTextTheme } from './theme';
+
 
 interface IStyledBulletTextProps {
   $theme: IBulletTextTheme;
@@ -24,7 +26,12 @@ export interface IBulletTextProps extends IComponentProps<IBulletTextTheme>, IOp
   text: string;
 }
 
-export const BulletText = (props: IBulletTextProps): React.ReactElement => {
+export const BulletText = (inputProps: IBulletTextProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    isEnabled: false,
+
+  });
   const theme = useBuiltTheme('bulletTexts', props.variant, props.theme);
   return (
     <StyledBulletText
@@ -39,7 +46,3 @@ export const BulletText = (props: IBulletTextProps): React.ReactElement => {
 };
 
 BulletText.displayName = 'BulletText';
-BulletText.defaultProps = {
-  ...defaultComponentProps,
-  isEnabled: true,
-};

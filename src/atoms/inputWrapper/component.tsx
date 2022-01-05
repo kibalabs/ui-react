@@ -5,8 +5,10 @@ import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { HidingView } from '../../wrappers';
 import { IInputWrapperTheme } from './theme';
+
 
 const StyledInputWrapper = styled.div`
   display: flex;
@@ -100,7 +102,11 @@ export interface IInputWrapperProps extends IComponentProps<IInputWrapperTheme>,
   // isFocussed?: boolean;
 }
 
-export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
+export const InputWrapper = (inputProps: IInputWrapperProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+
+  });
   // :focus-within is not supported on all browsers so we manually maintain if this particle has a isFocussed child
   const [isFocussed, setIsFocussed] = React.useState(false);
   const theme = useBuiltTheme('inputWrappers', props.variant, props.theme);
@@ -141,6 +147,3 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
 };
 
 InputWrapper.displayName = 'InputWrapper';
-InputWrapper.defaultProps = {
-  ...defaultComponentProps,
-};

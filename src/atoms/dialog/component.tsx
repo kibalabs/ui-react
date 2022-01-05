@@ -8,7 +8,9 @@ import { defaultComponentProps, IComponentProps } from '../../model';
 import { Box } from '../../particles/box';
 import { useBuiltTheme } from '../../theming';
 import { valueToCss } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IDialogTheme } from './theme';
+
 
 interface IStyledBackdropProps {
   $backdropColor: string;
@@ -32,7 +34,7 @@ const StyledBackdrop = styled.div<IStyledBackdropProps>`
 `;
 
 interface IDialogProps extends IComponentProps<IDialogTheme>, ISingleAnyChildProps {
-  isOpen: boolean;
+  isOpen?: boolean;
   maxHeight?: string;
   maxWidth?: string;
   isScrollableVertically?: boolean;
@@ -42,7 +44,15 @@ interface IDialogProps extends IComponentProps<IDialogTheme>, ISingleAnyChildPro
   onCloseClicked: () => void;
 }
 
-export const Dialog = (props: IDialogProps): React.ReactElement | null => {
+export const Dialog = (inputProps: IDialogProps): React.ReactElement | null => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    isOpen: false,
+    isScrollableHorizontally: true,
+    isScrollableVertically: true,
+    isClosableByBackdrop: true,
+    isClosableByEscape: true,
+  });
   const dialogRef = React.useRef<HTMLDivElement | null>(null);
   const maxWidth = props.maxWidth || '400px';
   const maxHeight = props.maxHeight || '400px';
@@ -83,13 +93,4 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
     </StyledBackdrop>
   );
 };
-Dialog.defaultProps = {
-  ...defaultComponentProps,
-  isOpen: false,
-  isScrollableHorizontally: true,
-  isScrollableVertically: true,
-  isClosableByBackdrop: true,
-  isClosableByEscape: true,
-};
-
 Dialog.displayName = 'Dialog';

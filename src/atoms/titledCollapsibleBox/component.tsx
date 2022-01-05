@@ -5,6 +5,7 @@ import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, KibaIcon, themeToCss, useBuiltTheme } from '../..';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { HidingView } from '../../wrappers';
 import { ITitledCollapsibleBoxTheme } from './theme';
 
@@ -73,7 +74,10 @@ interface ITitledCollapsibleBoxProps extends IComponentProps<ITitledCollapsibleB
   onCollapseToggled(): void;
 }
 
-export const TitledCollapsibleBox = (props: ITitledCollapsibleBoxProps): React.ReactElement => {
+export const TitledCollapsibleBox = (inputProps: ITitledCollapsibleBoxProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+  });
   const onCollapseToggled = (): void => {
     props.onCollapseToggled();
   };
@@ -103,6 +107,3 @@ export const TitledCollapsibleBox = (props: ITitledCollapsibleBoxProps): React.R
 };
 
 TitledCollapsibleBox.displayName = 'TitledCollapsibleBox';
-TitledCollapsibleBox.defaultProps = {
-  ...defaultComponentProps,
-};

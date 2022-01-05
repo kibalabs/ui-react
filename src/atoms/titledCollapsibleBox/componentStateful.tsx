@@ -4,6 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
 import { defaultComponentProps, IComponentProps } from '../../model';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { TitledCollapsibleBox } from './component';
 import { ITitledCollapsibleBoxTheme } from './theme';
 
@@ -12,7 +13,10 @@ interface IStatefulTitledCollapsibleBoxProps extends IComponentProps<ITitledColl
   isCollapsedInitially?: boolean;
 }
 
-export const StatefulTitledCollapsibleBox = (props: IStatefulTitledCollapsibleBoxProps): React.ReactElement => {
+export const StatefulTitledCollapsibleBox = (inputProps: IStatefulTitledCollapsibleBoxProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+  });
   const [isCollapsed, setIsCollapsed] = React.useState(!!props.isCollapsedInitially);
   const onCollapseToggled = (): void => {
     setIsCollapsed(!isCollapsed);
@@ -34,6 +38,3 @@ export const StatefulTitledCollapsibleBox = (props: IStatefulTitledCollapsibleBo
 };
 
 StatefulTitledCollapsibleBox.displayName = 'StatefulTitledCollapsibleBox';
-StatefulTitledCollapsibleBox.defaultProps = {
-  ...defaultComponentProps,
-};

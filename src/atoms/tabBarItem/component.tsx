@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { defaultComponentProps, IComponentProps } from '../../model';
 import { useBuiltTheme } from '../../theming';
 import { themeToCss } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { ITabBarItemTheme } from './theme';
 
 interface IStyledTabBarItemProps {
@@ -92,7 +93,10 @@ export interface ITabBarItemProps extends IComponentProps<ITabBarItemTheme> {
   onClicked?(tabKey: string): void;
 }
 
-export const TabBarItem = (props: ITabBarItemProps): React.ReactElement => {
+export const TabBarItem = (inputProps: ITabBarItemProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+  });
   const onClicked = (): void => {
     if (props.onClicked) {
       props.onClicked(props.tabKey);
@@ -116,6 +120,3 @@ export const TabBarItem = (props: ITabBarItemProps): React.ReactElement => {
 };
 
 TabBarItem.displayName = 'TabBarItem';
-TabBarItem.defaultProps = {
-  ...defaultComponentProps,
-};

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { defaultComponentProps, IComponentProps } from '../../model';
 import { useBuiltTheme } from '../../theming';
 import { themeToCss } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IProgressCounterItemTheme } from './theme';
 
 interface IStyledProgressCounterItemProps {
@@ -78,7 +79,12 @@ export interface IProgressCounterItemProps extends IComponentProps<IProgressCoun
   onClicked?(): void;
 }
 
-export const ProgressCounterItem = (props: IProgressCounterItemProps): React.ReactElement => {
+export const ProgressCounterItem = (inputProps: IProgressCounterItemProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    isEnabled: true,
+    isSelected: false,
+  });
   const onClicked = (): void => {
     if (props.onClicked) {
       props.onClicked();
@@ -100,8 +106,3 @@ export const ProgressCounterItem = (props: IProgressCounterItemProps): React.Rea
 };
 
 ProgressCounterItem.displayName = 'ProgressCounterItem';
-ProgressCounterItem.defaultProps = {
-  ...defaultComponentProps,
-  isEnabled: true,
-  isSelected: false,
-};

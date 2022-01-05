@@ -6,8 +6,10 @@ import styled from 'styled-components';
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { Icon, PaddingSize, Spacing } from '../../particles';
 import { propertyToCss } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { HidingView } from '../../wrappers';
 import { ICheckboxTheme } from './theme';
+
 
 interface IStyledCheckboxProps {
   $theme: ICheckboxTheme;
@@ -136,7 +138,10 @@ interface ICheckBoxProps extends IComponentProps<ICheckboxTheme> {
   onToggled?(): void;
 }
 
-export const Checkbox = (props: ICheckBoxProps): React.ReactElement => {
+export const Checkbox = (inputProps: ICheckBoxProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+  });
   const onToggled = (event: React.SyntheticEvent<HTMLElement>): void => {
     if (!props.isDisabled && props.onToggled) {
       props.onToggled();
@@ -171,6 +176,3 @@ export const Checkbox = (props: ICheckBoxProps): React.ReactElement => {
 };
 
 Checkbox.displayName = 'Checkbox';
-Checkbox.defaultProps = {
-  ...defaultComponentProps,
-};

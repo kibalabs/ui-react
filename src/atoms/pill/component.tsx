@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IPillTheme } from './theme';
 
 interface IStyledPillProps {
@@ -28,13 +29,16 @@ const StyledPill = styled.div<IStyledPillProps>`
 
 export interface IPillProps extends IComponentProps<IPillTheme> {
   text: string;
-  isFullWidth: boolean;
+  isFullWidth?: boolean;
   iconRight?: OptionalProppedElement<IIconProps>;
   iconLeft?: OptionalProppedElement<IIconProps>;
   iconGutter?: PaddingSize;
 }
 
-export const Pill = (props: IPillProps): React.ReactElement => {
+export const Pill = (inputProps: IPillProps): React.ReactElement => {
+  const props = setDefaults(inputProps, { ...defaultComponentProps,
+    isFullWidth: false,
+    iconGutter: PaddingSize.Default });
   const theme = useBuiltTheme('pills', props.variant, props.theme);
   return (
     <StyledPill
@@ -60,8 +64,3 @@ export const Pill = (props: IPillProps): React.ReactElement => {
 };
 
 Pill.displayName = 'Pill';
-Pill.defaultProps = {
-  ...defaultComponentProps,
-  isFullWidth: false,
-  iconGutter: PaddingSize.Default,
-};

@@ -8,6 +8,7 @@ import { defaultComponentProps, IComponentProps } from '../../model';
 import { getTextTag, TextAlignment, TextTag } from '../../particles/text';
 import { useBuiltTheme } from '../../theming';
 import { themeToCss } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IPrettyTextTheme } from './theme';
 
 interface IStyledPrettyTextProps {
@@ -33,7 +34,10 @@ export interface IPrettyTextProps extends IComponentProps<IPrettyTextTheme>, IMu
   tag?: TextTag;
 }
 
-export const PrettyText = (props: IPrettyTextProps): React.ReactElement => {
+export const PrettyText = (inputProps: IPrettyTextProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+  });
   const theme = useBuiltTheme('prettyTexts', props.variant, props.theme);
   return (
     <StyledPrettyText
@@ -49,6 +53,3 @@ export const PrettyText = (props: IPrettyTextProps): React.ReactElement => {
 };
 
 PrettyText.displayName = 'PrettyText';
-PrettyText.defaultProps = {
-  ...defaultComponentProps,
-};

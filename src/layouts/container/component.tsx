@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { IDimensionGuide } from '../../particles';
 import { useDimensions } from '../../theming';
+import { setDefaults } from '../../util/SetDefaultProps';
 
 interface IStyledContainerProps {
   $theme: IDimensionGuide;
@@ -28,7 +29,11 @@ export interface IContainerProps extends ISingleAnyChildProps {
   isFullHeight: boolean;
 }
 
-export const Container = (props: IContainerProps): React.ReactElement => {
+export const Container = (inputProps: IContainerProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    className: '',
+    isFullHeight: true,
+  });
   const theme = useDimensions(props.theme);
   return (
     <StyledContainer
@@ -43,7 +48,3 @@ export const Container = (props: IContainerProps): React.ReactElement => {
 };
 
 Container.displayName = 'Container';
-Container.defaultProps = {
-  className: '',
-  isFullHeight: true,
-};

@@ -6,7 +6,9 @@ import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { IIconProps } from '../../particles/icon';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IIconButtonTheme } from './theme';
+
 
 interface IStyledIconButtonProps {
   $theme: IIconButtonTheme;
@@ -55,7 +57,7 @@ const StyledIconButton = styled.button<IStyledIconButtonProps>`
 `;
 
 export interface IIconButtonProps extends IComponentProps<IIconButtonTheme> {
-  isEnabled: boolean;
+  isEnabled?: boolean;
   icon: React.ReactElement<IIconProps>;
   label?: string;
   target?: string;
@@ -64,7 +66,12 @@ export interface IIconButtonProps extends IComponentProps<IIconButtonTheme> {
   onClicked?(): void;
 }
 
-export const IconButton = (props: IIconButtonProps): React.ReactElement => {
+export const IconButton = (inputProps: IIconButtonProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    label: 'Icon Button',
+    isEnabled: true,
+  });
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
 
   const onClicked = (event: React.SyntheticEvent): void => {
@@ -98,8 +105,3 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
 };
 
 IconButton.displayName = 'IconButton';
-IconButton.defaultProps = {
-  ...defaultComponentProps,
-  label: 'Icon Button',
-  isEnabled: true,
-};

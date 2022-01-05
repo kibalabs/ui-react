@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { LoadingSpinner } from '../../particles';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IWebViewTheme } from './theme';
 
 interface IStyledWebViewProps {
@@ -64,7 +65,14 @@ export interface IWebViewProps extends IComponentProps<IWebViewTheme> {
   onLoadingChanged?: (isLoading: boolean) => void;
 }
 
-export const WebView = (props: IWebViewProps): React.ReactElement => {
+export const WebView = (inputProps: IWebViewProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    isEnabled: true,
+    shouldShowLoadingSpinner: true,
+    title: 'Embedded View',
+    permissions: [],
+  });
   const [currentUrl, setCurrentUrl] = React.useState<string | undefined>(props.url);
   const [hasFailedToLoad, setHasFailedToLoad] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
@@ -148,10 +156,3 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
 };
 
 WebView.displayName = 'WebView';
-WebView.defaultProps = {
-  ...defaultComponentProps,
-  isEnabled: true,
-  shouldShowLoadingSpinner: true,
-  title: 'Embedded View',
-  permissions: [],
-};

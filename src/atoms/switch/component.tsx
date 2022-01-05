@@ -4,6 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { ISwitchTheme } from './theme';
 
 
@@ -125,7 +126,10 @@ export interface ISwitchProps extends IComponentProps<ISwitchTheme> {
   onToggled?(): void;
 }
 
-export const Switch = (props: ISwitchProps): React.ReactElement => {
+export const Switch = (inputProps: ISwitchProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+  });
   const isEnabled = props.isEnabled !== undefined ? props.isEnabled : true;
   const theme = useBuiltTheme('switches', props.variant, props.theme);
 
@@ -152,6 +156,3 @@ export const Switch = (props: ISwitchProps): React.ReactElement => {
 };
 
 Switch.displayName = 'Switch';
-Switch.defaultProps = {
-  ...defaultComponentProps,
-};

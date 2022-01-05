@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { defaultComponentProps, IComponentProps } from '../../model';
 import { useBuiltTheme } from '../../theming';
 import { themeToCss } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IListItemTheme } from './theme';
 
 interface IStyledListItemProps {
@@ -68,7 +69,11 @@ export interface IListItemProps extends IComponentProps<IListItemTheme>, ISingle
   onClicked?(itemKey: string): void;
 }
 
-export const ListItem = (props: IListItemProps): React.ReactElement => {
+export const ListItem = (inputProps: IListItemProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    isDisabled: false,
+  });
   const onClicked = !props.onClicked ? undefined : (): void => {
     // @ts-ignore
     props.onClicked(props.itemKey);
@@ -90,7 +95,3 @@ export const ListItem = (props: IListItemProps): React.ReactElement => {
 };
 
 ListItem.displayName = 'ListItem';
-ListItem.defaultProps = {
-  isDisabled: false,
-  ...defaultComponentProps,
-};
