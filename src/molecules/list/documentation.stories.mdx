@@ -63,11 +63,11 @@ export const Template = (args) => {
 </Canvas>
 
 <Canvas>
-  <Story name='Disabled List' args={{}}>
-    <List >
+  <Story name='With disabled items' args={{}}>
+    <List onClicked = {(itemKey) => console.log(`clicked list item with key: ${itemKey}`)}>
       <List.Item isDisabled={true} itemKey={String(1)}>Item 1</List.Item>
-      <List.Item isDisabled={true} itemKey={String(2)}>Item 2</List.Item>
-      <List.Item isDisabled={true} itemKey={String(3)}>Item 3</List.Item>
+      <List.Item itemKey={String(2)}>Item 2</List.Item>
+      <List.Item itemKey={String(3)}>Item 3</List.Item>
     </List>
   </Story>
 </Canvas>
