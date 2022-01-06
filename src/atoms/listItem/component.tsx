@@ -81,7 +81,7 @@ export const ListItem = (props: IListItemProps): React.ReactElement => {
       key={props.itemKey}
       className={getClassName(ListItem.displayName, props.className, props.isDisabled && 'disabled', props.isSelected && 'selected')}
       $theme={theme}
-      $isClickable={onClicked != null || !props.isDisabled}
+      $isClickable={onClicked != null && !props.isDisabled}
       onClick={onClicked}
     >
       { props.children }

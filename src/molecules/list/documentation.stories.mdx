@@ -64,7 +64,7 @@ export const Template = (args) => {
 
 <Canvas>
   <Story name='With disabled items' args={{}}>
-    <List onClicked={(itemKey) => console.log(`clicked list item with key: ${itemKey}`)}>
+    <List onItemClicked={(itemKey) => console.log(`clicked list item with key: ${itemKey}`)}>
       <List.Item isDisabled={true} itemKey={String(1)}>Item 1</List.Item>
       <List.Item isDisabled={true} itemKey={String(2)}>Item 2</List.Item>
       <List.Item isDisabled={false} itemKey={String(3)}>Item 3</List.Item>
