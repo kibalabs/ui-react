@@ -69,7 +69,7 @@ export interface IListItemProps extends IComponentProps<IListItemTheme>, ISingle
 }
 
 export const ListItem = (props: IListItemProps): React.ReactElement => {
-  const onClicked = !props.onClicked ? undefined : (): void => {
+  const onClicked = !props.onClicked || props.isDisabled ? undefined : (): void => {
     // @ts-ignore
     props.onClicked(props.itemKey);
   };
