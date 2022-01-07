@@ -74,7 +74,7 @@ export const ListItem = (inputProps: IListItemProps): React.ReactElement => {
     ...defaultComponentProps,
     isDisabled: false,
   });
-  const onClicked = !props.onClicked ? undefined : (): void => {
+  const onClicked = !props.onClicked || props.isDisabled ? undefined : (): void => {
     // @ts-ignore
     props.onClicked(props.itemKey);
   };
@@ -86,7 +86,7 @@ export const ListItem = (inputProps: IListItemProps): React.ReactElement => {
       key={props.itemKey}
       className={getClassName(ListItem.displayName, props.className, props.isDisabled && 'disabled', props.isSelected && 'selected')}
       $theme={theme}
-      $isClickable={onClicked != null}
+      $isClickable={onClicked != null && !props.isDisabled}
       onClick={onClicked}
     >
       { props.children }
