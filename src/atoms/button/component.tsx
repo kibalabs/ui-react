@@ -112,7 +112,7 @@ export const Button = (inputProps: IButtonProps): React.ReactElement => {
       id={props.id}
       className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', !props.isEnabled && 'disabled')}
       $theme={theme}
-      $isLoading={true}
+      $isLoading={props.isLoading}
       onClick={onClicked}
       disabled={!props.isEnabled}
       href={props.target}
