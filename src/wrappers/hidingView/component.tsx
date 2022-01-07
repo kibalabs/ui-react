@@ -3,6 +3,7 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
@@ -20,7 +21,10 @@ export interface IHidingViewProps extends IWrapperProps {
   isHidden?: boolean;
 }
 
-export const HidingView = (props: IHidingViewProps): React.ReactElement => {
+export const HidingView = (inputProps: IHidingViewProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultWrapperProps,
+  });
   return (
     <StyledHidingView
       className={getClassName(HidingView.displayName, props.className)}
@@ -32,6 +36,3 @@ export const HidingView = (props: IHidingViewProps): React.ReactElement => {
 };
 
 HidingView.displayName = 'HidingView';
-HidingView.defaultProps = {
-  ...defaultWrapperProps,
-};

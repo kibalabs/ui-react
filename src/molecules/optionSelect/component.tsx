@@ -9,6 +9,7 @@ import { Alignment, Direction } from '../../model';
 import { IBoxTheme, KibaIcon, Text } from '../../particles';
 import { useBuiltTheme } from '../../theming';
 import { themeToCss } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { HidingView } from '../../wrappers';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
@@ -59,7 +60,10 @@ const StyledOptionSelect = styled.div`
 `;
 
 
-export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
+export const OptionSelect = (inputProps: IOptionSelectProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultMoleculeProps,
+  });
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const optionsContainerTheme = useBuiltTheme<IBoxTheme>('boxes', props.optionsContainerVariant || 'card-unpadded-unmargined', props.theme?.optionsContainerTheme);
 
@@ -117,7 +121,3 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
 };
 
 OptionSelect.displayName = 'OptionSelect';
-OptionSelect.defaultProps = {
-  ...defaultMoleculeProps,
-
-};

@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Alignment, Direction, getFlexContentAlignment, getFlexItemAlignment, IDimensionGuide, PaddingSize, PaddingSizeProp, Spacing } from '../..';
 import { useDimensions } from '../../theming';
 import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
 import { wrappingComponent } from '../../wrappers/wrappingComponent';
 
@@ -84,24 +85,35 @@ interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   id?: string;
   className?: string;
   theme?: IDimensionGuide;
-  shouldAddGutters: boolean;
+  shouldAddGutters?: boolean;
   defaultGutter?: PaddingSizeProp;
-  isScrollableVertically: boolean;
-  isScrollableHorizontally: boolean;
-  isFullWidth: boolean;
-  isFullHeight: boolean;
+  isScrollableVertically?: boolean;
+  isScrollableHorizontally?: boolean;
+  isFullWidth?: boolean;
+  isFullHeight?: boolean;
   paddingStart?: PaddingSizeProp,
   paddingEnd?: PaddingSizeProp,
-  direction: Direction;
+  direction?: Direction;
   directionResponsive?: ResponsiveField<Direction>;
-  childAlignment: Alignment;
+  childAlignment?: Alignment;
   childAlignmentResponsive?: ResponsiveField<Alignment>;
-  contentAlignment: Alignment;
+  contentAlignment?: Alignment;
   contentAlignmentResponsive?: ResponsiveField<Alignment>;
   shouldWrapItems?: boolean;
 }
 
-export const Stack = (props: IStackProps): React.ReactElement => {
+export const Stack = (inputProps: IStackProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    className: '',
+    direction: Direction.Vertical,
+    childAlignment: Alignment.Fill,
+    contentAlignment: Alignment.Fill,
+    shouldAddGutters: false,
+    isFullWidth: false,
+    isFullHeight: false,
+    isScrollableVertically: false,
+    isScrollableHorizontally: false,
+  });
   const theme = useDimensions(props.theme);
   const children = flattenChildren(props.children).map((child: React.ReactChild, index: number): React.ReactElement<IStackItemProps> => (
     typeof child === 'object' && 'type' in child && child.type === StackItem ? child : <StackItem key={index}>{ child }</StackItem>
@@ -154,17 +166,6 @@ export const Stack = (props: IStackProps): React.ReactElement => {
 };
 
 Stack.displayName = 'Stack';
-Stack.defaultProps = {
-  className: '',
-  direction: Direction.Vertical,
-  childAlignment: Alignment.Fill,
-  contentAlignment: Alignment.Fill,
-  shouldAddGutters: false,
-  isFullWidth: false,
-  isFullHeight: false,
-  isScrollableVertically: false,
-  isScrollableHorizontally: false,
-};
 Stack.Item = StackItem;
 
 interface IStyledStackItemProps extends ISingleAnyChildProps {

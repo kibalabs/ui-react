@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { IProgressCounterItemTheme, ProgressCounterItem } from '../../atoms';
 import { Direction } from '../../model';
 import { PaddingSize, Spacing } from '../../particles';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface IProgressCounterTheme {
@@ -28,11 +29,15 @@ export interface IProgressCounterProps extends IMoleculeProps<IProgressCounterTh
   stepCount: number;
   selectedStepIndex: number;
   progressCounterItemVariant?: string;
-  itemSpacingSize: PaddingSize;
+  itemSpacingSize?: PaddingSize;
   isSelectable?: (step: number) => boolean;
 }
 
-export const ProgressCounter = (props: IProgressCounterProps): React.ReactElement => {
+export const ProgressCounter = (inputProps: IProgressCounterProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultMoleculeProps,
+    itemSpacingSize: PaddingSize.Default,
+  });
   return (
     <StyledProgressCounter
       id={props.id}
@@ -58,7 +63,3 @@ export const ProgressCounter = (props: IProgressCounterProps): React.ReactElemen
 };
 
 ProgressCounter.displayName = 'ProgressCounter';
-ProgressCounter.defaultProps = {
-  ...defaultMoleculeProps,
-  itemSpacingSize: PaddingSize.Default,
-};

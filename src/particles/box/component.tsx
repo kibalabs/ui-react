@@ -5,6 +5,7 @@ import { IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IBoxTheme } from './theme';
 
 interface IStyledBoxProps {
@@ -52,7 +53,12 @@ export interface IBoxProps extends IComponentProps<IBoxTheme>, IOptionalSingleAn
   shouldClipContent?: boolean;
 }
 
-export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
+export const Box = React.forwardRef((inputProps: IBoxProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    isFullWidth: true,
+    shouldClipContent: false,
+  });
   const theme = useBuiltTheme('boxes', props.variant, props.theme);
   const height = props.height || (props.isFullHeight ? '100%' : 'auto');
   const width = props.width || (props.isFullWidth ? '100%' : 'auto');
@@ -85,8 +91,3 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
 });
 
 Box.displayName = 'Box';
-Box.defaultProps = {
-  ...defaultComponentProps,
-  isFullWidth: true,
-  shouldClipContent: false,
-};

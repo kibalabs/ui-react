@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { IDimensionGuide } from '../../particles';
 import { useDimensions } from '../../theming';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
@@ -26,10 +27,13 @@ const StyledContainingView = wrappingComponent((Component: React.ComponentType<I
 
 export interface IContainingViewProps extends IWrapperProps {
   theme?: IDimensionGuide;
-  isCenteredHorizontally: boolean;
+  isCenteredHorizontally?: boolean;
 }
 
-export const ContainingView = (props: IContainingViewProps): React.ReactElement => {
+export const ContainingView = (inputProps: IContainingViewProps): React.ReactElement => {
+  const props = setDefaults(inputProps,
+    { ...defaultWrapperProps,
+      isCenteredHorizontally: true });
   const theme = useDimensions(props.theme);
   return (
     <StyledContainingView
@@ -42,7 +46,3 @@ export const ContainingView = (props: IContainingViewProps): React.ReactElement 
 };
 
 ContainingView.displayName = 'ContainingView';
-ContainingView.defaultProps = {
-  ...defaultWrapperProps,
-  isCenteredHorizontally: true,
-};

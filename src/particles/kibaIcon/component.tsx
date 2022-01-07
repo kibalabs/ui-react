@@ -3,6 +3,7 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 
 import { IComponentProps } from '../..';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { Icon, IIconTheme } from '../icon';
 
 interface IKibaIconProps extends IComponentProps<IIconTheme> {
@@ -14,9 +15,13 @@ interface IconData {
   url: string;
   shouldAddFill: boolean;
   shouldAddStroke: boolean;
+  className?: string;
 }
 
-export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
+export const KibaIcon = (inputProps: IKibaIconProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    className: '',
+  });
   const [svgContent, setSvgContent] = React.useState<string | null>(null);
   const [shouldAddFill, setShouldAddFill] = React.useState<boolean | undefined>(undefined);
   const [shouldAddStroke, setShouldAddStroke] = React.useState<boolean | undefined>(undefined);
@@ -97,6 +102,3 @@ export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
 };
 
 KibaIcon.displayName = 'KibaIcon';
-KibaIcon.defaultProps = {
-  className: '',
-};

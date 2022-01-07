@@ -8,6 +8,7 @@ import { Alignment, getFlexContentAlignment, getFlexItemAlignment, PaddingSize, 
 import { getPaddingSize, IDimensionGuide } from '../../particles';
 import { useDimensions } from '../../theming';
 import { getResponsiveCss, ResponsiveField } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
 
 
@@ -52,11 +53,18 @@ export interface IGridProps extends IMultiChildProps<IGridItemProps>, IPaddingVi
   isFullHeight?: boolean;
   shouldAddGutters?: boolean;
   defaultGutter?: PaddingSizeProp;
-  childAlignment: Alignment;
-  contentAlignment: Alignment;
+  childAlignment?: Alignment;
+  contentAlignment?: Alignment;
 }
 
-export const Grid = (props: IGridProps): React.ReactElement => {
+export const Grid = (inputProps: IGridProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    className: '',
+    isFullHeight: true,
+    shouldAddGutters: false,
+    childAlignment: Alignment.Fill,
+    contentAlignment: Alignment.Center,
+  });
   const theme = useDimensions(props.theme);
   const defaultGutter = props.defaultGutter || PaddingSize.Default;
   const shouldAddGutters = props.shouldAddGutters && defaultGutter !== PaddingSize.None;
@@ -93,13 +101,6 @@ export const Grid = (props: IGridProps): React.ReactElement => {
 };
 
 Grid.displayName = 'Grid';
-Grid.defaultProps = {
-  className: '',
-  isFullHeight: true,
-  shouldAddGutters: false,
-  childAlignment: Alignment.Fill,
-  contentAlignment: Alignment.Center,
-};
 Grid.Item = GridItem;
 
 const getCssSize = (totalColumnCount: number, gutter: string, columnCount: number): string => {

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { getScreenSize, IDimensionGuide, ScreenSize } from '../../particles/dimensions';
 import { useDimensions } from '../../theming';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
@@ -26,7 +27,10 @@ export interface IResponsiveHidingViewProps extends IWrapperProps {
   hiddenBelow?: ScreenSize;
 }
 
-export const ResponsiveHidingView = (props: IResponsiveHidingViewProps): React.ReactElement => {
+export const ResponsiveHidingView = (inputProps: IResponsiveHidingViewProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultWrapperProps,
+  });
   const theme = useDimensions(props.theme);
   return (
     <StyledResponsiveHidingView
@@ -40,6 +44,3 @@ export const ResponsiveHidingView = (props: IResponsiveHidingViewProps): React.R
 };
 
 ResponsiveHidingView.displayName = 'ResponsiveHidingView';
-ResponsiveHidingView.defaultProps = {
-  ...defaultWrapperProps,
-};

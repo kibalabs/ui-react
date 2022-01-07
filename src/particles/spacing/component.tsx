@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { defaultComponentProps, Direction, IComponentProps, MultiDirection } from '../../model';
 import { useDimensions } from '../../theming';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { getPaddingSize, IDimensionGuide, PaddingSize } from '../dimensions';
 
 interface IStyledSpacingProps {
@@ -19,10 +20,12 @@ const StyledDiv = styled.div<IStyledSpacingProps>`
 `;
 
 export interface ISpacingProps extends IComponentProps<IDimensionGuide> {
-  direction: Direction | MultiDirection;
+  direction?: Direction | MultiDirection;
 }
 
-export const Spacing = (props: ISpacingProps): React.ReactElement => {
+export const Spacing = (inputProps: ISpacingProps): React.ReactElement => {
+  const props = setDefaults(inputProps, { ...defaultComponentProps,
+    direction: MultiDirection.Both });
   const theme = useDimensions(props.theme);
   return (
     <StyledDiv
@@ -36,7 +39,3 @@ export const Spacing = (props: ISpacingProps): React.ReactElement => {
 };
 
 Spacing.displayName = 'Spacing';
-Spacing.defaultProps = {
-  ...defaultComponentProps,
-  direction: MultiDirection.Both,
-};

@@ -4,6 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { InputType } from '../../model';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IInputFrameTheme, InputFrame } from '../inputFrame';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
@@ -45,10 +46,10 @@ const getAutocompleteType = (inputType: InputType): string | undefined => {
 
 export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTheme> {
   value: string | null;
-  isEnabled: boolean;
+  isEnabled?: boolean;
   placeholderText?: string;
   messageText?: string;
-  inputType: InputType;
+  inputType?: InputType;
   name?: string;
   label?: string;
   inputWrapperVariant?: string;
@@ -59,7 +60,12 @@ export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTh
   onValueChanged: (value: string) => void;
 }
 
-export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElement => {
+export const SingleLineInput = (inputProps: ISingleLineInputProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultMoleculeProps,
+    isEnabled: true,
+    inputType: InputType.Text,
+  });
   const onValueChanged = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (props.onValueChanged) {
       props.onValueChanged(event.target.value);
@@ -112,8 +118,3 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
 };
 
 SingleLineInput.displayName = 'SingleLineInput';
-SingleLineInput.defaultProps = {
-  ...defaultMoleculeProps,
-  isEnabled: true,
-  inputType: InputType.Text,
-};

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
 import { valueToCss } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IDividerTheme } from './theme';
 
 interface IStyledDividerProps {
@@ -34,7 +35,11 @@ interface IDividerProps extends IComponentProps<IDividerTheme> {
   orientation?: string;
 }
 
-export const Divider = (props: IDividerProps): React.ReactElement => {
+export const Divider = (inputProps: IDividerProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    orientation: 'horizontal',
+  });
   const theme = useBuiltTheme('dividers', props.variant, props.theme);
 
   return (
@@ -47,7 +52,3 @@ export const Divider = (props: IDividerProps): React.ReactElement => {
 };
 
 Divider.displayName = 'Divider';
-Divider.defaultProps = {
-  ...defaultComponentProps,
-  orientation: 'horizontal',
-};

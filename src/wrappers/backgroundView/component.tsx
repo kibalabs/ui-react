@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { IColorGuide } from '../../particles';
 import { useColors } from '../../theming';
 import { valueToCss } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
@@ -65,7 +66,10 @@ const StyledBackgroundView = wrappingComponent((Component: React.ComponentType<I
 export interface IBackgroundViewProps extends IWrapperProps, IBackgroundConfig {
 }
 
-export const BackgroundView = (props: IBackgroundViewProps): React.ReactElement => {
+export const BackgroundView = (inputProps: IBackgroundViewProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultWrapperProps,
+  });
   const colors = useColors();
   const layers = props.layers || [];
   if (props.color || props.linearGradient || props.radialGradient || props.imageUrl || props.patternImageUrl || layers.length === 0) {
@@ -89,6 +93,3 @@ export const BackgroundView = (props: IBackgroundViewProps): React.ReactElement 
 };
 
 BackgroundView.displayName = 'BackgroundView';
-BackgroundView.defaultProps = {
-  ...defaultWrapperProps,
-};

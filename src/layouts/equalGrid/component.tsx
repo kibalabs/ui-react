@@ -6,7 +6,9 @@ import { flattenChildren, IMultiAnyChildProps } from '@kibalabs/core-react';
 import { Alignment, PaddingSizeProp } from '../..';
 import { IDimensionGuide } from '../../particles';
 import { ResponsiveField } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { Grid } from '../grid';
+
 
 export interface IEqualGridProps extends IMultiAnyChildProps {
   id?: string;
@@ -21,7 +23,9 @@ export interface IEqualGridProps extends IMultiAnyChildProps {
   childSizeResponsive?: ResponsiveField<number>;
 }
 
-export const EqualGrid = (props: IEqualGridProps): React.ReactElement => {
+export const EqualGrid = (inputProps: IEqualGridProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+  });
   if (props.childSize == null && props.childSizeResponsive?.base == null) {
     throw new Error(`One of {childSize, childSizeResponsive.base} must be passed to ${EqualGrid.displayName}`);
   }
@@ -35,5 +39,3 @@ export const EqualGrid = (props: IEqualGridProps): React.ReactElement => {
 };
 
 EqualGrid.displayName = 'EqualGrid';
-EqualGrid.defaultProps = {
-};

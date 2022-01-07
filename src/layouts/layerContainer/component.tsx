@@ -5,6 +5,8 @@ import { flattenChildren, IMultiAnyChildProps, IOptionalSingleAnyChildProps, ISi
 import styled from 'styled-components';
 
 import { Alignment } from '../../model';
+import { setDefaults } from '../../util/SetDefaultProps';
+
 
 interface ILayerProps extends IOptionalSingleAnyChildProps {
   className?: string;
@@ -36,7 +38,10 @@ interface ILayerContainerProps extends IMultiAnyChildProps {
   className?: string;
 }
 
-export const LayerContainer = (props: ILayerContainerProps): React.ReactElement => {
+export const LayerContainer = (inputProps: ILayerContainerProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    className: '',
+  });
   const children = flattenChildren(props.children).map((child: React.ReactChild, index: number): React.ReactElement<ILayerProps> => (
     typeof child === 'object' && 'type' in child && child.type === Layer ? child : <Layer key={index}>{ child }</Layer>
   ));
@@ -64,9 +69,6 @@ export const LayerContainer = (props: ILayerContainerProps): React.ReactElement 
 };
 
 LayerContainer.displayName = 'LayerContainer';
-LayerContainer.defaultProps = {
-  className: '',
-};
 LayerContainer.Layer = Layer;
 
 const getStaticTranslateCssValue = (alignment: Alignment): string => {

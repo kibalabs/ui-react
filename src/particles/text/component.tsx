@@ -4,9 +4,11 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
+
 import { defaultComponentProps, IComponentProps } from '../../model';
 import { useBuiltTheme } from '../../theming';
 import { themeToCss } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { ITextTheme } from './theme';
 
 export enum TextAlignment {
@@ -91,15 +93,19 @@ export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChild
   alignment?: TextAlignment;
   tag?: TextTag;
   lineLimit?: number;
+  isSingleLine?: boolean;
 }
 
-export const Text = (props: ITextProps): React.ReactElement => {
+export const Text = (inputProps: ITextProps): React.ReactElement => {
+  const props = setDefaults(inputProps,
+    { ...defaultComponentProps,
+      isSingleLine: false });
   const theme = useBuiltTheme('texts', props.variant, props.theme);
 
   let lineLimit = props.lineLimit;
   if (props.lineLimit && props.lineLimit <= 0) {
     console.error('The lineLimit prop should be a positive integer');
-    lineLimit = undefined;
+    lineLimit = undefined as unknown as number;
   }
 
   return (
@@ -117,7 +123,3 @@ export const Text = (props: ITextProps): React.ReactElement => {
 };
 
 Text.displayName = 'Text';
-Text.defaultProps = {
-  ...defaultComponentProps,
-  isSingleLine: false,
-};

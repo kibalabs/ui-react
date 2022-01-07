@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { Box, IBoxTheme, ILoadingSpinnerTheme, LoadingSpinner } from '../../particles';
 import { ThemeType } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 
@@ -34,11 +35,15 @@ const LoadingOverlay = styled.div`
 `;
 
 interface IFormProps extends IMoleculeProps<IFormTheme>, ISingleAnyChildProps {
-  isLoading: boolean;
+  isLoading?: boolean;
   onFormSubmitted: () => void;
 }
 
-export const Form = (props: IFormProps): React.ReactElement => {
+export const Form = (inputProps: IFormProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultMoleculeProps,
+    isLoading: false,
+  });
   const onSubmitted = (event: React.FormEvent<HTMLElement>): void => {
     event.preventDefault();
     props.onFormSubmitted();
@@ -69,7 +74,3 @@ export const Form = (props: IFormProps): React.ReactElement => {
 };
 
 Form.displayName = 'Form';
-Form.defaultProps = {
-  ...defaultMoleculeProps,
-  isLoading: false,
-};

@@ -26,7 +26,7 @@ export interface IContainerProps extends ISingleAnyChildProps {
   id?: string;
   className?: string;
   theme?: IDimensionGuide;
-  isFullHeight: boolean;
+  isFullHeight?: boolean;
 }
 
 export const Container = (inputProps: IContainerProps): React.ReactElement => {

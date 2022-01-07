@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { IDimensionGuide } from '../../particles';
 import { useDimensions } from '../../theming';
 import { getResponsiveCss, ResponsiveField } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
@@ -65,7 +66,11 @@ export interface IResponsiveContainingViewProps extends IWrapperProps {
   isCenteredHorizontally?: boolean;
 }
 
-export const ResponsiveContainingView = (props: IResponsiveContainingViewProps): React.ReactElement => {
+export const ResponsiveContainingView = (inputProps: IResponsiveContainingViewProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultWrapperProps,
+    isCenteredHorizontally: true,
+  });
   const theme = useDimensions(props.theme);
   const isFullWidth = props.isFullWidth === true || props.isFullWidth == null;
   const shouldIncludeMaxSize = props.shouldIncludeMaxSize === true || props.shouldIncludeMaxSize == null;
@@ -86,7 +91,3 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
 };
 
 ResponsiveContainingView.displayName = 'ResponsiveContainingView';
-ResponsiveContainingView.defaultProps = {
-  ...defaultWrapperProps,
-  isCenteredHorizontally: true,
-};

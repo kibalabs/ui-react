@@ -7,6 +7,7 @@ import { ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IPortalTheme } from './theme';
 
 interface IStyledPortalProps {
@@ -67,7 +68,10 @@ export interface IPortalProps extends IComponentProps<IPortalTheme>, ISingleAnyC
   positionLeft?: number;
 }
 
-export const Portal = React.forwardRef((props: IPortalProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
+export const Portal = React.forwardRef((inputProps: IPortalProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+  });
   const theme = useBuiltTheme('portals', props.variant, props.theme);
   const [positionTop, setPositionTop] = React.useState<number>(props.positionTop || 0);
   const [positionLeft, setPositionLeft] = React.useState<number>(props.positionLeft || 0);
@@ -105,6 +109,3 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
 });
 
 Portal.displayName = 'Portal';
-Portal.defaultProps = {
-  ...defaultComponentProps,
-};

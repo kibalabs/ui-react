@@ -65,9 +65,9 @@ const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
 `;
 
 export interface ILinkBaseProps extends IComponentProps<ILinkBaseTheme>, ISingleAnyChildProps {
-  isEnabled: boolean;
-  isFullWidth: boolean;
-  isFullHeight: boolean;
+  isEnabled?: boolean;
+  isFullWidth?: boolean;
+  isFullHeight?: boolean;
   label?: string;
   target?: string;
   targetShouldOpenSameTab?: boolean;

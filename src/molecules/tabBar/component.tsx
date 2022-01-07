@@ -8,6 +8,7 @@ import { ITabBarItemProps, ITabBarItemTheme, TabBarItem } from '../../atoms/tabB
 import { Alignment, getFlexContentAlignment } from '../../model';
 import { useDimensions } from '../../theming';
 import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface ITabBarTheme {
@@ -48,12 +49,16 @@ class TabBarItemInner extends React.Component<ITabBarItemInnerProps> {
 interface ITabBarProps extends IMoleculeProps<ITabBarTheme>, IMultiChildProps<ITabBarItemInnerProps> {
   isFullWidth?: boolean;
   selectedTabKey: string;
-  contentAlignment: Alignment;
+  contentAlignment?: Alignment;
   contentAlignmentResponsive?: ResponsiveField<Alignment>;
   onTabKeySelected(tabKey: string): void;
 }
 
-export const TabBar = (props: ITabBarProps): React.ReactElement => {
+export const TabBar = (inputProps: ITabBarProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultMoleculeProps,
+    contentAlignment: Alignment.Fill,
+  });
   if (React.Children.count(props.children) === 0) {
     throw new Error('TabBar must have at least one child');
   }
@@ -93,10 +98,6 @@ export const TabBar = (props: ITabBarProps): React.ReactElement => {
   );
 };
 TabBar.displayName = 'TabBar';
-TabBar.defaultProps = {
-  ...defaultMoleculeProps,
-  contentAlignment: Alignment.Fill,
-};
 TabBar.Item = TabBarItemInner;
 
 // interface IManagedTabBarProps extends Omit<ITabBarProps, 'selectedTabKey' | 'onTabKeySelected'> {

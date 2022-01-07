@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
 import { valueToCss } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { ILoadingSpinnerTheme } from './theme';
 
 interface IStyledLoadingSpinnerProps {
@@ -29,7 +30,10 @@ const StyledLoadingSpinner = styled.div<IStyledLoadingSpinnerProps>`
 interface ILoadingSpinnerProps extends IComponentProps<ILoadingSpinnerTheme> {
 }
 
-export const LoadingSpinner = (props: ILoadingSpinnerProps): React.ReactElement => {
+export const LoadingSpinner = (inputProps: ILoadingSpinnerProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+  });
   const theme = useBuiltTheme('loadingSpinners', props.variant, props.theme);
   return (
     <StyledLoadingSpinner
@@ -41,6 +45,3 @@ export const LoadingSpinner = (props: ILoadingSpinnerProps): React.ReactElement 
 };
 
 LoadingSpinner.displayName = 'LoadingSpinner';
-LoadingSpinner.defaultProps = {
-  ...defaultComponentProps,
-};

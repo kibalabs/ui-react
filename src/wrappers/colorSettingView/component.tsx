@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { IColorGuide } from '../../particles';
 import { ColorProvider, useAlternateColors } from '../../theming';
 import { colorsToCss } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
@@ -24,7 +25,10 @@ export interface IColorSettingViewProps extends IWrapperProps {
   variant?: string;
 }
 
-export const ColorSettingView = (props: IColorSettingViewProps): React.ReactElement => {
+export const ColorSettingView = (inputProps: IColorSettingViewProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultWrapperProps,
+  });
   const colors = useAlternateColors(props.variant, props.theme);
 
   return (
@@ -40,6 +44,3 @@ export const ColorSettingView = (props: IColorSettingViewProps): React.ReactElem
 };
 
 ColorSettingView.displayName = 'ColorSettingView';
-ColorSettingView.defaultProps = {
-  ...defaultWrapperProps,
-};

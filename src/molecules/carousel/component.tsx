@@ -10,6 +10,7 @@ import { Alignment, Direction } from '../../model';
 import { getScreenSizeValue, IDimensionGuide, KibaIcon, ScreenSize } from '../../particles';
 import { useDimensions } from '../../theming';
 import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 const getSlidesPerPageCss: CssConverter<number> = (field: number): string => {
@@ -70,14 +71,21 @@ export interface ICarouselProps extends IMoleculeProps<ICarouselTheme>, IMultiAn
   autoplaySeconds?: number;
   initialIndex?: number;
   indexButtonVariant?: string;
-  slidesPerPage: number;
+  slidesPerPage?: number;
   slidesPerPageResponsive?: ResponsiveField<number>;
   onIndexProgressed?: (slideIndexProgress: number) => void;
   onIndexChanged?: (slideIndex: number) => void;
 }
 
 // NOTE(krishan711): the slider could potentially be its own component here!
-export const Carousel = (props: ICarouselProps): React.ReactElement => {
+export const Carousel = (inputProps: ICarouselProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultMoleculeProps,
+    shouldShowButtons: true,
+    autoplaySeconds: 7,
+    initialIndex: 0,
+    slidesPerPage: 1,
+  });
   const initialIndex = props.initialIndex || 0;
   const dimensions = useDimensions();
   const [sliderRef] = useRenderedRef<HTMLDivElement>();
@@ -224,10 +232,3 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
 };
 
 Carousel.displayName = 'Carousel';
-Carousel.defaultProps = {
-  ...defaultMoleculeProps,
-  shouldShowButtons: true,
-  autoplaySeconds: 7,
-  initialIndex: 0,
-  slidesPerPage: 1,
-};

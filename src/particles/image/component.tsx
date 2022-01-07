@@ -4,6 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IImageTheme } from './theme';
 
 export interface IStyledImageProps {
@@ -63,7 +64,10 @@ export interface IImageProps extends IComponentProps<IImageTheme> {
   isLazyLoadable?: boolean;
 }
 
-export const Image = (props: IImageProps): React.ReactElement => {
+export const Image = (inputProps: IImageProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+  });
   const theme = useBuiltTheme('images', props.variant, props.theme);
   const fitType = props.fitType || 'scale';
   return (
@@ -98,6 +102,3 @@ export const Image = (props: IImageProps): React.ReactElement => {
 };
 
 Image.displayName = 'Image';
-Image.defaultProps = {
-  ...defaultComponentProps,
-};

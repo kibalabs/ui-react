@@ -3,6 +3,7 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IInputFrameTheme, InputFrame } from '../inputFrame';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
@@ -37,9 +38,9 @@ const StyledMultiLineTextArea = styled.textarea`
 // TODO(krishan711): this only grows when the user types into it, not when the prop passed in is very long
 interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
   value: string| null;
-  isEnabled: boolean;
-  minRowCount: number;
-  maxRowCount: number;
+  isEnabled?: boolean;
+  minRowCount?: number;
+  maxRowCount?: number;
   placeholderText?: string;
   messageText?: string;
   name?: string;
@@ -51,7 +52,13 @@ interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
   onValueChanged: (value: string) => void;
 }
 
-export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement => {
+export const MultiLineInput = (inputProps: IMultiLineInputProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultMoleculeProps,
+    isEnabled: true,
+    minRowCount: 3,
+    maxRowCount: 6,
+  });
   const [rowCount, setRowCount] = React.useState(props.minRowCount);
   const maxRowCount = Math.max(props.maxRowCount, props.minRowCount);
 
@@ -126,9 +133,3 @@ export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement 
 };
 
 MultiLineInput.displayName = 'MultiLineInput';
-MultiLineInput.defaultProps = {
-  ...defaultMoleculeProps,
-  isEnabled: true,
-  minRowCount: 3,
-  maxRowCount: 6,
-};

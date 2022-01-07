@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { IListItemProps, IListItemTheme, ListItem } from '../../atoms/listItem';
 import { Divider } from '../../particles';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface IListTheme {
@@ -40,7 +41,10 @@ interface IListProps extends IMoleculeProps<IListTheme>, IMultiChildProps<IListI
   onItemClicked?(itemKey: string): void;
 }
 
-export const List = (props: IListProps): React.ReactElement => {
+export const List = (inputProps: IListProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultMoleculeProps,
+  });
   const onItemClicked = props.onItemClicked && ((itemKey: string): void => {
     if (props.onItemClicked) {
       props.onItemClicked(itemKey);
@@ -82,7 +86,4 @@ export const List = (props: IListProps): React.ReactElement => {
 };
 
 List.displayName = 'List';
-List.defaultProps = {
-  ...defaultMoleculeProps,
-};
 List.Item = ListItemInner;

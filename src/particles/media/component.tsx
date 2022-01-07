@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { defaultComponentProps, IComponentProps, ThemeType, WebView } from '../..';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IImageProps, Image } from '../image';
 import { Video } from '../video';
 
@@ -24,7 +25,10 @@ const getExtension = (url: string): string => {
   return fileExtension;
 };
 
-export const Media = (props: IMediaProps): React.ReactElement => {
+export const Media = (inputProps: IMediaProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+  });
   const [mediaType, setMediaType] = React.useState<string | null>(null);
   const isVideo = React.useMemo((): boolean => {
     if (!props.source) {
@@ -89,6 +93,3 @@ export const Media = (props: IMediaProps): React.ReactElement => {
 };
 
 Media.displayName = 'Media';
-Media.defaultProps = {
-  ...defaultComponentProps,
-};

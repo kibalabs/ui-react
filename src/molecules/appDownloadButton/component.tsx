@@ -5,6 +5,7 @@ import { getClassName, KibaException } from '@kibalabs/core';
 import { defaultMoleculeProps, IMoleculeProps } from '..';
 import { LinkBase } from '../../atoms/linkBase';
 import { Image } from '../../particles/image';
+import { setDefaults } from '../../util/SetDefaultProps';
 
 export interface AppDownloadButtonTheme {
 }
@@ -12,12 +13,17 @@ export interface AppDownloadButtonTheme {
 export interface AppDownloadButtonProps extends IMoleculeProps<AppDownloadButtonTheme> {
   appId: string;
   appType: 'android' | 'ios' | 'mac' | 'appletv';
-  buttonVariant: string;
+  buttonVariant?: string;
   isLazyLoadable?: boolean;
   onClick?(): void;
 }
 
-export const AppDownloadButton = (props: AppDownloadButtonProps): React.ReactElement => {
+export const AppDownloadButton = (inputProps: AppDownloadButtonProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultMoleculeProps,
+    buttonVariant: 'dark',
+    isLazyLoadable: true,
+  });
   if (['dark', 'dark-clear', 'light', 'light-clear'].indexOf(props.buttonVariant) === -1) {
     console.error(`The buttonVariant was not recognized: ${props.buttonVariant}`);
   }
@@ -74,8 +80,3 @@ export const AppDownloadButton = (props: AppDownloadButtonProps): React.ReactEle
 };
 
 AppDownloadButton.displayName = 'AppDownloadButton';
-AppDownloadButton.defaultProps = {
-  ...defaultMoleculeProps,
-  buttonVariant: 'dark',
-  isLazyLoadable: true,
-};

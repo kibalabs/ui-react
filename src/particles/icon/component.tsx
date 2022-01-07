@@ -4,6 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IIconTheme } from './theme';
 
 interface IStyledIconProps {
@@ -37,7 +38,12 @@ export interface IIconProps extends IComponentProps<IIconTheme> {
   svgContent: string;
 }
 
-export const Icon = (props: IIconProps): React.ReactElement => {
+export const Icon = (inputProps: IIconProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    shouldAddFill: true,
+    shouldAddStroke: true,
+  });
   const theme = useBuiltTheme('icons', props.variant, props.theme);
   return (
     <StyledIcon
@@ -54,8 +60,3 @@ export const Icon = (props: IIconProps): React.ReactElement => {
 };
 
 Icon.displayName = 'Icon';
-Icon.defaultProps = {
-  ...defaultComponentProps,
-  shouldAddFill: true,
-  shouldAddStroke: true,
-};

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { getPaddingSize, IDimensionGuide, PaddingSizeProp } from '../../particles/dimensions';
 import { useDimensions } from '../../theming';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
@@ -39,7 +40,10 @@ export interface IPaddingViewProps extends IWrapperProps, IPaddingViewPaddingPro
   theme?: IDimensionGuide;
 }
 
-export const PaddingView = (props: IPaddingViewProps): React.ReactElement => {
+export const PaddingView = (inputProps: IPaddingViewProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultWrapperProps,
+  });
   const theme = useDimensions(props.theme);
   const paddingTop = props.paddingTop || props.paddingVertical || props.padding;
   const paddingBottom = props.paddingBottom || props.paddingVertical || props.padding;
@@ -60,6 +64,3 @@ export const PaddingView = (props: IPaddingViewProps): React.ReactElement => {
 };
 
 PaddingView.displayName = 'PaddingView';
-PaddingView.defaultProps = {
-  ...defaultWrapperProps,
-};

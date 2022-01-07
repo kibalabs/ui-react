@@ -4,6 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { IVideoTheme } from './theme';
 
 export interface IStyledVideoProps {
@@ -65,7 +66,10 @@ export interface IVideoProps extends IComponentProps<IVideoTheme> {
   isLazyLoadable?: boolean;
 }
 
-export const Video = (props: IVideoProps): React.ReactElement => {
+export const Video = (inputProps: IVideoProps): React.ReactElement => {
+  const props = setDefaults(inputProps,
+    { ...defaultComponentProps,
+      shouldShowControls: true });
   const theme = useBuiltTheme('videos', props.variant, props.theme);
   const fitType = props.fitType || 'scale';
   const shouldShowControls = props.shouldShowControls != null ? props.shouldShowControls : true;
@@ -100,7 +104,3 @@ export const Video = (props: IVideoProps): React.ReactElement => {
 };
 
 Video.displayName = 'Video';
-Video.defaultProps = {
-  ...defaultComponentProps,
-  shouldShowControls: true,
-};

@@ -56,12 +56,13 @@ const StyledIframe = styled.iframe<IStyledIframeProps>`
 
 export interface IWebViewProps extends IComponentProps<IWebViewTheme> {
   url: string;
-  permissions: string[];
-  shouldShowLoadingSpinner: boolean;
+  permissions?: string[];
+  shouldShowLoadingSpinner?: boolean;
   errorView?: React.FunctionComponent;
   title?: string;
   isLazyLoadable?: boolean;
   aspectRatio?: number;
+  isEnabled?: boolean;
   onLoadingChanged?: (isLoading: boolean) => void;
 }
 

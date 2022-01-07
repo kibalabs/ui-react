@@ -4,6 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
 import { IInputWrapperTheme, InputWrapper } from '../../atoms';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface IInputFrameTheme {
@@ -12,13 +13,18 @@ export interface IInputFrameTheme {
 
 export interface IInputFrameProps extends IMoleculeProps<IInputFrameTheme>, ISingleAnyChildProps {
   messageText?: string;
-  isEnabled: boolean;
+  isEnabled?: boolean;
   inputWrapperVariant?: string;
   onClicked?: () => void;
 }
 
 // NOTE(krishan711): this component is intended to hold anything that would commonly be used alongside input wrapper (e.g. buttons)
-export const InputFrame = (props: IInputFrameProps): React.ReactElement => {
+export const InputFrame = (inputProps: IInputFrameProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultMoleculeProps,
+    isEnabled: true,
+  });
+
   return (
     <InputWrapper
       id={props.id}
@@ -35,7 +41,3 @@ export const InputFrame = (props: IInputFrameProps): React.ReactElement => {
 };
 
 InputFrame.displayName = 'InputFrame';
-InputFrame.defaultProps = {
-  ...defaultMoleculeProps,
-  iEnabled: true,
-};

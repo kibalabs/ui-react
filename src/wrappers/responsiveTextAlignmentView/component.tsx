@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { IDimensionGuide, TextAlignment } from '../../particles';
 import { useDimensions } from '../../theming';
 import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
+import { setDefaults } from '../../util/SetDefaultProps';
 import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
@@ -26,11 +27,15 @@ const StyledResponsiveTextAlignmentView = wrappingComponent((component: React.Co
 
 export interface IResponsiveTextAlignmentViewProps extends IWrapperProps {
   theme?: IDimensionGuide;
-  alignment: TextAlignment;
+  alignment?: TextAlignment;
   alignmentResponsive?: ResponsiveField<TextAlignment>;
 }
 
-export const ResponsiveTextAlignmentView = (props: IResponsiveTextAlignmentViewProps): React.ReactElement => {
+export const ResponsiveTextAlignmentView = (inputProps: IResponsiveTextAlignmentViewProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultWrapperProps,
+    alignment: TextAlignment.Left,
+  });
   const theme = useDimensions(props.theme);
   return (
     <StyledResponsiveTextAlignmentView
@@ -44,7 +49,3 @@ export const ResponsiveTextAlignmentView = (props: IResponsiveTextAlignmentViewP
 };
 
 ResponsiveTextAlignmentView.displayName = 'ResponsiveTextAlignmentView';
-ResponsiveTextAlignmentView.defaultProps = {
-  ...defaultWrapperProps,
-  alignment: TextAlignment.Left,
-};
