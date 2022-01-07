@@ -25,7 +25,7 @@ export interface IBulletListProps extends IComponentProps<IBulletListTheme>, IMu
 export const BulletList = (inputProps: IBulletListProps): React.ReactElement => {
   const props = setDefaults(inputProps, {
     ...defaultComponentProps,
-    isEnabled: false,
+    isEnabled: true,
 
   });
   const theme = useBuiltTheme('bulletLists', props.variant, props.theme);

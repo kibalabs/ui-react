@@ -67,9 +67,10 @@ export interface IVideoProps extends IComponentProps<IVideoTheme> {
 }
 
 export const Video = (inputProps: IVideoProps): React.ReactElement => {
-  const props = setDefaults(inputProps,
-    { ...defaultComponentProps,
-      shouldShowControls: true });
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    shouldShowControls: true,
+  });
   const theme = useBuiltTheme('videos', props.variant, props.theme);
   const fitType = props.fitType || 'scale';
   const shouldShowControls = props.shouldShowControls != null ? props.shouldShowControls : true;

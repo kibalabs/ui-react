@@ -97,9 +97,10 @@ export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChild
 }
 
 export const Text = (inputProps: ITextProps): React.ReactElement => {
-  const props = setDefaults(inputProps,
-    { ...defaultComponentProps,
-      isSingleLine: false });
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    isSingleLine: false,
+  });
   const theme = useBuiltTheme('texts', props.variant, props.theme);
 
   let lineLimit = props.lineLimit;

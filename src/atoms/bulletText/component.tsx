@@ -29,7 +29,7 @@ export interface IBulletTextProps extends IComponentProps<IBulletTextTheme>, IOp
 export const BulletText = (inputProps: IBulletTextProps): React.ReactElement => {
   const props = setDefaults(inputProps, {
     ...defaultComponentProps,
-    isEnabled: false,
+    isEnabled: true,
 
   });
   const theme = useBuiltTheme('bulletTexts', props.variant, props.theme);

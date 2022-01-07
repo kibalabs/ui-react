@@ -11,7 +11,6 @@ import { valueToCss } from '../../util';
 import { setDefaults } from '../../util/SetDefaultProps';
 import { IDialogTheme } from './theme';
 
-
 interface IStyledBackdropProps {
   $backdropColor: string;
 }

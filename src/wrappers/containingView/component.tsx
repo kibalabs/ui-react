@@ -31,9 +31,10 @@ export interface IContainingViewProps extends IWrapperProps {
 }
 
 export const ContainingView = (inputProps: IContainingViewProps): React.ReactElement => {
-  const props = setDefaults(inputProps,
-    { ...defaultWrapperProps,
-      isCenteredHorizontally: true });
+  const props = setDefaults(inputProps, {
+    ...defaultWrapperProps,
+    isCenteredHorizontally: true,
+  });
   const theme = useDimensions(props.theme);
   return (
     <StyledContainingView
