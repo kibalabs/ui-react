@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
+import { setDefaults } from '../../util/setDefaultProp';
 import { IButtonTheme } from './theme';
 
 interface IStyledButtonProps {
@@ -65,11 +66,11 @@ const StyledButton = styled.button<IStyledButtonProps>`
 `;
 
 export interface IButtonProps extends IComponentProps<IButtonTheme> {
-  buttonType: 'button' | 'reset' | 'submit';
+  buttonType?: 'button' | 'reset' | 'submit';
   text: string;
-  isEnabled: boolean;
-  isLoading: boolean;
-  isFullWidth: boolean;
+  isEnabled?: boolean;
+  isLoading?: boolean;
+  isFullWidth?: boolean;
   iconRight?: OptionalProppedElement<IIconProps>;
   iconLeft?: OptionalProppedElement<IIconProps>;
   iconGutter?: PaddingSize;
@@ -79,7 +80,15 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   onClicked?(): void;
 }
 
-export const Button = (props: IButtonProps): React.ReactElement => {
+export const Button = (inputProps: IButtonProps): React.ReactElement => {
+  const props = setDefaults(inputProps, {
+    ...defaultComponentProps,
+    buttonType: 'button',
+    isLoading: false,
+    isEnabled: true,
+    isFullWidth: false,
+    iconGutter: PaddingSize.Default,
+  });
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
 
   const onClicked = (): void => {
@@ -137,11 +146,3 @@ export const Button = (props: IButtonProps): React.ReactElement => {
 };
 
 Button.displayName = 'Button';
-Button.defaultProps = {
-  ...defaultComponentProps,
-  buttonType: 'button',
-  isLoading: false,
-  isEnabled: true,
-  isFullWidth: false,
-  iconGutter: PaddingSize.Default,
-};
