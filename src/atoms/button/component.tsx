@@ -74,10 +74,10 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   iconRight?: OptionalProppedElement<IIconProps>;
   iconLeft?: OptionalProppedElement<IIconProps>;
   iconGutter?: PaddingSize;
-  target?: string | null;
+  target?: string;
   targetShouldOpenSameTab?: boolean;
-  tabIndex?: number | null;
-  onClicked?: () => void | null;
+  tabIndex?: number;
+  onClicked?: () => void;
 }
 
 export const Button = (inputProps: IButtonProps): React.ReactElement => {
