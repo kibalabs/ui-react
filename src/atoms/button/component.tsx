@@ -96,11 +96,6 @@ export const Button = (inputProps: IButtonProps): React.ReactElement => {
     onClicked: null,
   });
 
-  const theme = useBuiltTheme('buttons', props.variant, props.theme);
-  const isUsingCoreRouting = useIsCoreRoutingEnabled();
-  const isTargetWithinApp = props.target && (props.target.startsWith('#') || props.target.startsWith('/'));
-  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
-
   if (props.onClicked && props.buttonType === 'submit') {
     throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
   }
@@ -113,6 +108,11 @@ export const Button = (inputProps: IButtonProps): React.ReactElement => {
       props.onClicked();
     }
   };
+
+  const theme = useBuiltTheme('buttons', props.variant, props.theme);
+  const isUsingCoreRouting = useIsCoreRoutingEnabled();
+  const isTargetWithinApp = props.target && (props.target.startsWith('#') || props.target.startsWith('/'));
+  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
 
   return (
     // @ts-ignore: as prop doesn't match type required
