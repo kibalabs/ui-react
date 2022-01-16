@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
+import { useDefaultProps } from '../../util';
 import { IButtonTheme } from './theme';
 
 interface IStyledButtonProps {
@@ -65,22 +66,39 @@ const StyledButton = styled.button<IStyledButtonProps>`
 `;
 
 export interface IButtonProps extends IComponentProps<IButtonTheme> {
-  buttonType: 'button' | 'reset' | 'submit';
+  buttonType?: 'button' | 'reset' | 'submit';
   text: string;
-  isEnabled: boolean;
-  isLoading: boolean;
-  isFullWidth: boolean;
+  isEnabled?: boolean;
+  isLoading?: boolean;
+  isFullWidth?: boolean;
   iconRight?: OptionalProppedElement<IIconProps>;
   iconLeft?: OptionalProppedElement<IIconProps>;
   iconGutter?: PaddingSize;
   target?: string;
   targetShouldOpenSameTab?: boolean;
   tabIndex?: number;
-  onClicked?(): void;
+  onClicked?: () => void;
 }
 
-export const Button = (props: IButtonProps): React.ReactElement => {
-  const isUsingCoreRouting = useIsCoreRoutingEnabled();
+export const Button = (inputProps: IButtonProps): React.ReactElement => {
+  const props = useDefaultProps(inputProps, {
+    ...defaultComponentProps,
+    buttonType: 'button',
+    isLoading: false,
+    isEnabled: true,
+    isFullWidth: false,
+    iconRight: null,
+    iconLeft: null,
+    iconGutter: PaddingSize.Default,
+    target: null,
+    targetShouldOpenSameTab: false,
+    tabIndex: null,
+    onClicked: null,
+  });
+
+  if (props.onClicked && props.buttonType === 'submit') {
+    throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
+  }
 
   const onClicked = (): void => {
     if (props.isLoading) {
@@ -91,13 +109,11 @@ export const Button = (props: IButtonProps): React.ReactElement => {
     }
   };
 
-  if (props.onClicked && props.buttonType === 'submit') {
-    throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
-  }
-
   const theme = useBuiltTheme('buttons', props.variant, props.theme);
+  const isUsingCoreRouting = useIsCoreRoutingEnabled();
   const isTargetWithinApp = props.target && (props.target.startsWith('#') || props.target.startsWith('/'));
   const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
+
   return (
     // @ts-ignore: as prop doesn't match type required
     <StyledButton
@@ -137,11 +153,3 @@ export const Button = (props: IButtonProps): React.ReactElement => {
 };
 
 Button.displayName = 'Button';
-Button.defaultProps = {
-  ...defaultComponentProps,
-  buttonType: 'button',
-  isLoading: false,
-  isEnabled: true,
-  isFullWidth: false,
-  iconGutter: PaddingSize.Default,
-};
