@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
-import { setDefaults } from '../../util/setDefaultProp';
+import { useDefaultProps } from '../../util';
 import { IButtonTheme } from './theme';
 
 interface IStyledButtonProps {
@@ -74,22 +74,36 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   iconRight?: OptionalProppedElement<IIconProps>;
   iconLeft?: OptionalProppedElement<IIconProps>;
   iconGutter?: PaddingSize;
-  target?: string;
+  target?: string | null;
   targetShouldOpenSameTab?: boolean;
-  tabIndex?: number;
-  onClicked?(): void;
+  tabIndex?: number | null;
+  onClicked?: () => void | null;
 }
 
 export const Button = (inputProps: IButtonProps): React.ReactElement => {
-  const props = setDefaults(inputProps, {
+  const props = useDefaultProps(inputProps, {
     ...defaultComponentProps,
     buttonType: 'button',
     isLoading: false,
     isEnabled: true,
     isFullWidth: false,
+    iconRight: null,
+    iconLeft: null,
     iconGutter: PaddingSize.Default,
+    target: null,
+    targetShouldOpenSameTab: false,
+    tabIndex: null,
+    onClicked: null,
   });
+
+  if (props.onClicked && props.buttonType === 'submit') {
+    throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
+  }
+
+  const theme = useBuiltTheme('buttons', props.variant, props.theme);
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
+  const isTargetWithinApp = props.target && (props.target.startsWith('#') || props.target.startsWith('/'));
+  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
 
   const onClicked = (): void => {
     if (props.isLoading) {
@@ -100,13 +114,6 @@ export const Button = (inputProps: IButtonProps): React.ReactElement => {
     }
   };
 
-  if (props.onClicked && props.buttonType === 'submit') {
-    throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
-  }
-
-  const theme = useBuiltTheme('buttons', props.variant, props.theme);
-  const isTargetWithinApp = props.target && (props.target.startsWith('#') || props.target.startsWith('/'));
-  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
   return (
     // @ts-ignore: as prop doesn't match type required
     <StyledButton
