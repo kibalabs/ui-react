@@ -4,10 +4,10 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
-import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 import { Box, IBoxTheme, ILoadingSpinnerTheme, LoadingSpinner } from '../../particles';
 import { useBuiltTheme } from '../../theming';
-import { ThemeType, themeToCss } from '../../util';
+import { themeToCss, ThemeType } from '../../util';
+import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface IFormTheme extends ThemeType {
   backgroundTheme: IBoxTheme;
@@ -53,7 +53,6 @@ export const Form = (props: IFormProps): React.ReactElement => {
   };
 
   const loadingOverlayTheme = useBuiltTheme('boxes', props.loadingOverlayVariant || 'overlay', props.theme?.loadingOverlayTheme);
-  console.log('loadingOverlayTheme', loadingOverlayTheme);
 
   // TODO(krishan711): this should use layers
   return (
