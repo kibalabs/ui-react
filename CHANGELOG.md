@@ -8,9 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
-- [MINOR] updated `ListItem` to be unclickable when disabled
+- [MINOR] Added overlay theme to `Box`
 
 ### Changed
+- [MINOR] Updated `ListItem` to be un-clickable when disabled
+- [MINOR] Updated `Form` to have correct theming
 
 ### Removed
 

@@ -68,6 +68,10 @@ export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide,
     margin: '0',
   }, base?.unmargined);
 
+  const overlayBoxTheme = mergeThemePartial<IBoxTheme>({
+    'background-color': '$colors.backgroundClear75',
+  }, base?.overlay);
+
   return {
     ...(base || {}),
     default: defaultBoxTheme,
@@ -80,5 +84,6 @@ export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide,
     rounded: roundBoxTheme,
     unpadded: unpaddedBoxTheme,
     unmargined: unmarginedBoxTheme,
+    overlay: overlayBoxTheme,
   };
 };
