@@ -10,6 +10,7 @@ interface ILayerProps extends IOptionalSingleAnyChildProps {
   className?: string;
   isFullWidth?: boolean;
   isFullHeight?: boolean;
+  isStatic?: boolean;
   alignmentVertical: Alignment;
   alignmentHorizontal: Alignment;
 }
@@ -19,6 +20,7 @@ class Layer extends React.Component<ILayerProps> {
     className: '',
     isFullWidth: true,
     isFullHeight: true,
+    isStatic: false,
     alignmentVertical: Alignment.Start,
     alignmentHorizontal: Alignment.Start,
   };
@@ -46,19 +48,18 @@ export const LayerContainer = (props: ILayerContainerProps): React.ReactElement 
       id={props.id}
       className={getClassName(LayerContainer.displayName, props.className)}
     >
-      { children.map((child: React.ReactElement, index: number): React.ReactElement<ILayerProps> => {
-        return (
-          <StyledLayer
-            id={props.id && `${props.id}-layer-${index}`}
-            className={getClassName(StyledLayer.displayName, child.props.className, child.props.isFullWidth && 'isFullWidth', child.props.isFullHeight && 'isFullHeight')}
-            key={child.key || index}
-            alignmentVertical={child.props.alignmentVertical}
-            alignmentHorizontal={child.props.alignmentHorizontal}
-          >
-            {child.props.children}
-          </StyledLayer>
-        );
-      })}
+      { children.map((child: React.ReactElement, index: number): React.ReactElement<ILayerProps> => (
+        <StyledLayer
+          id={props.id && `${props.id}-layer-${index}`}
+          className={getClassName(StyledLayer.displayName, child.props.className, child.props.isFullWidth && 'isFullWidth', child.props.isFullHeight && 'isFullHeight')}
+          key={child.key || index}
+          isStatic={child.props.isStatic}
+          alignmentVertical={child.props.alignmentVertical}
+          alignmentHorizontal={child.props.alignmentHorizontal}
+        >
+          {child.props.children}
+        </StyledLayer>
+      ))}
     </StyledLayerContainer>
   );
 };
@@ -99,12 +100,13 @@ const getStaticPositioningCss = (alignmentVertical: Alignment, alignmentHorizont
 
 interface IStyledLayerProps extends ISingleAnyChildProps {
   className?: string;
+  isStatic: boolean;
   alignmentVertical: Alignment;
   alignmentHorizontal: Alignment;
 }
 
 const StyledLayer = styled.div<IStyledLayerProps>`
-  position: absolute;
+  position: ${(props: IStyledLayerProps): string => (props.isStatic ? 'static' : 'absolute')};
   ${(props: IStyledLayerProps): string => getStaticPositioningCss(props.alignmentVertical, props.alignmentHorizontal)};
 
   &.isFullWidth {
@@ -114,3 +116,4 @@ const StyledLayer = styled.div<IStyledLayerProps>`
     height: 100%;
   }
 `;
+StyledLayer.displayName = 'LayerContainer.Layer';

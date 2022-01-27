@@ -2,11 +2,11 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
-import styled from 'styled-components';
 
+import { Alignment } from '../..';
+import { LayerContainer } from '../../layouts';
 import { Box, IBoxTheme, ILoadingSpinnerTheme, LoadingSpinner } from '../../particles';
-import { useBuiltTheme } from '../../theming';
-import { themeToCss, ThemeType } from '../../util';
+import { ThemeType } from '../../util';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
 export interface IFormTheme extends ThemeType {
@@ -14,29 +14,6 @@ export interface IFormTheme extends ThemeType {
   loadingOverlayTheme: IBoxTheme;
   loadingSpinnerTheme: ILoadingSpinnerTheme;
 }
-
-// TODO(krishan711): this should not be relative when it uses layers
-const StyledForm = styled.form`
-  position: relative;
-`;
-
-interface ILoadingOverlayProps {
-  $theme: IBoxTheme;
-}
-
-const LoadingOverlay = styled.div<ILoadingOverlayProps>`
-  ${(props: ILoadingOverlayProps): string => themeToCss(props.$theme)};
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
 interface IFormProps extends IMoleculeProps<IFormTheme>, ISingleAnyChildProps {
   isLoading: boolean;
@@ -52,9 +29,6 @@ export const Form = (props: IFormProps): React.ReactElement => {
     props.onFormSubmitted();
   };
 
-  const loadingOverlayTheme = useBuiltTheme('boxes', props.loadingOverlayVariant || 'overlay', props.theme?.loadingOverlayTheme);
-
-  // TODO(krishan711): this should use layers
   return (
     <Box
       id={props.id}
@@ -63,27 +37,38 @@ export const Form = (props: IFormProps): React.ReactElement => {
       theme={props.theme?.backgroundTheme}
       isFullWidth={true}
     >
-      <StyledForm
+      <form
         id={props.id && `${props.id}-form`}
-        className={getClassName(StyledForm.displayName)}
         onSubmit={onSubmitted}
       >
-        {props.children}
-        { props.isLoading && (
-          <LoadingOverlay
-            id={props.id && `${props.id}-loading-overlay`}
-            className={'form-overlay'}
-            $theme={loadingOverlayTheme}
-          >
-            <LoadingSpinner
-              id={props.id && `${props.id}-loading-spinner`}
-              className={'form-overlay-spinner'}
-              variant={props.loadingSpinnerVariant}
-              theme={props.theme?.loadingSpinnerTheme}
-            />
-          </LoadingOverlay>
-        )}
-      </StyledForm>
+        <LayerContainer>
+          <LayerContainer.Layer isStatic={true}>
+            {props.children}
+          </LayerContainer.Layer>
+          { props.isLoading && (
+            <React.Fragment>
+              <LayerContainer.Layer isFullHeight={true} isFullWidth={true}>
+                <Box
+                  id={props.id && `${props.id}-loading-overlay`}
+                  className={'form-overlay'}
+                  isFullHeight={true}
+                  isFullWidth={true}
+                  variant={props.loadingOverlayVariant || 'overlay'}
+                  theme={props.theme?.loadingOverlayTheme}
+                />
+              </LayerContainer.Layer>
+              <LayerContainer.Layer isFullHeight={false} isFullWidth={false} alignmentHorizontal={Alignment.Center} alignmentVertical={Alignment.Center}>
+                <LoadingSpinner
+                  id={props.id && `${props.id}-loading-spinner`}
+                  className={'form-overlay-spinner'}
+                  variant={props.loadingSpinnerVariant}
+                  theme={props.theme?.loadingSpinnerTheme}
+                />
+              </LayerContainer.Layer>
+            </React.Fragment>
+          )}
+        </LayerContainer>
+      </form>
     </Box>
   );
 };
