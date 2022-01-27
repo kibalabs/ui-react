@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Changed
 - [MINOR] Updated `ListItem` to be un-clickable when disabled
 - [MINOR] Updated `Form` to have correct theming
+- [MINOR] Added `isStatic` to `LayerContainer.Layer` to allow layers to size themselves
 
 ### Removed
 
