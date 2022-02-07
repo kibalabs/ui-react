@@ -43,10 +43,17 @@ export interface ILinkProps extends IComponentProps<ILinkTheme> {
   text: string;
   tabIndex?: number;
   shouldOpenSameTab?: boolean;
+  onClicked?: () => void;
 }
 
 export const Link = (props: ILinkProps): React.ReactElement => {
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
+
+  const onClicked = (): void => {
+    if (props.onClicked) {
+      props.onClicked();
+    }
+  };
 
   const theme = useBuiltTheme('links', props.variant, props.theme);
   const isTargetWithinApp = props.target.startsWith('#') || props.target.startsWith('/');
@@ -57,6 +64,7 @@ export const Link = (props: ILinkProps): React.ReactElement => {
       id={props.id}
       className={getClassName(Link.displayName, props.className, !props.isEnabled && 'disabled')}
       $theme={theme}
+      onClick={onClicked}
       href={props.isEnabled ? props.target : undefined}
       rel={'noopener'}
       tabIndex={props.tabIndex || 0}
