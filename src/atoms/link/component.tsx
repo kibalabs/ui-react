@@ -39,7 +39,7 @@ const StyledLink = styled.a<IStyledLinkProps>`
 
 export interface ILinkProps extends IComponentProps<ILinkTheme> {
   isEnabled: boolean;
-  target: string;
+  target?: string;
   text: string;
   tabIndex?: number;
   shouldOpenSameTab?: boolean;
@@ -68,8 +68,8 @@ export const Link = (props: ILinkProps): React.ReactElement => {
       href={props.isEnabled ? props.target : undefined}
       rel={'noopener'}
       tabIndex={props.tabIndex || 0}
-      target={targetShouldOpenSameTab ? '_self' : '_blank'}
-      as={isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : undefined}
+      target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
+      as={ props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
     >
       {props.text}
     </StyledLink>
