@@ -8,6 +8,10 @@ import { defaultComponentProps, IComponentProps, LoadingSpinner, themeToCss, use
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
 import { IButtonTheme } from './theme';
 
+const StyledButtonText = styled.span`
+  width: 100%;
+`;
+
 interface IStyledButtonProps {
   $theme: IButtonTheme;
   $isLoading: boolean;
@@ -26,7 +30,7 @@ const StyledButton = styled.button<IStyledButtonProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: stretch;
   background-clip: border-box;
   transition-duration: 0.3s;
   &.fullWidth {
@@ -119,7 +123,9 @@ export const Button = (props: IButtonProps): React.ReactElement => {
           <Spacing variant={props.iconGutter} />
         </React.Fragment>
       )}
-      { !props.isLoading && props.text }
+      { !props.isLoading && (
+        <StyledButtonText>{props.text }</StyledButtonText>
+      )}
       { !props.isLoading && props.iconRight && (
         <React.Fragment>
           <Spacing variant={props.iconGutter} />
