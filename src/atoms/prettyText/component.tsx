@@ -18,6 +18,10 @@ interface IStyledPrettyTextProps {
 const StyledPrettyText = styled.span<IStyledPrettyTextProps>`
   ${(props: IStyledPrettyTextProps): string => themeToCss(props.$theme.normal.default.text)};
   ${(props: IStyledPrettyTextProps): string => (props.$alignment ? `text-align: ${props.$alignment}` : '')};
+  /* NOTE(krishan711): margin needs to be reset as it doesn't work if there are multiple children (coming from MarkdownText) so needs to be set */
+  & > p {
+    ${(props: IStyledPrettyTextProps): string => (props.$theme.normal.default.text.margin ? `margin: ${props.$theme.normal.default.text.margin}` : '')};
+  }
   & > em {
     display: inline-block;
     ${(props: IStyledPrettyTextProps): string => themeToCss(props.$theme.normal.emphasis?.text)};

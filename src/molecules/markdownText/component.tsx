@@ -65,7 +65,7 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
     <PrettyText
       id={props.id}
       className={getClassName(MarkdownText.displayName, props.className)}
-      variant={mergeVariants(props.textVariant, 'unmargined')}
+      variant={mergeVariants('unmargined', props.textVariant)}
       tag={props.textTag}
       alignment={props.textAlignment}
     >
