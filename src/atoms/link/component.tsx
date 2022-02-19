@@ -56,8 +56,8 @@ export const Link = (props: ILinkProps): React.ReactElement => {
   };
 
   const theme = useBuiltTheme('links', props.variant, props.theme);
-  const isTargetWithinApp = props.target && (props.target.startsWith('#') || props.target.startsWith('/'));
-  const targetShouldOpenSameTab = props.shouldOpenSameTab || (props.shouldOpenSameTab == null && props.target && isTargetWithinApp);
+  const isTargetWithinApp = props.target && props.target.startsWith('/');
+  const targetShouldOpenSameTab = props.shouldOpenSameTab || props.target?.startsWith('#') || (props.shouldOpenSameTab == null && isTargetWithinApp);
   return (
   // @ts-ignore: as prop doesn't match type required
     <StyledLink
