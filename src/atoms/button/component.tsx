@@ -103,7 +103,9 @@ export const Button = (props: IButtonProps): React.ReactElement => {
     throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
   }
 
+  console.log('props.theme', props.theme);
   const theme = useBuiltTheme('buttons', props.variant, props.theme);
+  console.log('theme', theme);
   const isTargetWithinApp = props.target && props.target.startsWith('/');
   const targetShouldOpenSameTab = props.targetShouldOpenSameTab || props.target?.startsWith('#') || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
   return (
