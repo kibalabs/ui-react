@@ -15,6 +15,7 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
         text: mergeTheme(textThemes.default, {
           color: '$colors.brandPrimary',
           'font-weight': '600',
+          'text-align': 'center',
         }),
       },
       hover: {

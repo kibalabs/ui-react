@@ -35,7 +35,7 @@
     "react-markdown": "^6.0.3"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.8.2",
+    "@kibalabs/build": "0.8.3-next.0",
     "@storybook/addon-essentials": "6.4.19",
     "@storybook/addon-links": "6.4.19",
     "@storybook/builder-webpack5": "6.4.19",

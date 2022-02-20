@@ -62,8 +62,14 @@ export const Template = (args) => (
 </Canvas>
 
 <Canvas>
+  <Story name='Full width'>
+    <Button text='Full width' iconLeft={<KibaIcon iconId='ion-aperture' />} iconRight={<KibaIcon iconId='ion-aperture' />} isFullWidth={true} />
+  </Story>
+</Canvas>
+
+<Canvas>
   <Story name='End-aligned'>
-    <Button text='End-aligned' iconLeft={<KibaIcon iconId='ion-aperture' />} iconRight={<KibaIcon iconId='ion-aperture' />} isFullWidth={true} theme={{ normal: { default: { text: {'text-align': 'end' } } } }}/>
+    <Button text='End-aligned' iconLeft={<KibaIcon iconId='ion-aperture' />} iconRight={<KibaIcon iconId='ion-aperture' />} isFullWidth={true} theme={{ normal: { default: { text: {'text-align': 'end' } } } }} />
   </Story>
 </Canvas>
 
