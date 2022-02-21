@@ -63,12 +63,34 @@ export interface IVideoProps extends IComponentProps<IVideoTheme> {
   shouldMute?: boolean;
   shouldLoop?: boolean;
   isLazyLoadable?: boolean;
+  onEnded?: () => void;
+  onPlayed?: () => void;
+  onPaused?: () => void;
 }
 
 export const Video = (props: IVideoProps): React.ReactElement => {
   const theme = useBuiltTheme('videos', props.variant, props.theme);
   const fitType = props.fitType || 'scale';
   const shouldShowControls = props.shouldShowControls != null ? props.shouldShowControls : true;
+
+  const onEnded = (): void => {
+    if (props.onEnded) {
+      props.onEnded();
+    }
+  };
+
+  const onPlayed = (): void => {
+    if (props.onPlayed) {
+      props.onPlayed();
+    }
+  };
+
+  const onPaused = (): void => {
+    if (props.onPaused) {
+      props.onPaused();
+    }
+  };
+
   return (
     <StyledVideo
       id={props.id}
@@ -82,6 +104,9 @@ export const Video = (props: IVideoProps): React.ReactElement => {
       playsInline={true}
       controls={shouldShowControls}
       loop={Boolean(props.shouldLoop)}
+      onEnded={onEnded}
+      onPlay={onPlayed}
+      onPause={onPaused}
     >
       <source
         src={props.isLazyLoadable ? undefined : props.source}

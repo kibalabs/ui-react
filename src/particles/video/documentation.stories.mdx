@@ -37,6 +37,27 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
+<Canvas>
+  <Story name='onEnded'>
+    {() => {
+      const [isEnded, setIsEnded] = React.useState(false);
+      const [isPlayed, setIsPlayed] = React.useState(false);
+      const [isPaused, setIsPaused] = React.useState(false);
+      const onEnded = () => { setIsEnded(true); };
+      const onPlayed = () => { setIsPlayed(true); };
+      const onPaused = () => { setIsPaused(true); };
+      return (
+        <div>
+          <Text>{`isEnded: ${isEnded}`}</Text>
+          <Text>{`isPlayed: ${isPlayed}`}</Text>
+          <Text>{`isPaused: ${isPaused}`}</Text>
+          <Video source={'https://everysize.evrpg.com/_bh20200903213922/assets/hero.mp4'} isLazyLoadable={false} shouldAutoplay={true} shouldLoop={false} onEnded={onEnded} onPlayed={onPlayed} onPaused={onPaused}/>
+        </div>
+      );
+    }}
+  </Story>
+</Canvas>
+
 
 ### Theming
 
