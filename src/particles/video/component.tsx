@@ -77,19 +77,19 @@ export const Video = (props: IVideoProps): React.ReactElement => {
     if (props.onEnded) {
       props.onEnded();
     }
-  }
+  };
 
   const onPlayed = (): void => {
     if (props.onPlayed) {
       props.onPlayed();
     }
-  }
+  };
 
   const onPaused = (): void => {
     if (props.onPaused) {
       props.onPaused();
     }
-  }
+  };
 
   return (
     <StyledVideo
