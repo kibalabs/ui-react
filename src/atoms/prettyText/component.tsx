@@ -23,11 +23,11 @@ const StyledPrettyText = styled.span<IStyledPrettyTextProps>`
     ${(props: IStyledPrettyTextProps): string => (props.$theme.normal.default.text.margin ? `margin: ${props.$theme.normal.default.text.margin}` : '')};
   }
   & > em {
-    display: inline-block;
+    display: inline;
     ${(props: IStyledPrettyTextProps): string => themeToCss(props.$theme.normal.emphasis?.text)};
   }
   & > strong {
-    display: inline-block;
+    display: inline;
     ${(props: IStyledPrettyTextProps): string => themeToCss(props.$theme.normal.strong?.text)};
   }
 `;
