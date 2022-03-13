@@ -6,4 +6,5 @@ export * from './paddingView';
 export * from './responsiveContainingView';
 export * from './responsiveHidingView';
 export * from './responsiveTextAlignmentView';
+export * from './wrapperProps';
 export * from './wrappingComponent';

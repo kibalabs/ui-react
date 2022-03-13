@@ -7,7 +7,7 @@ import ReactMarkdown from 'react-markdown';
 
 import { Link, PrettyText } from '../../atoms';
 import { TextAlignment, TextTag } from '../../particles';
-import { mergeVariants } from '../../util';
+import { getVariant } from '../../util';
 import { ReactMarkdownTypes } from '../reactMarkdown';
 
 interface IMarkdownTextProps {
@@ -65,7 +65,7 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
     <PrettyText
       id={props.id}
       className={getClassName(MarkdownText.displayName, props.className)}
-      variant={mergeVariants('unmargined', props.textVariant)}
+      variant={getVariant(props.textVariant)}
       tag={props.textTag}
       alignment={props.textAlignment}
     >
@@ -75,7 +75,7 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
         components={components}
         includeElementIndex={true}
       >
-        {props.source}
+        {props.source.replace(/\n/g, '  \n')}
       </ReactMarkdown>
     </PrettyText>
   );

@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
-
+import { Box } from '../../particles/box';
 import { MarkdownText, IMarkdownTextProps } from '.';
 
 <Meta
@@ -32,8 +32,16 @@ export const Template = (args) => (
 </Canvas>
 
 <Canvas>
+  <Story name='very long'>
+    <Box width='200px'>
+      <MarkdownText source={'this is an **example with very long text** so we can see what things might look like if they get split on *multiple lines*, you know.'} />
+    </Box>
+  </Story>
+</Canvas>
+
+<Canvas>
   <Story name='With newlines'>
-    <MarkdownText source={'hello\n\nworld'} />
+    <MarkdownText source={'This should be rendered as a two separate p tags\n\nAnd they should have margins to separate them!'} />
   </Story>
 </Canvas>
 

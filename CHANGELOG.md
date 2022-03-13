@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 - [MINOR] Added overlay theme to `Box`
 - [MINOR] Added `onEnded`, `onPlayed` and `onPaused` to `Video`
+- [PATCH] Update `PrettyText` to render bold and italics inline
 
 ### Changed
 - [MINOR] Added `onClicked` to `Link`
