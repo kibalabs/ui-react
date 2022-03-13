@@ -38,7 +38,10 @@ export interface IPrettyTextProps extends IComponentProps<IPrettyTextTheme>, IMu
 }
 
 export const PrettyText = (props: IPrettyTextProps): React.ReactElement => {
+  console.log('props.variant', props.variant);
+  console.log('props.theme', props.theme);
   const theme = useBuiltTheme('prettyTexts', props.variant, props.theme);
+  console.log('theme', theme);
   return (
     <StyledPrettyText
       id={props.id}

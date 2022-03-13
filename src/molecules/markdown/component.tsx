@@ -100,7 +100,7 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
         components={components}
         includeElementIndex={true}
       >
-        {props.source}
+        {props.source.replace(/\n/g, '  \n')}
       </ReactMarkdown>
     </Box>
   );

@@ -100,6 +100,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
     },
   }, base?.header6);
 
+  console.log('prettyTextTheme', prettyTextTheme);
   return {
     ...(base || {}),
     ...derivedThemes,
