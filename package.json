@@ -32,7 +32,8 @@
     "@kibalabs/core-react": "^0.8.0",
     "lazysizes": "^5.3.2",
     "polished": "^4.1.4",
-    "react-markdown": "^6.0.3"
+    "react-markdown": "^6.0.3",
+    "remark-breaks": "^2.0.2"
   },
   "devDependencies": {
     "@kibalabs/build": "0.8.3-next.0",
