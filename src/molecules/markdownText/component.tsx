@@ -4,6 +4,7 @@ import { deepCompare, getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
 import { Element, ElementContent, Root, RootContent } from 'hast';
 import ReactMarkdown from 'react-markdown';
+import RemarkBreaks from 'remark-breaks';
 
 import { Link, PrettyText } from '../../atoms';
 import { TextAlignment, TextTag } from '../../particles';
@@ -65,7 +66,7 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
     <PrettyText
       id={props.id}
       className={getClassName(MarkdownText.displayName, props.className)}
-      variant={getVariant(props.textVariant)}
+      variant={getVariant('unmargined', props.textVariant)}
       tag={props.textTag}
       alignment={props.textAlignment}
     >
@@ -74,8 +75,9 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
         unwrapDisallowed={true}
         components={components}
         includeElementIndex={true}
+        remarkPlugins={[RemarkBreaks]}
       >
-        {props.source.replace(/\n/g, '  \n')}
+        {props.source.replace(/\n/g, '  \n &nbsp;')}
       </ReactMarkdown>
     </PrettyText>
   );
