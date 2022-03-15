@@ -68,7 +68,7 @@ export const TabBar = (props: ITabBarProps): React.ReactElement => {
       className={getClassName(TabBar.displayName, props.className, props.isFullWidth && 'fullWidth')}
       $contentAlignment={{ base: props.contentAlignment, ...props.contentAlignmentResponsive }}
     >
-      { React.Children.map(props.children, (child: OptionalProppedElement<ITabBarItemInnerProps>, index: number): React.ReactElement | null => {
+      { React.Children.map(props.children as OptionalProppedElement<ITabBarItemInnerProps>[], (child: OptionalProppedElement<ITabBarItemInnerProps>, index: number): React.ReactElement | null => {
         if (!child) {
           return null;
         }

@@ -52,7 +52,7 @@ export const List = (props: IListProps): React.ReactElement => {
       id={props.id}
       className={getClassName(List.displayName, props.className, props.isFullWidth && 'fullWidth')}
     >
-      { React.Children.map(props.children, (child: OptionalProppedElement<IListItemInnerProps>, index: number): React.ReactElement | null => {
+      { React.Children.map(props.children as OptionalProppedElement<IListItemInnerProps>[], (child: OptionalProppedElement<IListItemInnerProps>, index: number): React.ReactElement | null => {
         if (!child) {
           return null;
         }
