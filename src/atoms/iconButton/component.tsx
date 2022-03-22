@@ -57,6 +57,7 @@ const StyledIconButton = styled.button<IStyledIconButtonProps>`
 export interface IIconButtonProps extends IComponentProps<IIconButtonTheme> {
   isEnabled: boolean;
   icon: React.ReactElement<IIconProps>;
+  buttonType?: 'button' | 'reset' | 'submit';
   label?: string;
   target?: string;
   targetShouldOpenSameTab?: boolean;
@@ -73,6 +74,10 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
       props.onClicked();
     }
   };
+
+  if (props.onClicked && props.buttonType === 'submit') {
+    throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
+  }
 
   const theme = useBuiltTheme('iconButtons', props.variant, props.theme);
   const isTargetWithinApp = props.target && props.target.startsWith('/');
@@ -91,6 +96,7 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
       tabIndex={props.tabIndex || 0}
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
+      type={props.buttonType || 'button'}
     >
       {props.icon}
     </StyledIconButton>
