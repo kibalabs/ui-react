@@ -10,15 +10,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 - [MINOR] Added overlay theme to `Box`
 - [MINOR] Added `onEnded`, `onPlayed` and `onPaused` to `Video`
-- [PATCH] Update `PrettyText` to render bold and italics inline
+- [MINOR] Added `onClictked` to `Link`
+- [MINOR] Added `isStatic` to `LayerContainer.Layer` to allow layers to size themselves
+- [MINOR] Added `buttonType` to `IconButton`
 
 ### Changed
-- [MINOR] Added `onClicked` to `Link`
+- [PATCH] Update `PrettyText` to render bold and italics inline
 - [MINOR] Updated `ListItem` to be un-clickable when disabled
 - [MINOR] Updated `Form` to have correct theming
-- [MINOR] Added `isStatic` to `LayerContainer.Layer` to allow layers to size themselves
 - [MINOR] Updated `Link`, `LinkBase`, `IconButton` and `Button` to not use CoreLink for fragments
 - [MINOR] Updated `Button` to wrap text in `span`
+- [MINOR] Updated `Button` to use `buttonType` correctly
 
 ### Removed
 

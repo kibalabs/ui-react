@@ -69,11 +69,11 @@ const StyledButton = styled.button<IStyledButtonProps>`
 `;
 
 export interface IButtonProps extends IComponentProps<IButtonTheme> {
-  buttonType: 'button' | 'reset' | 'submit';
   text: string;
   isEnabled: boolean;
-  isLoading: boolean;
-  isFullWidth: boolean;
+  isLoading?: boolean;
+  isFullWidth?: boolean;
+  buttonType?: 'button' | 'reset' | 'submit';
   iconRight?: OptionalProppedElement<IIconProps>;
   iconLeft?: OptionalProppedElement<IIconProps>;
   iconGutter?: PaddingSize;
@@ -108,7 +108,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       id={props.id}
       className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', !props.isEnabled && 'disabled')}
       $theme={theme}
-      $isLoading={props.isLoading}
+      $isLoading={props.isLoading || false}
       onClick={onClicked}
       disabled={!props.isEnabled}
       href={props.target}
@@ -116,6 +116,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       tabIndex={props.tabIndex || 0}
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
+      type={props.buttonType || 'button'}
     >
       { !props.isLoading && props.iconLeft && (
         <React.Fragment>
@@ -145,9 +146,6 @@ export const Button = (props: IButtonProps): React.ReactElement => {
 Button.displayName = 'Button';
 Button.defaultProps = {
   ...defaultComponentProps,
-  buttonType: 'button',
-  isLoading: false,
   isEnabled: true,
-  isFullWidth: false,
   iconGutter: PaddingSize.Default,
 };
