@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `Link`, `LinkBase`, `IconButton` and `Button` to not use CoreLink for fragments
 - [MINOR] Updated `Button` to wrap text in `span`
 - [MINOR] Updated `Button` to use `buttonType` correctly
+- [MINOR] Updated `Stack` to inherit `min-height` when `isFullHeight` is true
 
 ### Removed
 
