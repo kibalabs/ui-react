@@ -60,7 +60,9 @@ interface IStyledStackProps {
 const StyledStack = styled.div<IStyledStackProps>`
   display: flex;
   width: ${(props: IStyledStackProps): string => (props.$isFullWidth ? '100%' : 'auto')};
+  min-width: ${(props: IStyledStackProps): string => (props.$isFullWidth ? 'inherit' : 'auto')};
   height: ${(props: IStyledStackProps): string => (props.$isFullHeight ? '100%' : 'auto')};
+  min-height: ${(props: IStyledStackProps): string => (props.$isFullHeight ? 'inherit' : 'auto')};
   ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$direction, props.$theme, getDirectionCss)};
   ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$childAlignment, props.$theme, getChildAlignmentCss)};
   ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$contentAlignment, props.$theme, getContentAlignmentCss)};
