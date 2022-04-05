@@ -28,26 +28,26 @@
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "dependencies": {
-    "@kibalabs/core": "^0.5.8-next.0",
-    "@kibalabs/core-react": "^0.8.1-next.2",
+    "@kibalabs/core": "^0.5.8",
+    "@kibalabs/core-react": "^0.8.1-next.3",
     "lazysizes": "^5.3.2",
-    "polished": "^4.1.4",
+    "polished": "^4.2.1",
     "react-markdown": "^6.0.3",
     "remark-breaks": "^2.0.2"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.8.3-next.0",
-    "@storybook/addon-essentials": "6.4.19",
-    "@storybook/addon-links": "6.4.19",
-    "@storybook/builder-webpack5": "6.4.19",
-    "@storybook/manager-webpack5": "6.4.19",
-    "@storybook/react": "6.4.19",
-    "@types/react": "17.0.40",
-    "@types/react-dom": "17.0.13",
+    "@kibalabs/build": "^0.8.3",
+    "@storybook/addon-essentials": "6.4.20",
+    "@storybook/addon-links": "6.4.20",
+    "@storybook/builder-webpack5": "6.4.20",
+    "@storybook/manager-webpack5": "6.4.20",
+    "@storybook/react": "6.4.20",
+    "@types/react": "17.0.43",
+    "@types/react-dom": "17.0.14",
     "@types/styled-components": "5.1.24",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "styled-components": "5.3.3"
+    "styled-components": "5.3.5"
   },
   "peerDependencies": {
     "react": "^16.9.0 || ^17.0.0",
