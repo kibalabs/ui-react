@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+## [0.9.7] - 2022-04-05
+
+### Added
 - [MINOR] Added overlay theme to `Box`
 - [MINOR] Added `onEnded`, `onPlayed` and `onPaused` to `Video`
 - [MINOR] Added `onClictked` to `Link`
@@ -22,8 +30,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `Button` to wrap text in `span`
 - [MINOR] Updated `Button` to use `buttonType` correctly
 - [MINOR] Updated `Stack` to inherit `min-height` when `isFullHeight` is true
-
-### Removed
 
 ## [0.9.6] - 2021-12-22
 
