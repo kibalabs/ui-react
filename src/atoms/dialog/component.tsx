@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
+import { getIsRunningOnBrowser, ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps } from '../../model';
@@ -47,6 +47,7 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
   const maxWidth = props.maxWidth || '400px';
   const maxHeight = props.maxHeight || '400px';
   const theme = useBuiltTheme('dialogs', props.variant, props.theme);
+  const isRunningOnBrowser = getIsRunningOnBrowser();
 
   const onBackdropClicked = (event: React.SyntheticEvent<HTMLDivElement>) => {
     if (props.isClosableByBackdrop && event.target === dialogRef.current) {
@@ -57,7 +58,7 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
   // NOTE(krishan711): useEventListener doesn't pass the dependencies in as it should
   // NOTE(krishan711): useEventListener should allow the event object to be provided as a generic
   // @ts-ignore
-  useEventListener(document, 'keydown', (event: React.KeyboardEvent): void => {
+  useEventListener(isRunningOnBrowser ? document : null, 'keydown', (event: React.KeyboardEvent): void => {
     if (props.isClosableByEscape && props.isOpen && event.key === 'Escape') {
       props.onCloseClicked();
     }
