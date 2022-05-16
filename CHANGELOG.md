@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Changed
 -[PATCH] Make `Dialog` SSR safe
 -[PATCH] Added padding props to `EqualGrid`
--[PATCH] Added `minHeight` and `maxHeight` to `Box`
+-[PATCH] Added `minHeight` and `minWidth` to `Box`
 
 ### Removed
 
