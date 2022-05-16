@@ -13,6 +13,8 @@ interface IStyledBoxProps {
   $width: string;
   $maxHeight: string;
   $maxWidth: string;
+  $minHeight: string;
+  $minWidth: string;
   $blockType: string;
   $zIndex?: number;
 }
@@ -24,6 +26,8 @@ const StyledBox = styled.div<IStyledBoxProps>`
   width: ${(props: IStyledBoxProps): string => props.$width};
   max-height: ${(props: IStyledBoxProps): string => props.$maxHeight};
   max-width: ${(props: IStyledBoxProps): string => props.$maxWidth};
+  min-height: ${(props: IStyledBoxProps): string => props.$minHeight};
+  min-width: ${(props: IStyledBoxProps): string => props.$minWidth};
   display: ${(props: IStyledBoxProps): string => props.$blockType};
   flex-direction: column;
   z-index: ${(props: IStyledBoxProps): string => (props.$zIndex ? `${props.$zIndex}` : 'auto')};
@@ -43,6 +47,8 @@ export interface IBoxProps extends IComponentProps<IBoxTheme>, IOptionalSingleAn
   width?: string;
   maxHeight?: string;
   maxWidth?: string;
+  minHeight?: string;
+  minWidth?: string;
   zIndex?: number;
   title?: string;
   isFullHeight?: boolean;
@@ -58,6 +64,8 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
   const width = props.width || (props.isFullWidth ? '100%' : 'auto');
   const maxHeight = props.maxHeight || 'none';
   const maxWidth = props.maxWidth || 'none';
+  const minHeight = props.minHeight || 'none';
+  const minWidth = props.minWidth || 'none';
   const blockType = width === '100%' ? 'block' : 'flex';
   const shouldClipContent = props.shouldClipContent;
 
@@ -74,6 +82,8 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
       $width={width}
       $maxHeight={maxHeight}
       $maxWidth={maxWidth}
+      $minHeight={minHeight}
+      $minWidth={minWidth}
       $blockType={blockType}
       $zIndex={props.zIndex}
       title={props.title}
