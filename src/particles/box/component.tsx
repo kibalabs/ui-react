@@ -64,8 +64,8 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
   const width = props.width || (props.isFullWidth ? '100%' : 'auto');
   const maxHeight = props.maxHeight || 'none';
   const maxWidth = props.maxWidth || 'none';
-  const minHeight = props.minHeight || 'none';
-  const minWidth = props.minWidth || 'none';
+  const minHeight = props.minHeight || 'auto';
+  const minWidth = props.minWidth || 'auto';
   const blockType = width === '100%' ? 'block' : 'flex';
   const shouldClipContent = props.shouldClipContent;
 

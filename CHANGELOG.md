@@ -10,11 +10,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
+
+### Removed
+
+## [0.9.8] - 2022-05-22
+
+### Changed
 -[PATCH] Make `Dialog` SSR safe
 -[PATCH] Added padding props to `EqualGrid`
 -[PATCH] Added `minHeight` and `minWidth` to `Box`
-
-### Removed
 
 ## [0.9.7] - 2022-04-05
 
