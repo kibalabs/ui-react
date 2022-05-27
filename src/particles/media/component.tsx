@@ -58,9 +58,9 @@ export const Media = (props: IMediaProps): React.ReactElement => {
       setMediaType('video');
       return;
     }
-    fetch(props.source, { method: 'HEAD' })
+    fetch(props.source, { method: 'HEAD', redirect: 'follow' })
       .then((response: Response) => {
-        if (response.status >= 300) {
+        if (response.status >= 400) {
           throw new Error(`Failed to fetch content type: ${response}`);
         }
         const contentType = response.headers.get('Content-Type');
@@ -85,7 +85,9 @@ export const Media = (props: IMediaProps): React.ReactElement => {
     <Video shouldShowControls={false} shouldLoop={true} shouldMute={true} shouldAutoplay={true} {...props} />
   ) : mediaType === 'image' ? (
     <Image {...props as IImageProps} />
-  ) : <WebView url={props.source} />;
+  ) : (
+    <WebView url={props.source} />
+  );
 };
 
 Media.displayName = 'Media';
