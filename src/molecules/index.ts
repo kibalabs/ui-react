@@ -13,3 +13,4 @@ export * from './optionSelect';
 export * from './progressCounter';
 export * from './singleLineInput';
 export * from './tabBar';
+export * from './dropZone';

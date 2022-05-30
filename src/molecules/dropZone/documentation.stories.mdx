@@ -1,0 +1,28 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { SingleLineInput } from '..';
+
+import { DropZone, IDropzoneProps } from '.';
+
+<Meta
+  component={DropZone}
+  title={'Molecules/DropZone'}
+/>
+
+# DropZone
+
+<br/>
+
+export const Template = (args) => (
+  <DropZone {...args} />
+);
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />
+
+### Theming
+
+TODO
