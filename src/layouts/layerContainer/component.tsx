@@ -13,6 +13,7 @@ interface ILayerProps extends IOptionalSingleAnyChildProps {
   isStatic?: boolean;
   alignmentVertical: Alignment;
   alignmentHorizontal: Alignment;
+  shouldPassThroughTouches?: boolean;
 }
 
 class Layer extends React.Component<ILayerProps> {
@@ -23,6 +24,7 @@ class Layer extends React.Component<ILayerProps> {
     isStatic: false,
     alignmentVertical: Alignment.Start,
     alignmentHorizontal: Alignment.Start,
+    shouldPassThroughTouches: false,
   };
 }
 
@@ -51,7 +53,7 @@ export const LayerContainer = (props: ILayerContainerProps): React.ReactElement 
       { children.map((child: React.ReactElement, index: number): React.ReactElement<ILayerProps> => (
         <StyledLayer
           id={props.id && `${props.id}-layer-${index}`}
-          className={getClassName(StyledLayer.displayName, child.props.className, child.props.isFullWidth && 'isFullWidth', child.props.isFullHeight && 'isFullHeight')}
+          className={getClassName(StyledLayer.displayName, child.props.className, child.props.isFullWidth && 'isFullWidth', child.props.isFullHeight && 'isFullHeight', child.props.shouldPassThroughTouches && 'passThroughTouches')}
           key={child.key || index}
           isStatic={child.props.isStatic}
           alignmentVertical={child.props.alignmentVertical}
@@ -114,6 +116,9 @@ const StyledLayer = styled.div<IStyledLayerProps>`
   }
   &.isFullHeight {
     height: 100%;
+  }
+  &.passThroughTouches {
+    pointer-events: none;
   }
 `;
 StyledLayer.displayName = 'LayerContainer.Layer';
