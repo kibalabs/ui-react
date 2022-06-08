@@ -71,7 +71,6 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
   const minHeight = props.minHeight || 'auto';
   const minWidth = props.minWidth || 'auto';
   const blockType = width === '100%' ? 'block' : 'flex';
-  const shouldCaptureTouches = props.shouldCaptureTouches;
 
   if ((props.isScrollableHorizontally || props.isScrollableVertically) && props.shouldClipContent) {
     console.error('Either shouldClipContent prop or Scroll props can be true at once.');
