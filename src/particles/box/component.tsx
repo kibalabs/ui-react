@@ -34,6 +34,9 @@ const StyledBox = styled.div<IStyledBoxProps>`
   &.clipContent {
     overflow: hidden;
   }
+  &.captureTouches {
+    pointer-events: all;
+  }
   &.scrollableVertically {
     overflow-y: auto;
   }
@@ -56,6 +59,7 @@ export interface IBoxProps extends IComponentProps<IBoxTheme>, IOptionalSingleAn
   isScrollableVertically?: boolean;
   isScrollableHorizontally?: boolean;
   shouldClipContent?: boolean;
+  shouldCaptureTouches?: boolean;
 }
 
 export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
@@ -67,7 +71,6 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
   const minHeight = props.minHeight || 'auto';
   const minWidth = props.minWidth || 'auto';
   const blockType = width === '100%' ? 'block' : 'flex';
-  const shouldClipContent = props.shouldClipContent;
 
   if ((props.isScrollableHorizontally || props.isScrollableVertically) && props.shouldClipContent) {
     console.error('Either shouldClipContent prop or Scroll props can be true at once.');
@@ -76,7 +79,7 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
   return (
     <StyledBox
       id={props.id}
-      className={getClassName(Box.displayName, props.className, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally', shouldClipContent && 'clipContent')}
+      className={getClassName(Box.displayName, props.className, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally', props.shouldClipContent && 'clipContent', props.shouldCaptureTouches && 'captureTouches')}
       $theme={theme}
       $height={height}
       $width={width}

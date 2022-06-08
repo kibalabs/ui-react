@@ -11,6 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Changed
 -[PATCH] Update `Media` to follow redirects when fetching for content-type
+-[PATCH] Added `shouldPassThroughTouches` to `LayerContainer.Layer`
+-[PATCH] Added `shouldCaptureTouches` to `Box`
 
 ### Removed
 
