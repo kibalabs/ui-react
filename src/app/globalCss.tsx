@@ -10,6 +10,8 @@ interface IGlobalCssProps {
   isFullPageApp?: boolean;
 }
 
+// NOTE(krishan711): global styles should come before all other styles but there is a problem with this:
+// https://github.com/styled-components/styled-components/issues/3146
 export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
   ${(props: IGlobalCssProps): string => props.resetCss};
 
@@ -51,7 +53,7 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
 
   /* NOTE(krishan711): the :not(.button) needs to be specified as Buttons can act as links and these styles will be used on hover */
   /* since this ":hover" is more specific (when hovering) than the generic styles for the default button (with no modifier) */
-  a:not(.Button):not(.LinkBase):not(.IconButton) {
+  a:not(.Button):not(.LinkBase):not(.IconButton):not(.Link) {
     ${(props: IGlobalCssProps): string => themeToCss(props.theme.links.default.normal.default.text)};
     :hover {
       ${(props: IGlobalCssProps): string => themeToCss(props.theme.links.default.normal.hover.text)};
