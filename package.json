@@ -36,7 +36,7 @@
     "remark-breaks": "^2.0.2"
   },
   "devDependencies": {
-    "@kibalabs/build": "^0.8.3",
+    "@kibalabs/build": "^0.9.0",
     "@storybook/addon-essentials": "6.5.9",
     "@storybook/addon-links": "6.5.9",
     "@storybook/builder-webpack5": "6.5.9",
