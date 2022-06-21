@@ -28,30 +28,30 @@
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "dependencies": {
-    "@kibalabs/core": "^0.5.8",
-    "@kibalabs/core-react": "^0.9.0",
+    "@kibalabs/core": "^0.5.9",
+    "@kibalabs/core-react": "^0.9.2",
     "lazysizes": "^5.3.2",
-    "polished": "^4.2.1",
+    "polished": "^4.2.2",
     "react-markdown": "^6.0.3",
     "remark-breaks": "^2.0.2"
   },
   "devDependencies": {
     "@kibalabs/build": "^0.8.3",
-    "@storybook/addon-essentials": "6.4.20",
-    "@storybook/addon-links": "6.4.20",
-    "@storybook/builder-webpack5": "6.4.20",
-    "@storybook/manager-webpack5": "6.4.20",
-    "@storybook/react": "6.4.20",
-    "@types/react": "17.0.43",
-    "@types/react-dom": "17.0.14",
-    "@types/styled-components": "5.1.24",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "@storybook/addon-essentials": "6.5.9",
+    "@storybook/addon-links": "6.5.9",
+    "@storybook/builder-webpack5": "6.5.9",
+    "@storybook/manager-webpack5": "6.5.9",
+    "@storybook/react": "6.5.9",
+    "@types/react": "18.0.14",
+    "@types/react-dom": "18.0.5",
+    "@types/styled-components": "5.1.25",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "styled-components": "5.3.5"
   },
   "peerDependencies": {
-    "react": "^16.9.0 || ^17.0.0",
-    "react-dom": "^16.9.0 || ^17.0.0",
+    "react": "^17.0.0 || ^18.0.0 ",
+    "react-dom": "^17.0.0 || ^18.0.0 ",
     "styled-components": "^5.3.1"
   }
 }
