@@ -96,15 +96,15 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
     }
   };
 
+  const onLoadingChanged = props.onLoadingChanged;
   React.useEffect((): void => {
-    if (props.onLoadingChanged) {
-      props.onLoadingChanged(isLoading);
+    if (onLoadingChanged) {
+      onLoadingChanged(isLoading);
     }
-  // NOTE(krishan711): not sure why this disable is needed. eslint complains it needs all of props??
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.onLoadingChanged, isLoading]);
+  }, [onLoadingChanged, isLoading]);
 
   return (
+    // @ts-ignore
     <StyledWebView
       id={props.id}
       className={getClassName(WebView.displayName, props.className)}
@@ -121,27 +121,29 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
           allow={props.permissions.join(';')}
         />
       </noscript>
-      {isInitialized && (
-        hasFailedToLoad ? errorView : (
-          <React.Fragment>
-            { isLoading && props.shouldShowLoadingSpinner && (
-              <LoadingWrapper id={props.id && `${props.id}-loading-wrapper`}>
-                <LoadingSpinner id={props.id && `${props.id}-loading-spinner`} className={'web-view-loading-spinner'} />
-              </LoadingWrapper>
-            )}
-            <StyledIframe
-              id={props.id && `${props.id}-iframe`}
-              className={getClassName('web-view-iframe', props.isLazyLoadable ? 'lazyload' : 'unlazy', isLoading && 'isLoading')}
-              title={props.title}
-              key={currentUrl}
-              src={props.isLazyLoadable ? undefined : currentUrl}
-              data-src={props.isLazyLoadable ? currentUrl : undefined}
-              onLoad={handleOnLoad}
-              onError={handleOnError}
-              allow={props.permissions.join(';')}
-            />
-          </React.Fragment>
-        )
+      { hasFailedToLoad ? (
+        errorView
+      ) : isInitialized ? (
+        <React.Fragment>
+          { isLoading && props.shouldShowLoadingSpinner && (
+            <LoadingWrapper id={props.id && `${props.id}-loading-wrapper`}>
+              <LoadingSpinner id={props.id && `${props.id}-loading-spinner`} className={'web-view-loading-spinner'} />
+            </LoadingWrapper>
+          )}
+          <StyledIframe
+            id={props.id && `${props.id}-iframe`}
+            className={getClassName('web-view-iframe', props.isLazyLoadable ? 'lazyload' : 'unlazy', isLoading && 'isLoading')}
+            title={props.title}
+            key={currentUrl}
+            src={props.isLazyLoadable ? undefined : currentUrl}
+            data-src={props.isLazyLoadable ? currentUrl : undefined}
+            onLoad={handleOnLoad}
+            onError={handleOnError}
+            allow={props.permissions.join(';')}
+          />
+        </React.Fragment>
+      ) : (
+        null
       )}
     </StyledWebView>
   );
