@@ -68,6 +68,7 @@ export interface IVideoProps extends IComponentProps<IVideoTheme> {
   onPaused?: () => void;
 }
 
+// NOTE(krishan711): Failed to get lazy loading working properly. try again with https://github.com/aFarkas/lazysizes/issues/697
 export const Video = (props: IVideoProps): React.ReactElement => {
   const theme = useBuiltTheme('videos', props.variant, props.theme);
   const fitType = props.fitType || 'scale';
@@ -94,13 +95,15 @@ export const Video = (props: IVideoProps): React.ReactElement => {
   return (
     <StyledVideo
       id={props.id}
-      className={getClassName(Video.displayName, props.className, props.isLazyLoadable ? 'lazyload' : 'unlazy', props.isCenteredHorizontally && 'centered')}
+      // props.isLazyLoadable ? 'lazyload' : 'unlazy'
+      className={getClassName(Video.displayName, props.className, props.isCenteredHorizontally && 'centered')}
       $theme={theme}
       $fitType={fitType}
       $isFullWidth={Boolean(props.isFullWidth)}
       $isFullHeight={Boolean(props.isFullHeight)}
-      autoPlay={props.isLazyLoadable ? undefined : Boolean(props.shouldAutoplay)}
-      dataAutoplay={props.isLazyLoadable ? Boolean(props.shouldAutoplay) : undefined}
+      // preload={props.isLazyLoadable ? "none" : "auto"}
+      autoPlay={Boolean(props.shouldAutoplay)}
+      // data-autoplay={props.isLazyLoadable ? Boolean(props.shouldAutoplay) : undefined}
       muted={Boolean(props.shouldMute)}
       playsInline={true}
       controls={shouldShowControls}
@@ -108,8 +111,8 @@ export const Video = (props: IVideoProps): React.ReactElement => {
       onEnded={onEnded}
       onPlay={onPlayed}
       onPause={onPaused}
+      src={props.source}
     >
-      <source src={props.source} />
       {props.alternativeText}
     </StyledVideo>
   );
