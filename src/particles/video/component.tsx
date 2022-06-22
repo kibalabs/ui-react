@@ -99,7 +99,8 @@ export const Video = (props: IVideoProps): React.ReactElement => {
       $fitType={fitType}
       $isFullWidth={Boolean(props.isFullWidth)}
       $isFullHeight={Boolean(props.isFullHeight)}
-      autoPlay={Boolean(props.shouldAutoplay)}
+      autoPlay={props.isLazyLoadable ? undefined : Boolean(props.shouldAutoplay)}
+      dataAutoplay={props.isLazyLoadable ? Boolean(props.shouldAutoplay) : undefined}
       muted={Boolean(props.shouldMute)}
       playsInline={true}
       controls={shouldShowControls}
@@ -108,17 +109,7 @@ export const Video = (props: IVideoProps): React.ReactElement => {
       onPlay={onPlayed}
       onPause={onPaused}
     >
-      <source
-        src={props.isLazyLoadable ? undefined : props.source}
-        data-src={props.isLazyLoadable ? props.source : undefined}
-      />
-      {props.isLazyLoadable && (
-        <noscript>
-          <source
-            src={props.source}
-          />
-        </noscript>
-      )}
+      <source src={props.source} />
       {props.alternativeText}
     </StyledVideo>
   );

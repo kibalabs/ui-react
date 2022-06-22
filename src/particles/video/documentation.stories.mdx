@@ -38,6 +38,12 @@ export const Template = (args) => (
 </Canvas>
 
 <Canvas>
+  <Story name='Lazy loading'>
+    <Video source={'https://everysize.evrpg.com/_bh20200903213922/assets/hero.mp4'} isLazyLoadable={true} shouldAutoplay={true} />
+  </Story>
+</Canvas>
+
+<Canvas>
   <Story name='onEnded'>
     {() => {
       const [isEnded, setIsEnded] = React.useState(false);
