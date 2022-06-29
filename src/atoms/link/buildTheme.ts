@@ -8,7 +8,7 @@ export const buildLinkThemes = (colors: IColorGuide, dimensions: IDimensionGuide
   const defaultLinkTheme = mergeTheme<ILinkTheme>({
     normal: {
       default: {
-        text: mergeTheme(textThemes.default, {
+        text: mergeTheme(textThemes.inherit as ITextTheme, {
           color: '$colors.brandPrimary',
           'text-decoration': 'underline',
         }),
@@ -37,20 +37,20 @@ export const buildLinkThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     },
   }, base?.default);
 
-  const inheritLinkTheme = mergeThemePartial<ILinkTheme>({
-    normal: {
-      default: {
-        text: mergeThemePartial(textThemes.inherit, {
-          color: '$colors.brandPrimary',
-          'text-decoration': 'underline',
-        }),
-      },
-    },
-  }, base?.default);
+  // const inheritLinkTheme = mergeThemePartial<ILinkTheme>({
+  //   normal: {
+  //     default: {
+  //       text: mergeThemePartial(textThemes.inherit, {
+  //         color: '$colors.brandPrimary',
+  //         'text-decoration': 'underline',
+  //       }),
+  //     },
+  //   },
+  // }, base?.default);
 
   return {
     ...(base || {}),
     default: defaultLinkTheme,
-    inherit: inheritLinkTheme,
+    inherit: defaultLinkTheme,
   };
 };
