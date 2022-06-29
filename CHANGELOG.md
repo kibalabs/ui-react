@@ -10,7 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
--[MINOR] Fixed Video lazy loading
+-[MINOR] Fixed `Video` lazy loading
+-[MINOR] Make `Link` default style use inherit
 
 ### Removed
 
