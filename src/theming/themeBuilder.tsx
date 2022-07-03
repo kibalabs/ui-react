@@ -29,6 +29,7 @@ import { buildLoadingSpinnerThemes } from '../particles/loadingSpinner';
 import { buildPortalThemes } from '../particles/portal';
 import { buildTextThemes } from '../particles/text';
 import { buildVideoThemes } from '../particles/video';
+import { buildScrollbarTheme } from '../particles/scrollbars';
 
 export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const colors = buildColors(inputTheme?.colors);
@@ -44,6 +45,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const dividerThemes = buildDividerThemes(colors, dimensions, inputTheme?.dividers);
   const portalThemes = buildPortalThemes(colors, dimensions, boxThemes, inputTheme?.portals);
   const videoThemes = buildVideoThemes(colors, dimensions, inputTheme?.videos);
+  const scrollbar = buildScrollbarTheme(colors, dimensions, boxThemes, inputTheme?.scrollbar);
 
   const buttonThemes = buildButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.buttons);
   const checkboxThemes = buildCheckboxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.checkboxes);
@@ -70,6 +72,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     alternateColors,
     dimensions,
     fonts,
+    scrollbar,
 
     // Particles
     boxes: boxThemes,

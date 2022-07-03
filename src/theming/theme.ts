@@ -25,6 +25,7 @@ import { IIconTheme } from '../particles/icon';
 import { IImageTheme } from '../particles/image';
 import { ILoadingSpinnerTheme } from '../particles/loadingSpinner';
 import { IPortalTheme } from '../particles/portal';
+import { IScrollbarTheme } from '../particles/scrollbars/theme';
 import { ITextTheme } from '../particles/text';
 import { IVideoTheme } from '../particles/video';
 import { ThemeMap, ThemeType } from '../util';
@@ -35,6 +36,7 @@ export interface ITheme extends ThemeType {
   alternateColors: Record<string, IColorGuide>,
   dimensions: IDimensionGuide,
   fonts: Record<string, IFont>,
+  scrollbar: IScrollbarTheme,
 
   // Particles
   boxes: ThemeMap<IBoxTheme>,

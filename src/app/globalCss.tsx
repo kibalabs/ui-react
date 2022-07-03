@@ -127,5 +127,15 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
     }
   }
 
+  ::-webkit-scrollbar {
+    width: ${(props: IGlobalCssProps): string => props.theme.scrollbar.width};
+  }
+  ::-webkit-scrollbar-track {
+    ${(props: IGlobalCssProps): string => themeToCss(props.theme.scrollbar.track)};
+  }
+  ::-webkit-scrollbar-thumb {
+    ${(props: IGlobalCssProps): string => themeToCss(props.theme.scrollbar.thumb)};
+  }
+
   ${(props: IGlobalCssProps): string => props.extraCss || ''};
 `;
