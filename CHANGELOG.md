@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Changed
 -[MINOR] Fixed `Video` lazy loading
 -[MINOR] Make `Link` default style use inherit
+-[MINOR] Added `placeholderText` to `OptionSelect`
+-[MINOR] Fixed `alternateColors` to be expanded correctly
 
 ### Removed
 

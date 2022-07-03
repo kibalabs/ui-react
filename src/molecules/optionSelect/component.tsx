@@ -45,6 +45,7 @@ interface IOptionSelectProps extends IMoleculeProps<IOptionSelectTheme> {
   closeIconId?: string;
   openIconId?: string;
   messageText?: string;
+  placeholderText?: string;
   inputWrapperVariant?: string;
   optionListVariant?: string;
   optionTextVariant?: string;
@@ -76,6 +77,8 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
     setIsOpen(!isOpen);
   };
 
+  const placeholder = props.placeholderText || 'Select an option';
+
   return (
     <StyledOptionSelect
       id={props.id}
@@ -90,7 +93,7 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
       >
         <Stack direction={Direction.Horizontal} childAlignment={Alignment.Center}>
           <Stack.Item growthFactor={1} shrinkFactor={1}>
-            <Text>{getSelectedItem(props.selectedItemKey)?.text || 'Select an option'}</Text>
+            <Text>{getSelectedItem(props.selectedItemKey)?.text || placeholder}</Text>
           </Stack.Item>
           <KibaIcon iconId={isOpen ? (props.closeIconId || 'ion-close') : props.openIconId || 'ion-chevron-down'} />
         </Stack>

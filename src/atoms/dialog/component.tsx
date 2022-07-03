@@ -66,7 +66,7 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
 
   return (
     <StyledBackdrop
-      className={getClassName(Dialog.displayName, !props.isOpen && 'closed')}
+      className={getClassName(Dialog.displayName, props.className, !props.isOpen && 'closed')}
       $backdropColor={theme.backdropColor}
       ref={dialogRef}
       onClick={onBackdropClicked}
