@@ -109,7 +109,7 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
                 isDisabled={option.isDisabled}
                 isSelected={option.itemKey === props.selectedItemKey}
               >
-                <Text variant={option.textVariant || 'smaller'}>{option.text}</Text>
+                <Text variant={option.textVariant || props.optionTextVariant || 'smaller'}>{option.text}</Text>
               </List.Item>
             ))}
           </List>
