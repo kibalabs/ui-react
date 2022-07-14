@@ -76,6 +76,8 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
         maxWidth={maxWidth}
         maxHeight={maxHeight}
         theme={theme.background}
+        shouldClipContent={true}
+        shouldCaptureTouches={true}
         isScrollableVertically={props.isScrollableVertically}
         isScrollableHorizontally={props.isScrollableHorizontally}
       >
