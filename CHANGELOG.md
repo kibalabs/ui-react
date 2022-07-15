@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 -[MINOR] Use `optionTextVariant` correctly in `OptionSelect`
 -[MINOR] Fixed `alternateColors` to be expanded correctly
 -[MINOR] Update `ColorSettingView` to set default `color` correctly
+-[MINOR] Added `isInvisible` to `HidingView`
 
 ### Removed
 
