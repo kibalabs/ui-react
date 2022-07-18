@@ -72,10 +72,6 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
   const minWidth = props.minWidth || 'auto';
   const blockType = width === '100%' ? 'block' : 'flex';
 
-  if ((props.isScrollableHorizontally || props.isScrollableVertically) && props.shouldClipContent) {
-    console.error('Either shouldClipContent prop or Scroll props can be true at once.');
-  }
-
   return (
     <StyledBox
       id={props.id}
