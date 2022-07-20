@@ -1,5 +1,6 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 
+import { Box } from '..';
 import { Image, IImageProps } from '.';
 
 <Meta
@@ -28,6 +29,13 @@ export const Template = (args) => (
 <Canvas>
   <Story name='Circular'>
     <Image variant='circular' source={'https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg'} isLazyLoadable={false} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Responsive'>
+    <Image source={'https://d35ci2i0uce4j6.cloudfront.net/v1/images/87ea0e3413b84d9496e7ec7baee8468d/go'} isLazyLoadable={false} width='150px' height='150px' />
+    <Image source={'https://d35ci2i0uce4j6.cloudfront.net/v1/images/87ea0e3413b84d9496e7ec7baee8468d/go'} isLazyLoadable={false} width='850px' height='850px' />
   </Story>
 </Canvas>
 
