@@ -72,8 +72,8 @@ interface IStyledTextProps {
 const StyledText = styled.span<IStyledTextProps>`
   ${(props: IStyledTextProps): string => themeToCss(props.$theme)};
   ${(props: IStyledTextProps): string => (props.$alignment ? `text-align: ${props.$alignment}` : '')};
-  ${(props: IStyledTextProps): string => (props.$shouldBreakOnWords ? `word-break: break-word` : '')};
-  ${(props: IStyledTextProps): string => (props.$shouldBreakAnywhere ? `word-break: break-all` : '')};
+  ${(props: IStyledTextProps): string => (props.$shouldBreakOnWords ? 'word-break: break-word' : '')};
+  ${(props: IStyledTextProps): string => (props.$shouldBreakAnywhere ? 'word-break: break-all' : '')};
 
   &.singleLine {
     display: block;
@@ -115,7 +115,7 @@ export const Text = (props: ITextProps): React.ReactElement => {
       $theme={theme}
       $alignment={props.alignment}
       $lineLimit={lineLimit}
-      $shouldBreakOnWords={props.shouldBreakOnWords}
+      $shouldBreakOnWords={props.shouldBreakOnWords === true || props.shouldBreakOnWords === undefined}
       $shouldBreakAnywhere={props.shouldBreakAnywhere}
       as={props.tag || getTextTag(props.variant)}
     >
