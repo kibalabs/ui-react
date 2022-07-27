@@ -87,7 +87,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
   const fitType = props.fitType || 'scale';
   const width = props.width ? props.width : props.isFullWidth ? '100%' : 'auto';
   const height = props.height ? props.height : props.isFullHeight ? '100%' : 'auto';
-  const supportsResponsive = props.source.includes('d35ci2i0uce4j6.cloudfront.net');
+  const supportsResponsive = props.source.includes('d35ci2i0uce4j6.cloudfront.net') || props.source.includes('pablo-images.kibalabs.com');
 
   return (
     <React.Fragment>
