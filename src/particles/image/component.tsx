@@ -40,9 +40,10 @@ const StyledImage = styled.img<IStyledImageProps>`
   }
 
   // fade in after lazy load
-  /* &.lazyload, &.lazyloading {
+  &.lazyload, &.lazyloading {
     opacity: 0;
-  } */
+  }
+
   &.lazyloaded {
     display: block;
     opacity: 1;
@@ -69,31 +70,31 @@ export interface IImageProps extends IComponentProps<IImageTheme> {
   isLazyLoadable?: boolean;
 }
 
-const _RESPONSIVE_IMAGE_SIZES = [100, 200, 300, 500, 640, 750, 1000, 1080, 1920, 2500]
+const RESPONSIVE_IMAGE_SIZES = [100, 200, 300, 500, 640, 750, 1000, 1080, 1920, 2500];
 
 const getResponsiveImageString = (url: string) => {
-  const widthValues = _RESPONSIVE_IMAGE_SIZES.map((size: number): string => {
+  const widthValues = RESPONSIVE_IMAGE_SIZES.map((size: number): string => {
     return `${url}?w=${size} ${size}w`;
   });
-  // const heightValues = _RESPONSIVE_IMAGE_SIZES.map((size: number): string => {
+  // const heightValues = RESPONSIVE_IMAGE_SIZES.map((size: number): string => {
   //   return `${url}?h=${size} ${size}h`;
   // });
   const heightValues = [];
   return [...widthValues, ...heightValues].join(', ');
-}
+};
 
 export const Image = (props: IImageProps): React.ReactElement => {
   const theme = useBuiltTheme('images', props.variant, props.theme);
   const fitType = props.fitType || 'scale';
   const width = props.width ? props.width : props.isFullWidth ? '100%' : 'auto';
   const height = props.height ? props.height : props.isFullHeight ? '100%' : 'auto';
-  const supportsResponsive = props.source.includes('d35ci2i0uce4j6.cloudfront.net') || props.source.includes('pablo-images.kibalabs.com');
+  const isSourceResponsive = props.source.includes('d35ci2i0uce4j6.cloudfront.net') || props.source.includes('pablo-images.kibalabs.com');
 
   return (
     <React.Fragment>
       <StyledImage
         id={props.id}
-        className={getClassName(Image.displayName, props.className, props.isLazyLoadable || supportsResponsive ? 'lazyload' : 'unlazy', props.isCenteredHorizontally && 'centered')}
+        className={getClassName(Image.displayName, props.className, props.isLazyLoadable ? 'lazyload' : 'unlazy', props.isCenteredHorizontally && 'centered')}
         $theme={theme}
         $fitType={fitType}
         $width={width}
@@ -101,11 +102,11 @@ export const Image = (props: IImageProps): React.ReactElement => {
         $maxWidth={props.maxWidth || 'auto'}
         $maxHeight={props.maxHeight || 'auto'}
         src={props.isLazyLoadable ? undefined : props.source}
-        sizes={supportsResponsive && !props.isLazyLoadable ? 'atuo' : undefined}
-        srcSet={supportsResponsive && !props.isLazyLoadable ? getResponsiveImageString(props.source) : undefined}
         data-src={props.isLazyLoadable ? props.source : undefined}
-        data-sizes={props.isLazyLoadable && supportsResponsive ? "auto" : undefined}
-        data-srcset={props.isLazyLoadable && supportsResponsive ? getResponsiveImageString(props.source) : undefined}
+        sizes={isSourceResponsive && !props.isLazyLoadable ? 'auto' : undefined}
+        data-sizes={isSourceResponsive && props.isLazyLoadable ? 'auto' : undefined}
+        srcSet={isSourceResponsive && !props.isLazyLoadable ? getResponsiveImageString(props.source) : undefined}
+        data-srcset={isSourceResponsive && props.isLazyLoadable ? getResponsiveImageString(props.source) : undefined}
         alt={props.alternativeText}
       />
       {props.isLazyLoadable && (
@@ -120,8 +121,8 @@ export const Image = (props: IImageProps): React.ReactElement => {
             $maxWidth={props.maxWidth || 'auto'}
             $maxHeight={props.maxHeight || 'auto'}
             src={props.source}
-            sizes={supportsResponsive ? "auto" : undefined}
-            srcSet={supportsResponsive ? getResponsiveImageString(props.source) : undefined}
+            sizes={isSourceResponsive ? 'auto' : undefined}
+            srcSet={isSourceResponsive ? getResponsiveImageString(props.source) : undefined}
             alt={props.alternativeText}
           />
         </noscript>
