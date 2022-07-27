@@ -79,8 +79,7 @@ const getResponsiveImageString = (url: string) => {
   // const heightValues = RESPONSIVE_IMAGE_SIZES.map((size: number): string => {
   //   return `${url}?h=${size} ${size}h`;
   // });
-  const heightValues = [];
-  return [...widthValues, ...heightValues].join(', ');
+  return [...widthValues].join(', ');
 };
 
 export const Image = (props: IImageProps): React.ReactElement => {
