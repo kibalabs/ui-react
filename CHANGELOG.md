@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 -[MINOR] Added `isInvisible` to `HidingView`
 -[MINOR] Added `shouldBreakOnWords` and `shouldBreakAnywhere` to `Text`
 -[MAJOR] Updated `Image` to support responsive images from pablo-images.kibalabs.com
+-[MINOR] Fixed `StatefulTitleCollapsibleBox` to pass through className
 
 ### Removed
 

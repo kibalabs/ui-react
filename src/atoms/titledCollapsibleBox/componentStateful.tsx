@@ -21,7 +21,7 @@ export const StatefulTitledCollapsibleBox = (props: IStatefulTitledCollapsibleBo
   return (
     <TitledCollapsibleBox
       id={props.id}
-      className={getClassName(StatefulTitledCollapsibleBox.displayName)}
+      className={getClassName(StatefulTitledCollapsibleBox.displayName, props.className)}
       theme={props.theme}
       variant={props.variant}
       title={props.title}
