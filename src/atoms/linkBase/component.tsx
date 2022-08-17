@@ -12,7 +12,8 @@ interface IStyledLinkBaseProps {
 }
 
 const StyledLinkBaseInner = styled.span`
-cursor: pointer;
+  transition-duration: 0.3s;
+  cursor: pointer;
   color: currentColor;
   outline: none;
   display: flex;

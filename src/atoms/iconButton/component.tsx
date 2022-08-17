@@ -13,6 +13,7 @@ interface IStyledIconButtonProps {
 }
 
 const StyledIconButtonInner = styled.span`
+  transition-duration: 0.3s;
   cursor: pointer;
   outline: none;
   display: flex;

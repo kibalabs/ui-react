@@ -20,6 +20,7 @@ interface IStyledButtonProps {
 // NOTE(krishan711): focus problem fixed with https://www.kizu.ru/keyboard-only-focus/#proper-solution
 
 const StyledButtonInner = styled.span`
+  transition-duration: 0.3s;
   outline: none;
   display: flex;
   flex-direction: row;

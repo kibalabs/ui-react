@@ -12,6 +12,7 @@ interface IStyledLinkProps {
 }
 
 const StyledLinkInner = styled.span`
+  transition-duration: 0.3s;
   /* Fixing the Safari bug for <button>s overflow */
   position: relative;
 `;
