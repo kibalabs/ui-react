@@ -114,7 +114,7 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
     >
-      <StyledLinkBaseInner className='focus-fixer' tabIndex='-1'>
+      <StyledLinkBaseInner className='focus-fixer' tabIndex={-1}>
         {props.children}
       </StyledLinkBaseInner>
     </StyledLinkBase>

@@ -85,7 +85,7 @@ export const Link = (props: ILinkProps): React.ReactElement => {
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       as={ props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
     >
-      <StyledLinkInner className='focus-fixer' tabIndex='-1'>
+      <StyledLinkInner className='focus-fixer' tabIndex={-1}>
         {props.text}
       </StyledLinkInner>
     </StyledLink>

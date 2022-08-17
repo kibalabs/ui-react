@@ -134,7 +134,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
       type={props.buttonType || 'button'}
     >
-      <StyledButtonInner className='focus-fixer' tabIndex='-1'>
+      <StyledButtonInner className='focus-fixer' tabIndex={-1}>
         { !props.isLoading && props.iconLeft && (
           <React.Fragment>
             {props.iconLeft}

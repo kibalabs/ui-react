@@ -109,7 +109,7 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
       type={props.buttonType || 'button'}
     >
-      <StyledIconButtonInner className='focus-fixer' tabIndex='-1'>
+      <StyledIconButtonInner className='focus-fixer' tabIndex={-1}>
         {props.icon}
       </StyledIconButtonInner>
     </StyledIconButton>
