@@ -11,17 +11,27 @@ interface IStyledLinkBaseProps {
   $theme: ILinkBaseTheme;
 }
 
-const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
-  color: currentColor;
+const StyledLinkBaseInner = styled.span`
+  transition-duration: 0.3s;
   cursor: pointer;
+  color: currentColor;
   outline: none;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   background-clip: padding-box;
-  transition: 0.3s;
+  width: 100%;
+  height: 100%;
+  /* Fixing the Safari bug for <button>s overflow */
+  position: relative;
+`;
+
+const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
+  cursor: pointer;
   width: fit-content;
+  transition-duration: 0.3s;
+
   &.fullWidth {
     width: 100%;
   }
@@ -30,33 +40,37 @@ const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
     height: 100%;
   }
 
-  ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.default.background)};
-  ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.default.linkBase)};
-  &:hover {
+  & > .focus-fixer {
+    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.default.background)};
+    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.default.linkBase)};
+  }
+  &:hover > .focus-fixer {
     ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.hover?.background)};
     ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.hover?.linkBase)};
   }
-  &:active {
+  &:active > .focus-fixer {
     ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.press?.background)};
     ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.press?.linkBase)};
   }
-  &:focus {
+  &:focus > .focus-fixer {
     ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.focus?.background)};
     ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.focus?.linkBase)};
   }
   &.disabled {
     cursor: not-allowed;
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.default?.background)};
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.default?.linkBase)};
-    &:hover {
+    & > .focus-fixer {
+      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.default?.background)};
+      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.default?.linkBase)};
+    }
+    &:hover > .focus-fixer {
       ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.hover?.background)};
       ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.hover?.linkBase)};
     }
-    &:active {
+    &:active > .focus-fixer {
       ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.press?.background)};
       ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.press?.linkBase)};
     }
-    &:focus {
+    &:focus > .focus-fixer {
       ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.focus?.background)};
       ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.focus?.linkBase)};
     }
@@ -100,7 +114,9 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
     >
-      {props.children}
+      <StyledLinkBaseInner className='focus-fixer' tabIndex={-1}>
+        {props.children}
+      </StyledLinkBaseInner>
     </StyledLinkBase>
   );
 };
