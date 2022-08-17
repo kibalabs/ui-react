@@ -17,51 +17,66 @@ interface IStyledButtonProps {
   $isLoading: boolean;
 }
 
-const StyledButton = styled.button<IStyledButtonProps>`
-  ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.text)};
-  ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.background)};
-  /* Since it can be rendered as an <a>, unset everything for visited */
-  &:visited {
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.text)};
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.background)};
-  }
-  cursor: ${(props: IStyledButtonProps): string => (props.$isLoading ? 'default' : 'pointer')};
+// NOTE(krishan711): focus problem fixed with https://www.kizu.ru/keyboard-only-focus/#proper-solution
+
+const StyledButtonInner = styled.span`
   outline: none;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: stretch;
   background-clip: border-box;
+  width: 100%;
+  height: 100%;
+  /* Fixing the Safari bug for <button>s overflow */
+  position: relative;
+`;
+
+
+const StyledButton = styled.button<IStyledButtonProps>`
+  cursor: ${(props: IStyledButtonProps): string => (props.$isLoading ? 'default' : 'pointer')};
   transition-duration: 0.3s;
+
   &.fullWidth {
     width: 100%;
   }
 
-  &:hover {
+  & > .focus-fixer {
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.text)};
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.background)};
+  }
+  /* Since it can be rendered as an <a>, unset everything for visited */
+  &:visited > .focus-fixer {
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.text)};
+    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.background)};
+  }
+  &:hover > .focus-fixer {
     ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.hover?.text)};
     ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.hover?.background)};
   }
-  &:active {
+  &:active > .focus-fixer {
     ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.press?.text)};
     ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.press?.background)};
   }
-  &:focus {
+  &:focus > .focus-fixer {
     ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.focus?.text)};
     ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.focus?.background)};
   }
   &.disabled {
     cursor: not-allowed;
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.default?.text)};
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.default?.background)};
-    &:hover {
+    & > .focus-fixer {
+      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.text)};
+      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.background)};
+    }
+    &:hover > .focus-fixer {
       ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.hover?.text)};
       ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.hover?.background)};
     }
-    &:active {
+    &:active > .focus-fixer {
       ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.press?.text)};
       ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.press?.background)};
     }
-    &:focus {
+    &:focus > .focus-fixer {
       ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.focus?.text)};
       ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.focus?.background)};
     }
@@ -118,27 +133,29 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
       type={props.buttonType || 'button'}
     >
-      { !props.isLoading && props.iconLeft && (
-        <React.Fragment>
-          {props.iconLeft}
-          <Spacing variant={props.iconGutter} />
-        </React.Fragment>
-      )}
-      { !props.isLoading && (
-        <StyledButtonText>{props.text }</StyledButtonText>
-      )}
-      { !props.isLoading && props.iconRight && (
-        <React.Fragment>
-          <Spacing variant={props.iconGutter} />
-          {props.iconRight}
-        </React.Fragment>
-      )}
-      { props.isLoading && (
-        <LoadingSpinner
-          id={props.id && `${props.id}-loading-spinner`}
-          variant='light-small'
-        />
-      )}
+      <StyledButtonInner className='focus-fixer' tabIndex='-1'>
+        { !props.isLoading && props.iconLeft && (
+          <React.Fragment>
+            {props.iconLeft}
+            <Spacing variant={props.iconGutter} />
+          </React.Fragment>
+        )}
+        { !props.isLoading && (
+          <StyledButtonText>{props.text }</StyledButtonText>
+        )}
+        { !props.isLoading && props.iconRight && (
+          <React.Fragment>
+            <Spacing variant={props.iconGutter} />
+            {props.iconRight}
+          </React.Fragment>
+        )}
+        { props.isLoading && (
+          <LoadingSpinner
+            id={props.id && `${props.id}-loading-spinner`}
+            variant='light-small'
+          />
+        )}
+      </StyledButtonInner>
     </StyledButton>
   );
 };

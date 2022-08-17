@@ -12,9 +12,7 @@ interface IStyledIconButtonProps {
   $theme: IIconButtonTheme;
 }
 
-const StyledIconButton = styled.button<IStyledIconButtonProps>`
-  ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.default.text)};
-  ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.default.background)};
+const StyledIconButtonInner = styled.span`
   cursor: pointer;
   outline: none;
   display: flex;
@@ -22,32 +20,44 @@ const StyledIconButton = styled.button<IStyledIconButtonProps>`
   align-items: center;
   justify-content: center;
   background-clip: border-box;
-  transition: 0.3s;
-  &:hover {
+  /* Fixing the Safari bug for <button>s overflow */
+  position: relative;
+`;
+
+const StyledIconButton = styled.button<IStyledIconButtonProps>`
+  transition-duration: 0.3s;
+
+  & > .focus-fixer {
+    ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.default.text)};
+    ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.default.background)};
+  }
+  &:hover > .focus-fixer  {
     ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.hover?.text)};
     ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.hover?.background)};
   }
-  &:active {
+  &:active > .focus-fixer  {
     ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.press?.text)};
     ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.press?.background)};
   }
-  &:focus {
+  &:focus > .focus-fixer  {
     ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.focus?.text)};
     ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.normal.focus?.background)};
   }
   &.disabled {
     cursor: not-allowed;
-    ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.default?.text)};
-    ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.default?.background)};
-    &:hover {
+    & > .focus-fixer {
+      ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.default?.text)};
+      ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.default?.background)};
+    }
+    &:hover > .focus-fixer  {
       ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.hover?.text)};
       ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.hover?.background)};
     }
-    &:active {
+    &:active > .focus-fixer  {
       ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.press?.text)};
       ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.press?.background)};
     }
-    &:focus {
+    &:focus > .focus-fixer  {
       ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.focus?.text)};
       ${(props: IStyledIconButtonProps): string => themeToCss(props.$theme.disabled.focus?.background)};
     }
@@ -98,7 +108,9 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
       type={props.buttonType || 'button'}
     >
-      {props.icon}
+      <StyledIconButtonInner className='focus-fixer' tabIndex='-1'>
+        {props.icon}
+      </StyledIconButtonInner>
     </StyledIconButton>
   );
 };

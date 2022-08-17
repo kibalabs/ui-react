@@ -162,6 +162,9 @@ export const resetCss = `
     text-decoration: none;
     color: inherit;
   }
+  a:focus-visible {
+    outline:0;
+  }
   button {
     border: none;
     margin: 0;
