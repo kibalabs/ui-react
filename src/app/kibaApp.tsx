@@ -44,6 +44,10 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
 
   useInitialization((): void => {
     setIsRunningOnBrowser(getIsRunningOnBrowser());
+    if (isRunningOnBrowser) {
+      window.lazySizes.cfg = window.lazySizes.cfg || {};
+      window.lazySizes.cfg.minSize = 20;
+    }
   });
 
   return (
