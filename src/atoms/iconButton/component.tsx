@@ -81,8 +81,10 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
 
   const onClicked = (event: React.SyntheticEvent): void => {
     if (props.onClicked) {
-      event.stopPropagation();
       props.onClicked();
+    }
+    if (props.onClicked || props.target) {
+      event.stopPropagation();
     }
   };
 

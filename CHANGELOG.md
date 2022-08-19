@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 -[MAJOR] Updated `Image` to support responsive images from pablo-images.kibalabs.com
 -[MINOR] Fixed `StatefulTitleCollapsibleBox` to pass through className
 -[MINOR] Updated `Button`, `IconButton`, `LinkBase` and `Link` to only show focus when navigating with keyboard
+-[MINOR] Updated `Button`, `IconButton`, `LinkBase` and `Link` to stop propagating events
 
 ### Removed
 

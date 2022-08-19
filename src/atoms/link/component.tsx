@@ -63,9 +63,12 @@ export interface ILinkProps extends IComponentProps<ILinkTheme> {
 export const Link = (props: ILinkProps): React.ReactElement => {
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
 
-  const onClicked = (): void => {
+  const onClicked = (event: React.SyntheticEvent): void => {
     if (props.onClicked) {
       props.onClicked();
+    }
+    if (props.onClicked || props.target) {
+      event.stopPropagation();
     }
   };
 
