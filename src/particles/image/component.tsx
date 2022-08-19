@@ -98,8 +98,8 @@ export const Image = (props: IImageProps): React.ReactElement => {
         $fitType={fitType}
         $width={width}
         $height={height}
-        $maxWidth={props.maxWidth || 'auto'}
-        $maxHeight={props.maxHeight || 'auto'}
+        $maxWidth={props.maxWidth || 'none'}
+        $maxHeight={props.maxHeight || 'none'}
         src={props.isLazyLoadable ? undefined : props.source}
         data-src={props.isLazyLoadable ? props.source : undefined}
         sizes={isSourceResponsive && !props.isLazyLoadable ? 'auto' : undefined}
@@ -117,8 +117,8 @@ export const Image = (props: IImageProps): React.ReactElement => {
             $fitType={fitType}
             $width={width}
             $height={height}
-            $maxWidth={props.maxWidth || 'auto'}
-            $maxHeight={props.maxHeight || 'auto'}
+            $maxWidth={props.maxWidth || 'none'}
+            $maxHeight={props.maxHeight || 'none'}
             src={props.source}
             sizes={isSourceResponsive ? 'auto' : undefined}
             srcSet={isSourceResponsive ? getResponsiveImageString(props.source) : undefined}
