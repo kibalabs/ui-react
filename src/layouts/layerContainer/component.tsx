@@ -76,9 +76,9 @@ const getStaticTranslateCssValue = (alignment: Alignment): string => {
   if (alignment === Alignment.Center) {
     return '-50%';
   }
-  if (alignment === Alignment.End) {
-    return '-100%';
-  }
+  // if (alignment === Alignment.End) {
+  //   return '-100%';
+  // }
   return '0';
 };
 
@@ -87,17 +87,26 @@ const getStaticAlignmentCssValue = (alignment: Alignment): string => {
     return '50%';
   }
   if (alignment === Alignment.End) {
-    return '100%';
+    return 'auto';
   }
   return '0';
+};
+
+const getStaticAlignmentEndCssValue = (alignment: Alignment): string => {
+  if (alignment === Alignment.End) {
+    return '0';
+  }
+  return 'auto';
 };
 
 const getStaticPositioningCss = (alignmentVertical: Alignment, alignmentHorizontal: Alignment): string => {
   const top = getStaticAlignmentCssValue(alignmentVertical);
   const left = getStaticAlignmentCssValue(alignmentHorizontal);
+  const bottom = getStaticAlignmentEndCssValue(alignmentVertical);
+  const right = getStaticAlignmentEndCssValue(alignmentHorizontal);
   const translateY = getStaticTranslateCssValue(alignmentVertical);
   const translateX = getStaticTranslateCssValue(alignmentHorizontal);
-  return `top: ${top}; left: ${left}; transform: translate(${translateX}, ${translateY})`;
+  return `top: ${top}; left: ${left}; bottom: ${bottom}; right: ${right}; transform: translate(${translateX}, ${translateY})`;
 };
 
 interface IStyledLayerProps extends ISingleAnyChildProps {
