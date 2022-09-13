@@ -5,11 +5,20 @@ import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } fro
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
+import { Alignment, getFlexContentAlignment } from '../../model';
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
+import { CssConverter } from '../../util';
 import { IButtonTheme } from './theme';
 
-const StyledButtonText = styled.span`
-  width: 100%;
+
+// NOTE(krishan711): focus problem fixed with https://www.kizu.ru/keyboard-only-focus/#proper-solution
+
+interface IStyledButtonTextProps {
+  $isTextFullWidth: boolean;
+}
+
+const StyledButtonText = styled.span<IStyledButtonTextProps>`
+  width: ${(props: IStyledButtonTextProps): string => (props.$isTextFullWidth ? '100%' : 'auto')};
 `;
 
 interface IStyledButtonProps {
@@ -17,15 +26,21 @@ interface IStyledButtonProps {
   $isLoading: boolean;
 }
 
-// NOTE(krishan711): focus problem fixed with https://www.kizu.ru/keyboard-only-focus/#proper-solution
+const getContentAlignmentCss: CssConverter<Alignment> = (field: Alignment): string => {
+  return `justify-content: ${getFlexContentAlignment(field)};`;
+};
 
-const StyledButtonInner = styled.span`
+interface IStyledButtonInnerProps {
+  $contentAlignment: Alignment;
+}
+
+const StyledButtonInner = styled.span<IStyledButtonInnerProps>`
   transition-duration: 0.3s;
   outline: none;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: stretch;
+  ${(props: IStyledButtonInnerProps): string => getContentAlignmentCss(props.$contentAlignment)};
   background-clip: border-box;
   width: 100%;
   height: 100%;
@@ -96,6 +111,8 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   target?: string;
   targetShouldOpenSameTab?: boolean;
   tabIndex?: number;
+  contentAlignment: Alignment;
+  isTextFullWidth: boolean;
   onClicked?(): void;
 }
 
@@ -137,7 +154,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
       type={props.buttonType || 'button'}
     >
-      <StyledButtonInner className='focus-fixer' tabIndex={-1}>
+      <StyledButtonInner className='focus-fixer' tabIndex={-1} $contentAlignment={props.contentAlignment}>
         { !props.isLoading && props.iconLeft && (
           <React.Fragment>
             {props.iconLeft}
@@ -145,7 +162,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
           </React.Fragment>
         )}
         { !props.isLoading && (
-          <StyledButtonText>{props.text }</StyledButtonText>
+          <StyledButtonText $isTextFullWidth={props.isTextFullWidth}>{props.text }</StyledButtonText>
         )}
         { !props.isLoading && props.iconRight && (
           <React.Fragment>
@@ -168,5 +185,7 @@ Button.displayName = 'Button';
 Button.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,
+  isTextFullWidth: true,
   iconGutter: PaddingSize.Default,
+  contentAlignment: Alignment.Fill,
 };
