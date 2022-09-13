@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 -[MINOR] Fixed `StatefulTitleCollapsibleBox` to pass through className
 -[MINOR] Updated `Button`, `IconButton`, `LinkBase` and `Link` to only show focus when navigating with keyboard
 -[MINOR] Updated `Button`, `IconButton`, `LinkBase` and `Link` to stop propagating events
+-[MINOR] Updated `Button` to have `contentAlignment` and `isTextFullWidth` props to allow new layouts
 
 ### Removed
 
