@@ -19,6 +19,7 @@ export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide,
     'outline-color': 'transparent',
     'outline-width': '0',
     'outline-offset': '0',
+    'opacity': '1',
   }, base?.default);
 
   const transparentBoxTheme = mergeThemePartial<IBoxTheme>({
