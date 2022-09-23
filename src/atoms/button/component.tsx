@@ -81,8 +81,8 @@ const StyledButton = styled.button<IStyledButtonProps>`
   &.disabled {
     cursor: not-allowed;
     & > .focus-fixer {
-      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.default.text)};
-      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.default.background)};
+      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.default?.text)};
+      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.default?.background)};
     }
     &:hover > .focus-fixer {
       ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.hover?.text)};
