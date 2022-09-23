@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 -[MINOR] Updated `Button`, `IconButton`, `LinkBase` and `Link` to stop propagating events
 -[MINOR] Updated `Button` to have `contentAlignment` and `isTextFullWidth` props to allow new layouts
 -[MINOR] Updated `Box` to have responsive props for size
+-[MINOR] Added `opacity` to `IBoxTheme`
 
 ### Removed
 

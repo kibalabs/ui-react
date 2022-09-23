@@ -13,4 +13,5 @@ export interface IBoxTheme extends CssTheme, ThemeType {
   'outline-color': string;
   'outline-width': string;
   'outline-offset': string;
+  'opacity': string;
 }
