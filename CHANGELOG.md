@@ -10,6 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
+
+### Removed
+
+## [0.10.0] - 2022-10-11
+
+### Changed
 -[MINOR] Fixed `Video` lazy loading
 -[MINOR] Make `Link` default style use inherit
 -[MINOR] Added `placeholderText` to `OptionSelect`
@@ -25,8 +31,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 -[MINOR] Updated `Button` to have `contentAlignment` and `isTextFullWidth` props to allow new layouts
 -[MINOR] Updated `Box` to have responsive props for size
 -[MINOR] Added `opacity` to `IBoxTheme`
-
-### Removed
 
 ## [0.9.9] - 2022-06-21
 
