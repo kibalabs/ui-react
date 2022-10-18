@@ -8,8 +8,10 @@ import { IVideoTheme } from './theme';
 
 export interface IStyledVideoProps {
   $theme: IVideoTheme;
-  $isFullWidth: boolean;
-  $isFullHeight: boolean;
+  $width: string;
+  $height: string;
+  $maxWidth: string;
+  $maxHeight: string;
   $fitType: 'crop' | 'cover' | 'scale' | 'contain';
 }
 
@@ -25,8 +27,10 @@ const getImageFit = (fitType: string): string => {
 
 const StyledVideo = styled.video<IStyledVideoProps>`
   display: block;
-  width: ${(props: IStyledVideoProps): string => (props.$isFullWidth ? '100%' : 'auto')};
-  height: ${(props: IStyledVideoProps): string => (props.$isFullHeight ? '100%' : 'auto')};
+  width: ${(props: IStyledVideoProps): string => props.$width};
+  height: ${(props: IStyledVideoProps): string => props.$height};
+  max-width: ${(props: IStyledVideoProps): string => props.$maxWidth};
+  max-height: ${(props: IStyledVideoProps): string => props.$maxHeight};
   object-fit: ${(props: IStyledVideoProps): string => getImageFit(props.$fitType)};
   max-width: 100%;
   max-height: 100%;
@@ -55,8 +59,12 @@ export interface IVideoProps extends IComponentProps<IVideoTheme> {
   source: string;
   alternativeText: string;
   fitType?: 'crop' | 'cover' | 'scale' | 'contain';
+  width?: string;
+  height?: string;
   isFullWidth?: boolean;
   isFullHeight?: boolean;
+  maxWidth?: string;
+  maxHeight?: string;
   isCenteredHorizontally?: boolean;
   shouldShowControls?: boolean;
   shouldAutoplay?: boolean;
@@ -73,6 +81,8 @@ export const Video = (props: IVideoProps): React.ReactElement => {
   const theme = useBuiltTheme('videos', props.variant, props.theme);
   const fitType = props.fitType || 'scale';
   const shouldShowControls = props.shouldShowControls != null ? props.shouldShowControls : true;
+  const width = props.width ? props.width : props.isFullWidth ? '100%' : 'auto';
+  const height = props.height ? props.height : props.isFullHeight ? '100%' : 'auto';
 
   const onEnded = (): void => {
     if (props.onEnded) {
@@ -99,8 +109,10 @@ export const Video = (props: IVideoProps): React.ReactElement => {
       className={getClassName(Video.displayName, props.className, props.isCenteredHorizontally && 'centered')}
       $theme={theme}
       $fitType={fitType}
-      $isFullWidth={Boolean(props.isFullWidth)}
-      $isFullHeight={Boolean(props.isFullHeight)}
+      $width={width}
+      $height={height}
+      $maxWidth={props.maxWidth || 'none'}
+      $maxHeight={props.maxHeight || 'none'}
       // preload={props.isLazyLoadable ? "none" : "auto"}
       autoPlay={Boolean(props.shouldAutoplay)}
       // data-autoplay={props.isLazyLoadable ? Boolean(props.shouldAutoplay) : undefined}
