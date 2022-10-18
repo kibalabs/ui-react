@@ -12,7 +12,7 @@ import { Image, IImageProps } from '.';
 <br/>
 
 export const Template = (args) => (
-  <Image {...args} />
+  <Image maxWidth={'100%'} isFullHeigh={true} {...args} />
 );
 
 <Canvas withToolbar={true} withSource={'none'}>
@@ -27,7 +27,7 @@ export const Template = (args) => (
 
 <Canvas>
   <Story name='Circular'>
-    <Image variant='circular' source={'https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg'} isLazyLoadable={false} />
+    <Image variant='circular' maxWidth={'100%'} isFullHeigh={true} source={'https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg'} isLazyLoadable={false} />
   </Story>
 </Canvas>
 

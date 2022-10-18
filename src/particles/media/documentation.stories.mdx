@@ -13,7 +13,7 @@ import { Media, IMediaProps } from '.';
 <br/>
 
 export const Template = (args) => (
-  <Media {...args} />
+  <Media maxWidth='100%' {...args} />
 );
 
 <Canvas withToolbar={true} withSource={'none'}>
@@ -28,7 +28,7 @@ export const Template = (args) => (
 
 <Canvas>
   <Story name='Circular'>
-    <Media variant='circular' source='https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg' />
+    <Media variant='circular' maxWidth='100%' source='https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg' />
   </Story>
 </Canvas>
 
@@ -46,7 +46,7 @@ export const Template = (args) => (
 
 <Canvas>
   <Story name='Video Without Extension'>
-    <Media source='https://gateway.pinata.cloud/ipfs/QmZ3yCYX2c6Z2BNSTyx1zuBoPUJTB8dyE74zwngdweaFV6' />
+    <Media source='https://pablo-images.kibalabs.com/v1/ipfs/QmZ3yCYX2c6Z2BNSTyx1zuBoPUJTB8dyE74zwngdweaFV6' />
   </Story>
 </Canvas>
 
@@ -58,17 +58,13 @@ export const Template = (args) => (
 
 <Canvas>
   <Story name='Unknown Content Type Without Extension'>
-    <Box height={'500px'}>
-     <Media source='https://genesisblocks.art/api/tokens/show/1539' />
-    </Box>
+    <Media height={'500px'} source='https://genesisblocks.art/api/tokens/show/1539' />
   </Story>
 </Canvas>
 
 <Canvas>
   <Story name='Image With Extension'>
-    <Box height={'500px'}>
-     <Media source='https://storage.googleapis.com/7981b604-d28c-4982-ac3f-0f9c61dc6e1d/3883.0001.png' />
-    </Box>
+    <Media height={'500px'} source='https://storage.googleapis.com/7981b604-d28c-4982-ac3f-0f9c61dc6e1d/3883.0001.png' />
   </Story>
 </Canvas>
 

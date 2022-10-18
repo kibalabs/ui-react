@@ -11,8 +11,12 @@ export interface IMediaProps extends IComponentProps<IMediaTheme> {
   source: string;
   alternativeText: string;
   fitType?: 'crop' | 'cover' | 'scale' | 'contain';
+  width?: string;
+  height?: string;
   isFullWidth?: boolean;
   isFullHeight?: boolean;
+  maxWidth?: string;
+  maxHeight?: string;
   isCenteredHorizontally?: boolean;
   isLazyLoadable?: boolean;
 }

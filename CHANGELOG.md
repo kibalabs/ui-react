@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
+-[MINOR] Fixed `Markdown` to render images at maxWidth=100%
+-[MINOR] Added sizing props to `Media`, `Video` and `Image`
 
 ### Removed
 
