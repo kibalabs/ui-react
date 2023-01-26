@@ -10,43 +10,43 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
--[MINOR] Fixed `Markdown` to render images at maxWidth=100%
--[MINOR] Added sizing props to `Media`, `Video` and `Image`
+- [MINOR] Fixed `Markdown` to render images at maxWidth=100%
+- [MINOR] Added sizing props to `Media`, `Video` and `Image`
 
 ### Removed
 
 ## [0.10.0] - 2022-10-11
 
 ### Changed
--[MINOR] Fixed `Video` lazy loading
--[MINOR] Make `Link` default style use inherit
--[MINOR] Added `placeholderText` to `OptionSelect`
--[MINOR] Use `optionTextVariant` correctly in `OptionSelect`
--[MINOR] Fixed `alternateColors` to be expanded correctly
--[MINOR] Update `ColorSettingView` to set default `color` correctly
--[MINOR] Added `isInvisible` to `HidingView`
--[MINOR] Added `shouldBreakOnWords` and `shouldBreakAnywhere` to `Text`
--[MAJOR] Updated `Image` to support responsive images from pablo-images.kibalabs.com
--[MINOR] Fixed `StatefulTitleCollapsibleBox` to pass through className
--[MINOR] Updated `Button`, `IconButton`, `LinkBase` and `Link` to only show focus when navigating with keyboard
--[MINOR] Updated `Button`, `IconButton`, `LinkBase` and `Link` to stop propagating events
--[MINOR] Updated `Button` to have `contentAlignment` and `isTextFullWidth` props to allow new layouts
--[MINOR] Updated `Box` to have responsive props for size
--[MINOR] Added `opacity` to `IBoxTheme`
+- [MINOR] Fixed `Video` lazy loading
+- [MINOR] Make `Link` default style use inherit
+- [MINOR] Added `placeholderText` to `OptionSelect`
+- [MINOR] Use `optionTextVariant` correctly in `OptionSelect`
+- [MINOR] Fixed `alternateColors` to be expanded correctly
+- [MINOR] Update `ColorSettingView` to set default `color` correctly
+- [MINOR] Added `isInvisible` to `HidingView`
+- [MINOR] Added `shouldBreakOnWords` and `shouldBreakAnywhere` to `Text`
+- [MAJOR] Updated `Image` to support responsive images from pablo-images.kibalabs.com
+- [MINOR] Fixed `StatefulTitleCollapsibleBox` to pass through className
+- [MINOR] Updated `Button`, `IconButton`, `LinkBase` and `Link` to only show focus when navigating with keyboard
+- [MINOR] Updated `Button`, `IconButton`, `LinkBase` and `Link` to stop propagating events
+- [MINOR] Updated `Button` to have `contentAlignment` and `isTextFullWidth` props to allow new layouts
+- [MINOR] Updated `Box` to have responsive props for size
+- [MINOR] Added `opacity` to `IBoxTheme`
 
 ## [0.9.9] - 2022-06-21
 
 ### Changed
--[PATCH] Update `Media` to follow redirects when fetching for content-type
--[PATCH] Added `shouldPassThroughTouches` to `LayerContainer.Layer`
--[PATCH] Added `shouldCaptureTouches` to `Box`
+- [PATCH] Update `Media` to follow redirects when fetching for content-type
+- [PATCH] Added `shouldPassThroughTouches` to `LayerContainer.Layer`
+- [PATCH] Added `shouldCaptureTouches` to `Box`
 
 ## [0.9.8] - 2022-05-22
 
 ### Changed
--[PATCH] Make `Dialog` SSR safe
--[PATCH] Added padding props to `EqualGrid`
--[PATCH] Added `minHeight` and `minWidth` to `Box`
+- [PATCH] Make `Dialog` SSR safe
+- [PATCH] Added padding props to `EqualGrid`
+- [PATCH] Added `minHeight` and `minWidth` to `Box`
 
 ## [0.9.7] - 2022-04-05
 
