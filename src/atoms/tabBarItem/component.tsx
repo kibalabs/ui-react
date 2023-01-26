@@ -3,10 +3,10 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
+import { ITabBarItemTheme } from './theme';
 import { defaultComponentProps, IComponentProps } from '../../model';
 import { useBuiltTheme } from '../../theming';
 import { themeToCss } from '../../util';
-import { ITabBarItemTheme } from './theme';
 
 interface IStyledTabBarItemProps {
   $theme: ITabBarItemTheme;

@@ -3,8 +3,8 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { ISwitchTheme } from './theme';
+import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 
 
 interface IStyledSwitchBackgroundProps {

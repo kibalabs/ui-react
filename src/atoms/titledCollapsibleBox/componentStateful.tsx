@@ -3,9 +3,9 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
-import { defaultComponentProps, IComponentProps } from '../../model';
 import { TitledCollapsibleBox } from './component';
 import { ITitledCollapsibleBoxTheme } from './theme';
+import { defaultComponentProps, IComponentProps } from '../../model';
 
 interface IStatefulTitledCollapsibleBoxProps extends IComponentProps<ITitledCollapsibleBoxTheme>, ISingleAnyChildProps {
   title: string;

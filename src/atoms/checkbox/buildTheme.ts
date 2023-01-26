@@ -1,8 +1,8 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { ICheckboxTheme } from './theme';
 import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, ThemeMap } from '../../util';
-import { ICheckboxTheme } from './theme';
 
 export const buildCheckboxThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ICheckboxTheme>>): ThemeMap<ICheckboxTheme> => {
   const defaultCheckboxTheme = mergeTheme<ICheckboxTheme>({

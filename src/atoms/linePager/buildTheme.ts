@@ -1,8 +1,8 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { ILinePagerTheme } from './theme';
 import { IBoxTheme, IColorGuide, IDimensionGuide } from '../../particles';
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { ILinePagerTheme } from './theme';
 
 export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ILinePagerTheme>>): ThemeMap<ILinePagerTheme> => {
   const defaultLinePagerTheme = mergeTheme<ILinePagerTheme>({

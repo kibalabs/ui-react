@@ -1,9 +1,9 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { ITextTheme } from './theme';
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
-import { ITextTheme } from './theme';
 
 export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: RecursivePartial<Record<string, ITextTheme>>): ThemeMap<ITextTheme> => {
   const textTheme = mergeTheme<ITextTheme>({

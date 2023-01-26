@@ -4,8 +4,8 @@ import { getClassName } from '@kibalabs/core';
 import { IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
-import { CssConverter, defaultComponentProps, fieldToResponsiveCss, IComponentProps, IDimensionGuide, ResponsiveField, themeToCss, useBuiltTheme, useDimensions } from '../..';
 import { IBoxTheme } from './theme';
+import { CssConverter, defaultComponentProps, fieldToResponsiveCss, IComponentProps, IDimensionGuide, ResponsiveField, themeToCss, useBuiltTheme, useDimensions } from '../..';
 
 interface IStyledBoxProps {
   $theme: IBoxTheme;

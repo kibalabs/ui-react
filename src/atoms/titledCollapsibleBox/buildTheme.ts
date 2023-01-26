@@ -1,8 +1,8 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { ITitledCollapsibleBoxTheme } from './theme';
 import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, ThemeMap } from '../../util';
-import { ITitledCollapsibleBoxTheme } from './theme';
 
 export const buildTitledCollapsibleBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ITitledCollapsibleBoxTheme>>): ThemeMap<ITitledCollapsibleBoxTheme> => {
   const defaultTitledCollapsibleBoxTheme = mergeTheme<ITitledCollapsibleBoxTheme>({

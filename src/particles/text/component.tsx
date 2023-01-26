@@ -4,10 +4,10 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
+import { ITextTheme } from './theme';
 import { defaultComponentProps, IComponentProps } from '../../model';
 import { useBuiltTheme } from '../../theming';
 import { themeToCss } from '../../util';
-import { ITextTheme } from './theme';
 
 export enum TextAlignment {
   Center = 'center',

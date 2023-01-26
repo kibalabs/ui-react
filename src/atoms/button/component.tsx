@@ -4,11 +4,11 @@ import { getClassName } from '@kibalabs/core';
 import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
+import { IButtonTheme } from './theme';
 import { defaultComponentProps, IComponentProps, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
 import { Alignment, getFlexContentAlignment } from '../../model';
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
 import { CssConverter } from '../../util';
-import { IButtonTheme } from './theme';
 
 
 // NOTE(krishan711): focus problem fixed with https://www.kizu.ru/keyboard-only-focus/#proper-solution

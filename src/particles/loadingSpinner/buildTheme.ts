@@ -1,9 +1,9 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { ILoadingSpinnerTheme } from './theme';
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
-import { ILoadingSpinnerTheme } from './theme';
 
 export const buildLoadingSpinnerThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: RecursivePartial<Record<string, ILoadingSpinnerTheme>>): ThemeMap<ILoadingSpinnerTheme> => {
   const defaultLoadingSpinnerTheme = mergeTheme<ILoadingSpinnerTheme>({

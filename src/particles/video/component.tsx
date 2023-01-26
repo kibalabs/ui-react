@@ -3,8 +3,8 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
-import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
 import { IVideoTheme } from './theme';
+import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
 
 export interface IStyledVideoProps {
   $theme: IVideoTheme;

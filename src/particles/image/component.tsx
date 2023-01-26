@@ -3,8 +3,8 @@ import React from 'react';
 import { getClassName, updateQueryString } from '@kibalabs/core';
 import styled from 'styled-components';
 
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { IImageTheme } from './theme';
+import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 
 export interface IStyledImageProps {
   $theme: IImageTheme;
@@ -74,7 +74,7 @@ const RESPONSIVE_IMAGE_SIZES = [100, 200, 300, 500, 640, 750, 1000, 1080, 1920, 
 
 const getResponsiveImageString = (url: string) => {
   const widthValues = RESPONSIVE_IMAGE_SIZES.map((size: number): string => {
-    const newUrl = updateQueryString(url, {w: size});
+    const newUrl = updateQueryString(url, { w: size });
     return `${newUrl} ${size}w`;
   });
   // const heightValues = RESPONSIVE_IMAGE_SIZES.map((size: number): string => {

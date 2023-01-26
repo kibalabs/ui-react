@@ -4,9 +4,9 @@ import { getClassName } from '@kibalabs/core';
 import { IMultiChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
+import { IBulletListTheme } from './theme';
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { IBulletTextProps } from '../bulletText';
-import { IBulletListTheme } from './theme';
 
 interface IStyledBulletListProps {
   $theme: IBulletListTheme;

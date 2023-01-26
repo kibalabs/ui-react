@@ -4,9 +4,9 @@ import { getClassName } from '@kibalabs/core';
 import { OptionalProppedElement } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
+import { IPillTheme } from './theme';
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
-import { IPillTheme } from './theme';
 
 interface IStyledPillProps {
   $theme: IPillTheme;

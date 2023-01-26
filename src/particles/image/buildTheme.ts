@@ -1,10 +1,10 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { IImageTheme } from './theme';
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
 import { IBoxTheme } from '../box';
 import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
-import { IImageTheme } from './theme';
 
 export const buildImageThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IImageTheme>>): ThemeMap<IImageTheme> => {
   const defaultImageTheme = mergeTheme<IImageTheme>({

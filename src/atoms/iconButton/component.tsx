@@ -4,9 +4,9 @@ import { getClassName } from '@kibalabs/core';
 import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
+import { IIconButtonTheme } from './theme';
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { IIconProps } from '../../particles/icon';
-import { IIconButtonTheme } from './theme';
 
 interface IStyledIconButtonProps {
   $theme: IIconButtonTheme;

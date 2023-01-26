@@ -4,11 +4,11 @@ import { getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
+import { IPrettyTextTheme } from './theme';
 import { defaultComponentProps, IComponentProps } from '../../model';
 import { getTextTag, TextAlignment, TextTag } from '../../particles/text';
 import { useBuiltTheme } from '../../theming';
 import { themeToCss } from '../../util';
-import { IPrettyTextTheme } from './theme';
 
 interface IStyledPrettyTextProps {
   $theme: IPrettyTextTheme;
