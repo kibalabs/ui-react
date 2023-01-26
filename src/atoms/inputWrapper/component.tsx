@@ -4,9 +4,9 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
+import { IInputWrapperTheme } from './theme';
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { HidingView } from '../../wrappers';
-import { IInputWrapperTheme } from './theme';
 
 const StyledInputWrapper = styled.div`
   display: flex;

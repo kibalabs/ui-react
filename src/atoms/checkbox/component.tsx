@@ -3,11 +3,11 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
+import { ICheckboxTheme } from './theme';
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { Icon, PaddingSize, Spacing } from '../../particles';
 import { propertyToCss } from '../../util';
 import { HidingView } from '../../wrappers';
-import { ICheckboxTheme } from './theme';
 
 interface IStyledCheckboxProps {
   $theme: ICheckboxTheme;

@@ -4,11 +4,11 @@ import { getClassName } from '@kibalabs/core';
 import { getIsRunningOnBrowser, ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
+import { IDialogTheme } from './theme';
 import { defaultComponentProps, IComponentProps } from '../../model';
 import { Box } from '../../particles/box';
 import { useBuiltTheme } from '../../theming';
 import { valueToCss } from '../../util';
-import { IDialogTheme } from './theme';
 
 interface IStyledBackdropProps {
   $backdropColor: string;

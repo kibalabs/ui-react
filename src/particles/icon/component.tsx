@@ -3,8 +3,8 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
-import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
 import { IIconTheme } from './theme';
+import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
 
 interface IStyledIconProps {
   $theme: IIconTheme;

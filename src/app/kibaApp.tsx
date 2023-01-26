@@ -4,14 +4,15 @@ import { getClassName } from '@kibalabs/core';
 import { getIsRunningOnBrowser, IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
-import { ITheme, ThemeProvider } from '../theming';
-import { BackgroundView, IBackgroundConfig } from '../wrappers';
 import { GlobalCss } from './globalCss';
 import { Head, HeadRootProvider, IHeadRootProviderProps } from './headContext';
 import { resetCss } from './resetCss';
+import { ITheme, ThemeProvider } from '../theming';
+import { BackgroundView, IBackgroundConfig } from '../wrappers';
 
 import 'lazysizes';
 import 'lazysizes/plugins/attrchange/ls.attrchange';
+import 'lazysizes/plugins/respimg/ls.respimg';
 
 interface IStyledMainViewProps {
   extraCss?: string;
@@ -50,6 +51,11 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
       // @ts-ignore
       window.lazySizes.cfg.minSize = 20;
     }
+
+    // NOTE(krishan711): helpful to debug lazysizes
+    // window.addEventListener('lazybeforesizes', function(e){
+    //   console.log(e);
+    // });
   });
 
   return (

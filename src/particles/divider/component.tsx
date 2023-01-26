@@ -3,9 +3,9 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
+import { IDividerTheme } from './theme';
 import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
 import { valueToCss } from '../../util';
-import { IDividerTheme } from './theme';
 
 interface IStyledDividerProps {
   $theme: IDividerTheme;

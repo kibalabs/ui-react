@@ -1,8 +1,8 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { IDialogTheme } from './theme';
 import { IBoxTheme, IColorGuide, IDimensionGuide } from '../../particles';
 import { mergeTheme, ThemeMap } from '../../util';
-import { IDialogTheme } from './theme';
 
 export const buildDialogThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IDialogTheme>>): ThemeMap<IDialogTheme> => {
   const defaultDialogTheme = mergeTheme<IDialogTheme>({

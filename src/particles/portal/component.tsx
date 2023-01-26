@@ -6,8 +6,8 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { IPortalTheme } from './theme';
+import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 
 interface IStyledPortalProps {
   $theme: IPortalTheme;

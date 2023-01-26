@@ -1,8 +1,8 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { IPillTheme } from './theme';
 import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IPillTheme } from './theme';
 
 export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IPillTheme>>): ThemeMap<IPillTheme> => {
   const defaultPillTheme = mergeTheme<IPillTheme>({

@@ -32,7 +32,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
       - name: Publish next package to npm
         if: steps.vars.outputs.commit_count != '0'
-        run: docker run -v $(pwd)/.npmrc:/root/.npmrc $DOCKER_IMAGE /bin/bash -c "npm run publish-next -- --next-version ${{ steps.vars.outputs.commit_count }}"
+        run: docker run -v $(pwd)/.npmrc:/root/.npmrc $DOCKER_IMAGE make COMMIT_COUNT=${{ steps.vars.outputs.commit_count }} publish-next
   deploy-docs-next:
     runs-on: ubuntu-latest
     env:

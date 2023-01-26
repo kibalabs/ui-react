@@ -3,9 +3,9 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
+import { ILoadingSpinnerTheme } from './theme';
 import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
 import { valueToCss } from '../../util';
-import { ILoadingSpinnerTheme } from './theme';
 
 interface IStyledLoadingSpinnerProps {
   $theme: ILoadingSpinnerTheme;

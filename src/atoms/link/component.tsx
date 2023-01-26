@@ -4,8 +4,8 @@ import { getClassName } from '@kibalabs/core';
 import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { ILinkTheme } from './theme';
+import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 
 interface IStyledLinkProps {
   $theme: ILinkTheme;

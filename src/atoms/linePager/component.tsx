@@ -3,12 +3,12 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
+import { ILinePagerTheme } from './theme';
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { Direction } from '../../model';
 import { ScreenSize, Spacing } from '../../particles';
 import { ResponsiveField } from '../../util';
 import { ResponsiveHidingView } from '../../wrappers';
-import { ILinePagerTheme } from './theme';
 
 interface IStyledLinePagerProps {
   $theme: ILinePagerTheme;

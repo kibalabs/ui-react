@@ -4,9 +4,9 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
+import { ITitledCollapsibleBoxTheme } from './theme';
 import { defaultComponentProps, IComponentProps, KibaIcon, themeToCss, useBuiltTheme } from '../..';
 import { HidingView } from '../../wrappers';
-import { ITitledCollapsibleBoxTheme } from './theme';
 
 interface IStyledTitledCollapsibleBoxProps {
   $theme: ITitledCollapsibleBoxTheme;

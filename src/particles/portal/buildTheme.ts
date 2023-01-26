@@ -1,10 +1,10 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+import { IPortalTheme } from './theme';
 import { mergeTheme, ThemeMap } from '../../util';
 import { IBoxTheme } from '../box';
 import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
-import { IPortalTheme } from './theme';
 
 export const buildPortalThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IPortalTheme>>): ThemeMap<IPortalTheme> => {
   const defaultPortalTheme = mergeTheme<IPortalTheme>({
