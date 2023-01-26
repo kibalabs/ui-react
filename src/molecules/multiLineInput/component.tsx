@@ -45,6 +45,7 @@ interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
   name?: string;
   label?: string;
   inputWrapperVariant?: string;
+  shouldAutofocus?: boolean;
   onKeyUp?: (key: string) => void;
   onKeyDown?: (key: string) => void;
   onClick?: () => void;
@@ -120,6 +121,7 @@ export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement 
         onClick={onClick}
         aria-label={props.label || props.name || props.placeholderText}
         placeholder={props.placeholderText}
+        autoFocus={props.shouldAutofocus}
       />
     </InputFrame>
   );

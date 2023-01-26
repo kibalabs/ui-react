@@ -1,15 +1,17 @@
-FROM node:16.4.1-stretch as build
+# Stage 1: build
+FROM node:18.2.0 as build
 
 WORKDIR /app
+COPY makefile $WORKDIR
 
-# Install dependecies
-COPY package.json package.json
-COPY package-lock.json package-lock.json
-RUN npm ci
+# Install requirements
+COPY package.json .
+COPY package-lock.json .
+RUN make install
 
-COPY . .
-
-RUN npm run build-docs
+# Build app
+COPY . $WORKDIR
+RUN make build-docs
 
 # Stage 2: Serve build files with nginx
 FROM ghcr.io/kibalabs/app-serve:latest

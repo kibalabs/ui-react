@@ -12,6 +12,7 @@ import { resetCss } from './resetCss';
 
 import 'lazysizes';
 import 'lazysizes/plugins/attrchange/ls.attrchange';
+import 'lazysizes/plugins/respimg/ls.respimg';
 
 interface IStyledMainViewProps {
   extraCss?: string;
@@ -50,6 +51,13 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
       // @ts-ignore
       window.lazySizes.cfg.minSize = 20;
     }
+
+    window.addEventListener('lazybeforesizes', function(e){
+      //use width of parent node instead of the image width itself
+      console.log(e);
+      // (e.orginalEvent || e).detail.width = e.target).parents(':not(picture)').innerWidth() || e.detail.width;
+  });
+
   });
 
   return (

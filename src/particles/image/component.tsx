@@ -6,6 +6,14 @@ import styled from 'styled-components';
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { IImageTheme } from './theme';
 
+export const updateQueryString = (url: string, values: Record<string, string | number | boolean>): string => {
+  const newUrl = new URL(url);
+  Object.keys(values).forEach((key: string): void => {
+    newUrl.searchParams.set(key, String(values[key]));
+  })
+  return newUrl.toString();
+}
+
 export interface IStyledImageProps {
   $theme: IImageTheme;
   $width: string;
@@ -74,7 +82,8 @@ const RESPONSIVE_IMAGE_SIZES = [100, 200, 300, 500, 640, 750, 1000, 1080, 1920, 
 
 const getResponsiveImageString = (url: string) => {
   const widthValues = RESPONSIVE_IMAGE_SIZES.map((size: number): string => {
-    return `${url}?w=${size} ${size}w`;
+    const newUrl = updateQueryString(url, {w: size});
+    return `${newUrl} ${size}w`;
   });
   // const heightValues = RESPONSIVE_IMAGE_SIZES.map((size: number): string => {
   //   return `${url}?h=${size} ${size}h`;

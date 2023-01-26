@@ -21,12 +21,16 @@ const StyledLinkBaseInner = styled.span`
   align-items: center;
   justify-content: center;
   background-clip: padding-box;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   /* Fixing the Safari bug for <button>s overflow */
   position: relative;
 `;
 
+// TODO(krishan711): this hurts to be a button or a as both have unintended consequences:
+// button -> you cant have another button inside
+// a -> inners get styled accordingly as if they are links themselves
 const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
   cursor: pointer;
   width: fit-content;

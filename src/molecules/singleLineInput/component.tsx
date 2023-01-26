@@ -28,7 +28,7 @@ const StyledSingleLineInput = styled.input`
   &:focus {
     outline: none;
   }
-  
+
   &.disabled {
     pointer-events: none;
   }
@@ -52,6 +52,7 @@ export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTh
   name?: string;
   label?: string;
   inputWrapperVariant?: string;
+  shouldAutofocus?: boolean;
   onKeyUp?: (key: string) => void;
   onKeyDown?: (key: string) => void;
   // TODO(krishan711): update this to onClicked for the next breaking change
@@ -106,6 +107,7 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
         onChange={onValueChanged}
         aria-label={props.label || props.name || props.placeholderText}
         placeholder={props.placeholderText}
+        autoFocus={props.shouldAutofocus}
       />
     </InputFrame>
   );

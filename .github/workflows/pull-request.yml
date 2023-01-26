@@ -38,25 +38,27 @@ jobs:
           cache-from: type=gha,scope=package
           cache-to: type=gha,mode=max,scope=package
           tags: ${{ env.DOCKER_IMAGE }}
-      - name: Run linting
+      - name: Run lint-check
         run: |
-          docker run --name linting $DOCKER_IMAGE npm run lint -- --output-file linting-results.json --output-file-format annotations
-          docker cp linting:/app/linting-results.json ./linting-results.json
-      - name: Upload linting results
+          docker run --name lint-check $DOCKER_IMAGE make lint-check-ci
+          docker cp lint-check:/app/lint-check-results.json ./src/lint-check-results.json
+      - name: Upload lint results
         uses: kibalabs/github-action-create-annotations@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          json-file-path: ./linting-results.json
-          check-name: lint-package
+          json-file-path: ./src/lint-check-results.json
+          check-name: lint-check
           fail-on-error: false
-      - name: Run typing
+          path-prefix: ./src/
+      - name: Run type-check
         run: |
-          docker run --name typing $DOCKER_IMAGE npm run type-check -- --output-file typing-results.json --output-file-format annotations
-          docker cp typing:/app/typing-results.json ./typing-results.json
-      - name: Upload typing results
+          docker run --name type-check $DOCKER_IMAGE make type-check-ci
+          docker cp type-check:/app/type-check-results.json ./src/type-check-results.json
+      - name: Upload type-check results
         uses: kibalabs/github-action-create-annotations@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          json-file-path: ./typing-results.json
-          check-name: type-package
+          json-file-path: ./src/type-check-results.json
+          check-name: type-check
           fail-on-error: false
+          path-prefix: ./src/
