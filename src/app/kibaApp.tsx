@@ -52,11 +52,10 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
       window.lazySizes.cfg.minSize = 20;
     }
 
-    window.addEventListener('lazybeforesizes', function(e){
-      //use width of parent node instead of the image width itself
-      console.log(e);
-      // (e.orginalEvent || e).detail.width = e.target).parents(':not(picture)').innerWidth() || e.detail.width;
-  });
+    // NOTE(krishan711): helpful to debug lazysizes
+    // window.addEventListener('lazybeforesizes', function(e){
+    //   console.log(e);
+    // });
 
   });
 
