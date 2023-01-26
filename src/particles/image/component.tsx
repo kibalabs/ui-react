@@ -1,18 +1,10 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, updateQueryString } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 import { IImageTheme } from './theme';
-
-export const updateQueryString = (url: string, values: Record<string, string | number | boolean>): string => {
-  const newUrl = new URL(url);
-  Object.keys(values).forEach((key: string): void => {
-    newUrl.searchParams.set(key, String(values[key]));
-  })
-  return newUrl.toString();
-}
 
 export interface IStyledImageProps {
   $theme: IImageTheme;
