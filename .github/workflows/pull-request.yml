@@ -41,24 +41,24 @@ jobs:
       - name: Run lint-check
         run: |
           docker run --name lint-check $DOCKER_IMAGE make lint-check-ci
-          docker cp lint-check:/app/lint-check-results.json ./src/lint-check-results.json
+          docker cp lint-check:/app/lint-check-results.json ./lint-check-results.json
       - name: Upload lint results
         uses: kibalabs/github-action-create-annotations@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          json-file-path: ./src/lint-check-results.json
+          json-file-path: ./lint-check-results.json
           check-name: lint-check
           fail-on-error: false
           path-prefix: ./src/
       - name: Run type-check
         run: |
           docker run --name type-check $DOCKER_IMAGE make type-check-ci
-          docker cp type-check:/app/type-check-results.json ./src/type-check-results.json
+          docker cp type-check:/app/type-check-results.json ./type-check-results.json
       - name: Upload type-check results
         uses: kibalabs/github-action-create-annotations@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          json-file-path: ./src/type-check-results.json
+          json-file-path: ./type-check-results.json
           check-name: type-check
           fail-on-error: false
           path-prefix: ./src/
