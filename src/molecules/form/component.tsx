@@ -20,13 +20,20 @@ interface IFormProps extends IMoleculeProps<IFormTheme>, ISingleAnyChildProps {
   backgroundVariant?: string;
   loadingOverlayVariant?: string;
   loadingSpinnerVariant?: string;
-  onFormSubmitted: () => void;
+  postTarget?: string;
+  onFormSubmitted?: () => void;
 }
 
 export const Form = (props: IFormProps): React.ReactElement => {
+  if (props.postTarget && props.onFormSubmitted) {
+    throw new Error('only one of {postTarget, onFormSubmitted} should be provided to Form');
+  }
+
   const onSubmitted = (event: React.FormEvent<HTMLElement>): void => {
-    event.preventDefault();
-    props.onFormSubmitted();
+    if (props.onFormSubmitted) {
+      event.preventDefault();
+      props.onFormSubmitted();
+    }
   };
 
   return (
@@ -39,7 +46,9 @@ export const Form = (props: IFormProps): React.ReactElement => {
     >
       <form
         id={props.id && `${props.id}-form`}
-        onSubmit={onSubmitted}
+        onSubmit={props.onFormSubmitted ? onSubmitted : undefined}
+        method={props.postTarget ? 'POST' : undefined}
+        action={props.postTarget ? props.postTarget : undefined}
       >
         <LayerContainer>
           <LayerContainer.Layer isStatic={true}>
