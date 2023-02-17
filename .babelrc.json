@@ -1,0 +1,16 @@
+{
+  // NOTE(krishan711): this is for storybook only, how can we remove?
+  "sourceType": "unambiguous",
+  "presets": [
+    "@babel/preset-typescript",
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "chrome": 100
+        }
+      }
+    ]
+  ],
+  "plugins": []
+}

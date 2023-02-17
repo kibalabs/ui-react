@@ -50,19 +50,33 @@ class StackItem extends React.Component<IStackItemProps> {
 
 interface IStyledStackProps {
   $theme: IDimensionGuide;
-  $isFullWidth: boolean;
-  $isFullHeight: boolean;
+  $height: ResponsiveField<string>;
+  $width: ResponsiveField<string>;
+  $maxHeight: ResponsiveField<string>;
+  $maxWidth: ResponsiveField<string>;
+  $minHeight: ResponsiveField<string>;
+  $minWidth: ResponsiveField<string>;
   $direction: ResponsiveField<Direction>;
   $childAlignment: ResponsiveField<Alignment>;
   $contentAlignment: ResponsiveField<Alignment>;
 }
 
+const getCss = (fieldName: string): CssConverter<string> => {
+  return (value: string): string => `${fieldName}: ${value};`;
+};
+
+// width: ${(props: IStyledStackProps): string => (props.$isFullWidth ? '100%' : 'auto')};
+// min-width: ${(props: IStyledStackProps): string => (props.$isFullWidth ? 'inherit' : 'auto')};
+// height: ${(props: IStyledStackProps): string => (props.$isFullHeight ? '100%' : 'auto')};
+// min-height: ${(props: IStyledStackProps): string => (props.$isFullHeight ? 'inherit' : 'auto')};
 const StyledStack = styled.div<IStyledStackProps>`
   display: flex;
-  width: ${(props: IStyledStackProps): string => (props.$isFullWidth ? '100%' : 'auto')};
-  min-width: ${(props: IStyledStackProps): string => (props.$isFullWidth ? 'inherit' : 'auto')};
-  height: ${(props: IStyledStackProps): string => (props.$isFullHeight ? '100%' : 'auto')};
-  min-height: ${(props: IStyledStackProps): string => (props.$isFullHeight ? 'inherit' : 'auto')};
+  ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$height, props.$theme, getCss('height'))};
+  ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$width, props.$theme, getCss('width'))};
+  ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$maxHeight, props.$theme, getCss('max-height'))};
+  ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$maxWidth, props.$theme, getCss('max-width'))};
+  ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$minHeight, props.$theme, getCss('min-height'))};
+  ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$minWidth, props.$theme, getCss('min-width'))};
   ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$direction, props.$theme, getDirectionCss)};
   ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$childAlignment, props.$theme, getChildAlignmentCss)};
   ${(props: IStyledStackProps): string => fieldToResponsiveCss(props.$contentAlignment, props.$theme, getContentAlignmentCss)};
@@ -82,6 +96,7 @@ const StyledStack = styled.div<IStyledStackProps>`
   }
 `;
 
+// NOTE(krishan711): the height and width stuff is copied from box, find a way to merge these?
 interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   id?: string;
   className?: string;
@@ -92,6 +107,18 @@ interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   isScrollableHorizontally: boolean;
   isFullWidth: boolean;
   isFullHeight: boolean;
+  height?: string;
+  heightResponsive?: ResponsiveField<string>;
+  width?: string;
+  widthResponsive?: ResponsiveField<string>;
+  maxHeight?: string;
+  maxHeightResponsive?: ResponsiveField<string>;
+  maxWidth?: string;
+  maxWidthResponsive?: ResponsiveField<string>;
+  minHeight?: string;
+  minHeightResponsive?: ResponsiveField<string>;
+  minWidth?: string;
+  minWidthResponsive?: ResponsiveField<string>;
   paddingStart?: PaddingSizeProp,
   paddingEnd?: PaddingSizeProp,
   direction: Direction;
@@ -113,6 +140,13 @@ export const Stack = (props: IStackProps): React.ReactElement => {
   const paddingRight = (props.paddingStart && props.direction === Direction.Horizontal) ? props.paddingStart : undefined;
   const paddingLeft = (props.paddingEnd && props.direction === Direction.Horizontal) ? props.paddingEnd : undefined;
 
+  const height = props.height || (props.isFullHeight ? '100%' : 'auto');
+  const width = props.width || (props.isFullWidth ? '100%' : 'auto');
+  const maxHeight = props.maxHeight || 'none';
+  const maxWidth = props.maxWidth || 'none';
+  const minHeight = props.minHeight || 'auto';
+  const minWidth = props.minWidth || 'auto';
+
   const defaultGutter = props.defaultGutter || PaddingSize.Default;
   const shouldAddGutters = props.shouldAddGutters && defaultGutter !== PaddingSize.None;
   const shouldWrapItems = props.shouldWrapItems || false;
@@ -125,8 +159,12 @@ export const Stack = (props: IStackProps): React.ReactElement => {
         $direction={{ base: props.direction, ...props.directionResponsive }}
         $childAlignment={{ base: props.childAlignment, ...props.childAlignmentResponsive }}
         $contentAlignment={{ base: props.contentAlignment, ...props.contentAlignmentResponsive }}
-        $isFullWidth={props.isFullWidth}
-        $isFullHeight={props.isFullHeight}
+        $height={{ base: height, ...props.heightResponsive }}
+        $width={{ base: width, ...props.widthResponsive }}
+        $maxHeight={{ base: maxHeight, ...props.maxHeightResponsive }}
+        $maxWidth={{ base: maxWidth, ...props.maxWidthResponsive }}
+        $minHeight={{ base: minHeight, ...props.minHeightResponsive }}
+        $minWidth={{ base: minWidth, ...props.minWidthResponsive }}
       >
         { children.map((child: React.ReactElement, index: number): React.ReactElement<IStackItemProps> => (
           <React.Fragment key={index}>

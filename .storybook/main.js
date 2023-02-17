@@ -1,16 +1,11 @@
-module.exports = {
-  stories: [
-    '../src/**/*.stories.@(mdx|js|jsx|ts|tsx)',
-  ],
+export default config = {
+  stories: ['../src/**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-links',
   ],
   typescript: {
-    check: false,
-  },
-  core: {
-    builder: 'webpack5',
+    check: false
   },
   webpackFinal: async (config, { configType }) => {
     config.resolve = config.resolve || {};
@@ -18,4 +13,12 @@ module.exports = {
     config.resolve.fallback.fs = false;
     return config;
   },
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: { fastRefresh: true },
+  },
+  docs: {
+    autodocs: true
+  },
+  staticDir: './.storybook/public',
 };
