@@ -36,7 +36,7 @@ build-static:
 	@ echo "Not Supported"
 
 build-docs:
-	@ npx build-storybook --static-dir ./.storybook/public --docs --output-dir dist
+	@ npx storybook build --docs --output-dir dist
 
 start:
 	@ npx build-react-component --start --dev
@@ -45,7 +45,7 @@ start-prod:
 	@ npx build-react-component --start
 
 start-docs:
-	@ npx start-storybook --static-dir ./.storybook/public --docs --port 6006
+	@ npx storybook dev --docs --port 6006
 
 test:
 	@ echo "Not Supported"
