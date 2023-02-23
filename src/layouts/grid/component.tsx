@@ -57,6 +57,7 @@ export interface IGridProps extends IMultiChildProps<IGridItemProps>, IPaddingVi
 }
 
 export const Grid = (props: IGridProps): React.ReactElement => {
+  console.log('Grid here');
   const theme = useDimensions(props.theme);
   const defaultGutter = props.defaultGutter || PaddingSize.Default;
   const shouldAddGutters = props.shouldAddGutters && defaultGutter !== PaddingSize.None;
@@ -103,9 +104,9 @@ Grid.defaultProps = {
 Grid.Item = GridItem;
 
 const getCssSize = (totalColumnCount: number, gutter: string, columnCount: number): string => {
-  // TODO(krishan711): it should be display: unset below (not block) but ie11 doesn't like this. find a nicer way!
-  return `width: calc(${(100.0 * columnCount) / totalColumnCount}% - 2 * ${gutter});
-    ${columnCount === 0 ? 'display: none' : 'display: block'};
+  return `
+    width: calc(${(100.0 * columnCount) / totalColumnCount}% - 2 * ${gutter});
+    ${columnCount === 0 ? 'display: none' : 'display: flex'};
   `;
 };
 
