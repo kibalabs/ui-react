@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Added sizing props to `Media`, `Video` and `Image`
 - [MINOR] Added `postTarget` as alternative to `onFormSubmitted` for `Form`
 - [MINOR] Updated `Stack` to have responsive props for size
+- [MINOR] Updated `Grid.Item` to be flex by default
 
 ### Removed
 
