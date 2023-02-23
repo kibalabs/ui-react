@@ -57,7 +57,6 @@ export interface IGridProps extends IMultiChildProps<IGridItemProps>, IPaddingVi
 }
 
 export const Grid = (props: IGridProps): React.ReactElement => {
-  console.log('Grid here');
   const theme = useDimensions(props.theme);
   const defaultGutter = props.defaultGutter || PaddingSize.Default;
   const shouldAddGutters = props.shouldAddGutters && defaultGutter !== PaddingSize.None;
