@@ -71,6 +71,7 @@ interface ITitledCollapsibleBoxProps extends IComponentProps<ITitledCollapsibleB
   title: string;
   isCollapsed: boolean;
   onCollapseToggled(): void;
+  shouldSkipRenderingWhenCollapsed?: boolean;
 }
 
 export const TitledCollapsibleBox = (props: ITitledCollapsibleBoxProps): React.ReactElement => {
@@ -93,11 +94,13 @@ export const TitledCollapsibleBox = (props: ITitledCollapsibleBoxProps): React.R
         <span>{props.title}</span>
         <KibaIcon iconId={props.isCollapsed ? 'ion-chevron-down' : 'ion-chevron-up'} />
       </StyledHeader>
-      <HidingView isHidden={props.isCollapsed}>
-        <StyledContent $theme={theme} className={getClassName(props.isCollapsed && 'collapsed')}>
-          {props.children}
-        </StyledContent>
-      </HidingView>
+      {(!props.isCollapsed || !props.shouldSkipRenderingWhenCollapsed) && (
+        <HidingView isHidden={props.isCollapsed}>
+          <StyledContent $theme={theme} className={getClassName(props.isCollapsed && 'collapsed')}>
+            {props.children}
+          </StyledContent>
+        </HidingView>
+      )}
     </StyledCollapsibleBox>
   );
 };
