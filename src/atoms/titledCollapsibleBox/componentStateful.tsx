@@ -10,6 +10,7 @@ import { defaultComponentProps, IComponentProps } from '../../model';
 interface IStatefulTitledCollapsibleBoxProps extends IComponentProps<ITitledCollapsibleBoxTheme>, ISingleAnyChildProps {
   title: string;
   isCollapsedInitially?: boolean;
+  shouldSkipRenderingWhenCollapsed?: boolean;
 }
 
 export const StatefulTitledCollapsibleBox = (props: IStatefulTitledCollapsibleBoxProps): React.ReactElement => {
@@ -27,6 +28,7 @@ export const StatefulTitledCollapsibleBox = (props: IStatefulTitledCollapsibleBo
       title={props.title}
       isCollapsed={isCollapsed}
       onCollapseToggled={onCollapseToggled}
+      shouldSkipRenderingWhenCollapsed={props.shouldSkipRenderingWhenCollapsed}
     >
       {props.children}
     </TitledCollapsibleBox>

@@ -37,6 +37,7 @@ export interface IIconProps extends IComponentProps<IIconTheme> {
   svgContent: string;
 }
 
+// maybe use react-inlinesvg instead!
 export const Icon = (props: IIconProps): React.ReactElement => {
   const theme = useBuiltTheme('icons', props.variant, props.theme);
   return (
@@ -48,7 +49,9 @@ export const Icon = (props: IIconProps): React.ReactElement => {
       $color={props._color}
       $shouldAddFill={props.shouldAddFill}
       $shouldAddStroke={props.shouldAddStroke}
-      dangerouslySetInnerHTML={{ __html: props.svgContent }}
+      // dangerouslySetInnerHTML={{ __html: props.svgContent }}
+      as={'img'}
+      src={`data:image/svg+xml;utf8,${encodeURIComponent(props.svgContent)}`}
     />
   );
 };
