@@ -49,9 +49,9 @@ export const Icon = (props: IIconProps): React.ReactElement => {
       $color={props._color}
       $shouldAddFill={props.shouldAddFill}
       $shouldAddStroke={props.shouldAddStroke}
-      // dangerouslySetInnerHTML={{ __html: props.svgContent }}
-      as={'img'}
-      src={`data:image/svg+xml;utf8,${encodeURIComponent(props.svgContent)}`}
+      dangerouslySetInnerHTML={{ __html: props.svgContent }}
+      // as={'img'}
+      // src={`data:image/svg+xml;utf8,${encodeURIComponent(props.svgContent)}`}
     />
   );
 };
