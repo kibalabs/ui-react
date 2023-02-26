@@ -29,31 +29,27 @@ const StyledImage = styled.img<IStyledImageProps>`
   ${(props: IStyledImageProps): string => themeToCss(props.$theme.background)};
   display: block;
   pointer-events: none;
-  width: ${(props: IStyledImageProps): string => props.$width};
-  height: ${(props: IStyledImageProps): string => props.$height};
-  max-width: ${(props: IStyledImageProps): string => props.$maxWidth};
-  max-height: ${(props: IStyledImageProps): string => props.$maxHeight};
-  object-fit: ${(props: IStyledImageProps): string => getImageFit(props.$fitType)};
-
+  // fade in after lazy load
   .no-js &.lazyload {
     display: none;
   }
-
-  // fade in after lazy load
   &.lazyload, &.lazyloading {
     opacity: 0;
   }
-
   &.lazyloaded {
     display: block;
     opacity: 1;
     transition: opacity 0.15s;
   }
-
   &.centered {
     margin-left: auto;
     margin-right: auto;
   }
+  width: ${(props: IStyledImageProps): string => props.$width};
+  height: ${(props: IStyledImageProps): string => props.$height};
+  max-width: ${(props: IStyledImageProps): string => props.$maxWidth};
+  max-height: ${(props: IStyledImageProps): string => props.$maxHeight};
+  object-fit: ${(props: IStyledImageProps): string => getImageFit(props.$fitType)};
 `;
 
 export interface IImageProps extends IComponentProps<IImageTheme> {

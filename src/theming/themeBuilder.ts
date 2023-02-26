@@ -1,4 +1,4 @@
-import { merge, RecursivePartial } from '@kibalabs/core';
+import { RecursivePartial } from '@kibalabs/core';
 
 import { ITheme } from '.';
 import { buildCheckboxThemes, buildSwitchThemes } from '../atoms';
@@ -31,40 +31,24 @@ import { buildTextThemes } from '../particles/text';
 import { buildVideoThemes } from '../particles/video';
 
 export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
+  // Base
   const colors = buildColors(inputTheme?.colors);
   const alternateColors = buildAlternateColors(colors, inputTheme?.alternateColors);
   const dimensions = buildDimensions(inputTheme?.dimensions);
   const fonts = buildFonts(inputTheme?.fonts);
 
+  // Particles
   const textThemes = buildTextThemes(colors, dimensions, inputTheme?.texts);
   const boxThemes = buildBoxThemes(colors, dimensions, inputTheme?.boxes);
   const iconThemes = buildIconThemes(colors, dimensions, boxThemes, inputTheme?.icons);
   const imageThemes = buildImageThemes(colors, dimensions, boxThemes, inputTheme?.images);
-  const loadingSpinnerThemes = buildLoadingSpinnerThemes(colors, dimensions, inputTheme?.loadingSpinners);
   const dividerThemes = buildDividerThemes(colors, dimensions, inputTheme?.dividers);
+  const loadingSpinnerThemes = buildLoadingSpinnerThemes(colors, dimensions, inputTheme?.loadingSpinners);
+  const pillThemes = buildPillThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.pills);
   const portalThemes = buildPortalThemes(colors, dimensions, boxThemes, inputTheme?.portals);
   const videoThemes = buildVideoThemes(colors, dimensions, inputTheme?.videos);
 
-  const buttonThemes = buildButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.buttons);
-  const checkboxThemes = buildCheckboxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.checkboxes);
-  const bulletListThemes = buildBulletListThemes(colors, dimensions, inputTheme?.bulletLists);
-  const bulletTextThemes = buildBulletTextThemes(colors, dimensions, textThemes, inputTheme?.bulletTexts);
-  const dialogThemes = buildDialogThemes(colors, dimensions, boxThemes, inputTheme?.dialogs);
-  const iconButtonThemes = buildIconButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.iconButtons);
-  const inputWrapperThemes = buildInputWrapperThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.inputWrappers);
-  const linkBaseThemes = buildLinkBaseThemes(colors, dimensions, boxThemes, inputTheme?.linkBases);
-  const linkThemes = buildLinkThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.links);
-  const listItemTheme = buildListItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.listItems);
-  const pillThemes = buildPillThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.pills);
-  const prettyTextThemes = buildPrettyTextThemes(colors, dimensions, textThemes, inputTheme?.prettyTexts);
-  const switchThemes = buildSwitchThemes(colors, dimensions, boxThemes, inputTheme?.switches);
-  const webViewThemes = buildWebViewThemes(colors, dimensions, boxThemes, inputTheme?.webViews);
-  const linePagerThemes = buildLinePagerThemes(colors, dimensions, boxThemes, inputTheme?.linePagers);
-  const progressCounterItemThemes = buildProgressCounterItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.progressCounterItems);
-  const tabBarItemThemes = buildTabBarItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.tabBarItems);
-  const titledCollapsibleBoxThemes = buildTitledCollapsibleBoxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.titledCollapsibleBoxes);
-
-  return merge<ITheme>({
+  return {
     // Base
     colors,
     alternateColors,
@@ -83,25 +67,22 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     videos: videoThemes,
 
     // Atoms
-    bulletLists: bulletListThemes,
-    bulletTexts: bulletTextThemes,
-    buttons: buttonThemes,
-    checkboxes: checkboxThemes,
-    dialogs: dialogThemes,
-    iconButtons: iconButtonThemes,
-    inputWrappers: inputWrapperThemes,
-    linkBases: linkBaseThemes,
-    links: linkThemes,
-    listItems: listItemTheme,
-    prettyTexts: prettyTextThemes,
-    switches: switchThemes,
-    webViews: webViewThemes,
-    linePagers: linePagerThemes,
-    progressCounterItems: progressCounterItemThemes,
-    tabBarItems: tabBarItemThemes,
-    titledCollapsibleBoxes: titledCollapsibleBoxThemes,
-  }, inputTheme, {
-    // NOTE(krishan711): this is here so the font replacement doesn't get overridden
-    fonts,
-  });
+    buttons: buildButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.buttons),
+    checkboxes: buildCheckboxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.checkboxes),
+    bulletLists: buildBulletListThemes(colors, dimensions, inputTheme?.bulletLists),
+    bulletTexts: buildBulletTextThemes(colors, dimensions, textThemes, inputTheme?.bulletTexts),
+    dialogs: buildDialogThemes(colors, dimensions, boxThemes, inputTheme?.dialogs),
+    iconButtons: buildIconButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.iconButtons),
+    inputWrappers: buildInputWrapperThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.inputWrappers),
+    linkBases: buildLinkBaseThemes(colors, dimensions, boxThemes, inputTheme?.linkBases),
+    links: buildLinkThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.links),
+    listItems: buildListItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.listItems),
+    prettyTexts: buildPrettyTextThemes(colors, dimensions, textThemes, inputTheme?.prettyTexts),
+    switches: buildSwitchThemes(colors, dimensions, boxThemes, inputTheme?.switches),
+    webViews: buildWebViewThemes(colors, dimensions, boxThemes, inputTheme?.webViews),
+    linePagers: buildLinePagerThemes(colors, dimensions, boxThemes, inputTheme?.linePagers),
+    progressCounterItems: buildProgressCounterItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.progressCounterItems),
+    tabBarItems: buildTabBarItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.tabBarItems),
+    titledCollapsibleBoxes: buildTitledCollapsibleBoxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.titledCollapsibleBoxes),
+  };
 };

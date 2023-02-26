@@ -1,0 +1,28 @@
+{
+  "name": "ui-react-test-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "build-react-app",
+    "build-static": "build-react-app-static",
+    "start": "build-react-app --start",
+    "start-dev": "build-react-app --start --dev",
+    "clean": "rm -rf ./node_modules ./package-lock.json ./dist",
+    "lint": "lint",
+    "lint-fix": "lint --fix",
+    "type-check": "type-check"
+  },
+  "dependencies": {
+    "@kibalabs/core": "0.5.10-next.0",
+    "@kibalabs/core-react": "^0.9.2-next.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "styled-components": "5.3.5"
+  },
+  "devDependencies": {
+    "@kibalabs/build": "0.9.1-next.3",
+    "@types/react": "17.0.43",
+    "@types/react-dom": "17.0.14",
+    "@types/styled-components": "5.1.26"
+  }
+}

@@ -1,7 +1,9 @@
+import { RecursivePartial } from '@kibalabs/core';
+
 export interface IComponentProps<Theme> {
   id?: string;
   className?: string;
-  theme?: Theme;
+  theme?: RecursivePartial<Theme>;
   variant?: string;
 }
 

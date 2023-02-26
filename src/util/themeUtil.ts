@@ -60,6 +60,8 @@ export interface ThemeMap<Theme extends ThemeType> extends Record<string, Recurs
   default: Theme;
 }
 
+export type ThemeCssFunction<Theme extends ThemeType> = (theme: Theme | RecursivePartial<Theme>) => string;
+
 export function mergeTheme<Theme extends ThemeType>(baseTheme: Theme, ...partialThemes: (RecursivePartial<Theme> | undefined)[]): Theme {
   return merge(baseTheme, ...partialThemes);
 }

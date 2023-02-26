@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { Alignment, Direction, getFlexContentAlignment, getFlexItemAlignment, IDimensionGuide, PaddingSize, PaddingSizeProp, Spacing } from '../..';
 import { useDimensions } from '../../theming';
-import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
+import { CssConverter, fieldToResponsiveCss, getCss, ResponsiveField } from '../../util';
 import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
 import { wrappingComponent } from '../../wrappers/wrappingComponent';
 
@@ -60,10 +60,6 @@ interface IStyledStackProps {
   $childAlignment: ResponsiveField<Alignment>;
   $contentAlignment: ResponsiveField<Alignment>;
 }
-
-const getCss = (fieldName: string): CssConverter<string> => {
-  return (value: string): string => `${fieldName}: ${value};`;
-};
 
 // width: ${(props: IStyledStackProps): string => (props.$isFullWidth ? '100%' : 'auto')};
 // min-width: ${(props: IStyledStackProps): string => (props.$isFullWidth ? 'inherit' : 'auto')};

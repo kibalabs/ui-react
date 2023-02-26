@@ -14,6 +14,10 @@ export interface ResponsiveField<FieldType> {
 
 export type CssConverter<FieldType> = (field: FieldType) => string;
 
+export const getCss = (fieldName: string): CssConverter<string> => {
+  return (value: string): string => `${fieldName}: ${value};`;
+};
+
 export const fieldToResponsiveCss = <FieldType>(field: ResponsiveField<FieldType>, theme: IDimensionGuide, cssConversion: CssConverter<FieldType>): string => {
   const output = [];
   if (field?.base !== undefined) {

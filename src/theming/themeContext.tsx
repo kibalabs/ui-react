@@ -2,11 +2,14 @@ import React from 'react';
 
 import { RecursivePartial } from '@kibalabs/core';
 import { IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
+import { createGlobalStyle } from 'styled-components';
 
-import { ITheme } from '..';
+import { buildThemeCssString } from './cssBuilder';
+import { ITheme } from './theme';
 import { IColorGuide } from '../particles/colors';
 import { IDimensionGuide } from '../particles/dimensions';
 import { mergeTheme, ThemeMap, ThemeType, ThemeValue } from '../util';
+
 
 export const ThemeContext = React.createContext<ITheme | null>(null);
 
@@ -15,8 +18,16 @@ interface IThemeProviderProps extends IMultiAnyChildProps {
 }
 
 export const ThemeProvider = (props: IThemeProviderProps): React.ReactElement => {
+  console.log('here1');
+  const themeCssString = buildThemeCssString(props.theme);
+  console.log('here2');
+  // console.log('themeCssString', themeCssString);
+  const ThemeCss = createGlobalStyle`
+    ${themeCssString}
+  `;
   return (
     <ThemeContext.Provider value={props.theme}>
+      <ThemeCss />
       <ColorProvider colors={props.theme.colors}>
         {props.children}
       </ColorProvider>

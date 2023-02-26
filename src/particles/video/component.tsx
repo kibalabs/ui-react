@@ -4,7 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { IVideoTheme } from './theme';
-import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
 
 export interface IStyledVideoProps {
   $theme: IVideoTheme;
@@ -25,21 +25,13 @@ const getImageFit = (fitType: string): string => {
   return 'fill';
 };
 
+/* ${(props: IStyledVideoProps): string => themeToCss(props.$theme.background)}; */
 const StyledVideo = styled.video<IStyledVideoProps>`
   display: block;
-  width: ${(props: IStyledVideoProps): string => props.$width};
-  height: ${(props: IStyledVideoProps): string => props.$height};
-  max-width: ${(props: IStyledVideoProps): string => props.$maxWidth};
-  max-height: ${(props: IStyledVideoProps): string => props.$maxHeight};
-  object-fit: ${(props: IStyledVideoProps): string => getImageFit(props.$fitType)};
-  max-width: 100%;
-  max-height: 100%;
-
+  // fade in after lazy load
   .no-js &.lazyload {
     display: none;
   }
-
-  // fade in after lazy load
   &.lazyload, &.lazyloading {
     opacity: 0;
   }
@@ -48,11 +40,15 @@ const StyledVideo = styled.video<IStyledVideoProps>`
     opacity: 1;
     transition: opacity 0.15s;
   }
-
   &.centered {
     margin-left: auto;
     margin-right: auto;
   }
+  width: ${(props: IStyledVideoProps): string => props.$width};
+  height: ${(props: IStyledVideoProps): string => props.$height};
+  max-width: ${(props: IStyledVideoProps): string => props.$maxWidth};
+  max-height: ${(props: IStyledVideoProps): string => props.$maxHeight};
+  object-fit: ${(props: IStyledVideoProps): string => getImageFit(props.$fitType)};
 `;
 
 export interface IVideoProps extends IComponentProps<IVideoTheme> {

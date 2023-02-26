@@ -17,6 +17,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `Grid.Item` to be flex by default
 - [MINOR] Added `shouldSkipRenderingWhenCollapsed` to `TitledCollapsibleBox`
 - [MINOR] Updated `Checkbox` to not render check when not checked
+- [MAJOR] Completely changed how css is rendered - see new documentation for detail
+<!-- TODO(krishan711): update docs with new things! -->
+- [MAJOR] Updated `buildTheme` to throw away extra components, they should now be added after
 
 ### Removed
 
