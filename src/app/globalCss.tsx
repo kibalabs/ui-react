@@ -1,7 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
+import { IBulletListTheme, IBulletTextTheme, ILinkTheme } from '../atoms';
 import { ITheme } from '../theming';
-import { colorsToCss, themeToCss } from '../util';
+import { colorsToCss, ThemeMap, themeToCss } from '../util';
 
 interface IGlobalCssProps {
   theme: ITheme;
@@ -54,12 +55,12 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
   /* NOTE(krishan711): the :not(.button) needs to be specified as Buttons can act as links and these styles will be used on hover */
   /* since this ":hover" is more specific (when hovering) than the generic styles for the default button (with no modifier) */
   a:not(.Button):not(.LinkBase):not(.IconButton):not(.Link) {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.links.default.normal.default.text)};
+    ${(props: IGlobalCssProps): string => themeToCss((props.theme.links as ThemeMap<ILinkTheme>).default.normal.default.text)};
     :hover {
-      ${(props: IGlobalCssProps): string => themeToCss(props.theme.links.default.normal.hover.text)};
+      ${(props: IGlobalCssProps): string => themeToCss((props.theme.links as ThemeMap<ILinkTheme>).default.normal.hover.text)};
     }
     :visited {
-      ${(props: IGlobalCssProps): string => themeToCss(props.theme.links.default.visited?.default?.text)};
+      ${(props: IGlobalCssProps): string => themeToCss((props.theme.links as ThemeMap<ILinkTheme>).default.visited?.default?.text)};
     }
   }
 
@@ -117,13 +118,13 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
   }
 
   ul {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.bulletLists.default.normal.default.bulletList)};
+    ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletLists as ThemeMap<IBulletListTheme>).default.normal.default.bulletList)};
   }
 
   li {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.bulletTexts.default.normal.default.text)};
+    ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).default.normal.default.text)};
     :before {
-      ${(props: IGlobalCssProps): string => themeToCss(props.theme.bulletTexts.default.normal.default.bullet)};
+      ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).default.normal.default.bullet)};
     }
   }
 

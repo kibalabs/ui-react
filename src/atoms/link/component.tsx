@@ -1,17 +1,49 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { ILinkTheme } from './theme';
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps } from '../../model';
+import { themeToCss } from '../../util';
+
+export const LinkThemedStyle = (theme: RecursivePartial<ILinkTheme>): string => `
+  & > .link-focus-fixer {
+    ${themeToCss(theme?.normal?.default?.background)};
+    ${themeToCss(theme?.normal?.default?.text)};
+  }
+  &:hover > .link-focus-fixer {
+    ${themeToCss(theme?.normal?.hover?.background)};
+    ${themeToCss(theme?.normal?.hover?.text)};
+  }
+  &.disabled {
+    & > .link-focus-fixer {
+      ${themeToCss(theme?.disabled?.default?.background)};
+      ${themeToCss(theme?.disabled?.default?.text)};
+    }
+    &:hover > .link-focus-fixer {
+      ${themeToCss(theme?.disabled?.hover?.background)};
+      ${themeToCss(theme?.disabled?.hover?.text)};
+    }
+  }
+  &:visited {
+    & > .link-focus-fixer {
+      ${themeToCss(theme?.visited?.default?.background)};
+      ${themeToCss(theme?.visited?.default?.text)};
+    }
+    &:hover > .link-focus-fixer {
+      ${themeToCss(theme?.visited?.hover?.background)};
+      ${themeToCss(theme?.visited?.hover?.text)};
+    }
+  }
+`;
 
 interface IStyledLinkProps {
-  $theme: ILinkTheme;
+  $theme?: RecursivePartial<ILinkTheme>;
 }
 
-const StyledLinkInner = styled.span`
+const StyledLinkFocusFixer = styled.span`
   transition-duration: 0.3s;
   /* Fixing the Safari bug for <button>s overflow */
   position: relative;
@@ -19,35 +51,12 @@ const StyledLinkInner = styled.span`
 
 const StyledLink = styled.a<IStyledLinkProps>`
   transition-duration: 0.3s;
-
-  & > .focus-fixer {
-    ${(props: IStyledLinkProps): string => themeToCss(props.$theme.normal?.default?.background)};
-    ${(props: IStyledLinkProps): string => themeToCss(props.$theme.normal?.default?.text)};
-  }
-  &:hover > .focus-fixer {
-    ${(props: IStyledLinkProps): string => themeToCss(props.$theme.normal?.hover?.background)};
-    ${(props: IStyledLinkProps): string => themeToCss(props.$theme.normal?.hover?.text)};
-  }
   &.disabled {
-    & > .focus-fixer {
-      ${(props: IStyledLinkProps): string => themeToCss(props.$theme.disabled?.default?.background)};
-      ${(props: IStyledLinkProps): string => themeToCss(props.$theme.disabled?.default?.text)};
-    }
     cursor: not-allowed;
-    &:hover > .focus-fixer {
-      ${(props: IStyledLinkProps): string => themeToCss(props.$theme.disabled?.hover?.background)};
-      ${(props: IStyledLinkProps): string => themeToCss(props.$theme.disabled?.hover?.text)};
-    }
   }
-  &:visited {
-    & > .focus-fixer {
-      ${(props: IStyledLinkProps): string => themeToCss(props.$theme.visited?.default?.background)};
-      ${(props: IStyledLinkProps): string => themeToCss(props.$theme.visited?.default?.text)};
-    }
-    &:hover > .focus-fixer {
-      ${(props: IStyledLinkProps): string => themeToCss(props.$theme.visited?.hover?.background)};
-      ${(props: IStyledLinkProps): string => themeToCss(props.$theme.visited?.hover?.text)};
-    }
+
+  && {
+    ${(props: IStyledLinkProps): string => (props.$theme ? LinkThemedStyle(props.$theme) : '')};
   }
 `;
 
@@ -72,15 +81,14 @@ export const Link = (props: ILinkProps): React.ReactElement => {
     }
   };
 
-  const theme = useBuiltTheme('links', props.variant, props.theme);
   const isTargetWithinApp = props.target && props.target.startsWith('/');
   const targetShouldOpenSameTab = props.shouldOpenSameTab || props.target?.startsWith('#') || (props.shouldOpenSameTab == null && isTargetWithinApp);
   return (
   // @ts-ignore: as prop doesn't match type required
     <StyledLink
       id={props.id}
-      className={getClassName(Link.displayName, props.className, !props.isEnabled && 'disabled')}
-      $theme={theme}
+      className={getClassName(Link.displayName, props.className, !props.isEnabled && 'disabled', ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
       onClick={onClicked}
       href={props.isEnabled ? props.target : undefined}
       rel={'noopener'}
@@ -88,9 +96,9 @@ export const Link = (props: ILinkProps): React.ReactElement => {
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       as={ props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
     >
-      <StyledLinkInner className='focus-fixer' tabIndex={-1}>
+      <StyledLinkFocusFixer className='link-focus-fixer' tabIndex={-1}>
         {props.text}
-      </StyledLinkInner>
+      </StyledLinkFocusFixer>
     </StyledLink>
   );
 };

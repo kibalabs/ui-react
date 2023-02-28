@@ -7,7 +7,7 @@ export const HomePage = (): React.ReactElement => {
     <Box variant='card-bordered' width='200px'>
       <Text>hello world it's me, can you hear me and see me?</Text>
       <Spacing variant={PaddingSize.Wide2} />
-      <Button variant='primary-large' text='click me' target='/' theme={{normal:{default:{text:{color:'green'}}}}} />
+      <Button variant='primary-large' text='click me' target='/' theme={{ normal: { default: { text: { color: 'green' } } } }} />
     </Box>
   );
 };

@@ -5,47 +5,46 @@ import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } fro
 import styled from 'styled-components';
 
 import { IButtonTheme } from './theme';
-import { defaultComponentProps, IComponentProps, LoadingSpinner, themeToCss } from '../..';
-import { Alignment, getFlexContentAlignment } from '../../model';
-import { IIconProps, PaddingSize, Spacing } from '../../particles';
-import { CssConverter } from '../../util';
+import { Alignment, defaultComponentProps, getFlexContentAlignment, IComponentProps } from '../../model';
+import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particles';
+import { CssConverter, themeToCss } from '../../util';
 
 export const ButtonThemedStyle = (theme: RecursivePartial<IButtonTheme>): string => `
-  & > .focus-fixer {
+  & > .button-focus-fixer {
     ${themeToCss(theme.normal?.default?.text)};
     ${themeToCss(theme.normal?.default?.background)};
   }
   /* Since it can be rendered as an <a>, unset everything for visited */
-  &:visited > .focus-fixer {
+  &:visited > .button-focus-fixer {
     ${themeToCss(theme.normal?.default?.text)};
     ${themeToCss(theme.normal?.default?.background)};
   }
-  &:hover > .focus-fixer {
+  &:hover > .button-focus-fixer {
     ${themeToCss(theme.normal?.hover?.text)};
     ${themeToCss(theme.normal?.hover?.background)};
   }
-  &:active > .focus-fixer {
+  &:active > .button-focus-fixer {
     ${themeToCss(theme.normal?.press?.text)};
     ${themeToCss(theme.normal?.press?.background)};
   }
-  &:focus > .focus-fixer {
+  &:focus > .button-focus-fixer {
     ${themeToCss(theme.normal?.focus?.text)};
     ${themeToCss(theme.normal?.focus?.background)};
   }
   &.disabled {
-    & > .focus-fixer {
+    & > .button-focus-fixer {
       ${themeToCss(theme.disabled?.default?.text)};
       ${themeToCss(theme.disabled?.default?.background)};
     }
-    &:hover > .focus-fixer {
+    &:hover > .button-focus-fixer {
       ${themeToCss(theme.disabled?.hover?.text)};
       ${themeToCss(theme.disabled?.hover?.background)};
     }
-    &:active > .focus-fixer {
+    &:active > .button-focus-fixer {
       ${themeToCss(theme.disabled?.press?.text)};
       ${themeToCss(theme.disabled?.press?.background)};
     }
-    &:focus > .focus-fixer {
+    &:focus > .button-focus-fixer {
       ${themeToCss(theme.disabled?.focus?.text)};
       ${themeToCss(theme.disabled?.focus?.background)};
     }
@@ -71,17 +70,17 @@ const getContentAlignmentCss: CssConverter<Alignment> = (field: Alignment): stri
   return `justify-content: ${getFlexContentAlignment(field)};`;
 };
 
-interface IStyledButtonInnerProps {
+interface IStyledButtonFocusFixerProps {
   $contentAlignment: Alignment;
 }
 
-const StyledButtonInner = styled.span<IStyledButtonInnerProps>`
+const StyledButtonFocusFixer = styled.span<IStyledButtonFocusFixerProps>`
   transition-duration: 0.3s;
   outline: none;
   display: flex;
   flex-direction: row;
   align-items: center;
-  ${(props: IStyledButtonInnerProps): string => getContentAlignmentCss(props.$contentAlignment)};
+  ${(props: IStyledButtonFocusFixerProps): string => getContentAlignmentCss(props.$contentAlignment)};
   background-clip: border-box;
   width: 100%;
   height: 100%;
@@ -159,7 +158,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
       type={props.buttonType || 'button'}
     >
-      <StyledButtonInner className='focus-fixer' tabIndex={-1} $contentAlignment={props.contentAlignment}>
+      <StyledButtonFocusFixer className='button-focus-fixer' tabIndex={-1} $contentAlignment={props.contentAlignment}>
         { !props.isLoading && props.iconLeft && (
           <React.Fragment>
             {props.iconLeft}
@@ -181,7 +180,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
             variant='light-small'
           />
         )}
-      </StyledButtonInner>
+      </StyledButtonFocusFixer>
     </StyledButton>
   );
 };

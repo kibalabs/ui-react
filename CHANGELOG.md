@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MAJOR] Completely changed how css is rendered - see new documentation for detail
 <!-- TODO(krishan711): update docs with new things! -->
 - [MAJOR] Updated `buildTheme` to throw away extra components, they should now be added after
+- [MAJOR] Moved `Pill` to `atoms` folder
 
 ### Removed
 

@@ -1,32 +1,37 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { IIconTheme } from './theme';
-import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps } from '../../model';
+
+export const IconThemedStyle = (theme: RecursivePartial<IIconTheme>): string => `
+  width: ${theme.size};
+  height: ${theme.size};
+  // min-width: ${theme.size};
+  // min-height: ${theme.size};
+`;
 
 interface IStyledIconProps {
-  $theme: IIconTheme;
+  $theme?: RecursivePartial<IIconTheme>;
   $color?: string;
   $shouldAddFill?: boolean;
   $shouldAddStroke?: boolean;
 }
 
 const StyledIcon = styled.div<IStyledIconProps>`
-  width: ${(props: IStyledIconProps): string => props.$theme.size};
-  height: ${(props: IStyledIconProps): string => props.$theme.size};
-  min-width: ${(props: IStyledIconProps): string => props.$theme.size};
-  min-height: ${(props: IStyledIconProps): string => props.$theme.size};
-  color: ${(props: IStyledIconProps): string => props.$color || 'currentColor'};
-  overflow: hidden;
-
   svg {
     height: 100%;
     width: 100%;
     display: block;
     fill: ${(props: IStyledIconProps): string => (props.$shouldAddFill ? 'currentColor' : 'none')};
     stroke: ${(props: IStyledIconProps): string => (props.$shouldAddStroke ? 'currentColor' : 'none')};
+  }
+  overflow: hidden;
+  color: ${(props: IStyledIconProps): string => props.$color || 'currentColor'};
+  && {
+    ${(props: IStyledIconProps): string => (props.$theme ? IconThemedStyle(props.$theme) : '')};
   }
 `;
 
@@ -39,12 +44,11 @@ export interface IIconProps extends IComponentProps<IIconTheme> {
 
 // maybe use react-inlinesvg instead!
 export const Icon = (props: IIconProps): React.ReactElement => {
-  const theme = useBuiltTheme('icons', props.variant, props.theme);
   return (
     <StyledIcon
       id={props.id}
-      className={getClassName(Icon.displayName, props.className)}
-      $theme={theme}
+      className={getClassName(Icon.displayName, props.className, ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
       // eslint-disable-next-line no-underscore-dangle
       $color={props._color}
       $shouldAddFill={props.shouldAddFill}

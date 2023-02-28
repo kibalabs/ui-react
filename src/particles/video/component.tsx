@@ -1,13 +1,18 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { IVideoTheme } from './theme';
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps } from '../../model';
+
+/* ${(props: IStyledVideoProps): string => themeToCss(props.$theme.background)}; */
+// eslint-disable-next-line unused-imports/no-unused-vars
+export const VideoThemedStyle = (theme: RecursivePartial<IVideoTheme>): string => `
+`;
 
 export interface IStyledVideoProps {
-  $theme: IVideoTheme;
+  $theme?: RecursivePartial<IVideoTheme>;
   $width: string;
   $height: string;
   $maxWidth: string;
@@ -25,7 +30,6 @@ const getImageFit = (fitType: string): string => {
   return 'fill';
 };
 
-/* ${(props: IStyledVideoProps): string => themeToCss(props.$theme.background)}; */
 const StyledVideo = styled.video<IStyledVideoProps>`
   display: block;
   // fade in after lazy load
@@ -49,6 +53,9 @@ const StyledVideo = styled.video<IStyledVideoProps>`
   max-width: ${(props: IStyledVideoProps): string => props.$maxWidth};
   max-height: ${(props: IStyledVideoProps): string => props.$maxHeight};
   object-fit: ${(props: IStyledVideoProps): string => getImageFit(props.$fitType)};
+  && {
+    ${(props: IStyledVideoProps): string => (props.$theme ? VideoThemedStyle(props.$theme) : '')};
+  }
 `;
 
 export interface IVideoProps extends IComponentProps<IVideoTheme> {
@@ -74,7 +81,6 @@ export interface IVideoProps extends IComponentProps<IVideoTheme> {
 
 // NOTE(krishan711): Failed to get lazy loading working properly. try again with https://github.com/aFarkas/lazysizes/issues/697
 export const Video = (props: IVideoProps): React.ReactElement => {
-  const theme = useBuiltTheme('videos', props.variant, props.theme);
   const fitType = props.fitType || 'scale';
   const shouldShowControls = props.shouldShowControls != null ? props.shouldShowControls : true;
   const width = props.width ? props.width : props.isFullWidth ? '100%' : 'auto';
@@ -102,8 +108,8 @@ export const Video = (props: IVideoProps): React.ReactElement => {
     <StyledVideo
       id={props.id}
       // props.isLazyLoadable ? 'lazyload' : 'unlazy'
-      className={getClassName(Video.displayName, props.className, props.isCenteredHorizontally && 'centered')}
-      $theme={theme}
+      className={getClassName(Video.displayName, props.className, props.isCenteredHorizontally && 'centered', ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
       $fitType={fitType}
       $width={width}
       $height={height}

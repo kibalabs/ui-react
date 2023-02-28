@@ -1,121 +1,107 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { ISwitchTheme } from './theme';
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps } from '../../model';
+import { propertyToCss, themeToCss } from '../../util';
 
 
-interface IStyledSwitchBackgroundProps {
-  $theme: ISwitchTheme;
-}
-
-const StyledSwitchBackground = styled.button<IStyledSwitchBackgroundProps>`
-  ${(props: IStyledSwitchBackgroundProps): string => themeToCss(props.$theme.normal.default?.background)};
-  width: ${(props: IStyledSwitchBackgroundProps): string => props.$theme.normal.default?.backgroundWidth};
-  cursor: pointer;
-  transition: 300ms;
-
+export const SwitchThemedStyle = (theme: RecursivePartial<ISwitchTheme>): string => `
+  ${themeToCss(theme?.normal?.default?.background)};
+  ${propertyToCss('width', theme.normal?.default?.backgroundWidth)};
+  & > .SwitchInner {
+    ${themeToCss(theme?.normal?.default?.switch)};
+    ${propertyToCss('width', theme?.normal?.default?.switchWidth)};
+    ${propertyToCss('height', theme?.normal?.default?.switchHeight)};
+  }
   &:hover {
-    ${(props: IStyledSwitchBackgroundProps): string => themeToCss(props.$theme.normal.hover?.background)};
+    ${themeToCss(theme?.normal?.hover?.background)};
+    & > .SwitchInner {
+      ${themeToCss(theme?.normal?.hover?.switch)};
+    }
   }
-
   &:focus {
-    ${(props: IStyledSwitchBackgroundProps): string => themeToCss(props.$theme.normal.focus?.background)};
+    ${themeToCss(theme?.normal?.focus?.background)};
+    & > .SwitchInner {
+      ${themeToCss(theme?.normal?.focus?.switch)};
+    }
   }
-
   &:active {
-    ${(props: IStyledSwitchBackgroundProps): string => themeToCss(props.$theme.normal.press?.background)};
+    ${themeToCss(theme?.normal?.press?.background)};
+    & > .SwitchInner {
+      ${themeToCss(theme?.normal?.press?.switch)};
+    }
   }
-
   &.disabled {
-    ${(props: IStyledSwitchBackgroundProps): string => themeToCss(props.$theme.disabled.default?.background)};
-
+    ${themeToCss(theme?.disabled?.default?.background)};
+    & > .SwitchInner {
+      ${themeToCss(theme?.disabled?.default?.switch)};
+    }
     &:hover {
-      ${(props: IStyledSwitchBackgroundProps): string => themeToCss(props.$theme.disabled.hover?.background)};
+      ${themeToCss(theme?.disabled?.hover?.background)};
+      & > .SwitchInner {
+        ${themeToCss(theme?.disabled?.hover?.switch)};
+      }
     }
-
     &:focus {
-      ${(props: IStyledSwitchBackgroundProps): string => themeToCss(props.$theme.disabled.focus?.background)};
+      ${themeToCss(theme?.disabled?.focus?.background)};
+      & > .SwitchInner {
+        ${themeToCss(theme?.disabled?.focus?.switch)};
+      }
     }
-
     &:active {
-      ${(props: IStyledSwitchBackgroundProps): string => themeToCss(props.$theme.disabled.press?.background)};
+      ${themeToCss(theme?.disabled?.press?.background)};
+      & > .SwitchInner {
+        ${themeToCss(theme?.disabled?.press?.switch)};
+      }
     }
   }
-
   &[aria-checked="true"] {
-    ${(props: IStyledSwitchBackgroundProps): string => themeToCss(props.$theme.checked.default?.background)};
-
+    ${themeToCss(theme?.checked?.default?.background)};
+    & > .SwitchInner {
+      ${themeToCss(theme?.checked?.default?.switch)};
+    }
     &:hover {
-      ${(props: IStyledSwitchBackgroundProps): string => themeToCss(props.$theme.checked.hover?.background)};
+      ${themeToCss(theme?.checked?.hover?.background)};
+      & > .SwitchInner {
+        ${themeToCss(theme?.checked?.hover?.switch)};
+      }
     }
-
     &:focus {
-      ${(props: IStyledSwitchBackgroundProps): string => themeToCss(props.$theme.checked.focus?.background)};
+      ${themeToCss(theme?.checked?.focus?.background)};
+      & > .SwitchInner {
+        ${themeToCss(theme?.checked?.focus?.switch)};
+      }
     }
-
     &:active {
-      ${(props: IStyledSwitchBackgroundProps): string => themeToCss(props.$theme.checked.press?.background)};
+      ${themeToCss(theme?.checked?.press?.background)};
+      & > .SwitchInner {
+        ${themeToCss(theme?.checked?.press?.switch)};
+      }
     }
   }
 `;
 
 interface IStyledSwitchProps {
-  $theme: ISwitchTheme;
+  $theme?: RecursivePartial<ISwitchTheme>;
 }
 
-const StyledSwitch = styled.div<IStyledSwitchProps>`
-  ${(props: IStyledSwitchProps): string => themeToCss(props.$theme.normal.default?.switch)};
-  width: ${(props: IStyledSwitchProps): string => props.$theme.normal.default?.switchWidth};
-  height: ${(props: IStyledSwitchProps): string => props.$theme.normal.default?.switchHeight};
+const StyledSwitch = styled.button<IStyledSwitchProps>`
+  cursor: pointer;
+  transition: 300ms;
+
+  && {
+    ${(props: IStyledSwitchProps): string => (props.$theme ? SwitchThemedStyle(props.$theme) : '')};
+  }
+`;
+
+const StyledSwitchInner = styled.div`
   float: left;
   cursor: pointer;
-
-  &:hover {
-    ${(props: IStyledSwitchProps): string => themeToCss(props.$theme.normal.hover?.switch)};
-  }
-
-  &:focus {
-    ${(props: IStyledSwitchProps): string => themeToCss(props.$theme.normal.focus?.switch)};
-  }
-
-  &:active {
-    ${(props: IStyledSwitchProps): string => themeToCss(props.$theme.normal.press?.switch)};
-  }
-
-  &.disabled {
-    ${(props: IStyledSwitchProps): string => themeToCss(props.$theme.disabled.default?.switch)};
-
-    &:hover {
-      ${(props: IStyledSwitchProps): string => themeToCss(props.$theme.disabled.hover?.switch)};
-    }
-
-    &:focus {
-      ${(props: IStyledSwitchProps): string => themeToCss(props.$theme.disabled.focus?.switch)};
-    }
-
-    &:active {
-      ${(props: IStyledSwitchProps): string => themeToCss(props.$theme.disabled.press?.switch)};
-    }
-  }
-
   &.checked {
-    ${(props: IStyledSwitchProps): string => themeToCss(props.$theme.checked.default?.switch)};
     float: right;
-
-    &:hover {
-      ${(props: IStyledSwitchProps): string => themeToCss(props.$theme.checked.hover?.switch)};
-    }
-
-    &:focus {
-      ${(props: IStyledSwitchProps): string => themeToCss(props.$theme.checked.focus?.switch)};
-    }
-
-    &:press {
-      ${(props: IStyledSwitchProps): string => themeToCss(props.$theme.checked.press?.switch)};
-    }
   }
 `;
 
@@ -127,8 +113,6 @@ export interface ISwitchProps extends IComponentProps<ISwitchTheme> {
 
 export const Switch = (props: ISwitchProps): React.ReactElement => {
   const isEnabled = props.isEnabled !== undefined ? props.isEnabled : true;
-  const theme = useBuiltTheme('switches', props.variant, props.theme);
-
   const onToggled = () => {
     if (isEnabled && props.onToggled) {
       props.onToggled();
@@ -136,18 +120,15 @@ export const Switch = (props: ISwitchProps): React.ReactElement => {
   };
 
   return (
-    <StyledSwitchBackground
+    <StyledSwitch
       id={props.id}
-      className={getClassName(Switch.displayName, props.className, !isEnabled && 'disabled')}
-      $theme={theme}
+      className={getClassName(Switch.displayName, props.className, !isEnabled && 'disabled', ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
       aria-checked={props.isChecked}
       onClick={onToggled}
     >
-      <StyledSwitch
-        className={getClassName(!isEnabled && 'disabled', props.isChecked && 'checked')}
-        $theme={theme}
-      />
-    </StyledSwitchBackground>
+      <StyledSwitchInner className='SwitchInner' />
+    </StyledSwitch>
   );
 };
 

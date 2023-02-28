@@ -1,23 +1,24 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { ITheme } from '.';
-import { buildCheckboxThemes, buildSwitchThemes } from '../atoms';
-import { buildBulletListThemes } from '../atoms/bulletList';
-import { buildBulletTextThemes } from '../atoms/bulletText';
-import { buildButtonThemes } from '../atoms/button';
-import { buildDialogThemes } from '../atoms/dialog';
-import { buildIconButtonThemes } from '../atoms/iconButton';
-import { buildInputWrapperThemes } from '../atoms/inputWrapper';
-import { buildLinePagerThemes } from '../atoms/linePager';
-import { buildLinkThemes } from '../atoms/link';
-import { buildLinkBaseThemes } from '../atoms/linkBase';
-import { buildListItemThemes } from '../atoms/listItem';
-import { buildPillThemes } from '../atoms/pill';
-import { buildPrettyTextThemes } from '../atoms/prettyText';
-import { buildProgressCounterItemThemes } from '../atoms/progressCounterItem';
-import { buildTabBarItemThemes } from '../atoms/tabBarItem';
-import { buildTitledCollapsibleBoxThemes } from '../atoms/titledCollapsibleBox';
-import { buildWebViewThemes } from '../atoms/webView';
+import { PartialThemeMap } from '..';
+import { buildBulletListThemes, IBulletListTheme } from '../atoms/bulletList';
+import { buildBulletTextThemes, IBulletTextTheme } from '../atoms/bulletText';
+import { buildButtonThemes, IButtonTheme } from '../atoms/button';
+import { buildCheckboxThemes, ICheckboxTheme } from '../atoms/checkbox';
+import { buildDialogThemes, IDialogTheme } from '../atoms/dialog';
+import { buildIconButtonThemes, IIconButtonTheme } from '../atoms/iconButton';
+import { buildInputWrapperThemes, IInputWrapperTheme } from '../atoms/inputWrapper';
+import { buildLinePagerThemes, ILinePagerTheme } from '../atoms/linePager';
+import { buildLinkThemes, ILinkTheme } from '../atoms/link';
+import { buildLinkBaseThemes, ILinkBaseTheme } from '../atoms/linkBase';
+import { buildListItemThemes, IListItemTheme } from '../atoms/listItem';
+import { buildPrettyTextThemes, IPrettyTextTheme } from '../atoms/prettyText';
+import { buildProgressCounterItemThemes, IProgressCounterItemTheme } from '../atoms/progressCounterItem';
+import { buildSwitchThemes, ISwitchTheme } from '../atoms/switch';
+import { buildTabBarItemThemes, ITabBarItemTheme } from '../atoms/tabBarItem';
+import { buildTitledCollapsibleBoxThemes, ITitledCollapsibleBoxTheme } from '../atoms/titledCollapsibleBox';
+import { buildWebViewThemes, IWebViewTheme } from '../atoms/webView';
 import { buildBoxThemes } from '../particles/box';
 import { buildAlternateColors, buildColors } from '../particles/colors';
 import { buildDimensions } from '../particles/dimensions';
@@ -26,6 +27,7 @@ import { buildFonts } from '../particles/fonts';
 import { buildIconThemes } from '../particles/icon';
 import { buildImageThemes } from '../particles/image';
 import { buildLoadingSpinnerThemes } from '../particles/loadingSpinner';
+import { buildPillThemes } from '../particles/pill';
 import { buildPortalThemes } from '../particles/portal';
 import { buildTextThemes } from '../particles/text';
 import { buildVideoThemes } from '../particles/video';
@@ -67,22 +69,22 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     videos: videoThemes,
 
     // Atoms
-    buttons: buildButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.buttons),
-    checkboxes: buildCheckboxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.checkboxes),
-    bulletLists: buildBulletListThemes(colors, dimensions, inputTheme?.bulletLists),
-    bulletTexts: buildBulletTextThemes(colors, dimensions, textThemes, inputTheme?.bulletTexts),
-    dialogs: buildDialogThemes(colors, dimensions, boxThemes, inputTheme?.dialogs),
-    iconButtons: buildIconButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.iconButtons),
-    inputWrappers: buildInputWrapperThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.inputWrappers),
-    linkBases: buildLinkBaseThemes(colors, dimensions, boxThemes, inputTheme?.linkBases),
-    links: buildLinkThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.links),
-    listItems: buildListItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.listItems),
-    prettyTexts: buildPrettyTextThemes(colors, dimensions, textThemes, inputTheme?.prettyTexts),
-    switches: buildSwitchThemes(colors, dimensions, boxThemes, inputTheme?.switches),
-    webViews: buildWebViewThemes(colors, dimensions, boxThemes, inputTheme?.webViews),
-    linePagers: buildLinePagerThemes(colors, dimensions, boxThemes, inputTheme?.linePagers),
-    progressCounterItems: buildProgressCounterItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.progressCounterItems),
-    tabBarItems: buildTabBarItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.tabBarItems),
-    titledCollapsibleBoxes: buildTitledCollapsibleBoxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.titledCollapsibleBoxes),
+    buttons: buildButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.buttons as PartialThemeMap<IButtonTheme>),
+    checkboxes: buildCheckboxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.checkboxes as PartialThemeMap<ICheckboxTheme>),
+    bulletLists: buildBulletListThemes(colors, dimensions, inputTheme?.bulletLists as PartialThemeMap<IBulletListTheme>),
+    bulletTexts: buildBulletTextThemes(colors, dimensions, textThemes, inputTheme?.bulletTexts as PartialThemeMap<IBulletTextTheme>),
+    dialogs: buildDialogThemes(colors, dimensions, boxThemes, inputTheme?.dialogs as PartialThemeMap<IDialogTheme>),
+    iconButtons: buildIconButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.iconButtons as PartialThemeMap<IIconButtonTheme>),
+    inputWrappers: buildInputWrapperThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.inputWrappers as PartialThemeMap<IInputWrapperTheme>),
+    linkBases: buildLinkBaseThemes(colors, dimensions, boxThemes, inputTheme?.linkBases as PartialThemeMap<ILinkBaseTheme>),
+    links: buildLinkThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.links as PartialThemeMap<ILinkTheme>),
+    listItems: buildListItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.listItems as PartialThemeMap<IListItemTheme>),
+    prettyTexts: buildPrettyTextThemes(colors, dimensions, textThemes, inputTheme?.prettyTexts as PartialThemeMap<IPrettyTextTheme>),
+    switches: buildSwitchThemes(colors, dimensions, boxThemes, inputTheme?.switches as PartialThemeMap<ISwitchTheme>),
+    webViews: buildWebViewThemes(colors, dimensions, boxThemes, inputTheme?.webViews as PartialThemeMap<IWebViewTheme>),
+    linePagers: buildLinePagerThemes(colors, dimensions, boxThemes, inputTheme?.linePagers as PartialThemeMap<ILinePagerTheme>),
+    progressCounterItems: buildProgressCounterItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.progressCounterItems as PartialThemeMap<IProgressCounterItemTheme>),
+    tabBarItems: buildTabBarItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.tabBarItems as PartialThemeMap<ITabBarItemTheme>),
+    titledCollapsibleBoxes: buildTitledCollapsibleBoxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.titledCollapsibleBoxes as PartialThemeMap<ITitledCollapsibleBoxTheme>),
   };
 };

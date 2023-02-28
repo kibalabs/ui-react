@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { IBoxTheme } from './theme';
 import { defaultComponentProps, IComponentProps, IDimensionGuide, themeToCss, useDimensions } from '../..';
-import { fieldToResponsiveCss, getCss, ResponsiveField } from '../../util';
+import { fieldToResponsiveCss, getCss, propertyToCss, ResponsiveField } from '../../util';
 
 export const BoxThemedStyle = (theme: RecursivePartial<IBoxTheme>): string => `
   ${themeToCss(theme)};
@@ -23,6 +23,7 @@ interface IStyledBoxProps {
   $minWidth: ResponsiveField<string> | null;
   $blockType: string;
   $zIndex?: number;
+  $position?: string;
 }
 
 const StyledBox = styled.div<IStyledBoxProps>`
@@ -46,8 +47,9 @@ const StyledBox = styled.div<IStyledBoxProps>`
   ${(props: IStyledBoxProps): string => (props.$maxWidth ? fieldToResponsiveCss(props.$maxWidth, props.$dimensions, getCss('max-width')) : '')};
   ${(props: IStyledBoxProps): string => (props.$minHeight ? fieldToResponsiveCss(props.$minHeight, props.$dimensions, getCss('min-height')) : '')};
   ${(props: IStyledBoxProps): string => (props.$minWidth ? fieldToResponsiveCss(props.$minWidth, props.$dimensions, getCss('min-width')) : '')};
-  display: ${(props: IStyledBoxProps): string => props.$blockType};
-  z-index: ${(props: IStyledBoxProps): string => (props.$zIndex ? `${props.$zIndex}` : 'auto')};
+  ${(props: IStyledBoxProps): string => propertyToCss('display', props.$blockType)};
+  ${(props: IStyledBoxProps): string => propertyToCss('z-index', props.$zIndex)};
+  ${(props: IStyledBoxProps): string => propertyToCss('position', props.$position)};
 
   && {
     ${(props: IStyledBoxProps): string => (props.$theme ? BoxThemedStyle(props.$theme) : '')};
@@ -75,6 +77,7 @@ export interface IBoxProps extends IComponentProps<IBoxTheme>, IOptionalSingleAn
   isScrollableHorizontally?: boolean;
   shouldClipContent?: boolean;
   shouldCaptureTouches?: boolean;
+  position?: string;
 }
 
 export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
@@ -105,6 +108,7 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
       $minWidth={minWidthResponsive}
       $blockType={blockType}
       $zIndex={props.zIndex}
+      $position={props.position}
       title={props.title}
       ref={ref}
     >

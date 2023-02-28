@@ -1,22 +1,57 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IListItemTheme } from './theme';
 import { defaultComponentProps, IComponentProps } from '../../model';
-import { useBuiltTheme } from '../../theming';
 import { themeToCss } from '../../util';
 
+export const ListItemThemedStyle = (theme: RecursivePartial<IListItemTheme>): string => `
+  ${themeToCss(theme?.normal?.default?.background)};
+  &.clickable {
+    &:hover {
+        ${themeToCss(theme?.normal?.hover?.background)};
+    }
+    &:active {
+        ${themeToCss(theme?.normal?.press?.background)};
+    }
+    &:focus {
+        ${themeToCss(theme?.normal?.focus?.background)};
+    }
+    &.disabled {
+      ${themeToCss(theme?.disabled?.default?.background)};
+      &:hover {
+        ${themeToCss(theme?.disabled?.hover?.background)};
+      }
+      &:active {
+        ${themeToCss(theme?.disabled?.press?.background)};
+      }
+      &:focus {
+        ${themeToCss(theme?.disabled?.focus?.background)};
+      }
+    }
+  }
+  &.selected {
+    ${themeToCss(theme?.selected?.default?.background)};
+    &:hover {
+      ${themeToCss(theme?.selected?.hover?.background)};
+    }
+    &:active {
+      ${themeToCss(theme?.selected?.press?.background)};
+    }
+    &:focus {
+      ${themeToCss(theme?.selected?.focus?.background)};
+    }
+  }
+`;
+
 interface IStyledListItemProps {
-  $theme: IListItemTheme;
-  $isClickable: boolean;
+  $theme?: RecursivePartial<IListItemTheme>;
 }
 
 const StyledListItem = styled.div<IStyledListItemProps>`
-  ${(props: IStyledListItemProps): string => themeToCss(props.$theme.normal.default.background)};
-  cursor: ${(props: IStyledListItemProps): string => (props.$isClickable ? 'pointer' : 'default')};
   outline: none;
   display: flex;
   flex-direction: row;
@@ -24,40 +59,16 @@ const StyledListItem = styled.div<IStyledListItemProps>`
   justify-content: start;
   background-clip: border-box;
   transition-duration: 0.3s;
-
-  &:hover {
-    ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.normal.hover?.background) : '')};
-  }
-  &:active {
-    ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.normal.press?.background) : '')};
-  }
-  &:focus {
-    ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.normal.focus?.background) : '')};
+  cursor: default;
+  &.clickable {
+    cursor: pointer;
   }
   &.disabled {
     cursor: auto;
-    ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.disabled?.default?.background) : '')};
-    &:hover {
-      ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.disabled?.hover?.background) : '')};
-    }
-    &:active {
-      ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.disabled?.press?.background) : '')};
-    }
-    &:focus {
-      ${(props: IStyledListItemProps): string => (props.$isClickable ? themeToCss(props.$theme.disabled?.focus?.background) : '')};
-    }
   }
-  &.selected {
-    ${(props: IStyledListItemProps): string => themeToCss(props.$theme.selected?.default?.background)};
-    &:hover {
-      ${(props: IStyledListItemProps): string => themeToCss(props.$theme.selected?.hover?.background)};
-    }
-    &:active {
-      ${(props: IStyledListItemProps): string => themeToCss(props.$theme.selected?.press?.background)};
-    }
-    &:focus {
-      ${(props: IStyledListItemProps): string => themeToCss(props.$theme.selected?.focus?.background)};
-    }
+
+  && {
+    ${(props: IStyledListItemProps): string => (props.$theme ? ListItemThemedStyle(props.$theme) : '')};
   }
 `;
 
@@ -69,20 +80,19 @@ export interface IListItemProps extends IComponentProps<IListItemTheme>, ISingle
 }
 
 export const ListItem = (props: IListItemProps): React.ReactElement => {
-  const onClicked = !props.onClicked || props.isDisabled ? undefined : (): void => {
+  const isClickable = props.onClicked != null && !props.isDisabled;
+  const onClicked = (): void => {
     // @ts-ignore
     props.onClicked(props.itemKey);
   };
 
-  const theme = useBuiltTheme('listItems', props.variant, props.theme);
   return (
     <StyledListItem
       id={props.id}
       key={props.itemKey}
-      className={getClassName(ListItem.displayName, props.className, props.isDisabled && 'disabled', props.isSelected && 'selected')}
-      $theme={theme}
-      $isClickable={onClicked != null && !props.isDisabled}
-      onClick={onClicked}
+      className={getClassName(ListItem.displayName, props.className, props.isDisabled && 'disabled', props.isSelected && 'selected', isClickable && 'clickable', ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
+      onClick={isClickable ? onClicked : undefined}
     >
       { props.children }
     </StyledListItem>
