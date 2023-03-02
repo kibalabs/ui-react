@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MAJOR] Moved `Pill` to `atoms` folder
 - [MAJOR] Updated `buildTheme` to ignore extra components, they should be added after calling buildTheme
 - [MAJOR] Completely changed how css is rendered - see new documentation for detail
+- [MAJOR] Change all displayName for component `X` to `KibaX`
 
 ### Removed
 
