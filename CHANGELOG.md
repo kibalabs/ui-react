@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `Grid.Item` to be flex by default
 - [MINOR] Added `shouldSkipRenderingWhenCollapsed` to `TitledCollapsibleBox`
 - [MINOR] Updated `Checkbox` to not render check when not checked
+- [MINOR] Updated `Image` and `Video` to replace ipfs urls
 
 ### Removed
 
