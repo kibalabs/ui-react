@@ -1,7 +1,9 @@
 name: Build
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - beta-**
 jobs:
   build-docs:
     runs-on: ubuntu-latest
