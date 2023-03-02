@@ -21,13 +21,13 @@ interface IStyledLoadingSpinnerProps {
 const StyledLoadingSpinner = styled.div<IStyledLoadingSpinnerProps>`
   border-radius: 50%;
   border-style: solid;
-  border-top-color: transparent;
+  border-top-color: transparent !important;
   animation: spin 1.0s linear infinite;
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-  
+
   && {
     ${(props: IStyledLoadingSpinnerProps): string => (props.$theme ? LoadingSpinnerThemedStyle(props.$theme) : '')};
   }
@@ -46,7 +46,7 @@ export const LoadingSpinner = (props: ILoadingSpinnerProps): React.ReactElement 
   );
 };
 
-LoadingSpinner.displayName = 'LoadingSpinner';
+LoadingSpinner.displayName = 'KibaLoadingSpinner';
 LoadingSpinner.defaultProps = {
   ...defaultComponentProps,
 };

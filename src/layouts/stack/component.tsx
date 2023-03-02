@@ -194,7 +194,7 @@ export const Stack = (props: IStackProps): React.ReactElement => {
   );
 };
 
-Stack.displayName = 'Stack';
+Stack.displayName = 'KibaStack';
 Stack.defaultProps = {
   className: '',
   direction: Direction.Vertical,

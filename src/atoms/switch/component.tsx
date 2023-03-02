@@ -11,73 +11,73 @@ import { propertyToCss, themeToCss } from '../../util';
 export const SwitchThemedStyle = (theme: RecursivePartial<ISwitchTheme>): string => `
   ${themeToCss(theme?.normal?.default?.background)};
   ${propertyToCss('width', theme.normal?.default?.backgroundWidth)};
-  & > .SwitchInner {
+  & > .KibaSwitchInner {
     ${themeToCss(theme?.normal?.default?.switch)};
     ${propertyToCss('width', theme?.normal?.default?.switchWidth)};
     ${propertyToCss('height', theme?.normal?.default?.switchHeight)};
   }
   &:hover {
     ${themeToCss(theme?.normal?.hover?.background)};
-    & > .SwitchInner {
+    & > .KibaSwitchInner {
       ${themeToCss(theme?.normal?.hover?.switch)};
     }
   }
   &:focus {
     ${themeToCss(theme?.normal?.focus?.background)};
-    & > .SwitchInner {
+    & > .KibaSwitchInner {
       ${themeToCss(theme?.normal?.focus?.switch)};
     }
   }
   &:active {
     ${themeToCss(theme?.normal?.press?.background)};
-    & > .SwitchInner {
+    & > .KibaSwitchInner {
       ${themeToCss(theme?.normal?.press?.switch)};
     }
   }
   &.disabled {
     ${themeToCss(theme?.disabled?.default?.background)};
-    & > .SwitchInner {
+    & > .KibaSwitchInner {
       ${themeToCss(theme?.disabled?.default?.switch)};
     }
     &:hover {
       ${themeToCss(theme?.disabled?.hover?.background)};
-      & > .SwitchInner {
+      & > .KibaSwitchInner {
         ${themeToCss(theme?.disabled?.hover?.switch)};
       }
     }
     &:focus {
       ${themeToCss(theme?.disabled?.focus?.background)};
-      & > .SwitchInner {
+      & > .KibaSwitchInner {
         ${themeToCss(theme?.disabled?.focus?.switch)};
       }
     }
     &:active {
       ${themeToCss(theme?.disabled?.press?.background)};
-      & > .SwitchInner {
+      & > .KibaSwitchInner {
         ${themeToCss(theme?.disabled?.press?.switch)};
       }
     }
   }
   &[aria-checked="true"] {
     ${themeToCss(theme?.checked?.default?.background)};
-    & > .SwitchInner {
+    & > .KibaSwitchInner {
       ${themeToCss(theme?.checked?.default?.switch)};
     }
     &:hover {
       ${themeToCss(theme?.checked?.hover?.background)};
-      & > .SwitchInner {
+      & > .KibaSwitchInner {
         ${themeToCss(theme?.checked?.hover?.switch)};
       }
     }
     &:focus {
       ${themeToCss(theme?.checked?.focus?.background)};
-      & > .SwitchInner {
+      & > .KibaSwitchInner {
         ${themeToCss(theme?.checked?.focus?.switch)};
       }
     }
     &:active {
       ${themeToCss(theme?.checked?.press?.background)};
-      & > .SwitchInner {
+      & > .KibaSwitchInner {
         ${themeToCss(theme?.checked?.press?.switch)};
       }
     }
@@ -127,12 +127,12 @@ export const Switch = (props: ISwitchProps): React.ReactElement => {
       aria-checked={props.isChecked}
       onClick={onToggled}
     >
-      <StyledSwitchInner className='SwitchInner' />
+      <StyledSwitchInner className='KibaSwitchInner' />
     </StyledSwitch>
   );
 };
 
-Switch.displayName = 'Switch';
+Switch.displayName = 'KibaSwitch';
 Switch.defaultProps = {
   ...defaultComponentProps,
 };

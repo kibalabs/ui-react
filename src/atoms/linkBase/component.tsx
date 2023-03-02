@@ -138,7 +138,7 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
   );
 };
 
-LinkBase.displayName = 'LinkBase';
+LinkBase.displayName = 'KibaLinkBase';
 LinkBase.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,

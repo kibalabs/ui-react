@@ -128,7 +128,7 @@ export const Text = (props: ITextProps): React.ReactElement => {
   );
 };
 
-Text.displayName = 'Text';
+Text.displayName = 'KibaText';
 Text.defaultProps = {
   ...defaultComponentProps,
   isSingleLine: false,

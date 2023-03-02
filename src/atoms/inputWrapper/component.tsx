@@ -165,7 +165,7 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
   );
 };
 
-InputWrapper.displayName = 'InputWrapper';
+InputWrapper.displayName = 'KibaInputWrapper';
 InputWrapper.defaultProps = {
   ...defaultComponentProps,
 };

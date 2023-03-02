@@ -185,7 +185,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
   );
 };
 
-Button.displayName = 'Button';
+Button.displayName = 'KibaButton';
 Button.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,

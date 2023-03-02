@@ -29,23 +29,4 @@ export interface ITheme extends Record<string, ThemeType> {
   pills: ThemeMap<IPillTheme>,
   portals: ThemeMap<IPortalTheme>,
   videos: ThemeMap<IVideoTheme>,
-
-  // Atoms
-  // bulletLists: ThemeMap<IBulletListTheme>,
-  // bulletTexts: ThemeMap<IBulletTextTheme>,
-  // buttons: ThemeMap<IButtonTheme>,
-  // dialogs: ThemeMap<IDialogTheme>,
-  // checkboxes: ThemeMap<ICheckboxTheme>,
-  // linkBases: ThemeMap<ILinkBaseTheme>,
-  // iconButtons: ThemeMap<IIconButtonTheme>,
-  // inputWrappers: ThemeMap<IInputWrapperTheme>,
-  // links: ThemeMap<ILinkTheme>,
-  // listItems: ThemeMap<IListItemTheme>,
-  // prettyTexts: ThemeMap<IPrettyTextTheme>,
-  // switches: ThemeMap<ISwitchTheme>,
-  // webViews: ThemeMap<IWebViewTheme>,
-  // linePagers: ThemeMap<ILinePagerTheme>,
-  // progressCounterItems: ThemeMap<IProgressCounterItemTheme>,
-  // tabBarItems: ThemeMap<ITabBarItemTheme>,
-  // titledCollapsibleBoxes: ThemeMap<ITitledCollapsibleBoxTheme>,
 }

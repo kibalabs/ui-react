@@ -112,7 +112,7 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
   );
 });
 
-Portal.displayName = 'Portal';
+Portal.displayName = 'KibaPortal';
 Portal.defaultProps = {
   ...defaultComponentProps,
 };

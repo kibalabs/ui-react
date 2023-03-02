@@ -156,7 +156,7 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
   );
 };
 
-WebView.displayName = 'WebView';
+WebView.displayName = 'KibaWebView';
 WebView.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,

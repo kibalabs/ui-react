@@ -133,7 +133,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
   );
 };
 
-Image.displayName = 'Image';
+Image.displayName = 'KibaImage';
 Image.defaultProps = {
   ...defaultComponentProps,
 };

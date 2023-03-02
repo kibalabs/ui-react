@@ -99,7 +99,7 @@ export const ListItem = (props: IListItemProps): React.ReactElement => {
   );
 };
 
-ListItem.displayName = 'ListItem';
+ListItem.displayName = 'KibaListItem';
 ListItem.defaultProps = {
   isDisabled: false,
   ...defaultComponentProps,

@@ -117,7 +117,7 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
   );
 });
 
-Box.displayName = 'Box';
+Box.displayName = 'KibaBox';
 Box.defaultProps = {
   ...defaultComponentProps,
   isFullWidth: true,

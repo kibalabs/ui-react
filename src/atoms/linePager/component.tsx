@@ -11,26 +11,26 @@ import { ResponsiveHidingView } from '../../wrappers';
 
 export const LinePagerThemedStyle = (theme: RecursivePartial<ILinePagerTheme>): string => `
   & > .LinePagerItem {
-    ${themeToCss(theme?.normal?.default?.background)};
+    ${themeToCss(theme.normal?.default?.background)};
     &:hover {
-      ${themeToCss(theme?.normal?.hover?.background)};
+      ${themeToCss(theme.normal?.hover?.background)};
     }
     &:active {
-      ${themeToCss(theme?.normal?.press?.background)};
+      ${themeToCss(theme.normal?.press?.background)};
     }
     &:focus {
-      ${themeToCss(theme?.normal?.focus?.background)};
+      ${themeToCss(theme.normal?.focus?.background)};
     }
     &.active {
-      ${themeToCss(theme?.active?.default?.background)};
+      ${themeToCss(theme.active?.default?.background)};
       &:hover {
-        ${themeToCss(theme?.active?.hover?.background)};
+        ${themeToCss(theme.active?.hover?.background)};
       }
       &:active {
-        ${themeToCss(theme?.active?.press?.background)};
+        ${themeToCss(theme.active?.press?.background)};
       }
       &:focus {
-        ${themeToCss(theme?.active?.focus?.background)};
+        ${themeToCss(theme.active?.focus?.background)};
       }
     }
   }
@@ -124,7 +124,7 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
   );
 };
 
-LinePager.displayName = 'LinePager';
+LinePager.displayName = 'KibaLinePager';
 LinePager.defaultProps = {
   ...defaultComponentProps,
 };

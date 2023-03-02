@@ -1,34 +1,38 @@
+import React from 'react';
+
 import { ITheme } from './theme';
-import { BulletListThemedStyle } from '../atoms/bulletList';
-import { BulletTextThemedStyle } from '../atoms/bulletText';
-import { ButtonThemedStyle } from '../atoms/button';
-import { CheckboxThemedStyle } from '../atoms/checkbox';
-import { DialogThemedStyle } from '../atoms/dialog';
-import { IconButtonThemedStyle } from '../atoms/iconButton';
-import { InputWrapperThemedStyle } from '../atoms/inputWrapper';
-import { LinePagerThemedStyle } from '../atoms/linePager';
-import { LinkThemedStyle } from '../atoms/link';
-import { LinkBaseThemedStyle } from '../atoms/linkBase';
-import { ListItemThemedStyle } from '../atoms/listItem';
-import { PrettyTextThemedStyle } from '../atoms/prettyText';
-import { ProgressCounterItemThemedStyle } from '../atoms/progressCounterItem';
-import { SwitchThemedStyle } from '../atoms/switch';
-import { TabBarItemThemedStyle } from '../atoms/tabBarItem';
-import { TitledCollapsibleBoxThemedStyle } from '../atoms/titledCollapsibleBox';
-import { WebViewThemedStyle } from '../atoms/webView';
-import { BoxThemedStyle } from '../particles/box';
-import { DividerThemedStyle } from '../particles/divider';
-import { IconThemedStyle } from '../particles/icon';
-import { ImageThemedStyle } from '../particles/image';
-import { LoadingSpinnerThemedStyle } from '../particles/loadingSpinner';
-import { PillThemedStyle } from '../particles/pill';
-import { PortalThemedStyle } from '../particles/portal';
-import { TextThemedStyle } from '../particles/text';
-import { VideoThemedStyle } from '../particles/video';
+import { BulletList, BulletListThemedStyle } from '../atoms/bulletList';
+import { BulletText, BulletTextThemedStyle } from '../atoms/bulletText';
+import { Button, ButtonThemedStyle } from '../atoms/button';
+import { Checkbox, CheckboxThemedStyle } from '../atoms/checkbox';
+import { CollapsibleBox, CollapsibleBoxThemedStyle } from '../atoms/collapsibleBox';
+import { Dialog, DialogThemedStyle } from '../atoms/dialog';
+import { IconButton, IconButtonThemedStyle } from '../atoms/iconButton';
+import { InputWrapper, InputWrapperThemedStyle } from '../atoms/inputWrapper';
+import { LinePager, LinePagerThemedStyle } from '../atoms/linePager';
+import { Link, LinkThemedStyle } from '../atoms/link';
+import { LinkBase, LinkBaseThemedStyle } from '../atoms/linkBase';
+import { ListItem, ListItemThemedStyle } from '../atoms/listItem';
+import { PrettyText, PrettyTextThemedStyle } from '../atoms/prettyText';
+import { ProgressCounterItem, ProgressCounterItemThemedStyle } from '../atoms/progressCounterItem';
+import { Switch, SwitchThemedStyle } from '../atoms/switch';
+import { TabBarItem, TabBarItemThemedStyle } from '../atoms/tabBarItem';
+import { TitledCollapsibleBox, TitledCollapsibleBoxThemedStyle } from '../atoms/titledCollapsibleBox';
+import { WebView, WebViewThemedStyle } from '../atoms/webView';
+import { IComponentProps } from '../model';
+import { Box, BoxThemedStyle } from '../particles/box';
+import { Divider, DividerThemedStyle } from '../particles/divider';
+import { Icon, IconThemedStyle } from '../particles/icon';
+import { Image, ImageThemedStyle } from '../particles/image';
+import { LoadingSpinner, LoadingSpinnerThemedStyle } from '../particles/loadingSpinner';
+import { Pill, PillThemedStyle } from '../particles/pill';
+import { Portal, PortalThemedStyle } from '../particles/portal';
+import { Text, TextThemedStyle } from '../particles/text';
+import { Video, VideoThemedStyle } from '../particles/video';
 import { ThemeCssFunction, ThemeMap, ThemeType } from '../util/themeUtil';
 
 export interface ComponentDefinition<Theme extends ThemeType> {
-  className: string,
+  component: React.FunctionComponent<IComponentProps<Theme>>,
   themeMap: ThemeMap<Theme>;
   themeCssFunction: ThemeCssFunction<Theme>;
 }
@@ -52,42 +56,47 @@ const buildComponentThemeCssString = <Theme extends ThemeType>(name: string, the
 };
 
 // NOTE(krishan711): this css needs to be processed before rendering so put it in a styled component or similar
+// TODO(krishan711): can't figure out how to get the generics to work well here. apparently it requires existential types but feels like there should be an easy workaround.
+// @ts-ignore
 export const buildThemeCssString = (theme: ITheme, extraComponentDefinitions?: ComponentDefinition[]): string => {
+  // @ts-ignore
   const componentDefinitions: ComponentDefinition[] = [
     // particles
-    { className: 'Box', themeMap: theme.boxes, themeCssFunction: BoxThemedStyle },
-    { className: 'Text', themeMap: theme.texts, themeCssFunction: TextThemedStyle },
-    { className: 'Icon', themeMap: theme.icons, themeCssFunction: IconThemedStyle },
-    { className: 'Image', themeMap: theme.images, themeCssFunction: ImageThemedStyle },
-    { className: 'Divider', themeMap: theme.dividers, themeCssFunction: DividerThemedStyle },
-    { className: 'LoadingSpinner', themeMap: theme.loadingSpinners, themeCssFunction: LoadingSpinnerThemedStyle },
-    { className: 'Pill', themeMap: theme.pills, themeCssFunction: PillThemedStyle },
-    { className: 'Portal', themeMap: theme.portals, themeCssFunction: PortalThemedStyle },
-    { className: 'Video', themeMap: theme.videos, themeCssFunction: VideoThemedStyle },
+    { component: Box, themeMap: theme.boxes, themeCssFunction: BoxThemedStyle },
+    { component: Text, themeMap: theme.texts, themeCssFunction: TextThemedStyle },
+    { component: Icon, themeMap: theme.icons, themeCssFunction: IconThemedStyle },
+    { component: Image, themeMap: theme.images, themeCssFunction: ImageThemedStyle },
+    { component: Divider, themeMap: theme.dividers, themeCssFunction: DividerThemedStyle },
+    { component: LoadingSpinner, themeMap: theme.loadingSpinners, themeCssFunction: LoadingSpinnerThemedStyle },
+    { component: Pill, themeMap: theme.pills, themeCssFunction: PillThemedStyle },
+    { component: Portal, themeMap: theme.portals, themeCssFunction: PortalThemedStyle },
+    { component: Video, themeMap: theme.videos, themeCssFunction: VideoThemedStyle },
     // atoms
-    { className: 'Button', themeMap: theme.buttons, themeCssFunction: ButtonThemedStyle },
-    { className: 'Checkbox', themeMap: theme.checkboxes, themeCssFunction: CheckboxThemedStyle },
-    { className: 'BulletList', themeMap: theme.bulletLists, themeCssFunction: BulletListThemedStyle },
-    { className: 'BulletText', themeMap: theme.bulletTexts, themeCssFunction: BulletTextThemedStyle },
-    { className: 'Dialog', themeMap: theme.dialogs, themeCssFunction: DialogThemedStyle },
-    { className: 'IconButton', themeMap: theme.iconButtons, themeCssFunction: IconButtonThemedStyle },
-    { className: 'InputWrapper', themeMap: theme.inputWrappers, themeCssFunction: InputWrapperThemedStyle },
-    { className: 'LinkBase', themeMap: theme.linkBases, themeCssFunction: LinkBaseThemedStyle },
-    { className: 'Link', themeMap: theme.links, themeCssFunction: LinkThemedStyle },
-    { className: 'ListItem', themeMap: theme.listItems, themeCssFunction: ListItemThemedStyle },
-    { className: 'PrettyText', themeMap: theme.prettyTexts, themeCssFunction: PrettyTextThemedStyle },
-    { className: 'Switch', themeMap: theme.switches, themeCssFunction: SwitchThemedStyle },
-    { className: 'WebView', themeMap: theme.webViews, themeCssFunction: WebViewThemedStyle },
-    { className: 'LinePager', themeMap: theme.linePagers, themeCssFunction: LinePagerThemedStyle },
-    { className: 'ProgressCounterItem', themeMap: theme.progressCounterItems, themeCssFunction: ProgressCounterItemThemedStyle },
-    { className: 'TabBarItem', themeMap: theme.tabBarItems, themeCssFunction: TabBarItemThemedStyle },
-    { className: 'TitledCollapsibleBox', themeMap: theme.titledCollapsibleBoxes, themeCssFunction: TitledCollapsibleBoxThemedStyle },
+    { component: Button, themeMap: theme.buttons, themeCssFunction: ButtonThemedStyle },
+    { component: Checkbox, themeMap: theme.checkboxes, themeCssFunction: CheckboxThemedStyle },
+    { component: BulletList, themeMap: theme.bulletLists, themeCssFunction: BulletListThemedStyle },
+    { component: BulletText, themeMap: theme.bulletTexts, themeCssFunction: BulletTextThemedStyle },
+    { component: CollapsibleBox, themeMap: theme.collapsibleBoxes, themeCssFunction: CollapsibleBoxThemedStyle },
+    { component: Dialog, themeMap: theme.dialogs, themeCssFunction: DialogThemedStyle },
+    { component: IconButton, themeMap: theme.iconButtons, themeCssFunction: IconButtonThemedStyle },
+    { component: InputWrapper, themeMap: theme.inputWrappers, themeCssFunction: InputWrapperThemedStyle },
+    { component: LinkBase, themeMap: theme.linkBases, themeCssFunction: LinkBaseThemedStyle },
+    { component: Link, themeMap: theme.links, themeCssFunction: LinkThemedStyle },
+    { component: ListItem, themeMap: theme.listItems, themeCssFunction: ListItemThemedStyle },
+    { component: PrettyText, themeMap: theme.prettyTexts, themeCssFunction: PrettyTextThemedStyle },
+    { component: Switch, themeMap: theme.switches, themeCssFunction: SwitchThemedStyle },
+    { component: WebView, themeMap: theme.webViews, themeCssFunction: WebViewThemedStyle },
+    { component: LinePager, themeMap: theme.linePagers, themeCssFunction: LinePagerThemedStyle },
+    { component: ProgressCounterItem, themeMap: theme.progressCounterItems, themeCssFunction: ProgressCounterItemThemedStyle },
+    { component: TabBarItem, themeMap: theme.tabBarItems, themeCssFunction: TabBarItemThemedStyle },
+    { component: TitledCollapsibleBox, themeMap: theme.titledCollapsibleBoxes, themeCssFunction: TitledCollapsibleBoxThemedStyle },
     ...(extraComponentDefinitions || []),
   ];
+  // @ts-ignore
   const cssString = componentDefinitions.reduce((accumulator: string, current: ComponentDefinition): string => {
     return `
       ${accumulator}
-      ${buildComponentThemeCssString(current.className, current.themeMap, current.themeCssFunction)}
+      ${buildComponentThemeCssString(current.component.displayName, current.themeMap, current.themeCssFunction)}
     `;
   }, '');
   return cssString;

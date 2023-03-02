@@ -82,7 +82,7 @@ export const Form = (props: IFormProps): React.ReactElement => {
   );
 };
 
-Form.displayName = 'Form';
+Form.displayName = 'KibaForm';
 Form.defaultProps = {
   ...defaultMoleculeProps,
   isLoading: false,

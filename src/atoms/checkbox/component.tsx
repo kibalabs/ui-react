@@ -179,7 +179,7 @@ export const Checkbox = (props: ICheckBoxProps): React.ReactElement => {
   );
 };
 
-Checkbox.displayName = 'Checkbox';
+Checkbox.displayName = 'KibaCheckbox';
 Checkbox.defaultProps = {
   ...defaultComponentProps,
 };

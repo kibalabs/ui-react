@@ -94,7 +94,7 @@ export const Media = (props: IMediaProps): React.ReactElement => {
   );
 };
 
-Media.displayName = 'Media';
+Media.displayName = 'KibaMedia';
 Media.defaultProps = {
   ...defaultComponentProps,
 };

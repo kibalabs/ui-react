@@ -60,7 +60,7 @@ export const Icon = (props: IIconProps): React.ReactElement => {
   );
 };
 
-Icon.displayName = 'Icon';
+Icon.displayName = 'KibaIcon';
 Icon.defaultProps = {
   ...defaultComponentProps,
   shouldAddFill: true,

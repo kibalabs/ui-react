@@ -38,7 +38,7 @@ export const BulletList = (props: IBulletListProps): React.ReactElement => {
   );
 };
 
-BulletList.displayName = 'BulletList';
+BulletList.displayName = 'KibaBulletList';
 BulletList.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,

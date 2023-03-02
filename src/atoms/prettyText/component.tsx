@@ -57,7 +57,7 @@ export const PrettyText = (props: IPrettyTextProps): React.ReactElement => {
   );
 };
 
-PrettyText.displayName = 'PrettyText';
+PrettyText.displayName = 'KibaPrettyText';
 PrettyText.defaultProps = {
   ...defaultComponentProps,
 };

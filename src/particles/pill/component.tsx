@@ -66,7 +66,7 @@ export const Pill = (props: IPillProps): React.ReactElement => {
   );
 };
 
-Pill.displayName = 'Pill';
+Pill.displayName = 'KibaPill';
 Pill.defaultProps = {
   ...defaultComponentProps,
   isFullWidth: false,

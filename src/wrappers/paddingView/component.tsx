@@ -59,7 +59,7 @@ export const PaddingView = (props: IPaddingViewProps): React.ReactElement => {
   );
 };
 
-PaddingView.displayName = 'PaddingView';
+PaddingView.displayName = 'KibaPaddingView';
 PaddingView.defaultProps = {
   ...defaultWrapperProps,
 };

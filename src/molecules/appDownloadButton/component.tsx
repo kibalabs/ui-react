@@ -73,7 +73,7 @@ export const AppDownloadButton = (props: AppDownloadButtonProps): React.ReactEle
   );
 };
 
-AppDownloadButton.displayName = 'AppDownloadButton';
+AppDownloadButton.displayName = 'KibaAppDownloadButton';
 AppDownloadButton.defaultProps = {
   ...defaultMoleculeProps,
   buttonVariant: 'dark',

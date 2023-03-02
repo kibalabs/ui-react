@@ -46,7 +46,7 @@ export const BulletText = (props: IBulletTextProps): React.ReactElement => {
   );
 };
 
-BulletText.displayName = 'BulletText';
+BulletText.displayName = 'KibaBulletText';
 BulletText.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,

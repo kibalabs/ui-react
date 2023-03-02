@@ -103,7 +103,7 @@ export const Link = (props: ILinkProps): React.ReactElement => {
   );
 };
 
-Link.displayName = 'Link';
+Link.displayName = 'KibaLink';
 Link.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,

@@ -133,7 +133,7 @@ As molecules can use atoms, it would not make sense for them to be stateful and 
 For example, the OptionSelect molecule uses an input and shows a list item for each option. To allow theming, the OptionSelectTheme looks like this:
 
 ```ts
-interface  IOptionSelectTheme {
+interface IOptionSelectTheme {
   inputTheme: ISingleLineInputTheme;
   listItemTheme: IListItemTheme;
 }
@@ -148,29 +148,35 @@ TODO(krishan711): add images for the below section Sometimes, the molecule wants
 ```tsx
 <TitledBox
   id={props.id}
-  className={`accordion ${props.className}`}
+  className={getClassName('accordion', props.className)}
   theme={props.theme?.titledBoxTheme}
-  mode={'unpadded'}
+  variant={'unpadded'}
   title={props.title}
-> ... </TitledBox>
+>
+  ...
+</TitledBox>
 ```
 
 This means that by default the molecule will use the unpadded mode for the TitledBox, but if the user provides a theme directly to the Accordion, that theme will be used instead.
 
-### Layouts
+## Layouts
 
 These components are used to lay out other components in specific configurations.
 
 TODO(krishan711): fill this in.
 
-### Wrappers
+## Wrappers
 
 These components are used to augment other components without creating an additional level of heirarchy in the output html.
 
 TODO(krishan711): fill this in.
 
-### Application-level
+## Application-level
 
 These components are used to set up the application.
 
 TODO(krishan711): fill this in.
+
+## Theme Application
+
+Themes are applied to components via normal css. The themes passed into `ThemeProvider` are converted into CSS and applied to the document through the component names (e.g. the `Box` component will have css applied from `.KibaBox`). The variants are created in the same way through css with classNames as well. Although it's far better to pass variants through the variant prop, they can actually be passed in through classNames too.

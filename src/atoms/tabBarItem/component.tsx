@@ -120,7 +120,7 @@ export const TabBarItem = (props: ITabBarItemProps): React.ReactElement => {
   );
 };
 
-TabBarItem.displayName = 'TabBarItem';
+TabBarItem.displayName = 'KibaTabBarItem';
 TabBarItem.defaultProps = {
   ...defaultComponentProps,
 };

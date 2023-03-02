@@ -105,7 +105,7 @@ export const ProgressCounterItem = (props: IProgressCounterItemProps): React.Rea
   );
 };
 
-ProgressCounterItem.displayName = 'ProgressCounterItem';
+ProgressCounterItem.displayName = 'KibaProgressCounterItem';
 ProgressCounterItem.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,

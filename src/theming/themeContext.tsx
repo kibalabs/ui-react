@@ -7,13 +7,14 @@ import { buildThemeCssString, ComponentDefinition } from './cssBuilder';
 import { ITheme } from './theme';
 import { IColorGuide } from '../particles/colors';
 import { IDimensionGuide } from '../particles/dimensions';
+import { ThemeType } from '../util';
 
 
 export const ThemeContext = React.createContext<ITheme | null>(null);
 
 interface IThemeProviderProps extends IMultiAnyChildProps {
   theme: ITheme;
-  extraComponentDefinitions?: ComponentDefinition[];
+  extraComponentDefinitions?: ComponentDefinition<ThemeType>[];
 }
 
 export const ThemeProvider = (props: IThemeProviderProps): React.ReactElement => {

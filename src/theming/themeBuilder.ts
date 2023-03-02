@@ -6,6 +6,7 @@ import { buildBulletListThemes, IBulletListTheme } from '../atoms/bulletList';
 import { buildBulletTextThemes, IBulletTextTheme } from '../atoms/bulletText';
 import { buildButtonThemes, IButtonTheme } from '../atoms/button';
 import { buildCheckboxThemes, ICheckboxTheme } from '../atoms/checkbox';
+import { buildCollapsibleBoxThemes, ICollapsibleBoxTheme } from '../atoms/collapsibleBox';
 import { buildDialogThemes, IDialogTheme } from '../atoms/dialog';
 import { buildIconButtonThemes, IIconButtonTheme } from '../atoms/iconButton';
 import { buildInputWrapperThemes, IInputWrapperTheme } from '../atoms/inputWrapper';
@@ -73,6 +74,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     checkboxes: buildCheckboxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.checkboxes as PartialThemeMap<ICheckboxTheme>),
     bulletLists: buildBulletListThemes(colors, dimensions, inputTheme?.bulletLists as PartialThemeMap<IBulletListTheme>),
     bulletTexts: buildBulletTextThemes(colors, dimensions, textThemes, inputTheme?.bulletTexts as PartialThemeMap<IBulletTextTheme>),
+    collapsibleBoxes: buildCollapsibleBoxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.collapsibleBoxes as PartialThemeMap<ICollapsibleBoxTheme>),
     dialogs: buildDialogThemes(colors, dimensions, boxThemes, inputTheme?.dialogs as PartialThemeMap<IDialogTheme>),
     iconButtons: buildIconButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.iconButtons as PartialThemeMap<IIconButtonTheme>),
     inputWrappers: buildInputWrapperThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.inputWrappers as PartialThemeMap<IInputWrapperTheme>),

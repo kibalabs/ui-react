@@ -127,7 +127,7 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
   );
 };
 
-IconButton.displayName = 'IconButton';
+IconButton.displayName = 'KibaIconButton';
 IconButton.defaultProps = {
   ...defaultComponentProps,
   label: 'Icon Button',

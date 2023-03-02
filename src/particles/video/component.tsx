@@ -132,7 +132,7 @@ export const Video = (props: IVideoProps): React.ReactElement => {
   );
 };
 
-Video.displayName = 'Video';
+Video.displayName = 'KibaVideo';
 Video.defaultProps = {
   ...defaultComponentProps,
   shouldShowControls: true,

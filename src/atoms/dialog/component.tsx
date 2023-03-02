@@ -103,4 +103,4 @@ Dialog.defaultProps = {
   isClosableByEscape: true,
 };
 
-Dialog.displayName = 'Dialog';
+Dialog.displayName = 'KibaDialog';
