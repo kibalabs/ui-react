@@ -54,8 +54,12 @@ publish:
 	@ npm publish
 
 publish-next:
-ifneq ($(COMMIT_COUNT),0)
-	npx kiba-publish --next --next-version $(COMMIT_COUNT)
+ifneq ($(NEXT_VERSION),0)
+ifneq ($(NEXT_TYPE),)
+	npx kiba-publish --next --next-version $(NEXT_VERSION) --next-type $(NEXT_TYPE)
+else
+	npx kiba-publish --next --next-version $(NEXT_VERSION)
+endif
 endif
 
 clean:
