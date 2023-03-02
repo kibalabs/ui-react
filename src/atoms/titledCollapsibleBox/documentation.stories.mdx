@@ -18,7 +18,7 @@ export const Template = (args) => (
 );
 
 <Canvas withToolbar={true} withSource={'none'}>
-  <Story name='Default' args={{title: 'Here is a TitledCollapsibleBox'}}>
+  <Story name='Default' args={{title: 'Here is a TitledCollapsibleBox', onCollapseToggled: () => {}}}>
     {Template.bind({})}
   </Story>
 </Canvas>

@@ -35,7 +35,7 @@ export const HidingView = (props: IHidingViewProps): React.ReactElement => {
   );
 };
 
-HidingView.displayName = 'HidingView';
+HidingView.displayName = 'KibaHidingView';
 HidingView.defaultProps = {
   ...defaultWrapperProps,
 };

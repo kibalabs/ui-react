@@ -9,7 +9,7 @@ export const buildLoadingSpinnerThemes = (colors: IColorGuide, dimensions: IDime
   const defaultLoadingSpinnerTheme = mergeTheme<ILoadingSpinnerTheme>({
     color: '$colors.brandPrimary',
     size: '2rem',
-    width: '0.25em',
+    width: '0.2em',
   }, base?.default);
 
   const lightLoadingSpinnerTheme = mergeThemePartial<ILoadingSpinnerTheme>({

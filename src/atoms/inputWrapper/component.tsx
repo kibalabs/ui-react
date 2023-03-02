@@ -1,12 +1,78 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IInputWrapperTheme } from './theme';
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps } from '../../model';
+import { themeToCss } from '../../util';
 import { HidingView } from '../../wrappers';
+
+export const InputWrapperThemedStyle = (theme: RecursivePartial<IInputWrapperTheme>): string => `
+  ${themeToCss(theme?.normal?.default?.text)};
+  ${themeToCss(theme?.normal?.default?.background)};
+
+  & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
+    ${themeToCss(theme?.normal?.default?.placeholderText)};
+  }
+  &.inputwrapper-message {
+    ${themeToCss(theme?.normal?.default?.messageText)};
+  }
+  &:hover {
+    ${themeToCss(theme?.normal?.hover?.text)};
+    ${themeToCss(theme?.normal?.hover?.background)};
+    & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
+      ${themeToCss(theme?.normal?.hover?.placeholderText)};
+    }
+    &.inputwrapper-message {
+      ${themeToCss(theme?.normal?.hover?.messageText)};
+    }
+  }
+  &.focus, &:focus {
+    ${themeToCss(theme?.normal?.focus?.text)};
+    ${themeToCss(theme?.normal?.focus?.background)};
+    & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
+      ${themeToCss(theme?.normal?.focus?.placeholderText)};
+    }
+    &.inputwrapper-message {
+      ${themeToCss(theme?.normal?.focus?.messageText)};
+    }
+  }
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    ${themeToCss(theme?.disabled?.default?.text)};
+    ${themeToCss(theme?.disabled?.default?.background)};
+    & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
+      ${themeToCss(theme?.disabled?.default?.placeholderText)};
+    }
+    &.inputwrapper-message {
+      ${themeToCss(theme?.disabled?.default?.messageText)};
+    }
+    &:hover {
+      ${themeToCss(theme?.disabled?.hover?.text)};
+      ${themeToCss(theme?.disabled?.hover?.background)};
+      & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
+        ${themeToCss(theme?.disabled?.hover?.placeholderText)};
+      }
+      &.inputwrapper-message {
+        ${themeToCss(theme?.disabled?.hover?.messageText)};
+      }
+    }
+    &.focus, &:focus {
+      ${themeToCss(theme?.disabled?.focus?.text)};
+      ${themeToCss(theme?.disabled?.focus?.background)};
+      & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
+        ${themeToCss(theme?.disabled?.focus?.placeholderText)};
+      }
+      &.inputwrapper-message {
+        ${themeToCss(theme?.disabled?.focus?.messageText)};
+      }
+    }
+  }
+
+`;
 
 const StyledInputWrapper = styled.div`
   display: flex;
@@ -14,7 +80,7 @@ const StyledInputWrapper = styled.div`
 `;
 
 interface IInputWrapperInnerProps {
-  $theme: IInputWrapperTheme;
+  $theme?: RecursivePartial<IInputWrapperTheme>;
 }
 
 const InputWrapperInner = styled.div<IInputWrapperInnerProps>`
@@ -26,65 +92,26 @@ const InputWrapperInner = styled.div<IInputWrapperInnerProps>`
     color: inherit;
     line-height: inherit;
   }
-  ${(props) => themeToCss(props.$theme.normal.default.text)};
-  ${(props) => themeToCss(props.$theme.normal.default.background)};
   width: 100%;
   overflow: hidden;
   transition-duration: 0.3s;
   & * {
     transition-duration: 0.3s;
   }
-
-  & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-    ${(props) => themeToCss(props.$theme.normal.default.placeholderText)};
-  }
-
   &:hover {
     box-shadow: none;
-    ${(props) => themeToCss(props.$theme.normal.hover.text)};
-    ${(props) => themeToCss(props.$theme.normal.hover.background)};
-    & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-      ${(props) => themeToCss(props.$theme.normal.hover.placeholderText)};
-    }
   }
-
-  &.focus, &:focus {
-    ${(props) => themeToCss(props.$theme.normal.focus.text)};
-    ${(props) => themeToCss(props.$theme.normal.focus.background)};
-    & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-      ${(props) => themeToCss(props.$theme.normal.focus.placeholderText)};
-    }
-  }
-
   &.disabled {
     cursor: not-allowed;
     pointer-events: none;
-    ${(props) => themeToCss(props.$theme.disabled.default?.text)};
-    ${(props) => themeToCss(props.$theme.disabled.default?.background)};
-    & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-      ${(props) => themeToCss(props.$theme.disabled.default?.placeholderText)};
-    }
+  }
 
-    &:hover {
-      ${(props) => themeToCss(props.$theme.disabled.hover?.text)};
-      ${(props) => themeToCss(props.$theme.disabled.hover?.background)};
-      & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-        ${(props) => themeToCss(props.$theme.disabled.hover?.placeholderText)};
-      }
-    }
-
-    &.focus, &:focus {
-      ${(props) => themeToCss(props.$theme.disabled.focus?.text)};
-      ${(props) => themeToCss(props.$theme.disabled.focus?.background)};
-      & ::placeholder, & input ::placeholder, & textarea ::placeholder, .wrapped-input:empty::before {
-        ${(props) => themeToCss(props.$theme.disabled.focus?.placeholderText)};
-      }
-    }
+  && {
+    ${(props: IInputWrapperInnerProps): string => (props.$theme ? InputWrapperThemedStyle(props.$theme) : '')};
   }
 `;
 
 const StyledMessage = styled.p`
-  ${(props) => themeToCss(props.theme.normal.default.messageText)};
   /* TODO(krishan711): move this to the theme or as a gutter prop (see checkbox) */
   margin-top: 0.25em;
   margin-bottom: 0.25em;
@@ -103,7 +130,6 @@ export interface IInputWrapperProps extends IComponentProps<IInputWrapperTheme>,
 export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
   // :focus-within is not supported on all browsers so we manually maintain if this particle has a isFocussed child
   const [isFocussed, setIsFocussed] = React.useState(false);
-  const theme = useBuiltTheme('inputWrappers', props.variant, props.theme);
 
   const onClicked = (): void => {
     if (props.onClicked) {
@@ -119,8 +145,8 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
     >
       <InputWrapperInner
         id={props.id && `${props.id}-inner`}
-        className={getClassName(InputWrapperInner.displayName, props.messageText && 'message-showing', isFocussed && 'focus', !props.isEnabled && 'disabled')}
-        $theme={theme}
+        className={getClassName(InputWrapperInner.displayName, props.messageText && 'message-showing', isFocussed && 'focus', !props.isEnabled && 'disabled', ...(props.variant?.split('-') || []))}
+        $theme={props.theme}
         onClick={onClicked}
         onFocus={(): void => setIsFocussed(true)}
         onBlur={(): void => setIsFocussed(false)}
@@ -130,8 +156,7 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
       <HidingView isHidden={!props.messageText}>
         <StyledMessage
           id={props.id && `${props.id}-message`}
-          className={getClassName(StyledMessage.displayName)}
-          theme={theme}
+          className={'inputwrapper-message'}
         >
           {props.messageText}
         </StyledMessage>
@@ -140,7 +165,7 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
   );
 };
 
-InputWrapper.displayName = 'InputWrapper';
+InputWrapper.displayName = 'KibaInputWrapper';
 InputWrapper.defaultProps = {
   ...defaultComponentProps,
 };

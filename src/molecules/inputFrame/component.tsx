@@ -34,7 +34,7 @@ export const InputFrame = (props: IInputFrameProps): React.ReactElement => {
   );
 };
 
-InputFrame.displayName = 'InputFrame';
+InputFrame.displayName = 'KibaInputFrame';
 InputFrame.defaultProps = {
   ...defaultMoleculeProps,
   iEnabled: true,

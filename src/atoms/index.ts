@@ -1,6 +1,7 @@
 export * from './bulletList';
 export * from './bulletText';
 export * from './button';
+export * from './collapsibleBox';
 export * from './dialog';
 export * from './linkBase';
 export * from './prettyText';
@@ -9,7 +10,6 @@ export * from './inputWrapper';
 export * from './link';
 export * from './linePager';
 export * from './listItem';
-export * from './pill';
 export * from './progressCounterItem';
 export * from './tabBarItem';
 export * from './titledCollapsibleBox';

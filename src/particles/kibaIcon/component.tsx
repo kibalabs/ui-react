@@ -96,7 +96,8 @@ export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
   );
 };
 
-KibaIcon.displayName = 'KibaIcon';
+// TODO(krishan711): this is a terrible name lol but it clashes with Icon otherwise
+KibaIcon.displayName = 'KibaKibaIcon';
 KibaIcon.defaultProps = {
   className: '',
 };

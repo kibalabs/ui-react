@@ -8,6 +8,8 @@ import { GlobalCss } from './globalCss';
 import { Head, HeadRootProvider, IHeadRootProviderProps } from './headContext';
 import { resetCss } from './resetCss';
 import { ITheme, ThemeProvider } from '../theming';
+import { ComponentDefinition } from '../theming/cssBuilder';
+import { ThemeType } from '../util';
 import { BackgroundView, IBackgroundConfig } from '../wrappers';
 
 import 'lazysizes';
@@ -37,6 +39,7 @@ export interface IKibaAppProps extends IMultiAnyChildProps, IHeadRootProviderPro
   extraGlobalCss?: string;
   extraCss?: string;
   background?: IBackgroundConfig;
+  extraComponentDefinitions?: ComponentDefinition<ThemeType>[];
 }
 
 export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
@@ -59,7 +62,7 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
   });
 
   return (
-    <ThemeProvider theme={props.theme}>
+    <ThemeProvider theme={props.theme} extraComponentDefinitions={props.extraComponentDefinitions}>
       <GlobalCss
         theme={props.theme}
         resetCss={resetCss}

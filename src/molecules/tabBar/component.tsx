@@ -42,7 +42,7 @@ export interface ITabBarItemInnerProps extends Omit<ITabBarItemProps, 'isSelecte
 }
 
 class TabBarItemInner extends React.Component<ITabBarItemInnerProps> {
-  static displayName = 'TabBar.Item';
+  displayName = 'KibaTabBarItem';
 }
 
 interface ITabBarProps extends IMoleculeProps<ITabBarTheme>, IMultiChildProps<ITabBarItemInnerProps> {
@@ -92,7 +92,7 @@ export const TabBar = (props: ITabBarProps): React.ReactElement => {
     </StyledTabBar>
   );
 };
-TabBar.displayName = 'TabBar';
+TabBar.displayName = 'KibaTabBar';
 TabBar.defaultProps = {
   ...defaultMoleculeProps,
   contentAlignment: Alignment.Fill,

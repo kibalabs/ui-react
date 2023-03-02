@@ -40,7 +40,7 @@ export const ColorSettingView = (props: IColorSettingViewProps): React.ReactElem
   );
 };
 
-ColorSettingView.displayName = 'ColorSettingView';
+ColorSettingView.displayName = 'KibaColorSettingView';
 ColorSettingView.defaultProps = {
   ...defaultWrapperProps,
 };

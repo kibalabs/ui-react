@@ -35,7 +35,7 @@ export const Spacing = (props: ISpacingProps): React.ReactElement => {
   );
 };
 
-Spacing.displayName = 'Spacing';
+Spacing.displayName = 'KibaSpacing';
 Spacing.defaultProps = {
   ...defaultComponentProps,
   direction: MultiDirection.Both,

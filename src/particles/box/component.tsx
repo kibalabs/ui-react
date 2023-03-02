@@ -1,14 +1,19 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IBoxTheme } from './theme';
-import { CssConverter, defaultComponentProps, fieldToResponsiveCss, IComponentProps, IDimensionGuide, ResponsiveField, themeToCss, useBuiltTheme, useDimensions } from '../..';
+import { defaultComponentProps, IComponentProps, IDimensionGuide, themeToCss, useDimensions } from '../..';
+import { fieldToResponsiveCss, getCss, propertyToCss, ResponsiveField } from '../../util';
+
+export const BoxThemedStyle = (theme: RecursivePartial<IBoxTheme>): string => `
+  ${themeToCss(theme)};
+`;
 
 interface IStyledBoxProps {
-  $theme: IBoxTheme;
+  $theme?: RecursivePartial<IBoxTheme>;
   $dimensions: IDimensionGuide;
   $height: ResponsiveField<string>;
   $width: ResponsiveField<string>;
@@ -18,24 +23,12 @@ interface IStyledBoxProps {
   $minWidth: ResponsiveField<string> | null;
   $blockType: string;
   $zIndex?: number;
+  $position?: string;
 }
 
-const getCss = (fieldName: string): CssConverter<string> => {
-  return (value: string): string => `${fieldName}: ${value};`;
-};
-
 const StyledBox = styled.div<IStyledBoxProps>`
-  ${(props: IStyledBoxProps): string => themeToCss(props.$theme)};
   box-sizing: border-box;
-  ${(props: IStyledBoxProps): string => fieldToResponsiveCss(props.$height, props.$dimensions, getCss('height'))};
-  ${(props: IStyledBoxProps): string => fieldToResponsiveCss(props.$width, props.$dimensions, getCss('width'))};
-  ${(props: IStyledBoxProps): string => (props.$maxHeight ? fieldToResponsiveCss(props.$maxHeight, props.$dimensions, getCss('max-height')) : '')};
-  ${(props: IStyledBoxProps): string => (props.$maxWidth ? fieldToResponsiveCss(props.$maxWidth, props.$dimensions, getCss('max-width')) : '')};
-  ${(props: IStyledBoxProps): string => (props.$minHeight ? fieldToResponsiveCss(props.$minHeight, props.$dimensions, getCss('min-height')) : '')};
-  ${(props: IStyledBoxProps): string => (props.$minWidth ? fieldToResponsiveCss(props.$minWidth, props.$dimensions, getCss('min-width')) : '')};
-  display: ${(props: IStyledBoxProps): string => props.$blockType};
   flex-direction: column;
-  z-index: ${(props: IStyledBoxProps): string => (props.$zIndex ? `${props.$zIndex}` : 'auto')};
   &.clipContent {
     overflow: hidden;
   }
@@ -47,6 +40,19 @@ const StyledBox = styled.div<IStyledBoxProps>`
   }
   &.scrollableHorizontally {
     overflow-x: auto;
+  }
+  ${(props: IStyledBoxProps): string => fieldToResponsiveCss(props.$height, props.$dimensions, getCss('height'))};
+  ${(props: IStyledBoxProps): string => fieldToResponsiveCss(props.$width, props.$dimensions, getCss('width'))};
+  ${(props: IStyledBoxProps): string => (props.$maxHeight ? fieldToResponsiveCss(props.$maxHeight, props.$dimensions, getCss('max-height')) : '')};
+  ${(props: IStyledBoxProps): string => (props.$maxWidth ? fieldToResponsiveCss(props.$maxWidth, props.$dimensions, getCss('max-width')) : '')};
+  ${(props: IStyledBoxProps): string => (props.$minHeight ? fieldToResponsiveCss(props.$minHeight, props.$dimensions, getCss('min-height')) : '')};
+  ${(props: IStyledBoxProps): string => (props.$minWidth ? fieldToResponsiveCss(props.$minWidth, props.$dimensions, getCss('min-width')) : '')};
+  ${(props: IStyledBoxProps): string => propertyToCss('display', props.$blockType)};
+  ${(props: IStyledBoxProps): string => propertyToCss('z-index', props.$zIndex)};
+  ${(props: IStyledBoxProps): string => propertyToCss('position', props.$position)};
+
+  && {
+    ${(props: IStyledBoxProps): string => (props.$theme ? BoxThemedStyle(props.$theme) : '')};
   }
 `;
 
@@ -71,10 +77,10 @@ export interface IBoxProps extends IComponentProps<IBoxTheme>, IOptionalSingleAn
   isScrollableHorizontally?: boolean;
   shouldClipContent?: boolean;
   shouldCaptureTouches?: boolean;
+  position?: string;
 }
 
 export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
-  const theme = useBuiltTheme('boxes', props.variant, props.theme);
   const dimensions = useDimensions();
   const height = props.height || (props.isFullHeight ? '100%' : 'auto');
   const width = props.width || (props.isFullWidth ? '100%' : 'auto');
@@ -91,8 +97,8 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
   return (
     <StyledBox
       id={props.id}
-      className={getClassName(Box.displayName, props.className, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally', props.shouldClipContent && 'clipContent', props.shouldCaptureTouches && 'captureTouches')}
-      $theme={theme}
+      className={getClassName(Box.displayName, props.className, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally', props.shouldClipContent && 'clipContent', props.shouldCaptureTouches && 'captureTouches', ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
       $dimensions={dimensions}
       $height={{ base: height, ...props.heightResponsive }}
       $width={{ base: width, ...props.widthResponsive }}
@@ -102,6 +108,7 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
       $minWidth={minWidthResponsive}
       $blockType={blockType}
       $zIndex={props.zIndex}
+      $position={props.position}
       title={props.title}
       ref={ref}
     >
@@ -110,7 +117,7 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
   );
 });
 
-Box.displayName = 'Box';
+Box.displayName = 'KibaBox';
 Box.defaultProps = {
   ...defaultComponentProps,
   isFullWidth: true,

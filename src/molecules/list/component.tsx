@@ -29,7 +29,7 @@ export interface IListItemInnerProps extends Omit<IListItemProps, 'onClicked'> {
 }
 
 class ListItemInner extends React.Component<IListItemInnerProps> {
-  static displayName = 'List.Item';
+  static displayName = 'KibaListItem';
 }
 
 interface IListProps extends IMoleculeProps<IListTheme>, IMultiChildProps<IListItemInnerProps> {
@@ -81,7 +81,7 @@ export const List = (props: IListProps): React.ReactElement => {
   );
 };
 
-List.displayName = 'List';
+List.displayName = 'KibaList';
 List.defaultProps = {
   ...defaultMoleculeProps,
 };

@@ -1,23 +1,28 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { getIsRunningOnBrowser, ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IDialogTheme } from './theme';
 import { defaultComponentProps, IComponentProps } from '../../model';
-import { Box } from '../../particles/box';
-import { useBuiltTheme } from '../../theming';
-import { valueToCss } from '../../util';
+import { Box, BoxThemedStyle } from '../../particles/box';
+import { propertyToCss } from '../../util';
 
-interface IStyledBackdropProps {
-  $backdropColor: string;
+export const DialogThemedStyle = (theme: RecursivePartial<IDialogTheme>): string => `
+  ${propertyToCss('background', theme?.backdropColor)};
+  & > .dialog-inner {
+    ${theme?.background ? BoxThemedStyle(theme?.background) : ''};
+  }
+`;
+
+interface IStyledDialogProps {
+  $theme?: RecursivePartial<IDialogTheme>;
 }
 
-const StyledBackdrop = styled.div<IStyledBackdropProps>`
+const StyledDialog = styled.div<IStyledDialogProps>`
   width: 100%;
   height: 100%;
-  background: ${(props: IStyledBackdropProps): string => valueToCss(props.$backdropColor)};
   position: fixed;
   display: flex;
   justify-content: center;
@@ -28,6 +33,10 @@ const StyledBackdrop = styled.div<IStyledBackdropProps>`
 
   &.closed {
     display: none;
+  }
+
+  && {
+    ${(props: IStyledDialogProps): string => (props.$theme ? DialogThemedStyle(props.$theme) : '')};
   }
 `;
 
@@ -46,7 +55,6 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
   const dialogRef = React.useRef<HTMLDivElement | null>(null);
   const maxWidth = props.maxWidth || '400px';
   const maxHeight = props.maxHeight || '400px';
-  const theme = useBuiltTheme('dialogs', props.variant, props.theme);
   const isRunningOnBrowser = getIsRunningOnBrowser();
 
   const onBackdropClicked = (event: React.SyntheticEvent<HTMLDivElement>) => {
@@ -65,17 +73,17 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
   });
 
   return (
-    <StyledBackdrop
-      className={getClassName(Dialog.displayName, props.className, !props.isOpen && 'closed')}
-      $backdropColor={theme.backdropColor}
+    <StyledDialog
+      className={getClassName(Dialog.displayName, props.className, !props.isOpen && 'closed', ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
       ref={dialogRef}
       onClick={onBackdropClicked}
     >
       <Box
+        className='dialog-inner'
         width='90%'
         maxWidth={maxWidth}
         maxHeight={maxHeight}
-        theme={theme.background}
         shouldClipContent={true}
         shouldCaptureTouches={true}
         isScrollableVertically={props.isScrollableVertically}
@@ -83,7 +91,7 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
       >
         {props.children}
       </Box>
-    </StyledBackdrop>
+    </StyledDialog>
   );
 };
 Dialog.defaultProps = {
@@ -95,4 +103,4 @@ Dialog.defaultProps = {
   isClosableByEscape: true,
 };
 
-Dialog.displayName = 'Dialog';
+Dialog.displayName = 'KibaDialog';

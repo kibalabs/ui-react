@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [MINOR] Added `CollapsibleBox`
 
 ### Changed
 - [MINOR] Fixed `Markdown` to render images at maxWidth=100%
@@ -17,6 +18,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `Grid.Item` to be flex by default
 - [MINOR] Added `shouldSkipRenderingWhenCollapsed` to `TitledCollapsibleBox`
 - [MINOR] Updated `Checkbox` to not render check when not checked
+- [MAJOR] Moved `Pill` to `atoms` folder
+- [MAJOR] Updated `buildTheme` to ignore extra components, they should be added after calling buildTheme
+- [MAJOR] Completely changed how css is rendered - see new documentation for detail
+- [MAJOR] Change all displayName for component `X` to `KibaX`
 
 ### Removed
 

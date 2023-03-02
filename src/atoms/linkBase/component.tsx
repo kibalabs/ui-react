@@ -1,17 +1,56 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { Link as CoreLink, ISingleAnyChildProps, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { ILinkBaseTheme } from './theme';
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps } from '../../model';
+import { themeToCss } from '../../util';
+
+export const LinkBaseThemedStyle = (theme: RecursivePartial<ILinkBaseTheme>): string => `
+  & > .linkbase-focus-fixer {
+    ${themeToCss(theme?.normal?.default?.background)};
+    ${themeToCss(theme?.normal?.default?.linkBase)};
+  }
+  &:hover > .linkbase-focus-fixer {
+    ${themeToCss(theme?.normal?.hover?.background)};
+    ${themeToCss(theme?.normal?.hover?.linkBase)};
+  }
+  &:active > .linkbase-focus-fixer {
+    ${themeToCss(theme?.normal?.press?.background)};
+    ${themeToCss(theme?.normal?.press?.linkBase)};
+  }
+  &:focus > .linkbase-focus-fixer {
+    ${themeToCss(theme?.normal?.focus?.background)};
+    ${themeToCss(theme?.normal?.focus?.linkBase)};
+  }
+  &.disabled {
+    cursor: not-allowed;
+    & > .linkbase-focus-fixer {
+      ${themeToCss(theme?.disabled?.default?.background)};
+      ${themeToCss(theme?.disabled?.default?.linkBase)};
+    }
+    &:hover > .linkbase-focus-fixer {
+      ${themeToCss(theme?.disabled?.hover?.background)};
+      ${themeToCss(theme?.disabled?.hover?.linkBase)};
+    }
+    &:active > .linkbase-focus-fixer {
+      ${themeToCss(theme?.disabled?.press?.background)};
+      ${themeToCss(theme?.disabled?.press?.linkBase)};
+    }
+    &:focus > .linkbase-focus-fixer {
+      ${themeToCss(theme?.disabled?.focus?.background)};
+      ${themeToCss(theme?.disabled?.focus?.linkBase)};
+    }
+  }
+`;
 
 interface IStyledLinkBaseProps {
-  $theme: ILinkBaseTheme;
+  $theme?: RecursivePartial<ILinkBaseTheme>;
 }
 
-const StyledLinkBaseInner = styled.span`
+const StyledLinkBaseFocusFixer = styled.span`
   transition-duration: 0.3s;
   cursor: pointer;
   color: currentColor;
@@ -44,40 +83,12 @@ const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
     height: 100%;
   }
 
-  & > .focus-fixer {
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.default.background)};
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.default.linkBase)};
-  }
-  &:hover > .focus-fixer {
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.hover?.background)};
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.hover?.linkBase)};
-  }
-  &:active > .focus-fixer {
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.press?.background)};
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.press?.linkBase)};
-  }
-  &:focus > .focus-fixer {
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.focus?.background)};
-    ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.normal.focus?.linkBase)};
-  }
   &.disabled {
     cursor: not-allowed;
-    & > .focus-fixer {
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.default?.background)};
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.default?.linkBase)};
-    }
-    &:hover > .focus-fixer {
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.hover?.background)};
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.hover?.linkBase)};
-    }
-    &:active > .focus-fixer {
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.press?.background)};
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.press?.linkBase)};
-    }
-    &:focus > .focus-fixer {
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.focus?.background)};
-      ${(props: IStyledLinkBaseProps): string => themeToCss(props.$theme.disabled.focus?.linkBase)};
-    }
+  }
+
+  && {
+    ${(props: IStyledLinkBaseProps): string => (props.$theme ? LinkBaseThemedStyle(props.$theme) : '')};
   }
 `;
 
@@ -104,15 +115,14 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
     }
   };
 
-  const theme = useBuiltTheme('linkBases', props.variant, props.theme);
   const isTargetWithinApp = props.target && props.target.startsWith('/');
   const targetShouldOpenSameTab = props.targetShouldOpenSameTab || props.target?.startsWith('#') || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
   return (
     // @ts-ignore: as prop doesn't match type required
     <StyledLinkBase
       id={props.id}
-      className={getClassName(LinkBase.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !props.isEnabled && 'disabled')}
-      $theme={theme}
+      className={getClassName(LinkBase.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !props.isEnabled && 'disabled', ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
       onClick={onClicked}
       aria-label={props.label}
       href={props.target}
@@ -121,14 +131,14 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
     >
-      <StyledLinkBaseInner className='focus-fixer' tabIndex={-1}>
+      <StyledLinkBaseFocusFixer className='linkbase-focus-fixer' tabIndex={-1}>
         {props.children}
-      </StyledLinkBaseInner>
+      </StyledLinkBaseFocusFixer>
     </StyledLinkBase>
   );
 };
 
-LinkBase.displayName = 'LinkBase';
+LinkBase.displayName = 'KibaLinkBase';
 LinkBase.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,

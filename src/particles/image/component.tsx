@@ -1,13 +1,18 @@
 import React from 'react';
 
-import { getClassName, updateQueryString } from '@kibalabs/core';
+import { getClassName, RecursivePartial, updateQueryString } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { IImageTheme } from './theme';
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps } from '../../model';
+import { themeToCss } from '../../util';
+
+export const ImageThemedStyle = (theme: RecursivePartial<IImageTheme>): string => `
+  ${themeToCss(theme.background)};
+`;
 
 export interface IStyledImageProps {
-  $theme: IImageTheme;
+  $theme?: RecursivePartial<IImageTheme>;
   $width: string;
   $height: string;
   $maxWidth: string;
@@ -26,33 +31,31 @@ const getImageFit = (fitType: string): string => {
 };
 
 const StyledImage = styled.img<IStyledImageProps>`
-  ${(props: IStyledImageProps): string => themeToCss(props.$theme.background)};
   display: block;
   pointer-events: none;
-  width: ${(props: IStyledImageProps): string => props.$width};
-  height: ${(props: IStyledImageProps): string => props.$height};
-  max-width: ${(props: IStyledImageProps): string => props.$maxWidth};
-  max-height: ${(props: IStyledImageProps): string => props.$maxHeight};
-  object-fit: ${(props: IStyledImageProps): string => getImageFit(props.$fitType)};
-
+  // fade in after lazy load
   .no-js &.lazyload {
     display: none;
   }
-
-  // fade in after lazy load
   &.lazyload, &.lazyloading {
     opacity: 0;
   }
-
   &.lazyloaded {
     display: block;
     opacity: 1;
     transition: opacity 0.15s;
   }
-
   &.centered {
     margin-left: auto;
     margin-right: auto;
+  }
+  width: ${(props: IStyledImageProps): string => props.$width};
+  height: ${(props: IStyledImageProps): string => props.$height};
+  max-width: ${(props: IStyledImageProps): string => props.$maxWidth};
+  max-height: ${(props: IStyledImageProps): string => props.$maxHeight};
+  object-fit: ${(props: IStyledImageProps): string => getImageFit(props.$fitType)};
+  && {
+    ${(props: IStyledImageProps): string => (props.$theme ? ImageThemedStyle(props.$theme) : '')};
   }
 `;
 
@@ -84,7 +87,6 @@ const getResponsiveImageString = (url: string) => {
 };
 
 export const Image = (props: IImageProps): React.ReactElement => {
-  const theme = useBuiltTheme('images', props.variant, props.theme);
   const fitType = props.fitType || 'scale';
   const width = props.width ? props.width : props.isFullWidth ? '100%' : 'auto';
   const height = props.height ? props.height : props.isFullHeight ? '100%' : 'auto';
@@ -94,8 +96,8 @@ export const Image = (props: IImageProps): React.ReactElement => {
     <React.Fragment>
       <StyledImage
         id={props.id}
-        className={getClassName(Image.displayName, props.className, props.isLazyLoadable ? 'lazyload' : 'unlazy', props.isCenteredHorizontally && 'centered')}
-        $theme={theme}
+        className={getClassName(Image.displayName, props.className, props.isLazyLoadable ? 'lazyload' : 'unlazy', props.isCenteredHorizontally && 'centered', ...(props.variant?.split('-') || []))}
+        $theme={props.theme}
         $fitType={fitType}
         $width={width}
         $height={height}
@@ -113,8 +115,8 @@ export const Image = (props: IImageProps): React.ReactElement => {
         <noscript>
           <StyledImage
             id={props.id}
-            className={getClassName(Image.displayName, props.className, 'unlazy', props.isCenteredHorizontally && 'centered')}
-            $theme={theme}
+            className={getClassName(Image.displayName, props.className, 'unlazy', props.isCenteredHorizontally && 'centered', ...(props.variant?.split('-') || []))}
+            $theme={props.theme}
             $fitType={fitType}
             $width={width}
             $height={height}
@@ -131,7 +133,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
   );
 };
 
-Image.displayName = 'Image';
+Image.displayName = 'KibaImage';
 Image.defaultProps = {
   ...defaultComponentProps,
 };

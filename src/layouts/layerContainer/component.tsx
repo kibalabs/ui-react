@@ -66,7 +66,7 @@ export const LayerContainer = (props: ILayerContainerProps): React.ReactElement 
   );
 };
 
-LayerContainer.displayName = 'LayerContainer';
+LayerContainer.displayName = 'KibaLayerContainer';
 LayerContainer.defaultProps = {
   className: '',
 };
@@ -130,4 +130,4 @@ const StyledLayer = styled.div<IStyledLayerProps>`
     pointer-events: none;
   }
 `;
-StyledLayer.displayName = 'LayerContainer.Layer';
+StyledLayer.displayName = 'KibaLayerContainerLayer';

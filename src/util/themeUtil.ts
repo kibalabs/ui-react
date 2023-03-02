@@ -21,11 +21,11 @@ export const valueToCss = (value: string): string => {
   return value;
 };
 
-export const propertyToCss = (name: string, value?: string): string => {
+export const propertyToCss = (name: string, value?: string | number): string => {
   if (!value) {
     return '';
   }
-  return `${name}: ${valueToCss(value)};`;
+  return `${name}: ${valueToCss(String(value))};`;
 };
 
 // NOTE(krishan711): the type param here seems silly but is necessary cos too complex to be calculated itself
@@ -56,9 +56,13 @@ export type ThemeType = {
   [key: string]: ThemeValue;
 };
 
-export interface ThemeMap<Theme extends ThemeType> extends Record<string, RecursivePartial<Theme> | Theme> {
+export type PartialThemeMap<Theme extends ThemeType> = Record<string, RecursivePartial<Theme> | Theme>;
+
+export interface ThemeMap<Theme extends ThemeType> extends PartialThemeMap<Theme> {
   default: Theme;
 }
+
+export type ThemeCssFunction<Theme extends ThemeType> = (theme: Theme | RecursivePartial<Theme>) => string;
 
 export function mergeTheme<Theme extends ThemeType>(baseTheme: Theme, ...partialThemes: (RecursivePartial<Theme> | undefined)[]): Theme {
   return merge(baseTheme, ...partialThemes);

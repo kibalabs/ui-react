@@ -21,6 +21,7 @@ export interface IGridItemProps extends IOptionalSingleAnyChildProps {
 }
 
 class GridItem extends React.Component<IGridItemProps> {
+  static displayName = 'KibaGridItem';
   static defaultProps = {
     className: '',
     isFullHeight: false,
@@ -92,7 +93,7 @@ export const Grid = (props: IGridProps): React.ReactElement => {
   );
 };
 
-Grid.displayName = 'Grid';
+Grid.displayName = 'KibaGrid';
 Grid.defaultProps = {
   className: '',
   isFullHeight: true,

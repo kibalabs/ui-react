@@ -3,39 +3,41 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
-import { TitledCollapsibleBox } from './component';
-import { ITitledCollapsibleBoxTheme } from './theme';
+import { CollapsibleBox } from './component';
+import { ICollapsibleBoxTheme } from './theme';
 import { defaultComponentProps, IComponentProps } from '../../model';
 
-interface IStatefulTitledCollapsibleBoxProps extends IComponentProps<ITitledCollapsibleBoxTheme>, ISingleAnyChildProps {
-  title: string;
+interface IStatefulCollapsibleBoxProps extends IComponentProps<ICollapsibleBoxTheme>, ISingleAnyChildProps {
+  headerView: React.ReactNode;
   isCollapsedInitially?: boolean;
   shouldSkipRenderingWhenCollapsed?: boolean;
+  shouldHideIndicator?: boolean;
 }
 
-export const StatefulTitledCollapsibleBox = (props: IStatefulTitledCollapsibleBoxProps): React.ReactElement => {
+export const StatefulCollapsibleBox = (props: IStatefulCollapsibleBoxProps): React.ReactElement => {
   const [isCollapsed, setIsCollapsed] = React.useState(!!props.isCollapsedInitially);
   const onCollapseToggled = (): void => {
     setIsCollapsed(!isCollapsed);
   };
 
   return (
-    <TitledCollapsibleBox
+    <CollapsibleBox
       id={props.id}
-      className={getClassName(StatefulTitledCollapsibleBox.displayName, props.className)}
+      className={getClassName(StatefulCollapsibleBox.displayName, props.className)}
       theme={props.theme}
       variant={props.variant}
-      title={props.title}
+      headerView={props.headerView}
       isCollapsed={isCollapsed}
       onCollapseToggled={onCollapseToggled}
       shouldSkipRenderingWhenCollapsed={props.shouldSkipRenderingWhenCollapsed}
+      shouldHideIndicator={props.shouldHideIndicator}
     >
       {props.children}
-    </TitledCollapsibleBox>
+    </CollapsibleBox>
   );
 };
 
-StatefulTitledCollapsibleBox.displayName = 'KibaStatefulTitledCollapsibleBox';
-StatefulTitledCollapsibleBox.defaultProps = {
+StatefulCollapsibleBox.displayName = 'KibaStatefulCollapsibleBox';
+StatefulCollapsibleBox.defaultProps = {
   ...defaultComponentProps,
 };

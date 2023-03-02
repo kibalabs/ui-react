@@ -39,7 +39,7 @@ export const ResponsiveHidingView = (props: IResponsiveHidingViewProps): React.R
   );
 };
 
-ResponsiveHidingView.displayName = 'ResponsiveHidingView';
+ResponsiveHidingView.displayName = 'KibaResponsiveHidingView';
 ResponsiveHidingView.defaultProps = {
   ...defaultWrapperProps,
 };

@@ -7,6 +7,7 @@ export * from './kibaIcon';
 export * from './divider';
 export * from './loadingSpinner';
 export * from './media';
+export * from './pill';
 export * from './portal';
 export * from './spacing';
 export * from './text';
