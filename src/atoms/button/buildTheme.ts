@@ -77,6 +77,8 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
     },
   }, base?.secondary);
 
+  const tertiaryButtonTheme = mergeTheme<IButtonTheme>(defaultButtonTheme, base?.tertiary);
+
   const largeButtonTheme = mergeThemePartial<IButtonTheme>({
     normal: {
       default: {
@@ -119,7 +121,7 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
     default: defaultButtonTheme,
     primary: primaryButtonTheme,
     secondary: secondaryButtonTheme,
-    tertiary: defaultButtonTheme,
+    tertiary: tertiaryButtonTheme,
     large: largeButtonTheme,
     small: smallButtonTheme,
     card: cardButtonTheme,
