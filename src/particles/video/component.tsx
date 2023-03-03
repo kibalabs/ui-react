@@ -85,6 +85,7 @@ export const Video = (props: IVideoProps): React.ReactElement => {
   const shouldShowControls = props.shouldShowControls != null ? props.shouldShowControls : true;
   const width = props.width ? props.width : props.isFullWidth ? '100%' : 'auto';
   const height = props.height ? props.height : props.isFullHeight ? '100%' : 'auto';
+  const source = props.source.startsWith('ipfs://') ? props.source.replace('ipfs://', 'https://pablo-images.kibalabs.com/v1/ipfs/') : props.source;
 
   const onEnded = (): void => {
     if (props.onEnded) {
@@ -125,7 +126,7 @@ export const Video = (props: IVideoProps): React.ReactElement => {
       onEnded={onEnded}
       onPlay={onPlayed}
       onPause={onPaused}
-      src={props.source}
+      src={source}
     >
       {props.alternativeText}
     </StyledVideo>

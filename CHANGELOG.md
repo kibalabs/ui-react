@@ -22,6 +22,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MAJOR] Updated `buildTheme` to ignore extra components, they should be added after calling buildTheme
 - [MAJOR] Completely changed how css is rendered - see new documentation for detail
 - [MAJOR] Change all displayName for component `X` to `KibaX`
+- [MINOR] Updated `Image` and `Video` to replace ipfs urls
+- [MINOR] Updated `Media` to use `Image` by default
 
 ### Removed
 
