@@ -13,7 +13,9 @@ export const buildSelectableViewThemes = (colors: IColorGuide, dimensions: IDime
           'border-width': '1em',
           'border-color': 'transparent',
         }),
-        overlay: linkBaseThemes.default.normal.default.background,
+        overlay: mergeTheme<IBoxTheme>(boxThemes.default, boxThemes.transparent, linkBaseThemes.default.normal.default.background, {
+          padding: '0',
+        }),
       },
       hover: {
         overlay: linkBaseThemes.default.normal.hover.background,
@@ -33,13 +35,10 @@ export const buildSelectableViewThemes = (colors: IColorGuide, dimensions: IDime
         },
       },
       hover: {
-        overlay: linkBaseThemes.default.normal.hover.background,
       },
       press: {
-        overlay: linkBaseThemes.default.normal.press.background,
       },
       focus: {
-        overlay: linkBaseThemes.default.normal.focus.background,
       },
     },
   }, base?.default);
