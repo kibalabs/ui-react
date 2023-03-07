@@ -119,7 +119,7 @@ export const SelectableView = (props: ISelectableViewProps): React.ReactElement 
     // @ts-ignore: as prop doesn't match type required
     <StyledSelectableView
       id={props.id}
-      className={getClassName(SelectableView.displayName, props.className)}
+      className={getClassName(SelectableView.displayName, props.className, props.isSelected && 'selected')}
       $theme={theme}
       onClick={onClicked}
     >

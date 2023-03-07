@@ -11,6 +11,7 @@ export * from './linePager';
 export * from './listItem';
 export * from './pill';
 export * from './progressCounterItem';
+export * from './selectableView';
 export * from './tabBarItem';
 export * from './titledCollapsibleBox';
 export * from './switch';
