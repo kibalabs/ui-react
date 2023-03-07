@@ -15,6 +15,7 @@ import { LinkBase, LinkBaseThemedStyle } from '../atoms/linkBase';
 import { ListItem, ListItemThemedStyle } from '../atoms/listItem';
 import { PrettyText, PrettyTextThemedStyle } from '../atoms/prettyText';
 import { ProgressCounterItem, ProgressCounterItemThemedStyle } from '../atoms/progressCounterItem';
+import { SelectableView, SelectableViewThemedStyle } from '../atoms/selectableView';
 import { Switch, SwitchThemedStyle } from '../atoms/switch';
 import { TabBarItem, TabBarItemThemedStyle } from '../atoms/tabBarItem';
 import { TitledCollapsibleBox, TitledCollapsibleBoxThemedStyle } from '../atoms/titledCollapsibleBox';
@@ -90,6 +91,7 @@ export const buildThemeCssString = (theme: ITheme, extraComponentDefinitions?: C
     { component: ProgressCounterItem, themeMap: theme.progressCounterItems, themeCssFunction: ProgressCounterItemThemedStyle },
     { component: TabBarItem, themeMap: theme.tabBarItems, themeCssFunction: TabBarItemThemedStyle },
     { component: TitledCollapsibleBox, themeMap: theme.titledCollapsibleBoxes, themeCssFunction: TitledCollapsibleBoxThemedStyle },
+    { component: SelectableView, themeMap: theme.selectableViews, themeCssFunction: SelectableViewThemedStyle },
     ...(extraComponentDefinitions || []),
   ];
   // @ts-ignore

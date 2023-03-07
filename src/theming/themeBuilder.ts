@@ -16,6 +16,7 @@ import { buildLinkBaseThemes, ILinkBaseTheme } from '../atoms/linkBase';
 import { buildListItemThemes, IListItemTheme } from '../atoms/listItem';
 import { buildPrettyTextThemes, IPrettyTextTheme } from '../atoms/prettyText';
 import { buildProgressCounterItemThemes, IProgressCounterItemTheme } from '../atoms/progressCounterItem';
+import { buildSelectableViewThemes, ISelectableViewTheme } from '../atoms/selectableView';
 import { buildSwitchThemes, ISwitchTheme } from '../atoms/switch';
 import { buildTabBarItemThemes, ITabBarItemTheme } from '../atoms/tabBarItem';
 import { buildTitledCollapsibleBoxThemes, ITitledCollapsibleBoxTheme } from '../atoms/titledCollapsibleBox';
@@ -51,6 +52,9 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const portalThemes = buildPortalThemes(colors, dimensions, boxThemes, inputTheme?.portals);
   const videoThemes = buildVideoThemes(colors, dimensions, inputTheme?.videos);
 
+  // NOTE(krishan711): this seems weird, think of a better approach!
+  const linkBaseThemes = buildLinkBaseThemes(colors, dimensions, boxThemes, inputTheme?.linkBases as PartialThemeMap<ILinkBaseTheme>);
+
   return {
     // Base
     colors,
@@ -78,7 +82,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     dialogs: buildDialogThemes(colors, dimensions, boxThemes, inputTheme?.dialogs as PartialThemeMap<IDialogTheme>),
     iconButtons: buildIconButtonThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.iconButtons as PartialThemeMap<IIconButtonTheme>),
     inputWrappers: buildInputWrapperThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.inputWrappers as PartialThemeMap<IInputWrapperTheme>),
-    linkBases: buildLinkBaseThemes(colors, dimensions, boxThemes, inputTheme?.linkBases as PartialThemeMap<ILinkBaseTheme>),
+    linkBases: linkBaseThemes,
     links: buildLinkThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.links as PartialThemeMap<ILinkTheme>),
     listItems: buildListItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.listItems as PartialThemeMap<IListItemTheme>),
     prettyTexts: buildPrettyTextThemes(colors, dimensions, textThemes, inputTheme?.prettyTexts as PartialThemeMap<IPrettyTextTheme>),
@@ -88,5 +92,6 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     progressCounterItems: buildProgressCounterItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.progressCounterItems as PartialThemeMap<IProgressCounterItemTheme>),
     tabBarItems: buildTabBarItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.tabBarItems as PartialThemeMap<ITabBarItemTheme>),
     titledCollapsibleBoxes: buildTitledCollapsibleBoxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.titledCollapsibleBoxes as PartialThemeMap<ITitledCollapsibleBoxTheme>),
+    selectableViews: buildSelectableViewThemes(colors, dimensions, boxThemes, linkBaseThemes, inputTheme?.selectableViews as PartialThemeMap<ISelectableViewTheme>),
   };
 };
