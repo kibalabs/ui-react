@@ -13,6 +13,7 @@ import { IListItemTheme } from '../atoms/listItem';
 import { IPillTheme } from '../atoms/pill';
 import { IPrettyTextTheme } from '../atoms/prettyText';
 import { IProgressCounterItemTheme } from '../atoms/progressCounterItem';
+import { ISelectableViewTheme } from '../atoms/selectableView';
 import { ITabBarItemTheme } from '../atoms/tabBarItem';
 import { ITitledCollapsibleBoxTheme } from '../atoms/titledCollapsibleBox';
 import { IWebViewTheme } from '../atoms/webView';
@@ -65,4 +66,5 @@ export interface ITheme extends ThemeType {
   progressCounterItems: ThemeMap<IProgressCounterItemTheme>,
   tabBarItems: ThemeMap<ITabBarItemTheme>,
   titledCollapsibleBoxes: ThemeMap<ITitledCollapsibleBoxTheme>,
+  selectableViews: ThemeMap<ISelectableViewTheme>,
 }

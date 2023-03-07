@@ -15,6 +15,7 @@ import { buildListItemThemes } from '../atoms/listItem';
 import { buildPillThemes } from '../atoms/pill';
 import { buildPrettyTextThemes } from '../atoms/prettyText';
 import { buildProgressCounterItemThemes } from '../atoms/progressCounterItem';
+import { buildSelectableViewThemes } from '../atoms/selectableView';
 import { buildTabBarItemThemes } from '../atoms/tabBarItem';
 import { buildTitledCollapsibleBoxThemes } from '../atoms/titledCollapsibleBox';
 import { buildWebViewThemes } from '../atoms/webView';
@@ -63,6 +64,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const progressCounterItemThemes = buildProgressCounterItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.progressCounterItems);
   const tabBarItemThemes = buildTabBarItemThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.tabBarItems);
   const titledCollapsibleBoxThemes = buildTitledCollapsibleBoxThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.titledCollapsibleBoxes);
+  const selectableViewThemes = buildSelectableViewThemes(colors, dimensions, boxThemes, linkBaseThemes, inputTheme?.selectableViews);
 
   return merge<ITheme>({
     // Base
@@ -100,6 +102,7 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     progressCounterItems: progressCounterItemThemes,
     tabBarItems: tabBarItemThemes,
     titledCollapsibleBoxes: titledCollapsibleBoxThemes,
+    selectableViews: selectableViewThemes,
   }, inputTheme, {
     // NOTE(krishan711): this is here so the font replacement doesn't get overridden
     fonts,
