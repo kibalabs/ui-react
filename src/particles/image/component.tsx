@@ -68,6 +68,7 @@ export interface IImageProps extends IComponentProps<IImageTheme> {
   maxHeight?: string;
   isCenteredHorizontally?: boolean;
   isLazyLoadable?: boolean;
+  ipfsPrefix?: string;
 }
 
 const RESPONSIVE_IMAGE_SIZES = [100, 200, 300, 500, 640, 750, 1000, 1080, 1920, 2500];
@@ -88,7 +89,8 @@ export const Image = (props: IImageProps): React.ReactElement => {
   const fitType = props.fitType || 'scale';
   const width = props.width ? props.width : props.isFullWidth ? '100%' : 'auto';
   const height = props.height ? props.height : props.isFullHeight ? '100%' : 'auto';
-  const isSourceResponsive = props.source.includes('d35ci2i0uce4j6.cloudfront.net') || props.source.includes('pablo-images.kibalabs.com');
+  const source = props.source.startsWith('ipfs://') ? props.source.replace('ipfs://', props.ipfsPrefix ?? 'https://ipfs.io/ipfs/') : props.source;
+  const isSourceResponsive = source.includes('d35ci2i0uce4j6.cloudfront.net') || source.includes('pablo-images.kibalabs.com');
 
   return (
     <React.Fragment>
@@ -101,13 +103,14 @@ export const Image = (props: IImageProps): React.ReactElement => {
         $height={height}
         $maxWidth={props.maxWidth || 'none'}
         $maxHeight={props.maxHeight || 'none'}
-        src={props.isLazyLoadable ? undefined : props.source}
-        data-src={props.isLazyLoadable ? props.source : undefined}
+        src={props.isLazyLoadable ? undefined : source}
+        data-src={props.isLazyLoadable ? source : undefined}
         sizes={isSourceResponsive && !props.isLazyLoadable ? 'auto' : undefined}
         data-sizes={isSourceResponsive && props.isLazyLoadable ? 'auto' : undefined}
-        srcSet={isSourceResponsive && !props.isLazyLoadable ? getResponsiveImageString(props.source) : undefined}
-        data-srcset={isSourceResponsive && props.isLazyLoadable ? getResponsiveImageString(props.source) : undefined}
+        srcSet={isSourceResponsive && !props.isLazyLoadable ? getResponsiveImageString(source) : undefined}
+        data-srcset={isSourceResponsive && props.isLazyLoadable ? getResponsiveImageString(source) : undefined}
         alt={props.alternativeText}
+        crossOrigin='anonymous'
       />
       {props.isLazyLoadable && (
         <noscript>
@@ -124,6 +127,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
             sizes={isSourceResponsive ? 'auto' : undefined}
             srcSet={isSourceResponsive ? getResponsiveImageString(props.source) : undefined}
             alt={props.alternativeText}
+            crossOrigin='anonymous'
           />
         </noscript>
       )}

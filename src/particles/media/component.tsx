@@ -41,7 +41,7 @@ export const Media = (props: IMediaProps): React.ReactElement => {
 
   const isImage = React.useMemo((): boolean => {
     if (!props.source) {
-      return false;
+      return true;
     }
     const imageTypes = new Set(['png', 'jpg', 'gif', 'jpeg', 'tif', 'tiff', 'raw']);
     const fileExtension = getExtension(props.source);
@@ -87,10 +87,10 @@ export const Media = (props: IMediaProps): React.ReactElement => {
 
   return (isVideo || mediaType === 'video') ? (
     <Video shouldShowControls={false} shouldLoop={true} shouldMute={true} shouldAutoplay={true} {...props} />
-  ) : mediaType === 'image' ? (
-    <Image {...props as IImageProps} />
-  ) : (
+  ) : mediaType && mediaType !== 'image' ? (
     <WebView url={props.source} />
+  ) : (
+    <Image {...props as IImageProps} />
   );
 };
 
