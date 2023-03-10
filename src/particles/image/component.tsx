@@ -71,6 +71,7 @@ export interface IImageProps extends IComponentProps<IImageTheme> {
   maxHeight?: string;
   isCenteredHorizontally?: boolean;
   isLazyLoadable?: boolean;
+  ipfsPrefix?: string;
 }
 
 const RESPONSIVE_IMAGE_SIZES = [100, 200, 300, 500, 640, 750, 1000, 1080, 1920, 2500];
@@ -90,7 +91,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
   const fitType = props.fitType || 'scale';
   const width = props.width ? props.width : props.isFullWidth ? '100%' : 'auto';
   const height = props.height ? props.height : props.isFullHeight ? '100%' : 'auto';
-  const source = props.source.startsWith('ipfs://') ? props.source.replace('ipfs://', 'https://pablo-images.kibalabs.com/v1/ipfs/') : props.source;
+  const source = props.source.startsWith('ipfs://') ? props.source.replace('ipfs://', props.ipfsPrefix ?? 'https://ipfs.io/ipfs/') : props.source;
   const isSourceResponsive = source.includes('d35ci2i0uce4j6.cloudfront.net') || source.includes('pablo-images.kibalabs.com');
 
   return (
@@ -111,6 +112,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
         srcSet={isSourceResponsive && !props.isLazyLoadable ? getResponsiveImageString(source) : undefined}
         data-srcset={isSourceResponsive && props.isLazyLoadable ? getResponsiveImageString(source) : undefined}
         alt={props.alternativeText}
+        crossOrigin='anonymous'
       />
       {props.isLazyLoadable && (
         <noscript>
@@ -127,6 +129,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
             sizes={isSourceResponsive ? 'auto' : undefined}
             srcSet={isSourceResponsive ? getResponsiveImageString(props.source) : undefined}
             alt={props.alternativeText}
+            crossOrigin='anonymous'
           />
         </noscript>
       )}

@@ -74,6 +74,7 @@ export interface IVideoProps extends IComponentProps<IVideoTheme> {
   shouldMute?: boolean;
   shouldLoop?: boolean;
   isLazyLoadable?: boolean;
+  ipfsPrefix?: string;
   onEnded?: () => void;
   onPlayed?: () => void;
   onPaused?: () => void;
@@ -85,7 +86,7 @@ export const Video = (props: IVideoProps): React.ReactElement => {
   const shouldShowControls = props.shouldShowControls != null ? props.shouldShowControls : true;
   const width = props.width ? props.width : props.isFullWidth ? '100%' : 'auto';
   const height = props.height ? props.height : props.isFullHeight ? '100%' : 'auto';
-  const source = props.source.startsWith('ipfs://') ? props.source.replace('ipfs://', 'https://pablo-images.kibalabs.com/v1/ipfs/') : props.source;
+  const source = props.source.startsWith('ipfs://') ? props.source.replace('ipfs://', props.ipfsPrefix ?? 'https://ipfs.io/ipfs/') : props.source;
 
   const onEnded = (): void => {
     if (props.onEnded) {
@@ -127,6 +128,7 @@ export const Video = (props: IVideoProps): React.ReactElement => {
       onPlay={onPlayed}
       onPause={onPaused}
       src={source}
+      crossOrigin='anonymous'
     >
       {props.alternativeText}
     </StyledVideo>
