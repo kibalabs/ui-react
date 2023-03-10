@@ -144,7 +144,7 @@ export const SelectableView = (props: ISelectableViewProps): React.ReactElement 
   );
 };
 
-SelectableView.displayName = 'SelectableView';
+SelectableView.displayName = 'KibaSelectableView';
 SelectableView.defaultProps = {
   ...defaultComponentProps,
 };
