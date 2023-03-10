@@ -15,7 +15,7 @@ export default config = {
     options: { fastRefresh: true },
   },
   docs: {
-    autodocs: true
+    autodocs: true,
   },
   features: {
     babelModeV7: false,
