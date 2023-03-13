@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { KibaException } from '@kibalabs/core';
+
 import { defaultComponentProps, IComponentProps, ThemeType, WebView } from '../..';
 import { IImageProps, Image } from '../image';
 import { Video } from '../video';
@@ -28,8 +30,28 @@ const getExtension = (url: string): string => {
   return fileExtension;
 };
 
+const getContentType = async (source: string, useGet = false): Promise<string | null> => {
+  return fetch(source, { method: useGet ? 'GET' : 'HEAD', redirect: 'follow' })
+    .then(async (response: Response): Promise<string | null> => {
+      if (response.status >= 400) {
+        const content = await response.text();
+        throw new KibaException(content || 'Failed to fetch', response.status);
+      }
+      const contentType = response.headers.get('Content-Type');
+      if (!contentType) {
+        return Promise.resolve(null);
+      }
+      const contentTypeParts = contentType.split('/');
+      if (contentTypeParts.length === 0) {
+        return Promise.resolve(null);
+      }
+      return Promise.resolve(contentTypeParts[0]);
+    });
+};
+
 export const Media = (props: IMediaProps): React.ReactElement => {
-  const [mediaType, setMediaType] = React.useState<string | null>(null);
+  const [mediaType, setMediaType] = React.useState<string | null | undefined>(undefined);
+
   const isVideo = React.useMemo((): boolean => {
     if (!props.source) {
       return false;
@@ -48,7 +70,7 @@ export const Media = (props: IMediaProps): React.ReactElement => {
     return imageTypes.has(fileExtension);
   }, [props.source]);
 
-  React.useEffect((): void => {
+  const updateContentType = React.useCallback(async (): Promise<void> => {
     if (!props.source) {
       setMediaType(null);
       return;
@@ -62,28 +84,24 @@ export const Media = (props: IMediaProps): React.ReactElement => {
       setMediaType('video');
       return;
     }
-    fetch(props.source, { method: 'HEAD', redirect: 'follow' })
-      .then((response: Response) => {
-        if (response.status >= 400) {
-          throw new Error(`Failed to fetch content type: ${response}`);
-        }
-        const contentType = response.headers.get('Content-Type');
-        if (!contentType) {
-          setMediaType(null);
-          return;
-        }
-        const contentTypeParts = contentType.split('/');
-        if (contentTypeParts.length === 0) {
-          setMediaType(null);
-          return;
-        }
-        setMediaType(contentTypeParts[0]);
-      })
-      .catch((error: Error) => {
-        console.error(error);
+    try {
+      const contentType = await getContentType(props.source);
+      setMediaType(contentType);
+    } catch (error: unknown) {
+      console.error(error);
+      try {
+        const contentType = await getContentType(props.source, true);
+        setMediaType(contentType);
+      } catch (innerError: unknown) {
+        console.error(innerError);
         setMediaType(null);
-      });
+      }
+    }
   }, [props.source, isVideo, isImage]);
+
+  React.useEffect((): void => {
+    updateContentType();
+  }, [updateContentType]);
 
   return (isVideo || mediaType === 'video') ? (
     <Video shouldShowControls={false} shouldLoop={true} shouldMute={true} shouldAutoplay={true} {...props} />
