@@ -122,5 +122,4 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
 OptionSelect.displayName = 'OptionSelect';
 OptionSelect.defaultProps = {
   ...defaultMoleculeProps,
-
 };
