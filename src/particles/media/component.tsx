@@ -1,5 +1,6 @@
-import { KibaException, KibaResponse } from '@kibalabs/core';
 import React from 'react';
+
+import { KibaException } from '@kibalabs/core';
 
 import { defaultComponentProps, IComponentProps, ThemeType, WebView } from '../..';
 import { IImageProps, Image } from '../image';
@@ -29,23 +30,24 @@ const getExtension = (url: string): string => {
   return fileExtension;
 };
 
-const getContentType = (source: string, useGet = false): Promise<string | null> => {
+const getContentType = async (source: string, useGet = false): Promise<string | null> => {
   return fetch(source, { method: useGet ? 'GET' : 'HEAD', redirect: 'follow' })
-    .then((response: Response): string | null => {
+    .then(async (response: Response): Promise<string | null> => {
       if (response.status >= 400) {
-        throw new KibaException(response.message || 'Failed to fetch', response.status);
+        const content = await response.text();
+        throw new KibaException(content || 'Failed to fetch', response.status);
       }
       const contentType = response.headers.get('Content-Type');
       if (!contentType) {
-        return null;
+        return Promise.resolve(null);
       }
       const contentTypeParts = contentType.split('/');
       if (contentTypeParts.length === 0) {
-        return null;
+        return Promise.resolve(null);
       }
-      return contentTypeParts[0];
+      return Promise.resolve(contentTypeParts[0]);
     });
-}
+};
 
 export const Media = (props: IMediaProps): React.ReactElement => {
   const [mediaType, setMediaType] = React.useState<string | null | undefined>(undefined);
@@ -90,12 +92,12 @@ export const Media = (props: IMediaProps): React.ReactElement => {
       try {
         const contentType = await getContentType(props.source, true);
         setMediaType(contentType);
-      } catch (error: unknown) {
-        console.error(error);
+      } catch (innerError: unknown) {
+        console.error(innerError);
         setMediaType(null);
       }
-    };
-  }, [props.source, isVideo, isImage])
+    }
+  }, [props.source, isVideo, isImage]);
 
   React.useEffect((): void => {
     updateContentType();
