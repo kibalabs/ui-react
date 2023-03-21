@@ -92,7 +92,7 @@ const StyledSwitch = styled.button<IStyledSwitchProps>`
   cursor: pointer;
   transition: 300ms;
 
-  && {
+  &&&& {
     ${(props: IStyledSwitchProps): string => (props.$theme ? SwitchThemedStyle(props.$theme) : '')};
   }
 `;

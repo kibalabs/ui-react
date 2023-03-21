@@ -73,7 +73,7 @@ const StyledProgressCounterItem = styled.button<IStyledProgressCounterItemProps>
     cursor: auto;
   }
 
-  && {
+  &&&& {
     ${(props: IStyledProgressCounterItemProps): string => (props.$theme ? ProgressCounterItemThemedStyle(props.$theme) : '')};
   }
 `;

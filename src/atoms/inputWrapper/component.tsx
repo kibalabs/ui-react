@@ -106,7 +106,7 @@ const InputWrapperInner = styled.div<IInputWrapperInnerProps>`
     pointer-events: none;
   }
 
-  && {
+  &&&& {
     ${(props: IInputWrapperInnerProps): string => (props.$theme ? InputWrapperThemedStyle(props.$theme) : '')};
   }
 `;

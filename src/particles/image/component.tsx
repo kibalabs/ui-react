@@ -54,7 +54,7 @@ const StyledImage = styled.img<IStyledImageProps>`
   max-width: ${(props: IStyledImageProps): string => props.$maxWidth};
   max-height: ${(props: IStyledImageProps): string => props.$maxHeight};
   object-fit: ${(props: IStyledImageProps): string => getImageFit(props.$fitType)};
-  && {
+  &&&& {
     ${(props: IStyledImageProps): string => (props.$theme ? ImageThemedStyle(props.$theme) : '')};
   }
 `;

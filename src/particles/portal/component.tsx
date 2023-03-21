@@ -26,7 +26,7 @@ const StyledPortal = styled.div<IStyledPortalProps>`
   z-index: 999;
   top: ${(props: IStyledPortalProps): string => `${props.$positionTop}px`};
   left: ${(props: IStyledPortalProps): string => `${props.$positionLeft}px`};
-  && {
+  &&&& {
     ${(props: IStyledPortalProps): string => (props.$theme ? PortalThemedStyle(props.$theme) : '')};
   }
 `;

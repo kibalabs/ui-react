@@ -99,7 +99,7 @@ const StyledButton = styled.button<IStyledButtonProps>`
   }
   cursor: ${(props: IStyledButtonProps): string => (props.$isLoading ? 'default' : 'pointer')};
 
-  && {
+  &&&& {
     ${(props: IStyledButtonProps): string => (props.$theme ? ButtonThemedStyle(props.$theme) : '')};
   }
 `;

@@ -90,7 +90,7 @@ const StyledText = styled.span<IStyledTextProps>`
   ${(props: IStyledTextProps): string => (props.$shouldBreakOnWords ? 'word-break: break-word' : '')};
   ${(props: IStyledTextProps): string => (props.$shouldBreakAnywhere ? 'word-break: break-all' : '')};
 
-  && {
+  &&&& {
     ${(props: IStyledTextProps): string => (props.$theme ? TextThemedStyle(props.$theme) : '')};
   }
 `;
@@ -111,9 +111,9 @@ export const Text = (props: ITextProps): React.ReactElement => {
   }
 
   const theme = React.useMemo((): RecursivePartial<ITextTheme> => {
-    const currentTheme = props.theme || {} as RecursivePartial<ITextTheme>;
+    const currentTheme = (props.theme || {}) as RecursivePartial<ITextTheme>;
     if (props.alignment) {
-      currentTheme['text-alignment'] = props.alignment;
+      currentTheme['text-align'] = props.alignment;
     }
     return currentTheme;
   }, [props.theme, props.alignment]);

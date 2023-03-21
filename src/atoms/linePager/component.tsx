@@ -45,7 +45,7 @@ const StyledLinePager = styled.div<IStyledLinePagerProps>`
   flex-direction: row;
   width: 100%;
 
-  && {
+  &&&& {
     ${(props: IStyledLinePagerProps): string => (props.$theme ? LinePagerThemedStyle(props.$theme) : '')};
   }
 `;

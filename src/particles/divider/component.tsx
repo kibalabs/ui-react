@@ -37,7 +37,7 @@ const StyledDivider = styled.hr<IStyledDividerProps>`
     height: 100%;
   }
 
-  && {
+  &&&& {
     ${(props: IStyledDividerProps): string => (props.$theme ? DividerThemedStyle(props.$theme) : '')};
   }
 `;

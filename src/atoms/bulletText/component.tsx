@@ -24,7 +24,7 @@ const StyledBulletText = styled.li<IStyledBulletTextProps>`
   &:before {
     display: inline-block;
   }
-  && {
+  &&&& {
     ${(props: IStyledBulletTextProps): string => (props.$theme ? BulletTextThemedStyle(props.$theme) : '')};
   }
 `;

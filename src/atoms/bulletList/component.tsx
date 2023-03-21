@@ -18,7 +18,7 @@ interface IStyledBulletListProps {
 }
 
 const StyledBulletList = styled.ul<IStyledBulletListProps>`
-  && {
+  &&&& {
     ${(props: IStyledBulletListProps): string => (props.$theme ? BulletListThemedStyle(props.$theme) : '')};
   }
 `;

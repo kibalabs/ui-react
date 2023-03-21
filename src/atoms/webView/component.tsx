@@ -27,7 +27,7 @@ const StyledWebView = styled.div<IStyledWebViewProps>`
   position: relative;
   padding-bottom: ${(props: IStyledWebViewProps): string => (props.$aspectRatio ? `calc(${props.$aspectRatio} * 100%)` : 'auto')};
 
-  && {
+  &&&& {
     ${(props: IStyledWebViewProps): string => (props.$theme ? WebViewThemedStyle(props.$theme) : '')};
   }
 `;

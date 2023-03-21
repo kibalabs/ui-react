@@ -30,7 +30,7 @@ const StyledIcon = styled.div<IStyledIconProps>`
   }
   overflow: hidden;
   color: ${(props: IStyledIconProps): string => props.$color || 'currentColor'};
-  && {
+  &&&& {
     ${(props: IStyledIconProps): string => (props.$theme ? IconThemedStyle(props.$theme) : '')};
   }
 `;

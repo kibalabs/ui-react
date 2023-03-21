@@ -87,7 +87,7 @@ const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
     cursor: not-allowed;
   }
 
-  && {
+  &&&& {
     ${(props: IStyledLinkBaseProps): string => (props.$theme ? LinkBaseThemedStyle(props.$theme) : '')};
   }
 `;

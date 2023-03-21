@@ -51,7 +51,7 @@ const StyledBox = styled.div<IStyledBoxProps>`
   ${(props: IStyledBoxProps): string => propertyToCss('z-index', props.$zIndex)};
   ${(props: IStyledBoxProps): string => propertyToCss('position', props.$position)};
 
-  && {
+  &&&& {
     ${(props: IStyledBoxProps): string => (props.$theme ? BoxThemedStyle(props.$theme) : '')};
   }
 `;

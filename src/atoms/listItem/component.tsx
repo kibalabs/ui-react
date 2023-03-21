@@ -67,7 +67,7 @@ const StyledListItem = styled.div<IStyledListItemProps>`
     cursor: auto;
   }
 
-  && {
+  &&&& {
     ${(props: IStyledListItemProps): string => (props.$theme ? ListItemThemedStyle(props.$theme) : '')};
   }
 `;

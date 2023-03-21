@@ -66,7 +66,7 @@ const StyledCollapsibleBox = styled.div<IStyledCollapsibleBoxProps>`
   width: 100%;
   overflow: hidden;
 
-  && {
+  &&&& {
     ${(props: IStyledCollapsibleBoxProps): string => (props.$theme ? CollapsibleBoxThemedStyle(props.$theme) : '')};
   }
 `;

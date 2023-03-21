@@ -28,7 +28,7 @@ const StyledLoadingSpinner = styled.div<IStyledLoadingSpinnerProps>`
     100% { transform: rotate(360deg); }
   }
 
-  && {
+  &&&& {
     ${(props: IStyledLoadingSpinnerProps): string => (props.$theme ? LoadingSpinnerThemedStyle(props.$theme) : '')};
   }
 `;

@@ -112,7 +112,7 @@ const StyledContainer = styled.label<IStyledCheckboxProps>`
     }
   }
 
-  && {
+  &&&& {
     ${(props: IStyledCheckboxProps): string => (props.$theme ? CheckboxThemedStyle(props.$theme) : '')};
   }
 `;

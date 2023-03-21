@@ -82,7 +82,7 @@ const StyledTabBarItem = styled.button<IStyledTabBarItemProps>`
     cursor: auto;
   }
 
-  && {
+  &&&& {
     ${(props: IStyledTabBarItemProps): string => (props.$theme ? TabBarItemThemedStyle(props.$theme) : '')};
   }
 `;

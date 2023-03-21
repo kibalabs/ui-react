@@ -33,7 +33,7 @@ interface IStyledPrettyTextProps {
 const StyledPrettyText = styled.span<IStyledPrettyTextProps>`
   ${(props: IStyledPrettyTextProps): string => propertyToCss('text-align', props.$alignment)};
 
-  && {
+  &&&& {
     ${(props: IStyledPrettyTextProps): string => (props.$theme ? PrettyTextThemedStyle(props.$theme) : '')};
   }
 `;

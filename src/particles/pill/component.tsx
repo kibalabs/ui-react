@@ -29,7 +29,7 @@ const StyledPill = styled.div<IStyledPillProps>`
     width: 100%;
   }
 
-  && {
+  &&&& {
     ${(props: IStyledPillProps): string => (props.$theme ? PillThemedStyle(props.$theme) : '')};
   }
 `;

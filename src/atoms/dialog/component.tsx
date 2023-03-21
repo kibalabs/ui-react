@@ -35,7 +35,7 @@ const StyledDialog = styled.div<IStyledDialogProps>`
     display: none;
   }
 
-  && {
+  &&&& {
     ${(props: IStyledDialogProps): string => (props.$theme ? DialogThemedStyle(props.$theme) : '')};
   }
 `;

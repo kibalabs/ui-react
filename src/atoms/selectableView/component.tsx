@@ -87,7 +87,7 @@ const StyledSelectableView = styled.button<IStyledSelectableViewProps>`
     height: 100%;
   }
 
-  && {
+  &&&& {
     ${(props: IStyledSelectableViewProps): string => (props.$theme ? SelectableViewThemedStyle(props.$theme) : '')};
   }
 `;

@@ -70,7 +70,7 @@ const StyledIconButton = styled.button<IStyledIconButtonProps>`
     cursor: not-allowed;
   }
 
-  && {
+  &&&& {
     ${(props: IStyledIconButtonProps): string => (props.$theme ? IconButtonThemedStyle(props.$theme) : '')};
   }
 `;

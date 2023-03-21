@@ -55,7 +55,7 @@ const StyledLink = styled.a<IStyledLinkProps>`
     cursor: not-allowed;
   }
 
-  && {
+  &&&& {
     ${(props: IStyledLinkProps): string => (props.$theme ? LinkThemedStyle(props.$theme) : '')};
   }
 `;

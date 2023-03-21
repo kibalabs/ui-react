@@ -53,7 +53,7 @@ const StyledVideo = styled.video<IStyledVideoProps>`
   max-width: ${(props: IStyledVideoProps): string => props.$maxWidth};
   max-height: ${(props: IStyledVideoProps): string => props.$maxHeight};
   object-fit: ${(props: IStyledVideoProps): string => getImageFit(props.$fitType)};
-  && {
+  &&&& {
     ${(props: IStyledVideoProps): string => (props.$theme ? VideoThemedStyle(props.$theme) : '')};
   }
 `;
