@@ -78,6 +78,8 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
     },
   }, base?.secondary);
 
+  const tertiaryIconButtonTheme = mergeTheme<IIconButtonTheme>(defaultIconButtonTheme, base?.tertiary);
+
   const smallIconButtonTheme = mergeThemePartial<IIconButtonTheme>({
     normal: {
       default: {
@@ -103,7 +105,7 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
     default: defaultIconButtonTheme,
     primary: primaryIconButtonTheme,
     secondary: secondaryIconButtonTheme,
-    tertiary: defaultIconButtonTheme,
+    tertiary: tertiaryIconButtonTheme,
     small: smallIconButtonTheme,
     passive: passiveIconButtonTheme,
   };

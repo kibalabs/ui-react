@@ -67,6 +67,8 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
     },
   }, base?.secondary);
 
+  const tertiaryLinePagerTheme = mergeTheme<ILinePagerTheme>(defaultLinePagerTheme, base?.tertiary);
+
   const largeLinePagerTheme = mergeThemePartial<ILinePagerTheme>({
     normal: {
       default: {
@@ -103,7 +105,7 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
     default: defaultLinePagerTheme,
     primary: primaryLinePagerTheme,
     secondary: secondaryLinePagerTheme,
-    tertiary: defaultLinePagerTheme,
+    tertiary: tertiaryLinePagerTheme,
     large: largeLinePagerTheme,
     small: smallLinePagerTheme,
     card: cardLinePagerTheme,
