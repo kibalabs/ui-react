@@ -66,7 +66,6 @@ export const getTextTag = (variant?: string): TextTag => {
 
 interface IStyledTextProps {
   $theme?: RecursivePartial<ITextTheme>;
-  $alignment?: TextAlignment;
   $lineLimit?: number;
   $shouldBreakOnWords?: boolean;
   $shouldBreakAnywhere?: boolean;
@@ -88,7 +87,6 @@ const StyledText = styled.span<IStyledTextProps>`
     overflow: hidden;
   }
 
-  ${(props: IStyledTextProps): string => (props.$alignment ? `text-align: ${props.$alignment}` : '')};
   ${(props: IStyledTextProps): string => (props.$shouldBreakOnWords ? 'word-break: break-word' : '')};
   ${(props: IStyledTextProps): string => (props.$shouldBreakAnywhere ? 'word-break: break-all' : '')};
 
@@ -112,12 +110,19 @@ export const Text = (props: ITextProps): React.ReactElement => {
     lineLimit = undefined;
   }
 
+  const theme = React.useMemo((): RecursivePartial<ITextTheme> => {
+    const currentTheme = props.theme || {} as RecursivePartial<ITextTheme>;
+    if (props.alignment) {
+      currentTheme['text-alignment'] = props.alignment;
+    }
+    return currentTheme;
+  }, [props.theme, props.alignment]);
+
   return (
     <StyledText
       id={props.id}
       className={getClassName(Text.displayName, props.className, lineLimit && lineLimit === 1 && 'singleLine', lineLimit && lineLimit >= 2 && 'fixedLines', ...(props.variant?.split('-') || []))}
-      $theme={props.theme}
-      $alignment={props.alignment}
+      $theme={theme}
       $lineLimit={lineLimit}
       $shouldBreakOnWords={props.shouldBreakOnWords === true || props.shouldBreakOnWords === undefined}
       $shouldBreakAnywhere={props.shouldBreakAnywhere}
