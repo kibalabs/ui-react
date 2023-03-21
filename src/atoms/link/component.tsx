@@ -9,30 +9,30 @@ import { defaultComponentProps, IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const LinkThemedStyle = (theme: RecursivePartial<ILinkTheme>): string => `
-  & > .link-focus-fixer {
+  & > .KibaLinkFocusFixer {
     ${themeToCss(theme?.normal?.default?.background)};
     ${themeToCss(theme?.normal?.default?.text)};
   }
-  &:hover > .link-focus-fixer {
+  &:hover > .KibaLinkFocusFixer {
     ${themeToCss(theme?.normal?.hover?.background)};
     ${themeToCss(theme?.normal?.hover?.text)};
   }
   &.disabled {
-    & > .link-focus-fixer {
+    & > .KibaLinkFocusFixer {
       ${themeToCss(theme?.disabled?.default?.background)};
       ${themeToCss(theme?.disabled?.default?.text)};
     }
-    &:hover > .link-focus-fixer {
+    &:hover > .KibaLinkFocusFixer {
       ${themeToCss(theme?.disabled?.hover?.background)};
       ${themeToCss(theme?.disabled?.hover?.text)};
     }
   }
   &:visited {
-    & > .link-focus-fixer {
+    & > .KibaLinkFocusFixer {
       ${themeToCss(theme?.visited?.default?.background)};
       ${themeToCss(theme?.visited?.default?.text)};
     }
-    &:hover > .link-focus-fixer {
+    &:hover > .KibaLinkFocusFixer {
       ${themeToCss(theme?.visited?.hover?.background)};
       ${themeToCss(theme?.visited?.hover?.text)};
     }
@@ -96,7 +96,7 @@ export const Link = (props: ILinkProps): React.ReactElement => {
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       as={ props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
     >
-      <StyledLinkFocusFixer className='link-focus-fixer' tabIndex={-1}>
+      <StyledLinkFocusFixer className='KibaLinkFocusFixer' tabIndex={-1}>
         {props.text}
       </StyledLinkFocusFixer>
     </StyledLink>

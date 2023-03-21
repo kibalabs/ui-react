@@ -10,41 +10,41 @@ import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particle
 import { CssConverter, themeToCss } from '../../util';
 
 export const ButtonThemedStyle = (theme: RecursivePartial<IButtonTheme>): string => `
-  & > .button-focus-fixer {
+  & > .KibaButtonFocusFixer {
     ${themeToCss(theme.normal?.default?.text)};
     ${themeToCss(theme.normal?.default?.background)};
   }
   /* Since it can be rendered as an <a>, unset everything for visited */
-  &:visited > .button-focus-fixer {
+  &:visited > .KibaButtonFocusFixer {
     ${themeToCss(theme.normal?.default?.text)};
     ${themeToCss(theme.normal?.default?.background)};
   }
-  &:hover > .button-focus-fixer {
+  &:hover > .KibaButtonFocusFixer {
     ${themeToCss(theme.normal?.hover?.text)};
     ${themeToCss(theme.normal?.hover?.background)};
   }
-  &:active > .button-focus-fixer {
+  &:active > .KibaButtonFocusFixer {
     ${themeToCss(theme.normal?.press?.text)};
     ${themeToCss(theme.normal?.press?.background)};
   }
-  &:focus > .button-focus-fixer {
+  &:focus > .KibaButtonFocusFixer {
     ${themeToCss(theme.normal?.focus?.text)};
     ${themeToCss(theme.normal?.focus?.background)};
   }
   &.disabled {
-    & > .button-focus-fixer {
+    & > .KibaButtonFocusFixer {
       ${themeToCss(theme.disabled?.default?.text)};
       ${themeToCss(theme.disabled?.default?.background)};
     }
-    &:hover > .button-focus-fixer {
+    &:hover > .KibaButtonFocusFixer {
       ${themeToCss(theme.disabled?.hover?.text)};
       ${themeToCss(theme.disabled?.hover?.background)};
     }
-    &:active > .button-focus-fixer {
+    &:active > .KibaButtonFocusFixer {
       ${themeToCss(theme.disabled?.press?.text)};
       ${themeToCss(theme.disabled?.press?.background)};
     }
-    &:focus > .button-focus-fixer {
+    &:focus > .KibaButtonFocusFixer {
       ${themeToCss(theme.disabled?.focus?.text)};
       ${themeToCss(theme.disabled?.focus?.background)};
     }
@@ -158,7 +158,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
       type={props.buttonType || 'button'}
     >
-      <StyledButtonFocusFixer className='button-focus-fixer' tabIndex={-1} $contentAlignment={props.contentAlignment}>
+      <StyledButtonFocusFixer className='KibaButtonFocusFixer' tabIndex={-1} $contentAlignment={props.contentAlignment}>
         { !props.isLoading && props.iconLeft && (
           <React.Fragment>
             {props.iconLeft}

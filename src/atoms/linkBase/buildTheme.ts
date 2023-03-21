@@ -44,6 +44,7 @@ export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionG
     normal: {
       default: {
         background: mergeThemePartial(boxThemes.card, boxThemes.focusable, {
+          margin: '0',
         }),
       },
     },

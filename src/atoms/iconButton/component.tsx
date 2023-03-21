@@ -10,37 +10,37 @@ import { IIconProps } from '../../particles/icon';
 import { themeToCss } from '../../util';
 
 export const IconButtonThemedStyle = (theme: RecursivePartial<IIconButtonTheme>): string => `
-  & > .iconbutton-focus-fixer {
+  & > .KibaIconButtonFocusFixer {
     ${themeToCss(theme?.normal?.default?.text)};
     ${themeToCss(theme?.normal?.default?.background)};
   }
-  &:hover > .iconbutton-focus-fixer  {
+  &:hover > .KibaIconButtonFocusFixer {
     ${themeToCss(theme?.normal?.hover?.text)};
     ${themeToCss(theme?.normal?.hover?.background)};
   }
-  &:active > .iconbutton-focus-fixer  {
+  &:active > .KibaIconButtonFocusFixer {
     ${themeToCss(theme?.normal?.press?.text)};
     ${themeToCss(theme?.normal?.press?.background)};
   }
-  &:focus > .iconbutton-focus-fixer  {
+  &:focus > .KibaIconButtonFocusFixer {
     ${themeToCss(theme?.normal?.focus?.text)};
     ${themeToCss(theme?.normal?.focus?.background)};
   }
   &.disabled {
     cursor: not-allowed;
-    & > .iconbutton-focus-fixer {
+    & > .KibaIconButtonFocusFixer {
       ${themeToCss(theme?.disabled?.default?.text)};
       ${themeToCss(theme?.disabled?.default?.background)};
     }
-    &:hover > .iconbutton-focus-fixer  {
+    &:hover > .KibaIconButtonFocusFixer {
       ${themeToCss(theme?.disabled?.hover?.text)};
       ${themeToCss(theme?.disabled?.hover?.background)};
     }
-    &:active > .iconbutton-focus-fixer  {
+    &:active > .KibaIconButtonFocusFixer {
       ${themeToCss(theme?.disabled?.press?.text)};
       ${themeToCss(theme?.disabled?.press?.background)};
     }
-    &:focus > .iconbutton-focus-fixer  {
+    &:focus > .KibaIconButtonFocusFixer {
       ${themeToCss(theme?.disabled?.focus?.text)};
       ${themeToCss(theme?.disabled?.focus?.background)};
     }
@@ -120,8 +120,8 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
       type={props.buttonType || 'button'}
     >
-      <StyledIconButtonFocusFixer className='iconbutton-focus-fixer' tabIndex={-1}>
-        {props.icon}
+      <StyledIconButtonFocusFixer className='KibaIconButtonFocusFixer' tabIndex={-1}>
+       {props.icon}
       </StyledIconButtonFocusFixer>
     </StyledIconButton>
   );

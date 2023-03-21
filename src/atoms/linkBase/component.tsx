@@ -9,37 +9,37 @@ import { defaultComponentProps, IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const LinkBaseThemedStyle = (theme: RecursivePartial<ILinkBaseTheme>): string => `
-  & > .linkbase-focus-fixer {
+  & > .KibaLinkBaseFocusFixer {
     ${themeToCss(theme?.normal?.default?.background)};
     ${themeToCss(theme?.normal?.default?.linkBase)};
   }
-  &:hover > .linkbase-focus-fixer {
+  &:hover > .KibaLinkBaseFocusFixer {
     ${themeToCss(theme?.normal?.hover?.background)};
     ${themeToCss(theme?.normal?.hover?.linkBase)};
   }
-  &:active > .linkbase-focus-fixer {
+  &:active > .KibaLinkBaseFocusFixer {
     ${themeToCss(theme?.normal?.press?.background)};
     ${themeToCss(theme?.normal?.press?.linkBase)};
   }
-  &:focus > .linkbase-focus-fixer {
+  &:focus > .KibaLinkBaseFocusFixer {
     ${themeToCss(theme?.normal?.focus?.background)};
     ${themeToCss(theme?.normal?.focus?.linkBase)};
   }
   &.disabled {
     cursor: not-allowed;
-    & > .linkbase-focus-fixer {
+    & > .KibaLinkBaseFocusFixer {
       ${themeToCss(theme?.disabled?.default?.background)};
       ${themeToCss(theme?.disabled?.default?.linkBase)};
     }
-    &:hover > .linkbase-focus-fixer {
+    &:hover > .KibaLinkBaseFocusFixer {
       ${themeToCss(theme?.disabled?.hover?.background)};
       ${themeToCss(theme?.disabled?.hover?.linkBase)};
     }
-    &:active > .linkbase-focus-fixer {
+    &:active > .KibaLinkBaseFocusFixer {
       ${themeToCss(theme?.disabled?.press?.background)};
       ${themeToCss(theme?.disabled?.press?.linkBase)};
     }
-    &:focus > .linkbase-focus-fixer {
+    &:focus > .KibaLinkBaseFocusFixer {
       ${themeToCss(theme?.disabled?.focus?.background)};
       ${themeToCss(theme?.disabled?.focus?.linkBase)};
     }
@@ -74,15 +74,12 @@ const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
   cursor: pointer;
   width: fit-content;
   transition-duration: 0.3s;
-
   &.fullWidth {
     width: 100%;
   }
-
   &.fullHeight {
     height: 100%;
   }
-
   &.disabled {
     cursor: not-allowed;
   }
@@ -131,7 +128,7 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
     >
-      <StyledLinkBaseFocusFixer className='linkbase-focus-fixer' tabIndex={-1}>
+      <StyledLinkBaseFocusFixer className='KibaLinkBaseFocusFixer' tabIndex={-1}>
         {props.children}
       </StyledLinkBaseFocusFixer>
     </StyledLinkBase>
