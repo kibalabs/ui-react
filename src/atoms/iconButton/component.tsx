@@ -121,7 +121,7 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
       type={props.buttonType || 'button'}
     >
       <StyledIconButtonFocusFixer className='KibaIconButtonFocusFixer' tabIndex={-1}>
-       {props.icon}
+        {props.icon}
       </StyledIconButtonFocusFixer>
     </StyledIconButton>
   );
