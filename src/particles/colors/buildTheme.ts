@@ -48,11 +48,11 @@ export const buildAlternateColors = (colors: IColorGuide, base?: RecursivePartia
   const textOnBrand = inverseBase?.textOnBrand || getLuminance(brandPrimary) > 0.5 ? '#222222' : '#eeeeee';
   output.inverse = expandColors({
     ...colors,
-    ...base?.inverse,
     brandPrimary,
     background,
     text,
     textOnBrand,
+    ...base?.inverse,
   });
 
 
