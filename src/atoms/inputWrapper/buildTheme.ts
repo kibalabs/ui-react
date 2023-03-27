@@ -1,11 +1,12 @@
+
 import { RecursivePartial } from '@kibalabs/core';
 
 import { IInputWrapperTheme } from './theme';
 import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IInputWrapperTheme>>): ThemeMap<IInputWrapperTheme> => {
-  const defaultInputWrapperTheme = mergeTheme<IInputWrapperTheme>({
+export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IInputWrapperTheme>): ThemeMap<IInputWrapperTheme> => {
+  const defaultInputWrapperTheme: IInputWrapperTheme = {
     normal: {
       default: {
         text: textThemes.default,
@@ -54,9 +55,9 @@ export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimens
         },
       },
     },
-  }, base?.default);
+  };
 
-  const errorInputWrapperTheme = mergeThemePartial<IInputWrapperTheme>({
+  const errorInputWrapperTheme: RecursivePartial<IInputWrapperTheme> = {
     normal: {
       default: {
         messageText: {
@@ -78,9 +79,9 @@ export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimens
         },
       },
     },
-  });
+  };
 
-  const successInputWrapperTheme = mergeThemePartial<IInputWrapperTheme>({
+  const successInputWrapperTheme: RecursivePartial<IInputWrapperTheme> = {
     normal: {
       default: {
         messageText: {
@@ -102,12 +103,11 @@ export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimens
         },
       },
     },
-  });
+  };
 
-  return {
-    ...(base || {}),
+  return mergeThemeMap<IInputWrapperTheme>({
     default: defaultInputWrapperTheme,
     error: errorInputWrapperTheme,
     success: successInputWrapperTheme,
-  };
+  }, (base || {}));
 };

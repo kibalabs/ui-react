@@ -1,28 +1,27 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { IImageTheme } from './theme';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 import { IBoxTheme } from '../box';
 import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
 
-export const buildImageThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IImageTheme>>): ThemeMap<IImageTheme> => {
-  const defaultImageTheme = mergeTheme<IImageTheme>({
+export const buildImageThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IImageTheme>): ThemeMap<IImageTheme> => {
+  const defaultImageTheme: IImageTheme = {
     background: boxThemes.default,
-  }, base?.default);
+  };
 
-  const circularImageTheme = mergeThemePartial<IImageTheme>({
+  const circularImageTheme: RecursivePartial<IImageTheme> = {
     background: {
       'border-radius': '50%',
     },
-  }, base?.circular);
+  };
 
-  const profileImageTheme = mergeThemePartial<IImageTheme>(circularImageTheme, base?.profile);
+  const profileImageTheme: RecursivePartial<IImageTheme> = circularImageTheme;
 
-  return {
-    ...(base || {}),
+  return mergeThemeMap<IImageTheme>({
     default: defaultImageTheme,
     profile: profileImageTheme,
     circular: circularImageTheme,
-  };
+  }, (base || {}));
 };

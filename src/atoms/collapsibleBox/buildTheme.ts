@@ -1,11 +1,12 @@
+
 import { RecursivePartial } from '@kibalabs/core';
 
 import { ICollapsibleBoxTheme } from './theme';
 import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildCollapsibleBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ICollapsibleBoxTheme>>): ThemeMap<ICollapsibleBoxTheme> => {
-  const defaultCollapsibleBoxTheme = mergeTheme<ICollapsibleBoxTheme>({
+export const buildCollapsibleBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<ICollapsibleBoxTheme>): ThemeMap<ICollapsibleBoxTheme> => {
+  const defaultCollapsibleBoxTheme: ICollapsibleBoxTheme = {
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
@@ -23,7 +24,7 @@ export const buildCollapsibleBoxThemes = (colors: IColorGuide, dimensions: IDime
       },
       hover: {
         background: {
-          'background-color': colors.neutral,
+          'background-color': '$colors.neutral',
         },
       },
       press: {
@@ -47,9 +48,9 @@ export const buildCollapsibleBoxThemes = (colors: IColorGuide, dimensions: IDime
     },
     collapsed: {
     },
-  }, base?.default);
+  };
 
-  const unpaddedHeaderCollapsibleBoxTheme = mergeThemePartial<ICollapsibleBoxTheme>({
+  const unpaddedHeaderCollapsibleBoxTheme: RecursivePartial<ICollapsibleBoxTheme> = {
     normal: {
       default: {
         headerBackground: {
@@ -57,11 +58,10 @@ export const buildCollapsibleBoxThemes = (colors: IColorGuide, dimensions: IDime
         },
       },
     },
-  });
+  };
 
-  return {
-    ...(base || {}),
+  return mergeThemeMap<ICollapsibleBoxTheme>({
     default: defaultCollapsibleBoxTheme,
     unpaddedHeader: unpaddedHeaderCollapsibleBoxTheme,
-  };
+  }, (base || {}));
 };

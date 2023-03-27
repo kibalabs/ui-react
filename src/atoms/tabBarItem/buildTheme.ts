@@ -1,11 +1,10 @@
-import { RecursivePartial } from '@kibalabs/core';
 
 import { ITabBarItemTheme } from './theme';
 import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
-import { mergeTheme, ThemeMap } from '../../util';
+import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildTabBarItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ITabBarItemTheme>>): ThemeMap<ITabBarItemTheme> => {
-  const defaultTabBarItemTheme = mergeTheme<ITabBarItemTheme>({
+export const buildTabBarItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<ITabBarItemTheme>): ThemeMap<ITabBarItemTheme> => {
+  const defaultTabBarItemTheme: ITabBarItemTheme = {
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
@@ -50,10 +49,9 @@ export const buildTabBarItemThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.default);
-
-  return {
-    ...(base || {}),
-    default: defaultTabBarItemTheme,
   };
+
+  return mergeThemeMap<ITabBarItemTheme>({
+    default: defaultTabBarItemTheme,
+  }, (base || {}));
 };

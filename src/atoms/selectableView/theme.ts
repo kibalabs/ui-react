@@ -3,6 +3,7 @@ import { RecursivePartial } from '@kibalabs/core';
 import { IBoxTheme } from '../../particles';
 import { ThemeType } from '../../util';
 
+
 export interface ISelectableViewThemeBase extends ThemeType {
   background: IBoxTheme;
   overlay: IBoxTheme;

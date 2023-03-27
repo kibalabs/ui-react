@@ -1,14 +1,14 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { ITextTheme } from './theme';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
 
-export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: RecursivePartial<Record<string, ITextTheme>>): ThemeMap<ITextTheme> => {
-  const textTheme = mergeTheme<ITextTheme>({
+export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: PartialThemeMap<ITextTheme>): ThemeMap<ITextTheme> => {
+  const textTheme: ITextTheme = {
     'font-size': dimensions.fontSize,
-    'font-family': '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Asans-serif',
+    'font-family': '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
     'font-weight': 'normal',
     color: '$colors.text',
     'line-height': '1.5em',
@@ -17,9 +17,9 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     'text-align': 'inherit',
     'text-shadow': 'inherit',
     'text-transform': 'inherit',
-  }, base?.default);
+  };
 
-  const inheritTextTheme = mergeTheme<ITextTheme>({
+  const inheritTextTheme: ITextTheme = {
     'font-size': 'inherit',
     'font-family': 'inherit',
     'font-weight': 'inherit',
@@ -30,149 +30,148 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     'text-align': 'inherit',
     'text-shadow': 'inherit',
     'text-transform': 'inherit',
-  }, base?.inherit);
+  };
 
-  const inlineTextTheme = mergeThemePartial<ITextTheme>({
-  }, base?.inline);
+  const inlineTextTheme: RecursivePartial<ITextTheme> = {
+  };
 
-  const paragraphTextTheme = mergeThemePartial<ITextTheme>({
-  }, base?.paragraph);
+  const paragraphTextTheme: RecursivePartial<ITextTheme> = {
+  };
 
-  const boldTextTheme = mergeThemePartial<ITextTheme>({
+  const boldTextTheme: RecursivePartial<ITextTheme> = {
     'font-weight': 'bolder',
-  }, base?.bold);
+  };
 
-  const strongTextTheme = mergeThemePartial<ITextTheme>({
+  const strongTextTheme: RecursivePartial<ITextTheme> = {
     'font-weight': 'bolder',
-  }, base?.strong);
+  };
 
-  const italicTextTheme = mergeThemePartial<ITextTheme>({
+  const italicTextTheme: RecursivePartial<ITextTheme> = {
     'font-style': 'italic',
-  }, base?.italic);
+  };
 
-  const emphasisTextTheme = mergeThemePartial<ITextTheme>({
+  const emphasisTextTheme: RecursivePartial<ITextTheme> = {
     'font-style': 'italic',
-  }, base?.emphasis);
+  };
 
-  const underlineTextTheme = mergeThemePartial<ITextTheme>({
+  const underlineTextTheme: RecursivePartial<ITextTheme> = {
     'text-decoration': 'underline',
-  }, base?.underline);
+  };
 
-  const markTextTheme = mergeThemePartial<ITextTheme>({
-  }, base?.mark);
+  const markTextTheme: RecursivePartial<ITextTheme> = {
+  };
 
-  const smallTextTheme = mergeThemePartial<ITextTheme>({
+  const smallTextTheme: RecursivePartial<ITextTheme> = {
     'font-size': 'smaller',
-  }, base?.small);
+  };
 
-  const smallerTextTheme = mergeThemePartial<ITextTheme>({
+  const smallerTextTheme: RecursivePartial<ITextTheme> = {
     'font-size': 'smaller',
-  }, base?.smaller);
+  };
 
-  const largeTextTheme = mergeThemePartial<ITextTheme>({
+  const largeTextTheme: RecursivePartial<ITextTheme> = {
     'font-size': 'larger',
-  }, base?.large);
+  };
 
-  const deletedTextTheme = mergeThemePartial<ITextTheme>({
+  const deletedTextTheme: RecursivePartial<ITextTheme> = {
     'text-decoration': 'line-through',
-  }, base?.deleted);
+  };
 
-  const insertedTextTheme = mergeThemePartial<ITextTheme>({
+  const insertedTextTheme: RecursivePartial<ITextTheme> = {
     'text-decoration': 'underline',
-  }, base?.inserted);
+  };
 
-  const subscriptTextTheme = mergeThemePartial<ITextTheme>({
+  const subscriptTextTheme: RecursivePartial<ITextTheme> = {
     'vertical-align': 'sub',
     'font-size': 'smaller',
-  }, base?.subscript);
+  };
 
-  const superscriptTextTheme = mergeThemePartial<ITextTheme>({
+  const superscriptTextTheme: RecursivePartial<ITextTheme> = {
     'vertical-align': 'super',
     'font-size': 'smaller',
-  }, base?.superscript);
+  };
 
   // /////////////
 
-  const header1TextTheme = mergeThemePartial<ITextTheme>({
+  const header1TextTheme: RecursivePartial<ITextTheme> = {
     'font-size': '3.0rem',
     'font-weight': '800',
     color: '$colors.text',
     'line-height': '1.2em',
-  }, base?.header1);
+  };
 
-  const headerTextTheme = mergeThemePartial(header1TextTheme, base?.header);
+  const headerTextTheme = header1TextTheme;
 
-  const header2TextTheme = mergeThemePartial<ITextTheme>({
+  const header2TextTheme: RecursivePartial<ITextTheme> = {
     'font-size': '2.0rem',
     'font-weight': '700',
     color: '$colors.text',
     'line-height': '1.2em',
-  }, base?.header2);
+  };
 
-  const titleTextTheme = mergeThemePartial(header2TextTheme, base?.title);
+  const titleTextTheme = header2TextTheme;
 
-  const header3TextTheme = mergeThemePartial<ITextTheme>({
+  const header3TextTheme: RecursivePartial<ITextTheme> = {
     'font-size': '1.4rem',
     'font-weight': '700',
     color: '$colors.text',
     'line-height': '1.2em',
-  }, base?.header3);
+  };
 
-  const subtitleTextTheme = mergeThemePartial(header3TextTheme, base?.subtitle);
+  const subtitleTextTheme = header3TextTheme;
 
-  const header4TextTheme = mergeThemePartial<ITextTheme>({
+  const header4TextTheme: RecursivePartial<ITextTheme> = {
     'font-size': '1.3rem',
     'font-weight': '600',
     color: '$colors.text',
     'text-decoration': 'underline',
     'line-height': '1.2em',
-  }, base?.header4);
+  };
 
-  const header5TextTheme = mergeThemePartial<ITextTheme>({
+  const header5TextTheme: RecursivePartial<ITextTheme> = {
     'font-size': '1.2rem',
     'font-weight': '600',
     color: '$colors.text',
     'line-height': '1.2em',
-  }, base?.header5);
+  };
 
-  const header6TextTheme = mergeThemePartial<ITextTheme>({
+  const header6TextTheme: RecursivePartial<ITextTheme> = {
     'font-size': '1.1rem',
     'font-weight': '600',
     color: '$colors.text',
     'line-height': '1.2em',
-  }, base?.header6);
+  };
 
-  const noteTextTheme = mergeThemePartial<ITextTheme>({
+  const noteTextTheme: RecursivePartial<ITextTheme> = {
     'font-size': '0.8rem',
     color: '$colors.textLight25',
-  }, base?.note);
+  };
 
-  const supersizeTextTheme = mergeThemePartial<ITextTheme>({
+  const supersizeTextTheme: RecursivePartial<ITextTheme> = {
     'font-size': '3rem',
-  }, base?.supersize);
+  };
 
-  const unmarginedTextTheme = mergeThemePartial<ITextTheme>({
+  const unmarginedTextTheme: RecursivePartial<ITextTheme> = {
     margin: '0',
-  }, base?.unmargined);
+  };
 
-  const marginedTextTheme = mergeThemePartial<ITextTheme>({
+  const marginedTextTheme: RecursivePartial<ITextTheme> = {
     margin: '1em 0 0.5em 0',
-  }, base?.margined);
+  };
 
-  const brandedTextTheme = mergeThemePartial<ITextTheme>({
+  const brandedTextTheme: RecursivePartial<ITextTheme> = {
     color: '$colors.brandPrimary',
-  }, base?.colored);
+  };
 
-  const errorTextTheme = mergeThemePartial<ITextTheme>({
+  const errorTextTheme: RecursivePartial<ITextTheme> = {
     color: '$colors.error',
-  }, base?.error);
+  };
 
-  const successTextTheme = mergeThemePartial<ITextTheme>({
+  const successTextTheme: RecursivePartial<ITextTheme> = {
     color: '$colors.success',
-  }, base?.success);
+  };
 
-  return {
-    ...(base || {}),
+  return mergeThemeMap<ITextTheme>({
     default: textTheme,
     inherit: inheritTextTheme,
     paragraph: paragraphTextTheme,
@@ -207,5 +206,5 @@ export const buildTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     branded: brandedTextTheme,
     error: errorTextTheme,
     success: successTextTheme,
-  };
+  }, (base || {}));
 };

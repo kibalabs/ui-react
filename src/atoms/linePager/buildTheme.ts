@@ -1,11 +1,12 @@
+
 import { RecursivePartial } from '@kibalabs/core';
 
 import { ILinePagerTheme } from './theme';
 import { IBoxTheme, IColorGuide, IDimensionGuide } from '../../particles';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ILinePagerTheme>>): ThemeMap<ILinePagerTheme> => {
-  const defaultLinePagerTheme = mergeTheme<ILinePagerTheme>({
+export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<ILinePagerTheme>): ThemeMap<ILinePagerTheme> => {
+  const defaultLinePagerTheme: ILinePagerTheme = {
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
@@ -34,9 +35,9 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
         },
       },
     },
-  }, base?.default);
+  };
 
-  const primaryLinePagerTheme = mergeThemePartial<ILinePagerTheme>({
+  const primaryLinePagerTheme: RecursivePartial<ILinePagerTheme> = {
     normal: {
       default: {
         background: {
@@ -55,9 +56,9 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
         },
       },
     },
-  }, base?.primary);
+  };
 
-  const secondaryLinePagerTheme = mergeThemePartial<ILinePagerTheme>({
+  const secondaryLinePagerTheme: RecursivePartial<ILinePagerTheme> = {
     normal: {
       default: {
         background: {
@@ -65,11 +66,11 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
         },
       },
     },
-  }, base?.secondary);
+  };
 
-  const tertiaryLinePagerTheme = mergeTheme<ILinePagerTheme>(defaultLinePagerTheme, base?.tertiary);
+  const tertiaryLinePagerTheme: RecursivePartial<ILinePagerTheme> = defaultLinePagerTheme;
 
-  const largeLinePagerTheme = mergeThemePartial<ILinePagerTheme>({
+  const largeLinePagerTheme: RecursivePartial<ILinePagerTheme> = {
     normal: {
       default: {
         background: {
@@ -77,9 +78,9 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
         },
       },
     },
-  }, base?.large);
+  };
 
-  const smallLinePagerTheme = mergeThemePartial<ILinePagerTheme>({
+  const smallLinePagerTheme: RecursivePartial<ILinePagerTheme> = {
     normal: {
       default: {
         background: {
@@ -87,9 +88,9 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
         },
       },
     },
-  }, base?.small);
+  };
 
-  const cardLinePagerTheme = mergeThemePartial<ILinePagerTheme>({
+  const cardLinePagerTheme: RecursivePartial<ILinePagerTheme> = {
     normal: {
       default: {
         background: {
@@ -98,10 +99,9 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
         },
       },
     },
-  }, base?.card);
+  };
 
-  return {
-    ...(base || {}),
+  return mergeThemeMap<ILinePagerTheme>({
     default: defaultLinePagerTheme,
     primary: primaryLinePagerTheme,
     secondary: secondaryLinePagerTheme,
@@ -109,5 +109,5 @@ export const buildLinePagerThemes = (colors: IColorGuide, dimensions: IDimension
     large: largeLinePagerTheme,
     small: smallLinePagerTheme,
     card: cardLinePagerTheme,
-  };
+  }, (base || {}));
 };

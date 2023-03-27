@@ -1,7 +1,7 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+
 import { ITheme } from '.';
-import { PartialThemeMap } from '..';
 import { buildBulletListThemes, IBulletListTheme } from '../atoms/bulletList';
 import { buildBulletTextThemes, IBulletTextTheme } from '../atoms/bulletText';
 import { buildButtonThemes, IButtonTheme } from '../atoms/button';
@@ -21,18 +21,19 @@ import { buildSwitchThemes, ISwitchTheme } from '../atoms/switch';
 import { buildTabBarItemThemes, ITabBarItemTheme } from '../atoms/tabBarItem';
 import { buildTitledCollapsibleBoxThemes, ITitledCollapsibleBoxTheme } from '../atoms/titledCollapsibleBox';
 import { buildWebViewThemes, IWebViewTheme } from '../atoms/webView';
-import { buildBoxThemes } from '../particles/box';
+import { buildBoxThemes, IBoxTheme } from '../particles/box';
 import { buildAlternateColors, buildColors } from '../particles/colors';
 import { buildDimensions } from '../particles/dimensions';
-import { buildDividerThemes } from '../particles/divider';
+import { buildDividerThemes, IDividerTheme } from '../particles/divider';
 import { buildFonts } from '../particles/fonts';
-import { buildIconThemes } from '../particles/icon';
-import { buildImageThemes } from '../particles/image';
-import { buildLoadingSpinnerThemes } from '../particles/loadingSpinner';
-import { buildPillThemes } from '../particles/pill';
-import { buildPortalThemes } from '../particles/portal';
-import { buildTextThemes } from '../particles/text';
-import { buildVideoThemes } from '../particles/video';
+import { buildIconThemes, IIconTheme } from '../particles/icon';
+import { buildImageThemes, IImageTheme } from '../particles/image';
+import { buildLoadingSpinnerThemes, ILoadingSpinnerTheme } from '../particles/loadingSpinner';
+import { buildPillThemes, IPillTheme } from '../particles/pill';
+import { buildPortalThemes, IPortalTheme } from '../particles/portal';
+import { buildTextThemes, ITextTheme } from '../particles/text';
+import { buildVideoThemes, IVideoTheme } from '../particles/video';
+import { PartialThemeMap } from '../util';
 
 export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   // Base
@@ -42,15 +43,15 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const fonts = buildFonts(inputTheme?.fonts);
 
   // Particles
-  const textThemes = buildTextThemes(colors, dimensions, inputTheme?.texts);
-  const boxThemes = buildBoxThemes(colors, dimensions, inputTheme?.boxes);
-  const iconThemes = buildIconThemes(colors, dimensions, boxThemes, inputTheme?.icons);
-  const imageThemes = buildImageThemes(colors, dimensions, boxThemes, inputTheme?.images);
-  const dividerThemes = buildDividerThemes(colors, dimensions, inputTheme?.dividers);
-  const loadingSpinnerThemes = buildLoadingSpinnerThemes(colors, dimensions, inputTheme?.loadingSpinners);
-  const pillThemes = buildPillThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.pills);
-  const portalThemes = buildPortalThemes(colors, dimensions, boxThemes, inputTheme?.portals);
-  const videoThemes = buildVideoThemes(colors, dimensions, inputTheme?.videos);
+  const textThemes = buildTextThemes(colors, dimensions, inputTheme?.texts as PartialThemeMap<ITextTheme>);
+  const boxThemes = buildBoxThemes(colors, dimensions, inputTheme?.boxes as PartialThemeMap<IBoxTheme>);
+  const iconThemes = buildIconThemes(colors, dimensions, boxThemes, inputTheme?.icons as PartialThemeMap<IIconTheme>);
+  const imageThemes = buildImageThemes(colors, dimensions, boxThemes, inputTheme?.images as PartialThemeMap<IImageTheme>);
+  const dividerThemes = buildDividerThemes(colors, dimensions, inputTheme?.dividers as PartialThemeMap<IDividerTheme>);
+  const loadingSpinnerThemes = buildLoadingSpinnerThemes(colors, dimensions, inputTheme?.loadingSpinners as PartialThemeMap<ILoadingSpinnerTheme>);
+  const pillThemes = buildPillThemes(colors, dimensions, textThemes, boxThemes, inputTheme?.pills as PartialThemeMap<IPillTheme>);
+  const portalThemes = buildPortalThemes(colors, dimensions, boxThemes, inputTheme?.portals as PartialThemeMap<IPortalTheme>);
+  const videoThemes = buildVideoThemes(colors, dimensions, inputTheme?.videos as PartialThemeMap<IVideoTheme>);
 
   // NOTE(krishan711): this seems weird, think of a better approach!
   const linkBaseThemes = buildLinkBaseThemes(colors, dimensions, boxThemes, inputTheme?.linkBases as PartialThemeMap<ILinkBaseTheme>);

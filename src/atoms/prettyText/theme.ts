@@ -3,6 +3,7 @@ import { RecursivePartial } from '@kibalabs/core';
 import { ITextTheme } from '../../particles';
 import { ThemeType } from '../../util';
 
+
 export interface IPrettyTextThemeBase extends ThemeType {
   text: ITextTheme;
 }

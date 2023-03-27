@@ -3,6 +3,7 @@ import { RecursivePartial } from '@kibalabs/core';
 import { IBoxTheme, ITextTheme } from '../../particles';
 import { ThemeType } from '../../util';
 
+
 export interface ITitledCollapsibleBoxThemeBase extends ThemeType {
   background: IBoxTheme;
   headerText: ITextTheme;

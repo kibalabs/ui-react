@@ -71,3 +71,19 @@ export function mergeTheme<Theme extends ThemeType>(baseTheme: Theme, ...partial
 export function mergeThemePartial<Theme extends ThemeType>(...partialThemes: (RecursivePartial<Theme> | undefined)[]): RecursivePartial<Theme> {
   return mergePartial(...partialThemes);
 }
+
+export function mergeThemeMap<Theme extends ThemeType>(themeMap: ThemeMap<Theme>, ...partialThemeMaps: PartialThemeMap<Theme>[]): ThemeMap<Theme> {
+  const output: ThemeMap<Theme> = {
+    default: mergeTheme(themeMap.default, ...(partialThemeMaps.map((partialThemeMap: PartialThemeMap<Theme>): RecursivePartial<Theme> | undefined => partialThemeMap.default as RecursivePartial<Theme> | undefined))),
+  };
+  let partialKeys: Set<string> = new Set(Object.keys(themeMap));
+  partialThemeMaps.forEach((partialThemeMap: PartialThemeMap<Theme>): void => {
+    // @ts-expect-error
+    partialKeys = new Set([...partialKeys, ...(Object.keys(partialThemeMap))]);
+  });
+  partialKeys.forEach((partialKey: string): void => {
+    // @ts-expect-error
+    output[partialKey] = mergeThemePartial(themeMap[partialKey], ...(partialThemeMaps.map((partialThemeMap: PartialThemeMap<Theme>): RecursivePartial<Theme> | undefined => partialThemeMap[partialKey] as RecursivePartial<Theme> | undefined)));
+  });
+  return output;
+}

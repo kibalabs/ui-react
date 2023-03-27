@@ -1,10 +1,9 @@
-import { RecursivePartial } from '@kibalabs/core';
 
 import { IListItemTheme } from './theme';
 import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { mergeTheme, mergeThemePartial, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildListItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IListItemTheme>>): ThemeMap<IListItemTheme> => {
+export const buildListItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IListItemTheme>): ThemeMap<IListItemTheme> => {
   const defaultListItemTheme = mergeTheme<IListItemTheme>({
     normal: {
       default: {

@@ -1,11 +1,10 @@
-import { RecursivePartial } from '@kibalabs/core';
 
 import { IBulletListTheme } from './theme';
 import { IColorGuide, IDimensionGuide } from '../../particles';
-import { mergeTheme, ThemeMap } from '../../util';
+import { mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildBulletListThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: RecursivePartial<Record<string, IBulletListTheme>>): ThemeMap<IBulletListTheme> => {
-  const defaultBulletListTheme = mergeTheme<IBulletListTheme>({
+export const buildBulletListThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: PartialThemeMap<IBulletListTheme>): ThemeMap<IBulletListTheme> => {
+  const defaultBulletListTheme: IBulletListTheme = {
     normal: {
       default: {
         bulletList: {
@@ -14,10 +13,9 @@ export const buildBulletListThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.default);
-
-  return {
-    ...(base || {}),
-    default: defaultBulletListTheme,
   };
+
+  return mergeThemeMap<IBulletListTheme>({
+    default: defaultBulletListTheme,
+  }, (base || {}));
 };

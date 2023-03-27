@@ -1,11 +1,12 @@
+
 import { RecursivePartial } from '@kibalabs/core';
 
 import { IIconButtonTheme } from './theme';
 import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IIconButtonTheme>>): ThemeMap<IIconButtonTheme> => {
-  const defaultIconButtonTheme = mergeTheme<IIconButtonTheme>({
+export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IIconButtonTheme>): ThemeMap<IIconButtonTheme> => {
+  const defaultIconButtonTheme: IIconButtonTheme = {
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
@@ -39,9 +40,9 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.default);
+  };
 
-  const primaryIconButtonTheme = mergeThemePartial<IIconButtonTheme>({
+  const primaryIconButtonTheme: RecursivePartial<IIconButtonTheme> = {
     normal: {
       default: {
         background: {
@@ -63,9 +64,9 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.primary);
+  };
 
-  const secondaryIconButtonTheme = mergeThemePartial<IIconButtonTheme>({
+  const secondaryIconButtonTheme: RecursivePartial<IIconButtonTheme> = {
     normal: {
       default: {
         background: {
@@ -76,11 +77,11 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.secondary);
+  };
 
-  const tertiaryIconButtonTheme = mergeTheme<IIconButtonTheme>(defaultIconButtonTheme, base?.tertiary);
+  const tertiaryIconButtonTheme: IIconButtonTheme = defaultIconButtonTheme;
 
-  const smallIconButtonTheme = mergeThemePartial<IIconButtonTheme>({
+  const smallIconButtonTheme: RecursivePartial<IIconButtonTheme> = {
     normal: {
       default: {
         background: {
@@ -88,9 +89,9 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.secondary);
+  };
 
-  const passiveIconButtonTheme = mergeThemePartial<IIconButtonTheme>({
+  const passiveIconButtonTheme: RecursivePartial<IIconButtonTheme> = {
     normal: {
       default: {
         text: {
@@ -98,15 +99,14 @@ export const buildIconButtonThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.secondary);
+  };
 
-  return {
-    ...(base || {}),
+  return mergeThemeMap<IIconButtonTheme>({
     default: defaultIconButtonTheme,
     primary: primaryIconButtonTheme,
     secondary: secondaryIconButtonTheme,
     tertiary: tertiaryIconButtonTheme,
     small: smallIconButtonTheme,
     passive: passiveIconButtonTheme,
-  };
+  }, (base || {}));
 };

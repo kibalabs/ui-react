@@ -1,12 +1,11 @@
-import { RecursivePartial } from '@kibalabs/core';
 
 import { ISelectableViewTheme } from './theme';
 import { IBoxTheme, IColorGuide, IDimensionGuide } from '../../particles';
-import { mergeTheme, ThemeMap } from '../../util';
+import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 import { ILinkBaseTheme } from '../linkBase';
 
-export const buildSelectableViewThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, linkBaseThemes: ThemeMap<ILinkBaseTheme>, base?: RecursivePartial<Record<string, ISelectableViewTheme>>): ThemeMap<ISelectableViewTheme> => {
-  const defaultTheme = mergeTheme<ISelectableViewTheme>({
+export const buildSelectableViewThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, linkBaseThemes: ThemeMap<ILinkBaseTheme>, base?: PartialThemeMap<ISelectableViewTheme>): ThemeMap<ISelectableViewTheme> => {
+  const defaultTheme: ISelectableViewTheme = {
     normal: {
       default: {
         background: mergeTheme<IBoxTheme>(boxThemes.default, boxThemes.transparent, {
@@ -41,10 +40,9 @@ export const buildSelectableViewThemes = (colors: IColorGuide, dimensions: IDime
       focus: {
       },
     },
-  }, base?.default);
-
-  return {
-    ...(base || {}),
-    default: defaultTheme,
   };
+
+  return mergeThemeMap<ISelectableViewTheme>({
+    default: defaultTheme,
+  }, (base || {}));
 };

@@ -11,7 +11,7 @@ import { propertyToCss } from '../../util';
 
 export const DialogThemedStyle = (theme: RecursivePartial<IDialogTheme>): string => `
   ${propertyToCss('background', theme?.backdropColor)};
-  & > .dialog-inner {
+  & > .KibaDialogInner {
     ${theme?.background ? BoxThemedStyle(theme?.background) : ''};
   }
 `;
@@ -80,7 +80,7 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
       onClick={onBackdropClicked}
     >
       <Box
-        className='dialog-inner'
+        className='KibaDialogInner'
         width='90%'
         maxWidth={maxWidth}
         maxHeight={maxHeight}

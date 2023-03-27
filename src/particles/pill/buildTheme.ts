@@ -1,11 +1,12 @@
+
 import { RecursivePartial } from '@kibalabs/core';
 
 import { IPillTheme } from './theme';
 import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IPillTheme>>): ThemeMap<IPillTheme> => {
-  const defaultPillTheme = mergeTheme<IPillTheme>({
+export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IPillTheme>): ThemeMap<IPillTheme> => {
+  const defaultPillTheme: IPillTheme = {
     background: mergeTheme(boxThemes.default, boxThemes.focusable, {
       padding: `${dimensions.padding} ${dimensions.paddingWide2}`,
       'background-color': '$colors.brandPrimaryClear75',
@@ -15,26 +16,26 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
       color: '$colors.brandPrimary',
       'font-weight': '600',
     }),
-  }, base?.default);
+  };
 
-  const primaryPillTheme = mergeThemePartial<IPillTheme>({
+  const primaryPillTheme: RecursivePartial<IPillTheme> = {
     background: {
       'border-color': '$colors.brandPrimary',
     },
     text: {
     },
-  }, base?.primary);
+  };
 
-  const secondaryPillTheme = mergeThemePartial<IPillTheme>({
+  const secondaryPillTheme: RecursivePartial<IPillTheme> = {
     background: {
       'background-color': '$colors.brandPrimaryClear25',
     },
     text: {
       color: '$colors.textOnBrand',
     },
-  }, base?.primary);
+  };
 
-  const errorPillTheme = mergeThemePartial<IPillTheme>({
+  const errorPillTheme: RecursivePartial<IPillTheme> = {
     background: {
       'background-color': '$colors.errorClear75',
       'border-color': '$colors.errorLight10',
@@ -42,9 +43,9 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     text: {
       color: '$colors.errorLight10',
     },
-  });
+  };
 
-  const successPillTheme = mergeThemePartial<IPillTheme>({
+  const successPillTheme: RecursivePartial<IPillTheme> = {
     background: {
       'background-color': '$colors.successClear75',
       'border-color': '$colors.successLight10',
@@ -52,14 +53,13 @@ export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide
     text: {
       color: '$colors.successLight10',
     },
-  });
+  };
 
-  return {
-    ...(base || {}),
+  return mergeThemeMap<IPillTheme>({
     default: defaultPillTheme,
     primary: primaryPillTheme,
     secondary: secondaryPillTheme,
     error: errorPillTheme,
     success: successPillTheme,
-  };
+  }, (base || {}));
 };
