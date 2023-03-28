@@ -43,16 +43,22 @@ interface IStyledLinkProps {
   $theme?: RecursivePartial<ILinkTheme>;
 }
 
-const StyledLinkFocusFixer = styled.span`
-  transition-duration: 0.3s;
-  /* Fixing the Safari bug for <button>s overflow */
-  position: relative;
-`;
-
 const StyledLink = styled.a<IStyledLinkProps>`
   transition-duration: 0.3s;
+  cursor: pointer;
   &.disabled {
     cursor: not-allowed;
+  }
+  & > .KibaLinkFocusFixer {
+    transition-duration: 0.3s;
+    cursor: pointer;
+    /* Fixing the Safari bug for <button>s overflow */
+    position: relative;
+  }
+  &.disabled {
+    & > .KibaLinkFocusFixer {
+      cursor: not-allowed;
+    }
   }
 
   &&&& {
@@ -96,9 +102,9 @@ export const Link = (props: ILinkProps): React.ReactElement => {
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       as={ props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
     >
-      <StyledLinkFocusFixer className='KibaLinkFocusFixer' tabIndex={-1}>
+      <span className='KibaLinkFocusFixer' tabIndex={-1}>
         {props.text}
-      </StyledLinkFocusFixer>
+      </span>
     </StyledLink>
   );
 };
