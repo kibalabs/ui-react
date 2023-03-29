@@ -17,11 +17,18 @@ export const buildImageThemes = (colors: IColorGuide, dimensions: IDimensionGuid
     },
   };
 
+  const unroundedImageTheme: RecursivePartial<IImageTheme> = {
+    background: {
+      'border-radius': '0',
+    },
+  };
+
   const profileImageTheme: RecursivePartial<IImageTheme> = circularImageTheme;
 
   return mergeThemeMap<IImageTheme>({
     default: defaultImageTheme,
     profile: profileImageTheme,
     circular: circularImageTheme,
+    unrounded: unroundedImageTheme,
   }, (base || {}));
 };
