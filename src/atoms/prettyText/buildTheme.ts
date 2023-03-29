@@ -32,7 +32,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
           text: textThemes[textVariant],
         },
       },
-    }, base?.textVariant);
+    });
     return currentMap;
   }, {});
 
@@ -49,7 +49,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.header1);
+  });
 
   derivedThemes.header2 = mergeThemePartial(derivedThemes.header2, {
     normal: {
@@ -59,7 +59,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.header2);
+  });
 
   derivedThemes.header3 = mergeThemePartial(derivedThemes.header3, {
     normal: {
@@ -69,7 +69,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.header3);
+  });
 
   derivedThemes.header4 = mergeThemePartial(derivedThemes.header4, {
     normal: {
@@ -79,7 +79,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.header4);
+  });
 
   derivedThemes.header5 = mergeThemePartial(derivedThemes.header5, {
     normal: {
@@ -89,7 +89,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.header5);
+  });
 
   derivedThemes.header6 = mergeThemePartial(derivedThemes.header6, {
     normal: {
@@ -99,7 +99,17 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.header6);
+  });
+
+  derivedThemes.paragraph = mergeThemePartial(derivedThemes.paragraph, {
+    normal: {
+      default: {
+        text: {
+          margin: '1em 0',
+        },
+      },
+    },
+  });
 
   return mergeThemeMap<IPrettyTextTheme>({
     default: prettyTextTheme,
