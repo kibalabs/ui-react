@@ -16,11 +16,11 @@ export const PrettyTextThemedStyle = (theme: RecursivePartial<IPrettyTextTheme>)
     ${propertyToCss('margin', theme?.normal?.default?.text?.margin)};
   }
   & > em {
-    display: inline;
+    display: inline-block;
     ${themeToCss(theme?.normal?.emphasis?.text)};
   }
   & > strong {
-    display: inline;
+    display: inline-block;
     ${themeToCss(theme?.normal?.strong?.text)};
   }
   `;
