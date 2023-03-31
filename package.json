@@ -26,16 +26,16 @@
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
     "@kibalabs/build": "0.12.1-next.5",
-    "@storybook/addon-essentials": "7.0.0-rc.5",
-    "@storybook/addon-links": "7.0.0-rc.5",
-    "@storybook/react": "7.0.0-rc.5",
-    "@storybook/react-webpack5": "7.0.0-rc.5",
-    "@types/react": "18.0.28",
+    "@storybook/addon-essentials": "7.0.0-rc.10",
+    "@storybook/addon-links": "7.0.0-rc.10",
+    "@storybook/react": "7.0.0-rc.10",
+    "@storybook/react-webpack5": "7.0.0-rc.10",
+    "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
     "@types/styled-components": "5.1.26",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "storybook": "7.0.0-rc.5",
+    "storybook": "7.0.0-rc.10",
     "styled-components": "5.3.9"
   },
   "peerDependencies": {

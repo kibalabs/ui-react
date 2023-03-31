@@ -9,6 +9,7 @@ import { defaultComponentProps, IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const LinkThemedStyle = (theme: RecursivePartial<ILinkTheme>): string => `
+  line-height: 0;
   & > .KibaLinkFocusFixer {
     ${themeToCss(theme?.normal?.default?.background)};
     ${themeToCss(theme?.normal?.default?.text)};
