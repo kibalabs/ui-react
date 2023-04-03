@@ -103,6 +103,8 @@ export interface ISelectableViewProps extends IComponentProps<ISelectableViewThe
   isSelected: boolean;
   selectedIndicator?: React.ReactElement;
   shouldHideDefaultSelectedIndicator?: boolean;
+  isFullWidth?: boolean;
+  isFullHeight?: boolean;
   onClicked(): void;
 
 }
@@ -119,7 +121,7 @@ export const SelectableView = (props: ISelectableViewProps): React.ReactElement 
     // @ts-ignore: as prop doesn't match type required
     <StyledSelectableView
       id={props.id}
-      className={getClassName(SelectableView.displayName, props.className, props.isSelected && 'selected', ...(props.variant?.split('-') || []))}
+      className={getClassName(SelectableView.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', props.isSelected && 'selected', ...(props.variant?.split('-') || []))}
       $theme={props.theme}
       onClick={onClicked}
     >
