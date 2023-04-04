@@ -44,11 +44,22 @@ export interface IPrettyTextProps extends IComponentProps<IPrettyTextTheme>, IMu
 }
 
 export const PrettyText = (props: IPrettyTextProps): React.ReactElement => {
+  const theme = React.useMemo((): RecursivePartial<IPrettyTextTheme> => {
+    const currentTheme = (props.theme || {}) as RecursivePartial<IPrettyTextTheme>;
+    if (props.alignment) {
+      currentTheme.normal = currentTheme.normal || {};
+      currentTheme.normal.default = currentTheme.normal.default || {};
+      currentTheme.normal.default.text = currentTheme.normal.default.text || {};
+      currentTheme.normal.default.text['text-align'] = props.alignment;
+    }
+    return currentTheme;
+  }, [props.theme, props.alignment]);
+
   return (
     <StyledPrettyText
       id={props.id}
       className={getClassName(PrettyText.displayName, props.className, ...(props.variant?.split('-') || []))}
-      $theme={props.theme}
+      $theme={theme}
       $alignment={props.alignment}
       as={props.tag || getTextTag(props.variant)}
     >
