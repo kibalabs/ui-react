@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
-    "@kibalabs/build": "0.12.1-next.7",
+    "@kibalabs/build": "0.13.0",
     "@storybook/addon-essentials": "7.0.2",
     "@storybook/addon-links": "7.0.2",
     "@storybook/react": "7.0.2",
