@@ -72,15 +72,18 @@ export interface IWebViewProps extends IComponentProps<IWebViewTheme> {
   onLoadingChanged?: (isLoading: boolean) => void;
 }
 
+// TODO(krishan711): make a better default error view
+const DefaultErrorView = (): React.ReactElement => {
+  return (
+    <div>Something went wrong</div>
+  );
+};
+
 export const WebView = (props: IWebViewProps): React.ReactElement => {
   const [currentUrl, setCurrentUrl] = React.useState<string | undefined>(props.url);
   const [hasFailedToLoad, setHasFailedToLoad] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const isInitialized = useInitialization((): void => undefined);
-  // TODO(krishan711): make a better default error view
-  const errorView = props.errorView || (
-    <div>Something went wrong</div>
-  );
 
   React.useEffect((): void => {
     if (props.url !== currentUrl) {
@@ -129,8 +132,14 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
         />
       </noscript>
       { hasFailedToLoad ? (
-        errorView
-      ) : isInitialized ? (
+        <React.Fragment>
+          {props.errorView != null ? (
+            <props.errorView />
+          ) : (
+            <DefaultErrorView />
+          )}
+        </React.Fragment>
+      ) : isInitialized && (
         <React.Fragment>
           { isLoading && props.shouldShowLoadingSpinner && (
             <LoadingWrapper id={props.id && `${props.id}-loading-wrapper`}>
@@ -149,8 +158,6 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
             allow={props.permissions.join(';')}
           />
         </React.Fragment>
-      ) : (
-        null
       )}
     </StyledWebView>
   );
