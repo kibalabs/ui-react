@@ -24,7 +24,6 @@
     "remark-breaks": "^2.0.2"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.20.2",
     "@kibalabs/build": "0.13.0",
     "@storybook/addon-essentials": "7.0.2",
     "@storybook/addon-links": "7.0.2",
