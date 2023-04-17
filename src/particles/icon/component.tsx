@@ -7,10 +7,12 @@ import { IIconTheme } from './theme';
 import { defaultComponentProps, IComponentProps } from '../../model';
 
 export const IconThemedStyle = (theme: RecursivePartial<IIconTheme>): string => `
-  width: ${theme.size};
-  height: ${theme.size};
-  // min-width: ${theme.size};
-  // min-height: ${theme.size};
+  & > svg {
+    width: ${theme.size};
+    height: ${theme.size};
+    // min-width: ${theme.size};
+    // min-height: ${theme.size};
+  }
 `;
 
 interface IStyledIconProps {
@@ -22,13 +24,13 @@ interface IStyledIconProps {
 
 const StyledIcon = styled.div<IStyledIconProps>`
   svg {
-    height: 100%;
-    width: 100%;
+    /* height: 100%;
+    width: 100%; */
     display: block;
     fill: ${(props: IStyledIconProps): string => (props.$shouldAddFill ? 'currentColor' : 'none')};
     stroke: ${(props: IStyledIconProps): string => (props.$shouldAddStroke ? 'currentColor' : 'none')};
   }
-  overflow: hidden;
+  /* overflow: hidden; */
   color: ${(props: IStyledIconProps): string => props.$color || 'currentColor'};
   &&&& {
     ${(props: IStyledIconProps): string => (props.$theme ? IconThemedStyle(props.$theme) : '')};

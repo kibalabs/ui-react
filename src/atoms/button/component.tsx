@@ -5,9 +5,9 @@ import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } fro
 import styled from 'styled-components';
 
 import { IButtonTheme } from './theme';
-import { Alignment, defaultComponentProps, getFlexContentAlignment, IComponentProps } from '../../model';
+import { Alignment, defaultComponentProps, getContentAlignmentCss, getItemAlignmentCss, IComponentProps } from '../../model';
 import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particles';
-import { CssConverter, themeToCss } from '../../util';
+import { themeToCss } from '../../util';
 
 export const ButtonThemedStyle = (theme: RecursivePartial<IButtonTheme>): string => `
   & > .KibaButtonFocusFixer {
@@ -66,11 +66,8 @@ interface IStyledButtonProps {
   $isLoading: boolean;
 }
 
-const getContentAlignmentCss: CssConverter<Alignment> = (field: Alignment): string => {
-  return `justify-content: ${getFlexContentAlignment(field)};`;
-};
-
 interface IStyledButtonFocusFixerProps {
+  $childAlignment: Alignment;
   $contentAlignment: Alignment;
 }
 
@@ -79,7 +76,7 @@ const StyledButtonFocusFixer = styled.span<IStyledButtonFocusFixerProps>`
   outline: none;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  ${(props: IStyledButtonFocusFixerProps): string => getItemAlignmentCss(props.$contentAlignment)};
   ${(props: IStyledButtonFocusFixerProps): string => getContentAlignmentCss(props.$contentAlignment)};
   background-clip: border-box;
   width: 100%;
@@ -116,6 +113,7 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   target?: string;
   targetShouldOpenSameTab?: boolean;
   tabIndex?: number;
+  childAlignment: Alignment;
   contentAlignment: Alignment;
   isTextFullWidth: boolean;
   onClicked?(): void;
@@ -158,7 +156,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
       type={props.buttonType || 'button'}
     >
-      <StyledButtonFocusFixer className='KibaButtonFocusFixer' tabIndex={-1} $contentAlignment={props.contentAlignment}>
+      <StyledButtonFocusFixer className='KibaButtonFocusFixer' tabIndex={-1} $childAlignment={props.childAlignment || Alignment.Center} $contentAlignment={props.contentAlignment || Alignment.Center}>
         { !props.isLoading && props.iconLeft && (
           <React.Fragment>
             {props.iconLeft}
@@ -192,4 +190,5 @@ Button.defaultProps = {
   isTextFullWidth: true,
   iconGutter: PaddingSize.Default,
   contentAlignment: Alignment.Fill,
+  childAlignment: Alignment.Center,
 };
