@@ -112,7 +112,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
         srcSet={isSourceResponsive && !props.isLazyLoadable ? getResponsiveImageString(source) : undefined}
         data-srcset={isSourceResponsive && props.isLazyLoadable ? getResponsiveImageString(source) : undefined}
         alt={props.alternativeText}
-        crossOrigin='anonymous'
+        // crossOrigin='anonymous'
       />
       {props.isLazyLoadable && (
         <noscript>
@@ -129,7 +129,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
             sizes={isSourceResponsive ? 'auto' : undefined}
             srcSet={isSourceResponsive ? getResponsiveImageString(props.source) : undefined}
             alt={props.alternativeText}
-            crossOrigin='anonymous'
+            // crossOrigin='anonymous'
           />
         </noscript>
       )}

@@ -128,7 +128,7 @@ export const Video = (props: IVideoProps): React.ReactElement => {
       onPlay={onPlayed}
       onPause={onPaused}
       src={source}
-      crossOrigin='anonymous'
+      // crossOrigin='anonymous'
     >
       {props.alternativeText}
     </StyledVideo>

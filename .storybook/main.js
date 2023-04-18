@@ -8,7 +8,7 @@ export default config = {
     '@storybook/addon-links',
   ],
   typescript: {
-    check: false
+    check: false,
   },
   framework: {
     name: '@storybook/react-webpack5',
