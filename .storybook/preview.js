@@ -17,7 +17,18 @@ const theme = buildTheme({
       color: '$colors.textLight80',
       "font-size": '0.85rem'
     }
-  }
+  },
+  prettyTexts: {
+    fancy: {
+      normal: {
+        strong: {
+          text: {
+            color: '$colors.brandPrimary',
+          },
+        },
+      },
+    },
+  },
 });
 
 export const decorators = [

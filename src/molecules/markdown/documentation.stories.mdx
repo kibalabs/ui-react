@@ -33,7 +33,13 @@ export const Template = (args) => (
 
 <Canvas>
   <Story name='Markdown with just strong'>
-    <Markdown source={'**Lorem ipsum dolor sit amet, consectetur adipiscing elit**'} />
+    <Markdown source={'**Lorem ipsum dolor sit amet, consectetur adipiscing elit**\n\n*Lorem ipsum dolor sit amet, consectetur adipiscing elit*'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Markdown with image caption'>
+    <Markdown source={'![cool icon](https://www.kibalabs.com/_bh20211208082922411123/assets/_generated/favicon-48.png)\n*with caption*\n\nThis part is not a caption'} />
   </Story>
 </Canvas>
 
