@@ -25,21 +25,21 @@
   },
   "devDependencies": {
     "@kibalabs/build": "0.13.0",
-    "@storybook/addon-essentials": "7.0.2",
-    "@storybook/addon-links": "7.0.2",
-    "@storybook/react": "7.0.2",
-    "@storybook/react-webpack5": "7.0.2",
-    "@types/react": "18.0.34",
+    "@storybook/addon-essentials": "7.0.7",
+    "@storybook/addon-links": "7.0.7",
+    "@storybook/react": "7.0.7",
+    "@storybook/react-webpack5": "7.0.7",
+    "@types/react": "18.0.38",
     "@types/react-dom": "18.0.11",
     "@types/styled-components": "5.1.26",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "storybook": "7.0.2",
-    "styled-components": "5.3.9"
+    "storybook": "7.0.7",
+    "styled-components": "5.3.10"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0 ",
     "react-dom": "^17.0.0 || ^18.0.0 ",
-    "styled-components": "^5.3.1"
+    "styled-components": "^5.3.0"
   }
 }
