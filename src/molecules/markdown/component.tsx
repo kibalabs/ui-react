@@ -9,6 +9,7 @@ import { getVariant } from '../../util';
 
 const MarkdownParagraph = (props: AnchorHTMLAttributes<HTMLAnchorElement>): React.ReactElement => {
   const childrenDisplayNames = React.Children.map(props.children, (child: React.ReactNode): string | null => (
+    // @ts-expect-error: Property 'displayName' does not exist on type
     (child && typeof child === 'object' && 'type' in child) ? String(child.type.displayName).split('-')[0] : null
   )) || [];
   const isCaption = childrenDisplayNames.indexOf('MarkdownMedia') >= 0;
