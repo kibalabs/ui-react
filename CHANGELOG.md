@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Added `CollapsibleBox`
 - [MINOR] Added `SelectableView`
 - [MINOR] Added `Baseline` to `Alignment`
+- [MAJOR] Replaced react-markdown with markdown-to-js
 
 ### Changed
 - [MINOR] Fixed `Markdown` to render images at maxWidth=100%
