@@ -3,10 +3,9 @@ import { RecursivePartial } from '@kibalabs/core';
 import { IIconTheme } from './theme';
 import { mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 import { IBoxTheme } from '../box';
-import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
 
-export const buildIconThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IIconTheme>): ThemeMap<IIconTheme> => {
+export const buildIconThemes = (dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IIconTheme>): ThemeMap<IIconTheme> => {
   const defaultIconTheme: IIconTheme = {
     size: '1.3rem',
   };

@@ -1,10 +1,10 @@
 
 import { ISelectableViewTheme } from './theme';
-import { IBoxTheme, IColorGuide, IDimensionGuide } from '../../particles';
+import { IBoxTheme, IDimensionGuide } from '../../particles';
 import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 import { ILinkBaseTheme } from '../linkBase';
 
-export const buildSelectableViewThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, linkBaseThemes: ThemeMap<ILinkBaseTheme>, base?: PartialThemeMap<ISelectableViewTheme>): ThemeMap<ISelectableViewTheme> => {
+export const buildSelectableViewThemes = (dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, linkBaseThemes: ThemeMap<ILinkBaseTheme>, base?: PartialThemeMap<ISelectableViewTheme>): ThemeMap<ISelectableViewTheme> => {
   const defaultTheme: ISelectableViewTheme = {
     normal: {
       default: {

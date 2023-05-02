@@ -1,9 +1,9 @@
 
 import { IBulletTextTheme } from './theme';
-import { IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
+import { IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildBulletTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, base?: PartialThemeMap<IBulletTextTheme>): ThemeMap<IBulletTextTheme> => {
+export const buildBulletTextThemes = (dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, base?: PartialThemeMap<IBulletTextTheme>): ThemeMap<IBulletTextTheme> => {
   const defaultBulletTextTheme: IBulletTextTheme = {
     normal: {
       default: {

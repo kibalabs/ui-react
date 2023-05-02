@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 import { IBulletListTheme, IBulletTextTheme, ILinkTheme } from '../atoms';
 import { ITheme } from '../theming';
-import { colorsToCss, ThemeMap, themeToCss } from '../util';
+import { ThemeMap, themeToCss } from '../util';
 
 interface IGlobalCssProps {
   theme: ITheme;
@@ -16,10 +16,6 @@ interface IGlobalCssProps {
 export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
   ${(props: IGlobalCssProps): string => props.resetCss};
 
-  :root {
-    ${(props: IGlobalCssProps): string => colorsToCss(props.theme.colors)};
-  }
-
   html {
     scroll-behavior: smooth;
     image-rendering: pixelated;
@@ -29,8 +25,8 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
 
   body {
     background-color: ${(props: IGlobalCssProps): string => props.theme.colors.background};
-    overflow: auto;
     ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.default)};
+    overflow: auto;
     text-align: left;
   }
 

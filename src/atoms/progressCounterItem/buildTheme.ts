@@ -1,9 +1,9 @@
 
 import { IProgressCounterItemTheme } from './theme';
-import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
+import { IBoxTheme, IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildProgressCounterItemThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IProgressCounterItemTheme>): ThemeMap<IProgressCounterItemTheme> => {
+export const buildProgressCounterItemThemes = (dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IProgressCounterItemTheme>): ThemeMap<IProgressCounterItemTheme> => {
   const defaultProgressCounterItemTheme: IProgressCounterItemTheme = {
     normal: {
       default: {

@@ -2,10 +2,10 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { ILinkBaseTheme } from './theme';
-import { IBoxTheme, IColorGuide, IDimensionGuide } from '../../particles';
+import { IBoxTheme, IDimensionGuide } from '../../particles';
 import { mergeTheme, mergeThemeMap, mergeThemePartial, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<ILinkBaseTheme>): ThemeMap<ILinkBaseTheme> => {
+export const buildLinkBaseThemes = (dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<ILinkBaseTheme>): ThemeMap<ILinkBaseTheme> => {
   const defaultLinkBaseTheme: ILinkBaseTheme = {
     normal: {
       default: {

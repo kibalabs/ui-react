@@ -3,11 +3,10 @@ import { RecursivePartial } from '@kibalabs/core';
 
 import { IPrettyTextTheme } from './theme';
 import { ITextTheme } from '../../particles';
-import { IColorGuide } from '../../particles/colors';
 import { IDimensionGuide } from '../../particles/dimensions';
 import { mergeTheme, mergeThemeMap, mergeThemePartial, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, base?: PartialThemeMap<IPrettyTextTheme>): ThemeMap<IPrettyTextTheme> => {
+export const buildPrettyTextThemes = (dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, base?: PartialThemeMap<IPrettyTextTheme>): ThemeMap<IPrettyTextTheme> => {
   const prettyTextTheme: IPrettyTextTheme = {
     normal: {
       default: {

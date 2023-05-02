@@ -12,17 +12,25 @@ import { ThemeType } from '../util';
 
 export const ThemeContext = React.createContext<ITheme | null>(null);
 
-interface IThemeProviderProps extends IMultiAnyChildProps {
+
+interface IThemeCssProps {
   theme: ITheme;
   extraComponentDefinitions?: ComponentDefinition<ThemeType>[];
 }
 
+const ThemeCss = createGlobalStyle<IThemeCssProps>`
+  :root {
+    ${(props: IThemeCssProps): string => buildThemeCssString(props.theme, props.extraComponentDefinitions)}
+  }
+`;
+
+interface IThemeProviderProps extends IMultiAnyChildProps, IThemeCssProps {
+}
+
 export const ThemeProvider = (props: IThemeProviderProps): React.ReactElement => {
-  const themeCssString = buildThemeCssString(props.theme, props.extraComponentDefinitions);
-  const ThemeCss = createGlobalStyle`${themeCssString}`;
   return (
     <ThemeContext.Provider value={props.theme}>
-      <ThemeCss />
+      <ThemeCss theme={props.theme} extraComponentDefinitions={props.extraComponentDefinitions} />
       <ColorProvider colors={props.theme.colors}>
         {props.children}
       </ColorProvider>

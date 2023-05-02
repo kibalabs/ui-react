@@ -56,7 +56,7 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
     }
 
     // NOTE(krishan711): helpful to debug lazysizes
-    // window.addEventListener('lazybeforesizes', function(e){
+    // window.addEventListener('lazybeforesizes', function(e) {
     //   console.log(e);
     // });
   });

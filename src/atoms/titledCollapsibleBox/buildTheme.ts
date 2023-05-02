@@ -1,9 +1,9 @@
 
 import { ITitledCollapsibleBoxTheme } from './theme';
-import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
+import { IBoxTheme, IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildTitledCollapsibleBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<ITitledCollapsibleBoxTheme>): ThemeMap<ITitledCollapsibleBoxTheme> => {
+export const buildTitledCollapsibleBoxThemes = (dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<ITitledCollapsibleBoxTheme>): ThemeMap<ITitledCollapsibleBoxTheme> => {
   const defaultTitledCollapsibleBoxTheme: ITitledCollapsibleBoxTheme = {
     normal: {
       default: {

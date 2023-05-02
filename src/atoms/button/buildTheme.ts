@@ -2,10 +2,10 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { IButtonTheme } from './theme';
-import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
+import { IBoxTheme, IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IButtonTheme>): ThemeMap<IButtonTheme> => {
+export const buildButtonThemes = (dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IButtonTheme>): ThemeMap<IButtonTheme> => {
   const defaultButtonTheme: IButtonTheme = {
     normal: {
       default: {

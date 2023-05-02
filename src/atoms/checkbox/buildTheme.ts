@@ -1,9 +1,9 @@
 
 import { ICheckboxTheme } from './theme';
-import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
+import { IBoxTheme, IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildCheckboxThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<ICheckboxTheme>): ThemeMap<ICheckboxTheme> => {
+export const buildCheckboxThemes = (dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<ICheckboxTheme>): ThemeMap<ICheckboxTheme> => {
   const defaultCheckboxTheme = mergeTheme<ICheckboxTheme>({
     normal: {
       default: {

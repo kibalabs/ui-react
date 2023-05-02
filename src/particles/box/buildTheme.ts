@@ -2,10 +2,9 @@ import { RecursivePartial } from '@kibalabs/core';
 
 import { IBoxTheme } from './theme';
 import { mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
-import { IColorGuide } from '../colors';
 import { IDimensionGuide } from '../dimensions';
 
-export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: PartialThemeMap<IBoxTheme>): ThemeMap<IBoxTheme> => {
+export const buildBoxThemes = (dimensions: IDimensionGuide, base?: PartialThemeMap<IBoxTheme>): ThemeMap<IBoxTheme> => {
   const defaultBoxTheme: IBoxTheme = {
     'background-color': 'transparent',
     'border-radius': dimensions.borderRadius,

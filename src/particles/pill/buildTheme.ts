@@ -2,10 +2,10 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { IPillTheme } from './theme';
-import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
+import { IBoxTheme, IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildPillThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IPillTheme>): ThemeMap<IPillTheme> => {
+export const buildPillThemes = (dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IPillTheme>): ThemeMap<IPillTheme> => {
   const defaultPillTheme: IPillTheme = {
     background: mergeTheme(boxThemes.default, boxThemes.focusable, {
       padding: `${dimensions.padding} ${dimensions.paddingWide2}`,

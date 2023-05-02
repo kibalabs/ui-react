@@ -2,10 +2,10 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { IInputWrapperTheme } from './theme';
-import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
+import { IBoxTheme, IDimensionGuide, ITextTheme } from '../../particles';
 import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildInputWrapperThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IInputWrapperTheme>): ThemeMap<IInputWrapperTheme> => {
+export const buildInputWrapperThemes = (dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IInputWrapperTheme>): ThemeMap<IInputWrapperTheme> => {
   const defaultInputWrapperTheme: IInputWrapperTheme = {
     normal: {
       default: {

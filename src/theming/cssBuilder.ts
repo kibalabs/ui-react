@@ -30,7 +30,7 @@ import { Pill, PillThemedStyle } from '../particles/pill';
 import { Portal, PortalThemedStyle } from '../particles/portal';
 import { Text, TextThemedStyle } from '../particles/text';
 import { Video, VideoThemedStyle } from '../particles/video';
-import { ThemeCssFunction, ThemeMap, ThemeType } from '../util/themeUtil';
+import { colorsToCss, ThemeCssFunction, ThemeMap, themeToCss, ThemeType } from '../util/themeUtil';
 
 export interface ComponentDefinition<Theme extends ThemeType> {
   component: React.FunctionComponent<IComponentProps<Theme>>,
@@ -40,25 +40,19 @@ export interface ComponentDefinition<Theme extends ThemeType> {
 
 const buildComponentThemeCssString = <Theme extends ThemeType>(name: string, themeMap: ThemeMap<Theme>, themeCssFunction: ThemeCssFunction<Theme>): string => {
   const defaultCss = themeCssFunction(themeMap.default);
-  const variantCss = Object.keys(themeMap).filter((themeKey: string): boolean => themeKey !== 'default').reduce((accumulator: string, themeKey: string): string => {
+  const componentCss = Object.keys(themeMap).filter((themeKey: string): boolean => themeKey !== 'default').reduce((accumulator: string, themeKey: string): string => {
     return `
       ${accumulator};
       &.${themeKey} {
         ${themeCssFunction(themeMap[themeKey])}
       }
     `;
-  }, '');
-  return `
-    .${name} {
-      ${defaultCss}
-      ${variantCss}
-    }
-  `;
+  }, defaultCss);
+  return `.${name} { ${componentCss} }`;
 };
 
 // NOTE(krishan711): this css needs to be processed before rendering so put it in a styled component or similar
-// TODO(krishan711): can't figure out how to get the generics to work well here. apparently it requires existential types but feels like there should be an easy workaround.
-// @ts-ignore
+// @ts-ignore: can't figure out how to get the generics to work well here. apparently it requires existential types but feels like there should be an easy workaround.
 export const buildThemeCssString = (theme: ITheme, extraComponentDefinitions?: ComponentDefinition[]): string => {
   // @ts-ignore
   const componentDefinitions: ComponentDefinition[] = [
@@ -94,12 +88,17 @@ export const buildThemeCssString = (theme: ITheme, extraComponentDefinitions?: C
     { component: SelectableView, themeMap: theme.selectableViews, themeCssFunction: SelectableViewThemedStyle },
     ...(extraComponentDefinitions || []),
   ];
+  const rootCssString = `
+    ${colorsToCss(theme.colors)};
+    ${themeToCss(theme.texts.default)};
+    background-color: ${theme.colors.background};
+  `;
   // @ts-ignore
   const cssString = componentDefinitions.reduce((accumulator: string, current: ComponentDefinition): string => {
     return `
       ${accumulator}
       ${buildComponentThemeCssString(current.component.displayName, current.themeMap, current.themeCssFunction)}
     `;
-  }, '');
+  }, rootCssString);
   return cssString;
 };
