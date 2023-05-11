@@ -60,6 +60,30 @@ export const SelectableViewThemedStyle = (theme: RecursivePartial<ISelectableVie
       }
     }
   }
+  &.disabled {
+    ${themeToCss(theme.disabled?.default?.background)};
+    & > .selectable-view-overlay {
+      ${themeToCss(theme.disabled?.default?.overlay)};
+    }
+    &:hover {
+      ${themeToCss(theme.disabled?.hover?.background)};
+      & > .selectable-view-overlay {
+        ${themeToCss(theme.disabled?.hover?.overlay)};
+      }
+    }
+    &:active {
+      ${themeToCss(theme.disabled?.press?.background)};
+      & > .selectable-view-overlay {
+        ${themeToCss(theme.disabled?.press?.overlay)};
+      }
+    }
+    &:focus {
+      ${themeToCss(theme.disabled?.focus?.background)};
+      & > .selectable-view-overlay {
+        ${themeToCss(theme.disabled?.focus?.overlay)};
+      }
+    }
+  }
 `;
 
 interface IStyledSelectableViewProps {
@@ -78,13 +102,14 @@ const StyledSelectableView = styled.button<IStyledSelectableViewProps>`
   background-clip: padding-box;
   transition: 0.3s;
   width: fit-content;
-
   &.fullWidth {
     width: 100%;
   }
-
   &.fullHeight {
     height: 100%;
+  }
+  &.disabled {
+    cursor: not-allowed !important;
   }
 
   &&&& {
@@ -101,6 +126,7 @@ const StyledOverlay = styled.div`
 
 export interface ISelectableViewProps extends IComponentProps<ISelectableViewTheme>, ISingleAnyChildProps {
   isSelected: boolean;
+  isDisabled?: boolean;
   selectedIndicator?: React.ReactElement;
   shouldHideDefaultSelectedIndicator?: boolean;
   isFullWidth?: boolean;
@@ -112,7 +138,7 @@ export interface ISelectableViewProps extends IComponentProps<ISelectableViewThe
 export const SelectableView = (props: ISelectableViewProps): React.ReactElement => {
   const colors = useColors();
   const onClicked = (): void => {
-    if (props.onClicked) {
+    if (props.onClicked && !props.isDisabled) {
       props.onClicked();
     }
   };
@@ -121,7 +147,7 @@ export const SelectableView = (props: ISelectableViewProps): React.ReactElement 
     // @ts-ignore: as prop doesn't match type required
     <StyledSelectableView
       id={props.id}
-      className={getClassName(SelectableView.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', props.isSelected && 'selected', ...(props.variant?.split('-') || []))}
+      className={getClassName(SelectableView.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', props.isSelected && 'selected', props.isDisabled && 'disabled', ...(props.variant?.split('-') || []))}
       $theme={props.theme}
       onClick={onClicked}
     >

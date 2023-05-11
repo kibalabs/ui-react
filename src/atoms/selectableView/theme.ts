@@ -19,4 +19,5 @@ export interface ISelectableViewThemeState extends ThemeType {
 export interface ISelectableViewTheme extends ThemeType {
   normal: ISelectableViewThemeState;
   selected: RecursivePartial<ISelectableViewThemeState>;
+  disabled: RecursivePartial<ISelectableViewThemeState>;
 }

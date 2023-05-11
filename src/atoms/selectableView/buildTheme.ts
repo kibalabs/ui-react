@@ -40,6 +40,19 @@ export const buildSelectableViewThemes = (dimensions: IDimensionGuide, boxThemes
       focus: {
       },
     },
+    disabled: {
+      default: {
+        overlay: {
+          'background-color': 'rgba(0, 0, 0, 0.1)',
+        },
+      },
+      hover: {
+      },
+      press: {
+      },
+      focus: {
+      },
+    },
   };
 
   return mergeThemeMap<ISelectableViewTheme>({

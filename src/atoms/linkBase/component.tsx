@@ -26,7 +26,6 @@ export const LinkBaseThemedStyle = (theme: RecursivePartial<ILinkBaseTheme>): st
     ${themeToCss(theme?.normal?.focus?.linkBase)};
   }
   &.disabled {
-    cursor: not-allowed;
     & > .KibaLinkBaseFocusFixer {
       ${themeToCss(theme?.disabled?.default?.background)};
       ${themeToCss(theme?.disabled?.default?.linkBase)};
