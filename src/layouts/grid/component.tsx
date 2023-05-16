@@ -112,7 +112,7 @@ const getCssSize = (totalColumnCount: number, gutter: string, columnCount: numbe
 
 // TODO(krishan711): this can be consolidated with responsiveUtil.fieldToResponsiveCss with some kind of currying for the above function.
 const columnCountsToCss = (field: ResponsiveField<number>, theme: IDimensionGuide, gutter: string): string => {
-  const output = [];
+  const output: string[] = [];
   if (field?.base !== undefined) {
     output.push(getCssSize(theme.columnCount, gutter, field.base));
   }
