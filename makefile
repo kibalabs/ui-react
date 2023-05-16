@@ -1,6 +1,9 @@
 install:
 	@ npm ci
 
+install-updates:
+	@ npm install
+
 list-outdated: install
 	@ npm outdated
 
