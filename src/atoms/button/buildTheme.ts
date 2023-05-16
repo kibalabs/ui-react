@@ -1,11 +1,12 @@
+
 import { RecursivePartial } from '@kibalabs/core';
 
 import { IButtonTheme } from './theme';
-import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { IBoxTheme, IDimensionGuide, ITextTheme } from '../../particles';
+import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IButtonTheme>>): ThemeMap<IButtonTheme> => {
-  const defaultButtonTheme = mergeTheme<IButtonTheme>({
+export const buildButtonThemes = (dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IButtonTheme>): ThemeMap<IButtonTheme> => {
+  const defaultButtonTheme: IButtonTheme = {
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
@@ -42,9 +43,9 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
         },
       },
     },
-  }, base?.default);
+  };
 
-  const primaryButtonTheme = mergeThemePartial<IButtonTheme>({
+  const primaryButtonTheme: RecursivePartial<IButtonTheme> = {
     normal: {
       default: {
         background: {
@@ -66,9 +67,9 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
         },
       },
     },
-  }, base?.primary);
+  };
 
-  const secondaryButtonTheme = mergeThemePartial<IButtonTheme>({
+  const secondaryButtonTheme: RecursivePartial<IButtonTheme> = {
     normal: {
       default: {
         background: {
@@ -76,9 +77,11 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
         },
       },
     },
-  }, base?.secondary);
+  };
 
-  const largeButtonTheme = mergeThemePartial<IButtonTheme>({
+  const tertiaryButtonTheme = defaultButtonTheme;
+
+  const largeButtonTheme: RecursivePartial<IButtonTheme> = {
     normal: {
       default: {
         background: {
@@ -89,9 +92,9 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
         },
       },
     },
-  }, base?.large);
+  };
 
-  const smallButtonTheme = mergeThemePartial<IButtonTheme>({
+  const smallButtonTheme: RecursivePartial<IButtonTheme> = {
     normal: {
       default: {
         background: {
@@ -102,9 +105,9 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
         },
       },
     },
-  }, base?.small);
+  };
 
-  const cardButtonTheme = mergeThemePartial<IButtonTheme>({
+  const cardButtonTheme: RecursivePartial<IButtonTheme> = {
     normal: {
       default: {
         background: {
@@ -113,16 +116,15 @@ export const buildButtonThemes = (colors: IColorGuide, dimensions: IDimensionGui
         },
       },
     },
-  }, base?.card);
+  };
 
-  return {
-    ...(base || {}),
+  return mergeThemeMap<IButtonTheme>({
     default: defaultButtonTheme,
     primary: primaryButtonTheme,
     secondary: secondaryButtonTheme,
-    tertiary: defaultButtonTheme,
+    tertiary: tertiaryButtonTheme,
     large: largeButtonTheme,
     small: smallButtonTheme,
     card: cardButtonTheme,
-  };
+  }, (base || {}));
 };

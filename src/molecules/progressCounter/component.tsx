@@ -57,7 +57,7 @@ export const ProgressCounter = (props: IProgressCounterProps): React.ReactElemen
   );
 };
 
-ProgressCounter.displayName = 'ProgressCounter';
+ProgressCounter.displayName = 'KibaProgressCounter';
 ProgressCounter.defaultProps = {
   ...defaultMoleculeProps,
   itemSpacingSize: PaddingSize.Default,

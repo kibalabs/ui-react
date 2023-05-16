@@ -3,6 +3,7 @@ import { RecursivePartial } from '@kibalabs/core';
 import { IBoxTheme } from '../../particles';
 import { CssTheme, ThemeType } from '../../util';
 
+
 export interface ILinkBaseThemeInner extends CssTheme {
   opacity: string;
 }

@@ -1,11 +1,12 @@
+
 import { RecursivePartial } from '@kibalabs/core';
 
 import { ILinkBaseTheme } from './theme';
-import { IBoxTheme, IColorGuide, IDimensionGuide } from '../../particles';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { IBoxTheme, IDimensionGuide } from '../../particles';
+import { mergeTheme, mergeThemeMap, mergeThemePartial, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ILinkBaseTheme>>): ThemeMap<ILinkBaseTheme> => {
-  const defaultLinkBaseTheme = mergeTheme<ILinkBaseTheme>({
+export const buildLinkBaseThemes = (dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<ILinkBaseTheme>): ThemeMap<ILinkBaseTheme> => {
+  const defaultLinkBaseTheme: ILinkBaseTheme = {
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
@@ -35,21 +36,32 @@ export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionG
         },
       },
     },
-  }, base?.default);
+  };
 
-  const translucentLinkBaseTheme = mergeThemePartial<ILinkBaseTheme>({
-  }, base?.translucent);
+  const translucentLinkBaseTheme: RecursivePartial<ILinkBaseTheme> = {
+    normal: {
+      default: {
+        background: mergeTheme(boxThemes.default, boxThemes.focusable, {
+          'background-color': 'transparent',
+        }),
+        linkBase: {
+          opacity: '1',
+        },
+      },
+    },
+  };
 
-  const cardLinkBaseTheme = mergeThemePartial<ILinkBaseTheme>({
+  const cardLinkBaseTheme: RecursivePartial<ILinkBaseTheme> = {
     normal: {
       default: {
         background: mergeThemePartial(boxThemes.card, boxThemes.focusable, {
+          margin: '0',
         }),
       },
     },
-  }, base?.card);
+  };
 
-  const imageLinkBaseTheme = mergeThemePartial<ILinkBaseTheme>({
+  const imageLinkBaseTheme: RecursivePartial<ILinkBaseTheme> = {
     normal: {
       hover: {
         linkBase: {
@@ -62,13 +74,12 @@ export const buildLinkBaseThemes = (colors: IColorGuide, dimensions: IDimensionG
         },
       },
     },
-  }, base?.translucent);
+  };
 
-  return {
-    ...(base || {}),
+  return mergeThemeMap<ILinkBaseTheme>({
     default: defaultLinkBaseTheme,
     translucent: translucentLinkBaseTheme,
     card: cardLinkBaseTheme,
     image: imageLinkBaseTheme,
-  };
+  }, (base || {}));
 };

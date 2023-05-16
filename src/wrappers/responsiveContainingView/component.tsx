@@ -85,7 +85,7 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
   );
 };
 
-ResponsiveContainingView.displayName = 'ResponsiveContainingView';
+ResponsiveContainingView.displayName = 'KibaResponsiveContainingView';
 ResponsiveContainingView.defaultProps = {
   ...defaultWrapperProps,
   isCenteredHorizontally: true,

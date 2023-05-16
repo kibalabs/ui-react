@@ -1,12 +1,11 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { IBoxTheme } from './theme';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide } from '../colors';
+import { mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 import { IDimensionGuide } from '../dimensions';
 
-export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: RecursivePartial<Record<string, IBoxTheme>>): ThemeMap<IBoxTheme> => {
-  const defaultBoxTheme = mergeTheme<IBoxTheme>({
+export const buildBoxThemes = (dimensions: IDimensionGuide, base?: PartialThemeMap<IBoxTheme>): ThemeMap<IBoxTheme> => {
+  const defaultBoxTheme: IBoxTheme = {
     'background-color': 'transparent',
     'border-radius': dimensions.borderRadius,
     'border-color': 'transparent',
@@ -20,61 +19,60 @@ export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide,
     'outline-width': '0',
     'outline-offset': '0',
     opacity: '1',
-  }, base?.default);
+  };
 
-  const transparentBoxTheme = mergeThemePartial<IBoxTheme>({
+  const transparentBoxTheme: RecursivePartial<IBoxTheme> = {
     'background-color': 'transparent',
     padding: dimensions.padding,
-  }, base?.transparent);
+  };
 
-  const paddedBoxTheme = mergeThemePartial<IBoxTheme>({
+  const paddedBoxTheme: RecursivePartial<IBoxTheme> = {
     padding: dimensions.padding,
-  }, base?.padded);
+  };
 
-  const cardBoxTheme = mergeThemePartial<IBoxTheme>({
+  const cardBoxTheme: RecursivePartial<IBoxTheme> = {
     'background-color': '$colors.backgroundLight10',
     'border-color': '$colors.backgroundDark05',
     'border-width': dimensions.borderWidth,
     'box-shadow': '0px 8px 8px -6px rgba(0,0,0,0.15)',
     margin: '0px 4px 12px 4px',
     padding: `${dimensions.paddingWide2} ${dimensions.paddingWide2}`,
-  }, base?.card);
+  };
 
-  const borderedBoxTheme = mergeThemePartial<IBoxTheme>({
+  const borderedBoxTheme: RecursivePartial<IBoxTheme> = {
     'background-color': '$colors.backgroundLight10',
     'border-color': '$colors.backgroundDark05',
     'border-width': dimensions.borderWidth,
     padding: `${dimensions.paddingWide2} ${dimensions.paddingWide2}`,
-  }, base?.bordered);
+  };
 
-  const focusableBoxTheme = mergeThemePartial<IBoxTheme>({
+  const focusableBoxTheme: RecursivePartial<IBoxTheme> = {
     'border-color': 'transparent',
     'border-width': '2px',
     'border-style': 'solid',
-  }, base?.focusable);
+  };
 
-  const focussedBoxTheme = mergeThemePartial<IBoxTheme>({
+  const focussedBoxTheme: RecursivePartial<IBoxTheme> = {
     'border-color': '$colors.backgroundDark50',
-  }, base?.focussed);
+  };
 
-  const roundBoxTheme = mergeThemePartial<IBoxTheme>({
+  const roundBoxTheme: RecursivePartial<IBoxTheme> = {
     'border-radius': '50%',
-  }, base?.rounded);
+  };
 
-  const unpaddedBoxTheme = mergeThemePartial<IBoxTheme>({
+  const unpaddedBoxTheme: RecursivePartial<IBoxTheme> = {
     padding: '0',
-  }, base?.unpaddeded);
+  };
 
-  const unmarginedBoxTheme = mergeThemePartial<IBoxTheme>({
+  const unmarginedBoxTheme: RecursivePartial<IBoxTheme> = {
     margin: '0',
-  }, base?.unmargined);
+  };
 
-  const overlayBoxTheme = mergeThemePartial<IBoxTheme>({
+  const overlayBoxTheme: RecursivePartial<IBoxTheme> = {
     'background-color': '$colors.backgroundClear75',
-  }, base?.overlay);
+  };
 
-  return {
-    ...(base || {}),
+  return mergeThemeMap<IBoxTheme>({
     default: defaultBoxTheme,
     transparent: transparentBoxTheme,
     padded: paddedBoxTheme,
@@ -86,5 +84,5 @@ export const buildBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide,
     unpadded: unpaddedBoxTheme,
     unmargined: unmarginedBoxTheme,
     overlay: overlayBoxTheme,
-  };
+  }, (base || {}));
 };

@@ -1,15 +1,55 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IButtonTheme } from './theme';
-import { defaultComponentProps, IComponentProps, LoadingSpinner, themeToCss, useBuiltTheme } from '../..';
-import { Alignment, getFlexContentAlignment } from '../../model';
-import { IIconProps, PaddingSize, Spacing } from '../../particles';
-import { CssConverter } from '../../util';
+import { Alignment, defaultComponentProps, getContentAlignmentCss, getItemAlignmentCss, IComponentProps } from '../../model';
+import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particles';
+import { themeToCss } from '../../util';
 
+export const ButtonThemedStyle = (theme: RecursivePartial<IButtonTheme>): string => `
+  & > .KibaButtonFocusFixer {
+    ${themeToCss(theme.normal?.default?.text)};
+    ${themeToCss(theme.normal?.default?.background)};
+  }
+  /* Since it can be rendered as an <a>, unset everything for visited */
+  &:visited > .KibaButtonFocusFixer {
+    ${themeToCss(theme.normal?.default?.text)};
+    ${themeToCss(theme.normal?.default?.background)};
+  }
+  &:hover > .KibaButtonFocusFixer {
+    ${themeToCss(theme.normal?.hover?.text)};
+    ${themeToCss(theme.normal?.hover?.background)};
+  }
+  &:active > .KibaButtonFocusFixer {
+    ${themeToCss(theme.normal?.press?.text)};
+    ${themeToCss(theme.normal?.press?.background)};
+  }
+  &:focus > .KibaButtonFocusFixer {
+    ${themeToCss(theme.normal?.focus?.text)};
+    ${themeToCss(theme.normal?.focus?.background)};
+  }
+  &.disabled {
+    & > .KibaButtonFocusFixer {
+      ${themeToCss(theme.disabled?.default?.text)};
+      ${themeToCss(theme.disabled?.default?.background)};
+    }
+    &:hover > .KibaButtonFocusFixer {
+      ${themeToCss(theme.disabled?.hover?.text)};
+      ${themeToCss(theme.disabled?.hover?.background)};
+    }
+    &:active > .KibaButtonFocusFixer {
+      ${themeToCss(theme.disabled?.press?.text)};
+      ${themeToCss(theme.disabled?.press?.background)};
+    }
+    &:focus > .KibaButtonFocusFixer {
+      ${themeToCss(theme.disabled?.focus?.text)};
+      ${themeToCss(theme.disabled?.focus?.background)};
+    }
+  }
+`;
 
 // NOTE(krishan711): focus problem fixed with https://www.kizu.ru/keyboard-only-focus/#proper-solution
 
@@ -22,25 +62,22 @@ const StyledButtonText = styled.span<IStyledButtonTextProps>`
 `;
 
 interface IStyledButtonProps {
-  $theme: IButtonTheme;
+  $theme?: RecursivePartial<IButtonTheme>;
   $isLoading: boolean;
 }
 
-const getContentAlignmentCss: CssConverter<Alignment> = (field: Alignment): string => {
-  return `justify-content: ${getFlexContentAlignment(field)};`;
-};
-
-interface IStyledButtonInnerProps {
+interface IStyledButtonFocusFixerProps {
+  $childAlignment: Alignment;
   $contentAlignment: Alignment;
 }
 
-const StyledButtonInner = styled.span<IStyledButtonInnerProps>`
+const StyledButtonFocusFixer = styled.span<IStyledButtonFocusFixerProps>`
   transition-duration: 0.3s;
   outline: none;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  ${(props: IStyledButtonInnerProps): string => getContentAlignmentCss(props.$contentAlignment)};
+  ${(props: IStyledButtonFocusFixerProps): string => getItemAlignmentCss(props.$contentAlignment)};
+  ${(props: IStyledButtonFocusFixerProps): string => getContentAlignmentCss(props.$contentAlignment)};
   background-clip: border-box;
   width: 100%;
   height: 100%;
@@ -50,52 +87,17 @@ const StyledButtonInner = styled.span<IStyledButtonInnerProps>`
 
 
 const StyledButton = styled.button<IStyledButtonProps>`
-  cursor: ${(props: IStyledButtonProps): string => (props.$isLoading ? 'default' : 'pointer')};
   transition-duration: 0.3s;
-
   &.fullWidth {
     width: 100%;
   }
-
-  & > .focus-fixer {
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.text)};
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.background)};
-  }
-  /* Since it can be rendered as an <a>, unset everything for visited */
-  &:visited > .focus-fixer {
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.text)};
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.default.background)};
-  }
-  &:hover > .focus-fixer {
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.hover?.text)};
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.hover?.background)};
-  }
-  &:active > .focus-fixer {
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.press?.text)};
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.press?.background)};
-  }
-  &:focus > .focus-fixer {
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.focus?.text)};
-    ${(props: IStyledButtonProps): string => themeToCss(props.$theme.normal.focus?.background)};
-  }
   &.disabled {
     cursor: not-allowed;
-    & > .focus-fixer {
-      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.default?.text)};
-      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.default?.background)};
-    }
-    &:hover > .focus-fixer {
-      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.hover?.text)};
-      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.hover?.background)};
-    }
-    &:active > .focus-fixer {
-      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.press?.text)};
-      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.press?.background)};
-    }
-    &:focus > .focus-fixer {
-      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.focus?.text)};
-      ${(props: IStyledButtonProps): string => themeToCss(props.$theme.disabled.focus?.background)};
-    }
+  }
+  cursor: ${(props: IStyledButtonProps): string => (props.$isLoading ? 'default' : 'pointer')};
+
+  &&&& {
+    ${(props: IStyledButtonProps): string => (props.$theme ? ButtonThemedStyle(props.$theme) : '')};
   }
 `;
 
@@ -111,6 +113,7 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   target?: string;
   targetShouldOpenSameTab?: boolean;
   tabIndex?: number;
+  childAlignment: Alignment;
   contentAlignment: Alignment;
   isTextFullWidth: boolean;
   onClicked?(): void;
@@ -135,15 +138,14 @@ export const Button = (props: IButtonProps): React.ReactElement => {
     throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
   }
 
-  const theme = useBuiltTheme('buttons', props.variant, props.theme);
   const isTargetWithinApp = props.target && props.target.startsWith('/');
   const targetShouldOpenSameTab = props.targetShouldOpenSameTab || props.target?.startsWith('#') || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
   return (
     // @ts-ignore: as prop doesn't match type required
     <StyledButton
       id={props.id}
-      className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', !props.isEnabled && 'disabled')}
-      $theme={theme}
+      className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', !props.isEnabled && 'disabled', ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
       $isLoading={props.isLoading || false}
       onClick={onClicked}
       disabled={!props.isEnabled}
@@ -154,7 +156,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
       type={props.buttonType || 'button'}
     >
-      <StyledButtonInner className='focus-fixer' tabIndex={-1} $contentAlignment={props.contentAlignment}>
+      <StyledButtonFocusFixer className='KibaButtonFocusFixer' tabIndex={-1} $childAlignment={props.childAlignment || Alignment.Center} $contentAlignment={props.contentAlignment || Alignment.Center}>
         { !props.isLoading && props.iconLeft && (
           <React.Fragment>
             {props.iconLeft}
@@ -176,16 +178,17 @@ export const Button = (props: IButtonProps): React.ReactElement => {
             variant='light-small'
           />
         )}
-      </StyledButtonInner>
+      </StyledButtonFocusFixer>
     </StyledButton>
   );
 };
 
-Button.displayName = 'Button';
+Button.displayName = 'KibaButton';
 Button.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,
   isTextFullWidth: true,
   iconGutter: PaddingSize.Default,
   contentAlignment: Alignment.Fill,
+  childAlignment: Alignment.Center,
 };

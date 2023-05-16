@@ -170,7 +170,7 @@ export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElem
   const addHead = React.useCallback((head: IHead): void => {
     const matchingHeads = headsRef.current.filter((currentHead: IHead): boolean => currentHead.headId === head.headId);
     if (matchingHeads.length > 0) {
-      console.warn('Skipping head with the same headId as another that is already added');
+      console.warn(`Skipping head with the same headId as another that is already added: ${head.headId}`);
     } else {
       headsRef.current.push(head);
     }
@@ -225,23 +225,26 @@ export const Head = (props: IHeadProps): React.ReactElement | null => {
     updateHead();
   }, [updateHead]);
 
+  // NOTE(krishan711): this is needed to cause the head to be rendered during ssr but its not a good solution
+  // because of https://react.dev/reference/react/useRef#avoiding-recreating-the-ref-contents it causes a warning
+  // log during development. I can't figure out the best way to apporach this.
   if (!isRendered.current) {
-    headRoot.addHead(headRef.current);
     isRendered.current = true;
+    headRoot.addHead(headRef.current);
     updateHead();
   }
 
   React.useEffect((): (() => void) => {
-    const head = headRef.current;
+    const headRefCurrent = headRef.current;
     if (!isRendered.current) {
-      headRoot.addHead(head);
       isRendered.current = true;
+      headRoot.addHead(headRefCurrent);
     }
     return ((): void => {
-      headRoot.removeHead(head);
+      headRoot.removeHead(headRefCurrent);
       isRendered.current = false;
     });
-  }, [headRef, headRoot]);
+  }, [isRendered, headRef, headRoot]);
 
   return null;
 };

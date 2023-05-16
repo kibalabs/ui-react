@@ -3,6 +3,7 @@ import { RecursivePartial } from '@kibalabs/core';
 import { IBoxTheme } from '../../particles';
 import { ThemeType } from '../../util';
 
+
 export interface ISelectableViewThemeBase extends ThemeType {
   background: IBoxTheme;
   overlay: IBoxTheme;
@@ -18,4 +19,5 @@ export interface ISelectableViewThemeState extends ThemeType {
 export interface ISelectableViewTheme extends ThemeType {
   normal: ISelectableViewThemeState;
   selected: RecursivePartial<ISelectableViewThemeState>;
+  disabled: RecursivePartial<ISelectableViewThemeState>;
 }

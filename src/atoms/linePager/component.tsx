@@ -1,54 +1,61 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { ILinePagerTheme } from './theme';
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
-import { Direction } from '../../model';
+import { defaultComponentProps, Direction, IComponentProps } from '../../model';
 import { ScreenSize, Spacing } from '../../particles';
-import { ResponsiveField } from '../../util';
+import { ResponsiveField, themeToCss } from '../../util';
 import { ResponsiveHidingView } from '../../wrappers';
 
+export const LinePagerThemedStyle = (theme: RecursivePartial<ILinePagerTheme>): string => `
+  & > .LinePagerItem {
+    ${themeToCss(theme.normal?.default?.background)};
+    &:hover {
+      ${themeToCss(theme.normal?.hover?.background)};
+    }
+    &:active {
+      ${themeToCss(theme.normal?.press?.background)};
+    }
+    &:focus {
+      ${themeToCss(theme.normal?.focus?.background)};
+    }
+    &.active {
+      ${themeToCss(theme.active?.default?.background)};
+      &:hover {
+        ${themeToCss(theme.active?.hover?.background)};
+      }
+      &:active {
+        ${themeToCss(theme.active?.press?.background)};
+      }
+      &:focus {
+        ${themeToCss(theme.active?.focus?.background)};
+      }
+    }
+  }
+`;
+
 interface IStyledLinePagerProps {
-  $theme: ILinePagerTheme;
+  $theme?: RecursivePartial<ILinePagerTheme>;
 }
 
-const StyledLinePager = styled.div`
+const StyledLinePager = styled.div<IStyledLinePagerProps>`
   display: flex;
   flex-direction: row;
   width: 100%;
+
+  &&&& {
+    ${(props: IStyledLinePagerProps): string => (props.$theme ? LinePagerThemedStyle(props.$theme) : '')};
+  }
 `;
 
 const StyledLinePagerItem = styled.button<IStyledLinePagerProps>`
-  ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.normal.default.background)};
   cursor: pointer;
   outline: none;
   transition-duration: 0.3s;
   flex-grow: 1;
   flex-shrink: 1;
-
-  &:hover {
-    ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.normal.hover?.background)};
-  }
-  &:active {
-    ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.normal.press?.background)};
-  }
-  &:focus {
-    ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.normal.focus?.background)};
-  }
-  &.active {
-    ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.active?.default?.background)};
-    &:hover {
-      ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.active?.hover?.background)};
-    }
-    &:active {
-      ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.active?.press?.background)};
-    }
-    &:focus {
-      ${(props: IStyledLinePagerProps): string => themeToCss(props.$theme.active?.focus?.background)};
-    }
-  }
 `;
 
 interface ILinePagerProps extends IComponentProps<ILinePagerTheme> {
@@ -59,7 +66,6 @@ interface ILinePagerProps extends IComponentProps<ILinePagerTheme> {
 }
 
 export const LinePager = (props: ILinePagerProps): React.ReactElement => {
-  const theme = useBuiltTheme('linePagers', props.variant, props.theme);
   if (props.pageCount == null && props.pageCountResponsive?.base == null) {
     throw new Error(`One of {pageCount, pageCountResponsive.base} must be passed to ${LinePager.displayName}`);
   }
@@ -97,18 +103,20 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
   return (
     <StyledLinePager
       id={props.id}
-      className={getClassName(LinePager.displayName, props.className)}
+      className={getClassName(LinePager.displayName, props.className, ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
     >
       {Array(maxPageCount).fill(null).map((_: unknown, index: number): React.ReactElement => {
         return (
           <ResponsiveHidingView key={index} hiddenAbove={getHiddenAboveSize(index)}>
             <StyledLinePagerItem
-              className={getClassName(index === props.activePageIndex && 'active')}
-              $theme={theme}
+              className={getClassName(index === props.activePageIndex && 'active', 'LinePagerItem')}
               aria-label={`Page ${index + 1}`}
               onClick={(): void => onPageClicked(index)}
             />
-            {index < pageCount - 1 && <Spacing direction={Direction.Horizontal} />}
+            {index < pageCount - 1 && (
+              <Spacing direction={Direction.Horizontal} />
+            )}
           </ResponsiveHidingView>
         );
       })}
@@ -116,7 +124,7 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
   );
 };
 
-LinePager.displayName = 'LinePager';
+LinePager.displayName = 'KibaLinePager';
 LinePager.defaultProps = {
   ...defaultComponentProps,
 };

@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
@@ -10,12 +10,84 @@ import { Stack } from '../../layouts';
 import { defaultComponentProps, IComponentProps } from '../../model';
 import { PaddingSize } from '../../particles';
 import { KibaIcon } from '../../particles/kibaIcon';
-import { useBuiltTheme, useColors } from '../../theming';
+import { useColors } from '../../theming';
 import { themeToCss } from '../../util';
 
+export const SelectableViewThemedStyle = (theme: RecursivePartial<ISelectableViewTheme>): string => `
+  ${themeToCss(theme.normal?.default?.background)};
+  & > .selectable-view-overlay {
+    ${themeToCss(theme.normal?.default?.overlay)};
+  }
+  &:hover {
+    ${themeToCss(theme.normal?.hover?.background)};
+    & > .selectable-view-overlay {
+      ${themeToCss(theme.normal?.hover?.overlay)};
+    }
+  }
+  &:active {
+    ${themeToCss(theme.normal?.press?.background)};
+    & > .selectable-view-overlay {
+      ${themeToCss(theme.normal?.press?.overlay)};
+    }
+  }
+  &:focus {
+    ${themeToCss(theme.normal?.focus?.background)};
+    & > .selectable-view-overlay {
+      ${themeToCss(theme.normal?.focus?.overlay)};
+    }
+  }
+  &.selected {
+    ${themeToCss(theme.selected?.default?.background)};
+    & > .selectable-view-overlay {
+      ${themeToCss(theme.selected?.default?.overlay)};
+    }
+    &:hover {
+      ${themeToCss(theme.selected?.hover?.background)};
+      & > .selectable-view-overlay {
+        ${themeToCss(theme.selected?.hover?.overlay)};
+      }
+    }
+    &:active {
+      ${themeToCss(theme.selected?.press?.background)};
+      & > .selectable-view-overlay {
+        ${themeToCss(theme.selected?.press?.overlay)};
+      }
+    }
+    &:focus {
+      ${themeToCss(theme.selected?.focus?.background)};
+      & > .selectable-view-overlay {
+        ${themeToCss(theme.selected?.focus?.overlay)};
+      }
+    }
+  }
+  &.disabled {
+    ${themeToCss(theme.disabled?.default?.background)};
+    & > .selectable-view-overlay {
+      ${themeToCss(theme.disabled?.default?.overlay)};
+    }
+    &:hover {
+      ${themeToCss(theme.disabled?.hover?.background)};
+      & > .selectable-view-overlay {
+        ${themeToCss(theme.disabled?.hover?.overlay)};
+      }
+    }
+    &:active {
+      ${themeToCss(theme.disabled?.press?.background)};
+      & > .selectable-view-overlay {
+        ${themeToCss(theme.disabled?.press?.overlay)};
+      }
+    }
+    &:focus {
+      ${themeToCss(theme.disabled?.focus?.background)};
+      & > .selectable-view-overlay {
+        ${themeToCss(theme.disabled?.focus?.overlay)};
+      }
+    }
+  }
+`;
 
 interface IStyledSelectableViewProps {
-  $theme: ISelectableViewTheme;
+  $theme?: RecursivePartial<ISelectableViewTheme>;
 }
 
 const StyledSelectableView = styled.button<IStyledSelectableViewProps>`
@@ -33,74 +105,32 @@ const StyledSelectableView = styled.button<IStyledSelectableViewProps>`
   &.fullWidth {
     width: 100%;
   }
-
   &.fullHeight {
     height: 100%;
   }
+  &.disabled {
+    cursor: not-allowed !important;
+  }
 
-  ${(props: IStyledSelectableViewProps): string => themeToCss(props.$theme.normal.default.background)};
-  &:hover {
-    ${(props: IStyledSelectableViewProps): string => themeToCss(props.$theme.normal.hover?.background)};
-  }
-  &:active {
-    ${(props: IStyledSelectableViewProps): string => themeToCss(props.$theme.normal.press?.background)};
-  }
-  &:focus {
-    ${(props: IStyledSelectableViewProps): string => themeToCss(props.$theme.normal.focus?.background)};
-  }
-  &.selected {
-    ${(props: IStyledSelectableViewProps): string => themeToCss(props.$theme.selected.default?.background)};
-    &:hover {
-      ${(props: IStyledSelectableViewProps): string => themeToCss(props.$theme.selected.hover?.background)};
-    }
-    &:active {
-      ${(props: IStyledSelectableViewProps): string => themeToCss(props.$theme.selected.press?.background)};
-    }
-    &:focus {
-      ${(props: IStyledSelectableViewProps): string => themeToCss(props.$theme.selected.focus?.background)};
-    }
+  &&&& {
+    ${(props: IStyledSelectableViewProps): string => (props.$theme ? SelectableViewThemedStyle(props.$theme) : '')};
   }
 `;
 
-interface IStyledOverlayProps {
-  $theme: ISelectableViewTheme;
-}
-
-const StyledOverlay = styled.div<IStyledOverlayProps>`
+const StyledOverlay = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
   z-index: 2;
-
-  ${(props: IStyledOverlayProps): string => themeToCss(props.$theme.normal.default.overlay)};
-  &:hover {
-    ${(props: IStyledOverlayProps): string => themeToCss(props.$theme.normal.hover?.overlay)};
-  }
-  &:active {
-    ${(props: IStyledOverlayProps): string => themeToCss(props.$theme.normal.press?.overlay)};
-  }
-  &:focus {
-    ${(props: IStyledOverlayProps): string => themeToCss(props.$theme.normal.focus?.overlay)};
-  }
-  &.selected {
-    ${(props: IStyledOverlayProps): string => themeToCss(props.$theme.selected.default?.overlay)};
-    &:hover {
-      ${(props: IStyledOverlayProps): string => themeToCss(props.$theme.selected.hover?.overlay)};
-    }
-    &:active {
-      ${(props: IStyledOverlayProps): string => themeToCss(props.$theme.selected.press?.overlay)};
-    }
-    &:focus {
-      ${(props: IStyledOverlayProps): string => themeToCss(props.$theme.selected.focus?.overlay)};
-    }
-  }
 `;
-StyledOverlay.displayName = 'SelectableViewOverlay';
 
 export interface ISelectableViewProps extends IComponentProps<ISelectableViewTheme>, ISingleAnyChildProps {
   isSelected: boolean;
+  isDisabled?: boolean;
   selectedIndicator?: React.ReactElement;
   shouldHideDefaultSelectedIndicator?: boolean;
+  isFullWidth?: boolean;
+  isFullHeight?: boolean;
   onClicked(): void;
 
 }
@@ -108,26 +138,21 @@ export interface ISelectableViewProps extends IComponentProps<ISelectableViewThe
 export const SelectableView = (props: ISelectableViewProps): React.ReactElement => {
   const colors = useColors();
   const onClicked = (): void => {
-    if (props.onClicked) {
+    if (props.onClicked && !props.isDisabled) {
       props.onClicked();
     }
   };
-
-  const theme = useBuiltTheme('selectableViews', props.variant, props.theme);
 
   return (
     // @ts-ignore: as prop doesn't match type required
     <StyledSelectableView
       id={props.id}
-      className={getClassName(SelectableView.displayName, props.className, props.isSelected && 'selected')}
-      $theme={theme}
+      className={getClassName(SelectableView.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', props.isSelected && 'selected', props.isDisabled && 'disabled', ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
       onClick={onClicked}
     >
       {props.children}
-      <StyledOverlay
-        className={getClassName(StyledOverlay.displayName, props.isSelected && 'selected')}
-        $theme={theme}
-      >
+      <StyledOverlay className='selectable-view-overlay'>
         { props.isSelected && (
           <React.Fragment>
             {props.selectedIndicator ? (
@@ -147,7 +172,7 @@ export const SelectableView = (props: ISelectableViewProps): React.ReactElement 
   );
 };
 
-SelectableView.displayName = 'SelectableView';
+SelectableView.displayName = 'KibaSelectableView';
 SelectableView.defaultProps = {
   ...defaultComponentProps,
 };

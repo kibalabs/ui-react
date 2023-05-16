@@ -3,6 +3,7 @@ import { RecursivePartial } from '@kibalabs/core';
 import { IBoxTheme, ITextTheme } from '../../particles';
 import { ThemeType } from '../../util';
 
+
 export interface IProgressCounterItemThemeBase extends ThemeType {
   text: ITextTheme;
   background: IBoxTheme;

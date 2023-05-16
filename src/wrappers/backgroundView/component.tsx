@@ -88,7 +88,7 @@ export const BackgroundView = (props: IBackgroundViewProps): React.ReactElement 
   );
 };
 
-BackgroundView.displayName = 'BackgroundView';
+BackgroundView.displayName = 'KibaBackgroundView';
 BackgroundView.defaultProps = {
   ...defaultWrapperProps,
 };

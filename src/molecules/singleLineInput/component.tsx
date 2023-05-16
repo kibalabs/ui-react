@@ -113,7 +113,7 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
   );
 };
 
-SingleLineInput.displayName = 'SingleLineInput';
+SingleLineInput.displayName = 'KibaSingleLineInput';
 SingleLineInput.defaultProps = {
   ...defaultMoleculeProps,
   isEnabled: true,

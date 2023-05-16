@@ -1,20 +1,24 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { useInitialization } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IWebViewTheme } from './theme';
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps } from '../../model';
 import { LoadingSpinner } from '../../particles';
+import { themeToCss } from '../../util';
+
+export const WebViewThemedStyle = (theme: RecursivePartial<IWebViewTheme>): string => `
+  ${themeToCss(theme?.normal?.default?.background)};
+`;
 
 interface IStyledWebViewProps {
-  $theme: IWebViewTheme;
+  $theme?: RecursivePartial<IWebViewTheme>;
   $aspectRatio?: number;
 }
 
 const StyledWebView = styled.div<IStyledWebViewProps>`
-  ${(props: IStyledWebViewProps): string => themeToCss(props.$theme.normal?.default?.background)};
   height: 100%;
   width: 100%;
   display: flex;
@@ -22,6 +26,10 @@ const StyledWebView = styled.div<IStyledWebViewProps>`
   justify-content: center;
   position: relative;
   padding-bottom: ${(props: IStyledWebViewProps): string => (props.$aspectRatio ? `calc(${props.$aspectRatio} * 100%)` : 'auto')};
+
+  &&&& {
+    ${(props: IStyledWebViewProps): string => (props.$theme ? WebViewThemedStyle(props.$theme) : '')};
+  }
 `;
 
 const LoadingWrapper = styled.div`
@@ -64,16 +72,18 @@ export interface IWebViewProps extends IComponentProps<IWebViewTheme> {
   onLoadingChanged?: (isLoading: boolean) => void;
 }
 
+// TODO(krishan711): make a better default error view
+const DefaultErrorView = (): React.ReactElement => {
+  return (
+    <div>Something went wrong</div>
+  );
+};
+
 export const WebView = (props: IWebViewProps): React.ReactElement => {
   const [currentUrl, setCurrentUrl] = React.useState<string | undefined>(props.url);
   const [hasFailedToLoad, setHasFailedToLoad] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const isInitialized = useInitialization((): void => undefined);
-  // TODO(krishan711): make a better default error view
-  const errorView = props.errorView || (
-    <div>Something went wrong</div>
-  );
-  const theme = useBuiltTheme('webViews', props.variant, props.theme);
 
   React.useEffect((): void => {
     if (props.url !== currentUrl) {
@@ -107,8 +117,8 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
     // @ts-ignore
     <StyledWebView
       id={props.id}
-      className={getClassName(WebView.displayName, props.className)}
-      $theme={theme}
+      className={getClassName(WebView.displayName, props.className, ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
       $aspectRatio={props.aspectRatio}
     >
       <noscript>
@@ -122,8 +132,14 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
         />
       </noscript>
       { hasFailedToLoad ? (
-        errorView
-      ) : isInitialized ? (
+        <React.Fragment>
+          {props.errorView != null ? (
+            <props.errorView />
+          ) : (
+            <DefaultErrorView />
+          )}
+        </React.Fragment>
+      ) : isInitialized && (
         <React.Fragment>
           { isLoading && props.shouldShowLoadingSpinner && (
             <LoadingWrapper id={props.id && `${props.id}-loading-wrapper`}>
@@ -142,14 +158,12 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
             allow={props.permissions.join(';')}
           />
         </React.Fragment>
-      ) : (
-        null
       )}
     </StyledWebView>
   );
 };
 
-WebView.displayName = 'WebView';
+WebView.displayName = 'KibaWebView';
 WebView.defaultProps = {
   ...defaultComponentProps,
   isEnabled: true,

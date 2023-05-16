@@ -127,7 +127,7 @@ export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement 
   );
 };
 
-MultiLineInput.displayName = 'MultiLineInput';
+MultiLineInput.displayName = 'KibaMultiLineInput';
 MultiLineInput.defaultProps = {
   ...defaultMoleculeProps,
   isEnabled: true,

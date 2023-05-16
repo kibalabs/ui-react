@@ -1,11 +1,10 @@
-import { RecursivePartial } from '@kibalabs/core';
 
 import { ITitledCollapsibleBoxTheme } from './theme';
-import { IBoxTheme, IColorGuide, IDimensionGuide, ITextTheme } from '../../particles';
-import { mergeTheme, ThemeMap } from '../../util';
+import { IBoxTheme, IDimensionGuide, ITextTheme } from '../../particles';
+import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildTitledCollapsibleBoxThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, ITitledCollapsibleBoxTheme>>): ThemeMap<ITitledCollapsibleBoxTheme> => {
-  const defaultTitledCollapsibleBoxTheme = mergeTheme<ITitledCollapsibleBoxTheme>({
+export const buildTitledCollapsibleBoxThemes = (dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<ITitledCollapsibleBoxTheme>): ThemeMap<ITitledCollapsibleBoxTheme> => {
+  const defaultTitledCollapsibleBoxTheme: ITitledCollapsibleBoxTheme = {
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, boxThemes.focusable, {
@@ -25,7 +24,7 @@ export const buildTitledCollapsibleBoxThemes = (colors: IColorGuide, dimensions:
       },
       hover: {
         background: {
-          'background-color': colors.neutral,
+          'background-color': '$colors.neutral',
         },
       },
       press: {
@@ -49,11 +48,9 @@ export const buildTitledCollapsibleBoxThemes = (colors: IColorGuide, dimensions:
     },
     collapsed: {
     },
-  }, base?.default);
-
-
-  return {
-    ...(base || {}),
-    default: defaultTitledCollapsibleBoxTheme,
   };
+
+  return mergeThemeMap<ITitledCollapsibleBoxTheme>({
+    default: defaultTitledCollapsibleBoxTheme,
+  }, (base || {}));
 };

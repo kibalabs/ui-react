@@ -1,14 +1,13 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
-import { IInputFrameTheme, IListTheme, InputFrame, List } from '../..';
+import { Box, IInputFrameTheme, IListTheme, InputFrame, List } from '../..';
 import { Stack } from '../../layouts';
 import { Alignment, Direction } from '../../model';
 import { IBoxTheme, KibaIcon, Text } from '../../particles';
-import { useBuiltTheme } from '../../theming';
-import { themeToCss } from '../../util';
+import { getVariant } from '../../util';
 import { HidingView } from '../../wrappers';
 import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
 
@@ -23,20 +22,8 @@ export interface IOption {
 export interface IOptionSelectTheme {
   inputFrameTheme: IInputFrameTheme;
   optionListTheme: IListTheme;
-  optionsContainerTheme: IBoxTheme;
+  optionsContainerTheme?: RecursivePartial<IBoxTheme>;
 }
-
-interface IStyledOptionsContainer {
-  $theme: IBoxTheme;
-}
-
-const StyledOptionsContainer = styled.div<IStyledOptionsContainer>`
-  ${(props: IStyledOptionsContainer): string => themeToCss(props.$theme)};
-  position: absolute;
-  display: block;
-  z-index: 999;
-  width: 100%;
-`;
 
 interface IOptionSelectProps extends IMoleculeProps<IOptionSelectTheme> {
   options: IOption[];
@@ -62,7 +49,7 @@ const StyledOptionSelect = styled.div`
 
 export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
-  const optionsContainerTheme = useBuiltTheme<IBoxTheme>('boxes', props.optionsContainerVariant || 'card-unpadded-unmargined', props.theme?.optionsContainerTheme);
+  const optionsContainerVariant = getVariant(props.optionsContainerVariant || 'card-unpadded-unmargined');
 
   const getSelectedItem = (itemKey?: string) => {
     return props.options.find((option) => option.itemKey === itemKey);
@@ -99,7 +86,7 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
         </Stack>
       </InputFrame>
       <HidingView isHidden={!isOpen}>
-        <StyledOptionsContainer $theme={optionsContainerTheme}>
+        <Box theme={props.theme?.optionsContainerTheme} variant={optionsContainerVariant} zIndex={999} isFullWidth={true} position='absolute'>
           <List theme={props.theme?.optionListTheme} itemVariant={props.optionListVariant || 'slim'} onItemClicked={onItemClicked} shouldShowDividers={true} isFullWidth={true}>
             {props.options.map((option) => (
               <List.Item
@@ -113,13 +100,13 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
               </List.Item>
             ))}
           </List>
-        </StyledOptionsContainer>
+        </Box>
       </HidingView>
     </StyledOptionSelect>
   );
 };
 
-OptionSelect.displayName = 'OptionSelect';
+OptionSelect.displayName = 'KibaOptionSelect';
 OptionSelect.defaultProps = {
   ...defaultMoleculeProps,
 

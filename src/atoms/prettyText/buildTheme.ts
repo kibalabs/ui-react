@@ -1,13 +1,13 @@
 import { RecursivePartial } from '@kibalabs/core';
 
+
 import { IPrettyTextTheme } from './theme';
 import { ITextTheme } from '../../particles';
-import { IColorGuide } from '../../particles/colors';
 import { IDimensionGuide } from '../../particles/dimensions';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
+import { mergeTheme, mergeThemeMap, mergeThemePartial, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, base?: RecursivePartial<Record<string, IPrettyTextTheme>>): ThemeMap<IPrettyTextTheme> => {
-  const prettyTextTheme = mergeTheme<IPrettyTextTheme>({
+export const buildPrettyTextThemes = (dimensions: IDimensionGuide, textThemes: ThemeMap<ITextTheme>, base?: PartialThemeMap<IPrettyTextTheme>): ThemeMap<IPrettyTextTheme> => {
+  const prettyTextTheme: IPrettyTextTheme = {
     normal: {
       default: {
         text: mergeTheme<ITextTheme>(textThemes.default, {
@@ -21,7 +21,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
         text: textThemes.strong,
       },
     },
-  }, base?.default);
+  };
 
   const derivedThemes = Object.keys(textThemes).reduce((currentMap: Record<string, RecursivePartial<IPrettyTextTheme>>, textVariant: string): Record<string, RecursivePartial<IPrettyTextTheme>> => {
     // eslint-disable-next-line no-param-reassign
@@ -31,7 +31,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
           text: textThemes[textVariant],
         },
       },
-    }, base?.textVariant);
+    });
     return currentMap;
   }, {});
 
@@ -48,7 +48,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.header1);
+  });
 
   derivedThemes.header2 = mergeThemePartial(derivedThemes.header2, {
     normal: {
@@ -58,7 +58,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.header2);
+  });
 
   derivedThemes.header3 = mergeThemePartial(derivedThemes.header3, {
     normal: {
@@ -68,7 +68,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.header3);
+  });
 
   derivedThemes.header4 = mergeThemePartial(derivedThemes.header4, {
     normal: {
@@ -78,7 +78,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.header4);
+  });
 
   derivedThemes.header5 = mergeThemePartial(derivedThemes.header5, {
     normal: {
@@ -88,7 +88,7 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.header5);
+  });
 
   derivedThemes.header6 = mergeThemePartial(derivedThemes.header6, {
     normal: {
@@ -98,11 +98,20 @@ export const buildPrettyTextThemes = (colors: IColorGuide, dimensions: IDimensio
         },
       },
     },
-  }, base?.header6);
+  });
 
-  return {
-    ...(base || {}),
-    ...derivedThemes,
+  derivedThemes.paragraph = mergeThemePartial(derivedThemes.paragraph, {
+    normal: {
+      default: {
+        text: {
+          margin: '1em 0',
+        },
+      },
+    },
+  });
+
+  return mergeThemeMap<IPrettyTextTheme>({
     default: prettyTextTheme,
-  };
+    ...derivedThemes,
+  }, (base || {}));
 };

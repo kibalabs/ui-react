@@ -1,32 +1,44 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { IDividerTheme } from './theme';
-import { defaultComponentProps, IComponentProps, useBuiltTheme } from '../..';
-import { valueToCss } from '../../util';
+import { defaultComponentProps, IComponentProps } from '../../model';
+import { propertyToCss } from '../../util';
+
+export const DividerThemedStyle = (theme: RecursivePartial<IDividerTheme>): string => `
+  ${propertyToCss('color', theme.color)};
+  &.horizontal {
+    ${propertyToCss('border-bottom-width', theme.width)};
+  }
+
+  &.vertical {
+    ${propertyToCss('border-right-width', theme.width)};
+  }
+`;
 
 interface IStyledDividerProps {
-  $theme: IDividerTheme;
+  $theme?: RecursivePartial<IDividerTheme>;
 }
 
 const StyledDivider = styled.hr<IStyledDividerProps>`
-  color: ${(props: IStyledDividerProps): string => valueToCss(props.$theme.color)};
   flex-shrink: 0;
   margin: 0;
   border-style: solid;
   border-width: 0;
 
   &.horizontal {
-    border-bottom-width: ${(props: IStyledDividerProps): string => props.$theme.width};
     width: 100%;
   }
 
   &.vertical {
     flex-direction: column;
-    border-right-width: ${(props: IStyledDividerProps): string => props.$theme.width};
     height: 100%;
+  }
+
+  &&&& {
+    ${(props: IStyledDividerProps): string => (props.$theme ? DividerThemedStyle(props.$theme) : '')};
   }
 `;
 
@@ -35,13 +47,11 @@ interface IDividerProps extends IComponentProps<IDividerTheme> {
 }
 
 export const Divider = (props: IDividerProps): React.ReactElement => {
-  const theme = useBuiltTheme('dividers', props.variant, props.theme);
-
   return (
     <StyledDivider
       id={props.id}
-      $theme={theme}
-      className={getClassName(Divider.displayName, props.className, props.orientation)}
+      className={getClassName(Divider.displayName, props.className, props.orientation, ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
     />
   );
 };

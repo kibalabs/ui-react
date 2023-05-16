@@ -2,15 +2,20 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IPortalTheme } from './theme';
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps } from '../../model';
+import { themeToCss } from '../../util';
+
+export const PortalThemedStyle = (theme: RecursivePartial<IPortalTheme>): string => `
+  ${themeToCss(theme.background)};
+`;
 
 interface IStyledPortalProps {
-  $theme: IPortalTheme;
+  $theme?: RecursivePartial<IPortalTheme>;
   $positionTop: number;
   $positionLeft: number;
 }
@@ -21,7 +26,9 @@ const StyledPortal = styled.div<IStyledPortalProps>`
   z-index: 999;
   top: ${(props: IStyledPortalProps): string => `${props.$positionTop}px`};
   left: ${(props: IStyledPortalProps): string => `${props.$positionLeft}px`};
-  ${(props: IStyledPortalProps): string => themeToCss(props.$theme.background)};
+  &&&& {
+    ${(props: IStyledPortalProps): string => (props.$theme ? PortalThemedStyle(props.$theme) : '')};
+  }
 `;
 
 export enum Placement {
@@ -68,7 +75,6 @@ export interface IPortalProps extends IComponentProps<IPortalTheme>, ISingleAnyC
 }
 
 export const Portal = React.forwardRef((props: IPortalProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
-  const theme = useBuiltTheme('portals', props.variant, props.theme);
   const [positionTop, setPositionTop] = React.useState<number>(props.positionTop || 0);
   const [positionLeft, setPositionLeft] = React.useState<number>(props.positionLeft || 0);
 
@@ -94,8 +100,8 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
     (
       <StyledPortal
         id={props.id}
-        className={getClassName(Portal.displayName, props.className)}
-        $theme={theme}
+        className={getClassName(Portal.displayName, props.className, ...(props.variant?.split('-') || []))}
+        $theme={props.theme}
         $positionTop={positionTop}
         $positionLeft={positionLeft}
         ref={ref}
@@ -106,7 +112,7 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
   );
 });
 
-Portal.displayName = 'Portal';
+Portal.displayName = 'KibaPortal';
 Portal.defaultProps = {
   ...defaultComponentProps,
 };

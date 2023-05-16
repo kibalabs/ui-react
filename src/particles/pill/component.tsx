@@ -1,20 +1,24 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { OptionalProppedElement } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IPillTheme } from './theme';
-import { defaultComponentProps, IComponentProps, themeToCss, useBuiltTheme } from '../..';
+import { defaultComponentProps, IComponentProps } from '../../model';
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
+import { themeToCss } from '../../util/themeUtil';
+
+export const PillThemedStyle = (theme: RecursivePartial<IPillTheme>): string => `
+  ${themeToCss(theme.text)};
+  ${themeToCss(theme.background)};
+`;
 
 interface IStyledPillProps {
-  $theme: IPillTheme;
+  $theme?: RecursivePartial<IPillTheme>;
 }
 
 const StyledPill = styled.div<IStyledPillProps>`
-  ${(props: IStyledPillProps): string => themeToCss(props.$theme.normal.default.text)};
-  ${(props: IStyledPillProps): string => themeToCss(props.$theme.normal.default.background)};
   outline: none;
   display: inline-flex;
   flex-direction: row;
@@ -23,6 +27,10 @@ const StyledPill = styled.div<IStyledPillProps>`
   background-clip: border-box;
   &.fullWidth {
     width: 100%;
+  }
+
+  &&&& {
+    ${(props: IStyledPillProps): string => (props.$theme ? PillThemedStyle(props.$theme) : '')};
   }
 `;
 
@@ -35,12 +43,11 @@ export interface IPillProps extends IComponentProps<IPillTheme> {
 }
 
 export const Pill = (props: IPillProps): React.ReactElement => {
-  const theme = useBuiltTheme('pills', props.variant, props.theme);
   return (
     <StyledPill
       id={props.id}
-      className={getClassName(Pill.displayName, props.className, props.isFullWidth && 'fullWidth')}
-      $theme={theme}
+      className={getClassName(Pill.displayName, props.className, props.isFullWidth && 'fullWidth', ...(props.variant?.split('-') || []))}
+      $theme={props.theme}
     >
       { props.iconLeft && (
         <React.Fragment>
@@ -59,7 +66,7 @@ export const Pill = (props: IPillProps): React.ReactElement => {
   );
 };
 
-Pill.displayName = 'Pill';
+Pill.displayName = 'KibaPill';
 Pill.defaultProps = {
   ...defaultComponentProps,
   isFullWidth: false,

@@ -21,6 +21,7 @@ export interface IGridItemProps extends IOptionalSingleAnyChildProps {
 }
 
 class GridItem extends React.Component<IGridItemProps> {
+  static displayName = 'KibaGridItem';
   static defaultProps = {
     className: '',
     isFullHeight: false,
@@ -92,7 +93,7 @@ export const Grid = (props: IGridProps): React.ReactElement => {
   );
 };
 
-Grid.displayName = 'Grid';
+Grid.displayName = 'KibaGrid';
 Grid.defaultProps = {
   className: '',
   isFullHeight: true,
@@ -111,7 +112,7 @@ const getCssSize = (totalColumnCount: number, gutter: string, columnCount: numbe
 
 // TODO(krishan711): this can be consolidated with responsiveUtil.fieldToResponsiveCss with some kind of currying for the above function.
 const columnCountsToCss = (field: ResponsiveField<number>, theme: IDimensionGuide, gutter: string): string => {
-  const output = [];
+  const output: string[] = [];
   if (field?.base !== undefined) {
     output.push(getCssSize(theme.columnCount, gutter, field.base));
   }

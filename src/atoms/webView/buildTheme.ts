@@ -1,21 +1,19 @@
-import { RecursivePartial } from '@kibalabs/core';
 
 import { IWebViewTheme } from './theme';
-import { IBoxTheme, IColorGuide, IDimensionGuide } from '../../particles';
-import { mergeTheme, ThemeMap } from '../../util';
+import { IBoxTheme, IDimensionGuide } from '../../particles';
+import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 
-export const buildWebViewThemes = (colors: IColorGuide, dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: RecursivePartial<Record<string, IWebViewTheme>>): ThemeMap<IWebViewTheme> => {
-  const defaultWebViewTheme = mergeTheme<IWebViewTheme>({
+export const buildWebViewThemes = (dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IWebViewTheme>): ThemeMap<IWebViewTheme> => {
+  const defaultWebViewTheme: IWebViewTheme = {
     normal: {
       default: {
         background: mergeTheme(boxThemes.default, {
         }),
       },
     },
-  }, base?.default);
-
-  return {
-    ...(base || {}),
-    default: defaultWebViewTheme,
   };
+
+  return mergeThemeMap<IWebViewTheme>({
+    default: defaultWebViewTheme,
+  }, (base || {}));
 };

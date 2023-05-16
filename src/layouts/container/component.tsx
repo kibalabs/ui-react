@@ -42,7 +42,7 @@ export const Container = (props: IContainerProps): React.ReactElement => {
   );
 };
 
-Container.displayName = 'Container';
+Container.displayName = 'KibaContainer';
 Container.defaultProps = {
   className: '',
   isFullHeight: true,

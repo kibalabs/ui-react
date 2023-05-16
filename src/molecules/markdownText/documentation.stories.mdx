@@ -9,7 +9,7 @@ import { MarkdownText, IMarkdownTextProps } from '.';
 
 # MarkdownText
 
-<br/>
+<br />
 
 export const Template = (args) => (
   <MarkdownText {...args} />
@@ -41,13 +41,25 @@ export const Template = (args) => (
 
 <Canvas>
   <Story name='With newlines'>
-    <MarkdownText source={'This should be rendered as **a single tag with BRs** in between\n\nIt should not be two separate P tags\nokay?'} />
+    <MarkdownText source={'This should be rendered as **a single tag with BRs** in between\n\nIt should not be two separate P tags\nmkay?'} />
   </Story>
 </Canvas>
 
 <Canvas>
   <Story name='Link'>
     <MarkdownText source={'Made by [Kiba Labs](https://www.kibalabs.com)'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Link as note'>
+    <MarkdownText textVariant='note' source={'Made by [Kiba Labs](https://www.kibalabs.com)'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Custom theme'>
+    <MarkdownText textVariant='fancy' source={'Made by **Kiba Labs**'} />
   </Story>
 </Canvas>
 

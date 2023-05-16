@@ -43,7 +43,7 @@ const StyledSlider = styled.div`
   -ms-overflow-style: none;
   overflow: auto;
 `;
-StyledSlider.displayName = 'CarouselSlider';
+StyledSlider.displayName = 'KibaCarouselSlider';
 
 interface IStyledSlideProps {
   $theme: IDimensionGuide;
@@ -63,7 +63,7 @@ const StyledSlide = styled.div<IStyledSlideProps>`
   justify-content: center;
   ${(props: IStyledSlideProps): string => fieldToResponsiveCss(props.$slidesPerPage, props.$theme, getSlidesPerPageCss)};
 `;
-StyledSlide.displayName = 'CarouselSlide';
+StyledSlide.displayName = 'KibaCarouselSliderSlide';
 
 export interface ICarouselProps extends IMoleculeProps<ICarouselTheme>, IMultiAnyChildProps {
   shouldShowButtons?: boolean;
@@ -223,7 +223,7 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
   );
 };
 
-Carousel.displayName = 'Carousel';
+Carousel.displayName = 'KibaCarousel';
 Carousel.defaultProps = {
   ...defaultMoleculeProps,
   shouldShowButtons: true,

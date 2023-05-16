@@ -41,7 +41,7 @@ export const ContainingView = (props: IContainingViewProps): React.ReactElement 
   );
 };
 
-ContainingView.displayName = 'ContainingView';
+ContainingView.displayName = 'KibaContainingView';
 ContainingView.defaultProps = {
   ...defaultWrapperProps,
   isCenteredHorizontally: true,

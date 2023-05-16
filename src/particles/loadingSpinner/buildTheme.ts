@@ -1,46 +1,44 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { ILoadingSpinnerTheme } from './theme';
-import { mergeTheme, mergeThemePartial, ThemeMap } from '../../util';
-import { IColorGuide } from '../colors';
+import { mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 import { IDimensionGuide } from '../dimensions';
 
-export const buildLoadingSpinnerThemes = (colors: IColorGuide, dimensions: IDimensionGuide, base?: RecursivePartial<Record<string, ILoadingSpinnerTheme>>): ThemeMap<ILoadingSpinnerTheme> => {
-  const defaultLoadingSpinnerTheme = mergeTheme<ILoadingSpinnerTheme>({
+export const buildLoadingSpinnerThemes = (dimensions: IDimensionGuide, base?: PartialThemeMap<ILoadingSpinnerTheme>): ThemeMap<ILoadingSpinnerTheme> => {
+  const defaultLoadingSpinnerTheme: ILoadingSpinnerTheme = {
     color: '$colors.brandPrimary',
     size: '2rem',
-    width: '0.25em',
-  }, base?.default);
+    width: '0.2em',
+  };
 
-  const lightLoadingSpinnerTheme = mergeThemePartial<ILoadingSpinnerTheme>({
+  const lightLoadingSpinnerTheme: RecursivePartial<ILoadingSpinnerTheme> = {
     color: 'white',
-  }, base?.light);
+  };
 
-  const darkLoadingSpinnerTheme = mergeThemePartial<ILoadingSpinnerTheme>({
+  const darkLoadingSpinnerTheme: RecursivePartial<ILoadingSpinnerTheme> = {
     color: 'black',
-  }, base?.dark);
+  };
 
-  const smallLoadingSpinnerTheme = mergeThemePartial<ILoadingSpinnerTheme>({
+  const smallLoadingSpinnerTheme: RecursivePartial<ILoadingSpinnerTheme> = {
     size: '1rem',
     width: '0.15rem',
-  });
+  };
 
-  const largeLoadingSpinnerTheme = mergeThemePartial<ILoadingSpinnerTheme>({
+  const largeLoadingSpinnerTheme: RecursivePartial<ILoadingSpinnerTheme> = {
     size: '4rem',
     width: '0.5rem',
-  });
+  };
 
-  const extraLargeLoadingSpinnerTheme = mergeThemePartial<ILoadingSpinnerTheme>({
+  const extraLargeLoadingSpinnerTheme: RecursivePartial<ILoadingSpinnerTheme> = {
     size: '8rem',
     width: '1rem',
-  });
+  };
 
-  const fillLoadingSpinnerTheme = mergeThemePartial<ILoadingSpinnerTheme>({
+  const fillLoadingSpinnerTheme: RecursivePartial<ILoadingSpinnerTheme> = {
     size: '100%',
-  });
+  };
 
-  return {
-    ...(base || {}),
+  return mergeThemeMap<ILoadingSpinnerTheme>({
     default: defaultLoadingSpinnerTheme,
     light: lightLoadingSpinnerTheme,
     dark: darkLoadingSpinnerTheme,
@@ -48,5 +46,5 @@ export const buildLoadingSpinnerThemes = (colors: IColorGuide, dimensions: IDime
     large: largeLoadingSpinnerTheme,
     extraLarge: extraLargeLoadingSpinnerTheme,
     fill: fillLoadingSpinnerTheme,
-  };
+  }, (base || {}));
 };

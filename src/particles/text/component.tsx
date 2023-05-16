@@ -1,13 +1,16 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
+import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { ITextTheme } from './theme';
 import { defaultComponentProps, IComponentProps } from '../../model';
-import { useBuiltTheme } from '../../theming';
 import { themeToCss } from '../../util';
+
+export const TextThemedStyle = (theme: RecursivePartial<ITextTheme>): string => `
+  ${themeToCss(theme)};
+`;
 
 export enum TextAlignment {
   Center = 'center',
@@ -62,19 +65,13 @@ export const getTextTag = (variant?: string): TextTag => {
 };
 
 interface IStyledTextProps {
-  $theme: ITextTheme;
-  $alignment?: TextAlignment;
+  $theme?: RecursivePartial<ITextTheme>;
   $lineLimit?: number;
   $shouldBreakOnWords?: boolean;
   $shouldBreakAnywhere?: boolean;
 }
 
 const StyledText = styled.span<IStyledTextProps>`
-  ${(props: IStyledTextProps): string => themeToCss(props.$theme)};
-  ${(props: IStyledTextProps): string => (props.$alignment ? `text-align: ${props.$alignment}` : '')};
-  ${(props: IStyledTextProps): string => (props.$shouldBreakOnWords ? 'word-break: break-word' : '')};
-  ${(props: IStyledTextProps): string => (props.$shouldBreakAnywhere ? 'word-break: break-all' : '')};
-
   &.singleLine {
     display: block;
     white-space: nowrap;
@@ -89,6 +86,13 @@ const StyledText = styled.span<IStyledTextProps>`
     -webkit-line-clamp: ${(props: IStyledTextProps): string => String(props.$lineLimit)};
     overflow: hidden;
   }
+
+  ${(props: IStyledTextProps): string => (props.$shouldBreakOnWords ? 'word-break: break-word' : '')};
+  ${(props: IStyledTextProps): string => (props.$shouldBreakAnywhere ? 'word-break: break-all' : '')};
+
+  &&&& {
+    ${(props: IStyledTextProps): string => (props.$theme ? TextThemedStyle(props.$theme) : '')};
+  }
 `;
 
 export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChildProps {
@@ -100,20 +104,25 @@ export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChild
 }
 
 export const Text = (props: ITextProps): React.ReactElement => {
-  const theme = useBuiltTheme('texts', props.variant, props.theme);
-
   let lineLimit = props.lineLimit;
   if (props.lineLimit && props.lineLimit <= 0) {
     console.error('The lineLimit prop should be a positive integer');
     lineLimit = undefined;
   }
 
+  const theme = React.useMemo((): RecursivePartial<ITextTheme> => {
+    const currentTheme = (props.theme || {}) as RecursivePartial<ITextTheme>;
+    if (props.alignment) {
+      currentTheme['text-align'] = props.alignment;
+    }
+    return currentTheme;
+  }, [props.theme, props.alignment]);
+
   return (
     <StyledText
       id={props.id}
-      className={getClassName(Text.displayName, props.className, lineLimit && lineLimit === 1 && 'singleLine', lineLimit && lineLimit >= 2 && 'fixedLines')}
+      className={getClassName(Text.displayName, props.className, lineLimit && lineLimit === 1 && 'singleLine', lineLimit && lineLimit >= 2 && 'fixedLines', ...(props.variant?.split('-') || []))}
       $theme={theme}
-      $alignment={props.alignment}
       $lineLimit={lineLimit}
       $shouldBreakOnWords={props.shouldBreakOnWords === true || props.shouldBreakOnWords === undefined}
       $shouldBreakAnywhere={props.shouldBreakAnywhere}
@@ -124,7 +133,7 @@ export const Text = (props: ITextProps): React.ReactElement => {
   );
 };
 
-Text.displayName = 'Text';
+Text.displayName = 'KibaText';
 Text.defaultProps = {
   ...defaultComponentProps,
   isSingleLine: false,

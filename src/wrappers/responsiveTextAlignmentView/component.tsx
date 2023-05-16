@@ -43,7 +43,7 @@ export const ResponsiveTextAlignmentView = (props: IResponsiveTextAlignmentViewP
   );
 };
 
-ResponsiveTextAlignmentView.displayName = 'ResponsiveTextAlignmentView';
+ResponsiveTextAlignmentView.displayName = 'KibaResponsiveTextAlignmentView';
 ResponsiveTextAlignmentView.defaultProps = {
   ...defaultWrapperProps,
   alignment: TextAlignment.Left,

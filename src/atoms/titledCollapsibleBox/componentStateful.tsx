@@ -35,7 +35,7 @@ export const StatefulTitledCollapsibleBox = (props: IStatefulTitledCollapsibleBo
   );
 };
 
-StatefulTitledCollapsibleBox.displayName = 'StatefulTitledCollapsibleBox';
+StatefulTitledCollapsibleBox.displayName = 'KibaStatefulTitledCollapsibleBox';
 StatefulTitledCollapsibleBox.defaultProps = {
   ...defaultComponentProps,
 };

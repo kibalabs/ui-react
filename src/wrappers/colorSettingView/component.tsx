@@ -17,6 +17,7 @@ const StyledColorSettingView = wrappingComponent((Component: React.ComponentType
   return styled(Component)<IStyledColorSettingViewProps>`
     ${(props: IStyledColorSettingViewProps): string => colorsToCss(props.colors)};
     ${(props: IStyledColorSettingViewProps): string => (props.colors.text ? `color: ${props.colors.text}` : '')};
+    ${(props: IStyledColorSettingViewProps): string => (props.colors.background ? `background-color: ${props.colors.background}` : '')};
   `;
 });
 
@@ -40,7 +41,7 @@ export const ColorSettingView = (props: IColorSettingViewProps): React.ReactElem
   );
 };
 
-ColorSettingView.displayName = 'ColorSettingView';
+ColorSettingView.displayName = 'KibaColorSettingView';
 ColorSettingView.defaultProps = {
   ...defaultWrapperProps,
 };
