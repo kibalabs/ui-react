@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+## [0.11.0] - 2023-05-16
+
+### Added
 - [MINOR] Added `CollapsibleBox`
 - [MINOR] Added `SelectableView`
 - [MINOR] Added `Baseline` to `Alignment`
@@ -29,8 +37,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MAJOR] Change all displayName for component `X` to `KibaX`
 - [MINOR] Added `childAlignment` prop to `Button`
 - [MINOR] Updated `Icon` to size svg directly instead of container
-
-### Removed
 
 ## [0.10.0] - 2022-10-11
 
