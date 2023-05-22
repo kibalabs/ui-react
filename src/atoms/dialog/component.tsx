@@ -48,6 +48,7 @@ interface IDialogProps extends IComponentProps<IDialogTheme>, ISingleAnyChildPro
   isScrollableHorizontally?: boolean;
   isClosableByBackdrop?: boolean;
   isClosableByEscape?: boolean;
+  shouldSkipRenderingWhenClosed?: boolean;
   onCloseClicked: () => void;
 }
 
@@ -89,7 +90,11 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
         isScrollableVertically={props.isScrollableVertically}
         isScrollableHorizontally={props.isScrollableHorizontally}
       >
-        {props.children}
+        {(props.isOpen || !props.shouldSkipRenderingWhenClosed) && (
+          <React.Fragment>
+            {props.children}
+          </React.Fragment>
+        )}
       </Box>
     </StyledDialog>
   );
