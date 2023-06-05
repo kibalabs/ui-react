@@ -99,6 +99,12 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
     }
   };
 
+  const onWheelCapture = (event: React.WheelEvent<HTMLInputElement>): void => {
+    if (props.shouldStopNumberScrolling) {
+      event.currentTarget.blur();
+    }
+  };
+
   return (
     <InputFrame
       id={props.id}
@@ -122,7 +128,7 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
         aria-label={props.label || props.name || props.placeholderText}
         placeholder={props.placeholderText}
         autoFocus={props.shouldAutofocus}
-        onWheelCapture={(event: React.WheelEvent<HTMLInputElement>): void => { props.shouldStopNumberScrolling && event.currentTarget.blur(); }}
+        onWheelCapture={onWheelCapture}
       />
     </InputFrame>
   );
