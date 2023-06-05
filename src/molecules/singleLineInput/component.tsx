@@ -32,6 +32,18 @@ const StyledSingleLineInput = styled.input`
   &.disabled {
     pointer-events: none;
   }
+
+  &.hideSpinButtons {
+    &[type='number'] {
+      -moz-appearance: textfield;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
 `;
 
 const getAutocompleteType = (inputType: InputType): string | undefined => {
@@ -53,6 +65,8 @@ export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTh
   label?: string;
   inputWrapperVariant?: string;
   shouldAutofocus?: boolean;
+  shouldHideNumberSpinButtons?: boolean;
+  shouldStopNumberScrolling?: boolean;
   onKeyUp?: (key: string) => void;
   onKeyDown?: (key: string) => void;
   // TODO(krishan711): update this to onClicked for the next breaking change
@@ -96,7 +110,7 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
     >
       <StyledSingleLineInput
         id={props.id && `${props.id}-textarea`}
-        className={getClassName(StyledSingleLineInput.displayName, !props.isEnabled && 'disabled')}
+        className={getClassName(StyledSingleLineInput.displayName, !props.isEnabled && 'disabled', props.shouldHideNumberSpinButtons && 'hideSpinButtons')}
         type={props.inputType}
         name={props.name}
         autoComplete={getAutocompleteType(props.inputType)}
@@ -108,6 +122,7 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
         aria-label={props.label || props.name || props.placeholderText}
         placeholder={props.placeholderText}
         autoFocus={props.shouldAutofocus}
+        onWheelCapture={(event: React.WheelEvent<HTMLInputElement>): void => { props.shouldStopNumberScrolling && event.currentTarget.blur(); }}
       />
     </InputFrame>
   );
