@@ -4,7 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiAnyChildProps, IOptionalSingleAnyChildProps, ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
-import { Alignment, Direction, getFlexContentAlignment, getFlexItemAlignment, IDimensionGuide, PaddingSize, PaddingSizeProp, Spacing } from '../..';
+import { Alignment, Direction, getFlexContentAlignment, getFlexItemAlignment, getPaddingSize, IDimensionGuide, PaddingSize, PaddingSizeProp, Spacing } from '../..';
 import { useDimensions } from '../../theming';
 import { CssConverter, fieldToResponsiveCss, getCss, ResponsiveField } from '../../util';
 import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
@@ -59,6 +59,8 @@ interface IStyledStackProps {
   $direction: ResponsiveField<Direction>;
   $childAlignment: ResponsiveField<Alignment>;
   $contentAlignment: ResponsiveField<Alignment>;
+  $shouldAddGutters: boolean;
+  $defaultGutter: string;
 }
 
 // width: ${(props: IStyledStackProps): string => (props.$isFullWidth ? '100%' : 'auto')};
@@ -88,7 +90,7 @@ const StyledStack = styled.div<IStyledStackProps>`
   &.wrapItems {
     flex-wrap: wrap;
     /* NOTE(krishan711): this only works for Chrome>84 and similar. It does not work for IE or safari: https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap */
-    row-gap: ${(props: IStyledStackProps): string => props.$theme.gutter}
+    gap: ${(props: IStyledStackProps): string => (props.$shouldAddGutters ? getPaddingSize(props.$defaultGutter, props.$theme) : '0')};
   }
 `;
 
@@ -166,6 +168,8 @@ export const Stack = (props: IStackProps): React.ReactElement => {
         $maxWidth={maxWidthResponsive}
         $minHeight={minHeightResponsive}
         $minWidth={minWidthResponsive}
+        $shouldAddGutters={shouldAddGutters}
+        $defaultGutter={defaultGutter}
       >
         { children.map((child: React.ReactElement, index: number): React.ReactElement<IStackItemProps> => (
           <React.Fragment key={index}>
@@ -184,7 +188,7 @@ export const Stack = (props: IStackProps): React.ReactElement => {
             >
               {React.Children.count(child.props.children) > 0 ? child.props.children : <div />}
             </StyledStackItem>
-            {(child.props.gutterAfter || (shouldAddGutters && index < children.length - 1)) && (
+            {(child.props.gutterAfter || (!shouldWrapItems && shouldAddGutters && index < children.length - 1)) && (
               <Spacing className='stack-gutter' variant={child.props.gutterAfter || defaultGutter} />
             )}
           </React.Fragment>
