@@ -26,6 +26,8 @@ interface IMarkdownTextProps {
 }
 
 export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactElement => {
+  const content = props.source.replace(/\n\n/g, '\n<br/>').replace(/\n/g, '  \n');
+
   return (
     <PrettyText
       id={props.id}
@@ -45,7 +47,7 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
           },
         }}
       >
-        {props.source.replace(/\n/g, '  \n&nbsp;')}
+        {content}
       </MarkdownToJsx>
     </PrettyText>
   );
