@@ -6,9 +6,9 @@ import styled from 'styled-components';
 
 import { ITextTheme } from './theme';
 import { defaultComponentProps, IComponentProps } from '../../model';
+import { useDimensions } from '../../theming';
 import { fieldToResponsiveCss, getCss, ResponsiveField, themeToCss } from '../../util';
 import { IDimensionGuide } from '../dimensions';
-import { useDimensions } from '../../theming';
 
 export const TextThemedStyle = (theme: RecursivePartial<ITextTheme>): string => `
   ${themeToCss(theme)};
