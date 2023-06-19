@@ -88,13 +88,13 @@ const StyledButtonFocusFixer = styled.span<IStyledButtonFocusFixerProps>`
 
 const StyledButton = styled.button<IStyledButtonProps>`
   transition-duration: 0.3s;
+  cursor: ${(props: IStyledButtonProps): string => (props.$isLoading ? 'default' : 'pointer')};
   &.fullWidth {
     width: 100%;
   }
   &.disabled {
     cursor: not-allowed;
   }
-  cursor: ${(props: IStyledButtonProps): string => (props.$isLoading ? 'default' : 'pointer')};
 
   &&&& {
     ${(props: IStyledButtonProps): string => (props.$theme ? ButtonThemedStyle(props.$theme) : '')};

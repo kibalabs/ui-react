@@ -15,7 +15,7 @@ export const buildInputWrapperThemes = (dimensions: IDimensionGuide, textThemes:
           'font-size': '0.9em',
         }),
         placeholderText: mergeTheme(textThemes.default, {
-          color: '$colors.textLight50',
+          color: '$colors.textClear75',
         }),
         background: mergeTheme(boxThemes.default, {
           'background-color': '$colors.backgroundLight50',
