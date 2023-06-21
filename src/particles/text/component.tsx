@@ -6,7 +6,9 @@ import styled from 'styled-components';
 
 import { ITextTheme } from './theme';
 import { defaultComponentProps, IComponentProps } from '../../model';
-import { themeToCss } from '../../util';
+import { useDimensions } from '../../theming';
+import { fieldToResponsiveCss, getCss, ResponsiveField, themeToCss } from '../../util';
+import { IDimensionGuide } from '../dimensions';
 
 export const TextThemedStyle = (theme: RecursivePartial<ITextTheme>): string => `
   ${themeToCss(theme)};
@@ -66,7 +68,9 @@ export const getTextTag = (variant?: string): TextTag => {
 
 interface IStyledTextProps {
   $theme?: RecursivePartial<ITextTheme>;
+  $dimensions: IDimensionGuide;
   $lineLimit?: number;
+  $alignment?: ResponsiveField<TextAlignment>;
   $shouldBreakOnWords?: boolean;
   $shouldBreakAnywhere?: boolean;
 }
@@ -87,16 +91,19 @@ const StyledText = styled.span<IStyledTextProps>`
     overflow: hidden;
   }
 
-  ${(props: IStyledTextProps): string => (props.$shouldBreakOnWords ? 'word-break: break-word' : '')};
-  ${(props: IStyledTextProps): string => (props.$shouldBreakAnywhere ? 'word-break: break-all' : '')};
 
   &&&& {
     ${(props: IStyledTextProps): string => (props.$theme ? TextThemedStyle(props.$theme) : '')};
+    ${(props: IStyledTextProps): string => (props.$shouldBreakOnWords ? 'word-break: break-word' : '')};
+    ${(props: IStyledTextProps): string => (props.$shouldBreakAnywhere ? 'word-break: break-all' : '')};
+    ${(props: IStyledTextProps): string => (props.$alignment ? fieldToResponsiveCss(props.$alignment, props.$dimensions, getCss('text-align')) : '')};
   }
+
 `;
 
 export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChildProps {
   alignment?: TextAlignment;
+  alignmentResponsive?: ResponsiveField<TextAlignment>;
   tag?: TextTag;
   lineLimit?: number;
   shouldBreakOnWords?: boolean;
@@ -104,26 +111,32 @@ export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChild
 }
 
 export const Text = (props: ITextProps): React.ReactElement => {
+  const dimensions = useDimensions();
+
   let lineLimit = props.lineLimit;
   if (props.lineLimit && props.lineLimit <= 0) {
     console.error('The lineLimit prop should be a positive integer');
     lineLimit = undefined;
   }
 
-  const theme = React.useMemo((): RecursivePartial<ITextTheme> => {
-    const currentTheme = (props.theme || {}) as RecursivePartial<ITextTheme>;
-    if (props.alignment) {
-      currentTheme['text-align'] = props.alignment;
-    }
-    return currentTheme;
-  }, [props.theme, props.alignment]);
+  // const theme = React.useMemo((): RecursivePartial<ITextTheme> => {
+  //   const currentTheme = (props.theme || {}) as RecursivePartial<ITextTheme>;
+  //   if (props.alignment) {
+  //     currentTheme['text-align'] = props.alignment;
+  //   }
+  //   return currentTheme;
+  // }, [props.theme, props.alignment]);
+
+  const alignment = (props.alignment || props.alignmentResponsive) ? { base: props.alignment, ...props.alignmentResponsive } : undefined;
 
   return (
     <StyledText
       id={props.id}
       className={getClassName(Text.displayName, props.className, lineLimit && lineLimit === 1 && 'singleLine', lineLimit && lineLimit >= 2 && 'fixedLines', ...(props.variant?.split('-') || []))}
-      $theme={theme}
+      $theme={props.theme}
+      $dimensions={dimensions}
       $lineLimit={lineLimit}
+      $alignment={alignment}
       $shouldBreakOnWords={props.shouldBreakOnWords === true || props.shouldBreakOnWords === undefined}
       $shouldBreakAnywhere={props.shouldBreakAnywhere}
       as={props.tag || getTextTag(props.variant)}

@@ -19,7 +19,7 @@ export const getCss = (fieldName: string): CssConverter<string> => {
 };
 
 export const fieldToResponsiveCss = <FieldType>(field: ResponsiveField<FieldType>, theme: IDimensionGuide, cssConversion: CssConverter<FieldType>): string => {
-  const output = [];
+  const output: string[] = [];
   if (field?.base !== undefined) {
     output.push(cssConversion(field.base));
   }
