@@ -3,7 +3,7 @@ import React, { AnchorHTMLAttributes, ImgHTMLAttributes } from 'react';
 import { deepCompare, getClassName } from '@kibalabs/core';
 import MarkdownToJsx from 'markdown-to-jsx';
 
-import { IWebViewProps, Link, PrettyText, WebView } from '../../atoms';
+import { Link, PrettyText } from '../../atoms';
 import { Box, Media, TextAlignment } from '../../particles';
 import { getVariant } from '../../util';
 
