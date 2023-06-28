@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Fixed `Stack` to not show manual row gutters when `shouldShowGutters=false`
 - [MINOR] Updated `MarkdownText` to render newlines more intuitively
 - [MINOR] Added `alignmentResponsive` to `Text`
+- [MINOR] Added more known extensions to `Media`
 
 ### Removed
 

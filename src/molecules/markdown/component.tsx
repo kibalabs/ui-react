@@ -51,7 +51,7 @@ const MarkdownMedia = (props: ImgHTMLAttributes<HTMLImageElement>): React.ReactE
 //   );
 // };
 
-interface IMarkdownProps {
+export interface IMarkdownProps {
   id?: string;
   className?: string;
   source: string;
