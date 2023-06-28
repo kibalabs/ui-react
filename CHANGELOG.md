@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 - [MINOR] Added `shouldSkipRenderingWhenClosed` to `Dialog`
 - [MINOR] Added `shouldHideNumberSpinButtons` and `shouldStopNumberScrolling` to `SingleLineInput`
+- [MINOR] Added `extraOverrideComponents` to `Markdown`
 
 ### Changed
 - [MINOR] Fixed `Stack` to not show manual row gutters when `shouldShowGutters=false`

@@ -3,7 +3,7 @@ import React, { AnchorHTMLAttributes, ImgHTMLAttributes } from 'react';
 import { deepCompare, getClassName } from '@kibalabs/core';
 import MarkdownToJsx from 'markdown-to-jsx';
 
-import { Link, PrettyText } from '../../atoms';
+import { IWebViewProps, Link, PrettyText, WebView } from '../../atoms';
 import { Box, Media, TextAlignment } from '../../particles';
 import { getVariant } from '../../util';
 
@@ -43,11 +43,20 @@ const MarkdownMedia = (props: ImgHTMLAttributes<HTMLImageElement>): React.ReactE
   );
 };
 
+// const MarkdownEmbed = (props: IWebViewProps): React.ReactElement => {
+//   return (
+//     <Box width='640px' height='360px' maxWidth='100%'>
+//       <WebView permissions={['accelerometer', 'autoplay', 'clipboard-write', 'encrypted-media', 'gyroscope', 'picture-in-picture', 'web-share']} aspectRatio={0.5625} {...props} />
+//     </Box>
+//   );
+// };
+
 interface IMarkdownProps {
   id?: string;
   className?: string;
   source: string;
   rootBoxVariant?: string;
+  extraOverrideComponents?: Record<string, React.ElementType>;
 }
 
 export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement => {
@@ -101,6 +110,7 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
                 variant: 'header6',
               },
             },
+            ...(props.extraOverrideComponents || {}),
           },
         }}
       >
