@@ -65,7 +65,7 @@ export const Media = (props: IMediaProps): React.ReactElement => {
     if (!props.source) {
       return true;
     }
-    const imageTypes = new Set(['png', 'jpg', 'gif', 'jpeg', 'tif', 'tiff', 'raw']);
+    const imageTypes = new Set(['png', 'jpg', 'gif', 'jpeg', 'tif', 'tiff', 'raw', 'avif', 'webp']);
     const fileExtension = getExtension(props.source);
     return imageTypes.has(fileExtension);
   }, [props.source]);
