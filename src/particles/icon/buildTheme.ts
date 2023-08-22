@@ -7,23 +7,23 @@ import { IDimensionGuide } from '../dimensions';
 
 export const buildIconThemes = (dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IIconTheme>): ThemeMap<IIconTheme> => {
   const defaultIconTheme: IIconTheme = {
-    size: '1.3rem',
+    size: '1.3em',
   };
 
   const smallIconTheme: RecursivePartial<IIconTheme> = {
-    size: '0.75rem',
+    size: '0.75em',
   };
 
   const largeIconTheme: RecursivePartial<IIconTheme> = {
-    size: '2rem',
+    size: '2em',
   };
 
   const extraLargeIconTheme: RecursivePartial<IIconTheme> = {
-    size: '4rem',
+    size: '4em',
   };
 
   const extraExtraLargeIconTheme: RecursivePartial<IIconTheme> = {
-    size: '8rem',
+    size: '8em',
   };
 
   const fillIconTheme: RecursivePartial<IIconTheme> = {

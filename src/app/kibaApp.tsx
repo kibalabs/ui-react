@@ -20,7 +20,7 @@ interface IStyledMainViewProps {
   extraCss?: string;
 }
 
-const StyledMainView = styled.div`
+const StyledMainView = styled.div<IStyledMainViewProps>`
   min-height: 100vh;
 
   &.fullPage {
