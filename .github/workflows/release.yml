@@ -2,6 +2,9 @@ name: Release
 on:
   push:
     tags: ["v*"]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-release
+  cancel-in-progress: false
 jobs:
   deploy-package:
     runs-on: ubuntu-latest

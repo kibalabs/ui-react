@@ -4,6 +4,9 @@ on:
     branches:
       - main
       - beta-**
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-pull-request
+  cancel-in-progress: true
 jobs:
   build-docs:
     runs-on: ubuntu-latest

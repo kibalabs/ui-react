@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+## [0.11.1] - 2023-08-22
+
+### Added
 - [MINOR] Added `shouldSkipRenderingWhenClosed` to `Dialog`
 - [MINOR] Added `shouldHideNumberSpinButtons` and `shouldStopNumberScrolling` to `SingleLineInput`
 - [MINOR] Added `extraOverrideComponents` to `Markdown`
@@ -17,8 +25,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `MarkdownText` to render newlines more intuitively
 - [MINOR] Added `alignmentResponsive` to `Text`
 - [MINOR] Added more known extensions to `Media`
-
-### Removed
 
 ## [0.11.0] - 2023-05-16
 

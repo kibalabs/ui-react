@@ -3,6 +3,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-deploy
+  cancel-in-progress: false
 jobs:
   deploy-package-next:
     runs-on: ubuntu-latest
