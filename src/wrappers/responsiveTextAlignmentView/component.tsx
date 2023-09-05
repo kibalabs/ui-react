@@ -14,13 +14,13 @@ const getAlignmentCss: CssConverter<TextAlignment> = (field: TextAlignment): str
 };
 
 interface IStyledResponsiveTextAlignmentViewProps extends IWrapperProps {
-  theme: IDimensionGuide;
-  alignment: ResponsiveField<TextAlignment>;
+  $theme: IDimensionGuide;
+  $alignment: ResponsiveField<TextAlignment>;
 }
 
 const StyledResponsiveTextAlignmentView = wrappingComponent((component: React.ComponentType<IStyledResponsiveTextAlignmentViewProps>): React.ComponentType<IStyledResponsiveTextAlignmentViewProps> => {
   return styled(component)<IStyledResponsiveTextAlignmentViewProps>`
-    ${(props: IStyledResponsiveTextAlignmentViewProps): string => fieldToResponsiveCss(props.alignment, props.theme, getAlignmentCss)};
+    ${(props: IStyledResponsiveTextAlignmentViewProps): string => fieldToResponsiveCss(props.$alignment, props.$theme, getAlignmentCss)};
   `;
 });
 
@@ -35,8 +35,8 @@ export const ResponsiveTextAlignmentView = (props: IResponsiveTextAlignmentViewP
   return (
     <StyledResponsiveTextAlignmentView
       className={getClassName(ResponsiveTextAlignmentView.displayName, props.className)}
-      theme={theme}
-      alignment={{ base: props.alignment, ...props.alignmentResponsive }}
+      $theme={theme}
+      $alignment={{ base: props.alignment, ...props.alignmentResponsive }}
     >
       {props.children}
     </StyledResponsiveTextAlignmentView>

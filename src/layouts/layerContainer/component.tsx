@@ -55,9 +55,9 @@ export const LayerContainer = (props: ILayerContainerProps): React.ReactElement 
           id={props.id && `${props.id}-layer-${index}`}
           className={getClassName(StyledLayer.displayName, child.props.className, child.props.isFullWidth && 'isFullWidth', child.props.isFullHeight && 'isFullHeight', child.props.shouldPassThroughTouches && 'passThroughTouches')}
           key={child.key || index}
-          isStatic={child.props.isStatic}
-          alignmentVertical={child.props.alignmentVertical}
-          alignmentHorizontal={child.props.alignmentHorizontal}
+          $isStatic={child.props.isStatic}
+          $alignmentVertical={child.props.alignmentVertical}
+          $alignmentHorizontal={child.props.alignmentHorizontal}
         >
           {child.props.children}
         </StyledLayer>
@@ -111,14 +111,14 @@ const getStaticPositioningCss = (alignmentVertical: Alignment, alignmentHorizont
 
 interface IStyledLayerProps extends ISingleAnyChildProps {
   className?: string;
-  isStatic: boolean;
-  alignmentVertical: Alignment;
-  alignmentHorizontal: Alignment;
+  $isStatic: boolean;
+  $alignmentVertical: Alignment;
+  $alignmentHorizontal: Alignment;
 }
 
 const StyledLayer = styled.div<IStyledLayerProps>`
-  position: ${(props: IStyledLayerProps): string => (props.isStatic ? 'static' : 'absolute')};
-  ${(props: IStyledLayerProps): string => getStaticPositioningCss(props.alignmentVertical, props.alignmentHorizontal)};
+  position: ${(props: IStyledLayerProps): string => (props.$isStatic ? 'static' : 'absolute')};
+  ${(props: IStyledLayerProps): string => getStaticPositioningCss(props.$alignmentVertical, props.$alignmentHorizontal)};
 
   &.isFullWidth {
     width: 100%;

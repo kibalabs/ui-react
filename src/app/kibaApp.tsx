@@ -17,7 +17,7 @@ import 'lazysizes/plugins/attrchange/ls.attrchange';
 import 'lazysizes/plugins/respimg/ls.respimg';
 
 interface IStyledMainViewProps {
-  extraCss?: string;
+  $extraCss?: string;
 }
 
 const StyledMainView = styled.div<IStyledMainViewProps>`
@@ -29,7 +29,7 @@ const StyledMainView = styled.div<IStyledMainViewProps>`
     min-height: 100%;
   }
 
-  ${(props: IStyledMainViewProps): string => props.extraCss || ''};
+  ${(props: IStyledMainViewProps): string => props.$extraCss || ''};
 `;
 
 export interface IKibaAppProps extends IMultiAnyChildProps, IHeadRootProviderProps {
@@ -85,7 +85,7 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
         <BackgroundView { ...props.background }>
           <StyledMainView
             className={getClassName(isRunningOnBrowser ? 'js' : 'no-js', props.isFullPageApp && 'fullPage')}
-            extraCss={props.extraCss}
+            $extraCss={props.extraCss}
           >
             {props.children}
           </StyledMainView>

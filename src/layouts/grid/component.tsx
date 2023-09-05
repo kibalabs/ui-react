@@ -79,11 +79,11 @@ export const Grid = (props: IGridProps): React.ReactElement => {
             key={index}
             id={child.props.id}
             className={getClassName(StyledGridItem.displayName, child.props.className)}
-            theme={theme}
-            size={{ base: child.props.size, ...child.props.sizeResponsive }}
-            isFullHeight={child.props.isFullHeight}
-            gutter={shouldAddGutters ? getPaddingSize(defaultGutter, theme) : '0px'}
-            alignment={child.props.alignment}
+            $theme={theme}
+            $size={{ base: child.props.size, ...child.props.sizeResponsive }}
+            $isFullHeight={child.props.isFullHeight}
+            $gutter={shouldAddGutters ? getPaddingSize(defaultGutter, theme) : '0px'}
+            $alignment={child.props.alignment}
           >
             {child.props.children}
           </StyledGridItem>
@@ -132,23 +132,23 @@ const columnCountsToCss = (field: ResponsiveField<number>, theme: IDimensionGuid
 };
 
 interface IStyledGridItemProps {
-  gutter: string;
-  theme: IDimensionGuide;
-  alignment?: Alignment;
-  isFullHeight: boolean;
-  size: ResponsiveField<number>;
+  $gutter: string;
+  $theme: IDimensionGuide;
+  $alignment?: Alignment;
+  $isFullHeight: boolean;
+  $size: ResponsiveField<number>;
 }
 
 const StyledGridItem = styled.div<IStyledGridItemProps>`
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: auto;
-  height: ${(props: IStyledGridItemProps): string => (props.isFullHeight ? '100%' : 'auto')};
-  ${(props: IStyledGridItemProps): string => columnCountsToCss(props.size, props.theme, props.gutter)};
-  overflow-y: ${(props: IStyledGridItemProps): string => (props.isFullHeight ? 'auto' : 'visible')};
-  margin-left: ${(props: IStyledGridItemProps): string => props.gutter};
-  margin-right: ${(props: IStyledGridItemProps): string => props.gutter};
-  margin-top: ${(props: IStyledGridItemProps): string => props.gutter};
-  margin-bottom: ${(props: IStyledGridItemProps): string => props.gutter};
-  align-self: ${(props: IStyledGridItemProps): string => (props.alignment ? getFlexItemAlignment(props.alignment) : 'auto')};
+  height: ${(props: IStyledGridItemProps): string => (props.$isFullHeight ? '100%' : 'auto')};
+  ${(props: IStyledGridItemProps): string => columnCountsToCss(props.$size, props.$theme, props.$gutter)};
+  overflow-y: ${(props: IStyledGridItemProps): string => (props.$isFullHeight ? 'auto' : 'visible')};
+  margin-left: ${(props: IStyledGridItemProps): string => props.$gutter};
+  margin-right: ${(props: IStyledGridItemProps): string => props.$gutter};
+  margin-top: ${(props: IStyledGridItemProps): string => props.$gutter};
+  margin-bottom: ${(props: IStyledGridItemProps): string => props.$gutter};
+  align-self: ${(props: IStyledGridItemProps): string => (props.$alignment ? getFlexItemAlignment(props.$alignment) : 'auto')};
 `;

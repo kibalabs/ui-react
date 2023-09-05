@@ -15,7 +15,7 @@ export interface ITabBarTheme {
 }
 
 interface IStyledTabBarProps {
-  theme: ITabBarTheme;
+  // theme: ITabBarTheme;
   $contentAlignment: ResponsiveField<Alignment>;
 }
 
