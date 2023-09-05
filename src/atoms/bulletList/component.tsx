@@ -18,6 +18,10 @@ interface IStyledBulletListProps {
 }
 
 const StyledBulletList = styled.ul<IStyledBulletListProps>`
+  counter-reset: list-number;
+  list-style-position: outside;
+  text-indent: -0.1em;
+  display: table;
   &&&& {
     ${(props: IStyledBulletListProps): string => (props.$theme ? BulletListThemedStyle(props.$theme) : '')};
   }

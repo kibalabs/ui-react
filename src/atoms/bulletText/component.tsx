@@ -21,8 +21,11 @@ interface IStyledBulletTextProps {
 }
 
 const StyledBulletText = styled.li<IStyledBulletTextProps>`
+  counter-increment: list-number;
+  display: table-row;
   &:before {
-    display: inline-block;
+    display: table-cell;
+    padding-right: 1em;
   }
   &&&& {
     ${(props: IStyledBulletTextProps): string => (props.$theme ? BulletTextThemedStyle(props.$theme) : '')};
