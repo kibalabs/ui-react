@@ -9,12 +9,12 @@ import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledContainingViewProps extends IWrapperProps {
-  theme: IDimensionGuide;
+  $theme: IDimensionGuide;
 }
 
 const StyledContainingView = wrappingComponent((Component: React.ComponentType<IStyledContainingViewProps>): React.ComponentType<IStyledContainingViewProps> => {
   return styled(Component)<IStyledContainingViewProps>`
-    max-width: ${(props: IStyledContainingViewProps): string => props.theme.screenWidthMax};
+    max-width: ${(props: IStyledContainingViewProps): string => props.$theme.screenWidthMax};
     width: 100%;
     overflow: auto;
     &.centered {
@@ -34,7 +34,7 @@ export const ContainingView = (props: IContainingViewProps): React.ReactElement 
   return (
     <StyledContainingView
       className={getClassName(ContainingView.displayName, props.className, props.isCenteredHorizontally && 'centered')}
-      theme={theme}
+      $theme={theme}
     >
       {props.children}
     </StyledContainingView>

@@ -10,10 +10,10 @@ import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledResponsiveContainingViewProps extends IWrapperProps {
-  theme: IDimensionGuide;
-  size: ResponsiveField<number>;
-  isFullWidth: boolean;
-  shouldIncludeMaxSize: boolean;
+  $theme: IDimensionGuide;
+  $size: ResponsiveField<number>;
+  $isFullWidth: boolean;
+  $shouldIncludeMaxSize: boolean;
 }
 
 export const getGridItemSizeCss = (totalColumnCount: number, columnCount: number, baseSize = '100%'): string => {
@@ -21,7 +21,7 @@ export const getGridItemSizeCss = (totalColumnCount: number, columnCount: number
 };
 
 const columnCountsToCss = (field: ResponsiveField<number>, theme: IDimensionGuide, shouldIncludeMaxSize?: boolean): string => {
-  const output = [];
+  const output: string[] = [];
   if (field?.base !== undefined) {
     output.push(getGridItemSizeCss(theme.columnCount, field.base));
   }
@@ -47,8 +47,8 @@ const columnCountsToCss = (field: ResponsiveField<number>, theme: IDimensionGuid
 const StyledResponsiveContainingView = wrappingComponent((Component: React.ComponentType<IStyledResponsiveContainingViewProps>): React.ComponentType<IStyledResponsiveContainingViewProps> => {
   return styled(Component)<IStyledResponsiveContainingViewProps>`
     max-width: 100%;
-    width: ${(props: IStyledResponsiveContainingViewProps): string => (props.isFullWidth ? '100%' : 'auto')};
-    ${(props: IStyledResponsiveContainingViewProps): string => columnCountsToCss(props.size, props.theme, props.shouldIncludeMaxSize)};
+    width: ${(props: IStyledResponsiveContainingViewProps): string => (props.$isFullWidth ? '100%' : 'auto')};
+    ${(props: IStyledResponsiveContainingViewProps): string => columnCountsToCss(props.$size, props.$theme, props.$shouldIncludeMaxSize)};
     &.centered {
       margin-right: auto;
       margin-left: auto;
@@ -75,10 +75,10 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
   return (
     <StyledResponsiveContainingView
       className={getClassName(ResponsiveContainingView.displayName, props.className, props.isCenteredHorizontally && 'centered')}
-      theme={theme}
-      size={{ base: props.size, ...props.sizeResponsive }}
-      isFullWidth={isFullWidth}
-      shouldIncludeMaxSize={shouldIncludeMaxSize}
+      $theme={theme}
+      $size={{ base: props.size, ...props.sizeResponsive }}
+      $isFullWidth={isFullWidth}
+      $shouldIncludeMaxSize={shouldIncludeMaxSize}
     >
       {props.children}
     </StyledResponsiveContainingView>

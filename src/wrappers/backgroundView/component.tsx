@@ -29,7 +29,7 @@ const getLayersCss = (backgroundLayers: IBackgroundLayer[], colors: IColorGuide)
 
 // eslint-disable-next-line unused-imports/no-unused-vars
 const getLayerCss = (backgroundLayer: IBackgroundLayer, colors: IColorGuide): string => {
-  const layers = [];
+  const layers: string[] = [];
   // TODO(krishan711): this resolve doesn't do the "full resolution" thing for IE
   // TODO(krishan711): resolve values for linear and radial gradients too
   if (backgroundLayer.color) {
@@ -52,13 +52,13 @@ const getLayerCss = (backgroundLayer: IBackgroundLayer, colors: IColorGuide): st
 
 interface IStyledBackgroundViewProps extends ISingleAnyChildProps {
   className?: string;
-  backgroundLayers: IBackgroundLayer[];
-  colors: IColorGuide;
+  $backgroundLayers: IBackgroundLayer[];
+  $colors: IColorGuide;
 }
 
 const StyledBackgroundView = wrappingComponent((Component: React.ComponentType<IStyledBackgroundViewProps>): React.ComponentType<IStyledBackgroundViewProps> => {
   return styled(Component)<IStyledBackgroundViewProps>`
-    background: ${(props: IStyledBackgroundViewProps): string => getLayersCss(props.backgroundLayers, props.colors)};
+    background: ${(props: IStyledBackgroundViewProps): string => getLayersCss(props.$backgroundLayers, props.$colors)};
   `;
 });
 
@@ -80,8 +80,8 @@ export const BackgroundView = (props: IBackgroundViewProps): React.ReactElement 
   return (
     <StyledBackgroundView
       className={getClassName(BackgroundView.displayName, props.className)}
-      backgroundLayers={layers}
-      colors={colors}
+      $backgroundLayers={layers}
+      $colors={colors}
     >
       { props.children }
     </StyledBackgroundView>

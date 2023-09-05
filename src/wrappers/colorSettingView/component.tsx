@@ -10,14 +10,14 @@ import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledColorSettingViewProps extends IWrapperProps {
-  colors: Partial<IColorGuide>;
+  $colors: Partial<IColorGuide>;
 }
 
 const StyledColorSettingView = wrappingComponent((Component: React.ComponentType<IStyledColorSettingViewProps>): React.ComponentType<IStyledColorSettingViewProps> => {
   return styled(Component)<IStyledColorSettingViewProps>`
-    ${(props: IStyledColorSettingViewProps): string => colorsToCss(props.colors)};
-    ${(props: IStyledColorSettingViewProps): string => (props.colors.text ? `color: ${props.colors.text}` : '')};
-    ${(props: IStyledColorSettingViewProps): string => (props.colors.background ? `background-color: ${props.colors.background}` : '')};
+    ${(props: IStyledColorSettingViewProps): string => colorsToCss(props.$colors)};
+    ${(props: IStyledColorSettingViewProps): string => (props.$colors.text ? `color: ${props.$colors.text}` : '')};
+    ${(props: IStyledColorSettingViewProps): string => (props.$colors.background ? `background-color: ${props.$colors.background}` : '')};
   `;
 });
 
@@ -33,7 +33,7 @@ export const ColorSettingView = (props: IColorSettingViewProps): React.ReactElem
     <ColorProvider colors={colors}>
       <StyledColorSettingView
         className={getClassName(ColorSettingView.displayName, props.className)}
-        colors={colors}
+        $colors={colors}
       >
         {props.children}
       </StyledColorSettingView>

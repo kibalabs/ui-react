@@ -13,7 +13,6 @@ export interface IProgressCounterTheme {
 }
 
 interface IStyledProgressCounterProps {
-  theme: IProgressCounterTheme;
 }
 
 const StyledProgressCounter = styled.div<IStyledProgressCounterProps>`
