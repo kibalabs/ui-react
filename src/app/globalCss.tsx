@@ -138,13 +138,13 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
     display: table;
 
     li {
-      ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).numbered?.normal.default.text)};
+      ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).numbered?.normal?.default?.text)};
       counter-increment: list-number;
       display: table-row;
       &:before {
         display: table-cell;
         padding-right: 1em;
-        ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).numbered?.normal.default.bullet)};
+        ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).numbered?.normal?.default?.bullet)};
       }
     }
   }
