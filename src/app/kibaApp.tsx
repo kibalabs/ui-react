@@ -71,7 +71,7 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
       />
       <HeadRootProvider setHead={props.setHead}>
         <Head headId='kiba-app'>
-          <link rel='preconnect' href='https://assets.evrpg.com' crossOrigin='anonymous' />
+          <link rel='preconnect' href='https://assets-cdn.kiba.dev' crossOrigin='anonymous' />
           { Object.keys(props.theme.fonts || {}).map((fontKey: string, index: number): React.ReactElement => (
             <React.Fragment key={index}>
               <link href={props.theme.fonts[fontKey].url} rel='preload' as='style' />

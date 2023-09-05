@@ -24,35 +24,35 @@ export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
   const getIconData = (iconId: string): IconData | null => {
     if (iconId.startsWith('ion-')) {
       return {
-        url: `https://assets.evrpg.com/ionicons/v5/${iconId.replace('ion-', '')}.svg`,
+        url: `https://assets-cdn.kiba.dev/ionicons/v5/${iconId.replace('ion-', '')}.svg`,
         shouldAddFill: true,
         shouldAddStroke: false,
       };
     }
     if (iconId.startsWith('mui-')) {
       return {
-        url: `https://assets.evrpg.com/material-icons/v1/${iconId.replace('mui-', '')}.svg`,
+        url: `https://assets-cdn.kiba.dev/material-icons/v1/${iconId.replace('mui-', '')}.svg`,
         shouldAddFill: true,
         shouldAddStroke: false,
       };
     }
     if (iconId.startsWith('bs-')) {
       return {
-        url: `https://assets.evrpg.com/bootstrap-icons/v1/${iconId.replace('bs-', '')}.svg`,
+        url: `https://assets-cdn.kiba.dev/bootstrap-icons/v1/${iconId.replace('bs-', '')}.svg`,
         shouldAddFill: true,
         shouldAddStroke: false,
       };
     }
     if (iconId.startsWith('feather-')) {
       return {
-        url: `https://assets.evrpg.com/feather/v4/${iconId.replace('feather-', '')}.svg`,
+        url: `https://assets-cdn.kiba.dev/feather/v4/${iconId.replace('feather-', '')}.svg`,
         shouldAddFill: false,
         shouldAddStroke: true,
       };
     }
     if (iconId.startsWith('remix-')) {
       return {
-        url: `https://assets.evrpg.com/remix-icons/v2/${iconId.replace('remix-', '')}.svg`,
+        url: `https://assets-cdn.kiba.dev/remix-icons/v2/${iconId.replace('remix-', '')}.svg`,
         shouldAddFill: true,
         shouldAddStroke: false,
       };
