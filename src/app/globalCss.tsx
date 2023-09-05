@@ -115,14 +115,40 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
 
   ul {
     ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletLists as ThemeMap<IBulletListTheme>).default.normal.default.bulletList)};
-  }
-
-  li {
-    ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).default.normal.default.text)};
-    :before {
-      ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).default.normal.default.bullet)};
+    list-style-position: outside;
+    text-indent: -0.1em;
+    display: table;
+    li {
+      ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).default.normal.default.text)};
+      display: table-row;
+      &:before {
+        display: table-cell;
+        padding-right: 1em;
+        ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).default.normal.default.bullet)};
+      }
     }
   }
+
+
+  ol {
+    ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletLists as ThemeMap<IBulletListTheme>).default.normal.default.bulletList)};
+    list-style-position: outside;
+    counter-reset: list-number;
+    text-indent: -0.1em;
+    display: table;
+
+    li {
+      ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).numbered?.normal.default.text)};
+      counter-increment: list-number;
+      display: table-row;
+      &:before {
+        display: table-cell;
+        padding-right: 1em;
+        ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).numbered?.normal.default.bullet)};
+      }
+    }
+  }
+
 
   ${(props: IGlobalCssProps): string => props.extraCss || ''};
 `;

@@ -20,7 +20,23 @@ export const buildBulletTextThemes = (dimensions: IDimensionGuide, textThemes: T
     },
   };
 
+  const numberedBulletTextTheme: IBulletTextTheme = {
+    normal: {
+      default: {
+        text: mergeTheme(textThemes.default, {
+          margin: '0 0 0.5em 0',
+        }),
+        bullet: {
+          color: '$colors.text',
+          content: 'counter(list-number)\'.\'',
+          margin: `0 ${dimensions.padding} 0 -${dimensions.padding}`,
+          'font-weight': 'normal',
+        },
+      },
+    },
+  };
   return mergeThemeMap<IBulletTextTheme>({
     default: defaultBulletTextTheme,
+    numbered: numberedBulletTextTheme,
   }, (base || {}));
 };

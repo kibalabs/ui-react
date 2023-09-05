@@ -11,6 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Changed
 - [MINOR] Updated assets url to `assets-cdn.kiba.dev`
+- [MINOR] Fix alignment for `BulletList` and `BulletText`
+- [MINOR] Added numbered variant to `BulletText` to use with `ol` tags
 
 ### Removed
 
