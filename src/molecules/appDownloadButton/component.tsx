@@ -65,7 +65,7 @@ export const AppDownloadButton = (props: AppDownloadButtonProps): React.ReactEle
       target={getAppUrl()}
     >
       <Image
-        source={`https://assets.evrpg.com/${props.appType}/download-button/v5/${props.buttonVariant}.svg`}
+        source={`https://assets-cdn.kiba.dev/${props.appType}/download-button/v5/${props.buttonVariant}.svg`}
         alternativeText={getAlternativeText()}
         isLazyLoadable={props.isLazyLoadable}
       />

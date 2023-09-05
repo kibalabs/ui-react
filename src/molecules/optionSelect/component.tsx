@@ -88,7 +88,7 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
       <HidingView isHidden={!isOpen}>
         <Box theme={props.theme?.optionsContainerTheme} variant={optionsContainerVariant} zIndex={999} isFullWidth={true} position='absolute'>
           <List theme={props.theme?.optionListTheme} itemVariant={props.optionListVariant || 'slim'} onItemClicked={onItemClicked} shouldShowDividers={true} isFullWidth={true}>
-            {props.options.map((option) => (
+            {props.options.map((option: IOption): React.ReactElement => (
               <List.Item
                 key={option.itemKey}
                 itemKey={option.itemKey}
@@ -109,5 +109,4 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
 OptionSelect.displayName = 'KibaOptionSelect';
 OptionSelect.defaultProps = {
   ...defaultMoleculeProps,
-
 };
