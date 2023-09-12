@@ -13,10 +13,22 @@ const MarkdownParagraph = (props: AnchorHTMLAttributes<HTMLAnchorElement>): Reac
     (child && typeof child === 'object' && 'type' in child) ? String(child.type.displayName).split('-')[0] : null
   )) || [];
   const isCaption = childrenDisplayNames.indexOf('MarkdownMedia') >= 0;
+
+  if (isCaption) {
+    return (
+      <span style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
+        {props.children}
+        <PrettyText
+          variant={getVariant('paragraph', 'note')}
+          alignment={TextAlignment.Center}
+        />
+      </span>
+    );
+  }
   return (
     <PrettyText
-      variant={getVariant('paragraph', isCaption && 'note')}
-      alignment={isCaption ? TextAlignment.Center : TextAlignment.Left}
+      variant={getVariant('paragraph')}
+      alignment={TextAlignment.Left}
     >
       {props.children}
     </PrettyText>
@@ -42,14 +54,6 @@ const MarkdownMedia = (props: ImgHTMLAttributes<HTMLImageElement>): React.ReactE
     />
   );
 };
-
-// const MarkdownEmbed = (props: IWebViewProps): React.ReactElement => {
-//   return (
-//     <Box width='640px' height='360px' maxWidth='100%'>
-//       <WebView permissions={['accelerometer', 'autoplay', 'clipboard-write', 'encrypted-media', 'gyroscope', 'picture-in-picture', 'web-share']} aspectRatio={0.5625} {...props} />
-//     </Box>
-//   );
-// };
 
 export interface IMarkdownProps {
   id?: string;
