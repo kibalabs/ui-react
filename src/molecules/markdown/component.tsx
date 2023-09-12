@@ -16,7 +16,7 @@ const MarkdownParagraph = (props: AnchorHTMLAttributes<HTMLAnchorElement>): Reac
 
   if (isCaption) {
     return (
-      <span style={{alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
+      <span style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
         {props.children}
         <PrettyText
           variant={getVariant('paragraph', 'note')}
@@ -33,7 +33,6 @@ const MarkdownParagraph = (props: AnchorHTMLAttributes<HTMLAnchorElement>): Reac
       {props.children}
     </PrettyText>
   );
-
 };
 
 const MarkdownLink = (props: AnchorHTMLAttributes<HTMLAnchorElement>): React.ReactElement => {
