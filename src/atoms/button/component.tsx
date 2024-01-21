@@ -92,6 +92,9 @@ const StyledButton = styled.button<IStyledButtonProps>`
   &.fullWidth {
     width: 100%;
   }
+  &.fullHeight {
+    width: 100%;
+  }
   &.disabled {
     cursor: not-allowed;
   }
@@ -105,6 +108,7 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   text: string;
   isEnabled: boolean;
   isLoading?: boolean;
+  isFullHeight?: boolean;
   isFullWidth?: boolean;
   buttonType?: 'button' | 'reset' | 'submit';
   iconRight?: OptionalProppedElement<IIconProps>;
@@ -144,7 +148,7 @@ export const Button = (props: IButtonProps): React.ReactElement => {
     // @ts-ignore: as prop doesn't match type required
     <StyledButton
       id={props.id}
-      className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', !props.isEnabled && 'disabled', ...(props.variant?.split('-') || []))}
+      className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !props.isEnabled && 'disabled', ...(props.variant?.split('-') || []))}
       $theme={props.theme}
       $isLoading={props.isLoading || false}
       onClick={onClicked}
