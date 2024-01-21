@@ -93,7 +93,7 @@ const StyledButton = styled.button<IStyledButtonProps>`
     width: 100%;
   }
   &.fullHeight {
-    width: 100%;
+    height: 100%;
   }
   &.disabled {
     cursor: not-allowed;
