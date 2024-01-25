@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Added numbered variant to `BulletText` to use with `ol` tags
 - [MINOR] Update how `Markdown` displays `Media` and captions
 - [MINOR] Added `isFullHeight` to `Button`
+- [MINOR] Update `Markdown` to render bullets without spaces in between
 
 ### Removed
 
