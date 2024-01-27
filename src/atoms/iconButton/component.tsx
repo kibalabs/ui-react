@@ -66,6 +66,12 @@ const StyledIconButtonFocusFixer = styled.span`
 
 const StyledIconButton = styled.button<IStyledIconButtonProps>`
   transition-duration: 0.3s;
+  &.fullWidth {
+    width: 100%;
+  }
+  &.fullHeight {
+    height: 100%;
+  }
   &.disabled {
     cursor: not-allowed;
   }
@@ -78,6 +84,8 @@ const StyledIconButton = styled.button<IStyledIconButtonProps>`
 export interface IIconButtonProps extends IComponentProps<IIconButtonTheme> {
   isEnabled: boolean;
   icon: React.ReactElement<IIconProps>;
+  isFullHeight?: boolean;
+  isFullWidth?: boolean;
   buttonType?: 'button' | 'reset' | 'submit';
   label?: string;
   target?: string;
@@ -108,7 +116,7 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
     // @ts-ignore: as prop doesn't match type required
     <StyledIconButton
       id={props.id}
-      className={getClassName(IconButton.displayName, !props.isEnabled && 'disabled', props.className, ...(props.variant?.split('-') || []))}
+      className={getClassName(IconButton.displayName, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !props.isEnabled && 'disabled', props.className, ...(props.variant?.split('-') || []))}
       $theme={props.theme}
       onClick={onClicked}
       disabled={!props.isEnabled}
