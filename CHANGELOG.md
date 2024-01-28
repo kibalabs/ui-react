@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Added `isFullHeight` to `Button`
 - [MINOR] Update `Markdown` to render bullets without spaces in between
 - [MINOR] Added `isFullHeight` and `isFullWidth` to `IconButton`
+- [MINOR] Fix lazyloading opacity in `Image`
 
 ### Removed
 
