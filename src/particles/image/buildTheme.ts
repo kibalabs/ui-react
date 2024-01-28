@@ -9,7 +9,7 @@ export const buildImageThemes = (dimensions: IDimensionGuide, boxThemes: ThemeMa
   const defaultImageTheme: IImageTheme = {
     background: mergeTheme<IBoxTheme>(boxThemes.default, {
       // NOTE(krishan711): we explicitly want to not set opacity for lazy loading
-        'opacity': '',
+      opacity: '',
     }),
   };
 
