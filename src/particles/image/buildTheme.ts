@@ -1,13 +1,16 @@
 import { RecursivePartial } from '@kibalabs/core';
 
 import { IImageTheme } from './theme';
-import { mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
+import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 import { IBoxTheme } from '../box';
 import { IDimensionGuide } from '../dimensions';
 
 export const buildImageThemes = (dimensions: IDimensionGuide, boxThemes: ThemeMap<IBoxTheme>, base?: PartialThemeMap<IImageTheme>): ThemeMap<IImageTheme> => {
   const defaultImageTheme: IImageTheme = {
-    background: boxThemes.default,
+    background: mergeTheme<IBoxTheme>(boxThemes.default, {
+      // NOTE(krishan711): we explicitly want to not set opacity for lazy loading
+      opacity: '',
+    }),
   };
 
   const circularImageTheme: RecursivePartial<IImageTheme> = {
