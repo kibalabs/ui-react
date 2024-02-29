@@ -112,6 +112,7 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
             p: { component: MarkdownParagraph },
             ul: { component: MarkdownBulletList },
             li: { component: MarkdownBulletText },
+            u: { component: PrettyText, props: { variant: 'underline' } },
             h1: {
               component: PrettyText,
               props: {
