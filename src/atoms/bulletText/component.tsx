@@ -22,7 +22,7 @@ interface IStyledBulletTextProps {
 
 const StyledBulletText = styled.li<IStyledBulletTextProps>`
   counter-increment: list-number;
-  display: table-row;
+  display: table;
   &:before {
     display: table-cell;
     padding-right: 1em;
