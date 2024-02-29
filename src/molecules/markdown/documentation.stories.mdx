@@ -61,6 +61,18 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
+<Canvas>
+  <Story name='Markdown with bullet points and trailing text'>
+    <Markdown source={'Why UI-React is awesome:\n\n* something something something something: \n* i told you so\n\nSomething else to talk about.'} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name='Markdown with bullet points and trailing html'>
+    <Markdown source={'Why UI-React is awesome:\n\n* something something something something: \n* i told you so\n\n<p><u>Our recommendations</u></p>'} />
+  </Story>
+</Canvas>
+
 ### Theming
 
 TODO
