@@ -8,7 +8,7 @@ export const buildBulletTextThemes = (dimensions: IDimensionGuide, textThemes: T
     normal: {
       default: {
         text: mergeTheme(textThemes.default, {
-          margin: '0 0 0.5em 0',
+          margin: '0 0 0.4em 0',
         }),
         bullet: {
           color: '$colors.text',

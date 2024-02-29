@@ -120,7 +120,7 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
     display: table;
     li {
       ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).default.normal.default.text)};
-      display: table-row;
+      display: table;
       &:before {
         display: table-cell;
         padding-right: 1em;
@@ -140,7 +140,7 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
     li {
       ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).numbered?.normal?.default?.text)};
       counter-increment: list-number;
-      display: table-row;
+      display: table;
       &:before {
         display: table-cell;
         padding-right: 1em;
