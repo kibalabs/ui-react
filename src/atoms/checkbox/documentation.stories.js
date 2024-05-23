@@ -20,6 +20,7 @@ export const Default = {
 
 export const WrappedState = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [isChecked, setIsChecked] = React.useState(true);
 
     return (
@@ -36,6 +37,7 @@ export const WrappedState = {
 
 export const Disabled = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [isChecked, setIsChecked] = React.useState(true);
 
     return (

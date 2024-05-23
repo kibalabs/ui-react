@@ -34,6 +34,7 @@ export const Default = {
 
 export const LongOption = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [selectedItemKey, setSelectedItemKey] = React.useState('');
 
     const options = [

@@ -20,6 +20,7 @@ export const Default = {
 
 export const StatefulExample = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = React.useState('');
     return <SingleLineInput value={value} onValueChanged={setValue} />;
   },
@@ -29,6 +30,7 @@ export const StatefulExample = {
 
 export const SuccessMessage = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = React.useState('');
 
     return (
@@ -46,6 +48,7 @@ export const SuccessMessage = {
 
 export const ErrorMessage = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = React.useState('');
 
     return (

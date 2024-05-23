@@ -16,6 +16,7 @@ export const Default = {
 
 export const Stateful = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [isChecked, setIsChecked] = React.useState(false);
     return (
       <Switch

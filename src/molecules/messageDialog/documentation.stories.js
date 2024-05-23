@@ -23,6 +23,7 @@ export const Default = {
 
 export const ExampleMessageDialog = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [openDialog, setOpenDialog] = React.useState(false);
 
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Text } from '../../particles';
 import { Video } from '.';
+import { Text } from '../../particles';
 
 const Template = (args) => <Video {...args} />;
 

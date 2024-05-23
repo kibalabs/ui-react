@@ -22,8 +22,9 @@ export const Default = {
 
 export const Simple = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = React.useState('');
-
+    // eslint-disable-next-line react-hooks/rules-of-hooks, unused-imports/no-unused-vars
     const [isLoading, setIsLoading] = React.useState(false);
 
     return (
@@ -50,8 +51,9 @@ export const Simple = {
 
 export const Loading = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = React.useState('');
-
+    // eslint-disable-next-line react-hooks/rules-of-hooks, unused-imports/no-unused-vars
     const [isLoading, setIsLoading] = React.useState(true);
 
     return (

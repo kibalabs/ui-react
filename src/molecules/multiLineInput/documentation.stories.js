@@ -20,6 +20,7 @@ export const Default = {
 
 export const StatefulExample = {
   render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = React.useState('');
     return <MultiLineInput value={value} onValueChanged={setValue} />;
   },

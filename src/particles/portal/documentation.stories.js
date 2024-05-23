@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Box, Text } from '../../particles';
 import { Portal } from '.';
+import { Box, Text } from '../../particles';
 
 const Template = (args) => <Portal {...args} />;
 
