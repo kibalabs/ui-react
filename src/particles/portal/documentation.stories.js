@@ -1,15 +1,18 @@
-import { Portal, IPortalProps } from ".";
+import React from 'react';
+
+import { Box, Text } from '../../particles';
+import { Portal } from '.';
 
 const Template = (args) => <Portal {...args} />;
 
 export default {
   component: Portal,
-  title: "Particles/Portal",
+  title: 'Particles/Portal',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
   args: {},
 };
 
@@ -20,16 +23,16 @@ export const PlacedAtBottomRight = {
     return (
       <React.Fragment>
         <button ref={ref}>Open Portal</button>
-        <Portal anchorElement={ref} placement="bottom-right">
-          <Box width="200px">
-            <Text>I'm anchored at the bottom-right</Text>
+        <Portal anchorElement={ref} placement='bottom-right'>
+          <Box width='200px'>
+            <Text>I&apos;m anchored at the bottom-right</Text>
           </Box>
         </Portal>
       </React.Fragment>
     );
   },
 
-  name: "Placed at bottom-right",
+  name: 'Placed at bottom-right',
 };
 
 export const PlacedAtBottomLeft = {
@@ -39,16 +42,16 @@ export const PlacedAtBottomLeft = {
     return (
       <React.Fragment>
         <button ref={ref}>Open Portal</button>
-        <Portal anchorElement={ref} placement="bottom-left">
-          <Box width="200px">
-            <Text>I'm anchored at the bottom-left</Text>
+        <Portal anchorElement={ref} placement='bottom-left'>
+          <Box width='200px'>
+            <Text>I&apos;m anchored at the bottom-left</Text>
           </Box>
         </Portal>
       </React.Fragment>
     );
   },
 
-  name: "Placed at bottom-left",
+  name: 'Placed at bottom-left',
 };
 
 export const PlacedAtBottomCenter = {
@@ -58,16 +61,16 @@ export const PlacedAtBottomCenter = {
     return (
       <React.Fragment>
         <button ref={ref}>Open Portal</button>
-        <Portal anchorElement={ref} placement="bottom-center">
-          <Box width="200px">
-            <Text>I'm anchored at the bottom-center</Text>
+        <Portal anchorElement={ref} placement='bottom-center'>
+          <Box width='200px'>
+            <Text>I&apos;m anchored at the bottom-center</Text>
           </Box>
         </Portal>
       </React.Fragment>
     );
   },
 
-  name: "Placed at bottom-center",
+  name: 'Placed at bottom-center',
 };
 
 export const PlacedAtTopRight = {
@@ -77,16 +80,16 @@ export const PlacedAtTopRight = {
     return (
       <React.Fragment>
         <button ref={ref}>Open Portal</button>
-        <Portal anchorElement={ref} placement="top-right">
-          <Box width="200px">
-            <Text>I'm anchored at the top-right</Text>
+        <Portal anchorElement={ref} placement='top-right'>
+          <Box width='200px'>
+            <Text>I&apos;m anchored at the top-right</Text>
           </Box>
         </Portal>
       </React.Fragment>
     );
   },
 
-  name: "Placed at top-right",
+  name: 'Placed at top-right',
 };
 
 export const PlacedAtTopLeft = {
@@ -96,16 +99,16 @@ export const PlacedAtTopLeft = {
     return (
       <React.Fragment>
         <button ref={ref}>Open Portal</button>
-        <Portal anchorElement={ref} placement="top-left">
-          <Box width="200px">
-            <Text>I'm anchored at the top-left</Text>
+        <Portal anchorElement={ref} placement='top-left'>
+          <Box width='200px'>
+            <Text>I&apos;m anchored at the top-left</Text>
           </Box>
         </Portal>
       </React.Fragment>
     );
   },
 
-  name: "Placed at top-left",
+  name: 'Placed at top-left',
 };
 
 export const PlacedAtTopCenter = {
@@ -115,14 +118,14 @@ export const PlacedAtTopCenter = {
     return (
       <React.Fragment>
         <button ref={ref}>Open Portal</button>
-        <Portal anchorElement={ref} placement="top-center">
-          <Box width="200px">
-            <Text>I'm anchored at the top-center</Text>
+        <Portal anchorElement={ref} placement='top-center'>
+          <Box width='200px'>
+            <Text>I&apos;m anchored at the top-center</Text>
           </Box>
         </Portal>
       </React.Fragment>
     );
   },
 
-  name: "Placed at top-center",
+  name: 'Placed at top-center',
 };

@@ -1,15 +1,17 @@
-import { ProgressCounter, IProgressCounterProps } from ".";
+import React from 'react';
+
+import { ProgressCounter } from '.';
 
 const Template = (args) => <ProgressCounter {...args} />;
 
 export default {
   component: ProgressCounter,
-  title: "Molecules/ProgressCounter",
+  title: 'Molecules/ProgressCounter',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
 
   args: {
     stepCount: 5,
@@ -19,5 +21,5 @@ export const Default = {
 
 export const TooMany = {
   render: () => <ProgressCounter stepCount={200} selectedStepIndex={5} />,
-  name: "Too many",
+  name: 'Too many',
 };

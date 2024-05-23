@@ -1,73 +1,75 @@
-import { LinkBase, ILinkBaseProps } from ".";
-import { KibaIcon } from "../../particles";
+import React from 'react';
+
+import { LinkBase } from '.';
+import { KibaIcon } from '../../particles';
 
 const Template = (args) => (
   <LinkBase {...args}>
-    <KibaIcon iconId="ion-bulb" />
+    <KibaIcon iconId='ion-bulb' />
   </LinkBase>
 );
 
 export default {
   component: LinkBase,
-  title: "Atoms/LinkBase",
+  title: 'Atoms/LinkBase',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
   args: {},
 };
 
 export const Translucent = {
   render: () => (
-    <LinkBase variant="translucent">
-      <p>I'm a link now</p>
+    <LinkBase variant='translucent'>
+      <p>I&apos;m a link now</p>
     </LinkBase>
   ),
 
-  name: "Translucent",
+  name: 'Translucent',
 };
 
 export const Image = {
   render: () => (
-    <LinkBase variant="image">
+    <LinkBase variant='image'>
       <img
         src={
-          "https://www.everypagehq.com/20200505212614/assets/everypage-wordmark.svg"
+          'https://www.everypagehq.com/20200505212614/assets/everypage-wordmark.svg'
         }
       />
     </LinkBase>
   ),
 
-  name: "Image",
+  name: 'Image',
 };
 
 export const Card = {
   render: () => (
-    <LinkBase variant="card">
+    <LinkBase variant='card'>
       <span>hello world</span>
     </LinkBase>
   ),
 
-  name: "Card",
+  name: 'Card',
 };
 
 export const LinkWithTarget = {
   render: () => (
-    <LinkBase variant="card" target="https://www.everypagehq.com">
+    <LinkBase variant='card' target='https://www.everypagehq.com'>
       <span>This is anchored</span>
     </LinkBase>
   ),
 
-  name: "Link with target",
+  name: 'Link with target',
 };
 
 export const LinkWithoutTarget = {
   render: () => (
-    <LinkBase variant="card">
+    <LinkBase variant='card'>
       <span>This is in a button</span>
     </LinkBase>
   ),
 
-  name: "Link without target",
+  name: 'Link without target',
 };

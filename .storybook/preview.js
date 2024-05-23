@@ -31,30 +31,34 @@ const theme = buildTheme({
   },
 });
 
-export const decorators = [
-  (Story) => (
-    <ThemeProvider theme={theme}>
-      <GlobalCss
-        theme={theme}
-        resetCss={resetCss}
-      />
-      <Story />
-    </ThemeProvider>
-  ),
-];
-
-export const parameters = {
-  actions: {
-    argTypesRegex: '^on[A-Z].*',
-  },
-  previewTabs: {
-    canvas: {
-      hidden: true,
-    },
-  },
-  options: {
-    storySort: {
-      order: ['Introduction', ['Welcome', 'Theming Goals', 'Architecture'], 'Particles', ['Colors', 'Dimensions', 'Fonts'], 'Atoms', 'Molecules', 'Organisms'],
-    },
-  },
+const preview = {
+  // parameters: {
+  //   // actions: {
+  //   //   argTypesRegex: '^on[A-Z].*',
+  //   // },
+  //   // previewTabs: {
+  //   //   canvas: {
+  //   //     hidden: true,
+  //   //   },
+  //   // },
+  //   options: {
+  //     storySort: {
+  //       method: 'alphabetical',
+  //   //     order: ['Introduction', ['Welcome', 'Theming Goals', 'Architecture'], 'Particles', ['Colors', 'Dimensions', 'Fonts'], 'Atoms', 'Molecules', 'Wrappers'],
+  //     },
+  //   },
+  // },
+  decorators: [
+    (Story) => (
+      <ThemeProvider theme={theme}>
+        <GlobalCss
+          theme={theme}
+          resetCss={resetCss}
+        />
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
 };
+
+export default preview;

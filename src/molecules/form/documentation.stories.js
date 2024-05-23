@@ -1,80 +1,84 @@
-import { SingleLineInput } from "..";
-import { Button } from "../../atoms";
-import { Stack } from "../../layouts";
-import { Direction } from "../../model";
+import React from 'react';
 
-import { Form, IFormProps } from ".";
+import { Form } from '.';
+import { SingleLineInput } from '..';
+import { Button } from '../../atoms';
+import { Stack } from '../../layouts';
+import { Direction } from '../../model';
+
 
 const Template = (args) => <Form {...args} />;
 
 export default {
   component: Form,
-  title: "Molecules/Form",
+  title: 'Molecules/Form',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
   args: {},
 };
 
 export const Simple = {
   render: () => {
-    const [value, setValue] = React.useState("");
+    const [value, setValue] = React.useState('');
+
     const [isLoading, setIsLoading] = React.useState(false);
 
     return (
-      <Form isLoading={isLoading} onFormSubmitted={() => setValue("")}>
+      <Form isLoading={isLoading} onFormSubmitted={() => setValue('')}>
         <SingleLineInput
-          placeholderText="Enter Message"
+          placeholderText='Enter Message'
           value={value}
           onValueChanged={setValue}
-          messageText="Button is disabled"
+          messageText='Button is disabled'
         />
         <br />
         <Button
-          type="submit"
+          type='submit'
           isEnabled={false}
-          variant="primary"
-          text="Submit"
+          variant='primary'
+          text='Submit'
         />
       </Form>
     );
   },
 
-  name: "Simple",
+  name: 'Simple',
 };
 
 export const Loading = {
   render: () => {
-    const [value, setValue] = React.useState("");
+    const [value, setValue] = React.useState('');
+
     const [isLoading, setIsLoading] = React.useState(true);
 
     return (
-      <Form isLoading={isLoading} onFormSubmitted={() => setValue("")}>
+      <Form isLoading={isLoading} onFormSubmitted={() => setValue('')}>
         <Stack direction={Direction.Verticl} shouldAddGutter={true}>
           <SingleLineInput
-            placeholderText="Enter Message"
+            placeholderText='Enter Message'
             value={value}
             onValueChanged={setValue}
           />
           <SingleLineInput
-            placeholderText="Enter Other message"
+            placeholderText='Enter Other message'
             value={value}
             onValueChanged={setValue}
-            messageText="Button is disabled"
+            messageText='Button is disabled'
           />
           <br />
           <Button
-            type="submit"
+            type='submit'
             isEnabled={false}
-            variant="primary"
-            text="Submit"
+            variant='primary'
+            text='Submit'
           />
         </Stack>
       </Form>
     );
   },
 
-  name: "Loading",
+  name: 'Loading',
 };

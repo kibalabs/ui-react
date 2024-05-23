@@ -1,19 +1,20 @@
-import { Checkbox, ICheckboxProps } from ".";
-import { PaddingSize, KibaIcon } from "../../particles";
+import React from 'react';
+
+import { Checkbox } from '.';
 
 const Template = (args) => <Checkbox {...args} />;
 
 export default {
   component: Checkbox,
-  title: "Atoms/Checkbox",
+  title: 'Atoms/Checkbox',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
 
   args: {
-    text: "Default Checkbox",
+    text: 'Default Checkbox',
   },
 };
 
@@ -25,12 +26,12 @@ export const WrappedState = {
       <Checkbox
         isChecked={isChecked}
         onToggled={() => setIsChecked(!isChecked)}
-        text="A Simple Checkbox"
+        text='A Simple Checkbox'
       />
     );
   },
 
-  name: "Wrapped state",
+  name: 'Wrapped state',
 };
 
 export const Disabled = {
@@ -42,10 +43,10 @@ export const Disabled = {
         isChecked={isChecked}
         onToggled={() => setIsChecked(!isChecked)}
         isDisabled={true}
-        text="Disabled Checkbox"
+        text='Disabled Checkbox'
       />
     );
   },
 
-  name: "Disabled",
+  name: 'Disabled',
 };

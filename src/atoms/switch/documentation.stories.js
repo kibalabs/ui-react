@@ -1,15 +1,17 @@
-import { Switch, ISwitchProps } from ".";
+import React from 'react';
+
+import { Switch } from '.';
 
 const Template = (args) => <Switch {...args} />;
 
 export default {
   component: Switch,
-  title: "Atoms/Switch",
+  title: 'Atoms/Switch',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
 };
 
 export const Stateful = {
@@ -23,5 +25,5 @@ export const Stateful = {
     );
   },
 
-  name: "stateful",
+  name: 'stateful',
 };

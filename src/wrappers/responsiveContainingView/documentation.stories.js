@@ -1,11 +1,13 @@
-import { Box, Text } from "../../particles";
-import { ResponsiveContainingView, IResponsiveContainingViewProps } from ".";
+import React from 'react';
+
+import { ResponsiveContainingView } from '.';
+import { Box, Text } from '../../particles';
 
 const Template = (args) => (
   <ResponsiveContainingView {...args}>
-    <Box variant="card">
-      <Box width={"2000px"}>
-        <Text>I'm wrapped</Text>
+    <Box variant='card'>
+      <Box width={'2000px'}>
+        <Text>I&apos;m wrapped</Text>
       </Box>
     </Box>
   </ResponsiveContainingView>
@@ -13,12 +15,12 @@ const Template = (args) => (
 
 export default {
   component: ResponsiveContainingView,
-  title: "Wrappers/ResponsiveContainingView",
+  title: 'Wrappers/ResponsiveContainingView',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
 
   args: {
     size: 10,

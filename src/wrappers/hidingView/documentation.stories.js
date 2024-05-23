@@ -1,21 +1,23 @@
-import { Box, Text } from "../../particles";
-import { HidingView, IHidingViewProps } from ".";
+import React from 'react';
+
+import { HidingView } from '.';
+import { Box, Text } from '../../particles';
 
 const Template = (args) => (
   <HidingView {...args}>
-    <Box variant="card">
-      <Text>I'm wrapped</Text>
+    <Box variant='card'>
+      <Text>I&apos;m wrapped</Text>
     </Box>
   </HidingView>
 );
 
 export default {
   component: HidingView,
-  title: "Wrappers/HidingView",
+  title: 'Wrappers/HidingView',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
   args: {},
 };

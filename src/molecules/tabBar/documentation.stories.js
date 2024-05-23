@@ -1,5 +1,7 @@
-import { TabBar } from ".";
-import { Alignment } from "../../model";
+import React from 'react';
+
+import { TabBar } from '.';
+import { Alignment } from '../../model';
 
 const Template = (args) => {
   const [selectedTabKey, setSelectedTabKey] = React.useState();
@@ -9,97 +11,97 @@ const Template = (args) => {
       selectedTabKey={args.selectedTabKey || selectedTabKey}
       onTabKeySelected={args.setSelectedTabKey || setSelectedTabKey}
     >
-      <TabBar.Item tabKey={String(1)} text="First" />
-      <TabBar.Item tabKey={String(2)} text="Second" />
-      <TabBar.Item tabKey={String(3)} text="Third" />
+      <TabBar.Item tabKey={String(1)} text='First' />
+      <TabBar.Item tabKey={String(2)} text='Second' />
+      <TabBar.Item tabKey={String(3)} text='Third' />
     </TabBar>
   );
 };
 
 export default {
   component: TabBar,
-  title: "Molecules/TabBar",
+  title: 'Molecules/TabBar',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
   args: {},
 };
 
 export const FullWidth = {
   render: () => (
     <TabBar isFullWidth={true}>
-      <TabBar.Item tabKey={String(1)} text="First" />
-      <TabBar.Item tabKey={String(2)} text="Second" />
-      <TabBar.Item tabKey={String(3)} text="Third" />
+      <TabBar.Item tabKey={String(1)} text='First' />
+      <TabBar.Item tabKey={String(2)} text='Second' />
+      <TabBar.Item tabKey={String(3)} text='Third' />
     </TabBar>
   ),
 
-  name: "Full width",
+  name: 'Full width',
 };
 
 export const ContentAlignmentStart = {
   render: () => (
     <TabBar contentAlignment={Alignment.Start} isFullWidth={false}>
-      <TabBar.Item tabKey={String(1)} text="First" />
-      <TabBar.Item tabKey={String(2)} text="Second" />
+      <TabBar.Item tabKey={String(1)} text='First' />
+      <TabBar.Item tabKey={String(2)} text='Second' />
     </TabBar>
   ),
 
-  name: "Content Alignment - Start",
+  name: 'Content Alignment - Start',
 };
 
 export const ContentAlignmentCenter = {
   render: () => (
     <TabBar contentAlignment={Alignment.Center} isFullWidth={false}>
-      <TabBar.Item tabKey={String(1)} text="First" />
-      <TabBar.Item tabKey={String(2)} text="Second" />
+      <TabBar.Item tabKey={String(1)} text='First' />
+      <TabBar.Item tabKey={String(2)} text='Second' />
     </TabBar>
   ),
 
-  name: "Content Alignment - Center",
+  name: 'Content Alignment - Center',
 };
 
 export const ContentAlignmentEnd = {
   render: () => (
     <TabBar contentAlignment={Alignment.End} isFullWidth={false}>
-      <TabBar.Item tabKey={String(1)} text="First" />
-      <TabBar.Item tabKey={String(2)} text="Second" />
+      <TabBar.Item tabKey={String(1)} text='First' />
+      <TabBar.Item tabKey={String(2)} text='Second' />
     </TabBar>
   ),
 
-  name: "Content Alignment - End",
+  name: 'Content Alignment - End',
 };
 
 export const FullWidthWithLongText = {
   render: () => (
     <TabBar isFullWidth={true}>
-      <TabBar.Item tabKey={String(1)} text="First" />
+      <TabBar.Item tabKey={String(1)} text='First' />
       <TabBar.Item
         tabKey={String(2)}
-        text="Second one is super long. I mean super, duper, extra long! Oh yeah, I really mean super alifragislistexpialodicious-ly long!"
+        text='Second one is super long. I mean super, duper, extra long! Oh yeah, I really mean super alifragislistexpialodicious-ly long!'
       />
-      <TabBar.Item tabKey={String(3)} text="Third" />
+      <TabBar.Item tabKey={String(3)} text='Third' />
     </TabBar>
   ),
 
-  name: "Full width with long text",
+  name: 'Full width with long text',
 };
 
 export const LongText = {
   render: () => (
     <TabBar isFullWidth={false}>
-      <TabBar.Item tabKey={String(1)} text="First" />
+      <TabBar.Item tabKey={String(1)} text='First' />
       <TabBar.Item
         tabKey={String(2)}
-        text="Second one is super long. I mean super, duper, extra long! Oh yeah, I really mean super alifragislistexpialodicious-ly long!"
+        text='Second one is super long. I mean super, duper, extra long! Oh yeah, I really mean super alifragislistexpialodicious-ly long!'
       />
-      <TabBar.Item tabKey={String(3)} text="Third" />
+      <TabBar.Item tabKey={String(3)} text='Third' />
     </TabBar>
   ),
 
-  name: "Long text",
+  name: 'Long text',
 };
 
 export const TooMany = {
@@ -119,5 +121,5 @@ export const TooMany = {
     </TabBar>
   ),
 
-  name: "Too many",
+  name: 'Too many',
 };

@@ -1,5 +1,7 @@
-import { BulletText, IBulletTextProps } from ".";
-import { BulletList, IBulletListProps } from "../bulletList";
+import React from 'react';
+
+import { BulletText } from '.';
+import { BulletList } from '../bulletList';
 
 const Template = (args) => (
   <BulletList>
@@ -9,12 +11,12 @@ const Template = (args) => (
 
 export default {
   component: BulletText,
-  title: "Atoms/BulletText",
+  title: 'Atoms/BulletText',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
 
   args: {
     text: "I'm a bullet",
@@ -28,5 +30,5 @@ export const SimpleExample = {
     </BulletList>
   ),
 
-  name: "Simple example",
+  name: 'Simple example',
 };

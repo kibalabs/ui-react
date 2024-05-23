@@ -1,89 +1,87 @@
-import { Button, IButtonProps } from ".";
-import { ButtonThemeExample } from "./themeExample";
-import { EqualGrid, Stack } from "../../layouts";
-import { Direction } from "../../model";
-import { Box, KibaIcon, Text } from "../../particles";
-import { MultiLineInput } from "../../molecules";
-import { buildTheme, ThemeProvider } from "../../theming";
+import React from 'react';
+
+import { Button } from '.';
+import { ButtonThemeExample } from './themeExample';
+import { KibaIcon } from '../../particles';
 
 const Template = (args) => <Button {...args} />;
 
 export default {
   component: Button,
-  title: "Atoms/Button",
+  title: 'Atoms/Button',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
 
   args: {
-    text: "Default Button",
+    text: 'Default Button',
   },
 };
 
 export const Primary = {
-  render: () => <Button variant="primary" text="Primary Button" />,
-  name: "Primary",
+  render: () => <Button variant='primary' text='Primary Button' />,
+  name: 'Primary',
 };
 
 export const Secondary = {
-  render: () => <Button variant="secondary" text="Secondary Button" />,
-  name: "Secondary",
+  render: () => <Button variant='secondary' text='Secondary Button' />,
+  name: 'Secondary',
 };
 
 export const RightIcon = {
   render: () => (
     <Button
-      iconRight={<KibaIcon iconId="ion-aperture" />}
-      text="Button With Right Icon"
+      iconRight={<KibaIcon iconId='ion-aperture' />}
+      text='Button With Right Icon'
     />
   ),
 
-  name: "Right Icon",
+  name: 'Right Icon',
 };
 
 export const LeftIcon = {
   render: () => (
     <Button
-      iconLeft={<KibaIcon iconId="ion-aperture" />}
-      text="Button With Left Icon"
+      iconLeft={<KibaIcon iconId='ion-aperture' />}
+      text='Button With Left Icon'
     />
   ),
 
-  name: "Left Icon",
+  name: 'Left Icon',
 };
 
 export const Disabled = {
-  render: () => <Button isEnabled={false} text="Button Disabled" />,
-  name: "Disabled",
+  render: () => <Button isEnabled={false} text='Button Disabled' />,
+  name: 'Disabled',
 };
 
 export const FullWidth = {
   render: () => (
     <Button
-      text="Full width"
-      iconLeft={<KibaIcon iconId="ion-aperture" />}
-      iconRight={<KibaIcon iconId="ion-aperture" />}
+      text='Full width'
+      iconLeft={<KibaIcon iconId='ion-aperture' />}
+      iconRight={<KibaIcon iconId='ion-aperture' />}
       isFullWidth={true}
     />
   ),
 
-  name: "Full width",
+  name: 'Full width',
 };
 
 export const EndAligned = {
   render: () => (
     <Button
-      text="End-aligned"
-      iconLeft={<KibaIcon iconId="ion-aperture" />}
-      iconRight={<KibaIcon iconId="ion-aperture" />}
+      text='End-aligned'
+      iconLeft={<KibaIcon iconId='ion-aperture' />}
+      iconRight={<KibaIcon iconId='ion-aperture' />}
       isFullWidth={true}
       theme={{
         normal: {
           default: {
             text: {
-              "text-align": "end",
+              'text-align': 'end',
             },
           },
         },
@@ -91,10 +89,10 @@ export const EndAligned = {
     />
   ),
 
-  name: "End-aligned",
+  name: 'End-aligned',
 };
 
 export const CompTestBlock = {
   render: () => <ButtonThemeExample />,
-  name: "compTestBlock",
+  name: 'compTestBlock',
 };

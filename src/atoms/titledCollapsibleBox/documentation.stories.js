@@ -1,8 +1,7 @@
-import {
-  TitledCollapsibleBox,
-  ICollapsibleBoxProps,
-  StatefulTitledCollapsibleBox,
-} from ".";
+import React from 'react';
+
+import { StatefulTitledCollapsibleBox,
+  TitledCollapsibleBox } from '.';
 
 const Template = (args) => (
   <TitledCollapsibleBox {...args}>
@@ -12,38 +11,38 @@ const Template = (args) => (
 
 export default {
   component: TitledCollapsibleBox,
-  title: "Atoms/TitledCollapsibleBox",
+  title: 'Atoms/TitledCollapsibleBox',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
 
   args: {
-    title: "Here is a TitledCollapsibleBox",
+    title: 'Here is a TitledCollapsibleBox',
     onCollapseToggled: () => {},
   },
 };
 
 export const Stateful = {
   render: () => (
-    <StatefulTitledCollapsibleBox title="Stateful TitledCollapsibleBox">
+    <StatefulTitledCollapsibleBox title='Stateful TitledCollapsibleBox'>
       <span>This is the content inside the box</span>
     </StatefulTitledCollapsibleBox>
   ),
 
-  name: "Stateful",
+  name: 'Stateful',
 };
 
 export const StatefulCollapsed = {
   render: () => (
     <StatefulTitledCollapsibleBox
-      title="Stateful TitledCollapsibleBox (collapsed initially)"
+      title='Stateful TitledCollapsibleBox (collapsed initially)'
       isCollapsedInitially={true}
     >
       <span>This is the content inside the box</span>
     </StatefulTitledCollapsibleBox>
   ),
 
-  name: "Stateful Collapsed",
+  name: 'Stateful Collapsed',
 };

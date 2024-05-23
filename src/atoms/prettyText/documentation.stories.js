@@ -1,65 +1,87 @@
-import { PrettyText, IPrettyTextProps } from ".";
+import React from 'react';
+
+import { PrettyText } from '.';
 
 const Template = (args) => (
   <PrettyText {...args}>
     <span>
-      <b>Bold</b> and <i>italic</i> text
+      <b>Bold</b>
+      {' '}
+and
+      <i>italic</i>
+      {' '}
+text
     </span>
   </PrettyText>
 );
 
 export default {
   component: PrettyText,
-  title: "Atoms/PrettyText",
+  title: 'Atoms/PrettyText',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
   args: {},
 };
 
 export const Header1 = {
   render: () => (
-    <PrettyText variant="header1">
-      <b>Bold</b>and<i>italic</i>text
+    <PrettyText variant='header1'>
+      <b>Bold</b>
+and
+      <i>italic</i>
+text
     </PrettyText>
   ),
-  name: "Header 1",
+  name: 'Header 1',
 };
 
 export const Header2 = {
   render: () => (
-    <PrettyText variant="header2">
-      <b>Bold</b>and<i>italic</i>text
+    <PrettyText variant='header2'>
+      <b>Bold</b>
+and
+      <i>italic</i>
+text
     </PrettyText>
   ),
-  name: "Header 2",
+  name: 'Header 2',
 };
 
 export const Header3 = {
   render: () => (
-    <PrettyText variant="header3">
-      <b>Bold</b>and<i>italic</i>text
+    <PrettyText variant='header3'>
+      <b>Bold</b>
+and
+      <i>italic</i>
+text
     </PrettyText>
   ),
-  name: "Header 3",
+  name: 'Header 3',
 };
 
 export const Header4 = {
   render: () => (
-    <PrettyText variant="header4">
-      <b>Bold</b>and<i>italic</i>text
+    <PrettyText variant='header4'>
+      <b>Bold</b>
+and
+      <i>italic</i>
+text
     </PrettyText>
   ),
-  name: "Header 4",
+  name: 'Header 4',
 };
 
 export const Header5 = {
   render: () => (
-    <PrettyText variant="header5">
-      <b>Bold</b>and<i>italic</i>text
+    <PrettyText variant='header5'>
+      <b>Bold</b>
+and
+      <i>italic</i>
+text
     </PrettyText>
   ),
-  name: "Header 5",
+  name: 'Header 5',
 };

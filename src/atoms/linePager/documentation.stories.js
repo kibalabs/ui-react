@@ -1,16 +1,17 @@
-import { LinePager, ILinePagerProps } from ".";
-import { PaddingSize, KibaIcon } from "../../particles";
+import React from 'react';
+
+import { LinePager } from '.';
 
 const Template = (args) => <LinePager {...args} />;
 
 export default {
   component: LinePager,
-  title: "Atoms/LinePager",
+  title: 'Atoms/LinePager',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
 
   args: {
     pageCount: 5,
@@ -20,14 +21,14 @@ export const Default = {
 
 export const Simple = {
   render: () => (
-    <LinePager variant="default" pageCount={5} activePageIndex={1} />
+    <LinePager variant='default' pageCount={5} activePageIndex={1} />
   ),
-  name: "Simple",
+  name: 'Simple',
 };
 
 export const Many = {
   render: () => (
-    <LinePager variant="default" pageCount={500} activePageIndex={1} />
+    <LinePager variant='default' pageCount={500} activePageIndex={1} />
   ),
-  name: "Many",
+  name: 'Many',
 };

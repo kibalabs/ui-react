@@ -1,14 +1,16 @@
-import { OptionSelect } from ".";
+import React from 'react';
+
+import { OptionSelect } from '.';
 
 const Template = (args) => {
-  const [selectedItemKey, setSelectedItemKey] = React.useState("");
+  const [selectedItemKey, setSelectedItemKey] = React.useState('');
   const options = [
-    { itemKey: "1", text: "First Option" },
-    { itemKey: "2", text: "Second Option" },
-    { itemKey: "3", text: "Third Option" },
+    { itemKey: '1', text: 'First Option' },
+    { itemKey: '2', text: 'Second Option' },
+    { itemKey: '3', text: 'Third Option' },
   ];
   return (
-    <div style={{ height: "250px" }}>
+    <div style={{ height: '250px' }}>
       <OptionSelect
         {...args}
         selectedItemKey={args.selectedItemKey || selectedItemKey}
@@ -21,38 +23,38 @@ const Template = (args) => {
 
 export default {
   component: OptionSelect,
-  title: "Molecules/OptionSelect",
+  title: 'Molecules/OptionSelect',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
   args: {},
 };
 
 export const LongOption = {
   render: () => {
-    const [selectedItemKey, setSelectedItemKey] = React.useState("");
+    const [selectedItemKey, setSelectedItemKey] = React.useState('');
 
     const options = [
       {
-        itemKey: "1",
-        text: "1",
+        itemKey: '1',
+        text: '1',
       },
       {
-        itemKey: "2",
-        text: "2",
+        itemKey: '2',
+        text: '2',
       },
       {
-        itemKey: "3",
-        text: "This is a very very long option",
+        itemKey: '3',
+        text: 'This is a very very long option',
       },
     ];
 
     return (
       <div
         style={{
-          height: "250px",
+          height: '250px',
         }}
       >
         <OptionSelect
@@ -65,5 +67,5 @@ export const LongOption = {
     );
   },
 
-  name: "Long option",
+  name: 'Long option',
 };

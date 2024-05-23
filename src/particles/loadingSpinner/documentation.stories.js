@@ -1,50 +1,52 @@
-import { Box } from "../box";
-import { LoadingSpinner, ILoadingSpinnerProps } from ".";
+import React from 'react';
+
+import { LoadingSpinner } from '.';
+import { Box } from '../box';
 
 const Template = (args) => <LoadingSpinner {...args} />;
 
 export default {
   component: LoadingSpinner,
-  title: "Particles/LoadingSpinner",
+  title: 'Particles/LoadingSpinner',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
   args: {},
 };
 
 export const Light = {
-  render: () => <LoadingSpinner variant="light" />,
-  name: "Light",
+  render: () => <LoadingSpinner variant='light' />,
+  name: 'Light',
 };
 
 export const Dark = {
-  render: () => <LoadingSpinner variant="dark" />,
-  name: "Dark",
+  render: () => <LoadingSpinner variant='dark' />,
+  name: 'Dark',
 };
 
 export const Small = {
-  render: () => <LoadingSpinner variant="small" />,
-  name: "Small",
+  render: () => <LoadingSpinner variant='small' />,
+  name: 'Small',
 };
 
 export const Large = {
-  render: () => <LoadingSpinner variant="large" />,
-  name: "Large",
+  render: () => <LoadingSpinner variant='large' />,
+  name: 'Large',
 };
 
 export const ExtraLarge = {
-  render: () => <LoadingSpinner variant="extraLarge" />,
-  name: "Extra Large",
+  render: () => <LoadingSpinner variant='extraLarge' />,
+  name: 'Extra Large',
 };
 
 export const Fill = {
   render: () => (
-    <Box height={"200px"} width={"200px"}>
-      <LoadingSpinner variant="fill" />
+    <Box height={'200px'} width={'200px'}>
+      <LoadingSpinner variant='fill' />
     </Box>
   ),
 
-  name: "Fill",
+  name: 'Fill',
 };

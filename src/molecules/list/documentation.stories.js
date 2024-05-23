@@ -1,4 +1,6 @@
-import { List } from ".";
+import React from 'react';
+
+import { List } from '.';
 
 const Template = (args) => {
   const [selectedItemKey, setSelectedItemKey] = React.useState();
@@ -17,12 +19,12 @@ const Template = (args) => {
 
 export default {
   component: List,
-  title: "Molecules/List",
+  title: 'Molecules/List',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
   args: {},
 };
 
@@ -35,16 +37,15 @@ export const UnClickableList = {
     </List>
   ),
 
-  name: "Un-clickable List",
+  name: 'Un-clickable List',
   args: {},
 };
 
 export const ClickWithoutSelectingList = {
   render: () => (
     <List
-      onItemClicked={(itemKey) =>
-        console.log(`clicked list item with key: ${itemKey}`)
-      }
+      // eslint-disable-next-line no-console
+      onItemClicked={(itemKey) => console.log(`clicked list item with key: ${itemKey}`)}
     >
       <List.Item itemKey={String(1)}>Item 1</List.Item>
       <List.Item itemKey={String(2)}>Item 2</List.Item>
@@ -52,7 +53,7 @@ export const ClickWithoutSelectingList = {
     </List>
   ),
 
-  name: "Click without selecting List",
+  name: 'Click without selecting List',
   args: {},
 };
 
@@ -65,16 +66,15 @@ export const WithDividers = {
     </List>
   ),
 
-  name: "With dividers",
+  name: 'With dividers',
   args: {},
 };
 
 export const WithDisabledItems = {
   render: () => (
     <List
-      onItemClicked={(itemKey) =>
-        console.log(`clicked list item with key: ${itemKey}`)
-      }
+      // eslint-disable-next-line no-console
+      onItemClicked={(itemKey) => console.log(`clicked list item with key: ${itemKey}`)}
     >
       <List.Item isDisabled={true} itemKey={String(1)}>
         Item 1
@@ -88,6 +88,6 @@ export const WithDisabledItems = {
     </List>
   ),
 
-  name: "With disabled items",
+  name: 'With disabled items',
   args: {},
 };

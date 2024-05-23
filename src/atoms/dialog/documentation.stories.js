@@ -1,19 +1,21 @@
-import { Text, TextAlignment } from "../../particles";
-import { Button } from "../../atoms";
-import { Stack } from "../../layouts";
-import { Alignment, Direction } from "../../model";
-import { Dialog } from ".";
+import React from 'react';
+
+import { Dialog } from '.';
+import { Button } from '../../atoms';
+import { Stack } from '../../layouts';
+import { Direction } from '../../model';
+import { Text, TextAlignment } from '../../particles';
 
 const Template = (args) => <Dialog {...args} />;
 
 export default {
   component: Dialog,
-  title: "Atoms/Dialog",
+  title: 'Atoms/Dialog',
 };
 
 export const Default = {
   render: Template.bind({}),
-  name: "Default",
+  name: 'Default',
   args: {},
 };
 
@@ -24,19 +26,19 @@ export const SimpleDialog = {
     return (
       <React.Fragment>
         <Button
-          variant="primary"
+          variant='primary'
           onClicked={() => setOpenDialog(true)}
-          text="Open Dialog"
+          text='Open Dialog'
         />
         <Dialog
           isOpen={openDialog}
           onCloseClicked={() => setOpenDialog(!openDialog)}
         >
           <Stack direction={Direction.Vertical} shouldAddGutters={true}>
-            <Text alignment={TextAlignment.Center}>I'm a Dialog</Text>
+            <Text alignment={TextAlignment.Center}>I&apos;m a Dialog</Text>
             <Button
-              variant="primary"
-              text="Close"
+              variant='primary'
+              text='Close'
               onClicked={() => setOpenDialog(!openDialog)}
             />
           </Stack>
@@ -45,7 +47,7 @@ export const SimpleDialog = {
     );
   },
 
-  name: "Simple Dialog",
+  name: 'Simple Dialog',
 };
 
 export const NonDismissableDialog = {
@@ -55,9 +57,9 @@ export const NonDismissableDialog = {
     return (
       <React.Fragment>
         <Button
-          variant="primary"
+          variant='primary'
           onClicked={() => setOpenDialog(true)}
-          text="Open Dialog"
+          text='Open Dialog'
         />
         <Dialog
           isOpen={openDialog}
@@ -65,11 +67,11 @@ export const NonDismissableDialog = {
           isDismissableByBackdrop={false}
           isDismissableByEscape={false}
         >
-          <Text alignment={TextAlignment.Center}>I'm not going anywhere</Text>
+          <Text alignment={TextAlignment.Center}>I&apos;m not going anywhere</Text>
         </Dialog>
       </React.Fragment>
     );
   },
 
-  name: "Non-dismissable Dialog",
+  name: 'Non-dismissable Dialog',
 };
