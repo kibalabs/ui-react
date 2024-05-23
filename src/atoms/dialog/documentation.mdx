@@ -1,0 +1,34 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Text, TextAlignment } from '../../particles';
+import { Button} from '../../atoms';
+import { Stack } from '../../layouts';
+import { Alignment, Direction } from '../../model'
+import { Dialog } from '.';
+
+<Meta of={DocumentationStories} />
+
+# Dialog
+
+<br />
+
+export const Template = (args) => (
+  <Dialog {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+# Examples
+
+<Canvas>
+  <Story of={DocumentationStories.SimpleDialog} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.NonDismissableDialog} />
+</Canvas>

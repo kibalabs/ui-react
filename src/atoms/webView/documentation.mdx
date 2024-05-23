@@ -1,0 +1,42 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { WebView, IWebViewProps } from '.';
+
+<Meta of={DocumentationStories} />
+
+# WebView
+
+<br />
+
+export const Template = (args) => (
+  <div style={{height: '300px'}}>
+    <WebView {...args} />
+  </div>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.WithError} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.WithAspectRatio} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.WithLazyLoading} />
+</Canvas>
+
+NOTE(krishan711): the error detection isn't working yet.
+
+### Theming
+
+TODO

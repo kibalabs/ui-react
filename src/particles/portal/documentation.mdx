@@ -1,0 +1,50 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Portal, IPortalProps } from '.';
+
+<Meta of={DocumentationStories} />
+
+# Portal
+
+<br />
+
+export const Template = (args) => (
+  <Portal {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.PlacedAtBottomRight} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.PlacedAtBottomLeft} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.PlacedAtBottomCenter} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.PlacedAtTopRight} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.PlacedAtTopLeft} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.PlacedAtTopCenter} />
+</Canvas>
+
+### Theming
+
+TODO

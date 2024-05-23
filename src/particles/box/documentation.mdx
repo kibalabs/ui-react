@@ -1,0 +1,84 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Box, IBoxProps } from '.';
+import { BoxThemeExample } from './themeExample';
+import { PaddingSize, KibaIcon, Image, Text } from '../../particles';
+import { LayerContainer, Stack } from '../../layouts';
+import { Alignment } from '../../model';
+
+<Meta of={DocumentationStories} />
+
+# Box
+
+<br />
+
+export const Template = (args) => (
+  <Box {...args}>
+    <p>I'm in a box</p>
+  </Box>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.Card} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Bordered} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Padded} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.ScrollableHorizontally} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.ScrollableVertically} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.EmptyCardWithTooltip} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.ClippedContent} />
+</Canvas>
+
+### Theming
+
+**Box** is a type of `particle`. Boxes provide a basic building block for structuring UIs.
+The theming structure of a **Box** is as follows:
+
+```ts
+interface IBoxTheme extends CssTheme, ThemeType {
+  'background-color': string;
+  'border-radius': string;
+  'border-color': string;
+  'border-width': string;
+  'border-style': string;
+  'padding': string;
+  'box-shadow': string;
+  'margin': string;
+  'outline-style': string;
+  'outline-color': string;
+  'outline-width': string;
+  'outline-offset': string;
+}
+```
+
+#### Example
+
+<Canvas withSource={'none'}>
+  <Story of={DocumentationStories.ComTestBlock} />
+</Canvas>

@@ -1,0 +1,51 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Box } from '../box';
+import { LoadingSpinner, ILoadingSpinnerProps } from '.';
+
+<Meta of={DocumentationStories} />
+
+# LoadingSpinner
+
+<br />
+
+export const Template = (args) => (
+  <LoadingSpinner {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.Light} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Dark} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Small} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Large} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.ExtraLarge} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Fill} />
+</Canvas>
+
+### Theming
+
+TODO

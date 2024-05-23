@@ -1,0 +1,64 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Button, IButtonProps } from '.';
+import { ButtonThemeExample } from './themeExample';
+import { EqualGrid, Stack } from '../../layouts';
+import { Direction } from '../../model';
+import { Box, KibaIcon, Text } from '../../particles';
+import { MultiLineInput } from '../../molecules';
+import { buildTheme, ThemeProvider } from '../../theming';
+
+<Meta of={DocumentationStories} />
+
+# Button
+
+<br />
+
+export const Template = (args) => (
+  <Button {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.Primary} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Secondary} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.RightIcon} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.LeftIcon} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Disabled} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.FullWidth} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.EndAligned} />
+</Canvas>
+
+### Theming
+
+As with all [atoms](?path=/docs/introduction-architecture--page#atoms), `Button` themes exist as a hierarchy with 3 layers. Use the interactive example below to test this out:
+
+<Canvas withSource={'none'}>
+  <Story of={DocumentationStories.CompTestBlock} />
+</Canvas>

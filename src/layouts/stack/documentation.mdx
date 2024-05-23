@@ -1,0 +1,57 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Stack, IStackProps } from '.';
+import { Direction, Alignment } from '../../model';
+import { Box, KibaIcon } from '../../particles';
+import { BackgroundView } from '../../wrappers';
+
+<Meta of={DocumentationStories} />
+
+# Stack
+
+<br />
+
+export const Template = (args) => (
+  <Stack {...args}>
+    <KibaIcon iconId={'ion-airplane'} />
+    <KibaIcon iconId={'ion-american-football'} />
+    <KibaIcon iconId={'ion-at'} />
+    <KibaIcon iconId={'ion-albums'} />
+    <KibaIcon iconId={'ion-bag'} />
+    <KibaIcon iconId={'ion-bonfire'} />
+    <KibaIcon iconId={'ion-battery-full'} />
+  </Stack>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.Vertical} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Spaced} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.WrappedItems} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.WrappedPills} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.ShrinkBelowSize} />
+</Canvas>
+
+### Theming
+
+TODO

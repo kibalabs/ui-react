@@ -1,0 +1,55 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Box } from '../box';
+import { Media, IMediaProps } from '.';
+
+<Meta of={DocumentationStories} />
+
+# Media
+
+<br />
+
+export const Template = (args) => (
+  <Media maxWidth='100%' {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.Circular} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Video} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Relative} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.VideoWithoutExtension} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.ImageWithoutExtension} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.UnknownContentTypeWithoutExtension} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.ImageWithExtension} />
+</Canvas>
+
+### Theming
+
+TODO

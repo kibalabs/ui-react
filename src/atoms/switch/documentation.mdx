@@ -1,0 +1,26 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Switch, ISwitchProps } from '.';
+
+<Meta of={DocumentationStories} />
+
+# Switch
+
+<br />
+
+export const Template = (args) => (
+  <Switch {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+# Example
+
+<Canvas>
+  <Story of={DocumentationStories.Stateful} />
+</Canvas>

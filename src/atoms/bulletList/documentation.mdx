@@ -1,0 +1,34 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { BulletList, IBulletListProps } from '.';
+import { BulletText } from '../bulletText';
+
+<Meta of={DocumentationStories} />
+
+# BulletList
+
+<br />
+
+export const Template = (args) => (
+  <BulletList {...args}>
+    <BulletText>hello</BulletText>
+    <BulletText>world</BulletText>
+  </BulletList>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.SimpleExample} />
+</Canvas>
+
+### Theming
+
+TODO

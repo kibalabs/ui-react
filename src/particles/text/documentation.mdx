@@ -1,0 +1,142 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Text, ITextProps } from '.';
+
+<Meta of={DocumentationStories} />
+
+# Text
+
+<br />
+
+export const Template = (args) => (
+  <Text {...args}>Every word tells a story</Text>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.Paragraph} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Inline} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Bold} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Strong} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Italic} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Emphasis} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Underline} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Mark} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Small} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Deleted} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Inserted} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Subscript} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Superscript} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Header} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Title} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Subtitle} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Header1} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Header2} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Header3} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Header4} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Header5} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Header6} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Note} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Supersize} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Unmargined} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Margined} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Colored} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.SingleLineTextView} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.MultipleLineTextView} />
+</Canvas>
+
+### Theming
+
+TODO

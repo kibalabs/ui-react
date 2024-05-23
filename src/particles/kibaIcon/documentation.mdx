@@ -1,0 +1,55 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { KibaIcon } from '.';
+import { IIconProps } from '../icon';
+
+<Meta of={DocumentationStories} />
+
+# KibaIcon
+
+<br />
+
+export const Template = (args) => (
+  <KibaIcon {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.IonIcon} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.MaterialIcon} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.FeatherIcon} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.BootstrapIcon} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.RemixIcon} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.SmallIcon} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.LargeIcon} />
+</Canvas>
+
+### Theming
+
+See [Icon]()
