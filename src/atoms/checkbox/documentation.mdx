@@ -1,0 +1,35 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Checkbox, ICheckboxProps } from '.';
+import { PaddingSize, KibaIcon } from '../../particles';
+
+<Meta of={DocumentationStories} />
+
+# Checkbox
+
+<br />
+
+export const Template = (args) => (
+  <Checkbox {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.WrappedState} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Disabled} />
+</Canvas>
+
+### Theming
+
+TODO

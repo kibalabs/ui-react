@@ -1,0 +1,64 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { LayerContainer, ILayerContainerProps } from '.';
+import { Direction, Alignment } from '../../model';
+import { KibaIcon, Box } from '../../particles';
+import { BackgroundView } from '../../wrappers';
+
+<Meta of={DocumentationStories} />
+
+# LayerContainer
+
+<br />
+
+{/* NOTE(krishan711): some unknonwn problem with this and grid when building docs */}
+
+{/*export const Template = (args) => (
+  <Box height='30px' width='30px'>
+    <LayerContainer {...args}>
+      <BackgroundView color='lightblue'>
+        <Box isFullHeight={true} isFullWidth={true} />
+      </BackgroundView>
+      <KibaIcon iconId={'ion-airplane'} />
+      <LayerContainer.Layer isFullHeight={false} isFullWidth={false} alignmentVertical={Alignment.Center} alignmentHorizontal={Alignment.Center}>
+        <KibaIcon iconId={'ion-american-football'} />
+      </LayerContainer.Layer>
+    </LayerContainer>
+  </Box>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} />*/}
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.LayersOnTopOfEachOther} />
+</Canvas>
+
+{/* NOTE(krishan711): it would be nice if this figured out the width too
+  but it only works when container has display: inline */}
+
+<Canvas>
+  <Story of={DocumentationStories.LayersWithAStaticHeightLayer} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.LayersOnTopOfEachOtherAndCentered} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.LayersOnTopOfEachOtherWithCustomAlignment} />
+</Canvas>
+
+TODO
+
+### Theming
+
+TODO

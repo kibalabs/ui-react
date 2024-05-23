@@ -1,0 +1,49 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { LinkBase, ILinkBaseProps } from '.';
+import { KibaIcon } from '../../particles';
+
+<Meta of={DocumentationStories} />
+
+# LinkBase
+
+<br />
+
+export const Template = (args) => (
+  <LinkBase {...args}>
+    <KibaIcon iconId='ion-bulb' />
+  </LinkBase>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.Translucent} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Image} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Card} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.LinkWithTarget} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.LinkWithoutTarget} />
+</Canvas>
+
+### Theming
+
+TODO

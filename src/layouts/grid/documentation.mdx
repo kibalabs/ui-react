@@ -1,0 +1,76 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Grid, IGridProps } from '.';
+import { PaddingSize } from '../../';
+import { Direction } from '../../model';
+import { Box, KibaIcon, Text } from '../../particles';
+
+<Meta of={DocumentationStories} />
+
+# Grid
+
+<br />
+
+{/* NOTE(krishan711): some unknonwn problem with this and grid when building docs */}
+
+{/* export const Template = (args) => (
+  <Grid {...args}>
+    <Grid.Item size={3}>
+      <KibaIcon iconId={'ion-airplane'} />
+    </Grid.Item>
+    <Grid.Item size={3}>
+      <KibaIcon iconId={'ion-american-football'} />
+    </Grid.Item>
+    <Grid.Item size={3}>
+      <KibaIcon iconId={'ion-at'} />
+    </Grid.Item>
+    <Grid.Item size={3}>
+      <KibaIcon iconId={'ion-albums'} />
+    </Grid.Item>
+    <Grid.Item size={3}>
+      <KibaIcon iconId={'ion-bag'} />
+    </Grid.Item>
+    <Grid.Item size={3}>
+      <KibaIcon iconId={'ion-bonfire'} />
+    </Grid.Item>
+  </Grid>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story name='Default' args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story={'Default'} /> */}
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.AllDifferentSizes} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.GutterApplied} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.DefaultGutters} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.WideGutters} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.NoGutters} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.ResponsiveGrid} />
+</Canvas>
+
+### Theming
+
+TODO

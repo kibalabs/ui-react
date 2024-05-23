@@ -1,0 +1,46 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { PrettyText, IPrettyTextProps } from '.';
+
+<Meta of={DocumentationStories} />
+
+# PrettyText
+
+<br />
+
+export const Template = (args) => (
+  <PrettyText {...args}><span><b>Bold</b> and <i>italic</i> text</span></PrettyText>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.Header1} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Header2} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Header3} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Header4} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Header5} />
+</Canvas>
+
+### Theming
+
+TODO

@@ -1,0 +1,33 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Box, Text } from '../../particles';
+import { PaddingView, IPaddingViewProps } from '.';
+
+<Meta of={DocumentationStories} />
+
+# PaddingView
+
+<br />
+
+export const Template = (args) => (
+  <PaddingView {...args}>
+    <Box variant='card'>
+      <Text>I'm wrapped</Text>
+    </Box>
+  </PaddingView>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+TODO
+
+### Theming
+
+TODO

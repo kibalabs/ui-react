@@ -1,0 +1,33 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Box, Text } from '../../particles';
+import { ColorSettingView, IColorSettingViewProps } from '.';
+
+<Meta of={DocumentationStories} />
+
+# ColorSettingView
+
+<br />
+
+export const Template = (args) => (
+  <ColorSettingView {...args}>
+    <Box variant='card'>
+      <Text>I'm wrapped</Text>
+    </Box>
+  </ColorSettingView>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+TODO
+
+### Theming
+
+TODO

@@ -1,0 +1,62 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { TabBar } from '.';
+import { Alignment } from '../../model';
+
+<Meta of={DocumentationStories} />
+
+# TabBar
+
+<br />
+
+export const Template = (args) => {
+  const [selectedTabKey, setSelectedTabKey] = React.useState();
+  return (
+    <TabBar {...args} selectedTabKey={args.selectedTabKey || selectedTabKey} onTabKeySelected={args.setSelectedTabKey || setSelectedTabKey}>
+      <TabBar.Item tabKey={String(1)} text='First' />
+      <TabBar.Item tabKey={String(2)} text='Second' />
+      <TabBar.Item tabKey={String(3)} text='Third' />
+    </TabBar>
+  )
+};
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.FullWidth} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.ContentAlignmentStart} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.ContentAlignmentCenter} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.ContentAlignmentEnd} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.FullWidthWithLongText} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.LongText} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.TooMany} />
+</Canvas>
+
+### Theming
+
+TODO

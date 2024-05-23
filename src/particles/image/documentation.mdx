@@ -1,0 +1,36 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Image, IImageProps } from '.';
+
+<Meta of={DocumentationStories} />
+
+# Image
+
+<br />
+
+export const Template = (args) => (
+  <Image maxWidth={'100%'} isFullHeigh={true} {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.Circular} />
+</Canvas>
+
+{/* NOTE(krishan711): this does not work well! */}
+
+<Canvas>
+  <Story of={DocumentationStories.Responsive} />
+</Canvas>
+
+### Theming
+
+TODO

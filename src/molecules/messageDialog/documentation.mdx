@@ -1,0 +1,27 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Button} from '../../atoms';
+import { MessageDialog } from '.';
+
+<Meta of={DocumentationStories} />
+
+# MessageDialog
+
+<br />
+
+export const Template = (args) => (
+  <MessageDialog {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+# Examples
+
+<Canvas>
+  <Story of={DocumentationStories.MessageDialog} />
+</Canvas>

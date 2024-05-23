@@ -1,0 +1,49 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { List } from '.';
+
+<Meta of={DocumentationStories} />
+
+# List
+
+<br />
+
+export const Template = (args) => {
+  const [selectedItemKey, setSelectedItemKey] = React.useState();
+  return (
+    <List {...args} selectedItemKey={args.selectedItemKey || selectedItemKey} onItemClicked={args.setSelectedItemKey || setSelectedItemKey}>
+      <List.Item itemKey={String(1)}>First</List.Item>
+      <List.Item itemKey={String(2)}>Second</List.Item>
+      <List.Item itemKey={String(3)}>Third</List.Item>
+    </List>
+  )
+};
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.UnClickableList} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.ClickWithoutSelectingList} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.WithDividers} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.WithDisabledItems} />
+</Canvas>
+
+### Theming
+
+TODO

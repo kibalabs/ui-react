@@ -1,0 +1,45 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Box, Image } from '../../particles';
+import { Carousel, ICarouselProps } from '.';
+
+<Meta of={DocumentationStories} />
+
+# Carousel
+
+<br />
+
+export const Template = (args) => (
+  <Carousel {...args}>
+    <Box variant='padded-transparent' isFullWidth={false}>
+      <Image source={'https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg'} isLazyLoadable={false} isFullHeight={true} isFullWidth={true} />
+    </Box>
+    <Box variant='padded-transparent' isFullWidth={false}>
+      <Image source={'https://upload.wikimedia.org/wikipedia/commons/0/0d/Alouatta_guariba.jpg'} isLazyLoadable={false} isFullHeight={true} isFullWidth={true} />
+    </Box>
+    <Box variant='padded-transparent' isFullWidth={false}>
+      <Image source={'https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg'} isLazyLoadable={false} isFullHeight={true} isFullWidth={true} />
+    </Box>
+    <Box variant='padded-transparent' isFullWidth={false}>
+      <Image source={'https://upload.wikimedia.org/wikipedia/commons/0/0d/Alouatta_guariba.jpg'} isLazyLoadable={false} isFullHeight={true} isFullWidth={true} />
+    </Box>
+    <Box variant='padded-transparent' isFullWidth={false}>
+      <Image source={'https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg'} isLazyLoadable={false} isFullHeight={true} isFullWidth={true} />
+    </Box>
+  </Carousel>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+TODO
+
+### Theming
+
+TODO

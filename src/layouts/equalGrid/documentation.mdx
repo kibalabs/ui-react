@@ -1,0 +1,39 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { EqualGrid, IEqualGridProps } from '.';
+import { Direction } from '../../model';
+import { KibaIcon } from '../../particles';
+
+<Meta of={DocumentationStories} />
+
+# EqualGrid
+
+<br />
+
+export const Template = (args) => (
+  <EqualGrid {...args}>
+    <KibaIcon iconId={'ion-airplane'} />
+    <KibaIcon iconId={'ion-american-football'} />
+    <KibaIcon iconId={'ion-at'} />
+    <KibaIcon iconId={'ion-albums'} />
+    <KibaIcon iconId={'ion-bag'} />
+    <KibaIcon iconId={'ion-bonfire'} />
+  </EqualGrid>
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.DifferentChildSize} />
+</Canvas>
+
+### Theming
+
+TODO

@@ -1,0 +1,42 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Video, IVideoProps } from '.';
+
+<Meta of={DocumentationStories} />
+
+# Video
+
+<br />
+
+export const Template = (args) => (
+  <Video {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.NoControls} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Autoplay} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.LazyLoading} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.OnEnded} />
+</Canvas>
+
+### Theming
+
+TODO

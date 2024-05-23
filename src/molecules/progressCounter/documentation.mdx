@@ -1,0 +1,30 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { ProgressCounter, IProgressCounterProps } from '.';
+
+<Meta of={DocumentationStories} />
+
+# ProgressCounter
+
+<br />
+
+export const Template = (args) => (
+  <ProgressCounter {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.TooMany} />
+</Canvas>
+
+### Theming
+
+TODO

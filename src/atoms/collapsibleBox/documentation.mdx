@@ -1,0 +1,40 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { CollapsibleBox, ICollapsibleBoxProps, StatefulCollapsibleBox } from '.';
+
+<Meta of={DocumentationStories} />
+
+# CollapsibleBox
+
+<br />
+
+export const Template = (args) => (
+  <CollapsibleBox {...args}>
+    <span>This is the content inside the box</span>
+  </CollapsibleBox>
+);
+
+<Canvas withToolbar={true}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.Stateful} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.StatefulUnpadded} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.StatefulCollapsed} />
+</Canvas>
+
+### Theming
+
+TODO

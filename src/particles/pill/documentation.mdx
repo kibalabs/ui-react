@@ -1,0 +1,51 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import * as DocumentationStories from './documentation.stories';
+
+import { Pill, IPillProps } from '.';
+import { PaddingSize, KibaIcon } from '../../particles';
+
+<Meta of={DocumentationStories} />
+
+# Pill
+
+<br />
+
+export const Template = (args) => (
+  <Pill {...args} />
+);
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.Primary} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Secondary} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Success} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.Error} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.RightIcon} />
+</Canvas>
+
+<Canvas>
+  <Story of={DocumentationStories.LeftIcon} />
+</Canvas>
+
+### Theming
+
+TODO
