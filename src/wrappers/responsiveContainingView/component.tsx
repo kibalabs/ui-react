@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { IDimensionGuide } from '../../particles';
 import { useDimensions } from '../../theming';
 import { getResponsiveCss, ResponsiveField } from '../../util';
-import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
+import { IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledResponsiveContainingViewProps extends IWrapperProps {
@@ -65,7 +65,11 @@ export interface IResponsiveContainingViewProps extends IWrapperProps {
   isCenteredHorizontally?: boolean;
 }
 
-export const ResponsiveContainingView = (props: IResponsiveContainingViewProps): React.ReactElement => {
+export function ResponsiveContainingView({
+  className = '',
+  isCenteredHorizontally = true,
+  ...props
+}: IResponsiveContainingViewProps): React.ReactElement {
   const theme = useDimensions(props.theme);
   const isFullWidth = props.isFullWidth === true || props.isFullWidth == null;
   const shouldIncludeMaxSize = props.shouldIncludeMaxSize === true || props.shouldIncludeMaxSize == null;
@@ -74,7 +78,7 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
   }
   return (
     <StyledResponsiveContainingView
-      className={getClassName(ResponsiveContainingView.displayName, props.className, props.isCenteredHorizontally && 'centered')}
+      className={getClassName(ResponsiveContainingView.displayName, className, isCenteredHorizontally && 'centered')}
       $theme={theme}
       $size={{ base: props.size, ...props.sizeResponsive }}
       $isFullWidth={isFullWidth}
@@ -83,10 +87,5 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
       {props.children}
     </StyledResponsiveContainingView>
   );
-};
-
+}
 ResponsiveContainingView.displayName = 'KibaResponsiveContainingView';
-ResponsiveContainingView.defaultProps = {
-  ...defaultWrapperProps,
-  isCenteredHorizontally: true,
-};

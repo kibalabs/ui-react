@@ -9,7 +9,7 @@ import { Alignment, Direction } from '../../model';
 import { IBoxTheme, KibaIcon, Text } from '../../particles';
 import { getVariant } from '../../util';
 import { HidingView } from '../../wrappers';
-import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
+import { IMoleculeProps } from '../moleculeProps';
 
 export interface IOption {
   text: string;
@@ -47,7 +47,10 @@ const StyledOptionSelect = styled.div`
 `;
 
 
-export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
+export function OptionSelect({
+  className = '',
+  ...props
+}: IOptionSelectProps): React.ReactElement {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const optionsContainerVariant = getVariant(props.optionsContainerVariant || 'card-unpadded-unmargined');
 
@@ -69,7 +72,7 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
   return (
     <StyledOptionSelect
       id={props.id}
-      className={getClassName(OptionSelect.displayName, props.className)}
+      className={getClassName(OptionSelect.displayName, className)}
     >
       <InputFrame
         onClicked={onToggleOpenClicked}
@@ -104,9 +107,5 @@ export const OptionSelect = (props: IOptionSelectProps): React.ReactElement => {
       </HidingView>
     </StyledOptionSelect>
   );
-};
-
+}
 OptionSelect.displayName = 'KibaOptionSelect';
-OptionSelect.defaultProps = {
-  ...defaultMoleculeProps,
-};

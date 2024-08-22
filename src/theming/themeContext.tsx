@@ -27,7 +27,9 @@ const ThemeCss = createGlobalStyle<IThemeCssProps>`
 interface IThemeProviderProps extends IMultiAnyChildProps, IThemeCssProps {
 }
 
-export const ThemeProvider = (props: IThemeProviderProps): React.ReactElement => {
+export function ThemeProvider({
+  ...props
+}: IThemeProviderProps): React.ReactElement {
   return (
     <ThemeContext.Provider value={props.theme}>
       <ThemeCss theme={props.theme} extraComponentDefinitions={props.extraComponentDefinitions} />
@@ -36,7 +38,7 @@ export const ThemeProvider = (props: IThemeProviderProps): React.ReactElement =>
       </ColorProvider>
     </ThemeContext.Provider>
   );
-};
+}
 
 export const useTheme = (): ITheme => {
   const theme = React.useContext(ThemeContext);
@@ -76,13 +78,15 @@ interface IColorProviderProps extends IMultiAnyChildProps {
   colors: Partial<IColorGuide>;
 }
 
-export const ColorProvider = (props: IColorProviderProps): React.ReactElement => {
+export function ColorProvider({
+  ...props
+}: IColorProviderProps): React.ReactElement {
   return (
     <ColorContext.Provider value={props.colors}>
       {props.children}
     </ColorContext.Provider>
   );
-};
+}
 
 export function useColors(): IColorGuide {
   const baseColors = useBaseColors();

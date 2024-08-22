@@ -5,7 +5,7 @@ import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } fro
 import styled from 'styled-components';
 
 import { IButtonTheme } from './theme';
-import { Alignment, defaultComponentProps, getContentAlignmentCss, getItemAlignmentCss, IComponentProps } from '../../model';
+import { Alignment, getContentAlignmentCss, getItemAlignmentCss, IComponentProps } from '../../model';
 import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particles';
 import { themeToCss } from '../../util';
 
@@ -106,7 +106,7 @@ const StyledButton = styled.button<IStyledButtonProps>`
 
 export interface IButtonProps extends IComponentProps<IButtonTheme> {
   text: string;
-  isEnabled: boolean;
+  isEnabled?: boolean;
   isLoading?: boolean;
   isFullHeight?: boolean;
   isFullWidth?: boolean;
@@ -117,16 +117,32 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   target?: string;
   targetShouldOpenSameTab?: boolean;
   tabIndex?: number;
-  childAlignment: Alignment;
-  contentAlignment: Alignment;
-  isTextFullWidth: boolean;
+  childAlignment?: Alignment;
+  contentAlignment?: Alignment;
+  isTextFullWidth?: boolean;
   onClicked?(): void;
 }
 
-export const Button = (props: IButtonProps): React.ReactElement => {
+export function Button({
+  className = '',
+  variant = 'default',
+  isEnabled = true,
+  isTextFullWidth = true,
+  iconGutter = PaddingSize.Default,
+  contentAlignment = Alignment.Fill,
+  childAlignment = Alignment.Center,
+  buttonType = 'button',
+  isFullHeight = false,
+  isFullWidth = false,
+  ...props
+}: IButtonProps): React.ReactElement {
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
 
-  const onClicked = (event: React.SyntheticEvent): void => {
+  if (props.onClicked && buttonType === 'submit') {
+    throw new Error('if the buttonType is set to submit, you should not use props.onClicked. use the form.onSubmitted instead');
+  }
+
+  const onButtonClicked = (event: React.SyntheticEvent): void => {
     if (props.isLoading) {
       return;
     }
@@ -138,41 +154,37 @@ export const Button = (props: IButtonProps): React.ReactElement => {
     }
   };
 
-  if (props.onClicked && props.buttonType === 'submit') {
-    throw new Error('if the buttonType is set to submit, you should not use onClicked. use the form.onSubmitted instead');
-  }
-
   const isTargetWithinApp = props.target && props.target.startsWith('/');
-  const targetShouldOpenSameTab = props.targetShouldOpenSameTab || props.target?.startsWith('#') || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
+  const innerTargetShouldOpenSameTab = props.targetShouldOpenSameTab || props.target?.startsWith('#') || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
   return (
     // @ts-ignore: as prop doesn't match type required
     <StyledButton
       id={props.id}
-      className={getClassName(Button.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !props.isEnabled && 'disabled', ...(props.variant?.split('-') || []))}
+      className={getClassName(Button.displayName, className, isFullWidth && 'fullWidth', isFullHeight && 'fullHeight', !isEnabled && 'disabled', ...(variant?.split('-') || []))}
       $theme={props.theme}
       $isLoading={props.isLoading || false}
-      onClick={onClicked}
-      disabled={!props.isEnabled}
+      onClick={onButtonClicked}
+      disabled={!isEnabled}
       href={props.target}
       rel={props.target && 'noopener'}
       tabIndex={props.tabIndex || 0}
-      target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
-      as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
-      type={props.buttonType || 'button'}
+      target={props.target ? (innerTargetShouldOpenSameTab ? '_self' : '_blank') : undefined}
+      as={props.target ? (isUsingCoreRouting && innerTargetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
+      type={buttonType || 'button'}
     >
-      <StyledButtonFocusFixer className='KibaButtonFocusFixer' tabIndex={-1} $childAlignment={props.childAlignment || Alignment.Center} $contentAlignment={props.contentAlignment || Alignment.Center}>
+      <StyledButtonFocusFixer className='KibaButtonFocusFixer' tabIndex={-1} $childAlignment={childAlignment || Alignment.Center} $contentAlignment={contentAlignment || Alignment.Center}>
         { !props.isLoading && props.iconLeft && (
           <React.Fragment>
             {props.iconLeft}
-            <Spacing variant={props.iconGutter} />
+            <Spacing variant={iconGutter} />
           </React.Fragment>
         )}
         { !props.isLoading && (
-          <StyledButtonText $isTextFullWidth={props.isTextFullWidth}>{props.text }</StyledButtonText>
+          <StyledButtonText $isTextFullWidth={isTextFullWidth}>{props.text}</StyledButtonText>
         )}
         { !props.isLoading && props.iconRight && (
           <React.Fragment>
-            <Spacing variant={props.iconGutter} />
+            <Spacing variant={iconGutter} />
             {props.iconRight}
           </React.Fragment>
         )}
@@ -185,14 +197,5 @@ export const Button = (props: IButtonProps): React.ReactElement => {
       </StyledButtonFocusFixer>
     </StyledButton>
   );
-};
-
+}
 Button.displayName = 'KibaButton';
-Button.defaultProps = {
-  ...defaultComponentProps,
-  isEnabled: true,
-  isTextFullWidth: true,
-  iconGutter: PaddingSize.Default,
-  contentAlignment: Alignment.Fill,
-  childAlignment: Alignment.Center,
-};

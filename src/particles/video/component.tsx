@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { IVideoTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 
 /* ${(props: IStyledVideoProps): string => themeToCss(props.$theme.background)}; */
 // eslint-disable-next-line unused-imports/no-unused-vars
@@ -73,7 +73,7 @@ export interface IVideoProps extends IComponentProps<IVideoTheme> {
   shouldAutoplay?: boolean;
   shouldMute?: boolean;
   shouldLoop?: boolean;
-  isLazyLoadable?: boolean;
+  // isLazyLoadable?: boolean;
   ipfsPrefix?: string;
   onEnded?: () => void;
   onPlayed?: () => void;
@@ -81,9 +81,13 @@ export interface IVideoProps extends IComponentProps<IVideoTheme> {
 }
 
 // NOTE(krishan711): Failed to get lazy loading working properly. try again with https://github.com/aFarkas/lazysizes/issues/697
-export const Video = (props: IVideoProps): React.ReactElement => {
+export function Video({
+  className = '',
+  variant = 'default',
+  shouldShowControls = true,
+  ...props
+}: IVideoProps): React.ReactElement {
   const fitType = props.fitType || 'scale';
-  const shouldShowControls = props.shouldShowControls != null ? props.shouldShowControls : true;
   const width = props.width ? props.width : props.isFullWidth ? '100%' : 'auto';
   const height = props.height ? props.height : props.isFullHeight ? '100%' : 'auto';
   const source = props.source.startsWith('ipfs://') ? props.source.replace('ipfs://', props.ipfsPrefix ?? 'https://ipfs.io/ipfs/') : props.source;
@@ -110,7 +114,7 @@ export const Video = (props: IVideoProps): React.ReactElement => {
     <StyledVideo
       id={props.id}
       // props.isLazyLoadable ? 'lazyload' : 'unlazy'
-      className={getClassName(Video.displayName, props.className, props.isCenteredHorizontally && 'centered', ...(props.variant?.split('-') || []))}
+      className={getClassName(Video.displayName, className, props.isCenteredHorizontally && 'centered', ...(variant?.split('-') || []))}
       $theme={props.theme}
       $fitType={fitType}
       $width={width}
@@ -133,10 +137,5 @@ export const Video = (props: IVideoProps): React.ReactElement => {
       {props.alternativeText}
     </StyledVideo>
   );
-};
-
+}
 Video.displayName = 'KibaVideo';
-Video.defaultProps = {
-  ...defaultComponentProps,
-  shouldShowControls: true,
-};

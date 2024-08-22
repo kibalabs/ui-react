@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { ICheckboxTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { Icon, PaddingSize, Spacing } from '../../particles';
 import { propertyToCss, themeToCss } from '../../util';
 
@@ -146,7 +146,11 @@ interface ICheckBoxProps extends IComponentProps<ICheckboxTheme> {
   onToggled?(): void;
 }
 
-export const Checkbox = (props: ICheckBoxProps): React.ReactElement => {
+export function Checkbox({
+  className = '',
+  variant = 'default',
+  ...props
+}: ICheckBoxProps): React.ReactElement {
   const isDisabled = props.isDisabled;
   const propsOnToggled = props.onToggled;
   const onToggled = React.useCallback((event: React.SyntheticEvent<HTMLElement>): void => {
@@ -159,7 +163,7 @@ export const Checkbox = (props: ICheckBoxProps): React.ReactElement => {
   return (
     <StyledContainer
       id={props.id}
-      className={getClassName(Checkbox.displayName, props.className, props.isDisabled && 'disabled', props.isChecked && 'checked', ...(props.variant?.split('-') || []))}
+      className={getClassName(Checkbox.displayName, className, props.isDisabled && 'disabled', props.isChecked && 'checked', ...(variant?.split('-') || []))}
       $theme={props.theme}
       onClick={onToggled}
     >
@@ -177,9 +181,5 @@ export const Checkbox = (props: ICheckBoxProps): React.ReactElement => {
       { props.text }
     </StyledContainer>
   );
-};
-
+}
 Checkbox.displayName = 'KibaCheckbox';
-Checkbox.defaultProps = {
-  ...defaultComponentProps,
-};

@@ -1,20 +1,21 @@
 import React, { AnchorHTMLAttributes } from 'react';
 
 import { deepCompare, getClassName } from '@kibalabs/core';
+// @ts-expect-error: commonjs import
 import MarkdownToJsx from 'markdown-to-jsx';
 
 import { Link, PrettyText } from '../../atoms';
 import { TextAlignment, TextTag } from '../../particles';
 import { getVariant } from '../../util';
 
-const MarkdownLink = (props: AnchorHTMLAttributes<HTMLAnchorElement>): React.ReactElement => {
+function MarkdownLink(props: AnchorHTMLAttributes<HTMLAnchorElement>): React.ReactElement {
   return (
     <Link
       target={props.href || '#'}
       text={String(React.Children.toArray(props.children)[0]) || ''}
     />
   );
-};
+}
 
 interface IMarkdownTextProps {
   id?: string;

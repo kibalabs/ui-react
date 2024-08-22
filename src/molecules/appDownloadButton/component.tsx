@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getClassName, KibaException } from '@kibalabs/core';
 
-import { defaultMoleculeProps, IMoleculeProps } from '..';
+import { IMoleculeProps } from '..';
 import { LinkBase } from '../../atoms/linkBase';
 import { Image } from '../../particles/image';
 
@@ -14,12 +14,17 @@ export interface AppDownloadButtonProps extends IMoleculeProps<AppDownloadButton
   appType: 'android' | 'ios' | 'mac' | 'appletv';
   buttonVariant: string;
   isLazyLoadable?: boolean;
-  onClick?(): void;
+  // onClick?(): void;
 }
 
-export const AppDownloadButton = (props: AppDownloadButtonProps): React.ReactElement => {
-  if (['dark', 'dark-clear', 'light', 'light-clear'].indexOf(props.buttonVariant) === -1) {
-    console.error(`The buttonVariant was not recognized: ${props.buttonVariant}`);
+export function AppDownloadButton({
+  className = '',
+  buttonVariant = 'dark',
+  isLazyLoadable = true,
+  ...props
+}: AppDownloadButtonProps): React.ReactElement {
+  if (['dark', 'dark-clear', 'light', 'light-clear'].indexOf(buttonVariant) === -1) {
+    console.error(`The buttonVariant was not recognized: ${buttonVariant}`);
   }
   if (['android', 'ios', 'mac', 'appletv'].indexOf(props.appType) === -1) {
     throw new KibaException(`appType not recognized: ${props.appType}`);
@@ -60,22 +65,16 @@ export const AppDownloadButton = (props: AppDownloadButtonProps): React.ReactEle
   return (
     <LinkBase
       id={props.id}
-      className={getClassName(AppDownloadButton.displayName, props.className)}
+      className={getClassName(AppDownloadButton.displayName, className)}
       variant='image'
       target={getAppUrl()}
     >
       <Image
-        source={`https://assets-cdn.kiba.dev/${props.appType}/download-button/v5/${props.buttonVariant}.svg`}
+        source={`https://assets-cdn.kiba.dev/${props.appType}/download-button/v5/${buttonVariant}.svg`}
         alternativeText={getAlternativeText()}
-        isLazyLoadable={props.isLazyLoadable}
+        isLazyLoadable={isLazyLoadable}
       />
     </LinkBase>
   );
-};
-
+}
 AppDownloadButton.displayName = 'KibaAppDownloadButton';
-AppDownloadButton.defaultProps = {
-  ...defaultMoleculeProps,
-  buttonVariant: 'dark',
-  isLazyLoadable: true,
-};

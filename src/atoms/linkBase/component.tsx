@@ -5,7 +5,7 @@ import { Link as CoreLink, ISingleAnyChildProps, useIsCoreRoutingEnabled } from 
 import styled from 'styled-components';
 
 import { ILinkBaseTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const LinkBaseThemedStyle = (theme: RecursivePartial<ILinkBaseTheme>): string => `
@@ -89,9 +89,9 @@ const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
 `;
 
 export interface ILinkBaseProps extends IComponentProps<ILinkBaseTheme>, ISingleAnyChildProps {
-  isEnabled: boolean;
-  isFullWidth: boolean;
-  isFullHeight: boolean;
+  isEnabled?: boolean;
+  isFullWidth?: boolean;
+  isFullHeight?: boolean;
   label?: string;
   target?: string;
   targetShouldOpenSameTab?: boolean;
@@ -99,7 +99,14 @@ export interface ILinkBaseProps extends IComponentProps<ILinkBaseTheme>, ISingle
   onClicked?(): void;
 }
 
-export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
+export function LinkBase({
+  className = '',
+  variant = 'default',
+  isEnabled = true,
+  isFullWidth = false,
+  isFullHeight = false,
+  ...props
+}: ILinkBaseProps): React.ReactElement {
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
 
   const onClicked = (event: React.SyntheticEvent): void => {
@@ -117,7 +124,7 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
     // @ts-ignore: as prop doesn't match type required
     <StyledLinkBase
       id={props.id}
-      className={getClassName(LinkBase.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !props.isEnabled && 'disabled', ...(props.variant?.split('-') || []))}
+      className={getClassName(LinkBase.displayName, className, isFullWidth && 'fullWidth', isFullHeight && 'fullHeight', !isEnabled && 'disabled', ...(variant?.split('-') || []))}
       $theme={props.theme}
       onClick={onClicked}
       aria-label={props.label}
@@ -132,12 +139,5 @@ export const LinkBase = (props: ILinkBaseProps): React.ReactElement => {
       </StyledLinkBaseFocusFixer>
     </StyledLinkBase>
   );
-};
-
+}
 LinkBase.displayName = 'KibaLinkBase';
-LinkBase.defaultProps = {
-  ...defaultComponentProps,
-  isEnabled: true,
-  isFullWidth: false,
-  isFullHeight: false,
-};

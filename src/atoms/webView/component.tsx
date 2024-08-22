@@ -5,7 +5,7 @@ import { useInitialization } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IWebViewTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { LoadingSpinner } from '../../particles';
 import { themeToCss } from '../../util';
 
@@ -63,8 +63,8 @@ const StyledIframe = styled.iframe<IStyledIframeProps>`
 
 export interface IWebViewProps extends IComponentProps<IWebViewTheme> {
   url: string;
-  permissions: string[];
-  shouldShowLoadingSpinner: boolean;
+  permissions?: string[];
+  shouldShowLoadingSpinner?: boolean;
   errorView?: React.FunctionComponent;
   title?: string;
   isLazyLoadable?: boolean;
@@ -73,13 +73,20 @@ export interface IWebViewProps extends IComponentProps<IWebViewTheme> {
 }
 
 // TODO(krishan711): make a better default error view
-const DefaultErrorView = (): React.ReactElement => {
+function DefaultErrorView(): React.ReactElement {
   return (
     <div>Something went wrong</div>
   );
-};
+}
 
-export const WebView = (props: IWebViewProps): React.ReactElement => {
+export function WebView({
+  className = '',
+  variant = 'default',
+  shouldShowLoadingSpinner = true,
+  title = 'Embedded View',
+  permissions = [],
+  ...props
+}: IWebViewProps): React.ReactElement {
   const [currentUrl, setCurrentUrl] = React.useState<string | undefined>(props.url);
   const [hasFailedToLoad, setHasFailedToLoad] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
@@ -117,7 +124,7 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
     // @ts-ignore
     <StyledWebView
       id={props.id}
-      className={getClassName(WebView.displayName, props.className, ...(props.variant?.split('-') || []))}
+      className={getClassName(WebView.displayName, className, ...(variant?.split('-') || []))}
       $theme={props.theme}
       $aspectRatio={props.aspectRatio}
     >
@@ -125,10 +132,10 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
         <StyledIframe
           id={props.id && `${props.id}-iframe`}
           className={getClassName('web-view-iframe', 'unlazy')}
-          title={props.title}
+          title={title}
           key={currentUrl}
           src={currentUrl}
-          allow={props.permissions.join(';')}
+          allow={permissions.join(';')}
         />
       </noscript>
       { hasFailedToLoad ? (
@@ -141,33 +148,25 @@ export const WebView = (props: IWebViewProps): React.ReactElement => {
         </React.Fragment>
       ) : isInitialized && (
         <React.Fragment>
-          { isLoading && props.shouldShowLoadingSpinner && (
+          { isLoading && shouldShowLoadingSpinner && (
             <LoadingWrapper id={props.id && `${props.id}-loading-wrapper`}>
-              <LoadingSpinner id={props.id && `${props.id}-loading-spinner`} className={'web-view-loading-spinner'} />
+              <LoadingSpinner id={props.id && `${props.id}-loading-spinner`} className='web-view-loading-spinner' />
             </LoadingWrapper>
           )}
           <StyledIframe
             id={props.id && `${props.id}-iframe`}
             className={getClassName('web-view-iframe', props.isLazyLoadable ? 'lazyload' : 'unlazy', isLoading && 'isLoading')}
-            title={props.title}
+            title={title}
             key={currentUrl}
             src={props.isLazyLoadable ? undefined : currentUrl}
             data-src={props.isLazyLoadable ? currentUrl : undefined}
             onLoad={handleOnLoad}
             onError={handleOnError}
-            allow={props.permissions.join(';')}
+            allow={permissions.join(';')}
           />
         </React.Fragment>
       )}
     </StyledWebView>
   );
-};
-
+}
 WebView.displayName = 'KibaWebView';
-WebView.defaultProps = {
-  ...defaultComponentProps,
-  isEnabled: true,
-  shouldShowLoadingSpinner: true,
-  title: 'Embedded View',
-  permissions: [],
-};

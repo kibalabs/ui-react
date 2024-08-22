@@ -4,7 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { IInputFrameTheme, InputFrame } from '../inputFrame';
-import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
+import { IMoleculeProps } from '../moleculeProps';
 
 
 export interface IMultiLineInputTheme {
@@ -37,9 +37,9 @@ const StyledMultiLineTextArea = styled.textarea`
 // TODO(krishan711): this only grows when the user types into it, not when the prop passed in is very long
 interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
   value: string| null;
-  isEnabled: boolean;
-  minRowCount: number;
-  maxRowCount: number;
+  isEnabled?: boolean;
+  minRowCount?: number;
+  maxRowCount?: number;
   placeholderText?: string;
   messageText?: string;
   name?: string;
@@ -52,9 +52,15 @@ interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
   onValueChanged: (value: string) => void;
 }
 
-export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement => {
-  const [rowCount, setRowCount] = React.useState(props.minRowCount);
-  const maxRowCount = Math.max(props.maxRowCount, props.minRowCount);
+export function MultiLineInput({
+  className = '',
+  isEnabled = true,
+  minRowCount = 3,
+  maxRowCount = 6,
+  ...props
+}: IMultiLineInputProps): React.ReactElement {
+  const [rowCount, setRowCount] = React.useState(minRowCount);
+  const innerMaxRowCount = Math.max(maxRowCount, minRowCount);
 
   const onKeyUp = (event: React.KeyboardEvent<HTMLElement>): void => {
     if (props.onKeyUp) {
@@ -77,18 +83,18 @@ export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement 
     const previousRows: number = event.target.rows;
     const currentRows = Math.floor(event.target.scrollHeight / fontSize);
     // eslint-disable-next-line no-param-reassign
-    event.target.rows = props.minRowCount;
+    event.target.rows = minRowCount;
     if (currentRows === previousRows) {
       // eslint-disable-next-line no-param-reassign
-      event.target.rows = Math.max(currentRows, props.minRowCount);
+      event.target.rows = Math.max(currentRows, minRowCount);
     }
-    if (currentRows >= maxRowCount) {
+    if (currentRows >= innerMaxRowCount) {
       // eslint-disable-next-line no-param-reassign
-      event.target.rows = maxRowCount;
+      event.target.rows = innerMaxRowCount;
       // eslint-disable-next-line no-param-reassign
       event.target.scrollTop = event.target.scrollHeight;
     }
-    setRowCount(currentRows < maxRowCount ? Math.max(currentRows, props.minRowCount) : maxRowCount);
+    setRowCount(currentRows < innerMaxRowCount ? Math.max(currentRows, minRowCount) : innerMaxRowCount);
     if (props.onValueChanged) {
       props.onValueChanged(event.target.value);
     }
@@ -103,15 +109,15 @@ export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement 
   return (
     <InputFrame
       id={props.id}
-      className={getClassName(MultiLineInput.displayName, props.className)}
+      className={getClassName(MultiLineInput.displayName, className)}
       theme={props.theme?.inputFrameTheme}
       inputWrapperVariant={props.inputWrapperVariant}
       messageText={props.messageText}
-      isEnabled={props.isEnabled}
+      isEnabled={isEnabled}
     >
       <StyledMultiLineTextArea
         id={props.id && `${props.id}-multiline-textarea`}
-        className={getClassName(StyledMultiLineTextArea.displayName, !props.isEnabled && 'disabled')}
+        className={getClassName(StyledMultiLineTextArea.displayName, !isEnabled && 'disabled')}
         name={props.name}
         rows={rowCount}
         value={props.value || ''}
@@ -125,12 +131,5 @@ export const MultiLineInput = (props: IMultiLineInputProps): React.ReactElement 
       />
     </InputFrame>
   );
-};
-
+}
 MultiLineInput.displayName = 'KibaMultiLineInput';
-MultiLineInput.defaultProps = {
-  ...defaultMoleculeProps,
-  isEnabled: true,
-  minRowCount: 3,
-  maxRowCount: 6,
-};

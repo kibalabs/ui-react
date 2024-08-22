@@ -12,22 +12,27 @@ import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingVie
 
 
 export interface IGridItemProps extends IOptionalSingleAnyChildProps {
+  // eslint-disable-next-line react/no-unused-prop-types
   id?: string;
+  // eslint-disable-next-line react/no-unused-prop-types
   className?: string;
-  isFullHeight: boolean;
-  size: number;
+  // eslint-disable-next-line react/no-unused-prop-types
+  isFullHeight?: boolean;
+  // eslint-disable-next-line react/no-unused-prop-types
+  size?: number;
+  // eslint-disable-next-line react/no-unused-prop-types
   sizeResponsive?: ResponsiveField<number>;
+  // eslint-disable-next-line react/no-unused-prop-types
   alignment?: Alignment;
 }
 
-class GridItem extends React.Component<IGridItemProps> {
-  static displayName = 'KibaGridItem';
-  static defaultProps = {
-    className: '',
-    isFullHeight: false,
-    size: 12,
-  };
+// eslint-disable-next-line unused-imports/no-unused-vars
+export function GridItem(props: IGridItemProps): React.ReactElement {
+  return (
+    <React.Fragment />
+  );
 }
+GridItem.displayName = 'KibaGridItem';
 
 interface IStyledGridProps {
   $isFullHeight?: boolean;
@@ -53,36 +58,45 @@ export interface IGridProps extends IMultiChildProps<IGridItemProps>, IPaddingVi
   isFullHeight?: boolean;
   shouldAddGutters?: boolean;
   defaultGutter?: PaddingSizeProp;
-  childAlignment: Alignment;
-  contentAlignment: Alignment;
+  childAlignment?: Alignment;
+  contentAlignment?: Alignment;
 }
 
-export const Grid = (props: IGridProps): React.ReactElement => {
+export function Grid({
+  className = '',
+  isFullHeight = true,
+  shouldAddGutters = false,
+  childAlignment = Alignment.Fill,
+  contentAlignment = Alignment.Center,
+  ...props
+}: IGridProps): React.ReactElement {
   const theme = useDimensions(props.theme);
   const defaultGutter = props.defaultGutter || PaddingSize.Default;
-  const shouldAddGutters = props.shouldAddGutters && defaultGutter !== PaddingSize.None;
+  const innerShouldAddGutters = shouldAddGutters && defaultGutter !== PaddingSize.None;
 
-  const children = flattenChildren(props.children).map((child: React.ReactChild, index: number): React.ReactElement<IGridItemProps> => (
+  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number), index: number): React.ReactElement<IGridItemProps> => (
+    // eslint-disable-next-line react/no-array-index-key
     typeof child === 'object' && 'type' in child && child.type === GridItem ? child : <GridItem key={index}>{ child }</GridItem>
   ));
   return (
-    <PaddingView {...props as IPaddingViewPaddingProps}>
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <PaddingView className={className} {...props as IPaddingViewPaddingProps}>
       <StyledGrid
         id={props.id}
-        className={getClassName(Grid.displayName, props.className)}
-        $isFullHeight={props.isFullHeight}
-        $childAlignment={props.childAlignment}
-        $contentAlignment={props.contentAlignment}
+        className={getClassName(Grid.displayName, className)}
+        $isFullHeight={isFullHeight}
+        $childAlignment={childAlignment}
+        $contentAlignment={contentAlignment}
       >
-        { children.map((child: React.ReactElement<IGridItemProps>, index: number): React.ReactElement => (
+        { children.map((child: React.ReactElement<IGridItemProps>): React.ReactElement => (
           <StyledGridItem
-            key={index}
+            key={child.key}
             id={child.props.id}
             className={getClassName(StyledGridItem.displayName, child.props.className)}
             $theme={theme}
-            $size={{ base: child.props.size, ...child.props.sizeResponsive }}
-            $isFullHeight={child.props.isFullHeight}
-            $gutter={shouldAddGutters ? getPaddingSize(defaultGutter, theme) : '0px'}
+            $size={{ base: child.props.size || 12, ...child.props.sizeResponsive }}
+            $isFullHeight={child.props.isFullHeight || false}
+            $gutter={innerShouldAddGutters ? getPaddingSize(defaultGutter, theme) : '0px'}
             $alignment={child.props.alignment}
           >
             {child.props.children}
@@ -91,16 +105,8 @@ export const Grid = (props: IGridProps): React.ReactElement => {
       </StyledGrid>
     </PaddingView>
   );
-};
-
+}
 Grid.displayName = 'KibaGrid';
-Grid.defaultProps = {
-  className: '',
-  isFullHeight: true,
-  shouldAddGutters: false,
-  childAlignment: Alignment.Fill,
-  contentAlignment: Alignment.Center,
-};
 Grid.Item = GridItem;
 
 const getCssSize = (totalColumnCount: number, gutter: string, columnCount: number): string => {

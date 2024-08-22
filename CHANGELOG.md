@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Update `Markdown` to render bullets without spaces in between
 - [MINOR] Added `isFullHeight` and `isFullWidth` to `IconButton`
 - [MINOR] Fix lazyloading opacity in `Image`
+- [MINOR] Updated all components to use new style for default props
 
 ### Removed
 

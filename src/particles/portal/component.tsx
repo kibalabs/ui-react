@@ -7,7 +7,7 @@ import { ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IPortalTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const PortalThemedStyle = (theme: RecursivePartial<IPortalTheme>): string => `
@@ -74,7 +74,11 @@ export interface IPortalProps extends IComponentProps<IPortalTheme>, ISingleAnyC
   positionLeft?: number;
 }
 
-export const Portal = React.forwardRef((props: IPortalProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
+export const Portal = React.forwardRef(({
+  className = '',
+  variant = 'default',
+  ...props
+}: IPortalProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
   const [positionTop, setPositionTop] = React.useState<number>(props.positionTop || 0);
   const [positionLeft, setPositionLeft] = React.useState<number>(props.positionLeft || 0);
 
@@ -100,7 +104,7 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
     (
       <StyledPortal
         id={props.id}
-        className={getClassName(Portal.displayName, props.className, ...(props.variant?.split('-') || []))}
+        className={getClassName(Portal.displayName, className, ...(variant?.split('-') || []))}
         $theme={props.theme}
         $positionTop={positionTop}
         $positionLeft={positionLeft}
@@ -111,8 +115,4 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
     ), window.document.body,
   );
 });
-
 Portal.displayName = 'KibaPortal';
-Portal.defaultProps = {
-  ...defaultComponentProps,
-};

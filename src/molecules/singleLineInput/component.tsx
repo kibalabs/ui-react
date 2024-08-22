@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { InputType } from '../../model';
 import { IInputFrameTheme, InputFrame } from '../inputFrame';
-import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
+import { IMoleculeProps } from '../moleculeProps';
 
 export interface ISingleLineInputTheme {
   inputFrameTheme: IInputFrameTheme;
@@ -57,10 +57,10 @@ const getAutocompleteType = (inputType: InputType): string | undefined => {
 
 export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTheme> {
   value: string | null;
-  isEnabled: boolean;
+  isEnabled?: boolean;
   placeholderText?: string;
   messageText?: string;
-  inputType: InputType;
+  inputType?: InputType;
   name?: string;
   label?: string;
   inputWrapperVariant?: string;
@@ -74,7 +74,12 @@ export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTh
   onValueChanged: (value: string) => void;
 }
 
-export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElement => {
+export function SingleLineInput({
+  className = '',
+  isEnabled = true,
+  inputType = InputType.Text,
+  ...props
+}: ISingleLineInputProps): React.ReactElement {
   const onValueChanged = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (props.onValueChanged) {
       props.onValueChanged(event.target.value);
@@ -108,18 +113,18 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
   return (
     <InputFrame
       id={props.id}
-      className={getClassName(SingleLineInput.displayName, props.className)}
+      className={getClassName(SingleLineInput.displayName, className)}
       theme={props.theme?.inputFrameTheme}
       inputWrapperVariant={props.inputWrapperVariant}
       messageText={props.messageText}
-      isEnabled={props.isEnabled}
+      isEnabled={isEnabled}
     >
       <StyledSingleLineInput
         id={props.id && `${props.id}-textarea`}
-        className={getClassName(StyledSingleLineInput.displayName, !props.isEnabled && 'disabled', props.shouldHideNumberSpinButtons && 'hideSpinButtons')}
-        type={props.inputType}
+        className={getClassName(StyledSingleLineInput.displayName, !isEnabled && 'disabled', props.shouldHideNumberSpinButtons && 'hideSpinButtons')}
+        type={inputType}
         name={props.name}
-        autoComplete={getAutocompleteType(props.inputType)}
+        autoComplete={getAutocompleteType(inputType)}
         value={props.value || ''}
         onClick={onClicked}
         onKeyUp={onKeyUp}
@@ -132,11 +137,5 @@ export const SingleLineInput = (props: ISingleLineInputProps): React.ReactElemen
       />
     </InputFrame>
   );
-};
-
+}
 SingleLineInput.displayName = 'KibaSingleLineInput';
-SingleLineInput.defaultProps = {
-  ...defaultMoleculeProps,
-  isEnabled: true,
-  inputType: InputType.Text,
-};

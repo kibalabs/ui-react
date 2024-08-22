@@ -1,13 +1,14 @@
 import React from 'react';
 
 import { deepCompare, getClassName } from '@kibalabs/core';
+// @ts-expect-error: commonjs import
 import MarkdownToJsx from 'markdown-to-jsx';
 
 import { BulletList, BulletText, Link, PrettyText } from '../../atoms';
 import { Box, Media, TextAlignment } from '../../particles';
 import { getVariant } from '../../util';
 
-const MarkdownParagraph = (props: React.AnchorHTMLAttributes<HTMLAnchorElement>): React.ReactElement => {
+function MarkdownParagraph(props: React.AnchorHTMLAttributes<HTMLAnchorElement>): React.ReactElement {
   const childrenDisplayNames = React.Children.map(props.children, (child: React.ReactNode): string | null => (
     // @ts-expect-error: Property 'displayName' does not exist on type
     (child && typeof child === 'object' && 'type' in child) ? String(child.type.displayName).split('-')[0] : null
@@ -33,20 +34,20 @@ const MarkdownParagraph = (props: React.AnchorHTMLAttributes<HTMLAnchorElement>)
       {props.children}
     </PrettyText>
   );
-};
+}
 MarkdownParagraph.displayName = 'MarkdownParagraph';
 
-const MarkdownLink = (props: React.AnchorHTMLAttributes<HTMLAnchorElement>): React.ReactElement => {
+function MarkdownLink(props: React.AnchorHTMLAttributes<HTMLAnchorElement>): React.ReactElement {
   return (
     <Link
       target={props.href || '#'}
       text={String(React.Children.toArray(props.children)[0]) || ''}
     />
   );
-};
+}
 MarkdownLink.displayName = 'MarkdownLink';
 
-const MarkdownMedia = (props: React.ImgHTMLAttributes<HTMLImageElement>): React.ReactElement => {
+function MarkdownMedia(props: React.ImgHTMLAttributes<HTMLImageElement>): React.ReactElement {
   return (
     <Media
       maxWidth='100%'
@@ -55,20 +56,20 @@ const MarkdownMedia = (props: React.ImgHTMLAttributes<HTMLImageElement>): React.
       alternativeText={props.alt || ''}
     />
   );
-};
+}
 MarkdownMedia.displayName = 'MarkdownMedia';
 
-const MarkdownBulletList = (props: React.OlHTMLAttributes<HTMLUListElement>): React.ReactElement => {
+function MarkdownBulletList(props: React.OlHTMLAttributes<HTMLUListElement>): React.ReactElement {
   return (
     <BulletList>
       {/* @ts-expect-error */}
       {props.children}
     </BulletList>
   );
-};
+}
 MarkdownBulletList.displayName = 'MarkdownBulletList';
 
-const MarkdownBulletText = (props: React.LiHTMLAttributes<HTMLLIElement>): React.ReactElement => {
+function MarkdownBulletText(props: React.LiHTMLAttributes<HTMLLIElement>): React.ReactElement {
   const childrenDisplayNames = React.Children.map(props.children, (child: React.ReactNode): string | null => (
     // @ts-expect-error: Property 'displayName' does not exist on type
     (child && typeof child === 'object' && 'type' in child) ? String(child.type.displayName).split('-')[0] : null
@@ -83,7 +84,7 @@ const MarkdownBulletText = (props: React.LiHTMLAttributes<HTMLLIElement>): React
     // @ts-expect-error
     <BulletText>{props.children}</BulletText>
   );
-};
+}
 MarkdownBulletText.displayName = 'MarkdownBulletText';
 
 

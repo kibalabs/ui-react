@@ -5,7 +5,7 @@ import { IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IBoxTheme } from './theme';
-import { defaultComponentProps, IComponentProps, IDimensionGuide, themeToCss, useDimensions } from '../..';
+import { IComponentProps, IDimensionGuide, themeToCss, useDimensions } from '../..';
 import { fieldToResponsiveCss, getCss, propertyToCss, ResponsiveField } from '../../util';
 
 export const BoxThemedStyle = (theme: RecursivePartial<IBoxTheme>): string => `
@@ -80,10 +80,15 @@ export interface IBoxProps extends IComponentProps<IBoxTheme>, IOptionalSingleAn
   position?: string;
 }
 
-export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
+export const Box = React.forwardRef(({
+  className = '',
+  variant = 'default',
+  isFullWidth = true,
+  ...props
+}: IBoxProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
   const dimensions = useDimensions();
   const height = props.height || (props.isFullHeight ? '100%' : 'auto');
-  const width = props.width || (props.isFullWidth ? '100%' : 'auto');
+  const width = props.width || (isFullWidth ? '100%' : 'auto');
   const maxHeight = props.maxHeight || null;
   const maxWidth = props.maxWidth || null;
   const minHeight = props.minHeight || null;
@@ -97,7 +102,7 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
   return (
     <StyledBox
       id={props.id}
-      className={getClassName(Box.displayName, props.className, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally', props.shouldClipContent && 'clipContent', props.shouldCaptureTouches && 'captureTouches', ...(props.variant?.split('-') || []))}
+      className={getClassName(Box.displayName, className, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally', props.shouldClipContent && 'clipContent', props.shouldCaptureTouches && 'captureTouches', ...(variant?.split('-') || []))}
       $theme={props.theme}
       $dimensions={dimensions}
       $height={{ base: height, ...props.heightResponsive }}
@@ -116,10 +121,4 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
     </StyledBox>
   );
 });
-
 Box.displayName = 'KibaBox';
-Box.defaultProps = {
-  ...defaultComponentProps,
-  isFullWidth: true,
-  shouldClipContent: false,
-};

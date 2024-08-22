@@ -8,7 +8,7 @@ import { ITabBarItemProps, ITabBarItemTheme, TabBarItem } from '../../atoms/tabB
 import { Alignment, getFlexContentAlignment } from '../../model';
 import { useDimensions } from '../../theming';
 import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
-import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
+import { IMoleculeProps } from '../moleculeProps';
 
 export interface ITabBarTheme {
   tabBarItemTheme: ITabBarItemTheme;
@@ -41,19 +41,25 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export interface ITabBarItemInnerProps extends Omit<ITabBarItemProps, 'isSelected' | 'onClicked'> {
 }
 
-class TabBarItemInner extends React.Component<ITabBarItemInnerProps> {
-  displayName = 'KibaTabBarItem';
+// eslint-disable-next-line unused-imports/no-unused-vars
+export function TabBarItemInner(props: ITabBarItemInnerProps): React.ReactElement {
+  return <React.Fragment />;
 }
+TabBarItemInner.displayName = 'KibaTabBarItem';
 
 interface ITabBarProps extends IMoleculeProps<ITabBarTheme>, IMultiChildProps<ITabBarItemInnerProps> {
   isFullWidth?: boolean;
   selectedTabKey: string;
-  contentAlignment: Alignment;
+  contentAlignment?: Alignment;
   contentAlignmentResponsive?: ResponsiveField<Alignment>;
   onTabKeySelected(tabKey: string): void;
 }
 
-export const TabBar = (props: ITabBarProps): React.ReactElement => {
+export function TabBar({
+  className = '',
+  contentAlignment = Alignment.Fill,
+  ...props
+}: ITabBarProps): React.ReactElement {
   if (React.Children.count(props.children) === 0) {
     throw new Error('TabBar must have at least one child');
   }
@@ -65,8 +71,8 @@ export const TabBar = (props: ITabBarProps): React.ReactElement => {
   return (
     <StyledTabBar
       id={props.id}
-      className={getClassName(TabBar.displayName, props.className, props.isFullWidth && 'fullWidth')}
-      $contentAlignment={{ base: props.contentAlignment, ...props.contentAlignmentResponsive }}
+      className={getClassName(TabBar.displayName, className, props.isFullWidth && 'fullWidth')}
+      $contentAlignment={{ base: contentAlignment, ...props.contentAlignmentResponsive }}
     >
       { React.Children.map(props.children as OptionalProppedElement<ITabBarItemInnerProps>[], (child: OptionalProppedElement<ITabBarItemInnerProps>, index: number): React.ReactElement | null => {
         if (!child) {
@@ -91,12 +97,8 @@ export const TabBar = (props: ITabBarProps): React.ReactElement => {
       })}
     </StyledTabBar>
   );
-};
+}
 TabBar.displayName = 'KibaTabBar';
-TabBar.defaultProps = {
-  ...defaultMoleculeProps,
-  contentAlignment: Alignment.Fill,
-};
 TabBar.Item = TabBarItemInner;
 
 // interface IManagedTabBarProps extends Omit<ITabBarProps, 'selectedTabKey' | 'onTabKeySelected'> {

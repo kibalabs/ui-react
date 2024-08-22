@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { getPaddingSize, IDimensionGuide, PaddingSizeProp } from '../../particles/dimensions';
 import { useDimensions } from '../../theming';
-import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
+import { IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 export interface IPaddingViewPaddingProps {
@@ -39,7 +39,10 @@ export interface IPaddingViewProps extends IWrapperProps, IPaddingViewPaddingPro
   theme?: IDimensionGuide;
 }
 
-export const PaddingView = (props: IPaddingViewProps): React.ReactElement => {
+export function PaddingView({
+  className = '',
+  ...props
+}: IPaddingViewProps): React.ReactElement {
   const theme = useDimensions(props.theme);
   const paddingTop = props.paddingTop || props.paddingVertical || props.padding;
   const paddingBottom = props.paddingBottom || props.paddingVertical || props.padding;
@@ -47,7 +50,7 @@ export const PaddingView = (props: IPaddingViewProps): React.ReactElement => {
   const paddingLeft = props.paddingLeft || props.paddingHorizontal || props.padding;
   return (
     <StyledPaddingView
-      className={getClassName(PaddingView.displayName, props.className)}
+      className={getClassName(PaddingView.displayName, className)}
       $theme={theme}
       $paddingTop={paddingTop}
       $paddingBottom={paddingBottom}
@@ -57,9 +60,5 @@ export const PaddingView = (props: IPaddingViewProps): React.ReactElement => {
       {props.children}
     </StyledPaddingView>
   );
-};
-
+}
 PaddingView.displayName = 'KibaPaddingView';
-PaddingView.defaultProps = {
-  ...defaultWrapperProps,
-};

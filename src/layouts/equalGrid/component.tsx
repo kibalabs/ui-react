@@ -22,18 +22,20 @@ export interface IEqualGridProps extends IMultiAnyChildProps, IPaddingViewPaddin
   childSizeResponsive?: ResponsiveField<number>;
 }
 
-export const EqualGrid = (props: IEqualGridProps): React.ReactElement => {
+export function EqualGrid(props: IEqualGridProps): React.ReactElement {
   if (props.childSize == null && props.childSizeResponsive?.base == null) {
     throw new Error(`One of {childSize, childSizeResponsive.base} must be passed to ${EqualGrid.displayName}`);
   }
   return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <Grid {...props} className={getClassName(EqualGrid.displayName, props.className)}>
-      {flattenChildren(props.children).map((child: React.ReactChild, index: number): React.ReactElement => (
+      {flattenChildren(props.children).map((child: (React.ReactElement | string | number), index: number): React.ReactElement => (
+      // eslint-disable-next-line react/no-array-index-key
         <Grid.Item key={index} size={props.childSize} sizeResponsive={props.childSizeResponsive}>{child}</Grid.Item>
       ))}
     </Grid>
   );
-};
+}
 
 EqualGrid.displayName = 'KibaEqualGrid';
 EqualGrid.defaultProps = {

@@ -7,7 +7,7 @@ import { Alignment } from '../..';
 import { LayerContainer } from '../../layouts';
 import { Box, IBoxTheme, ILoadingSpinnerTheme, LoadingSpinner } from '../../particles';
 import { ThemeType } from '../../util';
-import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
+import { IMoleculeProps } from '../moleculeProps';
 
 export interface IFormTheme extends ThemeType {
   backgroundTheme: IBoxTheme;
@@ -16,7 +16,7 @@ export interface IFormTheme extends ThemeType {
 }
 
 interface IFormProps extends IMoleculeProps<IFormTheme>, ISingleAnyChildProps {
-  isLoading: boolean;
+  isLoading?: boolean;
   backgroundVariant?: string;
   loadingOverlayVariant?: string;
   loadingSpinnerVariant?: string;
@@ -24,7 +24,11 @@ interface IFormProps extends IMoleculeProps<IFormTheme>, ISingleAnyChildProps {
   onFormSubmitted?: () => void;
 }
 
-export const Form = (props: IFormProps): React.ReactElement => {
+export function Form({
+  className = '',
+  isLoading = false,
+  ...props
+}: IFormProps): React.ReactElement {
   if (props.postTarget && props.onFormSubmitted) {
     throw new Error('only one of {postTarget, onFormSubmitted} should be provided to Form');
   }
@@ -39,7 +43,7 @@ export const Form = (props: IFormProps): React.ReactElement => {
   return (
     <Box
       id={props.id}
-      className={getClassName(Form.displayName, props.className)}
+      className={getClassName(Form.displayName, className)}
       variant={props.backgroundVariant}
       theme={props.theme?.backgroundTheme}
       isFullWidth={true}
@@ -54,12 +58,12 @@ export const Form = (props: IFormProps): React.ReactElement => {
           <LayerContainer.Layer isStatic={true}>
             {props.children}
           </LayerContainer.Layer>
-          { props.isLoading && (
+          { isLoading && (
             <React.Fragment>
               <LayerContainer.Layer isFullHeight={true} isFullWidth={true}>
                 <Box
                   id={props.id && `${props.id}-loading-overlay`}
-                  className={'form-overlay'}
+                  className='form-overlay'
                   isFullHeight={true}
                   isFullWidth={true}
                   variant={props.loadingOverlayVariant || 'overlay'}
@@ -69,7 +73,7 @@ export const Form = (props: IFormProps): React.ReactElement => {
               <LayerContainer.Layer isFullHeight={false} isFullWidth={false} alignmentHorizontal={Alignment.Center} alignmentVertical={Alignment.Center}>
                 <LoadingSpinner
                   id={props.id && `${props.id}-loading-spinner`}
-                  className={'form-overlay-spinner'}
+                  className='form-overlay-spinner'
                   variant={props.loadingSpinnerVariant}
                   theme={props.theme?.loadingSpinnerTheme}
                 />
@@ -80,10 +84,5 @@ export const Form = (props: IFormProps): React.ReactElement => {
       </form>
     </Box>
   );
-};
-
+}
 Form.displayName = 'KibaForm';
-Form.defaultProps = {
-  ...defaultMoleculeProps,
-  isLoading: false,
-};

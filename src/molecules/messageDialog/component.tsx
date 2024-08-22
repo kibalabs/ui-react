@@ -21,12 +21,15 @@ interface IMessageDialogProps extends IMoleculeProps<IMessageDialogTheme> {
   onCloseClicked: () => void;
 }
 
-export const MessageDialog = (props: IMessageDialogProps): React.ReactElement | null => {
+export function MessageDialog({
+  className = '',
+  ...props
+}: IMessageDialogProps): React.ReactElement | null {
   const cancelButtonText = props.cancelButtonText || 'Cancel';
   const confirmButtonText = props.confirmButtonText || 'Confirm';
 
   return (
-    <Dialog isOpen={props.isOpen} onCloseClicked={props.onCloseClicked} maxHeight={props.maxHeight} maxWidth={props.maxWidth}>
+    <Dialog className={className} isOpen={props.isOpen} onCloseClicked={props.onCloseClicked} maxHeight={props.maxHeight} maxWidth={props.maxWidth}>
       <Stack direction={Direction.Vertical} shouldAddGutters={true} defaultGutter={PaddingSize.Wide}>
         <Stack direction={Direction.Horizontal} contentAlignment={Alignment.Fill} childAlignment={Alignment.Center} shouldAddGutters={true}>
           <Spacing />
@@ -47,4 +50,4 @@ export const MessageDialog = (props: IMessageDialogProps): React.ReactElement | 
       </Stack>
     </Dialog>
   );
-};
+}

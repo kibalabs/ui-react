@@ -5,7 +5,7 @@ import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react'
 import styled from 'styled-components';
 
 import { IIconButtonTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { IIconProps } from '../../particles/icon';
 import { themeToCss } from '../../util';
 
@@ -82,7 +82,7 @@ const StyledIconButton = styled.button<IStyledIconButtonProps>`
 `;
 
 export interface IIconButtonProps extends IComponentProps<IIconButtonTheme> {
-  isEnabled: boolean;
+  isEnabled?: boolean;
   icon: React.ReactElement<IIconProps>;
   isFullHeight?: boolean;
   isFullWidth?: boolean;
@@ -94,7 +94,13 @@ export interface IIconButtonProps extends IComponentProps<IIconButtonTheme> {
   onClicked?(): void;
 }
 
-export const IconButton = (props: IIconButtonProps): React.ReactElement => {
+export function IconButton({
+  className = '',
+  variant = 'default',
+  label = 'Icon Button',
+  isEnabled = true,
+  ...props
+}: IIconButtonProps): React.ReactElement {
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
 
   const onClicked = (event: React.SyntheticEvent): void => {
@@ -116,11 +122,11 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
     // @ts-ignore: as prop doesn't match type required
     <StyledIconButton
       id={props.id}
-      className={getClassName(IconButton.displayName, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !props.isEnabled && 'disabled', props.className, ...(props.variant?.split('-') || []))}
+      className={getClassName(IconButton.displayName, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !isEnabled && 'disabled', className, ...(variant?.split('-') || []))}
       $theme={props.theme}
       onClick={onClicked}
-      disabled={!props.isEnabled}
-      aria-label={props.label}
+      disabled={!isEnabled}
+      aria-label={label}
       href={props.target}
       rel={props.target && 'noopener'}
       tabIndex={props.tabIndex || 0}
@@ -133,11 +139,5 @@ export const IconButton = (props: IIconButtonProps): React.ReactElement => {
       </StyledIconButtonFocusFixer>
     </StyledIconButton>
   );
-};
-
+}
 IconButton.displayName = 'KibaIconButton';
-IconButton.defaultProps = {
-  ...defaultComponentProps,
-  label: 'Icon Button',
-  isEnabled: true,
-};

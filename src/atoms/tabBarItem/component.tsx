@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { ITabBarItemTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const TabBarItemThemedStyle = (theme: RecursivePartial<ITabBarItemTheme>): string => `
@@ -97,7 +97,11 @@ export interface ITabBarItemProps extends IComponentProps<ITabBarItemTheme> {
   onClicked?(tabKey: string): void;
 }
 
-export const TabBarItem = (props: ITabBarItemProps): React.ReactElement => {
+export function TabBarItem({
+  className = '',
+  variant = 'default',
+  ...props
+}: ITabBarItemProps): React.ReactElement {
   const isEnabled = props.isEnabled == null ? true : props.isEnabled;
   const isExpandable = props.isExpandable == null ? true : props.isExpandable;
 
@@ -110,7 +114,7 @@ export const TabBarItem = (props: ITabBarItemProps): React.ReactElement => {
   return (
     <StyledTabBarItem
       id={props.id}
-      className={getClassName(TabBarItem.displayName, props.className, !isEnabled && 'disabled', props.isSelected && 'selected', props.isCollapsible && 'collapsible', isExpandable && 'expandable', ...(props.variant?.split('-') || []))}
+      className={getClassName(TabBarItem.displayName, className, !isEnabled && 'disabled', props.isSelected && 'selected', props.isCollapsible && 'collapsible', isExpandable && 'expandable', ...(variant?.split('-') || []))}
       $theme={props.theme}
       onClick={onClicked}
       disabled={!isEnabled}
@@ -118,9 +122,5 @@ export const TabBarItem = (props: ITabBarItemProps): React.ReactElement => {
       { props.text }
     </StyledTabBarItem>
   );
-};
-
+}
 TabBarItem.displayName = 'KibaTabBarItem';
-TabBarItem.defaultProps = {
-  ...defaultComponentProps,
-};

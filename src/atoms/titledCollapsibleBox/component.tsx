@@ -5,7 +5,7 @@ import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { ITitledCollapsibleBoxTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { KibaIcon } from '../../particles';
 import { themeToCss } from '../../util';
 import { HidingView } from '../../wrappers';
@@ -97,7 +97,11 @@ interface ITitledCollapsibleBoxProps extends IComponentProps<ITitledCollapsibleB
   shouldSkipRenderingWhenCollapsed?: boolean;
 }
 
-export const TitledCollapsibleBox = (props: ITitledCollapsibleBoxProps): React.ReactElement => {
+export function TitledCollapsibleBox({
+  className = '',
+  variant = 'default',
+  ...props
+}: ITitledCollapsibleBoxProps): React.ReactElement {
   const onCollapseToggled = (): void => {
     props.onCollapseToggled();
   };
@@ -105,7 +109,7 @@ export const TitledCollapsibleBox = (props: ITitledCollapsibleBoxProps): React.R
   return (
     <StyledTitledCollapsibleBox
       id={props.id}
-      className={getClassName(TitledCollapsibleBox.displayName, props.className, props.isCollapsed && 'collapsed', ...(props.variant?.split('-') || []))}
+      className={getClassName(TitledCollapsibleBox.displayName, className, props.isCollapsed && 'collapsed', ...(variant?.split('-') || []))}
       $theme={props.theme}
     >
       <StyledHeader
@@ -124,9 +128,5 @@ export const TitledCollapsibleBox = (props: ITitledCollapsibleBoxProps): React.R
       )}
     </StyledTitledCollapsibleBox>
   );
-};
-
+}
 TitledCollapsibleBox.displayName = 'KibaTitledCollapsibleBox';
-TitledCollapsibleBox.defaultProps = {
-  ...defaultComponentProps,
-};

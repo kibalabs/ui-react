@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { ISwitchTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { propertyToCss, themeToCss } from '../../util';
 
 
@@ -111,7 +111,11 @@ export interface ISwitchProps extends IComponentProps<ISwitchTheme> {
   onToggled?(): void;
 }
 
-export const Switch = (props: ISwitchProps): React.ReactElement => {
+export function Switch({
+  className = '',
+  variant = 'default',
+  ...props
+}: ISwitchProps): React.ReactElement {
   const isEnabled = props.isEnabled !== undefined ? props.isEnabled : true;
   const onToggled = () => {
     if (isEnabled && props.onToggled) {
@@ -122,7 +126,7 @@ export const Switch = (props: ISwitchProps): React.ReactElement => {
   return (
     <StyledSwitch
       id={props.id}
-      className={getClassName(Switch.displayName, props.className, !isEnabled && 'disabled', ...(props.variant?.split('-') || []))}
+      className={getClassName(Switch.displayName, className, !isEnabled && 'disabled', ...(variant?.split('-') || []))}
       $theme={props.theme}
       aria-checked={props.isChecked}
       onClick={onToggled}
@@ -130,9 +134,5 @@ export const Switch = (props: ISwitchProps): React.ReactElement => {
       <StyledSwitchInner className='KibaSwitchInner' />
     </StyledSwitch>
   );
-};
-
+}
 Switch.displayName = 'KibaSwitch';
-Switch.defaultProps = {
-  ...defaultComponentProps,
-};
