@@ -5,7 +5,7 @@ import { IMultiChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IBulletListTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 import { IBulletTextProps } from '../bulletText';
 
@@ -30,20 +30,19 @@ const StyledBulletList = styled.ul<IStyledBulletListProps>`
 export interface IBulletListProps extends IComponentProps<IBulletListTheme>, IMultiChildProps<IBulletTextProps> {
 }
 
-export const BulletList = (props: IBulletListProps): React.ReactElement => {
+export function BulletList({
+  className = '',
+  variant = 'default',
+  ...props
+}: IBulletListProps): React.ReactElement {
   return (
     <StyledBulletList
       id={props.id}
-      className={getClassName(BulletList.displayName, props.className, ...(props.variant?.split('-') || []))}
+      className={getClassName(BulletList.displayName, className, ...(variant?.split('-') || []))}
       $theme={props.theme}
     >
       {props.children}
     </StyledBulletList>
   );
-};
-
+}
 BulletList.displayName = 'KibaBulletList';
-BulletList.defaultProps = {
-  ...defaultComponentProps,
-  isEnabled: true,
-};

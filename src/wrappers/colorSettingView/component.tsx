@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { IColorGuide } from '../../particles';
 import { ColorProvider, useAlternateColors } from '../../theming';
 import { colorsToCss } from '../../util';
-import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
+import { IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledColorSettingViewProps extends IWrapperProps {
@@ -26,22 +26,22 @@ export interface IColorSettingViewProps extends IWrapperProps {
   variant?: string;
 }
 
-export const ColorSettingView = (props: IColorSettingViewProps): React.ReactElement => {
-  const colors = useAlternateColors(props.variant, props.theme);
+export function ColorSettingView({
+  className = '',
+  variant = 'default',
+  ...props
+}: IColorSettingViewProps): React.ReactElement {
+  const colors = useAlternateColors(variant, props.theme);
 
   return (
     <ColorProvider colors={colors}>
       <StyledColorSettingView
-        className={getClassName(ColorSettingView.displayName, props.className)}
+        className={getClassName(ColorSettingView.displayName, className)}
         $colors={colors}
       >
         {props.children}
       </StyledColorSettingView>
     </ColorProvider>
   );
-};
-
+}
 ColorSettingView.displayName = 'KibaColorSettingView';
-ColorSettingView.defaultProps = {
-  ...defaultWrapperProps,
-};

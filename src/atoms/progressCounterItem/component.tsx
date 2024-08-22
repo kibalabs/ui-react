@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { IProgressCounterItemTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import {IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const ProgressCounterItemThemedStyle = (theme: RecursivePartial<IProgressCounterItemTheme>): string => `
@@ -85,7 +85,13 @@ export interface IProgressCounterItemProps extends IComponentProps<IProgressCoun
   onClicked?(): void;
 }
 
-export const ProgressCounterItem = (props: IProgressCounterItemProps): React.ReactElement => {
+export function ProgressCounterItem({
+  className = '',
+  variant = 'default',
+  isEnabled = true,
+  isSelected = false,
+  ...props
+}: IProgressCounterItemProps): React.ReactElement {
   const onClicked = (): void => {
     if (props.onClicked) {
       props.onClicked();
@@ -95,19 +101,13 @@ export const ProgressCounterItem = (props: IProgressCounterItemProps): React.Rea
   return (
     <StyledProgressCounterItem
       id={props.id}
-      className={getClassName(ProgressCounterItem.displayName, props.className, !props.isEnabled && 'disabled', props.isSelected && 'selected', ...(props.variant?.split('-') || []))}
+      className={getClassName(ProgressCounterItem.displayName, className, !isEnabled && 'disabled', isSelected && 'selected', ...(variant?.split('-') || []))}
       $theme={props.theme}
       onClick={onClicked}
-      disabled={!props.isEnabled}
+      disabled={!isEnabled}
     >
       { props.text }
     </StyledProgressCounterItem>
   );
-};
-
+}
 ProgressCounterItem.displayName = 'KibaProgressCounterItem';
-ProgressCounterItem.defaultProps = {
-  ...defaultComponentProps,
-  isEnabled: true,
-  isSelected: false,
-};

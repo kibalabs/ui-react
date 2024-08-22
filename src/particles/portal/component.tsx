@@ -7,7 +7,7 @@ import { ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IPortalTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import {IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const PortalThemedStyle = (theme: RecursivePartial<IPortalTheme>): string => `
@@ -111,8 +111,4 @@ export const Portal = React.forwardRef((props: IPortalProps, ref: React.Forwarde
     ), window.document.body,
   );
 });
-
 Portal.displayName = 'KibaPortal';
-Portal.defaultProps = {
-  ...defaultComponentProps,
-};

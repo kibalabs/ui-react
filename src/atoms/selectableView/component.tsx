@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import { ISelectableViewTheme } from './theme';
 import { Stack } from '../../layouts';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import {IComponentProps } from '../../model';
 import { PaddingSize } from '../../particles';
 import { KibaIcon } from '../../particles/kibaIcon';
 import { useColors } from '../../theming';
@@ -135,7 +135,11 @@ export interface ISelectableViewProps extends IComponentProps<ISelectableViewThe
 
 }
 
-export const SelectableView = (props: ISelectableViewProps): React.ReactElement => {
+export function SelectableView({
+  className = '',
+  variant = 'default',
+  ...props
+}: ISelectableViewProps): React.ReactElement {
   const colors = useColors();
   const onClicked = (): void => {
     if (props.onClicked && !props.isDisabled) {
@@ -147,7 +151,7 @@ export const SelectableView = (props: ISelectableViewProps): React.ReactElement 
     // @ts-ignore: as prop doesn't match type required
     <StyledSelectableView
       id={props.id}
-      className={getClassName(SelectableView.displayName, props.className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', props.isSelected && 'selected', props.isDisabled && 'disabled', ...(props.variant?.split('-') || []))}
+      className={getClassName(SelectableView.displayName, className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', props.isSelected && 'selected', props.isDisabled && 'disabled', ...(variant?.split('-') || []))}
       $theme={props.theme}
       onClick={onClicked}
     >
@@ -170,9 +174,5 @@ export const SelectableView = (props: ISelectableViewProps): React.ReactElement 
       </StyledOverlay>
     </StyledSelectableView>
   );
-};
-
+}
 SelectableView.displayName = 'KibaSelectableView';
-SelectableView.defaultProps = {
-  ...defaultComponentProps,
-};

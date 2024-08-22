@@ -28,22 +28,21 @@ export interface IContainerProps extends ISingleAnyChildProps {
   isFullHeight: boolean;
 }
 
-export const Container = (props: IContainerProps): React.ReactElement => {
+export function Container({
+  className = '',
+  isFullHeight = true,
+  ...props
+}: IContainerProps): React.ReactElement {
   const theme = useDimensions(props.theme);
   return (
     <StyledContainer
       id={props.id}
-      className={getClassName(Container.displayName, props.className)}
+      className={getClassName(Container.displayName, className)}
       $theme={theme}
-      $isFullHeight={props.isFullHeight}
+      $isFullHeight={isFullHeight}
     >
       {props.children}
     </StyledContainer>
   );
-};
-
+}
 Container.displayName = 'KibaContainer';
-Container.defaultProps = {
-  className: '',
-  isFullHeight: true,
-};

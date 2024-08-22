@@ -5,7 +5,7 @@ import { IMultiAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IPrettyTextTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import {IComponentProps } from '../../model';
 import { getTextTag, TextAlignment, TextTag } from '../../particles/text';
 import { propertyToCss, themeToCss } from '../../util';
 
@@ -43,7 +43,11 @@ export interface IPrettyTextProps extends IComponentProps<IPrettyTextTheme>, IMu
   tag?: TextTag;
 }
 
-export const PrettyText = (props: IPrettyTextProps): React.ReactElement => {
+export function PrettyText({
+  className = '',
+  variant = 'default',
+  ...props
+}: IPrettyTextProps): React.ReactElement {
   const theme = React.useMemo((): RecursivePartial<IPrettyTextTheme> => {
     const currentTheme = (props.theme || {}) as RecursivePartial<IPrettyTextTheme>;
     if (props.alignment) {
@@ -58,17 +62,13 @@ export const PrettyText = (props: IPrettyTextProps): React.ReactElement => {
   return (
     <StyledPrettyText
       id={props.id}
-      className={getClassName(PrettyText.displayName, props.className, ...(props.variant?.split('-') || []))}
+      className={getClassName(PrettyText.displayName, className, ...(variant?.split('-') || []))}
       $theme={theme}
       $alignment={props.alignment}
-      as={props.tag || getTextTag(props.variant)}
+      as={props.tag || getTextTag(variant)}
     >
       { props.children }
     </StyledPrettyText>
   );
-};
-
+}
 PrettyText.displayName = 'KibaPrettyText';
-PrettyText.defaultProps = {
-  ...defaultComponentProps,
-};

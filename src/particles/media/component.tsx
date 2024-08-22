@@ -2,7 +2,7 @@ import React from 'react';
 
 import { KibaException } from '@kibalabs/core';
 
-import { defaultComponentProps, IComponentProps, ThemeType, WebView } from '../..';
+import {IComponentProps, ThemeType, WebView } from '../..';
 import { IImageProps, Image } from '../image';
 import { Video } from '../video';
 
@@ -49,7 +49,11 @@ const getContentType = async (source: string, useGet = false): Promise<string | 
     });
 };
 
-export const Media = (props: IMediaProps): React.ReactElement => {
+export function Media({
+  className = '',
+  variant = 'default',
+  ...props
+}: IMediaProps): React.ReactElement {
   const [mediaType, setMediaType] = React.useState<string | null | undefined>(undefined);
 
   const isVideo = React.useMemo((): boolean => {
@@ -104,15 +108,13 @@ export const Media = (props: IMediaProps): React.ReactElement => {
   }, [updateContentType]);
 
   return (isVideo || mediaType === 'video') ? (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <Video shouldShowControls={false} shouldLoop={true} shouldMute={true} shouldAutoplay={true} {...props} />
   ) : mediaType && mediaType !== 'image' ? (
     <WebView url={props.source} />
   ) : (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <Image {...props as IImageProps} />
   );
-};
-
+}
 Media.displayName = 'KibaMedia';
-Media.defaultProps = {
-  ...defaultComponentProps,
-};

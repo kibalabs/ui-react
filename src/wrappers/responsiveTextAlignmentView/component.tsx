@@ -30,18 +30,21 @@ export interface IResponsiveTextAlignmentViewProps extends IWrapperProps {
   alignmentResponsive?: ResponsiveField<TextAlignment>;
 }
 
-export const ResponsiveTextAlignmentView = (props: IResponsiveTextAlignmentViewProps): React.ReactElement => {
+export function ResponsiveTextAlignmentView({
+  className = '',
+  ...props
+}: IResponsiveTextAlignmentViewProps): React.ReactElement {
   const theme = useDimensions(props.theme);
   return (
     <StyledResponsiveTextAlignmentView
-      className={getClassName(ResponsiveTextAlignmentView.displayName, props.className)}
+      className={getClassName(ResponsiveTextAlignmentView.displayName, className)}
       $theme={theme}
       $alignment={{ base: props.alignment, ...props.alignmentResponsive }}
     >
       {props.children}
     </StyledResponsiveTextAlignmentView>
   );
-};
+}
 
 ResponsiveTextAlignmentView.displayName = 'KibaResponsiveTextAlignmentView';
 ResponsiveTextAlignmentView.defaultProps = {

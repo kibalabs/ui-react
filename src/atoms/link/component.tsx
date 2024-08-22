@@ -5,7 +5,7 @@ import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react'
 import styled from 'styled-components';
 
 import { ILinkTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import {IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const LinkThemedStyle = (theme: RecursivePartial<ILinkTheme>): string => `
@@ -67,15 +67,20 @@ const StyledLink = styled.a<IStyledLinkProps>`
 `;
 
 export interface ILinkProps extends IComponentProps<ILinkTheme> {
-  isEnabled: boolean;
-  target?: string;
   text: string;
+  isEnabled?: boolean;
+  target?: string;
   tabIndex?: number;
   shouldOpenSameTab?: boolean;
   onClicked?: () => void;
 }
 
-export const Link = (props: ILinkProps): React.ReactElement => {
+export function Link({
+  className = '',
+  variant = 'default',
+  isEnabled = true,
+  ...props
+}: ILinkProps): React.ReactElement {
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
 
   const onClicked = (event: React.SyntheticEvent): void => {
@@ -93,24 +98,19 @@ export const Link = (props: ILinkProps): React.ReactElement => {
   // @ts-ignore: as prop doesn't match type required
     <StyledLink
       id={props.id}
-      className={getClassName(Link.displayName, props.className, !props.isEnabled && 'disabled', ...(props.variant?.split('-') || []))}
+      className={getClassName(Link.displayName, className, !isEnabled && 'disabled', ...(variant?.split('-') || []))}
       $theme={props.theme}
       onClick={onClicked}
-      href={props.isEnabled ? props.target : undefined}
-      rel={'noopener'}
+      href={isEnabled ? props.target : undefined}
+      rel='noopener'
       tabIndex={props.tabIndex || 0}
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
-      as={ props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
+      as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
     >
       <span className='KibaLinkFocusFixer' tabIndex={-1}>
         {props.text}
       </span>
     </StyledLink>
   );
-};
-
+}
 Link.displayName = 'KibaLink';
-Link.defaultProps = {
-  ...defaultComponentProps,
-  isEnabled: true,
-};

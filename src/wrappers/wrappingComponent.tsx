@@ -6,10 +6,10 @@ import { flattenChildren } from '@kibalabs/core-react';
 import { IWrapperProps } from './wrapperProps';
 
 const styleCopier = <P extends IWrapperProps>(props: P): React.ReactElement => {
-  const children = flattenChildren(props.children).map((child: React.ReactChild): React.ReactChild => {
+  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): (React.ReactElement | string | number) => {
     if (React.isValidElement(child)) {
       // @ts-ignore
-      return React.cloneElement(child, { className: getClassName(child.props?.className, props.className) });
+      return React.cloneElement(child, { className: getClassName(child.props?.className, className) });
     }
     return child;
   });

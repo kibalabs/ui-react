@@ -42,7 +42,9 @@ export interface IKibaAppProps extends IMultiAnyChildProps, IHeadRootProviderPro
   extraComponentDefinitions?: ComponentDefinition<ThemeType>[];
 }
 
-export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
+export function KibaApp({
+  ...props
+}: IKibaAppProps): React.ReactElement {
   // NOTE(krishan711): the default is false because if this is rehydrating it would be false on the server and needs to match.
   const [isRunningOnBrowser, setIsRunningOnBrowser] = React.useState<boolean>(!props.isRehydrating);
 
@@ -72,8 +74,8 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
       <HeadRootProvider setHead={props.setHead}>
         <Head headId='kiba-app'>
           <link rel='preconnect' href='https://assets-cdn.kiba.dev' crossOrigin='anonymous' />
-          { Object.keys(props.theme.fonts || {}).map((fontKey: string, index: number): React.ReactElement => (
-            <React.Fragment key={index}>
+          { Object.keys(props.theme.fonts || {}).map((fontKey: string): React.ReactElement => (
+            <React.Fragment key={fontKey}>
               <link href={props.theme.fonts[fontKey].url} rel='preload' as='style' />
               {/* TODO(krishan711): the lazy loading doesn't work here */}
               {/* <link href={theme.fonts[fontKey].url} rel='stylesheet' media='print' onLoad={((event: React.SyntheticEvent<HTMLLinkElement>): void => {(event.target as HTMLLinkElement).media = 'all'})} />
@@ -82,7 +84,8 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
             </React.Fragment>
           ))}
         </Head>
-        <BackgroundView { ...props.background }>
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        <BackgroundView {...props.background}>
           <StyledMainView
             className={getClassName(isRunningOnBrowser ? 'js' : 'no-js', props.isFullPageApp && 'fullPage')}
             $extraCss={props.extraCss}
@@ -93,4 +96,4 @@ export const KibaApp = (props: IKibaAppProps): React.ReactElement => {
       </HeadRootProvider>
     </ThemeProvider>
   );
-};
+}

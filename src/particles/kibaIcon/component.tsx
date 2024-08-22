@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 
-import { IComponentProps } from '../..';
+import {IComponentProps } from '../..';
 import { Icon, IIconTheme } from '../icon';
 
 interface IKibaIconProps extends IComponentProps<IIconTheme> {
@@ -16,7 +16,11 @@ interface IconData {
   shouldAddStroke: boolean;
 }
 
-export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
+export function KibaIcon({
+  className = '',
+  variant = 'default',
+  ...props
+}: IKibaIconProps): React.ReactElement {
   const [svgContent, setSvgContent] = React.useState<string | null>(null);
   const [shouldAddFill, setShouldAddFill] = React.useState<boolean | undefined>(undefined);
   const [shouldAddStroke, setShouldAddStroke] = React.useState<boolean | undefined>(undefined);
@@ -85,8 +89,8 @@ export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
   return (
     <Icon
       id={props.id}
-      className={getClassName(KibaIcon.displayName, props.className)}
-      variant={props.variant}
+      className={getClassName(KibaIcon.displayName, className)}
+      variant={variant}
       // eslint-disable-next-line no-underscore-dangle
       _color={props._color}
       shouldAddFill={shouldAddFill}
@@ -94,10 +98,6 @@ export const KibaIcon = (props: IKibaIconProps): React.ReactElement => {
       svgContent={svgContent || '<svg></svg>'}
     />
   );
-};
-
+}
 // TODO(krishan711): this is a terrible name lol but it clashes with Icon otherwise
 KibaIcon.displayName = 'KibaKibaIcon';
-KibaIcon.defaultProps = {
-  className: '',
-};

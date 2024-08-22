@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial, updateQueryString } from '@kibalabs/cor
 import styled from 'styled-components';
 
 import { IImageTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import {IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const ImageThemedStyle = (theme: RecursivePartial<IImageTheme>): string => `
@@ -87,7 +87,11 @@ const getResponsiveImageString = (url: string) => {
   return [...widthValues].join(', ');
 };
 
-export const Image = (props: IImageProps): React.ReactElement => {
+export function Image({
+  className = '',
+  variant = 'default',
+  ...props
+}: IImageProps): React.ReactElement {
   const fitType = props.fitType || 'scale';
   const width = props.width ? props.width : props.isFullWidth ? '100%' : 'auto';
   const height = props.height ? props.height : props.isFullHeight ? '100%' : 'auto';
@@ -98,7 +102,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
     <React.Fragment>
       <StyledImage
         id={props.id}
-        className={getClassName(Image.displayName, props.className, props.isLazyLoadable ? 'lazyload' : 'unlazy', props.isCenteredHorizontally && 'centered', ...(props.variant?.split('-') || []))}
+        className={getClassName(Image.displayName, className, props.isLazyLoadable ? 'lazyload' : 'unlazy', props.isCenteredHorizontally && 'centered', ...(variant?.split('-') || []))}
         $theme={props.theme}
         $fitType={fitType}
         $width={width}
@@ -118,7 +122,7 @@ export const Image = (props: IImageProps): React.ReactElement => {
         <noscript>
           <StyledImage
             id={props.id}
-            className={getClassName(Image.displayName, props.className, 'unlazy', props.isCenteredHorizontally && 'centered', ...(props.variant?.split('-') || []))}
+            className={getClassName(Image.displayName, className, 'unlazy', props.isCenteredHorizontally && 'centered', ...(variant?.split('-') || []))}
             $theme={props.theme}
             $fitType={fitType}
             $width={width}
@@ -135,9 +139,5 @@ export const Image = (props: IImageProps): React.ReactElement => {
       )}
     </React.Fragment>
   );
-};
-
+}
 Image.displayName = 'KibaImage';
-Image.defaultProps = {
-  ...defaultComponentProps,
-};

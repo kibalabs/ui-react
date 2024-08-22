@@ -5,7 +5,7 @@ import { getIsRunningOnBrowser, ISingleAnyChildProps, useEventListener } from '@
 import styled from 'styled-components';
 
 import { IDialogTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import {IComponentProps } from '../../model';
 import { Box, BoxThemedStyle } from '../../particles/box';
 import { propertyToCss } from '../../util';
 
@@ -52,14 +52,23 @@ interface IDialogProps extends IComponentProps<IDialogTheme>, ISingleAnyChildPro
   onCloseClicked: () => void;
 }
 
-export const Dialog = (props: IDialogProps): React.ReactElement | null => {
+export function Dialog({
+  className = '',
+  variant = 'default',
+  isOpen = false,
+  isScrollableHorizontally = true,
+  isScrollableVertically = true,
+  isClosableByBackdrop = true,
+  isClosableByEscape = true,
+  ...props
+}: IDialogProps): React.ReactElement | null {
   const dialogRef = React.useRef<HTMLDivElement | null>(null);
   const maxWidth = props.maxWidth || '400px';
   const maxHeight = props.maxHeight || '400px';
   const isRunningOnBrowser = getIsRunningOnBrowser();
 
   const onBackdropClicked = (event: React.SyntheticEvent<HTMLDivElement>) => {
-    if (props.isClosableByBackdrop && event.target === dialogRef.current) {
+    if (isClosableByBackdrop && event.target === dialogRef.current) {
       props.onCloseClicked();
     }
   };
@@ -68,14 +77,14 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
   // NOTE(krishan711): useEventListener should allow the event object to be provided as a generic
   // @ts-ignore
   useEventListener(isRunningOnBrowser ? document : null, 'keydown', (event: React.KeyboardEvent): void => {
-    if (props.isClosableByEscape && props.isOpen && event.key === 'Escape') {
+    if (isClosableByEscape && isOpen && event.key === 'Escape') {
       props.onCloseClicked();
     }
   });
 
   return (
     <StyledDialog
-      className={getClassName(Dialog.displayName, props.className, !props.isOpen && 'closed', ...(props.variant?.split('-') || []))}
+      className={getClassName(Dialog.displayName, className, !isOpen && 'closed', ...(variant?.split('-') || []))}
       $theme={props.theme}
       ref={dialogRef}
       onClick={onBackdropClicked}
@@ -87,10 +96,10 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
         maxHeight={maxHeight}
         shouldClipContent={true}
         shouldCaptureTouches={true}
-        isScrollableVertically={props.isScrollableVertically}
-        isScrollableHorizontally={props.isScrollableHorizontally}
+        isScrollableVertically={isScrollableVertically}
+        isScrollableHorizontally={isScrollableHorizontally}
       >
-        {(props.isOpen || !props.shouldSkipRenderingWhenClosed) && (
+        {(isOpen || !props.shouldSkipRenderingWhenClosed) && (
           <React.Fragment>
             {props.children}
           </React.Fragment>
@@ -98,14 +107,5 @@ export const Dialog = (props: IDialogProps): React.ReactElement | null => {
       </Box>
     </StyledDialog>
   );
-};
-Dialog.defaultProps = {
-  ...defaultComponentProps,
-  isOpen: false,
-  isScrollableHorizontally: true,
-  isScrollableVertically: true,
-  isClosableByBackdrop: true,
-  isClosableByEscape: true,
-};
-
+}
 Dialog.displayName = 'KibaDialog';

@@ -21,7 +21,10 @@ interface IMessageDialogProps extends IMoleculeProps<IMessageDialogTheme> {
   onCloseClicked: () => void;
 }
 
-export const MessageDialog = (props: IMessageDialogProps): React.ReactElement | null => {
+export function MessageDialog({
+  className = '',
+  ...props
+}: IMessageDialogProps): React.ReactElement | null {
   const cancelButtonText = props.cancelButtonText || 'Cancel';
   const confirmButtonText = props.confirmButtonText || 'Confirm';
 
@@ -47,4 +50,4 @@ export const MessageDialog = (props: IMessageDialogProps): React.ReactElement | 
       </Stack>
     </Dialog>
   );
-};
+}

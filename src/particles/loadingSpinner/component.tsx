@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { ILoadingSpinnerTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../..';
+import {IComponentProps } from '../..';
 import { propertyToCss } from '../../util';
 
 export const LoadingSpinnerThemedStyle = (theme: RecursivePartial<ILoadingSpinnerTheme>): string => `
@@ -36,17 +36,17 @@ const StyledLoadingSpinner = styled.div<IStyledLoadingSpinnerProps>`
 interface ILoadingSpinnerProps extends IComponentProps<ILoadingSpinnerTheme> {
 }
 
-export const LoadingSpinner = (props: ILoadingSpinnerProps): React.ReactElement => {
+export function LoadingSpinner({
+  className = '',
+  variant = 'default',
+  ...props
+}: ILoadingSpinnerProps): React.ReactElement {
   return (
     <StyledLoadingSpinner
       id={props.id}
-      className={getClassName(LoadingSpinner.displayName, props.className, ...(props.variant?.split('-') || []))}
+      className={getClassName(LoadingSpinner.displayName, className, ...(variant?.split('-') || []))}
       $theme={props.theme}
     />
   );
-};
-
+}
 LoadingSpinner.displayName = 'KibaLoadingSpinner';
-LoadingSpinner.defaultProps = {
-  ...defaultComponentProps,
-};

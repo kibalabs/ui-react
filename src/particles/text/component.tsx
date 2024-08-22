@@ -5,7 +5,7 @@ import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { ITextTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { useDimensions } from '../../theming';
 import { fieldToResponsiveCss, getCss, ResponsiveField, themeToCss } from '../../util';
 import { IDimensionGuide } from '../dimensions';
@@ -110,7 +110,11 @@ export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChild
   shouldBreakAnywhere?: boolean;
 }
 
-export const Text = (props: ITextProps): React.ReactElement => {
+export function Text({
+  className = '',
+  variant = 'default',
+  ...props
+}: ITextProps): React.ReactElement {
   const dimensions = useDimensions();
 
   let lineLimit = props.lineLimit;
@@ -132,22 +136,17 @@ export const Text = (props: ITextProps): React.ReactElement => {
   return (
     <StyledText
       id={props.id}
-      className={getClassName(Text.displayName, props.className, lineLimit && lineLimit === 1 && 'singleLine', lineLimit && lineLimit >= 2 && 'fixedLines', ...(props.variant?.split('-') || []))}
+      className={getClassName(Text.displayName, className, lineLimit && lineLimit === 1 && 'singleLine', lineLimit && lineLimit >= 2 && 'fixedLines', ...(variant?.split('-') || []))}
       $theme={props.theme}
       $dimensions={dimensions}
       $lineLimit={lineLimit}
       $alignment={alignment}
       $shouldBreakOnWords={props.shouldBreakOnWords === true || props.shouldBreakOnWords === undefined}
       $shouldBreakAnywhere={props.shouldBreakAnywhere}
-      as={props.tag || getTextTag(props.variant)}
+      as={props.tag || getTextTag(variant)}
     >
       { props.children }
     </StyledText>
   );
-};
-
+}
 Text.displayName = 'KibaText';
-Text.defaultProps = {
-  ...defaultComponentProps,
-  isSingleLine: false,
-};

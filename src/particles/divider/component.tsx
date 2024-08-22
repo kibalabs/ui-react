@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { IDividerTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { propertyToCss } from '../../util';
 
 export const DividerThemedStyle = (theme: RecursivePartial<IDividerTheme>): string => `
@@ -46,18 +46,18 @@ interface IDividerProps extends IComponentProps<IDividerTheme> {
   orientation?: string;
 }
 
-export const Divider = (props: IDividerProps): React.ReactElement => {
+export function Divider({
+  className = '',
+  variant = 'default',
+  orientation = 'horizontal',
+  ...props
+}: IDividerProps): React.ReactElement {
   return (
     <StyledDivider
       id={props.id}
-      className={getClassName(Divider.displayName, props.className, props.orientation, ...(props.variant?.split('-') || []))}
+      className={getClassName(Divider.displayName, className, orientation, ...(variant?.split('-') || []))}
       $theme={props.theme}
     />
   );
-};
-
+}
 Divider.displayName = 'Divider';
-Divider.defaultProps = {
-  ...defaultComponentProps,
-  orientation: 'horizontal',
-};

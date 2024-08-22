@@ -5,7 +5,7 @@ import { IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IBoxTheme } from './theme';
-import { defaultComponentProps, IComponentProps, IDimensionGuide, themeToCss, useDimensions } from '../..';
+import {IComponentProps, IDimensionGuide, themeToCss, useDimensions } from '../..';
 import { fieldToResponsiveCss, getCss, propertyToCss, ResponsiveField } from '../../util';
 
 export const BoxThemedStyle = (theme: RecursivePartial<IBoxTheme>): string => `
@@ -116,10 +116,4 @@ export const Box = React.forwardRef((props: IBoxProps, ref: React.ForwardedRef<H
     </StyledBox>
   );
 });
-
 Box.displayName = 'KibaBox';
-Box.defaultProps = {
-  ...defaultComponentProps,
-  isFullWidth: true,
-  shouldClipContent: false,
-};

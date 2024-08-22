@@ -78,7 +78,6 @@ export function mergeThemeMap<Theme extends ThemeType>(themeMap: ThemeMap<Theme>
   };
   let partialKeys: Set<string> = new Set(Object.keys(themeMap));
   partialThemeMaps.forEach((partialThemeMap: PartialThemeMap<Theme>): void => {
-    // @ts-expect-error
     partialKeys = new Set([...partialKeys, ...(Object.keys(partialThemeMap))]);
   });
   partialKeys.forEach((partialKey: string): void => {

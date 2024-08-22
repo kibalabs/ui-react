@@ -29,17 +29,20 @@ export interface IContainingViewProps extends IWrapperProps {
   isCenteredHorizontally: boolean;
 }
 
-export const ContainingView = (props: IContainingViewProps): React.ReactElement => {
+export function ContainingView({
+  className = '',
+  ...props
+}: IContainingViewProps): React.ReactElement {
   const theme = useDimensions(props.theme);
   return (
     <StyledContainingView
-      className={getClassName(ContainingView.displayName, props.className, props.isCenteredHorizontally && 'centered')}
+      className={getClassName(ContainingView.displayName, className, props.isCenteredHorizontally && 'centered')}
       $theme={theme}
     >
       {props.children}
     </StyledContainingView>
   );
-};
+}
 
 ContainingView.displayName = 'KibaContainingView';
 ContainingView.defaultProps = {

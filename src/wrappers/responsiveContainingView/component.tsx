@@ -65,7 +65,10 @@ export interface IResponsiveContainingViewProps extends IWrapperProps {
   isCenteredHorizontally?: boolean;
 }
 
-export const ResponsiveContainingView = (props: IResponsiveContainingViewProps): React.ReactElement => {
+export function ResponsiveContainingView({
+  className = '',
+  ...props
+}: IResponsiveContainingViewProps): React.ReactElement {
   const theme = useDimensions(props.theme);
   const isFullWidth = props.isFullWidth === true || props.isFullWidth == null;
   const shouldIncludeMaxSize = props.shouldIncludeMaxSize === true || props.shouldIncludeMaxSize == null;
@@ -74,7 +77,7 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
   }
   return (
     <StyledResponsiveContainingView
-      className={getClassName(ResponsiveContainingView.displayName, props.className, props.isCenteredHorizontally && 'centered')}
+      className={getClassName(ResponsiveContainingView.displayName, className, props.isCenteredHorizontally && 'centered')}
       $theme={theme}
       $size={{ base: props.size, ...props.sizeResponsive }}
       $isFullWidth={isFullWidth}
@@ -83,7 +86,7 @@ export const ResponsiveContainingView = (props: IResponsiveContainingViewProps):
       {props.children}
     </StyledResponsiveContainingView>
   );
-};
+}
 
 ResponsiveContainingView.displayName = 'KibaResponsiveContainingView';
 ResponsiveContainingView.defaultProps = {

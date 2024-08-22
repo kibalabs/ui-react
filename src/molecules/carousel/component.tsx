@@ -10,7 +10,7 @@ import { Alignment, Direction } from '../../model';
 import { getScreenSizeValue, IDimensionGuide, KibaIcon, ScreenSize } from '../../particles';
 import { useDimensions } from '../../theming';
 import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
-import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
+import { IMoleculeProps } from '../moleculeProps';
 
 const getSlidesPerPageCss: CssConverter<number> = (field: number): string => {
   return `width: calc(100% / ${field});`;
@@ -70,15 +70,21 @@ export interface ICarouselProps extends IMoleculeProps<ICarouselTheme>, IMultiAn
   autoplaySeconds?: number;
   initialIndex?: number;
   indexButtonVariant?: string;
-  slidesPerPage: number;
+  slidesPerPage?: number;
   slidesPerPageResponsive?: ResponsiveField<number>;
   onIndexProgressed?: (slideIndexProgress: number) => void;
   onIndexChanged?: (slideIndex: number) => void;
 }
 
 // NOTE(krishan711): the slider could potentially be its own component here!
-export const Carousel = (props: ICarouselProps): React.ReactElement => {
-  const initialIndex = props.initialIndex || 0;
+export function Carousel({
+  className = '',
+  shouldShowButtons = true,
+  autoplaySeconds = 7,
+  initialIndex = 0,
+  slidesPerPage = 1,
+  ...props
+}: ICarouselProps): React.ReactElement {
   const dimensions = useDimensions();
   const [sliderRef] = useRenderedRef<HTMLDivElement>();
   const scrollTimeoutRef = React.useRef<number | null>(null);
@@ -107,8 +113,8 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     }
   };
 
-  useInterval(props.autoplaySeconds || 10000000, (): void => {
-    if (props.autoplaySeconds) {
+  useInterval(autoplaySeconds || 10000000, (): void => {
+    if (autoplaySeconds) {
       goToNext();
     }
   }, false, [slideIndex]);
@@ -124,11 +130,11 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     }, 50);
   }, [initialIndex, sliderRef]);
 
-  const slidesPerPage = props.slidesPerPageResponsive?.base || props.slidesPerPage;
-  const slidesPerPageSmall = props.slidesPerPageResponsive?.small || slidesPerPage;
-  const slidesPerPageMedium = props.slidesPerPageResponsive?.medium || slidesPerPageSmall;
-  const slidesPerPageLarge = props.slidesPerPageResponsive?.large || slidesPerPageMedium;
-  const slidesPerPageExtraLarge = props.slidesPerPageResponsive?.extraLarge || slidesPerPageLarge;
+  const innerSlidesPerPage = props.slidesPerPageResponsive?.base || slidesPerPage;
+  const innerSlidesPerPageSmall = props.slidesPerPageResponsive?.small || innerSlidesPerPage;
+  const innerSlidesPerPageMedium = props.slidesPerPageResponsive?.medium || innerSlidesPerPageSmall;
+  const innerSlidesPerPageLarge = props.slidesPerPageResponsive?.large || innerSlidesPerPageMedium;
+  const innerSlidesPerPageExtraLarge = props.slidesPerPageResponsive?.extraLarge || innerSlidesPerPageLarge;
 
   useScrollListener(sliderRef.current, (): void => {
     if (!sliderRef.current) {
@@ -137,18 +143,18 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
     const position = Math.ceil(sliderRef.current.scrollLeft);
     // TODO(krishan711): this doesn't work in everypage console because it refers to the global document, not the local (inside iframe) one
     const screenWidth = Math.ceil(document.body.clientWidth);
-    let slideCount = slidesPerPage;
+    let slideCount = innerSlidesPerPage;
     if (screenWidth > getScreenSizeValue(ScreenSize.Small, dimensions)) {
-      slideCount = slidesPerPageSmall;
+      slideCount = innerSlidesPerPageSmall;
     }
     if (screenWidth > getScreenSizeValue(ScreenSize.Medium, dimensions)) {
-      slideCount = slidesPerPageMedium;
+      slideCount = innerSlidesPerPageMedium;
     }
     if (screenWidth > getScreenSizeValue(ScreenSize.Large, dimensions)) {
-      slideCount = slidesPerPageLarge;
+      slideCount = innerSlidesPerPageLarge;
     }
     if (screenWidth > getScreenSizeValue(ScreenSize.ExtraLarge, dimensions)) {
-      slideCount = slidesPerPageExtraLarge;
+      slideCount = innerSlidesPerPageExtraLarge;
     }
     const width = Math.ceil(sliderRef.current.scrollWidth);
     const progress = (children.length / slideCount) * (position / width);
@@ -178,16 +184,16 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
   return (
     <Stack
       id={props.id}
-      className={getClassName(Carousel.displayName, props.className)}
+      className={getClassName(Carousel.displayName, className)}
       direction={Direction.Horizontal}
       childAlignment={Alignment.Center}
     >
-      {props.shouldShowButtons && (
+      {shouldShowButtons && (
         <IconButton
           theme={props.theme?.indexButtonTheme}
           variant={props.indexButtonVariant}
           icon={<KibaIcon iconId='mui-chevron-left' />}
-          label={'Previous'}
+          label='Previous'
           onClicked={onPreviousClicked}
         />
       )}
@@ -196,13 +202,13 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
           ref={sliderRef}
           className={getClassName(StyledSlider.displayName)}
         >
-          {children.map((child: React.ReactChild, index: number): React.ReactElement => {
+          {children.map((child: (React.ReactElement | string | number)): React.ReactElement => {
             return (
               <StyledSlide
-                key={index}
+                key={child.toString()}
                 className={getClassName(StyledSlide.displayName)}
                 $theme={dimensions}
-                $slidesPerPage={{ base: props.slidesPerPage, ...props.slidesPerPageResponsive }}
+                $slidesPerPage={{ base: slidesPerPage, ...props.slidesPerPageResponsive }}
               >
                 {child}
               </StyledSlide>
@@ -210,24 +216,16 @@ export const Carousel = (props: ICarouselProps): React.ReactElement => {
           })}
         </StyledSlider>
       </Stack.Item>
-      {props.shouldShowButtons && (
+      {shouldShowButtons && (
         <IconButton
           theme={props.theme?.indexButtonTheme}
           variant={props.indexButtonVariant}
           icon={<KibaIcon iconId='mui-chevron-right' />}
-          label={'Next'}
+          label='Next'
           onClicked={onNextClicked}
         />
       )}
     </Stack>
   );
-};
-
+}
 Carousel.displayName = 'KibaCarousel';
-Carousel.defaultProps = {
-  ...defaultMoleculeProps,
-  shouldShowButtons: true,
-  autoplaySeconds: 7,
-  initialIndex: 0,
-  slidesPerPage: 1,
-};

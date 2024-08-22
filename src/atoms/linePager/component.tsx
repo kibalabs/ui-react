@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { ILinePagerTheme } from './theme';
-import { defaultComponentProps, Direction, IComponentProps } from '../../model';
+import {Direction, IComponentProps } from '../../model';
 import { ScreenSize, Spacing } from '../../particles';
 import { ResponsiveField, themeToCss } from '../../util';
 import { ResponsiveHidingView } from '../../wrappers';
@@ -65,7 +65,11 @@ interface ILinePagerProps extends IComponentProps<ILinePagerTheme> {
   onPageClicked?(index: number): void;
 }
 
-export const LinePager = (props: ILinePagerProps): React.ReactElement => {
+export function LinePager({
+  className = '',
+  variant = 'default',
+  ...props
+}: ILinePagerProps): React.ReactElement {
   if (props.pageCount == null && props.pageCountResponsive?.base == null) {
     throw new Error(`One of {pageCount, pageCountResponsive.base} must be passed to ${LinePager.displayName}`);
   }
@@ -103,11 +107,12 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
   return (
     <StyledLinePager
       id={props.id}
-      className={getClassName(LinePager.displayName, props.className, ...(props.variant?.split('-') || []))}
+      className={getClassName(LinePager.displayName, className, ...(variant?.split('-') || []))}
       $theme={props.theme}
     >
       {Array(maxPageCount).fill(null).map((_: unknown, index: number): React.ReactElement => {
         return (
+          // eslint-disable-next-line react/no-array-index-key
           <ResponsiveHidingView key={index} hiddenAbove={getHiddenAboveSize(index)}>
             <StyledLinePagerItem
               className={getClassName(index === props.activePageIndex && 'active', 'LinePagerItem')}
@@ -122,9 +127,5 @@ export const LinePager = (props: ILinePagerProps): React.ReactElement => {
       })}
     </StyledLinePager>
   );
-};
-
+}
 LinePager.displayName = 'KibaLinePager';
-LinePager.defaultProps = {
-  ...defaultComponentProps,
-};

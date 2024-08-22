@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { IProgressCounterItemTheme, ProgressCounterItem } from '../../atoms';
 import { Direction } from '../../model';
 import { PaddingSize, Spacing } from '../../particles';
-import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
+import { IMoleculeProps } from '../moleculeProps';
 
 export interface IProgressCounterTheme {
   progressCounterItemTheme: IProgressCounterItemTheme;
@@ -31,14 +31,19 @@ export interface IProgressCounterProps extends IMoleculeProps<IProgressCounterTh
   isSelectable?: (step: number) => boolean;
 }
 
-export const ProgressCounter = (props: IProgressCounterProps): React.ReactElement => {
+export function ProgressCounter({
+  className = '',
+  itemSpacingSize = PaddingSize.Default,
+  ...props
+}: IProgressCounterProps): React.ReactElement {
   return (
     <StyledProgressCounter
       id={props.id}
-      className={getClassName(ProgressCounter.displayName, props.className)}
+      className={getClassName(ProgressCounter.displayName, className)}
     >
       {Array(props.stepCount).fill(null).map((_: unknown, index: number): React.ReactElement => {
         return (
+          // eslint-disable-next-line react/no-array-index-key
           <React.Fragment key={index}>
             <ProgressCounterItem
               id={props.id && `${props.id}-item-${index}`}
@@ -48,16 +53,11 @@ export const ProgressCounter = (props: IProgressCounterProps): React.ReactElemen
               isEnabled={props.isSelectable ? props.isSelectable(index) : false}
               isSelected={props.selectedStepIndex === index}
             />
-            {index < props.stepCount - 1 && <Spacing direction={Direction.Horizontal} variant={props.itemSpacingSize} />}
+            {index < props.stepCount - 1 && <Spacing direction={Direction.Horizontal} variant={itemSpacingSize} />}
           </React.Fragment>
         );
       })}
     </StyledProgressCounter>
   );
-};
-
+}
 ProgressCounter.displayName = 'KibaProgressCounter';
-ProgressCounter.defaultProps = {
-  ...defaultMoleculeProps,
-  itemSpacingSize: PaddingSize.Default,
-};

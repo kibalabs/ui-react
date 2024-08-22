@@ -12,9 +12,9 @@ import { PaddingSize, Spacing } from '../../particles';
 import { useTheme } from '../../theming';
 import { mergeTheme } from '../../util';
 
-export const BoxThemeExample = (): React.ReactElement => {
+export function BoxThemeExample(): React.ReactElement {
   const defaultTheme = useTheme();
-  const [theme, setTheme] = React.useState<IBoxTheme>({ ...defaultTheme.boxes.default, ...defaultTheme.boxes.bordered });
+  const [theme, setTheme] = React.useState<IBoxTheme>({ ...defaultTheme.boxes.default, ...defaultTheme.boxes.bordered } as IBoxTheme);
   const [themeEditorField, setThemeEditorField] = React.useState<string>('');
   const [setThemeCallback, clearSetThemeCallback] = useDebouncedCallback(1000);
   const currentThemeValue = React.useRef<IBoxTheme>(theme);
@@ -48,4 +48,4 @@ export const BoxThemeExample = (): React.ReactElement => {
       <MultiLineInput minRowCount={10} value={themeEditorField} onValueChanged={setThemeEditorField} />
     </Stack>
   );
-};
+}

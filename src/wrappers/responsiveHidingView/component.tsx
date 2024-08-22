@@ -26,18 +26,21 @@ export interface IResponsiveHidingViewProps extends IWrapperProps {
   hiddenBelow?: ScreenSize;
 }
 
-export const ResponsiveHidingView = (props: IResponsiveHidingViewProps): React.ReactElement => {
+export function ResponsiveHidingView({
+  className = '',
+  ...props
+}: IResponsiveHidingViewProps): React.ReactElement {
   const theme = useDimensions(props.theme);
   return (
     <StyledResponsiveHidingView
-      className={getClassName(ResponsiveHidingView.displayName, props.className)}
+      className={getClassName(ResponsiveHidingView.displayName, className)}
       $hiddenAboveSize={props.hiddenAbove && getScreenSize(props.hiddenAbove, theme)}
       $hiddenBelowSize={props.hiddenBelow && getScreenSize(props.hiddenBelow, theme)}
     >
       {props.children}
     </StyledResponsiveHidingView>
   );
-};
+}
 
 ResponsiveHidingView.displayName = 'KibaResponsiveHidingView';
 ResponsiveHidingView.defaultProps = {

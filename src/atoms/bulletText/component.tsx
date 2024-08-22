@@ -5,7 +5,7 @@ import { IOptionalSingleChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IBulletTextTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 import { IBulletListProps } from '../bulletList';
 
@@ -36,21 +36,21 @@ export interface IBulletTextProps extends IComponentProps<IBulletTextTheme>, IOp
   text: string;
 }
 
-export const BulletText = (props: IBulletTextProps): React.ReactElement => {
+export function BulletText({
+  text,
+  className = '',
+  variant = 'default',
+  ...props
+}: IBulletTextProps): React.ReactElement {
   return (
     <StyledBulletText
       id={props.id}
-      className={getClassName(BulletText.displayName, props.className, ...(props.variant?.split('-') || []))}
+      className={getClassName(BulletText.displayName, className, ...(variant?.split('-') || []))}
       $theme={props.theme}
     >
-      {props.text}
+      {text}
       {props.children}
     </StyledBulletText>
   );
-};
-
+}
 BulletText.displayName = 'KibaBulletText';
-BulletText.defaultProps = {
-  ...defaultComponentProps,
-  isEnabled: true,
-};

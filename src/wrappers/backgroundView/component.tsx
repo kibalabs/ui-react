@@ -65,7 +65,10 @@ const StyledBackgroundView = wrappingComponent((Component: React.ComponentType<I
 export interface IBackgroundViewProps extends IWrapperProps, IBackgroundConfig {
 }
 
-export const BackgroundView = (props: IBackgroundViewProps): React.ReactElement => {
+export function BackgroundView({
+  className = '',
+  ...props
+}: IBackgroundViewProps): React.ReactElement {
   const colors = useColors();
   const layers = props.layers || [];
   if (props.color || props.linearGradient || props.radialGradient || props.imageUrl || props.patternImageUrl || layers.length === 0) {
@@ -79,14 +82,14 @@ export const BackgroundView = (props: IBackgroundViewProps): React.ReactElement 
   }
   return (
     <StyledBackgroundView
-      className={getClassName(BackgroundView.displayName, props.className)}
+      className={getClassName(BackgroundView.displayName, className)}
       $backgroundLayers={layers}
       $colors={colors}
     >
       { props.children }
     </StyledBackgroundView>
   );
-};
+}
 
 BackgroundView.displayName = 'KibaBackgroundView';
 BackgroundView.defaultProps = {

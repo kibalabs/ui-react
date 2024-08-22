@@ -33,7 +33,7 @@ const getHeadTag = (element: React.ReactElement, headId: string): IHeadTag => {
 };
 
 const convertChildrenToHead = (children: React.ReactNode | React.ReactNode[], headId: string): IHead => {
-  const flattenedChildren = flattenChildren(children).filter((child: React.ReactChild): boolean => React.isValidElement(child)) as React.ReactElement[];
+  const flattenedChildren = flattenChildren(children).filter((child: (React.ReactElement | string | number)): boolean => React.isValidElement(child)) as React.ReactElement[];
   const titleElement = flattenedChildren.filter((child: React.ReactElement): boolean => child.type === 'title').shift();
   const baseElement = flattenedChildren.filter((child: React.ReactElement): boolean => child.type === 'base').shift();
   const head: IHead = {
@@ -151,7 +151,9 @@ export interface IHeadRootProviderProps extends IMultiAnyChildProps {
   setHead?: (head: IHead) => void;
 }
 
-export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElement => {
+export function HeadRootProvider({
+  ...props
+}: IHeadRootProviderProps): React.ReactElement {
   const headsRef = React.useRef<IHead[]>([]);
   const setHead = props.setHead;
 
@@ -183,11 +185,12 @@ export const HeadRootProvider = (props: IHeadRootProviderProps): React.ReactElem
   }, [refresh, headsRef]);
 
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <HeadRootContext.Provider value={{ addHead, removeHead, refresh }}>
       {props.children}
     </HeadRootContext.Provider>
   );
-};
+}
 
 export function useHeadRoot(): IHeadRoot {
   const headRoot = React.useContext(HeadRootContext);
@@ -203,7 +206,7 @@ interface IHeadProps extends IMultiAnyChildProps {
   headId?: string;
 }
 
-export const Head = (props: IHeadProps): React.ReactElement | null => {
+export function Head(props: IHeadProps): React.ReactElement | null {
   const headRoot = useHeadRoot();
   const headId = React.useMemo((): string => props.headId || generateUUID(), [props.headId]);
   const headRef = React.useRef<IHead>({ headId, title: null, base: null, links: [], metas: [], styles: [], scripts: [], noscripts: [] });
@@ -247,4 +250,4 @@ export const Head = (props: IHeadProps): React.ReactElement | null => {
   }, [isRendered, headRef, headRoot]);
 
   return null;
-};
+}

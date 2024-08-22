@@ -23,17 +23,20 @@ export interface IHidingViewProps extends IWrapperProps {
   isInvisible?: boolean;
 }
 
-export const HidingView = (props: IHidingViewProps): React.ReactElement => {
+export function HidingView({
+  className = '',
+  ...props
+}: IHidingViewProps): React.ReactElement {
   return (
     <StyledHidingView
-      className={getClassName(HidingView.displayName, props.className)}
+      className={getClassName(HidingView.displayName, className)}
       $isHidden={props.isHidden}
       $isInvisible={props.isInvisible}
     >
       {props.children}
     </StyledHidingView>
   );
-};
+}
 
 HidingView.displayName = 'KibaHidingView';
 HidingView.defaultProps = {

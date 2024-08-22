@@ -5,7 +5,7 @@ import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IListItemTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import {IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const ListItemThemedStyle = (theme: RecursivePartial<IListItemTheme>): string => `
@@ -79,8 +79,14 @@ export interface IListItemProps extends IComponentProps<IListItemTheme>, ISingle
   onClicked?(itemKey: string): void;
 }
 
-export const ListItem = (props: IListItemProps): React.ReactElement => {
-  const isClickable = props.onClicked != null && !props.isDisabled;
+export function ListItem({
+  className = '',
+  variant = 'default',
+  isDisabled = false,
+  isSelected = false,
+  ...props
+}: IListItemProps): React.ReactElement {
+  const isClickable = props.onClicked != null && !isDisabled;
   const onClicked = (): void => {
     // @ts-ignore
     props.onClicked(props.itemKey);
@@ -90,17 +96,12 @@ export const ListItem = (props: IListItemProps): React.ReactElement => {
     <StyledListItem
       id={props.id}
       key={props.itemKey}
-      className={getClassName(ListItem.displayName, props.className, props.isDisabled && 'disabled', props.isSelected && 'selected', isClickable && 'clickable', ...(props.variant?.split('-') || []))}
+      className={getClassName(ListItem.displayName, className, isDisabled && 'disabled', isSelected && 'selected', isClickable && 'clickable', ...(variant?.split('-') || []))}
       $theme={props.theme}
       onClick={isClickable ? onClicked : undefined}
     >
       { props.children }
     </StyledListItem>
   );
-};
-
+}
 ListItem.displayName = 'KibaListItem';
-ListItem.defaultProps = {
-  isDisabled: false,
-  ...defaultComponentProps,
-};

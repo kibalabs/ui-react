@@ -12,11 +12,11 @@ import { PaddingSize, Spacing } from '../../particles';
 import { useTheme } from '../../theming';
 import { mergeTheme } from '../../util';
 
-export const ButtonThemeExample = (): React.ReactElement => {
+export function ButtonThemeExample(): React.ReactElement {
   const defaultTheme = useTheme();
   const [permanentState, setPermanentState] = React.useState<string>('normal');
   const [temporaryState, setTemporaryState] = React.useState<string>('default');
-  const [theme, setTheme] = React.useState<IButtonTheme>(defaultTheme.buttons.default);
+  const [theme, setTheme] = React.useState<IButtonTheme>(defaultTheme.buttons.default as IButtonTheme);
   const [themeEditorField, setThemeEditorField] = React.useState<string>('');
   const [setThemeCallback, clearSetThemeCallback] = useDebouncedCallback(100);
   const currentThemeValue = React.useRef<IButtonTheme>(theme);
@@ -59,4 +59,4 @@ export const ButtonThemeExample = (): React.ReactElement => {
       <MultiLineInput minRowCount={10} value={themeEditorField} onValueChanged={setThemeEditorField} />
     </Stack>
   );
-};
+}

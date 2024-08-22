@@ -7,8 +7,3 @@ export interface IComponentProps<Theme> {
   theme?: RecursivePartial<Theme>;
   variant?: string;
 }
-
-export const defaultComponentProps = {
-  className: '',
-  variant: 'default',
-};

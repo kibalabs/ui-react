@@ -6,7 +6,3 @@ export interface IMoleculeProps<Theme> {
   className?: string;
   theme?: RecursivePartial<Theme>;
 }
-
-export const defaultMoleculeProps = {
-  className: '',
-};

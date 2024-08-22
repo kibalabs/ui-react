@@ -7,14 +7,14 @@ import { Link, PrettyText } from '../../atoms';
 import { TextAlignment, TextTag } from '../../particles';
 import { getVariant } from '../../util';
 
-const MarkdownLink = (props: AnchorHTMLAttributes<HTMLAnchorElement>): React.ReactElement => {
+function MarkdownLink(props: AnchorHTMLAttributes<HTMLAnchorElement>): React.ReactElement {
   return (
     <Link
       target={props.href || '#'}
       text={String(React.Children.toArray(props.children)[0]) || ''}
     />
   );
-};
+}
 
 interface IMarkdownTextProps {
   id?: string;
@@ -31,7 +31,7 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
   return (
     <PrettyText
       id={props.id}
-      className={getClassName(MarkdownText.displayName, props.className)}
+      className={getClassName(MarkdownText.displayName, className)}
       variant={getVariant(props.textVariant, 'unmargined')}
       tag={props.textTag}
       alignment={props.textAlignment}

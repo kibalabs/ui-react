@@ -3,7 +3,7 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
-import { defaultComponentProps, Direction, IComponentProps, MultiDirection } from '../../model';
+import { Direction, IComponentProps, MultiDirection } from '../../model';
 import { useDimensions } from '../../theming';
 import { getPaddingSize, IDimensionGuide, PaddingSize } from '../dimensions';
 
@@ -19,24 +19,24 @@ const StyledDiv = styled.div<IStyledSpacingProps>`
 `;
 
 export interface ISpacingProps extends IComponentProps<IDimensionGuide> {
-  direction: Direction | MultiDirection;
+  direction?: Direction | MultiDirection;
 }
 
-export const Spacing = (props: ISpacingProps): React.ReactElement => {
+export function Spacing({
+  className = '',
+  variant = 'default',
+  direction = MultiDirection.Both,
+  ...props
+}: ISpacingProps): React.ReactElement {
   const theme = useDimensions(props.theme);
   return (
     <StyledDiv
       id={props.id}
-      className={getClassName(Spacing.displayName, props.className)}
+      className={getClassName(Spacing.displayName, className)}
       $theme={theme}
-      $size={props.variant as PaddingSize}
-      $direction={props.direction}
+      $size={variant as PaddingSize}
+      $direction={direction}
     />
   );
-};
-
+}
 Spacing.displayName = 'KibaSpacing';
-Spacing.defaultProps = {
-  ...defaultComponentProps,
-  direction: MultiDirection.Both,
-};

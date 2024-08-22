@@ -57,26 +57,30 @@ export interface IGridProps extends IMultiChildProps<IGridItemProps>, IPaddingVi
   contentAlignment: Alignment;
 }
 
-export const Grid = (props: IGridProps): React.ReactElement => {
+export function Grid({
+  className = '',
+  ...props
+}: IGridProps): React.ReactElement {
   const theme = useDimensions(props.theme);
   const defaultGutter = props.defaultGutter || PaddingSize.Default;
   const shouldAddGutters = props.shouldAddGutters && defaultGutter !== PaddingSize.None;
 
-  const children = flattenChildren(props.children).map((child: React.ReactChild, index: number): React.ReactElement<IGridItemProps> => (
-    typeof child === 'object' && 'type' in child && child.type === GridItem ? child : <GridItem key={index}>{ child }</GridItem>
+  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): React.ReactElement<IGridItemProps> => (
+    typeof child === 'object' && 'type' in child && child.type === GridItem ? child : <GridItem key={child.toString()}>{ child }</GridItem>
   ));
   return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <PaddingView {...props as IPaddingViewPaddingProps}>
       <StyledGrid
         id={props.id}
-        className={getClassName(Grid.displayName, props.className)}
+        className={getClassName(Grid.displayName, className)}
         $isFullHeight={props.isFullHeight}
         $childAlignment={props.childAlignment}
         $contentAlignment={props.contentAlignment}
       >
-        { children.map((child: React.ReactElement<IGridItemProps>, index: number): React.ReactElement => (
+        { children.map((child: React.ReactElement<IGridItemProps>): React.ReactElement => (
           <StyledGridItem
-            key={index}
+            key={child.key}
             id={child.props.id}
             className={getClassName(StyledGridItem.displayName, child.props.className)}
             $theme={theme}
@@ -91,7 +95,7 @@ export const Grid = (props: IGridProps): React.ReactElement => {
       </StyledGrid>
     </PaddingView>
   );
-};
+}
 
 Grid.displayName = 'KibaGrid';
 Grid.defaultProps = {

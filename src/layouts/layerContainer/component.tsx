@@ -40,21 +40,24 @@ interface ILayerContainerProps extends IMultiAnyChildProps {
   className?: string;
 }
 
-export const LayerContainer = (props: ILayerContainerProps): React.ReactElement => {
-  const children = flattenChildren(props.children).map((child: React.ReactChild, index: number): React.ReactElement<ILayerProps> => (
-    typeof child === 'object' && 'type' in child && child.type === Layer ? child : <Layer key={index}>{ child }</Layer>
+export function LayerContainer({
+  className = '',
+  ...props
+}: ILayerContainerProps): React.ReactElement {
+  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): React.ReactElement<ILayerProps> => (
+    typeof child === 'object' && 'type' in child && child.type === Layer ? child : <Layer key={child.toString()}>{ child }</Layer>
   ));
 
   return (
     <StyledLayerContainer
       id={props.id}
-      className={getClassName(LayerContainer.displayName, props.className)}
+      className={getClassName(LayerContainer.displayName, className)}
     >
       { children.map((child: React.ReactElement, index: number): React.ReactElement<ILayerProps> => (
         <StyledLayer
           id={props.id && `${props.id}-layer-${index}`}
           className={getClassName(StyledLayer.displayName, child.props.className, child.props.isFullWidth && 'isFullWidth', child.props.isFullHeight && 'isFullHeight', child.props.shouldPassThroughTouches && 'passThroughTouches')}
-          key={child.key || index}
+          key={child.key}
           $isStatic={child.props.isStatic}
           $alignmentVertical={child.props.alignmentVertical}
           $alignmentHorizontal={child.props.alignmentHorizontal}
@@ -64,7 +67,7 @@ export const LayerContainer = (props: ILayerContainerProps): React.ReactElement 
       ))}
     </StyledLayerContainer>
   );
-};
+}
 
 LayerContainer.displayName = 'KibaLayerContainer';
 LayerContainer.defaultProps = {

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { IListItemProps, IListItemTheme, ListItem } from '../../atoms/listItem';
 import { Divider } from '../../particles';
-import { defaultMoleculeProps, IMoleculeProps } from '../moleculeProps';
+import { IMoleculeProps } from '../moleculeProps';
 
 export interface IListTheme {
   listItemTheme: IListItemTheme;
@@ -40,7 +40,10 @@ interface IListProps extends IMoleculeProps<IListTheme>, IMultiChildProps<IListI
   onItemClicked?(itemKey: string): void;
 }
 
-export const List = (props: IListProps): React.ReactElement => {
+export function List({
+  className = '',
+  ...props
+}: IListProps): React.ReactElement {
   const onItemClicked = props.onItemClicked && ((itemKey: string): void => {
     if (props.onItemClicked) {
       props.onItemClicked(itemKey);
@@ -50,7 +53,7 @@ export const List = (props: IListProps): React.ReactElement => {
   return (
     <StyledList
       id={props.id}
-      className={getClassName(List.displayName, props.className, props.isFullWidth && 'fullWidth')}
+      className={getClassName(List.displayName, className, props.isFullWidth && 'fullWidth')}
     >
       { React.Children.map(props.children as OptionalProppedElement<IListItemInnerProps>[], (child: OptionalProppedElement<IListItemInnerProps>, index: number): React.ReactElement | null => {
         if (!child) {
@@ -79,10 +82,6 @@ export const List = (props: IListProps): React.ReactElement => {
       })}
     </StyledList>
   );
-};
-
+}
 List.displayName = 'KibaList';
-List.defaultProps = {
-  ...defaultMoleculeProps,
-};
 List.Item = ListItemInner;

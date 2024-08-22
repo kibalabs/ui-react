@@ -5,7 +5,7 @@ import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
 import { CollapsibleBox } from './component';
 import { ICollapsibleBoxTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import {IComponentProps } from '../../model';
 
 interface IStatefulCollapsibleBoxProps extends IComponentProps<ICollapsibleBoxTheme>, ISingleAnyChildProps {
   headerView: React.ReactNode;
@@ -14,7 +14,11 @@ interface IStatefulCollapsibleBoxProps extends IComponentProps<ICollapsibleBoxTh
   shouldHideIndicator?: boolean;
 }
 
-export const StatefulCollapsibleBox = (props: IStatefulCollapsibleBoxProps): React.ReactElement => {
+export function StatefulCollapsibleBox({
+  className = '',
+  variant = 'default',
+  ...props
+}: IStatefulCollapsibleBoxProps): React.ReactElement {
   const [isCollapsed, setIsCollapsed] = React.useState(!!props.isCollapsedInitially);
   const onCollapseToggled = (): void => {
     setIsCollapsed(!isCollapsed);
@@ -23,9 +27,9 @@ export const StatefulCollapsibleBox = (props: IStatefulCollapsibleBoxProps): Rea
   return (
     <CollapsibleBox
       id={props.id}
-      className={getClassName(StatefulCollapsibleBox.displayName, props.className)}
+      className={getClassName(StatefulCollapsibleBox.displayName, className)}
       theme={props.theme}
-      variant={props.variant}
+      variant={variant}
       headerView={props.headerView}
       isCollapsed={isCollapsed}
       onCollapseToggled={onCollapseToggled}
@@ -35,9 +39,5 @@ export const StatefulCollapsibleBox = (props: IStatefulCollapsibleBoxProps): Rea
       {props.children}
     </CollapsibleBox>
   );
-};
-
+}
 StatefulCollapsibleBox.displayName = 'KibaStatefulCollapsibleBox';
-StatefulCollapsibleBox.defaultProps = {
-  ...defaultComponentProps,
-};

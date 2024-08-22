@@ -5,7 +5,7 @@ import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IInputWrapperTheme } from './theme';
-import { defaultComponentProps, IComponentProps } from '../../model';
+import {IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 import { HidingView } from '../../wrappers';
 
@@ -133,7 +133,11 @@ export interface IInputWrapperProps extends IComponentProps<IInputWrapperTheme>,
   // isFocussed?: boolean;
 }
 
-export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
+export function InputWrapper({
+  className = '',
+  variant = 'default',
+  ...props
+}: IInputWrapperProps): React.ReactElement {
   // :focus-within is not supported on all browsers so we manually maintain if this particle has a isFocussed child
   const [isFocussed, setIsFocussed] = React.useState(false);
 
@@ -147,12 +151,12 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
   return (
     <StyledInputWrapper
       id={props.id}
-      className={getClassName(InputWrapper.displayName, props.className, props.messageText && 'message-showing', isFocussed && 'focus', !props.isEnabled && 'disabled', ...(props.variant?.split('-') || []))}
+      className={getClassName(InputWrapper.displayName, className, props.messageText && 'message-showing', isFocussed && 'focus', !props.isEnabled && 'disabled', ...(variant?.split('-') || []))}
       $theme={props.theme}
     >
       <InputWrapperInner
         id={props.id && `${props.id}-inner`}
-        className={'KibaInputWrapperInner'}
+        className='KibaInputWrapperInner'
         onClick={onClicked}
         onFocus={(): void => setIsFocussed(true)}
         onBlur={(): void => setIsFocussed(false)}
@@ -170,9 +174,5 @@ export const InputWrapper = (props: IInputWrapperProps): React.ReactElement => {
       </HidingView>
     </StyledInputWrapper>
   );
-};
-
+}
 InputWrapper.displayName = 'KibaInputWrapper';
-InputWrapper.defaultProps = {
-  ...defaultComponentProps,
-};

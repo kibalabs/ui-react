@@ -128,10 +128,13 @@ interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   shouldWrapItems?: boolean;
 }
 
-export const Stack = (props: IStackProps): React.ReactElement => {
+export function Stack({
+  className = '',
+  ...props
+}: IStackProps): React.ReactElement {
   const theme = useDimensions(props.theme);
-  const children = flattenChildren(props.children).map((child: React.ReactChild, index: number): React.ReactElement<IStackItemProps> => (
-    typeof child === 'object' && 'type' in child && child.type === StackItem ? child : <StackItem key={index}>{ child }</StackItem>
+  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): React.ReactElement<IStackItemProps> => (
+    typeof child === 'object' && 'type' in child && child.type === StackItem ? child : <StackItem key={child.toString()}>{ child }</StackItem>
   ));
   const paddingTop = (props.paddingStart && props.direction === Direction.Vertical) ? props.paddingStart : undefined;
   const paddingBottom = (props.paddingEnd && props.direction === Direction.Vertical) ? props.paddingEnd : undefined;
@@ -154,6 +157,7 @@ export const Stack = (props: IStackProps): React.ReactElement => {
   const shouldAddGutters = props.shouldAddGutters && defaultGutter !== PaddingSize.None;
   const shouldWrapItems = props.shouldWrapItems || false;
   return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <PaddingView paddingTop={paddingTop} paddingBottom={paddingBottom} paddingRight={paddingRight} paddingLeft={paddingLeft} {...props as IPaddingViewPaddingProps}>
       <StyledStack
         id={props.id}
@@ -172,7 +176,7 @@ export const Stack = (props: IStackProps): React.ReactElement => {
         $defaultGutter={defaultGutter}
       >
         { children.map((child: React.ReactElement, index: number): React.ReactElement<IStackItemProps> => (
-          <React.Fragment key={index}>
+          <React.Fragment key={child.key}>
             {child.props.gutterBefore && (
               <Spacing className='stack-gutter' variant={child.props.gutterBefore} />
             )}
@@ -196,7 +200,7 @@ export const Stack = (props: IStackProps): React.ReactElement => {
       </StyledStack>
     </PaddingView>
   );
-};
+}
 
 Stack.displayName = 'KibaStack';
 Stack.defaultProps = {
