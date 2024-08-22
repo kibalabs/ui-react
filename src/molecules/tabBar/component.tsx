@@ -41,9 +41,11 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export interface ITabBarItemInnerProps extends Omit<ITabBarItemProps, 'isSelected' | 'onClicked'> {
 }
 
-class TabBarItemInner extends React.Component<ITabBarItemInnerProps> {
-  displayName = 'KibaTabBarItem';
+// eslint-disable-next-line unused-imports/no-unused-vars
+export function TabBarItemInner(props: ITabBarItemInnerProps): React.ReactElement {
+  return <React.Fragment />;
 }
+TabBarItemInner.displayName = 'KibaTabBarItem';
 
 interface ITabBarProps extends IMoleculeProps<ITabBarTheme>, IMultiChildProps<ITabBarItemInnerProps> {
   isFullWidth?: boolean;

@@ -32,7 +32,6 @@ export const buildLinkThemes = (dimensions: IDimensionGuide, textThemes: ThemeMa
         text: {
           color: '$colors.brandPrimary',
         },
-
       },
     },
   };

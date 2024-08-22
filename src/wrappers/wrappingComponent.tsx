@@ -9,7 +9,7 @@ const styleCopier = <P extends IWrapperProps>(props: P): React.ReactElement => {
   const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): (React.ReactElement | string | number) => {
     if (React.isValidElement(child)) {
       // @ts-ignore
-      return React.cloneElement(child, { className: getClassName(child.props?.className, className) });
+      return React.cloneElement(child, { className: getClassName(child.props?.className, props.className) });
     }
     return child;
   });

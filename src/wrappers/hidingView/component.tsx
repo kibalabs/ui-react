@@ -3,7 +3,7 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import styled from 'styled-components';
 
-import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
+import { IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledHidingViewProps extends IWrapperProps {
@@ -37,8 +37,4 @@ export function HidingView({
     </StyledHidingView>
   );
 }
-
 HidingView.displayName = 'KibaHidingView';
-HidingView.defaultProps = {
-  ...defaultWrapperProps,
-};

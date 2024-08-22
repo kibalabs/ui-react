@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial, updateQueryString } from '@kibalabs/cor
 import styled from 'styled-components';
 
 import { IImageTheme } from './theme';
-import {IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const ImageThemedStyle = (theme: RecursivePartial<IImageTheme>): string => `

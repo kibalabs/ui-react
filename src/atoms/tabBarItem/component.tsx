@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { ITabBarItemTheme } from './theme';
-import {IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const TabBarItemThemedStyle = (theme: RecursivePartial<ITabBarItemTheme>): string => `

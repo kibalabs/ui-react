@@ -5,7 +5,7 @@ import { Link as CoreLink, ISingleAnyChildProps, useIsCoreRoutingEnabled } from 
 import styled from 'styled-components';
 
 import { ILinkBaseTheme } from './theme';
-import {IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const LinkBaseThemedStyle = (theme: RecursivePartial<ILinkBaseTheme>): string => `

@@ -5,7 +5,7 @@ import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react'
 import styled from 'styled-components';
 
 import { ILinkTheme } from './theme';
-import {IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const LinkThemedStyle = (theme: RecursivePartial<ILinkTheme>): string => `

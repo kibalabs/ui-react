@@ -5,7 +5,7 @@ import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { ITitledCollapsibleBoxTheme } from './theme';
-import {IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { KibaIcon } from '../../particles';
 import { themeToCss } from '../../util';
 import { HidingView } from '../../wrappers';

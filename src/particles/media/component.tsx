@@ -2,7 +2,7 @@ import React from 'react';
 
 import { KibaException } from '@kibalabs/core';
 
-import {IComponentProps, ThemeType, WebView } from '../..';
+import { IComponentProps, ThemeType, WebView } from '../..';
 import { IImageProps, Image } from '../image';
 import { Video } from '../video';
 
@@ -109,12 +109,12 @@ export function Media({
 
   return (isVideo || mediaType === 'video') ? (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Video shouldShowControls={false} shouldLoop={true} shouldMute={true} shouldAutoplay={true} {...props} />
+    <Video shouldShowControls={false} shouldLoop={true} shouldMute={true} shouldAutoplay={true} className={className} variant={variant} {...props} />
   ) : mediaType && mediaType !== 'image' ? (
-    <WebView url={props.source} />
+    <WebView className={className} variant={variant} url={props.source} />
   ) : (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Image {...props as IImageProps} />
+    <Image className={className} variant={variant} {...props as IImageProps} />
   );
 }
 Media.displayName = 'KibaMedia';

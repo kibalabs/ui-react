@@ -5,7 +5,7 @@ import { getIsRunningOnBrowser, ISingleAnyChildProps, useEventListener } from '@
 import styled from 'styled-components';
 
 import { IDialogTheme } from './theme';
-import {IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { Box, BoxThemedStyle } from '../../particles/box';
 import { propertyToCss } from '../../util';
 
@@ -55,7 +55,6 @@ interface IDialogProps extends IComponentProps<IDialogTheme>, ISingleAnyChildPro
 export function Dialog({
   className = '',
   variant = 'default',
-  isOpen = false,
   isScrollableHorizontally = true,
   isScrollableVertically = true,
   isClosableByBackdrop = true,
@@ -77,14 +76,14 @@ export function Dialog({
   // NOTE(krishan711): useEventListener should allow the event object to be provided as a generic
   // @ts-ignore
   useEventListener(isRunningOnBrowser ? document : null, 'keydown', (event: React.KeyboardEvent): void => {
-    if (isClosableByEscape && isOpen && event.key === 'Escape') {
+    if (isClosableByEscape && props.isOpen && event.key === 'Escape') {
       props.onCloseClicked();
     }
   });
 
   return (
     <StyledDialog
-      className={getClassName(Dialog.displayName, className, !isOpen && 'closed', ...(variant?.split('-') || []))}
+      className={getClassName(Dialog.displayName, className, !props.isOpen && 'closed', ...(variant?.split('-') || []))}
       $theme={props.theme}
       ref={dialogRef}
       onClick={onBackdropClicked}
@@ -99,7 +98,7 @@ export function Dialog({
         isScrollableVertically={isScrollableVertically}
         isScrollableHorizontally={isScrollableHorizontally}
       >
-        {(isOpen || !props.shouldSkipRenderingWhenClosed) && (
+        {(props.isOpen || !props.shouldSkipRenderingWhenClosed) && (
           <React.Fragment>
             {props.children}
           </React.Fragment>

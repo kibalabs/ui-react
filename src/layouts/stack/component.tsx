@@ -26,27 +26,33 @@ const getDirectionCss: CssConverter<Direction> = (field: Direction): string => {
 };
 
 export interface IStackItemProps extends IOptionalSingleAnyChildProps {
+  // eslint-disable-next-line react/no-unused-prop-types
   className?: string;
-  growthFactor: number;
-  shrinkFactor: number;
-  baseSize: string;
-  isHidden: boolean;
+  // eslint-disable-next-line react/no-unused-prop-types
+  growthFactor?: number;
+  // eslint-disable-next-line react/no-unused-prop-types
+  shrinkFactor?: number;
+  // eslint-disable-next-line react/no-unused-prop-types
+  baseSize?: string;
+  // eslint-disable-next-line react/no-unused-prop-types
+  isHidden?: boolean;
+  // eslint-disable-next-line react/no-unused-prop-types
   alignment?: Alignment;
+  // eslint-disable-next-line react/no-unused-prop-types
   gutterBefore?: PaddingSizeProp;
+  // eslint-disable-next-line react/no-unused-prop-types
   gutterAfter?: PaddingSizeProp;
+  // eslint-disable-next-line react/no-unused-prop-types
   shouldShrinkBelowContentSize?: boolean;
 }
 
-class StackItem extends React.Component<IStackItemProps> {
-  static defaultProps = {
-    className: '',
-    growthFactor: 0,
-    shrinkFactor: 0,
-    // NOTE(krishan711): see note above
-    baseSize: 'auto',
-    isHidden: false,
-  };
+// eslint-disable-next-line unused-imports/no-unused-vars
+export function StackItem(props: IStackItemProps): React.ReactElement {
+  return (
+    <React.Fragment />
+  );
 }
+StackItem.displayName = 'KibaStackItem';
 
 interface IStyledStackProps {
   $theme: IDimensionGuide;
@@ -99,12 +105,12 @@ interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   id?: string;
   className?: string;
   theme?: IDimensionGuide;
-  shouldAddGutters: boolean;
+  shouldAddGutters?: boolean;
   defaultGutter?: PaddingSizeProp;
-  isScrollableVertically: boolean;
-  isScrollableHorizontally: boolean;
-  isFullWidth: boolean;
-  isFullHeight: boolean;
+  isScrollableVertically?: boolean;
+  isScrollableHorizontally?: boolean;
+  isFullWidth?: boolean;
+  isFullHeight?: boolean;
   height?: string;
   heightResponsive?: ResponsiveField<string>;
   width?: string;
@@ -119,30 +125,39 @@ interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   minWidthResponsive?: ResponsiveField<string>;
   paddingStart?: PaddingSizeProp,
   paddingEnd?: PaddingSizeProp,
-  direction: Direction;
+  direction?: Direction;
   directionResponsive?: ResponsiveField<Direction>;
-  childAlignment: Alignment;
+  childAlignment?: Alignment;
   childAlignmentResponsive?: ResponsiveField<Alignment>;
-  contentAlignment: Alignment;
+  contentAlignment?: Alignment;
   contentAlignmentResponsive?: ResponsiveField<Alignment>;
   shouldWrapItems?: boolean;
 }
 
 export function Stack({
   className = '',
+  direction = Direction.Vertical,
+  childAlignment = Alignment.Fill,
+  contentAlignment = Alignment.Fill,
+  shouldAddGutters = false,
+  isFullWidth = false,
+  isFullHeight = false,
+  isScrollableVertically = false,
+  isScrollableHorizontally = false,
   ...props
 }: IStackProps): React.ReactElement {
   const theme = useDimensions(props.theme);
-  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): React.ReactElement<IStackItemProps> => (
-    typeof child === 'object' && 'type' in child && child.type === StackItem ? child : <StackItem key={child.toString()}>{ child }</StackItem>
+  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number), index: number): React.ReactElement<IStackItemProps> => (
+    // eslint-disable-next-line react/no-array-index-key
+    typeof child === 'object' && 'type' in child && child.type === StackItem ? child : <StackItem key={index}>{ child }</StackItem>
   ));
-  const paddingTop = (props.paddingStart && props.direction === Direction.Vertical) ? props.paddingStart : undefined;
-  const paddingBottom = (props.paddingEnd && props.direction === Direction.Vertical) ? props.paddingEnd : undefined;
-  const paddingRight = (props.paddingStart && props.direction === Direction.Horizontal) ? props.paddingStart : undefined;
-  const paddingLeft = (props.paddingEnd && props.direction === Direction.Horizontal) ? props.paddingEnd : undefined;
+  const paddingTop = (props.paddingStart && direction === Direction.Vertical) ? props.paddingStart : undefined;
+  const paddingBottom = (props.paddingEnd && direction === Direction.Vertical) ? props.paddingEnd : undefined;
+  const paddingRight = (props.paddingStart && direction === Direction.Horizontal) ? props.paddingStart : undefined;
+  const paddingLeft = (props.paddingEnd && direction === Direction.Horizontal) ? props.paddingEnd : undefined;
 
-  const height = props.height || (props.isFullHeight ? '100%' : 'auto');
-  const width = props.width || (props.isFullWidth ? '100%' : 'auto');
+  const height = props.height || (isFullHeight ? '100%' : 'auto');
+  const width = props.width || (isFullWidth ? '100%' : 'auto');
   const maxHeight = props.maxHeight ?? null;
   const maxWidth = props.maxWidth ?? null;
   const minHeight = props.minHeight ?? null;
@@ -154,25 +169,25 @@ export function Stack({
   const minWidthResponsive = props.minWidthResponsive || minWidth ? { base: (minWidth || undefined), ...props.minWidthResponsive } : null;
 
   const defaultGutter = props.defaultGutter || PaddingSize.Default;
-  const shouldAddGutters = props.shouldAddGutters && defaultGutter !== PaddingSize.None;
+  const innerShouldAddGutters = shouldAddGutters && defaultGutter !== PaddingSize.None;
   const shouldWrapItems = props.shouldWrapItems || false;
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <PaddingView paddingTop={paddingTop} paddingBottom={paddingBottom} paddingRight={paddingRight} paddingLeft={paddingLeft} {...props as IPaddingViewPaddingProps}>
+    <PaddingView paddingTop={paddingTop} paddingBottom={paddingBottom} paddingRight={paddingRight} paddingLeft={paddingLeft} className={className} {...props as IPaddingViewPaddingProps}>
       <StyledStack
         id={props.id}
-        className={getClassName(Stack.displayName, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally', shouldWrapItems && 'wrapItems')}
+        className={getClassName(Stack.displayName, isScrollableVertically && 'scrollableVertically', isScrollableHorizontally && 'scrollableHorizontally', shouldWrapItems && 'wrapItems')}
         $theme={theme}
-        $direction={{ base: props.direction, ...props.directionResponsive }}
-        $childAlignment={{ base: props.childAlignment, ...props.childAlignmentResponsive }}
-        $contentAlignment={{ base: props.contentAlignment, ...props.contentAlignmentResponsive }}
+        $direction={{ base: direction, ...props.directionResponsive }}
+        $childAlignment={{ base: childAlignment, ...props.childAlignmentResponsive }}
+        $contentAlignment={{ base: contentAlignment, ...props.contentAlignmentResponsive }}
         $height={{ base: height, ...props.heightResponsive }}
         $width={{ base: width, ...props.widthResponsive }}
         $maxHeight={maxHeightResponsive}
         $maxWidth={maxWidthResponsive}
         $minHeight={minHeightResponsive}
         $minWidth={minWidthResponsive}
-        $shouldAddGutters={shouldAddGutters}
+        $shouldAddGutters={innerShouldAddGutters}
         $defaultGutter={defaultGutter}
       >
         { children.map((child: React.ReactElement, index: number): React.ReactElement<IStackItemProps> => (
@@ -182,9 +197,9 @@ export function Stack({
             )}
             <StyledStackItem
               className={getClassName(StyledStackItem.displayName, child.props.isHidden && 'isHidden')}
-              growthFactor={child.props.growthFactor}
-              shrinkFactor={child.props.shrinkFactor}
-              baseSize={child.props.baseSize}
+              growthFactor={child.props.growthFactor || 0}
+              shrinkFactor={child.props.shrinkFactor || 0}
+              baseSize={child.props.baseSize || 'auto'}
               alignment={child.props.alignment}
               // NOTE(krishan711): ideally the mins should only be 0 in the correct direction but we can't know the direction in a responsive way
               minWidth={child.props.shrinkFactor && child.props.shouldShrinkBelowContentSize ? '0' : 'auto'}
@@ -192,7 +207,7 @@ export function Stack({
             >
               {React.Children.count(child.props.children) > 0 ? child.props.children : <div />}
             </StyledStackItem>
-            {(child.props.gutterAfter || (!shouldWrapItems && shouldAddGutters && index < children.length - 1)) && (
+            {(child.props.gutterAfter || (!shouldWrapItems && innerShouldAddGutters && index < children.length - 1)) && (
               <Spacing className='stack-gutter' variant={child.props.gutterAfter || defaultGutter} />
             )}
           </React.Fragment>
@@ -201,19 +216,7 @@ export function Stack({
     </PaddingView>
   );
 }
-
 Stack.displayName = 'KibaStack';
-Stack.defaultProps = {
-  className: '',
-  direction: Direction.Vertical,
-  childAlignment: Alignment.Fill,
-  contentAlignment: Alignment.Fill,
-  shouldAddGutters: false,
-  isFullWidth: false,
-  isFullHeight: false,
-  isScrollableVertically: false,
-  isScrollableHorizontally: false,
-};
 Stack.Item = StackItem;
 
 interface IStyledStackItemProps extends ISingleAnyChildProps {

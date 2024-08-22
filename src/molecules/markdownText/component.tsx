@@ -1,6 +1,7 @@
 import React, { AnchorHTMLAttributes } from 'react';
 
 import { deepCompare, getClassName } from '@kibalabs/core';
+// @ts-expect-error: commonjs import
 import MarkdownToJsx from 'markdown-to-jsx';
 
 import { Link, PrettyText } from '../../atoms';
@@ -31,7 +32,7 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
   return (
     <PrettyText
       id={props.id}
-      className={getClassName(MarkdownText.displayName, className)}
+      className={getClassName(MarkdownText.displayName, props.className)}
       variant={getVariant(props.textVariant, 'unmargined')}
       tag={props.textTag}
       alignment={props.textAlignment}

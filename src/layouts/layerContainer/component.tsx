@@ -7,26 +7,29 @@ import styled from 'styled-components';
 import { Alignment } from '../../model';
 
 interface ILayerProps extends IOptionalSingleAnyChildProps {
+  // eslint-disable-next-line react/no-unused-prop-types
   className?: string;
+  // eslint-disable-next-line react/no-unused-prop-types
   isFullWidth?: boolean;
+  // eslint-disable-next-line react/no-unused-prop-types
   isFullHeight?: boolean;
+  // eslint-disable-next-line react/no-unused-prop-types
   isStatic?: boolean;
-  alignmentVertical: Alignment;
-  alignmentHorizontal: Alignment;
+  // eslint-disable-next-line react/no-unused-prop-types
+  alignmentVertical?: Alignment;
+  // eslint-disable-next-line react/no-unused-prop-types
+  alignmentHorizontal?: Alignment;
+  // eslint-disable-next-line react/no-unused-prop-types
   shouldPassThroughTouches?: boolean;
 }
 
-class Layer extends React.Component<ILayerProps> {
-  static defaultProps = {
-    className: '',
-    isFullWidth: true,
-    isFullHeight: true,
-    isStatic: false,
-    alignmentVertical: Alignment.Start,
-    alignmentHorizontal: Alignment.Start,
-    shouldPassThroughTouches: false,
-  };
+// eslint-disable-next-line unused-imports/no-unused-vars
+export function Layer(props: ILayerProps): React.ReactElement {
+  return (
+    <React.Fragment />
+  );
 }
+Layer.displayName = 'KibaLayer';
 
 const StyledLayerContainer = styled.div`
   position: relative;
@@ -44,8 +47,9 @@ export function LayerContainer({
   className = '',
   ...props
 }: ILayerContainerProps): React.ReactElement {
-  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): React.ReactElement<ILayerProps> => (
-    typeof child === 'object' && 'type' in child && child.type === Layer ? child : <Layer key={child.toString()}>{ child }</Layer>
+  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number), index: number): React.ReactElement<ILayerProps> => (
+  // eslint-disable-next-line react/no-array-index-key
+    typeof child === 'object' && 'type' in child && child.type === Layer ? child : <Layer key={index}>{ child }</Layer>
   ));
 
   return (
@@ -56,11 +60,11 @@ export function LayerContainer({
       { children.map((child: React.ReactElement, index: number): React.ReactElement<ILayerProps> => (
         <StyledLayer
           id={props.id && `${props.id}-layer-${index}`}
-          className={getClassName(StyledLayer.displayName, child.props.className, child.props.isFullWidth && 'isFullWidth', child.props.isFullHeight && 'isFullHeight', child.props.shouldPassThroughTouches && 'passThroughTouches')}
+          className={getClassName(StyledLayer.displayName, child.props.className, (child.props.isFullWidth || child.props.isFullWidth == null) && 'isFullWidth', (child.props.isFullHeight || child.props.isFullHeight == null) && 'isFullHeight', child.props.shouldPassThroughTouches && 'passThroughTouches')}
           key={child.key}
-          $isStatic={child.props.isStatic}
-          $alignmentVertical={child.props.alignmentVertical}
-          $alignmentHorizontal={child.props.alignmentHorizontal}
+          $isStatic={child.props.isStatic || false}
+          $alignmentVertical={child.props.alignmentVertical || Alignment.Start}
+          $alignmentHorizontal={child.props.alignmentHorizontal || Alignment.Start}
         >
           {child.props.children}
         </StyledLayer>
@@ -68,11 +72,7 @@ export function LayerContainer({
     </StyledLayerContainer>
   );
 }
-
 LayerContainer.displayName = 'KibaLayerContainer';
-LayerContainer.defaultProps = {
-  className: '',
-};
 LayerContainer.Layer = Layer;
 
 const getStaticTranslateCssValue = (alignment: Alignment): string => {

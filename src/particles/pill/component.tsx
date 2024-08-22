@@ -5,7 +5,7 @@ import { OptionalProppedElement } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IPillTheme } from './theme';
-import {IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
 import { themeToCss } from '../../util/themeUtil';
 

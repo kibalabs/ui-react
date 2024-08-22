@@ -202,10 +202,11 @@ export function Carousel({
           ref={sliderRef}
           className={getClassName(StyledSlider.displayName)}
         >
-          {children.map((child: (React.ReactElement | string | number)): React.ReactElement => {
+          {children.map((child: (React.ReactElement | string | number), index: number): React.ReactElement => {
             return (
               <StyledSlide
-                key={child.toString()}
+              // eslint-disable-next-line react/no-array-index-key
+                key={index}
                 className={getClassName(StyledSlide.displayName)}
                 $theme={dimensions}
                 $slidesPerPage={{ base: slidesPerPage, ...props.slidesPerPageResponsive }}

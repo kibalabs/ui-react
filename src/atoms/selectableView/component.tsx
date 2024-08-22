@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import { ISelectableViewTheme } from './theme';
 import { Stack } from '../../layouts';
-import {IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { PaddingSize } from '../../particles';
 import { KibaIcon } from '../../particles/kibaIcon';
 import { useColors } from '../../theming';

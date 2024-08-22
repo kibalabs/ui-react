@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { ICheckboxTheme } from './theme';
-import {IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { Icon, PaddingSize, Spacing } from '../../particles';
 import { propertyToCss, themeToCss } from '../../util';
 

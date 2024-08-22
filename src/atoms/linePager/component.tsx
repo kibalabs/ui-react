@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { ILinePagerTheme } from './theme';
-import {Direction, IComponentProps } from '../../model';
+import { Direction, IComponentProps } from '../../model';
 import { ScreenSize, Spacing } from '../../particles';
 import { ResponsiveField, themeToCss } from '../../util';
 import { ResponsiveHidingView } from '../../wrappers';

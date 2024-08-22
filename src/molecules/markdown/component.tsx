@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { deepCompare, getClassName } from '@kibalabs/core';
+// @ts-expect-error: commonjs import
 import MarkdownToJsx from 'markdown-to-jsx';
 
 import { BulletList, BulletText, Link, PrettyText } from '../../atoms';
@@ -99,7 +100,7 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
   return (
     <Box
       id={props.id}
-      className={getClassName(Markdown.displayName, className)}
+      className={getClassName(Markdown.displayName, props.className)}
       variant={props.rootBoxVariant}
     >
       <MarkdownToJsx

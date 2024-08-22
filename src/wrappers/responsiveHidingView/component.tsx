@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { getScreenSize, IDimensionGuide, ScreenSize } from '../../particles/dimensions';
 import { useDimensions } from '../../theming';
-import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
+import { IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledResponsiveHidingViewProps extends IWrapperProps {
@@ -41,8 +41,4 @@ export function ResponsiveHidingView({
     </StyledResponsiveHidingView>
   );
 }
-
 ResponsiveHidingView.displayName = 'KibaResponsiveHidingView';
-ResponsiveHidingView.defaultProps = {
-  ...defaultWrapperProps,
-};

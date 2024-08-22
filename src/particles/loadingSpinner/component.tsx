@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { ILoadingSpinnerTheme } from './theme';
-import {IComponentProps } from '../..';
+import { IComponentProps } from '../..';
 import { propertyToCss } from '../../util';
 
 export const LoadingSpinnerThemedStyle = (theme: RecursivePartial<ILoadingSpinnerTheme>): string => `

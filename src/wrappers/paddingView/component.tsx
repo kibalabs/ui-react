@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { getPaddingSize, IDimensionGuide, PaddingSizeProp } from '../../particles/dimensions';
 import { useDimensions } from '../../theming';
-import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
+import { IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 export interface IPaddingViewPaddingProps {
@@ -61,8 +61,4 @@ export function PaddingView({
     </StyledPaddingView>
   );
 }
-
 PaddingView.displayName = 'KibaPaddingView';
-PaddingView.defaultProps = {
-  ...defaultWrapperProps,
-};

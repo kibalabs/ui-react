@@ -57,7 +57,7 @@ const getAutocompleteType = (inputType: InputType): string | undefined => {
 
 export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTheme> {
   value: string | null;
-  isEnabled: boolean;
+  isEnabled?: boolean;
   placeholderText?: string;
   messageText?: string;
   inputType: InputType;

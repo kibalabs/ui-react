@@ -5,7 +5,7 @@ import { useInitialization } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
 import { IWebViewTheme } from './theme';
-import {IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { LoadingSpinner } from '../../particles';
 import { themeToCss } from '../../util';
 

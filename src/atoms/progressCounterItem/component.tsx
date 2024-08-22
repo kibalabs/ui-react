@@ -4,7 +4,7 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
 import { IProgressCounterItemTheme } from './theme';
-import {IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
 
 export const ProgressCounterItemThemedStyle = (theme: RecursivePartial<IProgressCounterItemTheme>): string => `
@@ -80,8 +80,8 @@ const StyledProgressCounterItem = styled.button<IStyledProgressCounterItemProps>
 
 export interface IProgressCounterItemProps extends IComponentProps<IProgressCounterItemTheme> {
   text: string;
-  isEnabled: boolean;
-  isSelected: boolean;
+  isEnabled?: boolean;
+  isSelected?: boolean;
   onClicked?(): void;
 }
 

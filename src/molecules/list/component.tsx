@@ -28,9 +28,11 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export interface IListItemInnerProps extends Omit<IListItemProps, 'onClicked'> {
 }
 
-class ListItemInner extends React.Component<IListItemInnerProps> {
-  static displayName = 'KibaListItem';
+// eslint-disable-next-line unused-imports/no-unused-vars
+export function ListItemInner(props: IListItemInnerProps): React.ReactElement {
+  return <React.Fragment />;
 }
+ListItemInner.displayName = 'KibaListItem';
 
 interface IListProps extends IMoleculeProps<IListTheme>, IMultiChildProps<IListItemInnerProps> {
   isFullWidth?: boolean;

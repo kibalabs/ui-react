@@ -5,7 +5,7 @@ import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react'
 import styled from 'styled-components';
 
 import { IIconButtonTheme } from './theme';
-import {IComponentProps } from '../../model';
+import { IComponentProps } from '../../model';
 import { IIconProps } from '../../particles/icon';
 import { themeToCss } from '../../util';
 

@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { IColorGuide } from '../../particles';
 import { useColors } from '../../theming';
 import { valueToCss } from '../../util';
-import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
+import { IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 export interface IBackgroundLayer {
@@ -90,8 +90,4 @@ export function BackgroundView({
     </StyledBackgroundView>
   );
 }
-
 BackgroundView.displayName = 'KibaBackgroundView';
-BackgroundView.defaultProps = {
-  ...defaultWrapperProps,
-};

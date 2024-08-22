@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { IDimensionGuide } from '../../particles';
 import { useDimensions } from '../../theming';
-import { defaultWrapperProps, IWrapperProps } from '../wrapperProps';
+import { IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';
 
 interface IStyledContainingViewProps extends IWrapperProps {
@@ -26,26 +26,22 @@ const StyledContainingView = wrappingComponent((Component: React.ComponentType<I
 
 export interface IContainingViewProps extends IWrapperProps {
   theme?: IDimensionGuide;
-  isCenteredHorizontally: boolean;
+  isCenteredHorizontally?: boolean;
 }
 
 export function ContainingView({
   className = '',
+  isCenteredHorizontally = true,
   ...props
 }: IContainingViewProps): React.ReactElement {
   const theme = useDimensions(props.theme);
   return (
     <StyledContainingView
-      className={getClassName(ContainingView.displayName, className, props.isCenteredHorizontally && 'centered')}
+      className={getClassName(ContainingView.displayName, className, isCenteredHorizontally && 'centered')}
       $theme={theme}
     >
       {props.children}
     </StyledContainingView>
   );
 }
-
 ContainingView.displayName = 'KibaContainingView';
-ContainingView.defaultProps = {
-  ...defaultWrapperProps,
-  isCenteredHorizontally: true,
-};
