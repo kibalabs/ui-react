@@ -36,7 +36,7 @@ const StyledPill = styled.div<IStyledPillProps>`
 
 export interface IPillProps extends IComponentProps<IPillTheme> {
   text: string;
-  isFullWidth: boolean;
+  isFullWidth?: boolean;
   iconRight?: OptionalProppedElement<IIconProps>;
   iconLeft?: OptionalProppedElement<IIconProps>;
   iconGutter?: PaddingSize;

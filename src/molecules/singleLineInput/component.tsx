@@ -60,7 +60,7 @@ export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTh
   isEnabled?: boolean;
   placeholderText?: string;
   messageText?: string;
-  inputType: InputType;
+  inputType?: InputType;
   name?: string;
   label?: string;
   inputWrapperVariant?: string;
