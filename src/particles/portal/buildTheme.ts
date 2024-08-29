@@ -1,3 +1,5 @@
+import { RecursivePartial } from '@kibalabs/core';
+
 import { IPortalTheme } from './theme';
 import { mergeTheme, mergeThemeMap, PartialThemeMap, ThemeMap } from '../../util';
 import { IBoxTheme } from '../box';
@@ -11,7 +13,14 @@ export const buildPortalThemes = (dimensions: IDimensionGuide, boxThemes: ThemeM
     }),
   };
 
+  const unpaddedPortalTheme: RecursivePartial<IPortalTheme> = {
+    background: {
+      padding: '0',
+    },
+  };
+
   return mergeThemeMap<IPortalTheme>({
     default: defaultPortalTheme,
+    unpadded: unpaddedPortalTheme,
   }, (base || {}));
 };
