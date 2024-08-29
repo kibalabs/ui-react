@@ -15,7 +15,6 @@ export interface ISingleLineInputTheme {
 }
 
 const StyledSingleLineInput = styled.input`
-  /* width: 100%; */
   background: none;
   border: none;
   outline: none;
