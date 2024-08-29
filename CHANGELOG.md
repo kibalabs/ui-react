@@ -10,6 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
+
+### Removed
+
+## [0.11.2] - 2024-08-29
+
+### Changed
 - [MINOR] Updated assets url to `assets-cdn.kiba.dev`
 - [MINOR] Fix alignment for `BulletList` and `BulletText`
 - [MINOR] Added numbered variant to `BulletText` to use with `ol` tags
@@ -19,8 +25,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Added `isFullHeight` and `isFullWidth` to `IconButton`
 - [MINOR] Fix lazyloading opacity in `Image`
 - [MINOR] Updated all components to use new style for default props
-
-### Removed
 
 ## [0.11.1] - 2023-08-22
 
