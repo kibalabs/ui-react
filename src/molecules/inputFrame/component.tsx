@@ -1,9 +1,12 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import { ISingleAnyChildProps, OptionalProppedElement } from '@kibalabs/core-react';
 
 import { IInputWrapperTheme, InputWrapper } from '../../atoms';
+import { Stack } from '../../layouts';
+import { Alignment, Direction } from '../../model';
+import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particles';
 import { IMoleculeProps } from '../moleculeProps';
 
 export interface IInputFrameTheme {
@@ -13,7 +16,13 @@ export interface IInputFrameTheme {
 export interface IInputFrameProps extends IMoleculeProps<IInputFrameTheme>, ISingleAnyChildProps {
   messageText?: string;
   isEnabled?: boolean;
+  isLoading?: boolean;
   inputWrapperVariant?: string;
+  iconRight?: OptionalProppedElement<IIconProps>;
+  iconLeft?: OptionalProppedElement<IIconProps>;
+  iconGutter?: PaddingSize;
+  childAlignment?: Alignment;
+  contentAlignment?: Alignment;
   onClicked?: () => void;
 }
 
@@ -21,6 +30,10 @@ export interface IInputFrameProps extends IMoleculeProps<IInputFrameTheme>, ISin
 export function InputFrame({
   className = '',
   isEnabled = true,
+  isLoading = false,
+  iconGutter = PaddingSize.Default,
+  contentAlignment = Alignment.Fill,
+  childAlignment = Alignment.Center,
   ...props
 }: IInputFrameProps): React.ReactElement {
   return (
@@ -33,7 +46,29 @@ export function InputFrame({
       isEnabled={isEnabled}
       onClicked={props.onClicked}
     >
-      {props.children}
+      <Stack direction={Direction.Horizontal} childAlignment={childAlignment} contentAlignment={contentAlignment}>
+        { !isLoading && props.iconLeft && (
+          <React.Fragment>
+            {props.iconLeft}
+            <Spacing variant={iconGutter} />
+          </React.Fragment>
+        )}
+        <Stack.Item growthFactor={1} shrinkFactor={1} shouldShrinkBelowContentSize={true}>
+          {props.children}
+        </Stack.Item>
+        { !isLoading && props.iconRight && (
+          <React.Fragment>
+            <Spacing variant={iconGutter} />
+            {props.iconRight}
+          </React.Fragment>
+        )}
+        { isLoading && (
+          <LoadingSpinner
+            id={props.id && `${props.id}-loading-spinner`}
+            variant='light-small'
+          />
+        )}
+      </Stack>
     </InputWrapper>
   );
 }

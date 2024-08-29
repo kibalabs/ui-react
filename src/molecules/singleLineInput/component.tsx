@@ -1,18 +1,20 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
+import { OptionalProppedElement } from '@kibalabs/core-react';
 import styled from 'styled-components';
 
-import { InputType } from '../../model';
+import { Alignment, InputType } from '../../model';
+import { IIconProps, PaddingSize } from '../../particles';
 import { IInputFrameTheme, InputFrame } from '../inputFrame';
 import { IMoleculeProps } from '../moleculeProps';
+
 
 export interface ISingleLineInputTheme {
   inputFrameTheme: IInputFrameTheme;
 }
 
 const StyledSingleLineInput = styled.input`
-  width: 100%;
   background: none;
   border: none;
   outline: none;
@@ -67,19 +69,24 @@ export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTh
   shouldAutofocus?: boolean;
   shouldHideNumberSpinButtons?: boolean;
   shouldStopNumberScrolling?: boolean;
+  iconRight?: OptionalProppedElement<IIconProps>;
+  iconLeft?: OptionalProppedElement<IIconProps>;
+  iconGutter?: PaddingSize;
+  childAlignment?: Alignment;
+  contentAlignment?: Alignment;
   onKeyUp?: (key: string) => void;
   onKeyDown?: (key: string) => void;
-  // TODO(krishan711): update this to onClicked for the next breaking change
-  onClick?: () => void;
+  onClicked?: () => void;
+  onFrameClicked?: () => void;
   onValueChanged: (value: string) => void;
 }
 
-export function SingleLineInput({
+export const SingleLineInput = React.forwardRef(({
   className = '',
   isEnabled = true,
   inputType = InputType.Text,
   ...props
-}: ISingleLineInputProps): React.ReactElement {
+}: ISingleLineInputProps, ref: React.ForwardedRef<HTMLInputElement>): React.ReactElement => {
   const onValueChanged = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (props.onValueChanged) {
       props.onValueChanged(event.target.value);
@@ -98,10 +105,11 @@ export function SingleLineInput({
     }
   };
 
-  const onClicked = () => {
-    if (props.onClick) {
-      props.onClick();
+  const onClicked = (event: React.SyntheticEvent<HTMLInputElement>): void => {
+    if (props.onClicked) {
+      props.onClicked();
     }
+    event.stopPropagation();
   };
 
   const onWheelCapture = (event: React.WheelEvent<HTMLInputElement>): void => {
@@ -118,6 +126,12 @@ export function SingleLineInput({
       inputWrapperVariant={props.inputWrapperVariant}
       messageText={props.messageText}
       isEnabled={isEnabled}
+      iconRight={props.iconRight}
+      iconLeft={props.iconLeft}
+      iconGutter={props.iconGutter}
+      childAlignment={props.childAlignment}
+      contentAlignment={props.contentAlignment}
+      onClicked={props.onFrameClicked}
     >
       <StyledSingleLineInput
         id={props.id && `${props.id}-textarea`}
@@ -134,8 +148,9 @@ export function SingleLineInput({
         placeholder={props.placeholderText}
         autoFocus={props.shouldAutofocus}
         onWheelCapture={onWheelCapture}
+        ref={ref}
       />
     </InputFrame>
   );
-}
+});
 SingleLineInput.displayName = 'KibaSingleLineInput';

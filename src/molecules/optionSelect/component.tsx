@@ -3,10 +3,8 @@ import React from 'react';
 import { getClassName, RecursivePartial } from '@kibalabs/core';
 import styled from 'styled-components';
 
-import { Box, IInputFrameTheme, IListTheme, InputFrame, List } from '../..';
-import { Stack } from '../../layouts';
-import { Alignment, Direction } from '../../model';
-import { IBoxTheme, KibaIcon, Text } from '../../particles';
+import { Box, IInputFrameTheme, IListTheme, List, SingleLineInput } from '../..';
+import { IBoxTheme, KibaIcon, Placement, Portal, Text } from '../../particles';
 import { getVariant } from '../../util';
 import { HidingView } from '../../wrappers';
 import { IMoleculeProps } from '../moleculeProps';
@@ -37,6 +35,8 @@ interface IOptionSelectProps extends IMoleculeProps<IOptionSelectTheme> {
   optionListVariant?: string;
   optionTextVariant?: string;
   optionsContainerVariant?: string;
+  shouldUsePortal?: boolean;
+  onFilterTextChanged?: (filterText: string | null) => void;
   onItemClicked: (itemKey: string) => void;
 }
 
@@ -46,13 +46,48 @@ const StyledOptionSelect = styled.div`
   display: block;
 `;
 
+interface IOptionSelectContentProps {
+  options: IOption[];
+  selectedItemKey?: string;
+  isDisabled?:boolean;
+  placeholderText?: string;
+  optionListVariant?: string;
+  optionTextVariant?: string;
+  optionsContainerVariant?: string;
+  optionListTheme?: IListTheme;
+  onItemClicked: (itemKey: string) => void;
+}
+
+function OptionSelectContent({
+  ...props
+}: IOptionSelectContentProps): React.ReactElement {
+  return (
+    <List theme={props.optionListTheme} itemVariant={props.optionListVariant || 'slim'} onItemClicked={props.onItemClicked} shouldShowDividers={true} isFullWidth={true}>
+      {props.options.map((option: IOption): React.ReactElement => (
+        <List.Item
+          key={option.itemKey}
+          itemKey={option.itemKey}
+          variant={option.listItemVariant}
+          isDisabled={option.isDisabled}
+          isSelected={option.itemKey === props.selectedItemKey}
+        >
+          <Text variant={option.textVariant || props.optionTextVariant || 'smaller'}>{option.text}</Text>
+        </List.Item>
+      ))}
+    </List>
+  );
+}
 
 export function OptionSelect({
   className = '',
+  shouldUsePortal = true,
   ...props
 }: IOptionSelectProps): React.ReactElement {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [textFilter, setTextFilter] = React.useState<string | null>(null);
   const optionsContainerVariant = getVariant(props.optionsContainerVariant || 'card-unpadded-unmargined');
+  const inputFrameRef = React.useRef<HTMLDivElement | null>(null);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const getSelectedItem = (itemKey?: string) => {
     return props.options.find((option) => option.itemKey === itemKey);
@@ -60,11 +95,30 @@ export function OptionSelect({
 
   const onItemClicked = (itemKey: string) => {
     props.onItemClicked(itemKey);
-    setIsOpen(false);
+    updateIsOpen(false);
+  };
+
+  const updateIsOpen = (newIsOpen: boolean): void => {
+    if (newIsOpen) {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    } else {
+      onFilterTextChanged(null);
+    }
+    setIsOpen(newIsOpen);
   };
 
   const onToggleOpenClicked = (): void => {
-    setIsOpen(!isOpen);
+    const newIsOpen = !isOpen;
+    updateIsOpen(newIsOpen);
+  };
+
+  const onFilterTextChanged = (filterText: string | null): void => {
+    if (props.onFilterTextChanged) {
+      props.onFilterTextChanged(filterText);
+    }
+    setTextFilter(filterText);
   };
 
   const placeholder = props.placeholderText || 'Select an option';
@@ -74,36 +128,55 @@ export function OptionSelect({
       id={props.id}
       className={getClassName(OptionSelect.displayName, className)}
     >
-      <InputFrame
-        onClicked={onToggleOpenClicked}
-        theme={props.theme?.inputFrameTheme}
-        inputWrapperVariant={props.inputWrapperVariant}
-        isEnabled={!props.isDisabled}
-        messageText={props.messageText}
-      >
-        <Stack direction={Direction.Horizontal} childAlignment={Alignment.Center}>
-          <Stack.Item growthFactor={1} shrinkFactor={1}>
-            <Text>{getSelectedItem(props.selectedItemKey)?.text || placeholder}</Text>
-          </Stack.Item>
-          <KibaIcon iconId={isOpen ? (props.closeIconId || 'ion-close') : props.openIconId || 'ion-chevron-down'} />
-        </Stack>
-      </InputFrame>
+      <Box ref={inputFrameRef}>
+        <SingleLineInput
+          ref={inputRef}
+          theme={{
+            inputFrameTheme: props.theme?.inputFrameTheme,
+          }}
+          inputWrapperVariant={props.inputWrapperVariant}
+          isEnabled={!props.isDisabled}
+          messageText={props.messageText}
+          iconRight={<KibaIcon iconId={isOpen ? (props.closeIconId || 'ion-close') : props.openIconId || 'ion-chevron-down'} />}
+          value={isOpen ? textFilter : getSelectedItem(props.selectedItemKey)?.text || placeholder}
+          onValueChanged={onFilterTextChanged}
+          placeholderText='Type to filter...'
+          onClicked={isOpen ? undefined : onToggleOpenClicked}
+          onFrameClicked={onToggleOpenClicked}
+        />
+      </Box>
       <HidingView isHidden={!isOpen}>
-        <Box theme={props.theme?.optionsContainerTheme} variant={optionsContainerVariant} zIndex={999} isFullWidth={true} position='absolute'>
-          <List theme={props.theme?.optionListTheme} itemVariant={props.optionListVariant || 'slim'} onItemClicked={onItemClicked} shouldShowDividers={true} isFullWidth={true}>
-            {props.options.map((option: IOption): React.ReactElement => (
-              <List.Item
-                key={option.itemKey}
-                itemKey={option.itemKey}
-                variant={option.listItemVariant}
-                isDisabled={option.isDisabled}
-                isSelected={option.itemKey === props.selectedItemKey}
-              >
-                <Text variant={option.textVariant || props.optionTextVariant || 'smaller'}>{option.text}</Text>
-              </List.Item>
-            ))}
-          </List>
-        </Box>
+        {shouldUsePortal ? (
+          <Portal anchorElement={inputFrameRef} placement={Placement.bottomLeft} variant='unpadded' shouldMatchAnchorWidth={true}>
+            <Box theme={props.theme?.optionsContainerTheme} variant={optionsContainerVariant} isFullHeight={true}>
+              <OptionSelectContent
+                options={props.options}
+                selectedItemKey={props.selectedItemKey}
+                isDisabled={props.isDisabled}
+                placeholderText={placeholder}
+                optionListVariant={props.optionListVariant}
+                optionTextVariant={props.optionTextVariant}
+                optionsContainerVariant={props.optionsContainerVariant}
+                optionListTheme={props.theme?.optionListTheme}
+                onItemClicked={onItemClicked}
+              />
+            </Box>
+          </Portal>
+        ) : (
+          <Box theme={props.theme?.optionsContainerTheme} variant={optionsContainerVariant} zIndex={999} isFullWidth={true} position='absolute'>
+            <OptionSelectContent
+              options={props.options}
+              selectedItemKey={props.selectedItemKey}
+              isDisabled={props.isDisabled}
+              placeholderText={placeholder}
+              optionListVariant={props.optionListVariant}
+              optionTextVariant={props.optionTextVariant}
+              optionsContainerVariant={props.optionsContainerVariant}
+              optionListTheme={props.theme?.optionListTheme}
+              onItemClicked={onItemClicked}
+            />
+          </Box>
+        )}
       </HidingView>
     </StyledOptionSelect>
   );
