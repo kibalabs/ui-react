@@ -129,7 +129,6 @@ export function OptionSelect({
       className={getClassName(OptionSelect.displayName, className)}
     >
       <Box ref={inputFrameRef}>
-        {/* <HidingView isHidden={!(isOpen && props.onFilterTextChanged)}> */}
         <SingleLineInput
           ref={inputRef}
           theme={{
@@ -145,19 +144,6 @@ export function OptionSelect({
           onClicked={isOpen ? undefined : onToggleOpenClicked}
           onFrameClicked={onToggleOpenClicked}
         />
-        {/* </HidingView>
-        <HidingView isHidden={isOpen || !props.onFilterTextChanged}>
-          <InputFrame
-          theme={props.theme?.inputFrameTheme}
-          inputWrapperVariant={props.inputWrapperVariant}
-          isEnabled={!props.isDisabled}
-          messageText={props.messageText}
-          iconRight={<KibaIcon iconId={isOpen ? (props.closeIconId || 'ion-close') : props.openIconId || 'ion-chevron-down'} />}
-          onClicked={onToggleOpenClicked}
-          >
-            <Text>{getSelectedItem(props.selectedItemKey)?.text || placeholder}</Text>
-          </InputFrame>
-        </HidingView> */}
       </Box>
       <HidingView isHidden={!isOpen}>
         {shouldUsePortal ? (
