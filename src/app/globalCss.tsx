@@ -38,9 +38,10 @@ export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
     }
 
     // NOTE(krishan711): for ios only disable all body scrolling
-    _::-webkit-full-page-media, _:future, :root body {
-      overflow: hidden;
-    }
+    // NOTE(krishan711): disabled cos it wasnt working on safari, not sure what the answer is here
+    // _::-webkit-full-page-media, _:future, :root body {
+    //   overflow: hidden;
+    // }
 
     #root {
       width: 100%;
