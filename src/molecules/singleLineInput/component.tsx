@@ -74,6 +74,7 @@ export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTh
   iconGutter?: PaddingSize;
   childAlignment?: Alignment;
   contentAlignment?: Alignment;
+  shouldSpellCheck?: boolean;
   onKeyUp?: (key: string) => void;
   onKeyDown?: (key: string) => void;
   onClicked?: () => void;
@@ -148,6 +149,7 @@ export const SingleLineInput = React.forwardRef(({
         placeholder={props.placeholderText}
         autoFocus={props.shouldAutofocus}
         onWheelCapture={onWheelCapture}
+        spellCheck={props.shouldSpellCheck}
         ref={ref}
       />
     </InputFrame>
