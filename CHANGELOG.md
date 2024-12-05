@@ -14,7 +14,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Added `onFrameClicked` to `SingleLineInput`
 - [MINOR] Added `iconRight` and `iconLeft` to `InputFrame`
 - [MINOR] Added `isScrollableVertically` and `isScrollableHorizontally` and `shouldMatchAnchorWidth` and `shouldMatchAnchorHeight` to `Portal`
-- [MAJOR] Changed GlobalCSS to not stop body scrolling on webkit
+- [MAJOR] Changed `GlobalCSS` to not stop body scrolling on webkit
+- [MAJOR] Added `shouldSpellCheck` to `SingleLineInput` and `MultiLineInput`
 
 ### Removed
 

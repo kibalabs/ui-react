@@ -46,6 +46,7 @@ interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
   label?: string;
   inputWrapperVariant?: string;
   shouldAutofocus?: boolean;
+  shouldSpellCheck?: boolean;
   onKeyUp?: (key: string) => void;
   onKeyDown?: (key: string) => void;
   onClick?: () => void;
@@ -128,6 +129,7 @@ export function MultiLineInput({
         aria-label={props.label || props.name || props.placeholderText}
         placeholder={props.placeholderText}
         autoFocus={props.shouldAutofocus}
+        spellCheck={props.shouldSpellCheck}
       />
     </InputFrame>
   );
