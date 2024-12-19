@@ -8,13 +8,12 @@ import { BulletList, BulletText, Link, PrettyText } from '../../atoms';
 import { Box, Media, TextAlignment } from '../../particles';
 import { getVariant } from '../../util';
 
-function MarkdownParagraph(props: React.AnchorHTMLAttributes<HTMLAnchorElement>): React.ReactElement {
+function MarkdownParagraph(props: React.AnchorHTMLAttributes<HTMLAnchorElement> & {isInline: boolean | undefined}): React.ReactElement {
   const childrenDisplayNames = React.Children.map(props.children, (child: React.ReactNode): string | null => (
     // @ts-expect-error: Property 'displayName' does not exist on type
     (child && typeof child === 'object' && 'type' in child) ? String(child.type.displayName).split('-')[0] : null
   )) || [];
   const isCaption = childrenDisplayNames.indexOf('MarkdownMedia') >= 0;
-
   if (isCaption) {
     return (
       <span style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
@@ -28,7 +27,7 @@ function MarkdownParagraph(props: React.AnchorHTMLAttributes<HTMLAnchorElement>)
   }
   return (
     <PrettyText
-      variant={getVariant('paragraph')}
+      variant={getVariant(!props.isInline && 'paragraph')}
       alignment={TextAlignment.Left}
     >
       {props.children}
@@ -70,19 +69,20 @@ function MarkdownBulletList(props: React.OlHTMLAttributes<HTMLUListElement>): Re
 MarkdownBulletList.displayName = 'MarkdownBulletList';
 
 function MarkdownBulletText(props: React.LiHTMLAttributes<HTMLLIElement>): React.ReactElement {
-  const childrenDisplayNames = React.Children.map(props.children, (child: React.ReactNode): string | null => (
-    // @ts-expect-error: Property 'displayName' does not exist on type
-    (child && typeof child === 'object' && 'type' in child) ? String(child.type.displayName).split('-')[0] : null
-  )) || [];
-  if (React.Children.count(props.children) === 1 && childrenDisplayNames[0] === 'MarkdownParagraph') {
-    return (
-      // @ts-expect-error
-      <BulletText text={React.Children.toArray(props.children)[0].props.children[0]} />
-    );
-  }
   return (
-    // @ts-expect-error
-    <BulletText>{props.children}</BulletText>
+    <BulletText>
+      {/* @ts-expect-error */}
+      {React.Children.toArray(props.children).map((child: React.ReactElement): React.ReactElement => {
+        if (typeof child === 'string') {
+          return <MarkdownParagraph isInline={true}>{child}</MarkdownParagraph>;
+        }
+        // @ts-expect-error
+        if (child.type?.displayName === 'MarkdownParagraph') {
+          return React.cloneElement(child, { isInline: true });
+        }
+        return child;
+      })}
+    </BulletText>
   );
 }
 MarkdownBulletText.displayName = 'MarkdownBulletText';
