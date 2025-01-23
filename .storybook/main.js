@@ -1,12 +1,12 @@
-export default {
+export default config = {
+  framework: {
+    name: '@storybook/react-vite',
+  },
   stories: [
     '../src/*.@(mdx|stories.@(js|jsx|ts|tsx))',
     '../src/**/*.@(mdx|stories.@(js|jsx|ts|tsx))',
   ],
   staticDir: './.storybook/public',
-  framework: {
-    name: '@storybook/react-vite',
-  },
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-links',
