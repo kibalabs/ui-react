@@ -1,13 +1,13 @@
-import path from 'path';
-
-export default config = {
+export default {
   stories: [
     '../src/*.@(mdx|stories.@(js|jsx|ts|tsx))',
     '../src/**/*.@(mdx|stories.@(js|jsx|ts|tsx))',
   ],
   staticDir: './.storybook/public',
+  framework: {
+    name: '@storybook/react-vite',
+  },
   addons: [
-    // '@storybook/addon-webpack5-compiler-babel',
     '@storybook/addon-essentials',
     '@storybook/addon-links',
   ],
@@ -16,11 +16,5 @@ export default config = {
   },
   docs: {
     autodocs: true,
-  },
-  babel: (config) => {
-    return {
-      ...config,
-      configFile: path.resolve(__dirname, "./.babelrc.json"),
-    }
   },
 };
