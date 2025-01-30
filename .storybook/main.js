@@ -3,7 +3,6 @@ export default config = {
     name: '@storybook/react-vite',
   },
   stories: [
-    '../src/*.@(mdx|stories.@(js|jsx|ts|tsx))',
     '../src/**/*.@(mdx|stories.@(js|jsx|ts|tsx))',
   ],
   staticDir: './.storybook/public',
