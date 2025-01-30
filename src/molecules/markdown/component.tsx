@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { deepCompare, getClassName } from '@kibalabs/core';
-// @ts-expect-error: commonjs import
 import MarkdownToJsx from 'markdown-to-jsx';
 
 import { BulletList, BulletText, Link, PrettyText } from '../../atoms';
