@@ -1,4 +1,4 @@
-import { camelCaseToKebabCase, mergePartial, RecursivePartial } from '@kibalabs/core';
+import { camelCaseToKebabCase, merge, mergePartial, RecursivePartial } from '@kibalabs/core';
 
 export type CssTheme = {
   [key: string]: Readonly<string>
@@ -64,9 +64,8 @@ export interface ThemeMap<Theme extends ThemeType> extends PartialThemeMap<Theme
 
 export type ThemeCssFunction<Theme extends ThemeType> = (theme: Theme | RecursivePartial<Theme>) => string;
 
-// NOTE(krishan711): stuck here cos deepmerge doesn't look like its being exported or read properly when running `make start-docs`
 export function mergeTheme<Theme extends ThemeType>(baseTheme: Theme, ...partialThemes: (RecursivePartial<Theme> | undefined)[]): Theme {
-  return { ...baseTheme, ...partialThemes };
+  return merge(baseTheme, ...partialThemes);
 }
 
 export function mergeThemePartial<Theme extends ThemeType>(...partialThemes: (RecursivePartial<Theme> | undefined)[]): RecursivePartial<Theme> {
