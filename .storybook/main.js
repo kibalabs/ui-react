@@ -1,16 +1,12 @@
-import path from 'path';
-
 export default config = {
   framework: {
-    name: '@storybook/react-webpack5',
+    name: '@storybook/react-vite',
   },
   stories: [
-    '../src/*.@(mdx|stories.@(js|jsx|ts|tsx))',
     '../src/**/*.@(mdx|stories.@(js|jsx|ts|tsx))',
   ],
   staticDir: './.storybook/public',
   addons: [
-    '@storybook/addon-webpack5-compiler-babel',
     '@storybook/addon-essentials',
     '@storybook/addon-links',
   ],
@@ -20,16 +16,4 @@ export default config = {
   docs: {
     autodocs: true,
   },
-  babel: (config) => {
-    return {
-      ...config,
-      configFile: path.resolve(__dirname, "./.babelrc.json"),
-    }
-  },
-  // webpackFinal: async (config, { configType }) => {
-  //   config.resolve = config.resolve || {};
-  //   config.resolve.fallback = config.resolve.fallback || {};
-  //   config.resolve.fallback.fs = false;
-  //   return config;
-  // },
 };

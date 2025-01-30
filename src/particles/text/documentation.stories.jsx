@@ -19,17 +19,17 @@ export const Default = {
 };
 
 export const Paragraph = {
-  render: () => <Text variant='paragraph'>Every word tells a story</Text>,
+  render: () => <Text variant='paragraph'>Every paragraph tells a story</Text>,
   name: 'paragraph',
 };
 
 export const Inline = {
-  render: () => <Text variant='inline'>Every word tells a story</Text>,
+  render: () => <Text variant='inline'>Every inline word tells a story</Text>,
   name: 'inline',
 };
 
 export const Bold = {
-  render: () => <Text variant='bold'>Every word tells a story</Text>,
+  render: () => <Text variant='bold'>Every bold word tells a story</Text>,
   name: 'bold',
 };
 
