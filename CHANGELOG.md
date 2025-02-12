@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MAJOR] Changed `GlobalCSS` to not stop body scrolling on webkit
 - [MINOR] Added `shouldSpellCheck` to `SingleLineInput` and `MultiLineInput`
 - [MINOR] Changed `Markdown` to render bullets with nested children
+- [MINOR] Changed `InputWrapper` to not have tabIndex
 
 ### Removed
 
