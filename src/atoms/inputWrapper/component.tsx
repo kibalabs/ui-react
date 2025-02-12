@@ -160,7 +160,6 @@ export function InputWrapper({
         onClick={onClicked}
         onFocus={(): void => setIsFocussed(true)}
         onBlur={(): void => setIsFocussed(false)}
-        tabIndex={0}
       >
         {props.children}
       </InputWrapperInner>
