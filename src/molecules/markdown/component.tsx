@@ -106,7 +106,7 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
       <MarkdownToJsx
         options={{
           forceWrapper: true,
-          wrapper: React.Fragment,
+          wrapper: 'span',
           overrides: {
             a: { component: MarkdownLink },
             img: { component: MarkdownMedia },
@@ -149,6 +149,9 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
               props: {
                 variant: 'header6',
               },
+            },
+            span: {
+              component: PrettyText,
             },
             ...(props.extraOverrideComponents || {}),
           },
