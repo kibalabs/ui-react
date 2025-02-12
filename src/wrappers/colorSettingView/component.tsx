@@ -28,10 +28,9 @@ export interface IColorSettingViewProps extends IWrapperProps {
 
 export function ColorSettingView({
   className = '',
-  variant = 'default',
   ...props
 }: IColorSettingViewProps): React.ReactElement {
-  const colors = useAlternateColors(variant, props.theme);
+  const colors = useAlternateColors(props.variant || undefined, props.theme);
 
   return (
     <ColorProvider colors={colors}>
