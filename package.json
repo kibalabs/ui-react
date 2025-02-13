@@ -9,6 +9,7 @@
   },
   "homepage": "https://ui-react-docs.kibalabs.com",
   "bugs": "https://github.com/kibalabs/ui-react/issues",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "sideEffects": false,
@@ -16,24 +17,24 @@
     "dist/*"
   ],
   "dependencies": {
-    "@kibalabs/core": "^0.6.3-next.1",
-    "@kibalabs/core-react": "^0.9.7-next.0",
+    "@kibalabs/core": "^0.6.3-next.4",
+    "@kibalabs/core-react": "^0.9.7-next.1",
     "lazysizes": "^5.3.2",
     "markdown-to-jsx": "^7.7.3",
     "polished": "^4.3.1"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.13.3-next.0",
-    "@storybook/addon-essentials": "8.5.1",
-    "@storybook/addon-links": "8.5.1",
-    "@storybook/blocks": "8.5.1",
-    "@storybook/react": "8.5.1",
-    "@storybook/react-vite": "^8.5.1",
+    "@kibalabs/build": "0.13.3-next.5",
+    "@storybook/addon-essentials": "8.5.5",
+    "@storybook/addon-links": "8.5.5",
+    "@storybook/blocks": "8.5.5",
+    "@storybook/react": "8.5.5",
+    "@storybook/react-vite": "^8.5.5",
     "@types/react": "18.3.4",
     "@types/react-dom": "18.3.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "storybook": "8.5.1",
+    "storybook": "8.5.5",
     "styled-components": "6.1.14"
   },
   "peerDependencies": {

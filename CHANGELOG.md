@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Added `shouldSpellCheck` to `SingleLineInput` and `MultiLineInput`
 - [MINOR] Changed `Markdown` to render bullets with nested children
 - [MINOR] Changed `InputWrapper` to not have tabIndex
+- [MAJOR] Converted package into an es-module
 
 ### Removed
 
