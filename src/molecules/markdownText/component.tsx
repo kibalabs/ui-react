@@ -1,7 +1,6 @@
 import React, { AnchorHTMLAttributes } from 'react';
 
 import { deepCompare, getClassName } from '@kibalabs/core';
-// @ts-expect-error: commonjs import
 import MarkdownToJsx from 'markdown-to-jsx';
 
 import { Link, PrettyText } from '../../atoms';
