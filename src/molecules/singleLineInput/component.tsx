@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { OptionalProppedElement } from '@kibalabs/core-react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { Alignment, InputType } from '../../model';
 import { IIconProps, PaddingSize } from '../../particles';

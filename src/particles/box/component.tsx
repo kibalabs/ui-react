@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { IBoxTheme } from './theme';
 import { IComponentProps, IDimensionGuide, themeToCss, useDimensions } from '../..';
