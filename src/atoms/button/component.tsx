@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { IButtonTheme } from './theme';
 import { Alignment, getContentAlignmentCss, getItemAlignmentCss, IComponentProps } from '../../model';

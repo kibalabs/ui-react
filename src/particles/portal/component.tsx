@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { ISingleAnyChildProps, useEventListener, useInterval } from '@kibalabs/core-react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { IPortalTheme } from './theme';
 import { IComponentProps } from '../../model';

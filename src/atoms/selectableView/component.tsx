@@ -3,7 +3,7 @@ import React from 'react';
 
 import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { ISelectableViewTheme } from './theme';
 import { Stack } from '../../layouts';

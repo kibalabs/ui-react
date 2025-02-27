@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiAnyChildProps, useInterval, useRenderedRef, useScrollListener } from '@kibalabs/core-react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { IconButton, IIconButtonTheme } from '../../atoms';
 import { Stack } from '../../layouts';

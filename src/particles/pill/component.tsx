@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { OptionalProppedElement } from '@kibalabs/core-react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { IPillTheme } from './theme';
 import { IComponentProps } from '../../model';

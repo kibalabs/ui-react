@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { IColorGuide } from '../../particles';
 import { useColors } from '../../theming';

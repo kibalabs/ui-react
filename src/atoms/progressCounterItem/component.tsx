@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName, RecursivePartial } from '@kibalabs/core';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { IProgressCounterItemTheme } from './theme';
 import { IComponentProps } from '../../model';

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { IWrapperProps } from '../wrapperProps';
 import { wrappingComponent } from '../wrappingComponent';

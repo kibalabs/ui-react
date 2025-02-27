@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiChildProps, IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { Alignment, getFlexContentAlignment, getFlexItemAlignment, PaddingSize, PaddingSizeProp } from '../..';
 import { getPaddingSize, IDimensionGuide } from '../../particles';

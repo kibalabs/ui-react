@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { IMultiChildProps, OptionalProppedElement } from '@kibalabs/core-react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { IListItemProps, IListItemTheme, ListItem } from '../../atoms/listItem';
 import { Divider } from '../../particles';

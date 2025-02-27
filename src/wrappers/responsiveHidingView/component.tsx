@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { getScreenSize, IDimensionGuide, ScreenSize } from '../../particles/dimensions';
 import { useDimensions } from '../../theming';

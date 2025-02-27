@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { getIsRunningOnBrowser, IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { GlobalCss } from './globalCss';
 import { Head, HeadRootProvider, IHeadRootProviderProps } from './headContext';
@@ -13,8 +13,8 @@ import { ThemeType } from '../util';
 import { BackgroundView, IBackgroundConfig } from '../wrappers';
 
 import 'lazysizes';
-import 'lazysizes/plugins/attrchange/ls.attrchange';
-import 'lazysizes/plugins/respimg/ls.respimg';
+import 'lazysizes/plugins/attrchange/ls.attrchange.js';
+import 'lazysizes/plugins/respimg/ls.respimg.js';
 
 interface IStyledMainViewProps {
   $extraCss?: string;

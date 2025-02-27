@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName, RecursivePartial } from '@kibalabs/core';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import { Box, IInputFrameTheme, IListTheme, List, SingleLineInput } from '../..';
 import { IBoxTheme, KibaIcon, Placement, Portal, Text } from '../../particles';
