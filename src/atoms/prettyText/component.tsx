@@ -10,6 +10,7 @@ import { getTextTag, TextAlignment, TextTag } from '../../particles/text';
 import { propertyToCss, themeToCss } from '../../util';
 
 export const PrettyTextThemedStyle = (theme: RecursivePartial<IPrettyTextTheme>): string => `
+  word-break: break-word;
   ${themeToCss(theme?.normal?.default?.text)};
   /* NOTE(krishan711): margin needs to be reset as it doesn't work if there are multiple children (coming from MarkdownText) so needs to be set */
   & > p {
