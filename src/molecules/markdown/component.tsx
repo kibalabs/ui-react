@@ -93,6 +93,8 @@ export interface IMarkdownProps {
   source: string;
   rootBoxVariant?: string;
   extraOverrideComponents?: Record<string, React.ElementType>;
+  shouldForceWrapper?: boolean;
+  shouldForceBlock?: boolean;
 }
 
 export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement => {
@@ -104,7 +106,8 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
     >
       <MarkdownToJsx
         options={{
-          forceWrapper: true,
+          forceWrapper: props.shouldForceWrapper,
+          forceBlock: props.shouldForceBlock,
           wrapper: 'span',
           overrides: {
             a: { component: MarkdownLink },
