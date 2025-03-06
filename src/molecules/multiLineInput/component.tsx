@@ -47,6 +47,8 @@ interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
   inputWrapperVariant?: string;
   shouldAutofocus?: boolean;
   shouldSpellCheck?: boolean;
+  // isResizableVertically?: boolean;
+  // isResizableHorizontally?: boolean;
   onKeyUp?: (key: string) => void;
   onKeyDown?: (key: string) => void;
   onClick?: () => void;
@@ -78,24 +80,15 @@ export function MultiLineInput({
   };
 
   const onValueChanged = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    // TODO(krishan711): get the font size from the theme! Also, not sure why this works with 24, seems like it should be 16!
-    const fontSize = 24;
-    // Make the textarea smaller when lines are removed
-    const previousRows: number = event.target.rows;
-    const currentRows = Math.floor(event.target.scrollHeight / fontSize);
+    const calculatedLineHeight = window.getComputedStyle(event.target, null).getPropertyValue('line-height');
+    const fontSize = parseInt(calculatedLineHeight, 10);
     // eslint-disable-next-line no-param-reassign
     event.target.rows = minRowCount;
-    if (currentRows === previousRows) {
-      // eslint-disable-next-line no-param-reassign
-      event.target.rows = Math.max(currentRows, minRowCount);
-    }
-    if (currentRows >= innerMaxRowCount) {
-      // eslint-disable-next-line no-param-reassign
-      event.target.rows = innerMaxRowCount;
-      // eslint-disable-next-line no-param-reassign
-      event.target.scrollTop = event.target.scrollHeight;
-    }
-    setRowCount(currentRows < innerMaxRowCount ? Math.max(currentRows, minRowCount) : innerMaxRowCount);
+    const currentRowCount = Math.floor(event.target.scrollHeight / fontSize);
+    const newRowCount = Math.min(Math.max(currentRowCount, minRowCount), innerMaxRowCount);
+    setRowCount(newRowCount);
+    // eslint-disable-next-line no-param-reassign
+    event.target.rows = newRowCount;
     if (props.onValueChanged) {
       props.onValueChanged(event.target.value);
     }
@@ -130,6 +123,7 @@ export function MultiLineInput({
         placeholder={props.placeholderText}
         autoFocus={props.shouldAutofocus}
         spellCheck={props.shouldSpellCheck}
+        // resize={props.isResizableVertically && props.isResizableHorizontally ? 'both' : props.isResizableVertically ? 'vertical' : props.isResizableHorizontally ? 'horizontal' : 'none'}
       />
     </InputFrame>
   );
