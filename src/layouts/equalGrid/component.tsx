@@ -38,5 +38,3 @@ export function EqualGrid(props: IEqualGridProps): React.ReactElement {
 }
 
 EqualGrid.displayName = 'KibaEqualGrid';
-EqualGrid.defaultProps = {
-};
