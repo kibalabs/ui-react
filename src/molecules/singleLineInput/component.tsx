@@ -80,14 +80,15 @@ export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTh
   onClicked?: () => void;
   onFrameClicked?: () => void;
   onValueChanged: (value: string) => void;
+  ref?: React.ForwardedRef<HTMLInputElement>;
 }
 
-export const SingleLineInput = React.forwardRef(({
+export function SingleLineInput({
   className = '',
   isEnabled = true,
   inputType = InputType.Text,
   ...props
-}: ISingleLineInputProps, ref: React.ForwardedRef<HTMLInputElement>): React.ReactElement => {
+}: ISingleLineInputProps): React.ReactElement {
   const onValueChanged = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (props.onValueChanged) {
       props.onValueChanged(event.target.value);
@@ -150,9 +151,9 @@ export const SingleLineInput = React.forwardRef(({
         autoFocus={props.shouldAutofocus}
         onWheelCapture={onWheelCapture}
         spellCheck={props.shouldSpellCheck}
-        ref={ref}
+        ref={props.ref}
       />
     </InputFrame>
   );
-});
+}
 SingleLineInput.displayName = 'KibaSingleLineInput';

@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "@kibalabs/core": "^0.6.3-next.4",
-    "@kibalabs/core-react": "^0.9.7-next.1",
+    "@kibalabs/core-react": "^0.9.7-next.2",
     "lazysizes": "^5.3.2",
     "markdown-to-jsx": "^7.7.4",
     "polished": "^4.3.1"
@@ -30,16 +30,16 @@
     "@storybook/blocks": "8.6.2",
     "@storybook/react": "8.6.2",
     "@storybook/react-vite": "^8.6.2",
-    "@types/react": "18.3.4",
-    "@types/react-dom": "18.3.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "storybook": "8.6.2",
     "styled-components": "6.1.15"
   },
   "peerDependencies": {
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0",
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0",
     "styled-components": "^6.1.15"
   }
 }
