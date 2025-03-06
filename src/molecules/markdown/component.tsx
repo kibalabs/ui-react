@@ -77,6 +77,7 @@ function MarkdownBulletText(props: React.LiHTMLAttributes<HTMLLIElement>): React
         }
         // @ts-expect-error
         if (child.type?.displayName === 'MarkdownParagraph') {
+          // @ts-expect-error
           return React.cloneElement(child, { isInline: true, key: child.key });
         }
         return React.cloneElement(child, { key: child.key });

@@ -190,7 +190,7 @@ export function Stack({
         $shouldAddGutters={innerShouldAddGutters}
         $defaultGutter={defaultGutter}
       >
-        { children.map((child: React.ReactElement, index: number): React.ReactElement<IStackItemProps> => (
+        { children.map((child: React.ReactElement<IStackItemProps>, index: number): React.ReactElement<IStackItemProps> => (
           <React.Fragment key={child.key}>
             {child.props.gutterBefore && (
               <Spacing className='stack-gutter' variant={child.props.gutterBefore} />

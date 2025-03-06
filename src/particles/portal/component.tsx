@@ -83,7 +83,7 @@ export function getOffsetLeft(rect: DOMRect, horizontal: number | string): numbe
 }
 
 export interface IPortalProps extends IComponentProps<IPortalTheme>, ISingleAnyChildProps {
-  anchorElement: React.RefObject<HTMLDivElement>;
+  anchorElement: React.RefObject<HTMLDivElement | null>;
   placement: Placement | string;
   positionTop?: number;
   positionLeft?: number;
@@ -91,7 +91,7 @@ export interface IPortalProps extends IComponentProps<IPortalTheme>, ISingleAnyC
   isScrollableHorizontally?: boolean;
   shouldMatchAnchorWidth?: boolean;
   shouldMatchAnchorHeight?: boolean;
-  ref?: React.ForwardedRef<HTMLDivElement>;
+  ref?: React.RefObject<HTMLDivElement | null>;
 }
 
 export const Portal = ({

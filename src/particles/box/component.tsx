@@ -78,7 +78,7 @@ export interface IBoxProps extends IComponentProps<IBoxTheme>, IOptionalSingleAn
   shouldClipContent?: boolean;
   shouldCaptureTouches?: boolean;
   position?: string;
-  ref?: React.ForwardedRef<HTMLDivElement>;
+  ref?: React.RefObject<HTMLDivElement | null>;
 }
 
 export function Box({

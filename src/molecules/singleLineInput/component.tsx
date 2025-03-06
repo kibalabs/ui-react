@@ -80,7 +80,7 @@ export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTh
   onClicked?: () => void;
   onFrameClicked?: () => void;
   onValueChanged: (value: string) => void;
-  ref?: React.ForwardedRef<HTMLInputElement>;
+  ref?: React.RefObject<HTMLInputElement | null>;
 }
 
 export function SingleLineInput({

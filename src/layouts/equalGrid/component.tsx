@@ -7,7 +7,7 @@ import { Alignment, PaddingSizeProp } from '../..';
 import { IDimensionGuide } from '../../particles';
 import { ResponsiveField } from '../../util';
 import { IPaddingViewPaddingProps } from '../../wrappers';
-import { Grid } from '../grid';
+import { Grid, IGridItemProps } from '../grid';
 
 export interface IEqualGridProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   id?: string;
@@ -29,7 +29,7 @@ export function EqualGrid(props: IEqualGridProps): React.ReactElement {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Grid {...props} className={getClassName(EqualGrid.displayName, props.className)}>
-      {flattenChildren(props.children).map((child: (React.ReactElement | string | number), index: number): React.ReactElement => (
+      {flattenChildren(props.children).map((child: (React.ReactElement | string | number), index: number): React.ReactElement<IGridItemProps> => (
       // eslint-disable-next-line react/no-array-index-key
         <Grid.Item key={index} size={props.childSize} sizeResponsive={props.childSizeResponsive}>{child}</Grid.Item>
       ))}
