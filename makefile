@@ -1,11 +1,11 @@
 install:
-	@ npm ci
+	@ npm ci --legacy-peer-deps
 
 install-updates:
-	@ npm install
+	@ npm install --legacy-peer-deps
 
 list-outdated: install
-	@ npm outdated
+	@ npm outdated --legacy-peer-deps
 
 lint-check:
 	@ npx lint

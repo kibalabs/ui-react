@@ -78,14 +78,15 @@ export interface IBoxProps extends IComponentProps<IBoxTheme>, IOptionalSingleAn
   shouldClipContent?: boolean;
   shouldCaptureTouches?: boolean;
   position?: string;
+  ref?: React.RefObject<HTMLDivElement | null>;
 }
 
-export const Box = React.forwardRef(({
+export function Box({
   className = '',
   variant = 'default',
   isFullWidth = true,
   ...props
-}: IBoxProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
+}: IBoxProps): React.ReactElement {
   const dimensions = useDimensions();
   const height = props.height || (props.isFullHeight ? '100%' : 'auto');
   const width = props.width || (isFullWidth ? '100%' : 'auto');
@@ -115,10 +116,10 @@ export const Box = React.forwardRef(({
       $zIndex={props.zIndex}
       $position={props.position}
       title={props.title}
-      ref={ref}
+      ref={props.ref}
     >
       {props.children}
     </StyledBox>
   );
-});
+}
 Box.displayName = 'KibaBox';

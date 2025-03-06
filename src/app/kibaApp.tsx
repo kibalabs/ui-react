@@ -5,7 +5,6 @@ import { getIsRunningOnBrowser, IMultiAnyChildProps, useInitialization } from '@
 import { styled } from 'styled-components';
 
 import { GlobalCss } from './globalCss';
-import { Head, HeadRootProvider, IHeadRootProviderProps } from './headContext';
 import { resetCss } from './resetCss';
 import { ITheme, ThemeProvider } from '../theming';
 import { ComponentDefinition } from '../theming/cssBuilder';
@@ -32,7 +31,7 @@ const StyledMainView = styled.div<IStyledMainViewProps>`
   ${(props: IStyledMainViewProps): string => props.$extraCss || ''};
 `;
 
-export interface IKibaAppProps extends IMultiAnyChildProps, IHeadRootProviderProps {
+export interface IKibaAppProps extends IMultiAnyChildProps {
   theme: ITheme;
   isRehydrating?: boolean;
   isFullPageApp?: boolean;
@@ -71,29 +70,25 @@ export function KibaApp({
         extraCss={props.extraGlobalCss}
         isFullPageApp={props.isFullPageApp}
       />
-      <HeadRootProvider setHead={props.setHead}>
-        <Head headId='kiba-app'>
-          <link rel='preconnect' href='https://assets-cdn.kiba.dev' crossOrigin='anonymous' />
-          { Object.keys(props.theme.fonts || {}).map((fontKey: string): React.ReactElement => (
-            <React.Fragment key={fontKey}>
-              <link href={props.theme.fonts[fontKey].url} rel='preload' as='style' />
-              {/* TODO(krishan711): the lazy loading doesn't work here */}
-              {/* <link href={theme.fonts[fontKey].url} rel='stylesheet' media='print' onLoad={((event: React.SyntheticEvent<HTMLLinkElement>): void => {(event.target as HTMLLinkElement).media = 'all'})} />
-              <noscript><link href={theme.fonts[fontKey].url} rel='stylesheet' /></noscript> */}
-              <link href={props.theme.fonts[fontKey].url} rel='stylesheet' />
-            </React.Fragment>
-          ))}
-        </Head>
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-        <BackgroundView {...props.background}>
-          <StyledMainView
-            className={getClassName(isRunningOnBrowser ? 'js' : 'no-js', props.isFullPageApp && 'fullPage')}
-            $extraCss={props.extraCss}
-          >
-            {props.children}
-          </StyledMainView>
-        </BackgroundView>
-      </HeadRootProvider>
+      <link href='https://assets-cdn.kiba.dev' rel='preconnect' crossOrigin='anonymous' />
+      { Object.keys(props.theme.fonts || {}).map((fontKey: string): React.ReactElement => (
+        <React.Fragment key={fontKey}>
+          <link href={props.theme.fonts[fontKey].url} rel='preload' as='style' />
+          {/* TODO(krishan711): the lazy loading doesn't work here */}
+          {/* <link href={theme.fonts[fontKey].url} rel='stylesheet' media='print' onLoad={((event: React.SyntheticEvent<HTMLLinkElement>): void => {(event.target as HTMLLinkElement).media = 'all'})} />
+          <noscript><link href={theme.fonts[fontKey].url} rel='stylesheet' /></noscript> */}
+          <link href={props.theme.fonts[fontKey].url} rel='stylesheet' />
+        </React.Fragment>
+      ))}
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <BackgroundView {...props.background}>
+        <StyledMainView
+          className={getClassName(isRunningOnBrowser ? 'js' : 'no-js', props.isFullPageApp && 'fullPage')}
+          $extraCss={props.extraCss}
+        >
+          {props.children}
+        </StyledMainView>
+      </BackgroundView>
     </ThemeProvider>
   );
 }

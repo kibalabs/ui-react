@@ -3,7 +3,7 @@ import React from 'react';
 import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { styled } from 'styled-components';
 
-import { Box, IInputFrameTheme, IListTheme, List, SingleLineInput } from '../..';
+import { Box, IInputFrameTheme, IListItemProps, IListTheme, List, SingleLineInput } from '../..';
 import { IBoxTheme, KibaIcon, Placement, Portal, Text } from '../../particles';
 import { getVariant } from '../../util';
 import { HidingView } from '../../wrappers';
@@ -63,7 +63,7 @@ function OptionSelectContent({
 }: IOptionSelectContentProps): React.ReactElement {
   return (
     <List theme={props.optionListTheme} itemVariant={props.optionListVariant || 'slim'} onItemClicked={props.onItemClicked} shouldShowDividers={true} isFullWidth={true}>
-      {props.options.map((option: IOption): React.ReactElement => (
+      {props.options.map((option: IOption): React.ReactElement<IListItemProps> => (
         <List.Item
           key={option.itemKey}
           itemKey={option.itemKey}
