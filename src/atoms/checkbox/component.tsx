@@ -122,12 +122,12 @@ const StyledHiddenCheckbox = styled.input`
   clip: rect(0 0 0 0);
   clippath: inset(50%);
   height: 1px;
+  width: 1px;
   margin: -1px;
   overflow: hidden;
   padding: 0;
   position: absolute;
   white-space: nowrap;
-  width: 1px;
 `;
 
 const StyledCheckbox = styled.div`
@@ -136,6 +136,12 @@ const StyledCheckbox = styled.div`
   transition-duration: 0.3s;
   width: 1em;
   height: 1em;
+`;
+
+const StyledText = styled.span`
+  cursor: pointer;
+  flex-basis: 0;
+  flex-grow: 1;
 `;
 
 interface ICheckBoxProps extends IComponentProps<ICheckboxTheme> {
@@ -178,7 +184,7 @@ export function Checkbox({
         )}
       </StyledCheckbox>
       <Spacing variant={props.gutter || PaddingSize.Default} />
-      { props.text }
+      <StyledText>{ props.text }</StyledText>
     </StyledContainer>
   );
 }
