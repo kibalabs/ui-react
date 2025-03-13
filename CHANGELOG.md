@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MAJOR] Converted package into an es-module
 - [MINOR] Added `shouldForceWrapper` and `shouldForceBlock` to `Markdown`
 - [PATCH] Corrections for how height is calculated in `MultiLineInput`
+- [MAJOR] Removed `Head` in favor of react 19 inline metadata tags
 
 ### Removed
 
