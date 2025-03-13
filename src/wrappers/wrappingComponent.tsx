@@ -2,13 +2,11 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { flattenChildren } from '@kibalabs/core-react';
+
 import { IWrapperProps } from './wrapperProps';
 
 const styleCopier = <P extends IWrapperProps>(props: P): React.ReactElement => {
-  console.log('styleCopier', props);
-  const flattenedChildren = flattenChildren(props.children);
-  console.log('flattenedChildren', flattenedChildren);
-  const children = flattenedChildren.map((child: (React.ReactElement | string | number)): (React.ReactElement | string | number) => {
+  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): (React.ReactElement | string | number) => {
     if (React.isValidElement(child)) {
       // @ts-ignore
       return React.cloneElement(child, { className: getClassName(child.props?.className, props.className) });
