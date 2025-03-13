@@ -83,7 +83,7 @@ export function getOffsetLeft(rect: DOMRect, horizontal: number | string): numbe
 }
 
 export interface IPortalProps extends IComponentProps<IPortalTheme>, ISingleAnyChildProps {
-  anchorElement: React.RefObject<HTMLDivElement>;
+  anchorElement: React.RefObject<HTMLDivElement | null>;
   placement: Placement | string;
   positionTop?: number;
   positionLeft?: number;
@@ -91,15 +91,16 @@ export interface IPortalProps extends IComponentProps<IPortalTheme>, ISingleAnyC
   isScrollableHorizontally?: boolean;
   shouldMatchAnchorWidth?: boolean;
   shouldMatchAnchorHeight?: boolean;
+  ref?: React.RefObject<HTMLDivElement | null>;
 }
 
-export const Portal = React.forwardRef(({
+export const Portal = ({
   className = '',
   variant = 'default',
   isScrollableVertically = true,
   isScrollableHorizontally = true,
   ...props
-}: IPortalProps, ref: React.ForwardedRef<HTMLDivElement>): React.ReactElement => {
+}: IPortalProps): React.ReactElement => {
   const [positionTop, setPositionTop] = React.useState<number>(props.positionTop || 0);
   const [positionLeft, setPositionLeft] = React.useState<number>(props.positionLeft || 0);
   const [maxHeight, setMaxHeight] = React.useState<number>(0);
@@ -146,11 +147,11 @@ export const Portal = React.forwardRef(({
         $maxWidth={maxWidth ? `${maxWidth}px` : null}
         $width={props.shouldMatchAnchorWidth ? `${anchorWidth}px` : null}
         $height={props.shouldMatchAnchorHeight ? `${anchorHeight}px` : null}
-        ref={ref}
+        ref={props.ref}
       >
         {props.children}
       </StyledPortal>
     ), window.document.body,
   );
-});
+};
 Portal.displayName = 'KibaPortal';

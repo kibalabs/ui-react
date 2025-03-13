@@ -1,11 +1,11 @@
 install:
-	@ npm ci
+	@ npm ci --legacy-peer-deps
 
 install-updates:
-	@ npm install
+	@ npm install --legacy-peer-deps
 
 list-outdated: install
-	@ npm outdated
+	@ npm outdated --legacy-peer-deps
 
 lint-check:
 	@ npx lint
@@ -30,7 +30,7 @@ security-check-ci:
 	@ echo "Not Supported"
 
 build:
-	@ npx build-module-rolldown
+	@ NODE_ENV=production npx build-module-rolldown
 
 build-ssr:
 	@ echo "Not Supported"
@@ -42,10 +42,10 @@ build-docs:
 	@ npx storybook build --docs --output-dir dist
 
 start:
-	@ npx build-module-rolldown --start --dev
+	@ NODE_ENV=development npx build-module-rolldown --start
 
 start-prod:
-	@ npx build-module-rolldown --start
+	@ NODE_ENV=production npx build-module-rolldown --start
 
 start-docs:
 	@ npx storybook dev --docs --port 6006
