@@ -5,7 +5,7 @@ import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } fro
 import { styled } from 'styled-components';
 
 import { IButtonTheme } from './theme';
-import { Alignment, getContentAlignmentCss, getItemAlignmentCss, IComponentProps } from '../../model';
+import { Alignment, getChildAlignmentCss, getContentAlignmentCss, IComponentProps } from '../../model';
 import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particles';
 import { themeToCss } from '../../util';
 
@@ -76,7 +76,7 @@ const StyledButtonFocusFixer = styled.span<IStyledButtonFocusFixerProps>`
   outline: none;
   display: flex;
   flex-direction: row;
-  ${(props: IStyledButtonFocusFixerProps): string => getItemAlignmentCss(props.$contentAlignment)};
+  ${(props: IStyledButtonFocusFixerProps): string => getChildAlignmentCss(props.$childAlignment)};
   ${(props: IStyledButtonFocusFixerProps): string => getContentAlignmentCss(props.$contentAlignment)};
   background-clip: border-box;
   width: 100%;
