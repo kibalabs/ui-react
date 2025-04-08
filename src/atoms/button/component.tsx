@@ -76,7 +76,7 @@ const StyledButtonFocusFixer = styled.span<IStyledButtonFocusFixerProps>`
   outline: none;
   display: flex;
   flex-direction: row;
-  ${(props: IStyledButtonFocusFixerProps): string => getChildAlignmentCss(props.$contentAlignment)};
+  ${(props: IStyledButtonFocusFixerProps): string => getChildAlignmentCss(props.$childAlignment)};
   ${(props: IStyledButtonFocusFixerProps): string => getContentAlignmentCss(props.$contentAlignment)};
   background-clip: border-box;
   width: 100%;
