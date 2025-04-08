@@ -3,6 +3,7 @@
 // to learn about alignment
 
 import { CssConverter } from '../util';
+import { Direction } from './direction';
 
 export enum Alignment {
   Start = 'start',
@@ -48,6 +49,10 @@ export const getContentAlignmentCss: CssConverter<Alignment> = (field: Alignment
   return `justify-content: ${getFlexContentAlignment(field)};`;
 };
 
-export const getItemAlignmentCss: CssConverter<Alignment> = (field: Alignment): string => {
+export const getChildAlignmentCss: CssConverter<Alignment> = (field: Alignment): string => {
   return `align-items: ${getFlexItemAlignment(field)};`;
+};
+
+export const getDirectionCss: CssConverter<Direction> = (field: Direction): string => {
+  return `flex-direction: ${field === Direction.Vertical ? 'column' : 'row'};`;
 };

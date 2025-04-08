@@ -4,26 +4,14 @@ import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiAnyChildProps, IOptionalSingleAnyChildProps, ISingleAnyChildProps } from '@kibalabs/core-react';
 import { styled } from 'styled-components';
 
-import { Alignment, Direction, getFlexContentAlignment, getFlexItemAlignment, getPaddingSize, IDimensionGuide, PaddingSize, PaddingSizeProp, Spacing } from '../..';
+import { Alignment, Direction, getChildAlignmentCss, getContentAlignmentCss, getDirectionCss, getFlexItemAlignment, getPaddingSize, IDimensionGuide, PaddingSize, PaddingSizeProp, Spacing } from '../..';
 import { useDimensions } from '../../theming';
-import { CssConverter, fieldToResponsiveCss, getCss, ResponsiveField } from '../../util';
+import { fieldToResponsiveCss, getCss, ResponsiveField } from '../../util';
 import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
 import { wrappingComponent } from '../../wrappers/wrappingComponent';
 
 // NOTE(krishan711): if the child of the stack.item declares 100% height (on vertical stack) it doesn't work on safari unless it has flex-basis: 0 (https://github.com/philipwalton/flexbugs/issues/197)
 // NOTE(krishan711): behavior of the above is also different on IE11, be careful!
-
-const getContentAlignmentCss: CssConverter<Alignment> = (field: Alignment): string => {
-  return `justify-content: ${getFlexContentAlignment(field)};`;
-};
-
-const getChildAlignmentCss: CssConverter<Alignment> = (field: Alignment): string => {
-  return `align-items: ${getFlexItemAlignment(field)};`;
-};
-
-const getDirectionCss: CssConverter<Direction> = (field: Direction): string => {
-  return `flex-direction: ${field === Direction.Vertical ? 'column' : 'row'};`;
-};
 
 export interface IStackItemProps extends IOptionalSingleAnyChildProps {
   // eslint-disable-next-line react/no-unused-prop-types
