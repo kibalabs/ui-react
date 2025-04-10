@@ -141,8 +141,8 @@ export function Stack({
   ));
   const paddingTop = (props.paddingStart && direction === Direction.Vertical) ? props.paddingStart : undefined;
   const paddingBottom = (props.paddingEnd && direction === Direction.Vertical) ? props.paddingEnd : undefined;
-  const paddingRight = (props.paddingStart && direction === Direction.Horizontal) ? props.paddingStart : undefined;
-  const paddingLeft = (props.paddingEnd && direction === Direction.Horizontal) ? props.paddingEnd : undefined;
+  const paddingLeft = (props.paddingStart && direction === Direction.Horizontal) ? props.paddingStart : undefined;
+  const paddingRight = (props.paddingEnd && direction === Direction.Horizontal) ? props.paddingEnd : undefined;
 
   const height = props.height || (isFullHeight ? '100%' : 'auto');
   const width = props.width || (isFullWidth ? '100%' : 'auto');
