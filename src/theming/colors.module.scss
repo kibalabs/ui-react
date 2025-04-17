@@ -11,25 +11,19 @@ $focusOutline: #000 !default;
 $error: #ff0000 !default;
 $disabledText: #999 !default;
 
+@mixin expandColor($name, $color) {
+  --color-#{$name}: #{$color};
+  @each $value in $colorValues {
+    --color-#{$name}Clear#{$value * 100}: #{color.adjust($color, $space: hsl, $alpha: -$value)};
+    --color-#{$name}Light#{$value * 100}: #{color.scale($color, $space: hsl, $lightness: $value * 100%)};
+    --color-#{$name}Dark#{$value * 100}: #{color.scale($color, $space: hsl, $lightness: -$value * 100%)};
+  }
+}
+
 :root {
-  --color-brandPrimary: #{$brandPrimary};
-  @each $value in $colorValues {
-    --color-brandPrimaryClear#{$value * 100}: #{color.adjust($brandPrimary, $space: hsl, $alpha: -$value)};
-    --color-brandPrimaryLight#{$value * 100}: #{color.scale($brandPrimary, $space: hsl, $lightness: $value * 100%)};
-    --color-brandPrimaryDark#{$value * 100}: #{color.scale($brandPrimary, $space: hsl, $lightness: -$value * 100%)};
-  }
-  --color-text: #{$text};
-  @each $value in $colorValues {
-    --color-textClear#{$value * 100}: #{color.adjust($text, $space: hsl, $alpha: -$value)};
-    --color-textLight#{$value * 100}: #{color.scale($text, $space: hsl, $lightness: $value * 100%)};
-    --color-textDark#{$value * 100}: #{color.scale($text, $space: hsl, $lightness: -$value * 100%)};
-  }
-  --color-background: #{$background};
-  @each $value in $colorValues {
-    --color-backgroundClear#{$value * 100}: #{color.adjust($background, $space: hsl, $alpha: -$value)};
-    --color-backgroundLight#{$value * 100}: #{color.scale($background, $space: hsl, $lightness: $value * 100%)};
-    --color-backgroundDark#{$value * 100}: #{color.scale($background, $space: hsl, $lightness: -$value * 100%)};
-  }
+  @include expandColor('brandPrimary', $brandPrimary);
+  @include expandColor('text', $text);
+  @include expandColor('background', $background);
   --color-disabledLight50: #{$disabledLight50};
   --color-disabledText: #{$disabledText};
   --color-focusOutline: #{$focusOutline};
