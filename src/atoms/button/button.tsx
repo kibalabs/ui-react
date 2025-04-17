@@ -1,12 +1,10 @@
 // ui-react/components/button.tsx
 import React from 'react';
-import defaultStyles from './button.module.scss';
+import * as defaultStyles from './button.module.scss';
 import { getClassName } from '@kibalabs/core';
 import { Alignment } from '../../model';
 import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particles';
 import { OptionalProppedElement, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
-
-console.log('defaultStyles', defaultStyles)
 
 export interface IButtonProps {
   id?: string;

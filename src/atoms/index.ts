@@ -1,5 +1,6 @@
 export * from './bulletList';
 export * from './bulletText';
+export * from './button';
 export * from './buttonStyled';
 export * from './collapsibleBox';
 export * from './dialog';

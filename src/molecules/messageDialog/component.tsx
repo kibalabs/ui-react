@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Dialog, IconButton } from '../../atoms';
+import { ButtonStyled, Dialog, IconButton } from '../../atoms';
 import { Stack } from '../../layouts';
 import { Alignment, Direction } from '../../model';
 import { KibaIcon, PaddingSize, Spacing, Text, TextAlignment } from '../../particles';
@@ -42,8 +42,8 @@ export function MessageDialog({
         <Stack.Item gutterBefore={PaddingSize.Default}>
           <Stack direction={Direction.Horizontal} shouldAddGutters={true} defaultGutter={PaddingSize.Wide}>
             <Stack.Item growthFactor={1} shrinkFactor={1} />
-            <Button variant='secondary' onClicked={props.onCloseClicked} text={cancelButtonText} />
-            <Button variant='primary' onClicked={props.onConfirmClicked} text={confirmButtonText} />
+            <ButtonStyled variant='secondary' onClicked={props.onCloseClicked} text={cancelButtonText} />
+            <ButtonStyled variant='primary' onClicked={props.onConfirmClicked} text={confirmButtonText} />
             <Stack.Item growthFactor={1} shrinkFactor={1} />
           </Stack>
         </Stack.Item>

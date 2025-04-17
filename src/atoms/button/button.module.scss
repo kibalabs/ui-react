@@ -47,16 +47,22 @@
     padding: var(--dimension-padding) var(--dimension-paddingWide);
     background-color: transparent;
     // TODO: text default
-    color: --color-brandPrimary;
-    font-weight: '600';
-    text-align: 'center';
-    &:hover {
-      background-color: '$colors.brandPrimaryClear90',
+    color: var(--color-brandPrimary);
+    font-weight: 600;
+    text-align: center;
+  }
+  &:hover {
+    .focusFixer {
+      background-color: var(--color-brandPrimaryClear90);
     }
-    &:active {
-      background-color: '$colors.brandPrimaryClear80',
+  }
+  &:active {
+    .focusFixer {
+      background-color: var(--color-brandPrimaryClear80);
     }
-    &:focus {
+  }
+  &:focus {
+    .focusFixer {
       // TODO: box focussed
     }
   }
@@ -68,4 +74,48 @@
     }
   }
 
+  &.primary {
+    .focusFixer {
+      background-color: var(--color-brandPrimary);
+      border-color: var(--color-brandPrimary);
+      color: var(--color-textOnBrand);
+    }
+    &:hover {
+      .focusFixer {
+        background-color: var(--color-brandSecondary);
+      }
+    }
+    &:active {
+      .focusFixer {
+        background-color: var(--color-brandSecondaryDark10);
+      }
+    }
+  }
+
+  &.secondary {
+    .focusFixer {
+      border-color: var(--color-brandPrimary);
+    }
+  }
+
+  &.large {
+    .focusFixer {
+      padding: var(--dimension-paddingWide) var(--dimension-paddingWide2);
+      font-size: 1.2em;
+    }
+  }
+
+  &.small {
+    .focusFixer {
+      padding: var(--dimension-paddingNarrow) var(--dimension-padding);
+      font-size: 0.8em;
+    }
+  }
+
+  &.card {
+    .focusFixer {
+      box-shadow: 0px 8px 8px -6px rgba(0,0,0,0.15);  // NOTE(krishan711): this should reference boxThemes.card['box-shadow'] (or something)
+      margin: 0px 4px 12px 4px; // this should reference boxThemes.card.margin or something
+    }
+  }
 }
