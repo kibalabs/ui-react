@@ -104,7 +104,7 @@ const StyledButton = styled.button<IStyledButtonProps>`
   }
 `;
 
-export interface IButtonStyledProps extends IComponentProps<IButtonTheme> {
+export interface IButtonProps extends IComponentProps<IButtonTheme> {
   text: string;
   isEnabled?: boolean;
   isLoading?: boolean;
@@ -135,7 +135,7 @@ export function Button({
   isFullHeight = false,
   isFullWidth = false,
   ...props
-}: IButtonStyledProps): React.ReactElement {
+}: IButtonProps): React.ReactElement {
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
 
   if (props.onClicked && buttonType === 'submit') {
@@ -198,4 +198,4 @@ export function Button({
     </StyledButton>
   );
 }
-Button.displayName = 'KibaButtonStyled';
+Button.displayName = 'KibaButton';
