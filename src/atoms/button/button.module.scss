@@ -1,0 +1,71 @@
+.button {
+  transition-duration: 0.3s;
+  cursor: pointer;
+  width: auto;
+  height: auto;
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &.fullHeight {
+    height: 100%;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+
+  &.isLoading {
+    cursor: default;
+  }
+
+  .focusFixer {
+    transition-duration: 0.3s;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    background-clip: border-box;
+    width: 100%;
+    height: 100%;
+    // Fixing the Safari bug for <button>s overflow
+    position: relative;
+    // NOTE(krishan711): aligment is done in the js for now
+  }
+
+  .text {
+    width: auto;
+    &.textFullWidth {
+      width: 100%;
+    }
+  }
+
+  // Styling
+  .focusFixer {
+    // TODO: box default
+    // TODO: box focussable
+    padding: var(--dimension-padding) var(--dimension-paddingWide);
+    background-color: transparent;
+    // TODO: text default
+    color: --color-brandPrimary;
+    font-weight: '600';
+    text-align: 'center';
+    &:hover {
+      background-color: '$colors.brandPrimaryClear90',
+    }
+    &:active {
+      background-color: '$colors.brandPrimaryClear80',
+    }
+    &:focus {
+      // TODO: box focussed
+    }
+  }
+
+  &.disabled {
+    .focusFixer {
+      background-color: var(--color-disabledLight50);
+      color: var(--color-disabledText);
+    }
+  }
+
+}

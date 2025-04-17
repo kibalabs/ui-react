@@ -104,7 +104,7 @@ const StyledButton = styled.button<IStyledButtonProps>`
   }
 `;
 
-export interface IButtonProps extends IComponentProps<IButtonTheme> {
+export interface IButtonStyledProps extends IComponentProps<IButtonTheme> {
   text: string;
   isEnabled?: boolean;
   isLoading?: boolean;
@@ -123,7 +123,7 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   onClicked?(): void;
 }
 
-export function Button({
+export function ButtonStyled({
   className = '',
   variant = 'default',
   isEnabled = true,
@@ -135,7 +135,7 @@ export function Button({
   isFullHeight = false,
   isFullWidth = false,
   ...props
-}: IButtonProps): React.ReactElement {
+}: IButtonStyledProps): React.ReactElement {
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
 
   if (props.onClicked && buttonType === 'submit') {
@@ -160,7 +160,7 @@ export function Button({
     // @ts-ignore: as prop doesn't match type required
     <StyledButton
       id={props.id}
-      className={getClassName(Button.displayName, className, isFullWidth && 'fullWidth', isFullHeight && 'fullHeight', !isEnabled && 'disabled', ...(variant?.split('-') || []))}
+      className={getClassName(ButtonStyled.displayName, className, isFullWidth && 'fullWidth', isFullHeight && 'fullHeight', !isEnabled && 'disabled', ...(variant?.split('-') || []))}
       $theme={props.theme}
       $isLoading={props.isLoading || false}
       onClick={onButtonClicked}
@@ -198,4 +198,4 @@ export function Button({
     </StyledButton>
   );
 }
-Button.displayName = 'KibaButton';
+ButtonStyled.displayName = 'KibaButtonStyled';

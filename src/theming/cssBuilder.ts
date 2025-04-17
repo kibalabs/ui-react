@@ -3,7 +3,7 @@ import React from 'react';
 import { ITheme } from './theme';
 import { BulletList, BulletListThemedStyle } from '../atoms/bulletList';
 import { BulletText, BulletTextThemedStyle } from '../atoms/bulletText';
-import { Button, ButtonThemedStyle } from '../atoms/button';
+import { Button, ButtonThemedStyle } from '../atoms/buttonStyled';
 import { Checkbox, CheckboxThemedStyle } from '../atoms/checkbox';
 import { CollapsibleBox, CollapsibleBoxThemedStyle } from '../atoms/collapsibleBox';
 import { Dialog, DialogThemedStyle } from '../atoms/dialog';
