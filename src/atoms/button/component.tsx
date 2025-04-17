@@ -123,7 +123,7 @@ export interface IButtonStyledProps extends IComponentProps<IButtonTheme> {
   onClicked?(): void;
 }
 
-export function ButtonStyled({
+export function Button({
   className = '',
   variant = 'default',
   isEnabled = true,
@@ -160,7 +160,7 @@ export function ButtonStyled({
     // @ts-ignore: as prop doesn't match type required
     <StyledButton
       id={props.id}
-      className={getClassName(ButtonStyled.displayName, className, isFullWidth && 'fullWidth', isFullHeight && 'fullHeight', !isEnabled && 'disabled', ...(variant?.split('-') || []))}
+      className={getClassName(Button.displayName, className, isFullWidth && 'fullWidth', isFullHeight && 'fullHeight', !isEnabled && 'disabled', ...(variant?.split('-') || []))}
       $theme={props.theme}
       $isLoading={props.isLoading || false}
       onClick={onButtonClicked}
@@ -198,4 +198,4 @@ export function ButtonStyled({
     </StyledButton>
   );
 }
-ButtonStyled.displayName = 'KibaButtonStyled';
+Button.displayName = 'KibaButtonStyled';

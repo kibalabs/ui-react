@@ -3,7 +3,7 @@ import React from 'react';
 import { ITheme } from './theme';
 import { BulletList, BulletListThemedStyle } from '../atoms/bulletList';
 import { BulletText, BulletTextThemedStyle } from '../atoms/bulletText';
-import { ButtonStyled, ButtonThemedStyle } from '../atoms/buttonStyled';
+import { Button, ButtonThemedStyle } from '../atoms/button';
 import { Checkbox, CheckboxThemedStyle } from '../atoms/checkbox';
 import { CollapsibleBox, CollapsibleBoxThemedStyle } from '../atoms/collapsibleBox';
 import { Dialog, DialogThemedStyle } from '../atoms/dialog';
@@ -67,7 +67,7 @@ export const buildThemeCssString = (theme: ITheme, extraComponentDefinitions?: C
     { component: Portal, themeMap: theme.portals, themeCssFunction: PortalThemedStyle },
     { component: Video, themeMap: theme.videos, themeCssFunction: VideoThemedStyle },
     // atoms
-    { component: ButtonStyled, themeMap: theme.buttons, themeCssFunction: ButtonThemedStyle },
+    { component: Button, themeMap: theme.buttons, themeCssFunction: ButtonThemedStyle },
     { component: Checkbox, themeMap: theme.checkboxes, themeCssFunction: CheckboxThemedStyle },
     { component: BulletList, themeMap: theme.bulletLists, themeCssFunction: BulletListThemedStyle },
     { component: BulletText, themeMap: theme.bulletTexts, themeCssFunction: BulletTextThemedStyle },

@@ -4,7 +4,7 @@ import { RecursivePartial } from '@kibalabs/core';
 import { ITheme } from '.';
 import { buildBulletListThemes, IBulletListTheme } from '../atoms/bulletList';
 import { buildBulletTextThemes, IBulletTextTheme } from '../atoms/bulletText';
-import { buildButtonThemes, IButtonTheme } from '../atoms/buttonStyled';
+import { buildButtonThemes, IButtonTheme } from '../atoms/button';
 import { buildCheckboxThemes, ICheckboxTheme } from '../atoms/checkbox';
 import { buildCollapsibleBoxThemes, ICollapsibleBoxTheme } from '../atoms/collapsibleBox';
 import { buildDialogThemes, IDialogTheme } from '../atoms/dialog';

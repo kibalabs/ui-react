@@ -6,7 +6,7 @@ import { Alignment } from '../../model';
 import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particles';
 import { OptionalProppedElement, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 
-export interface IButtonProps {
+export interface IButtonCssProps {
   id?: string;
   className?: string;
   variant?: string;
@@ -29,7 +29,7 @@ export interface IButtonProps {
   styles?: Record<string, string>; // CSS Module styles
 }
 
-export const Button = ({
+export const ButtonCss = ({
   className = '',
   isTextFullWidth = true,
   iconGutter = PaddingSize.Default,
@@ -40,7 +40,7 @@ export const Button = ({
   isFullWidth = false,
   styles = defaultStyles,
   ...props
-}: IButtonProps): React.ReactElement => {
+}: IButtonCssProps): React.ReactElement => {
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
 
   if (props.onClicked && buttonType === 'submit') {
@@ -72,7 +72,7 @@ export const Button = ({
     <button
       id={props.id}
       className={getClassName(
-        Button.displayName,
+        ButtonCss.displayName,
         className,
         styles.button,
         isFullWidth && styles.fullWidth,
@@ -128,4 +128,4 @@ export const Button = ({
     </button>
   );
 };
-Button.displayName = 'KibaButton';
+ButtonCss.displayName = 'KibaButton';
