@@ -24,6 +24,7 @@
     "markdown-to-jsx": "^7.7.4",
     "polished": "^4.3.1",
     "rollup-plugin-scss": "^4.0.1",
+    "rollup-plugin-styles": "^4.0.0",
     "sass": "^1.86.3"
   },
   "devDependencies": {

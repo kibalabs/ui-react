@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import scss from 'rollup-plugin-scss'
+import styles from "rollup-plugin-styles";
 
 export default (config) => {
   const newConfig = config;
