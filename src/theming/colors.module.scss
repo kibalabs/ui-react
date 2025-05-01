@@ -1,31 +1,20 @@
-@use 'sass:color';
-
-$colorValues: 0.01, 0.05, 0.10, 0.20, 0.25, 0.50, 0.75, 0.80, 0.90, 0.95, 0.99;
+@use './colorUtil.module.scss' as colorUtil;
 
 $brandPrimary: #333 !default;
 $text: #333 !default;
+$textOnBrand: #eee !default;
 $background: #f5f5f5 !default;
 $disabledLight50: rgba(0, 0, 0, 0.1) !default;
 $disabledText: #999 !default;
-$focusOutline: #000 !default;
 $error: #ff0000 !default;
 $disabledText: #999 !default;
 
-@mixin expandColor($name, $color) {
-  --color-#{$name}: #{$color};
-  @each $value in $colorValues {
-    --color-#{$name}Clear#{$value * 100}: #{color.adjust($color, $space: hsl, $alpha: -$value)};
-    --color-#{$name}Light#{$value * 100}: #{color.scale($color, $space: hsl, $lightness: $value * 100%)};
-    --color-#{$name}Dark#{$value * 100}: #{color.scale($color, $space: hsl, $lightness: -$value * 100%)};
-  }
-}
-
 :root {
-  @include expandColor('brandPrimary', $brandPrimary);
-  @include expandColor('text', $text);
-  @include expandColor('background', $background);
+  @include colorUtil.expandColor('brandPrimary', $brandPrimary);
+  @include colorUtil.expandColor('text', $text);
+  @include colorUtil.expandColor('background', $background);
+  @include colorUtil.expandColor('textOnBrand', $textOnBrand);
+  @include colorUtil.expandColor('error', $error);
   --color-disabledLight50: #{$disabledLight50};
   --color-disabledText: #{$disabledText};
-  --color-focusOutline: #{$focusOutline};
-  --color-error: #{$error};
 }

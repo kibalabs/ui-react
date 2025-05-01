@@ -1,0 +1,12 @@
+@use 'sass:color';
+
+$colorValues: 0.01, 0.05, 0.10, 0.20, 0.25, 0.50, 0.75, 0.80, 0.90, 0.95, 0.99;
+
+@mixin expandColor($name, $color) {
+  --color-#{$name}: #{$color};
+  @each $value in $colorValues {
+    --color-#{$name}Clear#{$value * 100}: #{color.adjust($color, $space: hsl, $alpha: -$value)};
+    --color-#{$name}Light#{$value * 100}: #{color.scale($color, $space: hsl, $lightness: $value * 100%)};
+    --color-#{$name}Dark#{$value * 100}: #{color.scale($color, $space: hsl, $lightness: -$value * 100%)};
+  }
+}

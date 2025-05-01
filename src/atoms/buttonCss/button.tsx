@@ -1,10 +1,13 @@
 // ui-react/components/button.tsx
 import React from 'react';
-import * as defaultStyles from './button.module.scss';
+
 import { getClassName } from '@kibalabs/core';
+import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
+
+import * as defaultStyles from './button.module.scss';
 import { Alignment } from '../../model';
 import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particles';
-import { OptionalProppedElement, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
+
 
 export interface IButtonCssProps {
   id?: string;
@@ -29,7 +32,7 @@ export interface IButtonCssProps {
   styles?: Record<string, string>; // CSS Module styles
 }
 
-export const ButtonCss = ({
+export function ButtonCss({
   className = '',
   isTextFullWidth = true,
   iconGutter = PaddingSize.Default,
@@ -40,7 +43,7 @@ export const ButtonCss = ({
   isFullWidth = false,
   styles = defaultStyles,
   ...props
-}: IButtonCssProps): React.ReactElement => {
+}: IButtonCssProps): React.ReactElement {
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
 
   if (props.onClicked && buttonType === 'submit') {
@@ -68,64 +71,101 @@ export const ButtonCss = ({
   const isTargetWithinApp = props.target && props.target.startsWith('/');
   const innerTargetShouldOpenSameTab = props.targetShouldOpenSameTab || props.target?.startsWith('#') || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
 
+  const children = (
+    <span
+      className={getClassName(
+        'KibaButtonFocusFixed',
+        styles.focusFixer,
+      )}
+      style={alignmentStyles}
+    >
+      {!props.isLoading && props.iconLeft && (
+        <React.Fragment>
+          {props.iconLeft}
+          <Spacing variant={iconGutter} />
+        </React.Fragment>
+      )}
+      {!props.isLoading && (
+        <span
+          className={getClassName(
+            'KibaButtonText',
+            styles.text,
+            isTextFullWidth && styles.textFullWidth,
+          )}
+        >
+          {props.text}
+        </span>
+      )}
+      {!props.isLoading && props.iconRight && (
+        <React.Fragment>
+          <Spacing variant={iconGutter} />
+          {props.iconRight}
+        </React.Fragment>
+      )}
+      {props.isLoading && (
+        <LoadingSpinner
+          id={props.id && `${props.id}-loading-spinner`}
+          variant='light-small'
+        />
+      )}
+    </span>
+  );
+
+  const fullClassName = getClassName(
+    ButtonCss.displayName,
+    className,
+    styles.button,
+    isFullWidth && styles.fullWidth,
+    isFullHeight && styles.fullHeight,
+    props.isDisabled && styles.disabled,
+    props.isLoading && styles.loading,
+    ...(props.variant?.split('-').map((innerVariant: string): string => styles[innerVariant])) || [],
+  );
+
+  if (props.target) {
+    if (isUsingCoreRouting && innerTargetShouldOpenSameTab && isTargetWithinApp) {
+      return (
+        <CoreLink
+          id={props.id}
+          className={fullClassName}
+          onClick={onButtonClicked}
+          href={props.target}
+          rel='noopener'
+          tabIndex={props.tabIndex || 0}
+          target={innerTargetShouldOpenSameTab ? '_self' : '_blank'}
+          type={buttonType || 'button'}
+        >
+          {children}
+        </CoreLink>
+      );
+    }
+    return (
+      <a
+        id={props.id}
+        className={fullClassName}
+        onClick={onButtonClicked}
+        href={props.target}
+        rel='noopener noreferrer'
+        tabIndex={props.tabIndex || 0}
+        target={innerTargetShouldOpenSameTab ? '_self' : '_blank'}
+        type={buttonType || 'button'}
+      >
+        {children}
+      </a>
+    );
+  }
   return (
     <button
       id={props.id}
-      className={getClassName(
-        ButtonCss.displayName,
-        className,
-        styles.button,
-        isFullWidth && styles.fullWidth,
-        isFullHeight && styles.fullHeight,
-        props.isDisabled && styles.disabled,
-        props.isLoading && styles.loading,
-        ...(props.variant?.split('-').map((innerVariant: string): string => styles[innerVariant])) || []
-      )}
+      className={fullClassName}
       onClick={onButtonClicked}
       disabled={props.isDisabled}
-      href={props.target}
-      rel={props.target && 'noopener'}
       tabIndex={props.tabIndex || 0}
-      target={props.target ? (innerTargetShouldOpenSameTab ? '_self' : '_blank') : undefined}
-      // as={props.target ? (isUsingCoreRouting && innerTargetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
+      // eslint-disable-next-line react/button-has-type
       type={buttonType || 'button'}
     >
-      <span
-        className={getClassName(
-          'KibaButtonFocusFixed',
-          styles.focusFixer,
-        )}
-        style={alignmentStyles}
-      >
-        {!props.isLoading && props.iconLeft && (
-          <React.Fragment>
-            {props.iconLeft}
-            <Spacing variant={iconGutter} />
-          </React.Fragment>
-        )}
-        {!props.isLoading && (
-          <span
-            className={getClassName(
-              'KibaButtonText',
-              styles.text,
-              isTextFullWidth && styles.textFullWidth,
-            )}
-          >{props.text}</span>
-        )}
-        {!props.isLoading && props.iconRight && (
-          <React.Fragment>
-            <Spacing variant={iconGutter} />
-            {props.iconRight}
-          </React.Fragment>
-        )}
-        {props.isLoading && (
-          <LoadingSpinner
-            id={props.id && `${props.id}-loading-spinner`}
-            variant='light-small'
-          />
-        )}
-      </span>
+      {children}
     </button>
   );
-};
+}
 ButtonCss.displayName = 'KibaButton';

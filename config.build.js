@@ -1,6 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import scss from 'rollup-plugin-scss'
-import styles from "rollup-plugin-styles";
+import scss from 'rollup-plugin-scss';
 
 export default (config) => {
   const newConfig = config;
@@ -9,8 +8,8 @@ export default (config) => {
     newInnerConfig.plugins.push(scss({
       fileName: 'output.css',
     }));
+    newInnerConfig.preserveModules = true;
     return newInnerConfig;
   };
-  newConfig.preserveModules = true;
   return newConfig;
 };
