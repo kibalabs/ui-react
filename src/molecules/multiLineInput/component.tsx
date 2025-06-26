@@ -11,7 +11,11 @@ export interface IMultiLineInputTheme {
   inputFrameTheme: IInputFrameTheme;
 }
 
-const StyledMultiLineTextArea = styled.textarea`
+interface IStyledMultiLineTextAreaProps {
+  $resize: string;
+}
+
+const StyledMultiLineTextArea = styled.textarea<IStyledMultiLineTextAreaProps>`
   width: 100%;
   background: none;
   border: none;
@@ -20,6 +24,7 @@ const StyledMultiLineTextArea = styled.textarea`
   overflow-y: auto;
   resize: none;
   box-shadow: none;
+  resize: ${(props: IStyledMultiLineTextAreaProps): string => props.$resize};
 
   &:hover {
     box-shadow: none;
@@ -47,8 +52,8 @@ interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
   inputWrapperVariant?: string;
   shouldAutofocus?: boolean;
   shouldSpellCheck?: boolean;
-  // isResizableVertically?: boolean;
-  // isResizableHorizontally?: boolean;
+  isResizableVertically?: boolean;
+  isResizableHorizontally?: boolean;
   onKeyUp?: (key: string) => void;
   onKeyDown?: (key: string) => void;
   onClick?: () => void;
@@ -112,6 +117,7 @@ export function MultiLineInput({
       <StyledMultiLineTextArea
         id={props.id && `${props.id}-multiline-textarea`}
         className={getClassName(StyledMultiLineTextArea.displayName, !isEnabled && 'disabled')}
+        $resize={props.isResizableVertically && props.isResizableHorizontally ? 'both' : props.isResizableVertically ? 'vertical' : props.isResizableHorizontally ? 'horizontal' : 'none'}
         name={props.name}
         rows={rowCount}
         value={props.value || ''}
@@ -123,7 +129,6 @@ export function MultiLineInput({
         placeholder={props.placeholderText}
         autoFocus={props.shouldAutofocus}
         spellCheck={props.shouldSpellCheck}
-        // resize={props.isResizableVertically && props.isResizableHorizontally ? 'both' : props.isResizableVertically ? 'vertical' : props.isResizableHorizontally ? 'horizontal' : 'none'}
       />
     </InputFrame>
   );
