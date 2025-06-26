@@ -100,7 +100,7 @@ export const Portal = ({
   isScrollableVertically = true,
   isScrollableHorizontally = true,
   ...props
-}: IPortalProps): React.ReactElement => {
+}: IPortalProps): React.ReactElement => 
   const [positionTop, setPositionTop] = React.useState<number>(props.positionTop || 0);
   const [positionLeft, setPositionLeft] = React.useState<number>(props.positionLeft || 0);
   const [maxHeight, setMaxHeight] = React.useState<number>(0);
@@ -134,7 +134,6 @@ export const Portal = ({
   React.useEffect((): void => {
     updateSizes();
   }, [updateSizes]);
-
 
   return ReactDOM.createPortal(
     (
