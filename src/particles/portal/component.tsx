@@ -135,6 +135,7 @@ export const Portal = ({
     updateSizes();
   }, [updateSizes]);
 
+
   return ReactDOM.createPortal(
     (
       <StyledPortal
