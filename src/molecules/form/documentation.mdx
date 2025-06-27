@@ -1,6 +1,5 @@
 import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
 import { SingleLineInput } from '..';
-import { Button } from '../../atoms';
 import { Stack } from '../../layouts';
 import { Direction } from '../../model';
 import * as DocumentationStories from './documentation.stories';
@@ -26,8 +25,6 @@ export const Template = (args) => (
 ### Examples
 
 <Canvas>
-  {/* Button is disabled, so that when Button is clicked the page doesn't change. */}
-
   <Story of={DocumentationStories.Simple} />
 </Canvas>
 
