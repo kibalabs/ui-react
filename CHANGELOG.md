@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [PATCH] Corrections for how height is calculated in `MultiLineInput`
 - [MAJOR] Removed `Head` in favor of react 19 inline metadata tags
 - [MINOR] Added `isResizableVertically` and `isResizableHorizontally` to `MultiLineInput`
+- [MAJOR] Fix for `Checkbox` to not use aboslute positioning to hide the input
 
 ### Removed
 
