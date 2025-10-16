@@ -118,16 +118,14 @@ const StyledContainer = styled.label<IStyledCheckboxProps>`
 `;
 
 const StyledHiddenCheckbox = styled.input`
-  border: 0;
-  clip: rect(0 0 0 0);
-  clippath: inset(50%);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0;
   padding: 0;
-  position: absolute;
-  white-space: nowrap;
+  border: 0;
+  overflow: hidden;
 `;
 
 const StyledCheckbox = styled.div`
