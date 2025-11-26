@@ -107,6 +107,7 @@ export function GlobalCss(props: IGlobalCssProps): React.ReactElement {
     `;
   }, [props.theme, props.extraCss, props.isFullPageApp]);
   return (
+    // eslint-disable-next-line react/no-danger
     <style dangerouslySetInnerHTML={{ __html: cssString }} />
   );
 }

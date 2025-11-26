@@ -22,6 +22,7 @@ function ThemeCss(props: IThemeCssProps): React.ReactElement {
     return `@layer kiba-theme { ${buildThemeCssString(props.theme, props.extraComponentDefinitions)} }`;
   }, [props.theme, props.extraComponentDefinitions]);
   return (
+    // eslint-disable-next-line react/no-danger
     <style dangerouslySetInnerHTML={{ __html: cssString }} />
   );
 }
