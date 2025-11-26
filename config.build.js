@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 import * as sass from 'sass';
 
 const sassPlugin = {

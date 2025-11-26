@@ -1,5 +1,5 @@
 import React from 'react';
-import { buildTheme, resetCss, GlobalCss, ThemeProvider } from '../src';
+import { buildTheme, GlobalCss, ThemeProvider } from '../src';
 
 const theme = buildTheme({
   colors: {
@@ -53,7 +53,6 @@ const preview = {
       <ThemeProvider theme={theme}>
         <GlobalCss
           theme={theme}
-          resetCss={resetCss}
         />
         <Story />
       </ThemeProvider>

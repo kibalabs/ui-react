@@ -57,15 +57,13 @@ export const App = (): React.ReactElement => {
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
-        <GlobalCss resetCss={<your reset css>} theme={theme} />
+        <GlobalCss theme={theme} />
         ...
       </React.Fragment>
     </ThemeProvider>
   );
 };
 ```
-
-This should work just as well but won't include the CSS to clear by default and you will need to provide it yourself as resetCss (it can just be an empty string).
 
 ### Example code
 

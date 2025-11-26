@@ -56,6 +56,7 @@ export function KibaApp({
           <link href={props.theme.fonts[fontKey].url} rel='stylesheet' />
         </React.Fragment>
       ))}
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <BackgroundView {...props.background}>
         <div
           className={getClassName(isRunningOnBrowser ? 'js' : 'no-js')}
