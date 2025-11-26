@@ -1,0 +1,20 @@
+@use './colorUtil.module.scss' as colorUtil;
+
+$brandPrimary: #333 !default;
+$text: #333 !default;
+$textOnBrand: #eee !default;
+$background: #f5f5f5 !default;
+$disabledLight50: rgba(0, 0, 0, 0.1) !default;
+$disabledText: #999 !default;
+$error: #ff0000 !default;
+$disabledText: #999 !default;
+
+:root {
+  @include colorUtil.expandColor('brandPrimary', $brandPrimary);
+  @include colorUtil.expandColor('text', $text);
+  @include colorUtil.expandColor('background', $background);
+  @include colorUtil.expandColor('textOnBrand', $textOnBrand);
+  @include colorUtil.expandColor('error', $error);
+  --color-disabledLight50: #{$disabledLight50};
+  --color-disabledText: #{$disabledText};
+}
