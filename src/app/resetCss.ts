@@ -165,7 +165,7 @@ export const resetCss = `
   a:focus-visible {
     outline:0;
   }
-  button:not([class*="Kiba"]) {
+  button {
     border: none;
     margin: 0;
     padding: 0;

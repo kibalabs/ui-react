@@ -63,7 +63,7 @@
     display:none;
   }
 
-  button:not([class*="Kiba"]), input[type="reset"], input[type="button"], input[type="submit"] {
+  button, input[type="reset"], input[type="button"], input[type="submit"] {
     overflow:visible;
     width:auto;
   }
@@ -159,6 +159,7 @@
     outline: none;
     line-height: inherit;
     -webkit-appearance: none;
+    appearance: none;
   }
   /* Fix antialiasing */
   *, *:before, *:after {
