@@ -89,16 +89,18 @@ export const buildThemeCssString = (theme: ITheme, extraComponentDefinitions?: C
     ...(extraComponentDefinitions || []),
   ];
   const rootCssString = `
-    ${colorsToCss(theme.colors)};
-    ${themeToCss(theme.texts.default)};
-    background-color: ${theme.colors.background};
+    :root {
+      ${colorsToCss(theme.colors)};
+      ${themeToCss(theme.texts.default)};
+      background-color: ${theme.colors.background};
+    }
   `;
   // @ts-ignore
-  const cssString = componentDefinitions.reduce((accumulator: string, current: ComponentDefinition): string => {
+  const componentCssString = componentDefinitions.reduce((accumulator: string, current: ComponentDefinition): string => {
     return `
       ${accumulator}
       ${buildComponentThemeCssString(current.component.displayName, current.themeMap, current.themeCssFunction)}
     `;
-  }, rootCssString);
-  return cssString;
+  }, '');
+  return `${rootCssString}\n${componentCssString}`;
 };

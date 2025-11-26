@@ -58,40 +58,46 @@
 
     // Header variants
     &.header1, &.header {
-      @include header-text;
       font-size: 3.0rem;
       font-weight: 800;
+      color: $color-text;
+      line-height: 1.2em;
     }
 
     &.header2, &.title {
-      @include header-text;
       font-size: 2.0rem;
       font-weight: 700;
+      color: $color-text;
+      line-height: 1.2em;
     }
 
     &.header3, &.subtitle {
-      @include header-text;
       font-size: 1.4rem;
       font-weight: 700;
+      color: $color-text;
+      line-height: 1.2em;
     }
 
     &.header4 {
-      @include header-text;
       font-size: 1.3rem;
       font-weight: 600;
+      color: $color-text;
+      line-height: 1.2em;
       text-decoration: underline;
     }
 
     &.header5 {
-      @include header-text;
       font-size: 1.2rem;
       font-weight: 600;
+      color: $color-text;
+      line-height: 1.2em;
     }
 
     &.header6 {
-      @include header-text;
       font-size: 1.1rem;
       font-weight: 600;
+      color: $color-text;
+      line-height: 1.2em;
     }
 
     // Special variants

@@ -1,4 +1,6 @@
-export const resetCss = `
+@layer kiba-reset, kiba-structure, kiba-theme;
+
+@layer kiba-reset {
   /* copied from bootstrap grid */
   html {
     -webkit-box-sizing: border-box;
@@ -13,7 +15,7 @@ export const resetCss = `
   }
 
   /* Copied from https://gist.github.com/anthonyshort/552543 */
-  input, label, select, button, textarea {
+  input, label, select, textarea {
     margin:0;
     border:0;
     padding:0;
@@ -47,28 +49,9 @@ export const resetCss = `
     box-sizing:border-box;
   }
 
-  input[type=date],
-  input[type=datetime],
-  input[type=datetime-local],
-  input[type=email],
-  input[type=month],
-  input[type=number],
-  input[type=password],
-  input[type=range],
-  input[type=search],
-  input[type=tel],
-  input[type=text],
-  input[type=time],
-  input[type=url],
-  input[type=week] {
-  }
-
   input[type=checkbox], input[type=radio] {
     width:13px;
     height:13px;
-  }
-
-  input[type=file] {
   }
 
   input[type=search] {
@@ -80,7 +63,7 @@ export const resetCss = `
     display:none;
   }
 
-  button, input[type="reset"], input[type="button"], input[type="submit"] {
+  button:not([class*="Kiba"]), input[type="reset"], input[type="button"], input[type="submit"] {
     overflow:visible;
     width:auto;
   }
@@ -96,8 +79,6 @@ export const resetCss = `
     overflow:auto;
   }
 
-  select {
-  }
   select[multiple] {
     vertical-align:top;
   }
@@ -165,7 +146,7 @@ export const resetCss = `
   a:focus-visible {
     outline:0;
   }
-  button:not([class*="Kiba"]) {
+  button {
     border: none;
     margin: 0;
     padding: 0;
@@ -187,7 +168,6 @@ export const resetCss = `
   /* Disable user select on everything but texts */
   *, *:before, *:after {
     user-select: none;
-
   }
   p, h1, h2, h3, h4, h5, h6, b, strong, i, em, mark, small, del, ins, sub, sup, blockquote, pre, ul, ol, li, table, tr, th, td, input, textarea, span, div[contenteditable="true"] {
     user-select: text;
@@ -195,4 +175,4 @@ export const resetCss = `
   b {
     font-weight: bold;
   }
-`;
+}

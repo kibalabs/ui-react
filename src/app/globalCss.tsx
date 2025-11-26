@@ -6,7 +6,6 @@ import { ThemeMap, themeToCss } from '../util';
 
 interface IGlobalCssProps {
   theme: ITheme;
-  resetCss: string;
   extraCss?: string;
   isFullPageApp?: boolean;
 }
@@ -25,8 +24,6 @@ export function GlobalCss(props: IGlobalCssProps): React.ReactElement {
       }
     ` : '';
     return `
-      ${props.resetCss}
-
       html {
         scroll-behavior: smooth;
         image-rendering: pixelated;
@@ -108,7 +105,7 @@ export function GlobalCss(props: IGlobalCssProps): React.ReactElement {
 
       ${props.extraCss || ''}
     `;
-  }, [props.theme, props.resetCss, props.extraCss, props.isFullPageApp]);
+  }, [props.theme, props.extraCss, props.isFullPageApp]);
   return (
     <style dangerouslySetInnerHTML={{ __html: cssString }} />
   );

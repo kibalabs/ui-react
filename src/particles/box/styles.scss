@@ -7,12 +7,10 @@
     display: var(--kiba-box-display, block);
     width: var(--kiba-box-width, 100%);
     height: var(--kiba-box-height, auto);
-    max-width: var(--kiba-box-max-width);
-    max-height: var(--kiba-box-max-height);
-    min-width: var(--kiba-box-min-width);
-    min-height: var(--kiba-box-min-height);
-    z-index: var(--kiba-box-z-index);
-    position: var(--kiba-box-position);
+    max-width: var(--kiba-box-max-width, none);
+    max-height: var(--kiba-box-max-height, none);
+    min-width: var(--kiba-box-min-width, auto);
+    min-height: var(--kiba-box-min-height, auto);
 
     &.clipContent { overflow: hidden; }
     &.captureTouches { pointer-events: all; }

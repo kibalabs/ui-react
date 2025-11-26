@@ -4,7 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import { getIsRunningOnBrowser, IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
 
 import { GlobalCss } from './globalCss';
-import { resetCss } from './resetCss';
+import '../styles/reset.scss';
 import { ITheme, ThemeProvider } from '../theming';
 import { ComponentDefinition } from '../theming/cssBuilder';
 import { ThemeType } from '../util';
@@ -46,7 +46,6 @@ export function KibaApp({
     <ThemeProvider theme={props.theme} extraComponentDefinitions={props.extraComponentDefinitions}>
       <GlobalCss
         theme={props.theme}
-        resetCss={resetCss}
         extraCss={props.extraGlobalCss}
         isFullPageApp={props.isFullPageApp}
       />

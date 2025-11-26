@@ -19,7 +19,7 @@ interface IThemeCssProps {
 
 function ThemeCss(props: IThemeCssProps): React.ReactElement {
   const cssString = React.useMemo((): string => {
-    return `@layer kiba-theme { :root { ${buildThemeCssString(props.theme, props.extraComponentDefinitions)} } }`;
+    return `@layer kiba-theme { ${buildThemeCssString(props.theme, props.extraComponentDefinitions)} }`;
   }, [props.theme, props.extraComponentDefinitions]);
   return (
     <style dangerouslySetInnerHTML={{ __html: cssString }} />

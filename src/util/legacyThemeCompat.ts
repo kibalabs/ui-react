@@ -3,7 +3,7 @@ import { RecursivePartial } from '@kibalabs/core';
 import { IBoxTheme } from '../particles/box/theme';
 import { IButtonTheme } from '../atoms/button/theme';
 import { ITextTheme } from '../particles/text/theme';
-import { valueToCss } from './themeUtil';
+import { themeToCss, valueToCss } from './themeUtil';
 
 // NOTE: This file contains backward compatibility functions for the legacy styled-components theming system.
 // These will be removed once all consumers migrate to CSS variants.
@@ -21,8 +21,7 @@ export const themeToInlineStyles = (theme?: RecursivePartial<IBoxTheme>): React.
   return styles as React.CSSProperties;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const BoxThemedStyle = (_theme: RecursivePartial<IBoxTheme>): string => '';
+export const BoxThemedStyle = (theme: RecursivePartial<IBoxTheme>): string => themeToCss(theme);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const ButtonThemedStyle = (_theme: RecursivePartial<IButtonTheme>): string => '';

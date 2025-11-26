@@ -80,8 +80,8 @@ export function Box({
     '--kiba-box-min-height-md': props.minHeightResponsive?.medium,
     '--kiba-box-min-height-lg': props.minHeightResponsive?.large,
     '--kiba-box-min-height-xl': props.minHeightResponsive?.extraLarge,
-    '--kiba-box-z-index': props.zIndex !== undefined ? String(props.zIndex) : undefined,
-    '--kiba-box-position': props.position,
+    zIndex: props.zIndex,
+    position: props.position as React.CSSProperties['position'],
   };
   return (
     <div
