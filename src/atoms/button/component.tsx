@@ -3,7 +3,7 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 
-import './styles.css';
+import './styles.scss';
 import { IButtonTheme } from './theme';
 import { Alignment, IComponentProps } from '../../model';
 import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particles';

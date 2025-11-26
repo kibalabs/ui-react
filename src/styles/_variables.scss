@@ -1,0 +1,54 @@
+// Color variables - map to CSS custom properties
+$color-brand-primary: var(--kiba-color-brand-primary);
+$color-brand-secondary: var(--kiba-color-brand-secondary, #1a9f4d);
+$color-brand-primary-clear90: var(--kiba-color-brand-primary-clear90, rgba(39, 236, 111, 0.1));
+$color-brand-primary-clear80: var(--kiba-color-brand-primary-clear80, rgba(39, 236, 111, 0.2));
+$color-background: var(--kiba-color-background);
+$color-background-light10: var(--kiba-color-background-light10);
+$color-background-dark05: var(--kiba-color-background-dark05);
+$color-background-dark50: var(--kiba-color-background-dark50);
+$color-background-clear75: var(--kiba-color-background-clear75);
+$color-text: var(--kiba-color-text);
+$color-text-on-brand: var(--kiba-color-text-on-brand, #222222);
+$color-text-light25: var(--kiba-color-text-light25, rgba(238, 238, 238, 0.75));
+$color-disabled-light50: var(--kiba-color-disabled-light50, rgba(119, 119, 119, 0.5));
+$color-disabled-text: var(--kiba-color-disabled-text, #444444);
+$color-error: var(--kiba-color-error);
+$color-success: var(--kiba-color-success);
+
+// Spacing variables
+$padding: var(--kiba-padding);
+$padding-narrow: var(--kiba-padding-narrow);
+$padding-wide: var(--kiba-padding-wide);
+$padding-wide2: var(--kiba-padding-wide2);
+
+// Border variables
+$border-radius: var(--kiba-border-radius);
+$border-width: var(--kiba-border-width);
+
+// Font variables
+$font-size: var(--kiba-font-size, 16px);
+$font-family: var(--kiba-font-family, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
+
+// Transition mixin
+@mixin transition($duration: 0.3s) {
+  transition-duration: $duration;
+}
+
+// Header text mixin
+@mixin header-text {
+  color: $color-text;
+  line-height: 1.2em;
+}
+
+// Button focus fixer base styles
+@mixin button-focus-fixer-base {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-clip: border-box;
+  position: relative;
+  box-sizing: border-box;
+}

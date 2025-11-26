@@ -3,7 +3,7 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
-import './styles.css';
+import './styles.scss';
 import { ITextTheme } from './theme';
 import { IComponentProps } from '../../model';
 import { ResponsiveField } from '../../util';

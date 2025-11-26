@@ -1,0 +1,117 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaButton {
+    display: inline-flex;
+    flex-direction: row;
+    outline: none;
+    background-clip: border-box;
+    position: relative;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+
+    &.fullWidth { width: 100%; }
+    &.fullHeight { height: 100%; }
+    &.disabled { cursor: not-allowed; }
+    &.isLoading { cursor: default; }
+
+    > .KibaButtonFocusFixer {
+      @include button-focus-fixer-base;
+    }
+
+    .KibaButton-text {
+      width: auto;
+      &.fullWidth { width: 100%; }
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaButton {
+    @include transition;
+
+    > .KibaButtonFocusFixer {
+      @include transition;
+      padding: $padding $padding-wide;
+      background-color: transparent;
+      border-radius: $border-radius;
+      border: 2px solid transparent;
+      color: $color-brand-primary;
+      font-weight: 600;
+      text-align: center;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    &:hover > .KibaButtonFocusFixer {
+      background-color: $color-brand-primary-clear90;
+    }
+
+    &:active > .KibaButtonFocusFixer {
+      background-color: $color-brand-primary-clear80;
+    }
+
+    &:focus > .KibaButtonFocusFixer {
+      border-color: $color-background-dark50;
+    }
+
+    &:visited > .KibaButtonFocusFixer {
+      color: $color-brand-primary;
+    }
+
+    // Disabled state
+    &.disabled > .KibaButtonFocusFixer {
+      background-color: $color-disabled-light50;
+      color: $color-disabled-text;
+    }
+
+    &.disabled:hover > .KibaButtonFocusFixer,
+    &.disabled:active > .KibaButtonFocusFixer,
+    &.disabled:focus > .KibaButtonFocusFixer {
+      background-color: $color-disabled-light50;
+      color: $color-disabled-text;
+    }
+
+    // Primary variant
+    &.primary > .KibaButtonFocusFixer {
+      background-color: $color-brand-primary;
+      border-color: $color-brand-primary;
+      color: $color-text-on-brand;
+    }
+
+    &.primary:hover > .KibaButtonFocusFixer {
+      background-color: $color-brand-secondary;
+    }
+
+    &.primary:active > .KibaButtonFocusFixer {
+      background-color: var(--kiba-color-brand-secondary-dark10, #158040);
+    }
+
+    // Secondary variant
+    &.secondary > .KibaButtonFocusFixer {
+      border-color: $color-brand-primary;
+    }
+
+    // Large variant
+    &.large > .KibaButtonFocusFixer {
+      padding: $padding-wide $padding-wide2;
+      font-size: 1.2em;
+    }
+
+    // Small variant
+    &.small > .KibaButtonFocusFixer {
+      padding: $padding-narrow $padding;
+      font-size: 0.8em;
+    }
+
+    // Card variant
+    &.card > .KibaButtonFocusFixer {
+      box-shadow: 0px 8px 8px -6px rgba(0, 0, 0, 0.15);
+      margin: 0px 4px 12px 4px;
+    }
+  }
+}
