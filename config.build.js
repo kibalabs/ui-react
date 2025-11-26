@@ -10,7 +10,7 @@ const sassPlugin = {
     }
     // Resolve the full path of the scss file
     const resolved = path.resolve(path.dirname(importer || ''), source);
-    // Return the .css version 
+    // Return the .css version
     return resolved.replace('.scss', '.css');
   },
   load(id) {
