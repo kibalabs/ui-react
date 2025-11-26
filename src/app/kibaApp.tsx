@@ -4,7 +4,6 @@ import { getClassName } from '@kibalabs/core';
 import { getIsRunningOnBrowser, IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
 
 import { GlobalCss } from './globalCss';
-import '../styles/reset.scss';
 import { ITheme, ThemeProvider } from '../theming';
 import { ComponentDefinition } from '../theming/cssBuilder';
 import { ThemeType } from '../util';

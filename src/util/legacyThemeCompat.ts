@@ -1,9 +1,11 @@
+import React from 'react';
+
 import { RecursivePartial } from '@kibalabs/core';
 
-import { IBoxTheme } from '../particles/box/theme';
-import { IButtonTheme } from '../atoms/button/theme';
-import { ITextTheme } from '../particles/text/theme';
 import { themeToCss, valueToCss } from './themeUtil';
+import { IButtonTheme } from '../atoms/button/theme';
+import { IBoxTheme } from '../particles/box/theme';
+import { ITextTheme } from '../particles/text/theme';
 
 // NOTE: This file contains backward compatibility functions for the legacy styled-components theming system.
 // These will be removed once all consumers migrate to CSS variants.

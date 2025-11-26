@@ -1,6 +1,7 @@
-import * as sass from 'sass';
-import path from 'node:path';
 import fs from 'node:fs';
+import path from 'node:path';
+
+import * as sass from 'sass';
 
 const sassPlugin = {
   name: 'sass',
