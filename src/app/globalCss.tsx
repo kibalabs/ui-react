@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import React from 'react';
 
 import { IBulletListTheme, IBulletTextTheme, ILinkTheme } from '../atoms';
 import { ITheme } from '../theming';
@@ -11,145 +11,105 @@ interface IGlobalCssProps {
   isFullPageApp?: boolean;
 }
 
-// NOTE(krishan711): global styles should come before all other styles but there is a problem with this:
-// https://github.com/styled-components/styled-components/issues/3146
-export const GlobalCss = createGlobalStyle<IGlobalCssProps>`
-  ${(props: IGlobalCssProps): string => props.resetCss};
+export function GlobalCss(props: IGlobalCssProps): React.ReactElement {
+  const cssString = React.useMemo((): string => {
+    const fullPageCss = props.isFullPageApp ? `
+      html, body {
+        width: 100%;
+        height: 100%;
+        overscroll-behavior: none;
+      }
+      #root {
+        width: 100%;
+        height: 100%;
+      }
+    ` : '';
+    return `
+      ${props.resetCss}
 
-  html {
-    scroll-behavior: smooth;
-    image-rendering: pixelated;
-    image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
-    -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
-  }
+      html {
+        scroll-behavior: smooth;
+        image-rendering: pixelated;
+        image-rendering: -webkit-optimize-contrast;
+        -ms-interpolation-mode: nearest-neighbor;
+      }
 
-  body {
-    background-color: ${(props: IGlobalCssProps): string => props.theme.colors.background};
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.default)};
-    overflow: auto;
-    text-align: left;
-  }
+      body {
+        background-color: ${props.theme.colors.background};
+        ${themeToCss(props.theme.texts.default)}
+        overflow: auto;
+        text-align: left;
+      }
 
-  ${(props: IGlobalCssProps): string => (props.isFullPageApp ? `
-    html, body {
-      width: 100%;
-      height: 100%;
-      overscroll-behavior: none;
-    }
+      ${fullPageCss}
 
-    // NOTE(krishan711): for ios only disable all body scrolling
-    // NOTE(krishan711): disabled cos it wasnt working on safari, not sure what the answer is here
-    // _::-webkit-full-page-media, _:future, :root body {
-    //   overflow: hidden;
-    // }
+      a:not(.KibaButton):not(.KibaLinkBase):not(.KibaIconButton):not(.KibaLink) {
+        ${themeToCss((props.theme.links as ThemeMap<ILinkTheme>).default.normal.default.text)}
+      }
+      a:not(.KibaButton):not(.KibaLinkBase):not(.KibaIconButton):not(.KibaLink):hover {
+        ${themeToCss((props.theme.links as ThemeMap<ILinkTheme>).default.normal.hover.text)}
+      }
+      a:not(.KibaButton):not(.KibaLinkBase):not(.KibaIconButton):not(.KibaLink):visited {
+        ${themeToCss((props.theme.links as ThemeMap<ILinkTheme>).default.visited?.default?.text)}
+      }
 
-    #root {
-      width: 100%;
-      height: 100%;
-    }
-  ` : '')};
+      p { ${themeToCss(props.theme.texts.paragraph)} }
+      b { ${themeToCss(props.theme.texts.bold)} }
+      strong { ${themeToCss(props.theme.texts.strong)} }
+      i { ${themeToCss(props.theme.texts.italic)} }
+      em { ${themeToCss(props.theme.texts.emphasis)} }
+      mark { ${themeToCss(props.theme.texts.mark)} }
+      small { ${themeToCss(props.theme.texts.small)} }
+      del { ${themeToCss(props.theme.texts.deleted)} }
+      ins { ${themeToCss(props.theme.texts.inserted)} }
+      sub { ${themeToCss(props.theme.texts.subscript)} }
+      sup { ${themeToCss(props.theme.texts.superscript)} }
 
-  /* NOTE(krishan711): the :not(.button) needs to be specified as Buttons can act as links and these styles will be used on hover */
-  /* since this ":hover" is more specific (when hovering) than the generic styles for the default button (with no modifier) */
-  a:not(.KibaButton):not(.KibaLinkBase):not(.KibaIconButton):not(.KibaLink) {
-    ${(props: IGlobalCssProps): string => themeToCss((props.theme.links as ThemeMap<ILinkTheme>).default.normal.default.text)};
-    :hover {
-      ${(props: IGlobalCssProps): string => themeToCss((props.theme.links as ThemeMap<ILinkTheme>).default.normal.hover.text)};
-    }
-    :visited {
-      ${(props: IGlobalCssProps): string => themeToCss((props.theme.links as ThemeMap<ILinkTheme>).default.visited?.default?.text)};
-    }
-  }
+      h1 { ${themeToCss(props.theme.texts.header1)} }
+      h2 { ${themeToCss(props.theme.texts.header2)} }
+      h3 { ${themeToCss(props.theme.texts.header3)} }
+      h4 { ${themeToCss(props.theme.texts.header4)} }
+      h5 { ${themeToCss(props.theme.texts.header5)} }
+      h6 { ${themeToCss(props.theme.texts.header6)} }
 
-  p {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.paragraph)};
-  }
-  b {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.bold)};
-  }
-  strong {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.strong)};
-  }
-  i {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.italic)};
-  }
-  em {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.emphasis)};
-  }
-  mark {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.mark)};
-  }
-  small {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.small)};
-  }
-  del {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.deleted)};
-  }
-  ins {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.inserted)};
-  }
-  sub {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.subscript)};
-  }
-  sup {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.superscript)};
-  }
-
-  h1 {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.header1)};
-  }
-  h2 {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.header2)};
-  }
-  h3 {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.header3)};
-  }
-  h4 {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.header4)};
-  }
-  h5 {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.header5)};
-  }
-  h6 {
-    ${(props: IGlobalCssProps): string => themeToCss(props.theme.texts.header6)};
-  }
-
-  ul {
-    ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletLists as ThemeMap<IBulletListTheme>).default.normal.default.bulletList)};
-    list-style-position: outside;
-    text-indent: -0.1em;
-    display: table;
-    li {
-      ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).default.normal.default.text)};
-      display: table;
-      &:before {
+      ul {
+        ${themeToCss((props.theme.bulletLists as ThemeMap<IBulletListTheme>).default.normal.default.bulletList)}
+        list-style-position: outside;
+        text-indent: -0.1em;
+        display: table;
+      }
+      ul li {
+        ${themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).default.normal.default.text)}
+        display: table;
+      }
+      ul li:before {
         display: table-cell;
         padding-right: 1em;
-        ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).default.normal.default.bullet)};
+        ${themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).default.normal.default.bullet)}
       }
-    }
-  }
 
-
-  ol {
-    ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletLists as ThemeMap<IBulletListTheme>).default.normal.default.bulletList)};
-    list-style-position: outside;
-    counter-reset: list-number;
-    text-indent: -0.1em;
-    display: table;
-
-    li {
-      ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).numbered?.normal?.default?.text)};
-      counter-increment: list-number;
-      display: table;
-      &:before {
+      ol {
+        ${themeToCss((props.theme.bulletLists as ThemeMap<IBulletListTheme>).default.normal.default.bulletList)}
+        list-style-position: outside;
+        counter-reset: list-number;
+        text-indent: -0.1em;
+        display: table;
+      }
+      ol li {
+        ${themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).numbered?.normal?.default?.text)}
+        counter-increment: list-number;
+        display: table;
+      }
+      ol li:before {
         display: table-cell;
         padding-right: 1em;
-        ${(props: IGlobalCssProps): string => themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).numbered?.normal?.default?.bullet)};
+        ${themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).numbered?.normal?.default?.bullet)}
       }
-    }
-  }
 
-
-  ${(props: IGlobalCssProps): string => props.extraCss || ''};
-`;
+      ${props.extraCss || ''}
+    `;
+  }, [props.theme, props.resetCss, props.extraCss, props.isFullPageApp]);
+  return (
+    <style dangerouslySetInnerHTML={{ __html: cssString }} />
+  );
+}

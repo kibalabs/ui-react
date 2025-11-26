@@ -1,60 +1,15 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
+import { getClassName } from '@kibalabs/core';
 import { IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
+import './styles.css';
 import { IBoxTheme } from './theme';
-import { IComponentProps, IDimensionGuide, themeToCss, useDimensions } from '../..';
-import { fieldToResponsiveCss, getCss, propertyToCss, ResponsiveField } from '../../util';
+import { IComponentProps } from '../..';
+import { ResponsiveField } from '../../util';
+import { themeToInlineStyles } from '../../util/legacyThemeCompat';
 
-export const BoxThemedStyle = (theme: RecursivePartial<IBoxTheme>): string => `
-  ${themeToCss(theme)};
-`;
-
-interface IStyledBoxProps {
-  $theme?: RecursivePartial<IBoxTheme>;
-  $dimensions: IDimensionGuide;
-  $height: ResponsiveField<string>;
-  $width: ResponsiveField<string>;
-  $maxHeight: ResponsiveField<string> | null;
-  $maxWidth: ResponsiveField<string> | null;
-  $minHeight: ResponsiveField<string> | null;
-  $minWidth: ResponsiveField<string> | null;
-  $blockType: string;
-  $zIndex?: number;
-  $position?: string;
-}
-
-const StyledBox = styled.div<IStyledBoxProps>`
-  box-sizing: border-box;
-  flex-direction: column;
-  &.clipContent {
-    overflow: hidden;
-  }
-  &.captureTouches {
-    pointer-events: all;
-  }
-  &.scrollableVertically {
-    overflow-y: auto;
-  }
-  &.scrollableHorizontally {
-    overflow-x: auto;
-  }
-  ${(props: IStyledBoxProps): string => fieldToResponsiveCss(props.$height, props.$dimensions, getCss('height'))};
-  ${(props: IStyledBoxProps): string => fieldToResponsiveCss(props.$width, props.$dimensions, getCss('width'))};
-  ${(props: IStyledBoxProps): string => (props.$maxHeight ? fieldToResponsiveCss(props.$maxHeight, props.$dimensions, getCss('max-height')) : '')};
-  ${(props: IStyledBoxProps): string => (props.$maxWidth ? fieldToResponsiveCss(props.$maxWidth, props.$dimensions, getCss('max-width')) : '')};
-  ${(props: IStyledBoxProps): string => (props.$minHeight ? fieldToResponsiveCss(props.$minHeight, props.$dimensions, getCss('min-height')) : '')};
-  ${(props: IStyledBoxProps): string => (props.$minWidth ? fieldToResponsiveCss(props.$minWidth, props.$dimensions, getCss('min-width')) : '')};
-  ${(props: IStyledBoxProps): string => propertyToCss('display', props.$blockType)};
-  ${(props: IStyledBoxProps): string => propertyToCss('z-index', props.$zIndex)};
-  ${(props: IStyledBoxProps): string => propertyToCss('position', props.$position)};
-
-  &&&& {
-    ${(props: IStyledBoxProps): string => (props.$theme ? BoxThemedStyle(props.$theme) : '')};
-  }
-`;
+export { BoxThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface IBoxProps extends IComponentProps<IBoxTheme>, IOptionalSingleAnyChildProps {
   height?: string;
@@ -87,39 +42,57 @@ export function Box({
   isFullWidth = true,
   ...props
 }: IBoxProps): React.ReactElement {
-  const dimensions = useDimensions();
-  const height = props.height || (props.isFullHeight ? '100%' : 'auto');
-  const width = props.width || (isFullWidth ? '100%' : 'auto');
-  const maxHeight = props.maxHeight || null;
-  const maxWidth = props.maxWidth || null;
-  const minHeight = props.minHeight || null;
-  const minWidth = props.minWidth || null;
-  const maxHeightResponsive = props.maxHeightResponsive || maxHeight ? { base: (maxHeight || undefined), ...props.maxHeightResponsive } : null;
-  const maxWidthResponsive = props.maxWidthResponsive || maxWidth ? { base: (maxWidth || undefined), ...props.maxWidthResponsive } : null;
-  const minHeightResponsive = props.minHeightResponsive || minHeight ? { base: (minHeight || undefined), ...props.minHeightResponsive } : null;
-  const minWidthResponsive = props.minWidthResponsive || minWidth ? { base: (minWidth || undefined), ...props.minWidthResponsive } : null;
+  const height = props.height || (props.isFullHeight ? '100%' : undefined);
+  const width = props.width || (isFullWidth ? '100%' : undefined);
   const blockType = width === '100%' ? 'block' : 'flex';
-
+  const themeStyles = themeToInlineStyles(props.theme);
+  const combinedStyles: React.CSSProperties = {
+    ...themeStyles,
+    // @ts-expect-error CSS custom properties are valid but not in CSSProperties type
+    '--kiba-box-display': blockType,
+    '--kiba-box-width': width,
+    '--kiba-box-width-sm': props.widthResponsive?.small,
+    '--kiba-box-width-md': props.widthResponsive?.medium,
+    '--kiba-box-width-lg': props.widthResponsive?.large,
+    '--kiba-box-width-xl': props.widthResponsive?.extraLarge,
+    '--kiba-box-height': height,
+    '--kiba-box-height-sm': props.heightResponsive?.small,
+    '--kiba-box-height-md': props.heightResponsive?.medium,
+    '--kiba-box-height-lg': props.heightResponsive?.large,
+    '--kiba-box-height-xl': props.heightResponsive?.extraLarge,
+    '--kiba-box-max-width': props.maxWidth,
+    '--kiba-box-max-width-sm': props.maxWidthResponsive?.small,
+    '--kiba-box-max-width-md': props.maxWidthResponsive?.medium,
+    '--kiba-box-max-width-lg': props.maxWidthResponsive?.large,
+    '--kiba-box-max-width-xl': props.maxWidthResponsive?.extraLarge,
+    '--kiba-box-max-height': props.maxHeight,
+    '--kiba-box-max-height-sm': props.maxHeightResponsive?.small,
+    '--kiba-box-max-height-md': props.maxHeightResponsive?.medium,
+    '--kiba-box-max-height-lg': props.maxHeightResponsive?.large,
+    '--kiba-box-max-height-xl': props.maxHeightResponsive?.extraLarge,
+    '--kiba-box-min-width': props.minWidth,
+    '--kiba-box-min-width-sm': props.minWidthResponsive?.small,
+    '--kiba-box-min-width-md': props.minWidthResponsive?.medium,
+    '--kiba-box-min-width-lg': props.minWidthResponsive?.large,
+    '--kiba-box-min-width-xl': props.minWidthResponsive?.extraLarge,
+    '--kiba-box-min-height': props.minHeight,
+    '--kiba-box-min-height-sm': props.minHeightResponsive?.small,
+    '--kiba-box-min-height-md': props.minHeightResponsive?.medium,
+    '--kiba-box-min-height-lg': props.minHeightResponsive?.large,
+    '--kiba-box-min-height-xl': props.minHeightResponsive?.extraLarge,
+    '--kiba-box-z-index': props.zIndex !== undefined ? String(props.zIndex) : undefined,
+    '--kiba-box-position': props.position,
+  };
   return (
-    <StyledBox
+    <div
       id={props.id}
       className={getClassName(Box.displayName, className, props.isScrollableVertically && 'scrollableVertically', props.isScrollableHorizontally && 'scrollableHorizontally', props.shouldClipContent && 'clipContent', props.shouldCaptureTouches && 'captureTouches', ...(variant?.split('-') || []))}
-      $theme={props.theme}
-      $dimensions={dimensions}
-      $height={{ base: height, ...props.heightResponsive }}
-      $width={{ base: width, ...props.widthResponsive }}
-      $maxHeight={maxHeightResponsive}
-      $maxWidth={maxWidthResponsive}
-      $minHeight={minHeightResponsive}
-      $minWidth={minWidthResponsive}
-      $blockType={blockType}
-      $zIndex={props.zIndex}
-      $position={props.position}
       title={props.title}
       ref={props.ref}
+      style={combinedStyles}
     >
       {props.children}
-    </StyledBox>
+    </div>
   );
 }
 Box.displayName = 'KibaBox';

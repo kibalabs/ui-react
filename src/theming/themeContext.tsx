@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
-import { createGlobalStyle } from 'styled-components';
 
 import { buildThemeCssString, ComponentDefinition } from './cssBuilder';
 import { ITheme } from './theme';
@@ -18,11 +17,14 @@ interface IThemeCssProps {
   extraComponentDefinitions?: ComponentDefinition<ThemeType>[];
 }
 
-const ThemeCss = createGlobalStyle<IThemeCssProps>`
-  :root {
-    ${(props: IThemeCssProps): string => buildThemeCssString(props.theme, props.extraComponentDefinitions)}
-  }
-`;
+function ThemeCss(props: IThemeCssProps): React.ReactElement {
+  const cssString = React.useMemo((): string => {
+    return `@layer kiba-theme { :root { ${buildThemeCssString(props.theme, props.extraComponentDefinitions)} } }`;
+  }, [props.theme, props.extraComponentDefinitions]);
+  return (
+    <style dangerouslySetInnerHTML={{ __html: cssString }} />
+  );
+}
 
 interface IThemeProviderProps extends IMultiAnyChildProps, IThemeCssProps {
 }
