@@ -4,19 +4,13 @@ import { RecursivePartial } from '@kibalabs/core';
 import { ITheme } from '.';
 import { buildBulletListThemes, IBulletListTheme } from '../atoms/bulletList';
 import { buildBulletTextThemes, IBulletTextTheme } from '../atoms/bulletText';
-import { IButtonTheme } from '../atoms/button';
 import { buildCheckboxThemes, ICheckboxTheme } from '../atoms/checkbox';
-import { ICollapsibleBoxTheme } from '../atoms/collapsibleBox';
 import { IDialogTheme } from '../atoms/dialog';
-import { IIconButtonTheme } from '../atoms/iconButton';
-import { IInputWrapperTheme } from '../atoms/inputWrapper';
 import { buildLinePagerThemes, ILinePagerTheme } from '../atoms/linePager';
 import { buildLinkThemes, ILinkTheme } from '../atoms/link';
 import { buildLinkBaseThemes, ILinkBaseTheme } from '../atoms/linkBase';
 import { buildListItemThemes, IListItemTheme } from '../atoms/listItem';
-import { IPrettyTextTheme } from '../atoms/prettyText';
 import { buildProgressCounterItemThemes, IProgressCounterItemTheme } from '../atoms/progressCounterItem';
-import { ISelectableViewTheme } from '../atoms/selectableView';
 import { buildSwitchThemes, ISwitchTheme } from '../atoms/switch';
 import { buildTabBarItemThemes, ITabBarItemTheme } from '../atoms/tabBarItem';
 import { buildTitledCollapsibleBoxThemes, ITitledCollapsibleBoxTheme } from '../atoms/titledCollapsibleBox';
@@ -73,24 +67,24 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     videos: videoThemes,
 
     // Atoms
-    buttons: {} as Record<string, IButtonTheme>,
+    buttons: {},
     checkboxes: buildCheckboxThemes(dimensions, textThemes, boxThemes, inputTheme?.checkboxes as PartialThemeMap<ICheckboxTheme>),
     bulletLists: buildBulletListThemes(dimensions, inputTheme?.bulletLists as PartialThemeMap<IBulletListTheme>),
     bulletTexts: buildBulletTextThemes(dimensions, textThemes, inputTheme?.bulletTexts as PartialThemeMap<IBulletTextTheme>),
-    collapsibleBoxes: {} as Record<string, ICollapsibleBoxTheme>,
+    collapsibleBoxes: {},
     dialogs: {} as Record<string, IDialogTheme>,
-    iconButtons: {} as Record<string, IIconButtonTheme>,
-    inputWrappers: {} as Record<string, IInputWrapperTheme>,
+    iconButtons: {},
+    inputWrappers: {},
     linkBases: linkBaseThemes,
     links: buildLinkThemes(dimensions, textThemes, boxThemes, inputTheme?.links as PartialThemeMap<ILinkTheme>),
     listItems: buildListItemThemes(dimensions, textThemes, boxThemes, inputTheme?.listItems as PartialThemeMap<IListItemTheme>),
-    prettyTexts: {} as Record<string, IPrettyTextTheme>,
+    prettyTexts: {},
     switches: buildSwitchThemes(dimensions, boxThemes, inputTheme?.switches as PartialThemeMap<ISwitchTheme>),
     webViews: buildWebViewThemes(dimensions, boxThemes, inputTheme?.webViews as PartialThemeMap<IWebViewTheme>),
     linePagers: buildLinePagerThemes(dimensions, boxThemes, inputTheme?.linePagers as PartialThemeMap<ILinePagerTheme>),
     progressCounterItems: buildProgressCounterItemThemes(dimensions, textThemes, boxThemes, inputTheme?.progressCounterItems as PartialThemeMap<IProgressCounterItemTheme>),
     tabBarItems: buildTabBarItemThemes(dimensions, textThemes, boxThemes, inputTheme?.tabBarItems as PartialThemeMap<ITabBarItemTheme>),
     titledCollapsibleBoxes: buildTitledCollapsibleBoxThemes(dimensions, textThemes, boxThemes, inputTheme?.titledCollapsibleBoxes as PartialThemeMap<ITitledCollapsibleBoxTheme>),
-    selectableViews: {} as Record<string, ISelectableViewTheme>,
+    selectableViews: {},
   };
 };

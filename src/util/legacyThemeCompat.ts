@@ -3,13 +3,7 @@ import React from 'react';
 import { RecursivePartial } from '@kibalabs/core';
 
 import { themeToCss, valueToCss } from './themeUtil';
-import { IButtonTheme } from '../atoms/button/theme';
-import { ICollapsibleBoxTheme } from '../atoms/collapsibleBox/theme';
 import { IDialogTheme } from '../atoms/dialog/theme';
-import { IIconButtonTheme } from '../atoms/iconButton/theme';
-import { IInputWrapperTheme } from '../atoms/inputWrapper/theme';
-import { IPrettyTextTheme } from '../atoms/prettyText/theme';
-import { ISelectableViewTheme } from '../atoms/selectableView/theme';
 import { IBoxTheme } from '../particles/box/theme';
 import { ITextTheme } from '../particles/text/theme';
 
@@ -32,25 +26,25 @@ export const themeToInlineStyles = (theme?: RecursivePartial<IBoxTheme>): React.
 export const BoxThemedStyle = (theme: RecursivePartial<IBoxTheme>): string => themeToCss(theme);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const ButtonThemedStyle = (_theme: RecursivePartial<IButtonTheme>): string => '';
+export const ButtonThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const CollapsibleBoxThemedStyle = (_theme: RecursivePartial<ICollapsibleBoxTheme>): string => '';
+export const CollapsibleBoxThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const DialogThemedStyle = (_theme: RecursivePartial<IDialogTheme>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const IconButtonThemedStyle = (_theme: RecursivePartial<IIconButtonTheme>): string => '';
+export const IconButtonThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const InputWrapperThemedStyle = (_theme: RecursivePartial<IInputWrapperTheme>): string => '';
+export const InputWrapperThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const PrettyTextThemedStyle = (_theme: RecursivePartial<IPrettyTextTheme>): string => '';
+export const PrettyTextThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const SelectableViewThemedStyle = (_theme: RecursivePartial<ISelectableViewTheme>): string => '';
+export const SelectableViewThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const TextThemedStyle = (_theme: RecursivePartial<ITextTheme>): string => '';

@@ -4,16 +4,14 @@ import { getClassName } from '@kibalabs/core';
 import { IMultiAnyChildProps } from '@kibalabs/core-react';
 
 import './styles.scss';
-import { IPrettyTextTheme } from './theme';
 import { IComponentProps } from '../../model';
 import { getTextTag, TextAlignment, TextTag } from '../../particles/text';
 
 export { PrettyTextThemedStyle } from '../../util/legacyThemeCompat';
 
-export interface IPrettyTextProps extends IComponentProps<IPrettyTextTheme>, IMultiAnyChildProps {
+export interface IPrettyTextProps extends IComponentProps, IMultiAnyChildProps {
   alignment?: TextAlignment;
   tag?: TextTag;
-  style?: React.CSSProperties;
 }
 
 export function PrettyText({

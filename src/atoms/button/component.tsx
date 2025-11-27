@@ -4,13 +4,12 @@ import { getClassName } from '@kibalabs/core';
 import { Link as CoreLink, OptionalProppedElement, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 
 import './styles.scss';
-import { IButtonTheme } from './theme';
 import { Alignment, IComponentProps } from '../../model';
 import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particles';
 
 export { ButtonThemedStyle } from '../../util/legacyThemeCompat';
 
-export interface IButtonProps extends IComponentProps<IButtonTheme> {
+export interface IButtonProps extends IComponentProps {
   text: string;
   isEnabled?: boolean;
   isLoading?: boolean;
@@ -26,7 +25,6 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   childAlignment?: Alignment;
   contentAlignment?: Alignment;
   isTextFullWidth?: boolean;
-  style?: React.CSSProperties;
   onClicked?(): void;
 }
 

@@ -4,13 +4,12 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
 import './styles.scss';
-import { IInputWrapperTheme } from './theme';
 import { IComponentProps } from '../../model';
 import { HidingView } from '../../wrappers';
 
 export { InputWrapperThemedStyle } from '../../util/legacyThemeCompat';
 
-export interface IInputWrapperProps extends IComponentProps<IInputWrapperTheme>, ISingleAnyChildProps {
+export interface IInputWrapperProps extends IComponentProps, ISingleAnyChildProps {
   messageText?: string;
   isEnabled?: boolean;
   onClicked?: () => void;

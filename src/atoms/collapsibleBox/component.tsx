@@ -4,20 +4,18 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
 import './styles.scss';
-import { ICollapsibleBoxTheme } from './theme';
 import { IComponentProps } from '../../model';
 import { KibaIcon } from '../../particles';
 import { HidingView } from '../../wrappers';
 
 export { CollapsibleBoxThemedStyle } from '../../util/legacyThemeCompat';
 
-interface ICollapsibleBoxProps extends IComponentProps<ICollapsibleBoxTheme>, ISingleAnyChildProps {
+interface ICollapsibleBoxProps extends IComponentProps, ISingleAnyChildProps {
   headerView: React.ReactNode;
   isCollapsed: boolean;
   onCollapseToggled(): void;
   shouldSkipRenderingWhenCollapsed?: boolean;
   shouldHideIndicator?: boolean;
-  style?: React.CSSProperties;
 }
 
 export function CollapsibleBox({

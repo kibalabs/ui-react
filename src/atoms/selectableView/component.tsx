@@ -4,7 +4,6 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
-import { ISelectableViewTheme } from './theme';
 import './styles.scss';
 import { Stack } from '../../layouts';
 import { IComponentProps } from '../../model';
@@ -13,14 +12,13 @@ import { KibaIcon } from '../../particles/kibaIcon';
 
 export { SelectableViewThemedStyle } from '../../util/legacyThemeCompat';
 
-export interface ISelectableViewProps extends IComponentProps<ISelectableViewTheme>, ISingleAnyChildProps {
+export interface ISelectableViewProps extends IComponentProps, ISingleAnyChildProps {
   isSelected: boolean;
   isDisabled?: boolean;
   selectedIndicator?: React.ReactElement;
   shouldHideDefaultSelectedIndicator?: boolean;
   isFullWidth?: boolean;
   isFullHeight?: boolean;
-  style?: React.CSSProperties;
   onClicked(): void;
 }
 

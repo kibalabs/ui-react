@@ -4,14 +4,14 @@ import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { getIsRunningOnBrowser, ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
 
 import { IDialogTheme } from './theme';
-import { IComponentProps } from '../../model';
+import { IComponentPropsCompat } from '../../model';
 import { Box } from '../../particles/box';
 
 import './styles.scss';
 
 export { DialogThemedStyle } from '../../util/legacyThemeCompat';
 
-interface IDialogProps extends IComponentProps<IDialogTheme>, ISingleAnyChildProps {
+interface IDialogProps extends IComponentPropsCompat<IDialogTheme>, ISingleAnyChildProps {
   isOpen: boolean;
   maxHeight?: string;
   maxWidth?: string;

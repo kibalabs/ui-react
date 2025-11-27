@@ -4,13 +4,12 @@ import { getClassName } from '@kibalabs/core';
 import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 
 import './styles.scss';
-import { IIconButtonTheme } from './theme';
 import { IComponentProps } from '../../model';
 import { IIconProps } from '../../particles/icon';
 
 export { IconButtonThemedStyle } from '../../util/legacyThemeCompat';
 
-export interface IIconButtonProps extends IComponentProps<IIconButtonTheme> {
+export interface IIconButtonProps extends IComponentProps {
   isEnabled?: boolean;
   icon: React.ReactElement<IIconProps>;
   isFullHeight?: boolean;
