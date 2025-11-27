@@ -42,6 +42,7 @@ StackItem.displayName = 'KibaStackItem';
 interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   id?: string;
   className?: string;
+  style?: React.CSSProperties;
   theme?: IDimensionGuide;
   shouldAddGutters?: boolean;
   defaultGutter?: PaddingSizeProp;
@@ -148,7 +149,7 @@ export function Stack({
   const defaultGutter = props.defaultGutter || PaddingSize.Default;
   const innerShouldAddGutters = shouldAddGutters && defaultGutter !== PaddingSize.None;
   const shouldWrapItems = props.shouldWrapItems || false;
-  const stackStyles: Record<string, string> = {
+  const stackStyles: React.CSSProperties = {
     '--kiba-stack-direction-base': getDirectionValue(direction),
     ...responsiveValueToCss(props.directionResponsive, '--kiba-stack-direction', getDirectionValue),
     '--kiba-stack-child-alignment-base': getFlexItemAlignment(childAlignment),
@@ -164,14 +165,15 @@ export function Stack({
     ...(minHeightResponsive ? { '--kiba-stack-min-height-base': minHeightResponsive.base ?? '0', ...responsiveValueToCss(minHeightResponsive, '--kiba-stack-min-height') } : {}),
     ...(minWidthResponsive ? { '--kiba-stack-min-width-base': minWidthResponsive.base ?? '0', ...responsiveValueToCss(minWidthResponsive, '--kiba-stack-min-width') } : {}),
     ...(shouldWrapItems && innerShouldAddGutters ? { '--kiba-stack-gap': getPaddingSize(defaultGutter, theme) } : {}),
-  };
+    ...props.style,
+  } as React.CSSProperties;
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <PaddingView paddingTop={paddingTop} paddingBottom={paddingBottom} paddingRight={paddingRight} paddingLeft={paddingLeft} className={className} {...props as IPaddingViewPaddingProps}>
       <div
         id={props.id}
         className={getClassName(Stack.displayName, isScrollableVertically && 'scrollableVertically', isScrollableHorizontally && 'scrollableHorizontally', shouldWrapItems && 'wrapItems')}
-        style={stackStyles as React.CSSProperties}
+        style={stackStyles}
       >
         { children.map((child: React.ReactElement<IStackItemProps>, index: number): React.ReactElement => (
           <React.Fragment key={child.key}>

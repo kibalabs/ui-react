@@ -53,8 +53,8 @@ width: var(--kiba-box-width, 100%);
 ### 4. CSS Layer Order
 
 Always use the correct layer for styles:
-- `@layer kiba-structure` - Layout, display, positioning, sizing
-- `@layer kiba-theme` - Colors, borders, padding, fonts, shadows
+- `@layer kiba-structure` - Layout, display, positioning, sizing (NO colors, borders, padding)
+- `@layer kiba-theme` - Colors, borders, padding, fonts, shadows, transitions
 
 ### 5. Variant Classes
 
@@ -70,15 +70,69 @@ className={getClassName(Component.displayName, ...(variant?.split('-') || []))}
 &.primary.large { ... }  // Combination
 ```
 
-### 6. Default Values
+### 6. Default Variant - DO NOT Use `.default` Class
+
+**CRITICAL**: The "default" variant should be applied directly to the base component selector, NOT as a `.default` class. This ensures:
+- Default styles always apply
+- App overrides to the base selector affect all variants
+- Other variants only need to specify their differences
+
+```scss
+// ✅ Correct - default styles on base selector
+.KibaButton {
+  background-color: transparent;
+  color: $color-brand-primary;
+
+  &.primary {
+    background-color: $color-brand-primary;
+    color: $color-text-on-brand;
+  }
+}
+
+// ❌ Wrong - default as a separate class
+.KibaButton {
+  &.default {
+    background-color: transparent;  // Won't inherit to other variants!
+  }
+}
+```
+
+### 7. Theme Styles vs Structure Styles
+
+Be very clear about what goes where:
+
+**Structure (`kiba-structure`):**
+- `display`, `flex-direction`, `align-items`, `justify-content`
+- `position`, `width`, `height`, `overflow`
+- `box-sizing`, `flex-grow`, `flex-shrink`
+
+**Theme (`kiba-theme`):**
+- `background-color`, `color`, `border-*`
+- `padding`, `margin`, `border-radius`
+- `font-*`, `box-shadow`, `opacity`
+- `transition-*`, `cursor`
+
+### 8. Default Values
 
 - Use CSS fallbacks for defaults: `var(--kiba-box-width, 100%)`
 - Don't rely on undefined CSS variables - always provide fallback
 - Component props should have sensible defaults
 
-### 7. No Wrapper Divs for Stack.Item
+### 9. No Wrapper Divs for Stack.Item
 
 `Stack.Item` must NOT wrap children in a div. It clones flex properties onto children directly. This means all potential Stack children must accept `style` prop.
+
+### 10. Don't Set Explicit Heights That Break Flex Stretch
+
+When using flex layouts (Grid, Stack), avoid setting explicit `height: auto` on children when `align-items: stretch` is desired.
+
+```tsx
+// ❌ Wrong - explicitly sets height, breaks stretch
+'--kiba-grid-item-height': child.props.isFullHeight ? '100%' : 'auto',
+
+// ✅ Correct - only set when explicitly requested
+...(child.props.isFullHeight ? { '--kiba-grid-item-height': '100%' } : {}),
+```
 
 ---
 
@@ -113,7 +167,7 @@ className={getClassName(Component.displayName, ...(variant?.split('-') || []))}
 
 - [x] Box
 - [x] Text
-- [x] Spacing ✅
+- [x] Spacing
 - [ ] Divider
 - [ ] Image
 - [ ] Icon
@@ -127,19 +181,19 @@ className={getClassName(Component.displayName, ...(variant?.split('-') || []))}
 ## Atoms
 
 - [x] Button
-- [x] SelectableView ✅
-- [x] Dialog ✅
-- [ ] IconButton
+- [x] SelectableView
+- [x] Dialog
+- [x] IconButton
 - [ ] Link
 - [ ] LinkBase
 - [ ] Checkbox
 - [ ] Switch
-- [ ] InputWrapper
+- [x] InputWrapper
 - [ ] TabBarItem
 - [ ] ListItem
 - [ ] BulletText
 - [ ] BulletList
-- [ ] CollapsibleBox
+- [x] CollapsibleBox
 - [ ] TitledCollapsibleBox
 - [ ] LinePager
 - [ ] PrettyText
@@ -150,7 +204,7 @@ className={getClassName(Component.displayName, ...(variant?.split('-') || []))}
 
 - [ ] Form
 - [ ] InputFrame
-- [ ] SingleLineInput
+- [x] SingleLineInput
 - [ ] MultiLineInput
 - [ ] OptionSelect
 - [ ] TabBar
@@ -164,9 +218,9 @@ className={getClassName(Component.displayName, ...(variant?.split('-') || []))}
 
 ## Layouts
 
-- [x] Stack ✅
-- [ ] EqualGrid
-- [ ] Grid
+- [x] Stack
+- [x] EqualGrid
+- [x] Grid
 - [ ] Container
 - [ ] LayerContainer
 

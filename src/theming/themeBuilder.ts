@@ -4,10 +4,10 @@ import { RecursivePartial } from '@kibalabs/core';
 import { ITheme } from '.';
 import { buildBulletListThemes, IBulletListTheme } from '../atoms/bulletList';
 import { buildBulletTextThemes, IBulletTextTheme } from '../atoms/bulletText';
-import { buildButtonThemes, IButtonTheme } from '../atoms/button';
+import { IButtonTheme } from '../atoms/button';
 import { buildCheckboxThemes, ICheckboxTheme } from '../atoms/checkbox';
-import { buildCollapsibleBoxThemes, ICollapsibleBoxTheme } from '../atoms/collapsibleBox';
-import { buildDialogThemes, IDialogTheme } from '../atoms/dialog';
+import { ICollapsibleBoxTheme } from '../atoms/collapsibleBox';
+import { IDialogTheme } from '../atoms/dialog';
 import { buildIconButtonThemes, IIconButtonTheme } from '../atoms/iconButton';
 import { buildInputWrapperThemes, IInputWrapperTheme } from '../atoms/inputWrapper';
 import { buildLinePagerThemes, ILinePagerTheme } from '../atoms/linePager';
@@ -16,7 +16,7 @@ import { buildLinkBaseThemes, ILinkBaseTheme } from '../atoms/linkBase';
 import { buildListItemThemes, IListItemTheme } from '../atoms/listItem';
 import { buildPrettyTextThemes, IPrettyTextTheme } from '../atoms/prettyText';
 import { buildProgressCounterItemThemes, IProgressCounterItemTheme } from '../atoms/progressCounterItem';
-import { buildSelectableViewThemes, ISelectableViewTheme } from '../atoms/selectableView';
+import { ISelectableViewTheme } from '../atoms/selectableView';
 import { buildSwitchThemes, ISwitchTheme } from '../atoms/switch';
 import { buildTabBarItemThemes, ITabBarItemTheme } from '../atoms/tabBarItem';
 import { buildTitledCollapsibleBoxThemes, ITitledCollapsibleBoxTheme } from '../atoms/titledCollapsibleBox';
@@ -52,8 +52,6 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const pillThemes = buildPillThemes(dimensions, textThemes, boxThemes, inputTheme?.pills as PartialThemeMap<IPillTheme>);
   const portalThemes = buildPortalThemes(dimensions, boxThemes, inputTheme?.portals as PartialThemeMap<IPortalTheme>);
   const videoThemes = buildVideoThemes(dimensions, inputTheme?.videos as PartialThemeMap<IVideoTheme>);
-
-  // NOTE(krishan711): this seems weird, think of a better approach (it's for buildSelectableViewThemes)
   const linkBaseThemes = buildLinkBaseThemes(dimensions, boxThemes, inputTheme?.linkBases as PartialThemeMap<ILinkBaseTheme>);
 
   return {
@@ -75,12 +73,12 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     videos: videoThemes,
 
     // Atoms
-    buttons: buildButtonThemes(dimensions, textThemes, boxThemes, inputTheme?.buttons as PartialThemeMap<IButtonTheme>),
+    buttons: {} as Record<string, IButtonTheme>,
     checkboxes: buildCheckboxThemes(dimensions, textThemes, boxThemes, inputTheme?.checkboxes as PartialThemeMap<ICheckboxTheme>),
     bulletLists: buildBulletListThemes(dimensions, inputTheme?.bulletLists as PartialThemeMap<IBulletListTheme>),
     bulletTexts: buildBulletTextThemes(dimensions, textThemes, inputTheme?.bulletTexts as PartialThemeMap<IBulletTextTheme>),
-    collapsibleBoxes: buildCollapsibleBoxThemes(dimensions, textThemes, boxThemes, inputTheme?.collapsibleBoxes as PartialThemeMap<ICollapsibleBoxTheme>),
-    dialogs: buildDialogThemes(dimensions, boxThemes, inputTheme?.dialogs as PartialThemeMap<IDialogTheme>),
+    collapsibleBoxes: {} as Record<string, ICollapsibleBoxTheme>,
+    dialogs: {} as Record<string, IDialogTheme>,
     iconButtons: buildIconButtonThemes(dimensions, textThemes, boxThemes, inputTheme?.iconButtons as PartialThemeMap<IIconButtonTheme>),
     inputWrappers: buildInputWrapperThemes(dimensions, textThemes, boxThemes, inputTheme?.inputWrappers as PartialThemeMap<IInputWrapperTheme>),
     linkBases: linkBaseThemes,
@@ -93,6 +91,6 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     progressCounterItems: buildProgressCounterItemThemes(dimensions, textThemes, boxThemes, inputTheme?.progressCounterItems as PartialThemeMap<IProgressCounterItemTheme>),
     tabBarItems: buildTabBarItemThemes(dimensions, textThemes, boxThemes, inputTheme?.tabBarItems as PartialThemeMap<ITabBarItemTheme>),
     titledCollapsibleBoxes: buildTitledCollapsibleBoxThemes(dimensions, textThemes, boxThemes, inputTheme?.titledCollapsibleBoxes as PartialThemeMap<ITitledCollapsibleBoxTheme>),
-    selectableViews: buildSelectableViewThemes(dimensions, boxThemes, linkBaseThemes, inputTheme?.selectableViews as PartialThemeMap<ISelectableViewTheme>),
+    selectableViews: {} as Record<string, ISelectableViewTheme>,
   };
 };

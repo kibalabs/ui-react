@@ -8,8 +8,12 @@ import { IWrapperProps } from './wrapperProps';
 const styleCopier = <P extends IWrapperProps>(props: P): React.ReactElement => {
   const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): (React.ReactElement | string | number) => {
     if (React.isValidElement(child)) {
+      const existingStyle = (child.props as { style?: React.CSSProperties }).style ?? {};
       // @ts-ignore
-      return React.cloneElement(child, { className: getClassName(child.props?.className, props.className) });
+      return React.cloneElement(child, {
+        className: getClassName(child.props?.className, props.className),
+        style: { ...existingStyle, ...props.style },
+      });
     }
     return child;
   });

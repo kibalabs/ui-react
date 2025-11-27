@@ -2,8 +2,8 @@ import React from 'react';
 
 import { getClassName, RecursivePartial } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
+import './styles.scss';
 import { IInputWrapperTheme } from './theme';
 import { IComponentProps } from '../../model';
 import { themeToCss } from '../../util';
@@ -79,58 +79,10 @@ export const InputWrapperThemedStyle = (theme: RecursivePartial<IInputWrapperThe
 
 `;
 
-interface IStyledInputWrapperProps {
-  $theme?: RecursivePartial<IInputWrapperTheme>;
-}
-
-const StyledInputWrapper = styled.div<IStyledInputWrapperProps>`
-  display: flex;
-  flex-direction: column;
-  transition-duration: 0.3s;
-  & * {
-    transition-duration: 0.3s;
-  }
-  &:hover > .KibaInputWrapperInner {
-    box-shadow: none;
-  }
-  &.disabled > .KibaInputWrapperInner {
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-
-  &&&& {
-    ${(props: IStyledInputWrapperProps): string => (props.$theme ? InputWrapperThemedStyle(props.$theme) : '')};
-  }
-`;
-
-const InputWrapperInner = styled.div`
-  & input, & textarea, & .wrapped-input {
-    /* NOTE(krishan711): these are all the fields of the ITextTheme, can it be done in one line? */
-    font-size: inherit;
-    font-family: inherit;
-    font-weight: inherit;
-    color: inherit;
-    line-height: inherit;
-  }
-  width: 100%;
-  overflow: hidden;
-  cursor: pointer;
-`;
-
-const StyledMessage = styled.p`
-  /* TODO(krishan711): move this to the theme or as a gutter prop (see checkbox) */
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
-  overflow: auto;
-  width: 100%;
-  text-align: right;
-`;
-
 export interface IInputWrapperProps extends IComponentProps<IInputWrapperTheme>, ISingleAnyChildProps {
   messageText?: string;
   isEnabled?: boolean;
   onClicked?: () => void;
-  // isFocussed?: boolean;
 }
 
 export function InputWrapper({
@@ -138,23 +90,18 @@ export function InputWrapper({
   variant = 'default',
   ...props
 }: IInputWrapperProps): React.ReactElement {
-  // :focus-within is not supported on all browsers so we manually maintain if this particle has a isFocussed child
   const [isFocussed, setIsFocussed] = React.useState(false);
-
   const onClicked = (): void => {
     if (props.onClicked) {
       props.onClicked();
     }
   };
-
-  // TODO(krishan711): check that the first child is an input, textarea or .wrapped-input
   return (
-    <StyledInputWrapper
+    <div
       id={props.id}
       className={getClassName(InputWrapper.displayName, className, props.messageText && 'message-showing', isFocussed && 'focus', !props.isEnabled && 'disabled', ...(variant?.split('-') || []))}
-      $theme={props.theme}
     >
-      <InputWrapperInner
+      <div
         id={props.id && `${props.id}-inner`}
         className='KibaInputWrapperInner'
         onClick={onClicked}
@@ -162,16 +109,16 @@ export function InputWrapper({
         onBlur={(): void => setIsFocussed(false)}
       >
         {props.children}
-      </InputWrapperInner>
+      </div>
       <HidingView isHidden={!props.messageText}>
-        <StyledMessage
+        <p
           id={props.id && `${props.id}-message`}
           className='KibaInputWrapperMessage'
         >
           {props.messageText}
-        </StyledMessage>
+        </p>
       </HidingView>
-    </StyledInputWrapper>
+    </div>
   );
 }
 InputWrapper.displayName = 'KibaInputWrapper';

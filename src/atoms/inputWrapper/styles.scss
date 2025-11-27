@@ -1,0 +1,128 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaInputWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &.disabled {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  .KibaInputWrapperInner {
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+
+    & input,
+    & textarea,
+    & .wrapped-input {
+      font-size: inherit;
+      font-family: inherit;
+      font-weight: inherit;
+      color: inherit;
+      line-height: inherit;
+      width: 100%;
+    }
+  }
+
+  .KibaInputWrapperMessage {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    overflow: auto;
+    width: 100%;
+    text-align: right;
+  }
+}
+
+@layer kiba-theme {
+  .KibaInputWrapper {
+    transition-duration: 0.3s;
+
+    & * {
+      transition-duration: 0.3s;
+    }
+  }
+
+  .KibaInputWrapperInner {
+    background-color: $color-background-light10;
+    padding: $padding $padding-wide;
+    border-radius: $border-radius;
+    border-width: $border-width;
+    border-color: $color-background-dark05;
+    border-style: solid;
+    color: $color-text;
+
+    &::placeholder,
+    & input::placeholder,
+    & textarea::placeholder,
+    & .wrapped-input:empty::before {
+      color: var(--kiba-color-text-clear75);
+    }
+  }
+
+  .KibaInputWrapper:hover .KibaInputWrapperInner {
+    border-color: var(--kiba-color-brand-primary-light10);
+    box-shadow: none;
+  }
+
+  .KibaInputWrapper.focus .KibaInputWrapperInner,
+  .KibaInputWrapper:focus-within .KibaInputWrapperInner {
+    border-color: $color-brand-primary;
+  }
+
+  .KibaInputWrapper.disabled .KibaInputWrapperInner {
+    background-color: var(--kiba-color-text-clear90);
+    border-color: var(--kiba-color-text-clear80);
+  }
+
+  .KibaInputWrapperMessage {
+    font-size: 0.9em;
+    color: var(--kiba-color-text-clear25);
+  }
+
+  // Error variant
+  .KibaInputWrapper.error {
+    .KibaInputWrapperInner {
+      background-color: var(--kiba-color-error-light90);
+      border-color: var(--kiba-color-error-light20);
+    }
+
+    &:hover .KibaInputWrapperInner {
+      border-color: var(--kiba-color-error-light10);
+    }
+
+    &.focus .KibaInputWrapperInner,
+    &:focus-within .KibaInputWrapperInner {
+      border-color: $color-error;
+    }
+
+    .KibaInputWrapperMessage {
+      color: $color-error;
+    }
+  }
+
+  // Success variant
+  .KibaInputWrapper.success {
+    .KibaInputWrapperInner {
+      background-color: var(--kiba-color-success-light90);
+      border-color: var(--kiba-color-success-light20);
+    }
+
+    &:hover .KibaInputWrapperInner {
+      border-color: var(--kiba-color-success-light10);
+    }
+
+    &.focus .KibaInputWrapperInner,
+    &:focus-within .KibaInputWrapperInner {
+      border-color: $color-success;
+    }
+
+    .KibaInputWrapperMessage {
+      color: $color-success;
+    }
+  }
+}

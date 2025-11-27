@@ -12,6 +12,7 @@ interface IStatefulCollapsibleBoxProps extends IComponentProps<ICollapsibleBoxTh
   isCollapsedInitially?: boolean;
   shouldSkipRenderingWhenCollapsed?: boolean;
   shouldHideIndicator?: boolean;
+  style?: React.CSSProperties;
 }
 
 export function StatefulCollapsibleBox({
@@ -35,6 +36,7 @@ export function StatefulCollapsibleBox({
       onCollapseToggled={onCollapseToggled}
       shouldSkipRenderingWhenCollapsed={props.shouldSkipRenderingWhenCollapsed}
       shouldHideIndicator={props.shouldHideIndicator}
+      style={props.style}
     >
       {props.children}
     </CollapsibleBox>
