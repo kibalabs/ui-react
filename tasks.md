@@ -254,7 +254,7 @@ export function MyWrapper(props: IMyWrapperProps): React.ReactElement {
 - [ ] Image
 - [ ] Icon
 - [ ] KibaIcon
-- [ ] LoadingSpinner
+- [x] LoadingSpinner
 - [ ] Pill
 - [ ] Video
 - [ ] Media
@@ -316,6 +316,21 @@ export function MyWrapper(props: IMyWrapperProps): React.ReactElement {
 - [x] PaddingView
 - [x] ColorSettingView
 - [x] ResponsiveTextAlignmentView
+
+---
+
+## Agent-Hack App (styled-components usage)
+
+These files in `agent-hack/app/src/` still use styled-components and need to be migrated to CSS classes in `theme.scss`:
+
+- [x] `components/ChatView.tsx` - `StyledSingleLineInput` (migrated to `.ChatInput` class)
+- [x] `components/LoadingIndicator.tsx` - (migrated to `.LoadingIndicator` class)
+- [x] `components/MatrixBackground.tsx` - (migrated to `.MatrixBackground` and `.MatrixBackgroundColumn` classes)
+- [x] `components/Tooltip.tsx` - (migrated to `.Tooltip` and `.TooltipContent` classes)
+- [x] `components/table/Table.tsx` - (migrated to `.Table` class in `Table.scss`)
+- [x] `components/table/TableRow.tsx` - (migrated to `.TableRow` class in `Table.scss`)
+- [x] `components/table/TableCell.tsx` - (migrated to `.TableCell` and `.TableHeaderCell` classes in `Table.scss`)
+- [x] `pages/LeaderboardPage.tsx` - `BouncingTriangle` (moved to `components/BouncingTriangle.tsx`)
 
 ---
 

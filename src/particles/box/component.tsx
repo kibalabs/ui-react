@@ -5,13 +5,13 @@ import { IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
 
 import './styles.scss';
 import { IBoxTheme } from './theme';
-import { IComponentProps } from '../..';
+import { IComponentPropsCompat } from '../..';
 import { ResponsiveField } from '../../util';
 import { themeToInlineStyles } from '../../util/legacyThemeCompat';
 
 export { BoxThemedStyle } from '../../util/legacyThemeCompat';
 
-export interface IBoxProps extends IComponentProps<IBoxTheme>, IOptionalSingleAnyChildProps {
+export interface IBoxProps extends IComponentPropsCompat<IBoxTheme>, IOptionalSingleAnyChildProps {
   height?: string;
   heightResponsive?: ResponsiveField<string>;
   width?: string;

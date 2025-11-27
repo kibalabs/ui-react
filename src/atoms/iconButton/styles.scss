@@ -36,6 +36,10 @@
   .KibaIconButtonFocusFixer {
     transition-duration: 0.3s;
     cursor: pointer;
+    padding: $padding;
+    background-color: transparent;
+    border-radius: $border-radius;
+    border: 2px solid transparent;
   }
 
   // Default variant
@@ -64,6 +68,7 @@
   .KibaIconButton.primary > .KibaIconButtonFocusFixer {
     background-color: $color-brand-primary;
     border-color: $color-brand-primary;
+    color: $color-text-on-brand;
   }
 
   .KibaIconButton.primary .KibaIcon {

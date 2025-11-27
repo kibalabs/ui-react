@@ -1,37 +1,13 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
-import { styled } from 'styled-components';
+import { getClassName } from '@kibalabs/core';
 
+import './styles.scss';
 import { ILoadingSpinnerTheme } from './theme';
 import { IComponentProps } from '../..';
-import { propertyToCss } from '../../util';
+import { themeToInlineStyles } from '../../util/legacyThemeCompat';
 
-export const LoadingSpinnerThemedStyle = (theme: RecursivePartial<ILoadingSpinnerTheme>): string => `
-  ${propertyToCss('border-width', theme.width)};
-  ${propertyToCss('border-color', theme.color)};
-  ${propertyToCss('width', theme.size)};
-  ${propertyToCss('height', theme.size)};
-`;
-
-interface IStyledLoadingSpinnerProps {
-  $theme?: RecursivePartial<ILoadingSpinnerTheme>;
-}
-
-const StyledLoadingSpinner = styled.div<IStyledLoadingSpinnerProps>`
-  border-radius: 50%;
-  border-style: solid;
-  border-top-color: transparent !important;
-  animation: spin 1.0s linear infinite;
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  &&&& {
-    ${(props: IStyledLoadingSpinnerProps): string => (props.$theme ? LoadingSpinnerThemedStyle(props.$theme) : '')};
-  }
-`;
+export { LoadingSpinnerThemedStyle } from '../../util/legacyThemeCompat';
 
 interface ILoadingSpinnerProps extends IComponentProps<ILoadingSpinnerTheme> {
 }
@@ -41,11 +17,12 @@ export function LoadingSpinner({
   variant = 'default',
   ...props
 }: ILoadingSpinnerProps): React.ReactElement {
+  const themeStyles = themeToInlineStyles(props.theme as Record<string, unknown>);
   return (
-    <StyledLoadingSpinner
+    <div
       id={props.id}
       className={getClassName(LoadingSpinner.displayName, className, ...(variant?.split('-') || []))}
-      $theme={props.theme}
+      style={{ ...props.style, ...themeStyles }}
     />
   );
 }

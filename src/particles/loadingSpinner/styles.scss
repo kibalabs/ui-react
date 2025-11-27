@@ -1,0 +1,51 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaLoadingSpinner {
+    border-radius: 50%;
+    animation: kiba-loading-spinner-spin 1.0s linear infinite;
+  }
+
+  @keyframes kiba-loading-spinner-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
+
+@layer kiba-theme {
+  .KibaLoadingSpinner {
+    border-style: solid;
+    border-width: var(--kiba-loading-spinner-width, 0.2em);
+    border-color: var(--kiba-loading-spinner-color, $color-brand-primary);
+    border-top-color: transparent;
+    width: var(--kiba-loading-spinner-size, 2rem);
+    height: var(--kiba-loading-spinner-size, 2rem);
+
+    &.light {
+      --kiba-loading-spinner-color: white;
+    }
+
+    &.dark {
+      --kiba-loading-spinner-color: black;
+    }
+
+    &.small {
+      --kiba-loading-spinner-size: 1rem;
+      --kiba-loading-spinner-width: 0.15rem;
+    }
+
+    &.large {
+      --kiba-loading-spinner-size: 4rem;
+      --kiba-loading-spinner-width: 0.5rem;
+    }
+
+    &.extraLarge {
+      --kiba-loading-spinner-size: 8rem;
+      --kiba-loading-spinner-width: 1rem;
+    }
+
+    &.fill {
+      --kiba-loading-spinner-size: 100%;
+    }
+  }
+}

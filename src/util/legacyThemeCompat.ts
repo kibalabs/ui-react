@@ -35,10 +35,16 @@ export const CollapsibleBoxThemedStyle = (_theme: RecursivePartial<Record<string
 export const DialogThemedStyle = (_theme: RecursivePartial<IDialogTheme>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const DividerThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const IconButtonThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const InputWrapperThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const LoadingSpinnerThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const PrettyTextThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';

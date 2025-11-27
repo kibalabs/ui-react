@@ -1,0 +1,34 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .Image {
+    display: block;
+    width: var(--kiba-image-width, auto);
+    height: var(--kiba-image-height, auto);
+    max-width: var(--kiba-image-max-width, none);
+    max-height: var(--kiba-image-max-height, none);
+    object-fit: var(--kiba-image-fit, fill);
+    &.lazyload, &.lazyloading {
+      opacity: 0;
+    }
+    &.lazyloaded {
+      display: block;
+      opacity: 1;
+    }
+    &.centered {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .no-js &.lazyload {
+      display: none;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .Image {
+    &.lazyloaded {
+      transition: opacity 0.15s;
+    }
+  }
+}

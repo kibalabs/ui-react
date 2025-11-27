@@ -32,6 +32,7 @@
   .KibaSelectableView {
     @include transition;
     background-color: transparent;
+    padding: $padding;
     border: 1px solid transparent;
     border-radius: $border-radius;
 
@@ -39,20 +40,24 @@
       @include transition;
       background-color: transparent;
       border-radius: $border-radius;
+      padding: 0;
+      border: 1px solid transparent;
     }
 
+    // Hover state - from linkBaseTheme
     &:hover > .KibaSelectableView-overlay {
-      background-color: var(--kiba-color-brand-primary-clear90);
+      background-color: var(--kiba-color-brand-primary-clear80);
     }
 
+    // Press state - from linkBaseTheme
     &:active > .KibaSelectableView-overlay {
-      background-color: var(--kiba-color-brand-primary-clear80);
+      background-color: var(--kiba-color-brand-primary-clear50);
     }
 
     // Selected state
     &.selected > .KibaSelectableView-overlay {
       background-color: rgba(255, 255, 255, 0.1);
-      border: 1px solid var(--kiba-color-brand-primary);
+      border-color: var(--kiba-color-brand-primary);
     }
 
     // Disabled state
