@@ -4,7 +4,85 @@
 
 We are migrating ui-react components from styled-components to pure CSS/SCSS. The goal is to remove the runtime overhead of styled-components and use CSS layers for proper cascade control.
 
-### Architecture
+---
+
+## Migration Rules
+
+### 1. Components Must Accept and Forward `style` Prop
+
+All components must accept a `style?: React.CSSProperties` prop and merge it with any internal styles. This is required because `Stack.Item` (and potentially other wrappers) use `React.cloneElement` to pass flex styles to children.
+
+```tsx
+// In the interface:
+style?: React.CSSProperties;
+
+// In the component:
+const combinedStyles: React.CSSProperties = {
+  ...props.style,  // External styles first
+  // ... component's own styles
+};
+```
+
+### 2. Wrappers Must Not Create Wrapper Elements
+
+Wrappers should pass through to their children without creating additional DOM elements. Use `React.cloneElement` to add className/style to children, not wrapper divs.
+
+```tsx
+// ❌ Wrong - creates wrapper element
+return <div className="wrapper">{children}</div>;
+
+// ✅ Correct - clones props onto children
+return React.cloneElement(child, {
+  className: getClassName(child.props.className, 'added-class'),
+  style: { ...itemStyle, ...child.props.style },
+});
+```
+
+### 3. CSS Custom Properties for Dynamic Values
+
+Use CSS custom properties (set via `style` prop) for values that vary per-instance. Static variants use CSS classes.
+
+```tsx
+// Component sets CSS variables
+style={{ '--kiba-box-width': width }}
+
+// SCSS uses them with fallbacks
+width: var(--kiba-box-width, 100%);
+```
+
+### 4. CSS Layer Order
+
+Always use the correct layer for styles:
+- `@layer kiba-structure` - Layout, display, positioning, sizing
+- `@layer kiba-theme` - Colors, borders, padding, fonts, shadows
+
+### 5. Variant Classes
+
+Split variant string and apply each part as a class. Use `&.variantName` in SCSS.
+
+```tsx
+className={getClassName(Component.displayName, ...(variant?.split('-') || []))}
+```
+
+```scss
+&.primary { ... }
+&.large { ... }
+&.primary.large { ... }  // Combination
+```
+
+### 6. Default Values
+
+- Use CSS fallbacks for defaults: `var(--kiba-box-width, 100%)`
+- Don't rely on undefined CSS variables - always provide fallback
+- Component props should have sensible defaults
+
+### 7. No Wrapper Divs for Stack.Item
+
+`Stack.Item` must NOT wrap children in a div. It clones flex properties onto children directly. This means all potential Stack children must accept `style` prop.
+
+---
+
+## Architecture
 
 1. **CSS Layers** (defined in `src/styles/reset.scss`):
    - `kiba-reset` - lowest priority, browser resets

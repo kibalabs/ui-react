@@ -6,20 +6,30 @@
 // variants are automatically available.
 
 @mixin generate-color-variants($name) {
-  // Light variants (mix with white)
-  @each $amount in (5, 10, 20, 25, 50) {
-    --kiba-color-#{$name}-light#{$amount}: color-mix(in srgb, var(--kiba-color-#{$name}), white #{$amount}%);
-  }
+  // Light variants (mix with white) - use two-digit format for consistency
+  --kiba-color-#{$name}-light05: color-mix(in srgb, var(--kiba-color-#{$name}), white 5%);
+  --kiba-color-#{$name}-light10: color-mix(in srgb, var(--kiba-color-#{$name}), white 10%);
+  --kiba-color-#{$name}-light20: color-mix(in srgb, var(--kiba-color-#{$name}), white 20%);
+  --kiba-color-#{$name}-light25: color-mix(in srgb, var(--kiba-color-#{$name}), white 25%);
+  --kiba-color-#{$name}-light50: color-mix(in srgb, var(--kiba-color-#{$name}), white 50%);
 
   // Dark variants (mix with black)
-  @each $amount in (5, 10, 20, 25, 50) {
-    --kiba-color-#{$name}-dark#{$amount}: color-mix(in srgb, var(--kiba-color-#{$name}), black #{$amount}%);
-  }
+  --kiba-color-#{$name}-dark05: color-mix(in srgb, var(--kiba-color-#{$name}), black 5%);
+  --kiba-color-#{$name}-dark10: color-mix(in srgb, var(--kiba-color-#{$name}), black 10%);
+  --kiba-color-#{$name}-dark20: color-mix(in srgb, var(--kiba-color-#{$name}), black 20%);
+  --kiba-color-#{$name}-dark25: color-mix(in srgb, var(--kiba-color-#{$name}), black 25%);
+  --kiba-color-#{$name}-dark50: color-mix(in srgb, var(--kiba-color-#{$name}), black 50%);
 
   // Clear/transparency variants (alpha channel)
-  @each $amount in (5, 10, 20, 25, 50, 75, 80, 90, 95) {
-    --kiba-color-#{$name}-clear#{$amount}: color-mix(in srgb, var(--kiba-color-#{$name}) #{100 - $amount}%, transparent);
-  }
+  --kiba-color-#{$name}-clear05: color-mix(in srgb, var(--kiba-color-#{$name}) 95%, transparent);
+  --kiba-color-#{$name}-clear10: color-mix(in srgb, var(--kiba-color-#{$name}) 90%, transparent);
+  --kiba-color-#{$name}-clear20: color-mix(in srgb, var(--kiba-color-#{$name}) 80%, transparent);
+  --kiba-color-#{$name}-clear25: color-mix(in srgb, var(--kiba-color-#{$name}) 75%, transparent);
+  --kiba-color-#{$name}-clear50: color-mix(in srgb, var(--kiba-color-#{$name}) 50%, transparent);
+  --kiba-color-#{$name}-clear75: color-mix(in srgb, var(--kiba-color-#{$name}) 25%, transparent);
+  --kiba-color-#{$name}-clear80: color-mix(in srgb, var(--kiba-color-#{$name}) 20%, transparent);
+  --kiba-color-#{$name}-clear90: color-mix(in srgb, var(--kiba-color-#{$name}) 10%, transparent);
+  --kiba-color-#{$name}-clear95: color-mix(in srgb, var(--kiba-color-#{$name}) 5%, transparent);
 }
 
 // =============================================================================

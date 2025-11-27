@@ -26,6 +26,7 @@ export interface IButtonProps extends IComponentProps<IButtonTheme> {
   childAlignment?: Alignment;
   contentAlignment?: Alignment;
   isTextFullWidth?: boolean;
+  style?: React.CSSProperties;
   onClicked?(): void;
 }
 
@@ -88,6 +89,7 @@ export function Button({
       tabIndex={props.tabIndex || 0}
       target={props.target ? (innerTargetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       type={buttonType || 'button'}
+      style={props.style}
     >
       <span
         className='KibaButtonFocusFixer'

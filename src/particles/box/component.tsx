@@ -33,6 +33,7 @@ export interface IBoxProps extends IComponentProps<IBoxTheme>, IOptionalSingleAn
   shouldClipContent?: boolean;
   shouldCaptureTouches?: boolean;
   position?: string;
+  style?: React.CSSProperties;
   ref?: React.RefObject<HTMLDivElement | null>;
 }
 
@@ -47,6 +48,7 @@ export function Box({
   const blockType = width === '100%' ? 'block' : 'flex';
   const themeStyles = themeToInlineStyles(props.theme);
   const combinedStyles: React.CSSProperties = {
+    ...props.style,
     ...themeStyles,
     // @ts-expect-error CSS custom properties are valid but not in CSSProperties type
     '--kiba-box-display': blockType,

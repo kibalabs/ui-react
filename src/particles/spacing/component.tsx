@@ -10,6 +10,7 @@ import './styles.scss';
 
 export interface ISpacingProps extends IComponentProps<IDimensionGuide> {
   direction?: Direction | MultiDirection;
+  style?: React.CSSProperties;
 }
 
 export function Spacing({
@@ -23,6 +24,7 @@ export function Spacing({
   const marginLeft = direction === MultiDirection.Both || direction === MultiDirection.Horizontal ? size : '0';
   const marginTop = direction === MultiDirection.Both || direction === MultiDirection.Vertical ? size : '0';
   const spacingStyles: React.CSSProperties = {
+    ...props.style,
     '--kiba-spacing-margin-left': marginLeft,
     '--kiba-spacing-margin-top': marginTop,
   } as React.CSSProperties;

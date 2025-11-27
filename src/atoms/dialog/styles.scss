@@ -1,3 +1,5 @@
+@use '../../styles/variables' as *;
+
 @layer kiba-structure {
   .KibaDialog {
     width: 100%;
@@ -19,5 +21,11 @@
 @layer kiba-theme {
   .KibaDialog {
     background: var(--kiba-dialog-backdrop-color, rgba(0, 0, 0, 0.5));
+
+    > .KibaDialogInner {
+      background-color: var(--kiba-color-background-light10);
+      border-radius: $border-radius;
+      padding: $padding-wide2;
+    }
   }
 }

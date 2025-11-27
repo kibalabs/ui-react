@@ -9,8 +9,8 @@
     height: var(--kiba-box-height, auto);
     max-width: var(--kiba-box-max-width, none);
     max-height: var(--kiba-box-max-height, none);
-    min-width: var(--kiba-box-min-width, auto);
-    min-height: var(--kiba-box-min-height, auto);
+    min-width: var(--kiba-box-min-width, 0);
+    min-height: var(--kiba-box-min-height, 0);
 
     &.clipContent { overflow: hidden; }
     &.captureTouches { pointer-events: all; }
@@ -95,13 +95,6 @@
       background-color: $color-background-light10;
       border-color: $color-background-dark05;
       border-width: $border-width;
-      padding: $padding-wide2;
-    }
-
-    // Dialog inner variant
-    &.dialog-inner {
-      background-color: var(--kiba-color-background-light10);
-      border-radius: $border-radius;
       padding: $padding-wide2;
     }
 

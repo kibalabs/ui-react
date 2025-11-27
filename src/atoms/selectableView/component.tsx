@@ -92,6 +92,7 @@ export interface ISelectableViewProps extends IComponentProps<ISelectableViewThe
   shouldHideDefaultSelectedIndicator?: boolean;
   isFullWidth?: boolean;
   isFullHeight?: boolean;
+  style?: React.CSSProperties;
   onClicked(): void;
 }
 
@@ -110,6 +111,7 @@ export function SelectableView({
       id={props.id}
       className={getClassName(SelectableView.displayName, className, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', props.isSelected && 'selected', props.isDisabled && 'disabled', ...(variant?.split('-') || []))}
       onClick={onClicked}
+      style={props.style}
     >
       {props.children}
       <div className='KibaSelectableView-overlay'>

@@ -69,6 +69,7 @@ export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChild
   lineLimit?: number;
   shouldBreakOnWords?: boolean;
   shouldBreakAnywhere?: boolean;
+  style?: React.CSSProperties;
 }
 
 export function Text({
@@ -84,6 +85,7 @@ export function Text({
   const shouldBreakOnWords = props.shouldBreakOnWords === true || props.shouldBreakOnWords === undefined;
   const TagComponent = (props.tag || getTextTag(variant)) as React.ElementType;
   const dynamicStyle: React.CSSProperties = {
+    ...props.style,
     ...(lineLimit ? { WebkitLineClamp: lineLimit } : {}),
     ...(shouldBreakOnWords ? { wordBreak: 'break-word' as const } : {}),
     ...(props.shouldBreakAnywhere ? { wordBreak: 'break-all' as const } : {}),

@@ -67,7 +67,6 @@ export function Dialog({
     >
       <Box
         className='KibaDialogInner'
-        variant={props.theme?.background ? undefined : 'dialog-inner'}
         theme={props.theme?.background}
         width='90%'
         maxWidth={maxWidth}
