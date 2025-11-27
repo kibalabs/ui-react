@@ -98,6 +98,13 @@
       padding: $padding-wide2;
     }
 
+    // Dialog inner variant
+    &.dialog-inner {
+      background-color: var(--kiba-color-background-light10);
+      border-radius: $border-radius;
+      padding: $padding-wide2;
+    }
+
     // Focus states
     &.focusable {
       border-color: transparent;

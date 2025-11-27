@@ -37,3 +37,29 @@ export const fieldToResponsiveCss = <FieldType>(field: ResponsiveField<FieldType
   }
   return output.join('\n');
 };
+
+const identityConverter = <T>(value: T): string => String(value);
+
+export const responsiveValueToCss = <FieldType>(
+  field: ResponsiveField<FieldType> | null | undefined,
+  variablePrefix: string,
+  converter: CssConverter<FieldType> = identityConverter,
+): Record<string, string> => {
+  if (!field) {
+    return {};
+  }
+  const result: Record<string, string> = {};
+  if (field.small !== undefined) {
+    result[`${variablePrefix}-small`] = converter(field.small);
+  }
+  if (field.medium !== undefined) {
+    result[`${variablePrefix}-medium`] = converter(field.medium);
+  }
+  if (field.large !== undefined) {
+    result[`${variablePrefix}-large`] = converter(field.large);
+  }
+  if (field.extraLarge !== undefined) {
+    result[`${variablePrefix}-extraLarge`] = converter(field.extraLarge);
+  }
+  return result;
+};

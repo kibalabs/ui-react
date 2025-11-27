@@ -1,0 +1,76 @@
+@layer kiba-structure {
+  .KibaStack {
+    display: flex;
+    flex-direction: var(--kiba-stack-direction-base, column);
+    align-items: var(--kiba-stack-child-alignment-base, stretch);
+    justify-content: var(--kiba-stack-content-alignment-base, space-between);
+    width: var(--kiba-stack-width-base, auto);
+    height: var(--kiba-stack-height-base, auto);
+    max-width: var(--kiba-stack-max-width-base, none);
+    max-height: var(--kiba-stack-max-height-base, none);
+    min-width: var(--kiba-stack-min-width-base, auto);
+    min-height: var(--kiba-stack-min-height-base, auto);
+
+    &.scrollableVertically {
+      overflow-y: auto;
+    }
+
+    &.scrollableHorizontally {
+      overflow-x: auto;
+    }
+
+    &.wrapItems {
+      flex-wrap: wrap;
+      gap: var(--kiba-stack-gap, 0);
+    }
+
+    // Responsive breakpoints
+    @media (min-width: 576px) {
+      flex-direction: var(--kiba-stack-direction-small, var(--kiba-stack-direction-base, column));
+      align-items: var(--kiba-stack-child-alignment-small, var(--kiba-stack-child-alignment-base, stretch));
+      justify-content: var(--kiba-stack-content-alignment-small, var(--kiba-stack-content-alignment-base, space-between));
+      width: var(--kiba-stack-width-small, var(--kiba-stack-width-base, auto));
+      height: var(--kiba-stack-height-small, var(--kiba-stack-height-base, auto));
+      max-width: var(--kiba-stack-max-width-small, var(--kiba-stack-max-width-base, none));
+      max-height: var(--kiba-stack-max-height-small, var(--kiba-stack-max-height-base, none));
+      min-width: var(--kiba-stack-min-width-small, var(--kiba-stack-min-width-base, auto));
+      min-height: var(--kiba-stack-min-height-small, var(--kiba-stack-min-height-base, auto));
+    }
+
+    @media (min-width: 768px) {
+      flex-direction: var(--kiba-stack-direction-medium, var(--kiba-stack-direction-small, var(--kiba-stack-direction-base, column)));
+      align-items: var(--kiba-stack-child-alignment-medium, var(--kiba-stack-child-alignment-small, var(--kiba-stack-child-alignment-base, stretch)));
+      justify-content: var(--kiba-stack-content-alignment-medium, var(--kiba-stack-content-alignment-small, var(--kiba-stack-content-alignment-base, space-between)));
+      width: var(--kiba-stack-width-medium, var(--kiba-stack-width-small, var(--kiba-stack-width-base, auto)));
+      height: var(--kiba-stack-height-medium, var(--kiba-stack-height-small, var(--kiba-stack-height-base, auto)));
+      max-width: var(--kiba-stack-max-width-medium, var(--kiba-stack-max-width-small, var(--kiba-stack-max-width-base, none)));
+      max-height: var(--kiba-stack-max-height-medium, var(--kiba-stack-max-height-small, var(--kiba-stack-max-height-base, none)));
+      min-width: var(--kiba-stack-min-width-medium, var(--kiba-stack-min-width-small, var(--kiba-stack-min-width-base, auto)));
+      min-height: var(--kiba-stack-min-height-medium, var(--kiba-stack-min-height-small, var(--kiba-stack-min-height-base, auto)));
+    }
+
+    @media (min-width: 992px) {
+      flex-direction: var(--kiba-stack-direction-large, var(--kiba-stack-direction-medium, var(--kiba-stack-direction-small, var(--kiba-stack-direction-base, column))));
+      align-items: var(--kiba-stack-child-alignment-large, var(--kiba-stack-child-alignment-medium, var(--kiba-stack-child-alignment-small, var(--kiba-stack-child-alignment-base, stretch))));
+      justify-content: var(--kiba-stack-content-alignment-large, var(--kiba-stack-content-alignment-medium, var(--kiba-stack-content-alignment-small, var(--kiba-stack-content-alignment-base, space-between))));
+      width: var(--kiba-stack-width-large, var(--kiba-stack-width-medium, var(--kiba-stack-width-small, var(--kiba-stack-width-base, auto))));
+      height: var(--kiba-stack-height-large, var(--kiba-stack-height-medium, var(--kiba-stack-height-small, var(--kiba-stack-height-base, auto))));
+      max-width: var(--kiba-stack-max-width-large, var(--kiba-stack-max-width-medium, var(--kiba-stack-max-width-small, var(--kiba-stack-max-width-base, none))));
+      max-height: var(--kiba-stack-max-height-large, var(--kiba-stack-max-height-medium, var(--kiba-stack-max-height-small, var(--kiba-stack-max-height-base, none))));
+      min-width: var(--kiba-stack-min-width-large, var(--kiba-stack-min-width-medium, var(--kiba-stack-min-width-small, var(--kiba-stack-min-width-base, auto))));
+      min-height: var(--kiba-stack-min-height-large, var(--kiba-stack-min-height-medium, var(--kiba-stack-min-height-small, var(--kiba-stack-min-height-base, auto))));
+    }
+
+    @media (min-width: 1200px) {
+      flex-direction: var(--kiba-stack-direction-extraLarge, var(--kiba-stack-direction-large, var(--kiba-stack-direction-medium, var(--kiba-stack-direction-small, var(--kiba-stack-direction-base, column)))));
+      align-items: var(--kiba-stack-child-alignment-extraLarge, var(--kiba-stack-child-alignment-large, var(--kiba-stack-child-alignment-medium, var(--kiba-stack-child-alignment-small, var(--kiba-stack-child-alignment-base, stretch)))));
+      justify-content: var(--kiba-stack-content-alignment-extraLarge, var(--kiba-stack-content-alignment-large, var(--kiba-stack-content-alignment-medium, var(--kiba-stack-content-alignment-small, var(--kiba-stack-content-alignment-base, space-between)))));
+      width: var(--kiba-stack-width-extraLarge, var(--kiba-stack-width-large, var(--kiba-stack-width-medium, var(--kiba-stack-width-small, var(--kiba-stack-width-base, auto)))));
+      height: var(--kiba-stack-height-extraLarge, var(--kiba-stack-height-large, var(--kiba-stack-height-medium, var(--kiba-stack-height-small, var(--kiba-stack-height-base, auto)))));
+      max-width: var(--kiba-stack-max-width-extraLarge, var(--kiba-stack-max-width-large, var(--kiba-stack-max-width-medium, var(--kiba-stack-max-width-small, var(--kiba-stack-max-width-base, none)))));
+      max-height: var(--kiba-stack-max-height-extraLarge, var(--kiba-stack-max-height-large, var(--kiba-stack-max-height-medium, var(--kiba-stack-max-height-small, var(--kiba-stack-max-height-base, none)))));
+      min-width: var(--kiba-stack-min-width-extraLarge, var(--kiba-stack-min-width-large, var(--kiba-stack-min-width-medium, var(--kiba-stack-min-width-small, var(--kiba-stack-min-width-base, auto)))));
+      min-height: var(--kiba-stack-min-height-extraLarge, var(--kiba-stack-min-height-large, var(--kiba-stack-min-height-medium, var(--kiba-stack-min-height-small, var(--kiba-stack-min-height-base, auto)))));
+    }
+  }
+}

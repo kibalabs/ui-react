@@ -11,10 +11,10 @@ export const valueToCss = (value: string): string => {
     const referenceType = strippedValueParts[0];
     const referenceValue = strippedValueParts[1];
     if (referenceType === 'colors') {
-      return `var(--color-${camelCaseToKebabCase(referenceValue)})`;
+      return `var(--kiba-color-${camelCaseToKebabCase(referenceValue)})`;
     }
     if (referenceType === 'dimensions') {
-      return `var(--dimension-${camelCaseToKebabCase(referenceValue)})`;
+      return `var(--kiba-dimension-${camelCaseToKebabCase(referenceValue)})`;
     }
     console.error(`Unknown reference used: ${referenceType} (${value})`);
   }

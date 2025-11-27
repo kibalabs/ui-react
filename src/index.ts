@@ -1,4 +1,5 @@
 import './styles/reset.scss';
+import './styles/colors.scss';
 
 export * from './model';
 export * from './util';
