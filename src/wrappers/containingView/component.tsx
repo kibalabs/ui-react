@@ -1,47 +1,35 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { styled } from 'styled-components';
 
 import { IDimensionGuide } from '../../particles';
 import { useDimensions } from '../../theming';
 import { IWrapperProps } from '../wrapperProps';
-import { wrappingComponent } from '../wrappingComponent';
-
-interface IStyledContainingViewProps extends IWrapperProps {
-  $theme: IDimensionGuide;
-}
-
-const StyledContainingView = wrappingComponent((Component: React.ComponentType<IStyledContainingViewProps>): React.ComponentType<IStyledContainingViewProps> => {
-  return styled(Component)<IStyledContainingViewProps>`
-    max-width: ${(props: IStyledContainingViewProps): string => props.$theme.screenWidthMax};
-    width: 100%;
-    overflow: auto;
-    &.centered {
-      margin-right: auto;
-      margin-left: auto;
-    }
-  `;
-});
+import { WrapperView } from '../wrappingComponent';
 
 export interface IContainingViewProps extends IWrapperProps {
   theme?: IDimensionGuide;
   isCenteredHorizontally?: boolean;
 }
 
-export function ContainingView({
-  className = '',
-  isCenteredHorizontally = true,
-  ...props
-}: IContainingViewProps): React.ReactElement {
+export function ContainingView(props: IContainingViewProps): React.ReactElement {
   const theme = useDimensions(props.theme);
+  const isCenteredHorizontally = props.isCenteredHorizontally ?? true;
+  const wrapperStyle: React.CSSProperties = {
+    maxWidth: theme.screenWidthMax,
+    width: '100%',
+    overflow: 'auto',
+    ...(isCenteredHorizontally ? { marginLeft: 'auto', marginRight: 'auto' } : {}),
+  };
   return (
-    <StyledContainingView
-      className={getClassName(ContainingView.displayName, className, isCenteredHorizontally && 'centered')}
-      $theme={theme}
+    <WrapperView
+      className={props.className}
+      style={props.style}
+      wrapperClassName={getClassName(ContainingView.displayName, isCenteredHorizontally && 'centered')}
+      wrapperStyle={wrapperStyle}
     >
       {props.children}
-    </StyledContainingView>
+    </WrapperView>
   );
 }
 ContainingView.displayName = 'KibaContainingView';

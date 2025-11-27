@@ -1,45 +1,50 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
-import { styled } from 'styled-components';
+import { camelCaseToKebabCase } from '@kibalabs/core';
 
 import { IColorGuide } from '../../particles';
 import { ColorProvider, useAlternateColors } from '../../theming';
-import { colorsToCss } from '../../util';
 import { IWrapperProps } from '../wrapperProps';
-import { wrappingComponent } from '../wrappingComponent';
+import { WrapperView } from '../wrappingComponent';
 
-interface IStyledColorSettingViewProps extends IWrapperProps {
-  $colors: Partial<IColorGuide>;
-}
-
-const StyledColorSettingView = wrappingComponent((Component: React.ComponentType<IStyledColorSettingViewProps>): React.ComponentType<IStyledColorSettingViewProps> => {
-  return styled(Component)<IStyledColorSettingViewProps>`
-    ${(props: IStyledColorSettingViewProps): string => colorsToCss(props.$colors)};
-    ${(props: IStyledColorSettingViewProps): string => (props.$colors.text ? `color: ${props.$colors.text}` : '')};
-    ${(props: IStyledColorSettingViewProps): string => (props.$colors.background ? `background-color: ${props.$colors.background}` : '')};
-  `;
-});
+const colorsToStyleProperties = (colors: Partial<IColorGuide>): Record<string, string> => {
+  const output: Record<string, string> = {};
+  Object.keys(colors).forEach((colorKey: string): void => {
+    const colorValue = colors[colorKey as keyof IColorGuide];
+    if (colorValue) {
+      output[`--kiba-color-${camelCaseToKebabCase(colorKey)}`] = colorValue;
+    }
+  });
+  return output;
+};
 
 export interface IColorSettingViewProps extends IWrapperProps {
+  /** @deprecated Use `colors` instead */
   theme?: Partial<IColorGuide>;
+  colors?: Partial<IColorGuide>;
   variant?: string;
 }
 
-export function ColorSettingView({
-  className = '',
-  ...props
-}: IColorSettingViewProps): React.ReactElement {
-  const colors = useAlternateColors(props.variant || undefined, props.theme);
-
+export function ColorSettingView(props: IColorSettingViewProps): React.ReactElement {
+  const colorOverrides = props.colors || props.theme;
+  const colors = useAlternateColors(props.variant || undefined, colorOverrides);
+  // Only set CSS variables for explicitly passed colors, not the full merged set
+  const colorStyles = colorsToStyleProperties(colorOverrides || {});
+  const wrapperStyle: React.CSSProperties = {
+    ...colorStyles,
+    ...(colorOverrides?.text ? { color: colorOverrides.text } : {}),
+    ...(colorOverrides?.background ? { backgroundColor: colorOverrides.background } : {}),
+  };
   return (
     <ColorProvider colors={colors}>
-      <StyledColorSettingView
-        className={getClassName(ColorSettingView.displayName, className)}
-        $colors={colors}
+      <WrapperView
+        className={props.className}
+        style={props.style}
+        wrapperClassName={ColorSettingView.displayName}
+        wrapperStyle={wrapperStyle}
       >
         {props.children}
-      </StyledColorSettingView>
+      </WrapperView>
     </ColorProvider>
   );
 }

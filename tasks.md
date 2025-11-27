@@ -134,6 +134,85 @@ When using flex layouts (Grid, Stack), avoid setting explicit `height: auto` on 
 ...(child.props.isFullHeight ? { '--kiba-grid-item-height': '100%' } : {}),
 ```
 
+### 11. Base Interface: IComponentProps
+
+All migrated components should extend `IComponentProps` from `../../model`. This interface provides:
+- `id?: string`
+- `className?: string`
+- `variant?: string`
+- `style?: React.CSSProperties`
+
+```tsx
+import { IComponentProps } from '../../model';
+
+export interface IButtonProps extends IComponentProps {
+  text: string;
+  // ... component-specific props only
+}
+```
+
+For components that still need the legacy `theme` prop during migration, use `IComponentPropsCompat<ThemeType>` which extends `IComponentProps` with a deprecated `theme` prop.
+
+### 12. Removing Theme Files
+
+When a component is fully migrated to CSS (no longer uses `props.theme`):
+
+1. **Delete `theme.ts`** - The theme interface is no longer needed
+2. **Delete `buildTheme.ts`** - No longer building JS theme objects
+3. **Update `index.ts`** - Remove `export * from './theme'`
+4. **Keep `ThemedStyle` export** - For backwards compat, export empty function from `legacyThemeCompat.ts`:
+   ```tsx
+   // In component.tsx:
+   export { ButtonThemedStyle } from '../../util/legacyThemeCompat';
+   ```
+5. **Update `themeBuilder.ts`** - Use `{}` for the component's theme entry
+
+### 13. Legacy Theme Compat
+
+The `src/util/legacyThemeCompat.ts` file contains:
+- Empty `ThemedStyle` functions for migrated components (return `''`)
+- `BoxThemedStyle` and `TextThemedStyle` that still work (particles not fully migrated)
+- `themeToInlineStyles()` for components that still support `props.theme`
+
+Components that still use `props.theme` should keep their `theme.ts` file and use `IComponentPropsCompat<IThemeType>`.
+
+### 14. Only Create SCSS Files When Needed
+
+**DO NOT** create `styles.scss` files for components that only use inline styles (via `style` prop). SCSS files are only needed when a component has:
+- Static CSS class-based styling
+- CSS layer definitions (`@layer kiba-structure`, `@layer kiba-theme`)
+- Variant classes
+
+Wrappers that only pass dynamic styles to children (like `BackgroundView`, `ColorSettingView`) should NOT have SCSS files.
+
+### 15. Wrappers Should Use WrapperView
+
+For wrapper components that pass styles/classNames to children without creating DOM elements, use the `WrapperView` component from `wrappingComponent.tsx`:
+
+```tsx
+import { WrapperView } from '../wrappingComponent';
+
+export function MyWrapper(props: IMyWrapperProps): React.ReactElement {
+  const wrapperStyle = { /* computed styles */ };
+  return (
+    <WrapperView
+      className={props.className}
+      style={props.style}
+      wrapperClassName={MyWrapper.displayName}
+      wrapperStyle={wrapperStyle}
+    >
+      {props.children}
+    </WrapperView>
+  );
+}
+```
+
+`WrapperView` handles:
+- Combining `className` (from parent) with `wrapperClassName` (component's own)
+- Combining `style` (from parent) with `wrapperStyle` (component's own)
+- Cloning these onto children via `React.cloneElement`
+- Returning `React.Fragment` (no wrapper div)
+
 ---
 
 ## Architecture
@@ -146,7 +225,9 @@ When using flex layouts (Grid, Stack), avoid setting explicit `height: auto` on 
 2. **File Structure** per component:
    - `component.tsx` - React component with className-based styling
    - `styles.scss` - SCSS file with `@layer kiba-structure` and `@layer kiba-theme` blocks
-   - `theme.ts` - Theme interface (keep for backwards compat, but unused)
+   - `theme.ts` - Theme interface (DELETE when component fully migrated to CSS)
+   - `buildTheme.ts` - Theme builder (DELETE when component fully migrated to CSS)
+   - `index.ts` - Exports (remove theme export when theme.ts deleted)
 
 3. **Pattern** (see Box, Button, Text as examples):
    - Remove `styled-components` import and `styled.div` usage
@@ -158,7 +239,8 @@ When using flex layouts (Grid, Stack), avoid setting explicit `height: auto` on 
    - Variants become CSS classes: `&.primary`, `&.large`, etc.
 
 4. **Backwards Compatibility**:
-   - Keep `theme` prop on components but use `themeToInlineStyles()` for legacy support
+   - Keep `ThemedStyle` exports via `legacyThemeCompat.ts` (empty functions for migrated components)
+   - Keep `IComponentPropsCompat<Theme>` for components still using `props.theme`
    - Apps should migrate to SCSS overrides (see `agent-hack/app/src/theme.scss`)
 
 ---
@@ -226,19 +308,21 @@ When using flex layouts (Grid, Stack), avoid setting explicit `height: auto` on 
 
 ## Wrappers
 
-- [ ] BackgroundView
-- [ ] ContainingView
-- [ ] ResponsiveContainingView
-- [ ] HidingView
-- [ ] ResponsiveHidingView
-- [ ] PaddingView
-- [ ] ColorSettingView
-- [ ] ResponsiveTextAlignmentView
+- [x] BackgroundView
+- [x] ContainingView
+- [x] ResponsiveContainingView
+- [x] HidingView
+- [x] ResponsiveHidingView
+- [x] PaddingView
+- [x] ColorSettingView
+- [x] ResponsiveTextAlignmentView
 
 ---
 
 ## Cleanup Tasks
 
+- [ ] Remove the theme context, everything should use css variables to get the current theme
+- [ ] Update all components to not support theme prop
 - [ ] Remove `styled-components` from peerDependencies once all components migrated
 - [ ] Remove legacy theme building code from `src/theming/cssBuilder.ts`
 - [ ] Remove `themeToInlineStyles` and related legacy compat code

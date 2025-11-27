@@ -1,49 +1,36 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { styled } from 'styled-components';
 
-import { IDimensionGuide, TextAlignment } from '../../particles';
-import { useDimensions } from '../../theming';
-import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
+import './styles.scss';
+import { TextAlignment } from '../../particles';
+import { ResponsiveField } from '../../util';
 import { IWrapperProps } from '../wrapperProps';
-import { wrappingComponent } from '../wrappingComponent';
-
-const getAlignmentCss: CssConverter<TextAlignment> = (field: TextAlignment): string => {
-  return `text-align: ${field};`;
-};
-
-interface IStyledResponsiveTextAlignmentViewProps extends IWrapperProps {
-  $theme: IDimensionGuide;
-  $alignment: ResponsiveField<TextAlignment>;
-}
-
-const StyledResponsiveTextAlignmentView = wrappingComponent((component: React.ComponentType<IStyledResponsiveTextAlignmentViewProps>): React.ComponentType<IStyledResponsiveTextAlignmentViewProps> => {
-  return styled(component)<IStyledResponsiveTextAlignmentViewProps>`
-    ${(props: IStyledResponsiveTextAlignmentViewProps): string => fieldToResponsiveCss(props.$alignment, props.$theme, getAlignmentCss)};
-  `;
-});
+import { WrapperView } from '../wrappingComponent';
 
 export interface IResponsiveTextAlignmentViewProps extends IWrapperProps {
-  theme?: IDimensionGuide;
   alignment: TextAlignment;
   alignmentResponsive?: ResponsiveField<TextAlignment>;
 }
 
-export function ResponsiveTextAlignmentView({
-  className = '',
-  alignment = TextAlignment.Left,
-  ...props
-}: IResponsiveTextAlignmentViewProps): React.ReactElement {
-  const theme = useDimensions(props.theme);
+export function ResponsiveTextAlignmentView(props: IResponsiveTextAlignmentViewProps): React.ReactElement {
+  const alignmentField: ResponsiveField<TextAlignment> = { base: props.alignment, ...props.alignmentResponsive };
+  const wrapperStyle: React.CSSProperties & Record<string, string> = {
+    '--rtav-text-align-base': alignmentField.base,
+    '--rtav-text-align-small': alignmentField.small,
+    '--rtav-text-align-medium': alignmentField.medium,
+    '--rtav-text-align-large': alignmentField.large,
+    '--rtav-text-align-extra-large': alignmentField.extraLarge,
+  } as React.CSSProperties;
   return (
-    <StyledResponsiveTextAlignmentView
-      className={getClassName(ResponsiveTextAlignmentView.displayName, className)}
-      $theme={theme}
-      $alignment={{ base: alignment, ...props.alignmentResponsive }}
+    <WrapperView
+      className={props.className}
+      style={props.style}
+      wrapperClassName={getClassName(ResponsiveTextAlignmentView.displayName)}
+      wrapperStyle={wrapperStyle}
     >
       {props.children}
-    </StyledResponsiveTextAlignmentView>
+    </WrapperView>
   );
 }
 ResponsiveTextAlignmentView.displayName = 'KibaResponsiveTextAlignmentView';
