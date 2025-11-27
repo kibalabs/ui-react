@@ -196,7 +196,7 @@ When using flex layouts (Grid, Stack), avoid setting explicit `height: auto` on 
 - [x] CollapsibleBox
 - [ ] TitledCollapsibleBox
 - [ ] LinePager
-- [ ] PrettyText
+- [x] PrettyText
 - [ ] ProgressCounterItem
 - [ ] WebView
 
@@ -221,8 +221,8 @@ When using flex layouts (Grid, Stack), avoid setting explicit `height: auto` on 
 - [x] Stack
 - [x] EqualGrid
 - [x] Grid
-- [ ] Container
-- [ ] LayerContainer
+- [x] Container
+- [x] LayerContainer
 
 ## Wrappers
 
@@ -234,26 +234,6 @@ When using flex layouts (Grid, Stack), avoid setting explicit `height: auto` on 
 - [ ] PaddingView
 - [ ] ColorSettingView
 - [ ] ResponsiveTextAlignmentView
-
----
-
-## App-Specific Priority (agent-hack usage count)
-
-1. Text (1060) ✅
-2. Stack (605) ✅
-3. Box (266) ✅
-4. Spacing (208) ✅
-5. Dialog (189) ✅
-6. Button (148) ✅
-7. KibaIcon (42)
-8. Image (42)
-9. MarkdownText (34)
-10. IconButton (25)
-11. Form (25)
-12. Link (23)
-13. ResponsiveHidingView (22)
-14. HidingView (17)
-15. LinkBase (16)
 
 ---
 

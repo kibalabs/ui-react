@@ -20,7 +20,7 @@ export interface IGridItemProps extends IOptionalSingleAnyChildProps {
   style?: React.CSSProperties;
 }
 
-export function GridItem(props: IGridItemProps): React.ReactElement {
+export function GridItem(_props: IGridItemProps): React.ReactElement {
   return <React.Fragment />;
 }
 GridItem.displayName = 'KibaGridItem';
@@ -57,9 +57,14 @@ export function Grid({
   const defaultGutter = props.defaultGutter || PaddingSize.Default;
   const innerShouldAddGutters = shouldAddGutters && defaultGutter !== PaddingSize.None;
   const gutter = innerShouldAddGutters ? getPaddingSize(defaultGutter, theme) : '0px';
-  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number), index: number): React.ReactElement<IGridItemProps> => (
-    typeof child === 'object' && 'type' in child && child.type === GridItem ? child : <GridItem key={index}>{child}</GridItem>
-  ));
+  let childIndex = 0;
+  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): React.ReactElement<IGridItemProps> => {
+    if (typeof child === 'object' && 'type' in child && child.type === GridItem) {
+      return child;
+    }
+    childIndex += 1;
+    return <GridItem key={`grid-item-${childIndex}`}>{child}</GridItem>;
+  });
   const gridStyles: React.CSSProperties = {
     ...props.style,
     // @ts-expect-error CSS custom properties
@@ -68,6 +73,7 @@ export function Grid({
     '--kiba-grid-content-alignment': getFlexContentAlignment(contentAlignment),
   };
   return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <PaddingView className={className} {...props as IPaddingViewPaddingProps}>
       <div
         id={props.id}
@@ -75,16 +81,17 @@ export function Grid({
         style={gridStyles}
       >
         {children.map((child: React.ReactElement<IGridItemProps>): React.ReactElement => {
-          const size = child.props.size ?? 12;
-          const sizeResponsive = child.props.sizeResponsive ?? {};
+          const childProps = child.props;
+          const size = childProps.size ?? 12;
+          const sizeResponsive = childProps.sizeResponsive ?? {};
           const itemStyles: React.CSSProperties = {
-            ...child.props.style,
+            ...childProps.style,
             // @ts-expect-error CSS custom properties
             '--kiba-grid-item-gutter': gutter,
-            '--kiba-grid-item-alignment': child.props.alignment ? getFlexItemAlignment(child.props.alignment) : 'auto',
+            '--kiba-grid-item-alignment': childProps.alignment ? getFlexItemAlignment(childProps.alignment) : 'auto',
             '--kiba-grid-item-width': getItemWidth(theme.columnCount, size, gutter),
             '--kiba-grid-item-display': getItemDisplay(size),
-            ...(child.props.isFullHeight ? {
+            ...(childProps.isFullHeight ? {
               '--kiba-grid-item-height': '100%',
               '--kiba-grid-item-overflow-y': 'auto',
             } : {}),
@@ -108,11 +115,11 @@ export function Grid({
           return (
             <div
               key={child.key}
-              id={child.props.id}
-              className={getClassName('KibaGridItem', child.props.className)}
+              id={childProps.id}
+              className={getClassName('KibaGridItem', childProps.className)}
               style={itemStyles}
             >
-              {child.props.children}
+              {childProps.children}
             </div>
           );
         })}

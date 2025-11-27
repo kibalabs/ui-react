@@ -1,3 +1,5 @@
+@use '../../styles/variables' as *;
+
 @layer kiba-structure {
   .KibaStack {
     display: flex;
@@ -25,7 +27,7 @@
     }
 
     // Responsive breakpoints
-    @media (min-width: 576px) {
+    @include screen-small {
       flex-direction: var(--kiba-stack-direction-small, var(--kiba-stack-direction-base, column));
       align-items: var(--kiba-stack-child-alignment-small, var(--kiba-stack-child-alignment-base, stretch));
       justify-content: var(--kiba-stack-content-alignment-small, var(--kiba-stack-content-alignment-base, space-between));
@@ -37,7 +39,7 @@
       min-height: var(--kiba-stack-min-height-small, var(--kiba-stack-min-height-base, auto));
     }
 
-    @media (min-width: 768px) {
+    @include screen-medium {
       flex-direction: var(--kiba-stack-direction-medium, var(--kiba-stack-direction-small, var(--kiba-stack-direction-base, column)));
       align-items: var(--kiba-stack-child-alignment-medium, var(--kiba-stack-child-alignment-small, var(--kiba-stack-child-alignment-base, stretch)));
       justify-content: var(--kiba-stack-content-alignment-medium, var(--kiba-stack-content-alignment-small, var(--kiba-stack-content-alignment-base, space-between)));
@@ -49,7 +51,7 @@
       min-height: var(--kiba-stack-min-height-medium, var(--kiba-stack-min-height-small, var(--kiba-stack-min-height-base, auto)));
     }
 
-    @media (min-width: 992px) {
+    @include screen-large {
       flex-direction: var(--kiba-stack-direction-large, var(--kiba-stack-direction-medium, var(--kiba-stack-direction-small, var(--kiba-stack-direction-base, column))));
       align-items: var(--kiba-stack-child-alignment-large, var(--kiba-stack-child-alignment-medium, var(--kiba-stack-child-alignment-small, var(--kiba-stack-child-alignment-base, stretch))));
       justify-content: var(--kiba-stack-content-alignment-large, var(--kiba-stack-content-alignment-medium, var(--kiba-stack-content-alignment-small, var(--kiba-stack-content-alignment-base, space-between))));
@@ -61,7 +63,7 @@
       min-height: var(--kiba-stack-min-height-large, var(--kiba-stack-min-height-medium, var(--kiba-stack-min-height-small, var(--kiba-stack-min-height-base, auto))));
     }
 
-    @media (min-width: 1200px) {
+    @include screen-extra-large {
       flex-direction: var(--kiba-stack-direction-extraLarge, var(--kiba-stack-direction-large, var(--kiba-stack-direction-medium, var(--kiba-stack-direction-small, var(--kiba-stack-direction-base, column)))));
       align-items: var(--kiba-stack-child-alignment-extraLarge, var(--kiba-stack-child-alignment-large, var(--kiba-stack-child-alignment-medium, var(--kiba-stack-child-alignment-small, var(--kiba-stack-child-alignment-base, stretch)))));
       justify-content: var(--kiba-stack-content-alignment-extraLarge, var(--kiba-stack-content-alignment-large, var(--kiba-stack-content-alignment-medium, var(--kiba-stack-content-alignment-small, var(--kiba-stack-content-alignment-base, space-between)))));

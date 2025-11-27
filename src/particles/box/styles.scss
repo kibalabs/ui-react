@@ -18,7 +18,7 @@
     &.scrollableHorizontally { overflow-x: auto; }
 
     // Responsive breakpoints
-    @media (min-width: 576px) {
+    @include screen-small {
       width: var(--kiba-box-width-sm, var(--kiba-box-width, 100%));
       height: var(--kiba-box-height-sm, var(--kiba-box-height, auto));
       max-width: var(--kiba-box-max-width-sm, var(--kiba-box-max-width));
@@ -27,7 +27,7 @@
       min-height: var(--kiba-box-min-height-sm, var(--kiba-box-min-height));
     }
 
-    @media (min-width: 768px) {
+    @include screen-medium {
       width: var(--kiba-box-width-md, var(--kiba-box-width-sm, var(--kiba-box-width, 100%)));
       height: var(--kiba-box-height-md, var(--kiba-box-height-sm, var(--kiba-box-height, auto)));
       max-width: var(--kiba-box-max-width-md, var(--kiba-box-max-width-sm, var(--kiba-box-max-width)));
@@ -36,7 +36,7 @@
       min-height: var(--kiba-box-min-height-md, var(--kiba-box-min-height-sm, var(--kiba-box-min-height)));
     }
 
-    @media (min-width: 992px) {
+    @include screen-large {
       width: var(--kiba-box-width-lg, var(--kiba-box-width-md, var(--kiba-box-width-sm, var(--kiba-box-width, 100%))));
       height: var(--kiba-box-height-lg, var(--kiba-box-height-md, var(--kiba-box-height-sm, var(--kiba-box-height, auto))));
       max-width: var(--kiba-box-max-width-lg, var(--kiba-box-max-width-md, var(--kiba-box-max-width-sm, var(--kiba-box-max-width))));
@@ -45,7 +45,7 @@
       min-height: var(--kiba-box-min-height-lg, var(--kiba-box-min-height-md, var(--kiba-box-min-height-sm, var(--kiba-box-min-height))));
     }
 
-    @media (min-width: 1200px) {
+    @include screen-extra-large {
       width: var(--kiba-box-width-xl, var(--kiba-box-width-lg, var(--kiba-box-width-md, var(--kiba-box-width-sm, var(--kiba-box-width, 100%)))));
       height: var(--kiba-box-height-xl, var(--kiba-box-height-lg, var(--kiba-box-height-md, var(--kiba-box-height-sm, var(--kiba-box-height, auto)))));
       max-width: var(--kiba-box-max-width-xl, var(--kiba-box-max-width-lg, var(--kiba-box-max-width-md, var(--kiba-box-max-width-sm, var(--kiba-box-max-width)))));

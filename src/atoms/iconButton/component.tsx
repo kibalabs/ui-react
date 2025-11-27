@@ -1,51 +1,14 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
+import { getClassName } from '@kibalabs/core';
 import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
 
 import './styles.scss';
 import { IIconButtonTheme } from './theme';
 import { IComponentProps } from '../../model';
 import { IIconProps } from '../../particles/icon';
-import { themeToCss } from '../../util';
 
-export const IconButtonThemedStyle = (theme: RecursivePartial<IIconButtonTheme>): string => `
-  & > .KibaIconButtonFocusFixer {
-    ${themeToCss(theme?.normal?.default?.text)};
-    ${themeToCss(theme?.normal?.default?.background)};
-  }
-  &:hover > .KibaIconButtonFocusFixer {
-    ${themeToCss(theme?.normal?.hover?.text)};
-    ${themeToCss(theme?.normal?.hover?.background)};
-  }
-  &:active > .KibaIconButtonFocusFixer {
-    ${themeToCss(theme?.normal?.press?.text)};
-    ${themeToCss(theme?.normal?.press?.background)};
-  }
-  &:focus > .KibaIconButtonFocusFixer {
-    ${themeToCss(theme?.normal?.focus?.text)};
-    ${themeToCss(theme?.normal?.focus?.background)};
-  }
-  &.disabled {
-    cursor: not-allowed;
-    & > .KibaIconButtonFocusFixer {
-      ${themeToCss(theme?.disabled?.default?.text)};
-      ${themeToCss(theme?.disabled?.default?.background)};
-    }
-    &:hover > .KibaIconButtonFocusFixer {
-      ${themeToCss(theme?.disabled?.hover?.text)};
-      ${themeToCss(theme?.disabled?.hover?.background)};
-    }
-    &:active > .KibaIconButtonFocusFixer {
-      ${themeToCss(theme?.disabled?.press?.text)};
-      ${themeToCss(theme?.disabled?.press?.background)};
-    }
-    &:focus > .KibaIconButtonFocusFixer {
-      ${themeToCss(theme?.disabled?.focus?.text)};
-      ${themeToCss(theme?.disabled?.focus?.background)};
-    }
-  }
-`;
+export { IconButtonThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface IIconButtonProps extends IComponentProps<IIconButtonTheme> {
   isEnabled?: boolean;

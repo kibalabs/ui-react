@@ -108,6 +108,7 @@ export function SingleLineInput({
         onChange={onValueChanged}
         aria-label={props.label || props.name || props.placeholderText}
         placeholder={props.placeholderText}
+        // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus={props.shouldAutofocus}
         onWheelCapture={onWheelCapture}
         spellCheck={props.shouldSpellCheck}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
+import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
 import './styles.scss';
@@ -9,7 +9,7 @@ import { IComponentProps } from '../../model';
 import { KibaIcon } from '../../particles';
 import { HidingView } from '../../wrappers';
 
-export const CollapsibleBoxThemedStyle = (theme: RecursivePartial<ICollapsibleBoxTheme>): string => '';
+export { CollapsibleBoxThemedStyle } from '../../util/legacyThemeCompat';
 
 interface ICollapsibleBoxProps extends IComponentProps<ICollapsibleBoxTheme>, ISingleAnyChildProps {
   headerView: React.ReactNode;
@@ -28,7 +28,12 @@ export function CollapsibleBox({
   const onCollapseToggled = (): void => {
     props.onCollapseToggled();
   };
-
+  const onKeyDown = (event: React.KeyboardEvent): void => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      onCollapseToggled();
+    }
+  };
   return (
     <div
       id={props.id}
@@ -36,8 +41,11 @@ export function CollapsibleBox({
       style={props.style}
     >
       <div
+        role='button'
+        tabIndex={0}
         className='KibaCollapsibleBoxHeader'
         onClick={onCollapseToggled}
+        onKeyDown={onKeyDown}
       >
         {props.headerView}
         {!props.shouldHideIndicator && (

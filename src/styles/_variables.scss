@@ -49,8 +49,44 @@ $font-family: var(--kiba-font-family);
 $line-height: var(--kiba-line-height);
 
 // -------------------------------------------------------------------------
+// Breakpoint Variables
+// -------------------------------------------------------------------------
+// NOTE: CSS custom properties cannot be used in media queries, so these must
+// be pure SCSS variables. Apps can override by redefining before importing.
+// These defaults match the values in particles/dimensions/buildTheme.ts
+$screen-width-small: 576px !default;
+$screen-width-medium: 768px !default;
+$screen-width-large: 992px !default;
+$screen-width-extra-large: 1200px !default;
+
+// -------------------------------------------------------------------------
 // Mixins
 // -------------------------------------------------------------------------
 @mixin transition($duration: 0.3s) {
   transition-duration: $duration;
+}
+
+// Responsive breakpoint mixins
+@mixin screen-small {
+  @media (min-width: $screen-width-small) {
+    @content;
+  }
+}
+
+@mixin screen-medium {
+  @media (min-width: $screen-width-medium) {
+    @content;
+  }
+}
+
+@mixin screen-large {
+  @media (min-width: $screen-width-large) {
+    @content;
+  }
+}
+
+@mixin screen-extra-large {
+  @media (min-width: $screen-width-extra-large) {
+    @content;
+  }
 }

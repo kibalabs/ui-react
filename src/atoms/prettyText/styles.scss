@@ -1,0 +1,143 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaPrettyText {
+    box-sizing: border-box;
+    & > p {
+      display: block;
+    }
+    & > em {
+      display: inline;
+    }
+    & > strong {
+      display: inline;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaPrettyText {
+    word-break: break-word;
+    font-size: $font-size;
+    font-family: $font-family;
+    font-weight: normal;
+    color: $color-text;
+    line-height: 1.5em;
+    text-decoration: none;
+    margin: 1em 0;
+    text-align: inherit;
+    text-shadow: inherit;
+    text-transform: inherit;
+
+    & > p {
+      margin: 1em 0;
+    }
+
+    & > em {
+      font-style: italic;
+    }
+
+    & > strong {
+      font-weight: bolder;
+    }
+
+    // Alignment variants
+    &.left { text-align: left; }
+    &.center { text-align: center; }
+    &.right { text-align: right; }
+    &.justify { text-align: justify; }
+
+    // Inherit variant
+    &.inherit {
+      font-size: inherit;
+      font-family: inherit;
+      font-weight: inherit;
+      color: inherit;
+      line-height: inherit;
+      text-decoration: inherit;
+      margin: inherit;
+      text-align: inherit;
+      text-shadow: inherit;
+      text-transform: inherit;
+    }
+
+    // Text style variants
+    &.bold, &.strong { font-weight: bolder; }
+    &.italic, &.emphasis { font-style: italic; }
+    &.underline, &.inserted { text-decoration: underline; }
+    &.deleted { text-decoration: line-through; }
+    &.small, &.smaller { font-size: smaller; }
+    &.large { font-size: larger; }
+    &.subscript { vertical-align: sub; font-size: smaller; }
+    &.superscript { vertical-align: super; font-size: smaller; }
+
+    // Header variants
+    &.header1, &.header {
+      font-size: 3.0rem;
+      font-weight: 800;
+      color: $color-text;
+      line-height: 1.2em;
+      margin: 0.67em 0;
+    }
+
+    &.header2, &.title {
+      font-size: 2.0rem;
+      font-weight: 700;
+      color: $color-text;
+      line-height: 1.2em;
+      margin: 0.83em 0;
+    }
+
+    &.header3, &.subtitle {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: $color-text;
+      line-height: 1.2em;
+      margin: 1em 0 0.5em 0;
+    }
+
+    &.header4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: $color-text;
+      line-height: 1.2em;
+      text-decoration: underline;
+      margin: 1em 0 0.5em 0;
+    }
+
+    &.header5 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: $color-text;
+      line-height: 1.2em;
+      margin: 1em 0 0.5em 0;
+    }
+
+    &.header6 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $color-text;
+      line-height: 1.2em;
+      margin: 1em 0 0.5em 0;
+    }
+
+    &.paragraph {
+      margin: 1em 0;
+    }
+
+    // Special variants
+    &.note {
+      font-size: 0.8rem;
+      color: $color-text-light25;
+    }
+
+    &.supersize { font-size: 3rem; }
+    &.unmargined { margin: 0; }
+    &.margined { margin: 1em 0 0.5em 0; }
+
+    // Color variants
+    &.colored, &.branded { color: $color-brand-primary; }
+    &.error { color: $color-error; }
+    &.success { color: $color-success; }
+  }
+}

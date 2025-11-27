@@ -5,18 +5,11 @@ import { getIsRunningOnBrowser, ISingleAnyChildProps, useEventListener } from '@
 
 import { IDialogTheme } from './theme';
 import { IComponentProps } from '../../model';
-import { Box, BoxThemedStyle } from '../../particles/box';
-import { propertyToCss } from '../../util';
+import { Box } from '../../particles/box';
 
 import './styles.scss';
 
-// NOTE(krishan711): kept for legacy cssBuilder compatibility
-export const DialogThemedStyle = (theme: RecursivePartial<IDialogTheme>): string => `
-  ${propertyToCss('background', theme?.backdropColor)};
-  & > .KibaDialogInner {
-    ${theme?.background ? BoxThemedStyle(theme?.background) : ''};
-  }
-`;
+export { DialogThemedStyle } from '../../util/legacyThemeCompat';
 
 interface IDialogProps extends IComponentProps<IDialogTheme>, ISingleAnyChildProps {
   isOpen: boolean;

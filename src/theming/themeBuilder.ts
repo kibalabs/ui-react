@@ -8,13 +8,13 @@ import { IButtonTheme } from '../atoms/button';
 import { buildCheckboxThemes, ICheckboxTheme } from '../atoms/checkbox';
 import { ICollapsibleBoxTheme } from '../atoms/collapsibleBox';
 import { IDialogTheme } from '../atoms/dialog';
-import { buildIconButtonThemes, IIconButtonTheme } from '../atoms/iconButton';
-import { buildInputWrapperThemes, IInputWrapperTheme } from '../atoms/inputWrapper';
+import { IIconButtonTheme } from '../atoms/iconButton';
+import { IInputWrapperTheme } from '../atoms/inputWrapper';
 import { buildLinePagerThemes, ILinePagerTheme } from '../atoms/linePager';
 import { buildLinkThemes, ILinkTheme } from '../atoms/link';
 import { buildLinkBaseThemes, ILinkBaseTheme } from '../atoms/linkBase';
 import { buildListItemThemes, IListItemTheme } from '../atoms/listItem';
-import { buildPrettyTextThemes, IPrettyTextTheme } from '../atoms/prettyText';
+import { IPrettyTextTheme } from '../atoms/prettyText';
 import { buildProgressCounterItemThemes, IProgressCounterItemTheme } from '../atoms/progressCounterItem';
 import { ISelectableViewTheme } from '../atoms/selectableView';
 import { buildSwitchThemes, ISwitchTheme } from '../atoms/switch';
@@ -79,12 +79,12 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     bulletTexts: buildBulletTextThemes(dimensions, textThemes, inputTheme?.bulletTexts as PartialThemeMap<IBulletTextTheme>),
     collapsibleBoxes: {} as Record<string, ICollapsibleBoxTheme>,
     dialogs: {} as Record<string, IDialogTheme>,
-    iconButtons: buildIconButtonThemes(dimensions, textThemes, boxThemes, inputTheme?.iconButtons as PartialThemeMap<IIconButtonTheme>),
-    inputWrappers: buildInputWrapperThemes(dimensions, textThemes, boxThemes, inputTheme?.inputWrappers as PartialThemeMap<IInputWrapperTheme>),
+    iconButtons: {} as Record<string, IIconButtonTheme>,
+    inputWrappers: {} as Record<string, IInputWrapperTheme>,
     linkBases: linkBaseThemes,
     links: buildLinkThemes(dimensions, textThemes, boxThemes, inputTheme?.links as PartialThemeMap<ILinkTheme>),
     listItems: buildListItemThemes(dimensions, textThemes, boxThemes, inputTheme?.listItems as PartialThemeMap<IListItemTheme>),
-    prettyTexts: buildPrettyTextThemes(dimensions, textThemes, inputTheme?.prettyTexts as PartialThemeMap<IPrettyTextTheme>),
+    prettyTexts: {} as Record<string, IPrettyTextTheme>,
     switches: buildSwitchThemes(dimensions, boxThemes, inputTheme?.switches as PartialThemeMap<ISwitchTheme>),
     webViews: buildWebViewThemes(dimensions, boxThemes, inputTheme?.webViews as PartialThemeMap<IWebViewTheme>),
     linePagers: buildLinePagerThemes(dimensions, boxThemes, inputTheme?.linePagers as PartialThemeMap<ILinePagerTheme>),

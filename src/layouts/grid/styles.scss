@@ -25,22 +25,22 @@
     margin: var(--kiba-grid-item-gutter, 0);
     align-self: var(--kiba-grid-item-alignment, auto);
 
-    @media (min-width: 576px) {
+    @include screen-small {
       width: var(--kiba-grid-item-width-sm, var(--kiba-grid-item-width, 100%));
       display: var(--kiba-grid-item-display-sm, var(--kiba-grid-item-display, flex));
     }
 
-    @media (min-width: 768px) {
+    @include screen-medium {
       width: var(--kiba-grid-item-width-md, var(--kiba-grid-item-width-sm, var(--kiba-grid-item-width, 100%)));
       display: var(--kiba-grid-item-display-md, var(--kiba-grid-item-display-sm, var(--kiba-grid-item-display, flex)));
     }
 
-    @media (min-width: 992px) {
+    @include screen-large {
       width: var(--kiba-grid-item-width-lg, var(--kiba-grid-item-width-md, var(--kiba-grid-item-width-sm, var(--kiba-grid-item-width, 100%))));
       display: var(--kiba-grid-item-display-lg, var(--kiba-grid-item-display-md, var(--kiba-grid-item-display-sm, var(--kiba-grid-item-display, flex))));
     }
 
-    @media (min-width: 1200px) {
+    @include screen-extra-large {
       width: var(--kiba-grid-item-width-xl, var(--kiba-grid-item-width-lg, var(--kiba-grid-item-width-md, var(--kiba-grid-item-width-sm, var(--kiba-grid-item-width, 100%)))));
       display: var(--kiba-grid-item-display-xl, var(--kiba-grid-item-display-lg, var(--kiba-grid-item-display-md, var(--kiba-grid-item-display-sm, var(--kiba-grid-item-display, flex)))));
     }
