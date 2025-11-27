@@ -39,6 +39,9 @@ export interface ComponentDefinition<Theme extends ThemeType> {
 }
 
 const buildComponentThemeCssString = <Theme extends ThemeType>(name: string, themeMap: ThemeMap<Theme>, themeCssFunction: ThemeCssFunction<Theme>): string => {
+  if (!themeMap || !themeMap.default) {
+    return '';
+  }
   const defaultCss = themeCssFunction(themeMap.default);
   const componentCss = Object.keys(themeMap).filter((themeKey: string): boolean => themeKey !== 'default').reduce((accumulator: string, themeKey: string): string => {
     return `
