@@ -6,12 +6,8 @@ import { OptionalProppedElement } from '@kibalabs/core-react';
 import './styles.scss';
 import { Alignment, InputType } from '../../model';
 import { IIconProps, PaddingSize } from '../../particles';
-import { IInputFrameTheme, InputFrame } from '../inputFrame';
+import { InputFrame } from '../inputFrame';
 import { IMoleculeProps } from '../moleculeProps';
-
-export interface ISingleLineInputTheme {
-  inputFrameTheme: IInputFrameTheme;
-}
 
 const getAutocompleteType = (inputType: InputType): string | undefined => {
   if (inputType === InputType.Email) {
@@ -22,7 +18,7 @@ const getAutocompleteType = (inputType: InputType): string | undefined => {
   return undefined;
 };
 
-export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTheme> {
+export interface ISingleLineInputProps extends IMoleculeProps {
   value: string | null;
   isEnabled?: boolean;
   placeholderText?: string;
@@ -84,7 +80,6 @@ export function SingleLineInput({
     <InputFrame
       id={props.id}
       className={getClassName(SingleLineInput.displayName, className)}
-      theme={props.theme?.inputFrameTheme}
       inputWrapperVariant={props.inputWrapperVariant}
       messageText={props.messageText}
       isEnabled={isEnabled}

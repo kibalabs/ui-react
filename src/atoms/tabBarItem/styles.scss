@@ -1,4 +1,6 @@
 @use '../../styles/variables' as *;
+@use '../../particles/text/styles' as text;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaTabBarItem {
@@ -26,14 +28,14 @@
 
 @layer kiba-theme {
   .KibaTabBarItem {
-    transition-duration: 0.3s;
-    font-size: $font-size;
-    font-family: $font-family;
-    color: $color-text;
+    @include text.default;
+    @include box.default;
+    @include box.focusable;
     background-color: transparent;
     padding: $padding $padding-wide;
     border: none;
     border-bottom: 2px solid transparent;
+    border-radius: $border-radius $border-radius 0 0;
     &:hover {
       color: $color-brand-primary;
     }

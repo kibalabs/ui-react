@@ -336,9 +336,112 @@ These files in `agent-hack/app/src/` still use styled-components and need to be 
 
 ## Cleanup Tasks
 
-- [ ] Remove the theme context, everything should use css variables to get the current theme
-- [ ] Update all components to not support theme prop
-- [ ] Remove `styled-components` from peerDependencies once all components migrated
-- [ ] Remove legacy theme building code from `src/theming/cssBuilder.ts`
-- [ ] Remove `themeToInlineStyles` and related legacy compat code
-- [ ] Update documentation/storybook
+### Phase 1: Remove Component theme.ts and buildTheme.ts Files ✅
+
+All component theme files have been removed:
+
+**Particles cleaned:**
+- [x] `src/particles/box/` - deleted theme.ts and buildTheme.ts
+- [x] `src/particles/text/` - deleted theme.ts and buildTheme.ts
+- [x] `src/particles/loadingSpinner/` - deleted theme.ts and buildTheme.ts
+- [ ] `src/particles/colors/` - KEEP: IColorGuide is a core type used by ThemeContext
+- [ ] `src/particles/dimensions/` - KEEP: IDimensionGuide is a core type used by ThemeContext
+- [ ] `src/particles/fonts/` - KEEP: IFont is a core type used by ThemeContext
+
+**Atoms cleaned:**
+- [x] `src/atoms/dialog/` - deleted theme.ts, uses backdropColor prop instead
+
+### Phase 2: Remove props.theme Usage from Components ✅
+
+All molecule theme props have been removed:
+
+**Molecules (all theme prop passing removed):**
+- [x] `src/molecules/form/component.tsx` - removed theme from Box, LoadingSpinner
+- [x] `src/molecules/multiLineInput/component.tsx` - removed theme from InputFrame
+- [x] `src/molecules/singleLineInput/component.tsx` - removed theme from InputFrame
+- [x] `src/molecules/tabBar/component.tsx` - removed theme from TabBarItem
+- [x] `src/molecules/progressCounter/component.tsx` - removed theme from ProgressCounterItem
+- [x] `src/molecules/carousel/component.tsx` - removed theme from IconButton
+- [x] `src/molecules/optionSelect/component.tsx` - removed theme from all components
+- [x] `src/molecules/list/component.tsx` - removed theme from ListItem
+- [x] `src/molecules/inputFrame/component.tsx` - removed theme from InputWrapper
+
+**Molecule theme interfaces removed:**
+- [x] ICarouselTheme
+- [x] IFormTheme
+- [x] IListTheme
+- [x] IMultiLineInputTheme
+- [x] ISingleLineInputTheme
+- [x] IInputFrameTheme
+- [x] IOptionSelectTheme
+- [x] ITabBarTheme
+- [x] IProgressCounterTheme
+- [x] IMessageDialogTheme
+- [x] AppDownloadButtonTheme
+
+**IMoleculeProps simplified:**
+- [x] `src/molecules/moleculeProps.ts` - removed theme generic, now just has id/className
+
+**Atoms:**
+- [x] `src/atoms/collapsibleBox/componentStateful.tsx` - removed theme import/usage
+- [x] `src/atoms/titledCollapsibleBox/componentStateful.tsx` - removed theme import/usage
+- [x] `src/atoms/dialog/component.tsx` - removed IDialogTheme, uses backdropColor prop
+
+**Wrappers (still use props.theme for dimensions/colors - needs further work):**
+- [ ] `src/wrappers/containingView/component.tsx` - uses `useDimensions(props.theme)`
+- [ ] `src/wrappers/responsiveContainingView/component.tsx` - uses `useDimensions(props.theme)`
+- [ ] `src/wrappers/paddingView/component.tsx` - uses `useDimensions(props.theme)`
+- [ ] `src/wrappers/colorSettingView/component.tsx` - uses `props.colors || props.theme`
+
+**App:**
+- [ ] `src/app/globalCss.tsx` - uses props.theme for global styles
+
+### Phase 3: Update ITheme and themeBuilder.ts
+
+- [ ] Remove `src/theming/themeBuilder.ts`
+- [ ] Remove `src/theming/themeContext.tsx`
+
+### Phase 4: Remove Legacy CSS Building
+
+- [ ] Delete `src/theming/cssBuilder.ts` entirely
+- [ ] Delete `src/util/legacyThemeCompat.ts` entirely
+- [ ] Remove all `*ThemedStyle` exports from components
+
+### Phase 5: Update Exports and Dependencies
+
+- [ ] Update `src/index.ts` - remove theme type exports
+- [ ] Update component `index.ts` files - remove theme exports
+- [ ] Remove `styled-components` from peerDependencies in package.json
+
+### Phase 6: Migrate Consumer Apps
+
+Apps using ui-react need to migrate from JS theme objects to SCSS:
+
+**agent-hack/app:**
+- [ ] Move theme variants from `theme.ts` to `theme.scss`
+- [ ] Use CSS variables instead of `$colors.*` references
+- [ ] Remove `buildTheme()` call, use simplified theme with just colors/dimensions
+
+### Key Types to Keep (move to core)
+
+These are still useful for layout calculations:
+- `IColorGuide` - defines available color tokens
+- `IDimensionGuide` - defines spacing, breakpoints, etc.
+- `IFont` - defines font configuration
+- `ScreenSize`, `PaddingSize` - enums for responsive/spacing
+
+### Migration Strategy for Consumer Apps
+
+Instead of:
+```ts
+const theme = buildTheme({
+  buttons: { primary: { normal: { default: { background: {...} } } } }
+});
+```
+
+Use SCSS:
+```scss
+.KibaButton.primary {
+  background-color: var(--color-brand-primary);
+}
+```

@@ -1,4 +1,6 @@
 @use '../../styles/variables' as *;
+@use '../../particles/text/styles' as text;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaButton {
@@ -42,16 +44,14 @@
     @include transition;
 
     > .KibaButtonFocusFixer {
-      @include transition;
+      @include text.default;
+      @include box.default;
+      @include box.focusable;
       padding: $padding $padding-wide;
-      background-color: transparent;
-      border-radius: $border-radius;
-      border: 2px solid transparent;
+      border-width: 2px;
       color: $color-brand-primary;
       font-weight: 600;
       text-align: center;
-      font-family: inherit;
-      font-size: inherit;
     }
 
     &:hover > .KibaButtonFocusFixer {

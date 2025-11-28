@@ -1,4 +1,5 @@
 @use '../../styles/variables' as *;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaLinkBase {
@@ -16,7 +17,6 @@
     & > .KibaLinkBaseFocusFixer {
       cursor: pointer;
       color: currentColor;
-      outline: none;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -32,9 +32,10 @@
 
 @layer kiba-theme {
   .KibaLinkBase {
-    transition-duration: 0.3s;
+    @include box.focusable;
     & > .KibaLinkBaseFocusFixer {
-      transition-duration: 0.3s;
+      @include box.default;
+      @include box.focusable;
     }
     &:hover > .KibaLinkBaseFocusFixer {
       opacity: 0.8;

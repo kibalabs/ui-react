@@ -1,4 +1,6 @@
 @use '../../styles/variables' as *;
+@use '../../particles/text/styles' as text;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaCheckbox {
@@ -15,8 +17,6 @@
     & > .checkbox-inner {
       cursor: pointer;
       background-clip: border-box;
-      width: 1em;
-      height: 1em;
     }
     & > .checkbox-hidden {
       opacity: 0;
@@ -38,16 +38,22 @@
 
 @layer kiba-theme {
   .KibaCheckbox {
-    transition-duration: 0.3s;
-    font-size: $font-size;
-    font-family: $font-family;
-    color: $color-text;
+    @include box.focusable;
     & > .checkbox-inner {
-      transition-duration: 0.3s;
+      @include box.default;
+      @include box.focusable;
+      --kiba-icon-size: 0.75em;
+      width: 1em;
+      height: 1em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background-color: transparent;
       border: 1px solid $color-text;
-      border-radius: $border-radius;
       color: $color-text;
+    }
+    & > .checkbox-text {
+      @include text.default;
     }
     &:hover > .checkbox-inner {
       border-color: $color-brand-primary;

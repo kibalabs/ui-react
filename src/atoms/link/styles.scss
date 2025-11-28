@@ -1,4 +1,6 @@
 @use '../../styles/variables' as *;
+@use '../../particles/text/styles' as text;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaLink {
@@ -18,15 +20,13 @@
 
 @layer kiba-theme {
   .KibaLink {
-    transition-duration: 0.3s;
+    @include box.focusable;
     & > .KibaLinkFocusFixer {
-      transition-duration: 0.3s;
+      @include text.inherit;
+      @include box.default;
+      @include box.focusable;
       color: $color-brand-primary;
       text-decoration: underline;
-      font-size: inherit;
-      font-family: inherit;
-      font-weight: inherit;
-      line-height: inherit;
     }
     &:hover > .KibaLinkFocusFixer {
       color: $color-brand-secondary;

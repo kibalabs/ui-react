@@ -1,8 +1,8 @@
 @use '../../styles/variables' as *;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaListItem {
-    outline: none;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -20,7 +20,8 @@
 
 @layer kiba-theme {
   .KibaListItem {
-    transition-duration: 0.3s;
+    @include box.default;
+    @include box.focusable;
     padding: $padding $padding-wide;
     background-color: transparent;
     &.clickable {

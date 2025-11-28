@@ -1,4 +1,6 @@
 @use '../../styles/variables' as *;
+@use '../../particles/text/styles' as text;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaCollapsibleBox {
@@ -22,13 +24,14 @@
 
 @layer kiba-theme {
   .KibaCollapsibleBox {
-    border-radius: $border-radius;
-    border-style: solid;
-    border-width: $border-width;
+    @include box.default;
+    @include box.bordered;
     border-color: var(--kiba-color-background-dark10);
   }
 
   .KibaCollapsibleBoxHeader {
+    @include text.default;
+    @include box.focusable;
     cursor: pointer;
     padding: $padding $padding-wide;
     background-color: var(--kiba-color-background-dark05);
@@ -46,7 +49,6 @@
     padding: $padding $padding-wide;
   }
 
-  // Unpadded header variant
   .KibaCollapsibleBox.unpaddedHeader > .KibaCollapsibleBoxHeader {
     padding: 0;
   }

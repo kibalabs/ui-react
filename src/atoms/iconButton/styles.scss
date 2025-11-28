@@ -1,4 +1,6 @@
 @use '../../styles/variables' as *;
+@use '../../particles/text/styles' as text;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaIconButton {
@@ -34,12 +36,12 @@
   }
 
   .KibaIconButtonFocusFixer {
-    transition-duration: 0.3s;
+    @include text.default;
+    @include box.default;
+    @include box.focusable;
     cursor: pointer;
     padding: $padding;
-    background-color: transparent;
-    border-radius: $border-radius;
-    border: 2px solid transparent;
+    border-width: 2px;
   }
 
   // Default variant

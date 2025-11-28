@@ -1,4 +1,6 @@
 @use '../../styles/variables' as *;
+@use '../../particles/text/styles' as text;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaTitledCollapsibleBox {
@@ -22,25 +24,21 @@
 
 @layer kiba-theme {
   .KibaTitledCollapsibleBox {
+    @include box.default;
     background-color: $color-background;
-    border-radius: $border-radius;
-
     .KibaTitledCollapsibleBoxHeader {
+      @include text.default;
+      @include box.focusable;
       padding: $padding;
       background-color: $color-background-light10;
-      color: $color-text;
       border: none;
-      font: inherit;
-
       &:hover {
         background-color: $color-background-dark05;
       }
-
       &:active {
         background-color: $color-background-dark05;
       }
     }
-
     .KibaTitledCollapsibleBoxContent {
       padding: $padding;
     }

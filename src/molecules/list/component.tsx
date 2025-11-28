@@ -4,13 +4,9 @@ import { getClassName } from '@kibalabs/core';
 import { IMultiChildProps, OptionalProppedElement } from '@kibalabs/core-react';
 
 import './styles.scss';
-import { IListItemProps, IListItemTheme, ListItem } from '../../atoms/listItem';
+import { IListItemProps, ListItem } from '../../atoms/listItem';
+import { IComponentProps } from '../../model';
 import { Divider } from '../../particles';
-import { IMoleculeProps } from '../moleculeProps';
-
-export interface IListTheme {
-  listItemTheme: IListItemTheme;
-}
 
 // TODO(krishan711): move this somewhere else if it is used again
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
@@ -24,7 +20,7 @@ export function ListItemInner(props: IListItemInnerProps): React.ReactElement {
 }
 ListItemInner.displayName = 'KibaListItem';
 
-interface IListProps extends IMoleculeProps<IListTheme>, IMultiChildProps<IListItemInnerProps> {
+interface IListProps extends IComponentProps, IMultiChildProps<IListItemInnerProps> {
   isFullWidth?: boolean;
   selectedItemKey?: string;
   shouldShowDividers?: boolean;
@@ -57,7 +53,6 @@ export function List({
               key={child.props.itemKey}
               id={child.props.id}
               className={child.props.className}
-              theme={props.theme?.listItemTheme}
               variant={props.itemVariant || child.props.variant}
               itemKey={child.props.itemKey}
               isDisabled={child.props.isDisabled}

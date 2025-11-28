@@ -1,4 +1,5 @@
 @use '../../styles/variables' as *;
+@use '../../particles/text/styles' as text;
 
 @layer kiba-structure {
   .KibaPrettyText {
@@ -17,17 +18,9 @@
 
 @layer kiba-theme {
   .KibaPrettyText {
+    @include text.default;
     word-break: break-word;
-    font-size: $font-size;
-    font-family: $font-family;
-    font-weight: normal;
-    color: $color-text;
-    line-height: 1.5em;
-    text-decoration: none;
     margin: 1em 0;
-    text-align: inherit;
-    text-shadow: inherit;
-    text-transform: inherit;
 
     & > p {
       margin: 1em 0;
@@ -49,16 +42,7 @@
 
     // Inherit variant
     &.inherit {
-      font-size: inherit;
-      font-family: inherit;
-      font-weight: inherit;
-      color: inherit;
-      line-height: inherit;
-      text-decoration: inherit;
-      margin: inherit;
-      text-align: inherit;
-      text-shadow: inherit;
-      text-transform: inherit;
+      @include text.inherit;
     }
 
     // Text style variants

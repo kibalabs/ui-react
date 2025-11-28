@@ -4,14 +4,12 @@ import { getClassName } from '@kibalabs/core';
 import { IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
 
 import './styles.scss';
-import { IBoxTheme } from './theme';
-import { IComponentPropsCompat } from '../..';
+import { IComponentProps } from '../..';
 import { ResponsiveField } from '../../util';
-import { themeToInlineStyles } from '../../util/legacyThemeCompat';
 
 export { BoxThemedStyle } from '../../util/legacyThemeCompat';
 
-export interface IBoxProps extends IComponentPropsCompat<IBoxTheme>, IOptionalSingleAnyChildProps {
+export interface IBoxProps extends IComponentProps, IOptionalSingleAnyChildProps {
   height?: string;
   heightResponsive?: ResponsiveField<string>;
   width?: string;
@@ -46,10 +44,8 @@ export function Box({
   const height = props.height || (props.isFullHeight ? '100%' : 'auto');
   const width = props.width || (isFullWidth ? '100%' : 'auto');
   const blockType = width === '100%' ? 'block' : 'flex';
-  const themeStyles = themeToInlineStyles(props.theme);
   const combinedStyles: React.CSSProperties = {
     ...props.style,
-    ...themeStyles,
     // @ts-expect-error CSS custom properties are valid but not in CSSProperties type
     '--kiba-box-display': blockType,
     '--kiba-box-width': width,

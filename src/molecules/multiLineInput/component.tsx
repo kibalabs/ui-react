@@ -3,14 +3,10 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 
 import './styles.scss';
-import { IInputFrameTheme, InputFrame } from '../inputFrame';
+import { InputFrame } from '../inputFrame';
 import { IMoleculeProps } from '../moleculeProps';
 
-export interface IMultiLineInputTheme {
-  inputFrameTheme: IInputFrameTheme;
-}
-
-interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
+interface IMultiLineInputProps extends IMoleculeProps {
   value: string| null;
   isEnabled?: boolean;
   minRowCount?: number;
@@ -75,7 +71,6 @@ export function MultiLineInput({
     <InputFrame
       id={props.id}
       className={getClassName(MultiLineInput.displayName, className)}
-      theme={props.theme?.inputFrameTheme}
       inputWrapperVariant={props.inputWrapperVariant}
       messageText={props.messageText}
       isEnabled={isEnabled}

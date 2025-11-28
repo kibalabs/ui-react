@@ -1,4 +1,6 @@
 @use '../../styles/variables' as *;
+@use '../../particles/text/styles' as text;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaInputWrapper {
@@ -20,11 +22,7 @@
     & input,
     & textarea,
     & .wrapped-input {
-      font-size: inherit;
-      font-family: inherit;
-      font-weight: inherit;
-      color: inherit;
-      line-height: inherit;
+      @include text.inherit;
       width: 100%;
     }
   }
@@ -48,13 +46,13 @@
   }
 
   .KibaInputWrapperInner {
+    @include text.default;
+    @include box.default;
     background-color: $color-background-light10;
     padding: $padding $padding-wide;
-    border-radius: $border-radius;
     border-width: $border-width;
     border-color: $color-background-dark05;
     border-style: solid;
-    color: $color-text;
 
     &::placeholder,
     & input::placeholder,

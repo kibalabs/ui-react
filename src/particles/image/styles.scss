@@ -1,4 +1,5 @@
 @use '../../styles/variables' as *;
+@use '../box/styles' as box;
 
 @layer kiba-structure {
   .KibaImage {
@@ -27,8 +28,15 @@
 
 @layer kiba-theme {
   .KibaImage {
+    @include box.default;
     &.lazyloaded {
       transition: opacity 0.15s;
+    }
+    &.circular, &.profile {
+      @include box.rounded;
+    }
+    &.unrounded {
+      border-radius: 0;
     }
   }
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { ITheme } from '../theming';
-import { themeToCss } from '../util';
 
 interface IGlobalCssProps {
   theme: ITheme;
@@ -31,8 +30,11 @@ export function GlobalCss(props: IGlobalCssProps): React.ReactElement {
       }
 
       body {
-        background-color: ${props.theme.colors.background};
-        ${themeToCss(props.theme.texts.default)}
+        background-color: var(--color-background);
+        font-family: var(--font-family-main, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif);
+        font-size: 16px;
+        font-weight: normal;
+        color: var(--color-text);
         overflow: auto;
         text-align: left;
       }
@@ -40,34 +42,32 @@ export function GlobalCss(props: IGlobalCssProps): React.ReactElement {
       ${fullPageCss}
 
       a:not(.KibaButton):not(.KibaLinkBase):not(.KibaIconButton):not(.KibaLink) {
-        color: var(--kiba-color-brand-primary);
+        color: var(--color-brand-primary);
         text-decoration: underline;
       }
       a:not(.KibaButton):not(.KibaLinkBase):not(.KibaIconButton):not(.KibaLink):hover {
-        color: var(--kiba-color-brand-primary-dark10);
+        color: var(--color-brand-primary-dark10);
       }
       a:not(.KibaButton):not(.KibaLinkBase):not(.KibaIconButton):not(.KibaLink):visited {
-        color: var(--kiba-color-brand-primary);
+        color: var(--color-brand-primary);
       }
 
-      p { ${themeToCss(props.theme.texts.paragraph)} }
-      b { ${themeToCss(props.theme.texts.bold)} }
-      strong { ${themeToCss(props.theme.texts.strong)} }
-      i { ${themeToCss(props.theme.texts.italic)} }
-      em { ${themeToCss(props.theme.texts.emphasis)} }
-      mark { ${themeToCss(props.theme.texts.mark)} }
-      small { ${themeToCss(props.theme.texts.small)} }
-      del { ${themeToCss(props.theme.texts.deleted)} }
-      ins { ${themeToCss(props.theme.texts.inserted)} }
-      sub { ${themeToCss(props.theme.texts.subscript)} }
-      sup { ${themeToCss(props.theme.texts.superscript)} }
+      p { margin: 0; }
+      b, strong { font-weight: bold; }
+      i, em { font-style: italic; }
+      mark { background-color: var(--color-warning-clear75); }
+      small { font-size: 0.85em; }
+      del { text-decoration: line-through; }
+      ins { text-decoration: underline; }
+      sub { vertical-align: sub; font-size: 0.75em; }
+      sup { vertical-align: super; font-size: 0.75em; }
 
-      h1 { ${themeToCss(props.theme.texts.header1)} }
-      h2 { ${themeToCss(props.theme.texts.header2)} }
-      h3 { ${themeToCss(props.theme.texts.header3)} }
-      h4 { ${themeToCss(props.theme.texts.header4)} }
-      h5 { ${themeToCss(props.theme.texts.header5)} }
-      h6 { ${themeToCss(props.theme.texts.header6)} }
+      h1 { font-size: 2.5em; font-weight: bold; margin: 0; }
+      h2 { font-size: 2em; font-weight: bold; margin: 0; }
+      h3 { font-size: 1.5em; font-weight: bold; margin: 0; }
+      h4 { font-size: 1.25em; font-weight: bold; margin: 0; }
+      h5 { font-size: 1em; font-weight: bold; margin: 0; }
+      h6 { font-size: 0.85em; font-weight: bold; margin: 0; }
 
       ul {
         list-style-position: outside;
@@ -101,7 +101,7 @@ export function GlobalCss(props: IGlobalCssProps): React.ReactElement {
 
       ${props.extraCss || ''}
     `;
-  }, [props.theme, props.extraCss, props.isFullPageApp]);
+  }, [props.extraCss, props.isFullPageApp]);
   return (
     // eslint-disable-next-line react/no-danger
     <style dangerouslySetInnerHTML={{ __html: cssString }} />

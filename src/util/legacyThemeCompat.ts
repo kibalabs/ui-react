@@ -1,30 +1,12 @@
-import React from 'react';
-
 import { RecursivePartial } from '@kibalabs/core';
 
-import { themeToCss, valueToCss } from './themeUtil';
-import { IDialogTheme } from '../atoms/dialog/theme';
-import { IBoxTheme } from '../particles/box/theme';
-import { ITextTheme } from '../particles/text/theme';
+import { themeToCss } from './themeUtil';
 
 // NOTE: This file contains backward compatibility functions for the legacy styled-components theming system.
 // These will be removed once all consumers migrate to CSS variants.
 
-export const themeToInlineStyles = (theme?: RecursivePartial<IBoxTheme>): React.CSSProperties => {
-  if (!theme) return {};
-  const styles: Record<string, string> = {};
-  Object.keys(theme).forEach((key) => {
-    const value = theme[key as keyof IBoxTheme];
-    if (value) {
-      const camelKey = key.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
-      styles[camelKey] = valueToCss(value);
-    }
-  });
-  return styles as React.CSSProperties;
-};
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const BoxThemedStyle = (theme: RecursivePartial<IBoxTheme>): string => themeToCss(theme);
+export const BoxThemedStyle = (theme: RecursivePartial<Record<string, unknown>>): string => themeToCss(theme);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const BulletListThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
@@ -42,7 +24,7 @@ export const CheckboxThemedStyle = (_theme: RecursivePartial<Record<string, unkn
 export const CollapsibleBoxThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const DialogThemedStyle = (_theme: RecursivePartial<IDialogTheme>): string => '';
+export const DialogThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const DividerThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
@@ -96,7 +78,7 @@ export const SwitchThemedStyle = (_theme: RecursivePartial<Record<string, unknow
 export const TabBarItemThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const TextThemedStyle = (_theme: RecursivePartial<ITextTheme>): string => '';
+export const TextThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const TitledCollapsibleBoxThemedStyle = (_theme: RecursivePartial<Record<string, unknown>>): string => '';

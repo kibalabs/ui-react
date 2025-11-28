@@ -3,7 +3,7 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiAnyChildProps, useInterval, useRenderedRef, useScrollListener } from '@kibalabs/core-react';
 
-import { IconButton, IIconButtonTheme } from '../../atoms';
+import { IconButton } from '../../atoms';
 import { Stack } from '../../layouts';
 import { Alignment, Direction } from '../../model';
 import { getScreenSizeValue, KibaIcon, ScreenSize } from '../../particles';
@@ -12,11 +12,7 @@ import { ResponsiveField } from '../../util';
 import { IMoleculeProps } from '../moleculeProps';
 import './styles.scss';
 
-export interface ICarouselTheme {
-  indexButtonTheme: IIconButtonTheme;
-}
-
-export interface ICarouselProps extends IMoleculeProps<ICarouselTheme>, IMultiAnyChildProps {
+export interface ICarouselProps extends IMoleculeProps, IMultiAnyChildProps {
   shouldShowButtons?: boolean;
   autoplaySeconds?: number;
   initialIndex?: number;
@@ -157,7 +153,6 @@ export function Carousel({
     >
       {shouldShowButtons && (
         <IconButton
-          theme={props.theme?.indexButtonTheme}
           variant={props.indexButtonVariant}
           icon={<KibaIcon iconId='mui-chevron-left' />}
           label='Previous'
@@ -185,7 +180,6 @@ export function Carousel({
       </Stack.Item>
       {shouldShowButtons && (
         <IconButton
-          theme={props.theme?.indexButtonTheme}
           variant={props.indexButtonVariant}
           icon={<KibaIcon iconId='mui-chevron-right' />}
           label='Next'

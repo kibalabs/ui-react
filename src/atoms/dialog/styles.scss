@@ -1,4 +1,5 @@
 @use '../../styles/variables' as *;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaDialog {
@@ -11,7 +12,6 @@
     left: 0;
     top: 0;
     z-index: 999;
-
     &.closed {
       display: none;
     }
@@ -20,12 +20,11 @@
 
 @layer kiba-theme {
   .KibaDialog {
+    @include box.default;
     background: var(--kiba-dialog-backdrop-color, rgba(0, 0, 0, 0.5));
-
     > .KibaDialogInner {
-      background-color: var(--kiba-color-background-light05);
-      border-radius: $border-radius;
-      padding: $padding-wide2;
+      @include box.default;
+      @include box.card;
     }
   }
 }

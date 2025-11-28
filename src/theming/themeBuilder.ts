@@ -2,14 +2,9 @@ import { RecursivePartial } from '@kibalabs/core';
 
 
 import { ITheme } from '.';
-import { IDialogTheme } from '../atoms/dialog';
-import { buildBoxThemes, IBoxTheme } from '../particles/box';
 import { buildAlternateColors, buildColors } from '../particles/colors';
 import { buildDimensions } from '../particles/dimensions';
 import { buildFonts } from '../particles/fonts';
-import { buildLoadingSpinnerThemes, ILoadingSpinnerTheme } from '../particles/loadingSpinner';
-import { buildTextThemes, ITextTheme } from '../particles/text';
-import { PartialThemeMap } from '../util';
 
 export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   // Base
@@ -18,11 +13,6 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
   const dimensions = buildDimensions(inputTheme?.dimensions);
   const fonts = buildFonts(inputTheme?.fonts);
 
-  // Particles
-  const textThemes = buildTextThemes(dimensions, inputTheme?.texts as PartialThemeMap<ITextTheme>);
-  const boxThemes = buildBoxThemes(dimensions, inputTheme?.boxes as PartialThemeMap<IBoxTheme>);
-  const loadingSpinnerThemes = buildLoadingSpinnerThemes(dimensions, inputTheme?.loadingSpinners as PartialThemeMap<ILoadingSpinnerTheme>);
-
   return {
     // Base
     colors,
@@ -30,24 +20,24 @@ export const buildTheme = (inputTheme?: RecursivePartial<ITheme>): ITheme => {
     dimensions,
     fonts,
 
-    // Particles
-    boxes: boxThemes,
-    texts: textThemes,
+    // Particles (legacy - empty objects for backwards compat)
+    boxes: {},
+    texts: {},
     icons: {},
     images: {},
     dividers: {},
-    loadingSpinners: loadingSpinnerThemes,
+    loadingSpinners: {},
     pills: {},
     portals: {},
     videos: {},
 
-    // Atoms
+    // Atoms (legacy - empty objects for backwards compat)
     buttons: {},
     checkboxes: {},
     bulletLists: {},
     bulletTexts: {},
     collapsibleBoxes: {},
-    dialogs: {} as Record<string, IDialogTheme>,
+    dialogs: {},
     iconButtons: {},
     inputWrappers: {},
     linkBases: {},

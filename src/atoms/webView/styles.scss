@@ -1,4 +1,5 @@
 @use '../../styles/variables' as *;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaWebView {
@@ -21,17 +22,14 @@
     height: 100%;
     width: 100%;
     border: none;
-
     .no-js &.lazyload {
       display: none;
     }
-
     &.lazyload,
     &.lazyloading,
     &.isLoading {
       opacity: 0;
     }
-
     &.lazyloaded {
       display: block;
       opacity: 1;
@@ -42,7 +40,7 @@
 
 @layer kiba-theme {
   .KibaWebView {
+    @include box.default;
     background-color: $color-background;
-    border-radius: $border-radius;
   }
 }

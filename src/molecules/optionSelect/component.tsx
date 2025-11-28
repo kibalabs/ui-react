@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
+import { getClassName } from '@kibalabs/core';
 
 import './styles.scss';
-import { Box, IInputFrameTheme, IListItemProps, IListTheme, List, SingleLineInput } from '../..';
-import { IBoxTheme, KibaIcon, Placement, Portal, Text } from '../../particles';
+import { IListItemProps, List, SingleLineInput } from '../..';
+import { Box, KibaIcon, Placement, Portal, Text } from '../../particles';
 import { getVariant } from '../../util';
 import { HidingView } from '../../wrappers';
 import { IMoleculeProps } from '../moleculeProps';
@@ -17,13 +17,7 @@ export interface IOption {
   isDisabled?: boolean;
 }
 
-export interface IOptionSelectTheme {
-  inputFrameTheme: IInputFrameTheme;
-  optionListTheme: IListTheme;
-  optionsContainerTheme?: RecursivePartial<IBoxTheme>;
-}
-
-interface IOptionSelectProps extends IMoleculeProps<IOptionSelectTheme> {
+interface IOptionSelectProps extends IMoleculeProps {
   options: IOption[];
   selectedItemKey?: string;
   isDisabled?:boolean;
@@ -48,7 +42,6 @@ interface IOptionSelectContentProps {
   optionListVariant?: string;
   optionTextVariant?: string;
   optionsContainerVariant?: string;
-  optionListTheme?: IListTheme;
   onItemClicked: (itemKey: string) => void;
 }
 
@@ -56,7 +49,7 @@ function OptionSelectContent({
   ...props
 }: IOptionSelectContentProps): React.ReactElement {
   return (
-    <List theme={props.optionListTheme} itemVariant={props.optionListVariant || 'slim'} onItemClicked={props.onItemClicked} shouldShowDividers={true} isFullWidth={true}>
+    <List itemVariant={props.optionListVariant || 'slim'} onItemClicked={props.onItemClicked} shouldShowDividers={true} isFullWidth={true}>
       {props.options.map((option: IOption): React.ReactElement<IListItemProps> => (
         <List.Item
           key={option.itemKey}
@@ -125,9 +118,6 @@ export function OptionSelect({
       <Box ref={inputFrameRef}>
         <SingleLineInput
           ref={inputRef}
-          theme={{
-            inputFrameTheme: props.theme?.inputFrameTheme,
-          }}
           inputWrapperVariant={props.inputWrapperVariant}
           isEnabled={!props.isDisabled}
           messageText={props.messageText}
@@ -142,7 +132,7 @@ export function OptionSelect({
       <HidingView isHidden={!isOpen}>
         {shouldUsePortal ? (
           <Portal anchorElement={inputFrameRef} placement={Placement.bottomLeft} variant='unpadded' shouldMatchAnchorWidth={true}>
-            <Box theme={props.theme?.optionsContainerTheme} variant={optionsContainerVariant} isFullHeight={true}>
+            <Box variant={optionsContainerVariant} isFullHeight={true}>
               <OptionSelectContent
                 options={props.options}
                 selectedItemKey={props.selectedItemKey}
@@ -151,13 +141,12 @@ export function OptionSelect({
                 optionListVariant={props.optionListVariant}
                 optionTextVariant={props.optionTextVariant}
                 optionsContainerVariant={props.optionsContainerVariant}
-                optionListTheme={props.theme?.optionListTheme}
                 onItemClicked={onItemClicked}
               />
             </Box>
           </Portal>
         ) : (
-          <Box theme={props.theme?.optionsContainerTheme} variant={optionsContainerVariant} zIndex={999} isFullWidth={true} position='absolute'>
+          <Box variant={optionsContainerVariant} zIndex={999} isFullWidth={true} position='absolute'>
             <OptionSelectContent
               options={props.options}
               selectedItemKey={props.selectedItemKey}
@@ -166,7 +155,6 @@ export function OptionSelect({
               optionListVariant={props.optionListVariant}
               optionTextVariant={props.optionTextVariant}
               optionsContainerVariant={props.optionsContainerVariant}
-              optionListTheme={props.theme?.optionListTheme}
               onItemClicked={onItemClicked}
             />
           </Box>

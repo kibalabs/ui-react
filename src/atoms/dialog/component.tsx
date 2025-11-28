@@ -1,20 +1,20 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
+import { getClassName } from '@kibalabs/core';
 import { getIsRunningOnBrowser, ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
 
-import { IDialogTheme } from './theme';
-import { IComponentPropsCompat } from '../../model';
+import { IComponentProps } from '../../model';
 import { Box } from '../../particles/box';
 
 import './styles.scss';
 
 export { DialogThemedStyle } from '../../util/legacyThemeCompat';
 
-interface IDialogProps extends IComponentPropsCompat<IDialogTheme>, ISingleAnyChildProps {
+interface IDialogProps extends IComponentProps, ISingleAnyChildProps {
   isOpen: boolean;
   maxHeight?: string;
   maxWidth?: string;
+  backdropColor?: string;
   isScrollableVertically?: boolean;
   isScrollableHorizontally?: boolean;
   isClosableByBackdrop?: boolean;
@@ -49,18 +49,17 @@ export function Dialog({
       props.onCloseClicked();
     }
   });
-  const dialogStyles = buildDialogStyles(props.theme);
+  const dialogStyles: React.CSSProperties = props.backdropColor ? { '--kiba-dialog-backdrop-color': props.backdropColor } as React.CSSProperties : {};
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       className={getClassName(Dialog.displayName, className, !props.isOpen && 'closed', ...(variant?.split('-') || []))}
-      style={dialogStyles}
+      style={{ ...props.style, ...dialogStyles }}
       ref={dialogRef}
       onClick={onBackdropClicked}
     >
       <Box
         className='KibaDialogInner'
-        theme={props.theme?.background}
         width='90%'
         maxWidth={maxWidth}
         maxHeight={maxHeight}
@@ -79,11 +78,3 @@ export function Dialog({
   );
 }
 Dialog.displayName = 'KibaDialog';
-
-const buildDialogStyles = (theme?: RecursivePartial<IDialogTheme>): React.CSSProperties => {
-  const styles: Record<string, string> = {};
-  if (theme?.backdropColor) {
-    styles['--kiba-dialog-backdrop-color'] = theme.backdropColor;
-  }
-  return styles as React.CSSProperties;
-};

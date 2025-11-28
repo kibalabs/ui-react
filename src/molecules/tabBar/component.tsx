@@ -4,14 +4,10 @@ import { getClassName } from '@kibalabs/core';
 import { IMultiChildProps, OptionalProppedElement } from '@kibalabs/core-react';
 
 import './styles.scss';
-import { ITabBarItemProps, ITabBarItemTheme, TabBarItem } from '../../atoms/tabBarItem';
+import { ITabBarItemProps, TabBarItem } from '../../atoms/tabBarItem';
 import { Alignment, getFlexContentAlignment } from '../../model';
 import { ResponsiveField } from '../../util';
 import { IMoleculeProps } from '../moleculeProps';
-
-export interface ITabBarTheme {
-  tabBarItemTheme: ITabBarItemTheme;
-}
 
 // TODO(krishan711): move this somewhere else if it is used again
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
@@ -25,7 +21,7 @@ export function TabBarItemInner(props: ITabBarItemInnerProps): React.ReactElemen
 }
 TabBarItemInner.displayName = 'KibaTabBarItem';
 
-interface ITabBarProps extends IMoleculeProps<ITabBarTheme>, IMultiChildProps<ITabBarItemInnerProps> {
+interface ITabBarProps extends IMoleculeProps, IMultiChildProps<ITabBarItemInnerProps> {
   isFullWidth?: boolean;
   selectedTabKey: string;
   contentAlignment?: Alignment;
@@ -63,7 +59,6 @@ export function TabBar({
             key={child.props.tabKey}
             id={child.props.id}
             className={child.props.className}
-            theme={props.theme?.tabBarItemTheme}
             variant={child.props.variant}
             tabKey={child.props.tabKey}
             text={child.props.text}

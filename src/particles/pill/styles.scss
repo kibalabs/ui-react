@@ -1,4 +1,6 @@
 @use '../../styles/variables' as *;
+@use '../text/styles' as text;
+@use '../box/styles' as box;
 
 @layer kiba-structure {
   .KibaPill {
@@ -16,12 +18,15 @@
 
 @layer kiba-theme {
   .KibaPill {
+    @include text.default;
+    @include text.small;
+    @include box.default;
+    @include box.focusable;
     padding: $padding $padding-wide2;
     border-radius: $padding-wide2;
     background-color: $color-brand-primary-clear80;
     color: $color-brand-primary;
     font-weight: 600;
-    font-size: $font-size;
     &.primary {
       border: 1px solid $color-brand-primary;
     }

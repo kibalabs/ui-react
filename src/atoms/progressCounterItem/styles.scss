@@ -1,4 +1,6 @@
 @use '../../styles/variables' as *;
+@use '../../particles/text/styles' as text;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaProgressCounterItem {
@@ -11,7 +13,6 @@
     background-clip: border-box;
     transition-duration: 0.3s;
     border: none;
-
     &.disabled {
       cursor: auto;
     }
@@ -20,11 +21,11 @@
 
 @layer kiba-theme {
   .KibaProgressCounterItem {
+    @include text.default;
+    @include box.default;
+    @include box.focusable;
     padding: $padding-narrow $padding;
-    border-radius: $border-radius;
     background-color: $color-background-light10;
-    color: $color-text;
-    font: inherit;
 
     &:hover {
       background-color: $color-background-dark05;

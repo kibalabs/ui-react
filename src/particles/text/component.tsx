@@ -4,7 +4,6 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
 import './styles.scss';
-import { ITextTheme } from './theme';
 import { IComponentProps } from '../../model';
 import { ResponsiveField } from '../../util';
 
@@ -62,7 +61,7 @@ export const getTextTag = (variant?: string): TextTag => {
   return textVariants.length > 0 ? textVariants[textVariants.length - 1] : 'span';
 };
 
-export interface ITextProps extends IComponentProps<ITextTheme>, ISingleAnyChildProps {
+export interface ITextProps extends IComponentProps, ISingleAnyChildProps {
   alignment?: TextAlignment;
   alignmentResponsive?: ResponsiveField<TextAlignment>;
   tag?: TextTag;

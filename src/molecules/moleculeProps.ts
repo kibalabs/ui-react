@@ -1,8 +1,4 @@
-import { RecursivePartial } from '@kibalabs/core';
-
-
-export interface IMoleculeProps<Theme> {
+export interface IMoleculeProps {
   id?: string;
   className?: string;
-  theme?: RecursivePartial<Theme>;
 }

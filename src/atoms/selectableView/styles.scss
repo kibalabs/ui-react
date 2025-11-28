@@ -1,11 +1,11 @@
 @use '../../styles/variables' as *;
+@use '../../particles/box/styles' as box;
 
 @layer kiba-structure {
   .KibaSelectableView {
     position: relative;
     color: currentColor;
     cursor: pointer;
-    outline: none;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -13,11 +13,9 @@
     background-clip: padding-box;
     width: fit-content;
     box-sizing: border-box;
-
     &.fullWidth { width: 100%; }
     &.fullHeight { height: 100%; }
     &.disabled { cursor: not-allowed; }
-
     > .KibaSelectableView-overlay {
       position: absolute;
       height: 100%;
@@ -30,37 +28,25 @@
 
 @layer kiba-theme {
   .KibaSelectableView {
-    @include transition;
-    background-color: transparent;
-    padding: $padding;
-    border: 1px solid transparent;
-    border-radius: $border-radius;
-
+    @include box.default;
+    @include box.focusable;
+    @include box.transparent;
     > .KibaSelectableView-overlay {
-      @include transition;
+      @include box.default;
+      @include box.focusable;
       background-color: transparent;
-      border-radius: $border-radius;
       padding: 0;
-      border: 1px solid transparent;
     }
-
-    // Hover state - from linkBaseTheme
     &:hover > .KibaSelectableView-overlay {
       background-color: var(--kiba-color-brand-primary-clear80);
     }
-
-    // Press state - from linkBaseTheme
     &:active > .KibaSelectableView-overlay {
       background-color: var(--kiba-color-brand-primary-clear50);
     }
-
-    // Selected state
     &.selected > .KibaSelectableView-overlay {
       background-color: rgba(255, 255, 255, 0.1);
       border-color: var(--kiba-color-brand-primary);
     }
-
-    // Disabled state
     &.disabled {
       > .KibaSelectableView-overlay {
         background-color: rgba(0, 0, 0, 0.1);
