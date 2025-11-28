@@ -22,11 +22,13 @@ export enum PaddingSize {
   None = 'none',
   Default = 'default',
   Narrow = 'Narrow1',
+  // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
   Narrow1 = 'Narrow1',
   Narrow2 = 'Narrow2',
   Narrow3 = 'Narrow3',
   Narrow4 = 'Narrow4',
   Wide = 'Wide1',
+  // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
   Wide1 = 'Wide1',
   Wide2 = 'Wide2',
   Wide3 = 'Wide3',
@@ -38,12 +40,10 @@ export type PaddingSizeProp = PaddingSize | string;
 const paddingSizeToVarName: Record<string, string> = {
   [PaddingSize.None]: '0px',
   [PaddingSize.Default]: 'var(--kiba-padding)',
-  [PaddingSize.Narrow]: 'var(--kiba-padding-narrow)',
   [PaddingSize.Narrow1]: 'var(--kiba-padding-narrow)',
   [PaddingSize.Narrow2]: 'var(--kiba-padding-narrow2)',
   [PaddingSize.Narrow3]: 'var(--kiba-padding-narrow3)',
   [PaddingSize.Narrow4]: 'var(--kiba-padding-narrow4)',
-  [PaddingSize.Wide]: 'var(--kiba-padding-wide)',
   [PaddingSize.Wide1]: 'var(--kiba-padding-wide)',
   [PaddingSize.Wide2]: 'var(--kiba-padding-wide2)',
   [PaddingSize.Wide3]: 'var(--kiba-padding-wide3)',

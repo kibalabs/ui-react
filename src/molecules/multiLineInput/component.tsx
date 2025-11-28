@@ -88,6 +88,7 @@ export function MultiLineInput({
         onClick={onClick}
         aria-label={props.label || props.name || props.placeholderText}
         placeholder={props.placeholderText}
+        // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus={props.shouldAutofocus}
         spellCheck={props.shouldSpellCheck}
       />

@@ -31,7 +31,9 @@ export function KibaApp(props: IKibaAppProps): React.ReactElement {
       window.lazySizes.cfg.minSize = 20;
     }
   });
+  // eslint-disable-next-line react/no-danger
   const extraGlobalCssStyle = props.extraGlobalCss ? <style dangerouslySetInnerHTML={{ __html: props.extraGlobalCss }} /> : null;
+  // eslint-disable-next-line react/no-danger
   const extraCssStyle = props.extraCss ? <style dangerouslySetInnerHTML={{ __html: props.extraCss }} /> : null;
   const mainViewStyle: React.CSSProperties = {
     minHeight: props.isFullPageApp ? '100%' : '100vh',
@@ -45,6 +47,7 @@ export function KibaApp(props: IKibaAppProps): React.ReactElement {
       {extraGlobalCssStyle}
       {extraCssStyle}
       <link href='https://assets-cdn.kiba.dev' rel='preconnect' crossOrigin='anonymous' />
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <BackgroundView {...props.background}>
         <div
           className={getClassName(isRunningOnBrowser ? 'js' : 'no-js')}
