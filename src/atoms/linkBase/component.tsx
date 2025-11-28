@@ -37,13 +37,15 @@ export function LinkBase({
   const isTargetWithinApp = props.target && props.target.startsWith('/');
   const targetShouldOpenSameTab = props.targetShouldOpenSameTab || props.target?.startsWith('#') || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
   const LinkComponent = props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : 'button';
+  const href = props.target || '';
   return (
     <LinkComponent
       id={props.id}
       className={getClassName(LinkBase.displayName, props.className, isFullWidth && 'fullWidth', isFullHeight && 'fullHeight', !isEnabled && 'disabled', ...(variant?.split('-') || []))}
       onClick={onClicked}
       aria-label={props.label}
-      href={props.target}
+      // @ts-expect-error - href is only undefined when LinkComponent is 'button', which doesn't need href
+      href={props.target ? href : undefined}
       rel={props.target ? 'noopener' : undefined}
       tabIndex={props.tabIndex || 0}
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}

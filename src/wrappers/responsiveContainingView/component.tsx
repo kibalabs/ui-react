@@ -31,17 +31,17 @@ export function ResponsiveContainingView(props: IResponsiveContainingViewProps):
     throw new Error(`One of {size, sizeResponsive.base} must be passed to ${ResponsiveContainingView.displayName}`);
   }
   const sizeField: ResponsiveField<number> = { base: props.size, ...props.sizeResponsive };
-  const wrapperStyle: React.CSSProperties & Record<string, string> = {
+  const wrapperStyle: Record<string, string | undefined> = {
     width: isFullWidth ? '100%' : 'auto',
     '--rcv-max-width-base': sizeField.base !== undefined ? getGridItemSizeCss(columnCount, sizeField.base) : undefined,
     '--rcv-max-width-small': sizeField.small !== undefined ? getGridItemSizeCss(columnCount, sizeField.small) : undefined,
     '--rcv-max-width-medium': sizeField.medium !== undefined ? getGridItemSizeCss(columnCount, sizeField.medium) : undefined,
     '--rcv-max-width-large': sizeField.large !== undefined ? getGridItemSizeCss(columnCount, sizeField.large) : undefined,
     '--rcv-max-width-extra-large': sizeField.extraLarge !== undefined ? getGridItemSizeCss(columnCount, sizeField.extraLarge) : undefined,
-  } as React.CSSProperties;
+  };
   if (shouldIncludeMaxSize) {
     const largestColumnCount = sizeField.extraLarge || sizeField.large || sizeField.medium || sizeField.small || sizeField.base || 12;
-    wrapperStyle['--rcv-max-width-max' as keyof React.CSSProperties] = getGridItemSizeCss(columnCount, largestColumnCount, 'var(--kiba-screen-width-max)');
+    wrapperStyle['--rcv-max-width-max'] = getGridItemSizeCss(columnCount, largestColumnCount, 'var(--kiba-screen-width-max)');
   }
   return (
     <WrapperView

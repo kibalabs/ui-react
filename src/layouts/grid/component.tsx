@@ -59,7 +59,7 @@ export function Grid({
   const innerShouldAddGutters = shouldAddGutters && defaultGutter !== PaddingSize.None;
   const gutter = innerShouldAddGutters ? getPaddingSizeCss(defaultGutter) : '0px';
   let childIndex = 0;
-  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): React.ReactElement<IGridItemProps> => {
+  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): React.ReactElement => {
     if (typeof child === 'object' && 'type' in child && child.type === GridItem) {
       return child;
     }
@@ -81,7 +81,7 @@ export function Grid({
         className={getClassName(Grid.displayName, className)}
         style={gridStyles}
       >
-        {children.map((child: React.ReactElement<IGridItemProps>): React.ReactElement => {
+        {(children as React.ReactElement<IGridItemProps>[]).map((child: React.ReactElement<IGridItemProps>): React.ReactElement => {
           const childProps = child.props;
           const size = childProps.size ?? 12;
           const sizeResponsive = childProps.sizeResponsive ?? {};

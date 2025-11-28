@@ -43,6 +43,7 @@ export function IconButton({
   const isTargetWithinApp = props.target && props.target.startsWith('/');
   const targetShouldOpenSameTab = props.targetShouldOpenSameTab || props.target?.startsWith('#') || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
   const ButtonComponent = props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : 'button';
+  const href = props.target || '';
   return (
     <ButtonComponent
       id={props.id}
@@ -50,7 +51,8 @@ export function IconButton({
       onClick={onClicked}
       disabled={!isEnabled}
       aria-label={label}
-      href={props.target}
+      // @ts-expect-error - href is only undefined when ButtonComponent is 'button', which doesn't need href
+      href={props.target ? href : undefined}
       rel={props.target ? 'noopener' : undefined}
       tabIndex={props.tabIndex || 0}
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}

@@ -15,13 +15,13 @@ export interface IResponsiveTextAlignmentViewProps extends IWrapperProps {
 
 export function ResponsiveTextAlignmentView(props: IResponsiveTextAlignmentViewProps): React.ReactElement {
   const alignmentField: ResponsiveField<TextAlignment> = { base: props.alignment, ...props.alignmentResponsive };
-  const wrapperStyle: React.CSSProperties & Record<string, string> = {
+  const wrapperStyle: Record<string, string | undefined> = {
     '--rtav-text-align-base': alignmentField.base,
     '--rtav-text-align-small': alignmentField.small,
     '--rtav-text-align-medium': alignmentField.medium,
     '--rtav-text-align-large': alignmentField.large,
     '--rtav-text-align-extra-large': alignmentField.extraLarge,
-  } as React.CSSProperties;
+  };
   return (
     <WrapperView
       className={props.className}
