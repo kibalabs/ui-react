@@ -5,9 +5,10 @@
   .KibaBulletText {
     counter-increment: list-number;
     display: table;
-    &:before {
+    &::before {
       display: table-cell;
       padding-right: 1em;
+      content: '•';
     }
   }
 }
@@ -15,8 +16,9 @@
 @layer kiba-theme {
   .KibaBulletText {
     @include text.default;
-    &:before {
-      color: $color-brand-primary;
+    &::before {
+      color: $color-text;
+      font-weight: bold;
     }
   }
 }

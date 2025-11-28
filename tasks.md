@@ -401,7 +401,6 @@ All molecule theme props have been removed:
 - [x] Remove `src/theming/themeBuilder.ts`
 - [x] Remove `src/theming/themeContext.tsx`
 - [x] Simplify `ITheme` to only require `fonts` (colors/dimensions are CSS variables)
-- [ ] Update documentation (README, storybook docs) to reflect new SCSS-based theming
 
 ### Phase 4: Remove Legacy CSS Building
 
@@ -424,13 +423,9 @@ Apps using ui-react need to migrate from JS theme objects to SCSS:
 - [ ] Use CSS variables instead of `$colors.*` references
 - [ ] Remove `buildTheme()` call, use simplified theme with just colors/dimensions
 
-### Key Types to Keep (move to core)
+### Phase 7: Documentation Updates
 
-These are still useful for layout calculations:
-- `IColorGuide` - defines available color tokens
-- `IDimensionGuide` - defines spacing, breakpoints, etc.
-- `IFont` - defines font configuration
-- `ScreenSize`, `PaddingSize` - enums for responsive/spacing
+#### TODO
 
 ### Migration Strategy for Consumer Apps
 

@@ -1,0 +1,101 @@
+// =============================================================================
+// Global Styles
+// =============================================================================
+// Base styles for html, body, and common HTML elements.
+// These are in the kiba-reset layer so component styles in kiba-theme
+// will always take precedence.
+
+@layer kiba-reset {
+  html {
+    scroll-behavior: smooth;
+    image-rendering: pixelated;
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+  }
+
+  body {
+    background-color: var(--kiba-color-background);
+    font-family: var(--kiba-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif);
+    font-size: var(--kiba-font-size, 16px);
+    font-weight: normal;
+    color: var(--kiba-color-text);
+    overflow: auto;
+    text-align: left;
+  }
+
+  // Full-page app mode (applied via class on html element)
+  html.kiba-full-page,
+  html.kiba-full-page body {
+    width: 100%;
+    height: 100%;
+    overscroll-behavior: none;
+  }
+
+  html.kiba-full-page #root {
+    width: 100%;
+    height: 100%;
+  }
+
+  // Link styles (for links not using Kiba components)
+  a:not(.KibaButton):not(.KibaLinkBase):not(.KibaIconButton):not(.KibaLink) {
+    color: var(--kiba-color-brand-primary);
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--kiba-color-brand-primary-dark10);
+    }
+
+    &:visited {
+      color: var(--kiba-color-brand-primary);
+    }
+  }
+
+  // Text element defaults
+  p { margin: 0; }
+  b, strong { font-weight: bold; }
+  i, em { font-style: italic; }
+  mark { background-color: var(--kiba-color-warning-clear75); }
+  small { font-size: 0.85em; }
+  del { text-decoration: line-through; }
+  ins { text-decoration: underline; }
+  sub { vertical-align: sub; font-size: 0.75em; }
+  sup { vertical-align: super; font-size: 0.75em; }
+
+  // Heading defaults (just reset margin, let components style)
+  h1, h2, h3, h4, h5, h6 { margin: 0; }
+
+  // List styles (exclude Kiba components which have their own styling)
+  ul:not(.KibaBulletList) {
+    list-style-position: outside;
+    text-indent: -0.1em;
+    display: table;
+
+    li:not(.KibaBulletText) {
+      display: table;
+
+      &::before {
+        display: table-cell;
+        padding-right: 1em;
+        content: '•';
+      }
+    }
+  }
+
+  ol:not(.KibaBulletList) {
+    list-style-position: outside;
+    counter-reset: list-number;
+    text-indent: -0.1em;
+    display: table;
+
+    li:not(.KibaBulletText) {
+      counter-increment: list-number;
+      display: table;
+
+      &::before {
+        display: table-cell;
+        padding-right: 1em;
+        content: counter(list-number) '.';
+      }
+    }
+  }
+}

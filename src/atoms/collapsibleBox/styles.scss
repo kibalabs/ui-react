@@ -25,16 +25,16 @@
 @layer kiba-theme {
   .KibaCollapsibleBox {
     @include box.default;
-    @include box.bordered;
+    @include box.focusable;
     border-color: var(--kiba-color-background-dark10);
   }
 
   .KibaCollapsibleBoxHeader {
     @include text.default;
-    @include box.focusable;
     cursor: pointer;
     padding: $padding $padding-wide;
     background-color: var(--kiba-color-background-dark05);
+    border-radius: 0;
   }
 
   .KibaCollapsibleBox:hover > .KibaCollapsibleBoxHeader {

@@ -20,7 +20,6 @@
   .KibaPrettyText {
     @include text.default;
     word-break: break-word;
-    margin: 1em 0;
 
     & > p {
       margin: 1em 0;

@@ -22,7 +22,7 @@ export function PrettyText({
   return (
     <Tag
       id={props.id}
-      className={getClassName(PrettyText.displayName, className, props.alignment, ...(variant?.split('-') || []))}
+      className={getClassName(PrettyText.displayName, 'KibaText', className, props.alignment, ...(variant?.split('-') || []))}
       style={props.style}
     >
       {props.children}

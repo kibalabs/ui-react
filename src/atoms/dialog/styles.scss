@@ -21,10 +21,11 @@
 @layer kiba-theme {
   .KibaDialog {
     @include box.default;
-    background: var(--kiba-dialog-backdrop-color, rgba(0, 0, 0, 0.5));
+    background: var(--kiba-dialog-backdrop-color, rgba(0, 0, 0, 0.8));
     > .KibaDialogInner {
       @include box.default;
       @include box.card;
+      background-color: var(--kiba-color-background-light05);
     }
   }
 }

@@ -34,6 +34,10 @@
       "sass": "./src/styles/colors.scss",
       "default": "./src/styles/colors.scss"
     },
+    "./styles/global": {
+      "sass": "./src/styles/global.scss",
+      "default": "./src/styles/global.scss"
+    },
     "./styles/variables": {
       "sass": "./src/styles/_variables.scss",
       "default": "./src/styles/_variables.scss"
