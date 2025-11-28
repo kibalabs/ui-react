@@ -398,8 +398,10 @@ All molecule theme props have been removed:
 
 ### Phase 3: Update ITheme and themeBuilder.ts
 
-- [ ] Remove `src/theming/themeBuilder.ts`
-- [ ] Remove `src/theming/themeContext.tsx`
+- [x] Remove `src/theming/themeBuilder.ts`
+- [x] Remove `src/theming/themeContext.tsx`
+- [x] Simplify `ITheme` to only require `fonts` (colors/dimensions are CSS variables)
+- [ ] Update documentation (README, storybook docs) to reflect new SCSS-based theming
 
 ### Phase 4: Remove Legacy CSS Building
 

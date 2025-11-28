@@ -12,9 +12,37 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.scss",
+    "*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./dist/index.css": "./dist/index.css",
+    "./styles": {
+      "sass": "./src/styles/index.scss",
+      "default": "./src/styles/index.scss"
+    },
+    "./styles/reset": {
+      "sass": "./src/styles/reset.scss",
+      "default": "./src/styles/reset.scss"
+    },
+    "./styles/colors": {
+      "sass": "./src/styles/colors.scss",
+      "default": "./src/styles/colors.scss"
+    },
+    "./styles/variables": {
+      "sass": "./src/styles/_variables.scss",
+      "default": "./src/styles/_variables.scss"
+    },
+    "./src/styles/*": "./src/styles/*"
+  },
   "files": [
-    "dist/*"
+    "dist/*",
+    "src/styles/*.scss"
   ],
   "dependencies": {
     "@kibalabs/core": "^0.6.3-next.4",

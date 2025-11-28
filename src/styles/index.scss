@@ -1,0 +1,22 @@
+// =============================================================================
+// UI-React SCSS Entry Point
+// =============================================================================
+// This file provides all the SCSS utilities from @kibalabs/ui-react.
+//
+// Usage in consuming apps:
+//   @use '@kibalabs/ui-react/styles' as kiba;
+//
+//   :root {
+//     --kiba-color-background: #000000;
+//     @include kiba.generate-color-variants('background');
+//   }
+//
+// Or import individual files:
+//   @use '@kibalabs/ui-react/styles/reset';
+//   @use '@kibalabs/ui-react/styles/colors';
+//   @use '@kibalabs/ui-react/styles/variables' as vars;
+
+// Forward all modules
+@forward 'reset';
+@forward 'colors';
+@forward 'variables';

@@ -26,43 +26,46 @@ UI-React is built on styled-components and styled-components should be installed
 
 ### Setup
 
-The easiest way to setup your code to be ready to use UI-React components is to use the `KibaApp` component. It should be used at the topmost level and needs to be passed a theme object like so:
+The easiest way to setup your code to be ready to use UI-React components is to use the `KibaApp` component and import the SCSS styles:
 
 ```tsx
 import React from 'react';
-import { KibaApp, buildTheme } from '@kibalabs/ui-react';
-
-const theme = buildTheme();
+import { KibaApp } from '@kibalabs/ui-react';
+import './theme.scss'; // Your app's theme file
 
 export const App = (): React.ReactElement => {
-  ...
   return (
-    <KibaApp theme={theme}>
+    <KibaApp>
       ...
     </KibaApp>
   );
 };
 ```
 
-If you don't want to use the `KibaApp` component (because, for example, it adds CSS to make everything look plain by default), you can instantiate the `ThemeProvider` yourself like this:
+Your `theme.scss` should import the base styles from ui-react and define your theme variables:
 
-```tsx
-import React from 'react';
-import { ThemeProvider, buildTheme, GlobalCSS } from '@kibalabs/ui-react';
+```scss
+@use '@kibalabs/ui-react/styles/reset';
+@use '@kibalabs/ui-react/styles/colors' as colors;
 
-const theme = buildTheme();
+:root {
+  // Define your base colors
+  --kiba-color-background: #ffffff;
+  --kiba-color-brand-primary: #4b6cb7;
+  --kiba-color-text: #333333;
 
-export const App = (): React.ReactElement => {
-  ...
-  return (
-    <ThemeProvider theme={theme}>
-      <React.Fragment>
-        <GlobalCss theme={theme} />
-        ...
-      </React.Fragment>
-    </ThemeProvider>
-  );
-};
+  // Generate all color variants (light, dark, clear)
+  @include colors.generate-color-variants('background');
+  @include colors.generate-color-variants('brand-primary');
+  @include colors.generate-color-variants('text');
+
+  // Typography
+  --kiba-font-family: -apple-system, system-ui, sans-serif;
+  --kiba-font-size: 16px;
+
+  // Spacing
+  --kiba-padding-base: 0.5em;
+}
 ```
 
 ### Example code
@@ -119,73 +122,51 @@ This practice makes new interfaces extremely quick to create and allows your com
 
 ### Customizing your theme
 
-To customize the theming in your application, you should provide a parameter to the `buildTheme` function. This parameter can contain a subset of an entire theme object (which you can find in buildTheme.ts in this project).
+To customize the theming in your application, define CSS custom properties in your theme.scss file. UI-React components use these variables for all styling.
 
-Here's a simple example where just some colors are changed (see particles/colors/theme.ts):
+Here's a simple example with custom colors:
 
-```ts
-const theme = buildTheme({
-  colors: {
-    brandPrimary: '#E56B6F',
-    brandSecondary: '#6D597A',
-    background: '#000000',
-    text: '#ffffff',
-    placeholderText: 'rgba(255, 255, 255, 0.5)',
-  },
-});
+```scss
+@use '@kibalabs/ui-react/styles/reset';
+@use '@kibalabs/ui-react/styles/colors' as colors;
+
+:root {
+  --kiba-color-brand-primary: #E56B6F;
+  --kiba-color-brand-secondary: #6D597A;
+  --kiba-color-background: #000000;
+  --kiba-color-text: #ffffff;
+
+  @include colors.generate-color-variants('brand-primary');
+  @include colors.generate-color-variants('background');
+  @include colors.generate-color-variants('text');
+}
 ```
 
-Here's a more complex example where a custom font is used for all text and all buttons and inputs are changed to have a box shadow when hovered or focussed:
+Here's a more complex example with custom fonts and component variants:
 
-```ts
-const theme = buildTheme({
-  colors: {
-    brandPrimary: '#2B59C3',
-    brandSecondary: '#1d3557',
-  },
-  fonts: {
-    main: {
-      url: 'https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap',
-    },
-  },
-  texts: {
-    default: {
-      'font-family': "Montserrat, apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
-    }
-  },
-  buttons: {
-    default: {
-      normal: {
-        focus: {
-          background: {
-            "box-shadow": "0 4px 8px 0 rgba(0,0,0,0.2)"
-          }
-        },
-        hover: {
-          background: {
-          "box-shadow": "0 4px 8px 0 rgba(0,0,0,0.2)"
-          }
-        }
-      }
-    }
-  },
-  inputWrappers: {
-    default: {
-      normal: {
-        focus: {
-          background: {
-            "box-shadow": "0 4px 8px 0 rgba(0,0,0,0.2)"
-          }
-        },
-        hover: {
-          background: {
-            "box-shadow": "0 4px 8px 0 rgba(0,0,0,0.2)"
-          }
-        }
-      }
-    }
+```scss
+@use '@kibalabs/ui-react/styles/reset';
+@use '@kibalabs/ui-react/styles/colors' as colors;
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap');
+
+:root {
+  --kiba-color-brand-primary: #2B59C3;
+  --kiba-color-brand-secondary: #1d3557;
+  @include colors.generate-color-variants('brand-primary');
+
+  --kiba-font-family: "Montserrat", sans-serif;
+}
+
+// Custom button variant with hover shadow
+.KibaButton.shadow {
+  > .KibaButtonFocusFixer {
+    transition: box-shadow 0.2s;
   }
-});
+  &:hover > .KibaButtonFocusFixer {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+}
 ```
 
 Hopefully this starts to give you a sense of how powerful the separation of theming and layout can be.

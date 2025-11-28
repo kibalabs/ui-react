@@ -5,7 +5,9 @@ import { flattenChildren, IMultiChildProps, IOptionalSingleAnyChildProps } from 
 
 import './styles.scss';
 import { Alignment, getFlexContentAlignment, getFlexItemAlignment, getPaddingSizeCss, PaddingSize, PaddingSizeProp } from '../..';
+import { ResponsiveField } from '../../util';
 import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
+
 
 const DEFAULT_COLUMN_COUNT = 12;
 
@@ -23,8 +25,6 @@ export function GridItem(_props: IGridItemProps): React.ReactElement {
   return <React.Fragment />;
 }
 GridItem.displayName = 'KibaGridItem';
-
-import { ResponsiveField } from '../../util';
 
 export interface IGridProps extends IMultiChildProps<IGridItemProps>, IPaddingViewPaddingProps {
   id?: string;

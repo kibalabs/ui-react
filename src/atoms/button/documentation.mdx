@@ -2,12 +2,10 @@ import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
 import * as DocumentationStories from './documentation.stories';
 
 import { Button } from '.';
-import { ButtonThemeExample } from './themeExample';
 import { EqualGrid, Stack } from '../../layouts';
 import { Direction } from '../../model';
 import { Box, KibaIcon, Text } from '../../particles';
 import { MultiLineInput } from '../../molecules';
-import { buildTheme, ThemeProvider } from '../../theming';
 
 <Meta of={DocumentationStories} />
 
@@ -57,8 +55,21 @@ export const Template = (args) => (
 
 ### Theming
 
-As with all [atoms](?path=/docs/introduction-architecture--page#atoms), `Button` themes exist as a hierarchy with 3 layers. Use the interactive example below to test this out:
+Button styling is controlled through CSS custom properties and variant classes. Define your button variants in your theme SCSS file:
 
-<Canvas withSource={'none'}>
-  <Story of={DocumentationStories.CompTestBlock} />
-</Canvas>
+```scss
+.KibaButton {
+  // Default button styling
+  > .KibaButtonFocusFixer {
+    background-color: transparent;
+    border-radius: var(--kiba-border-radius);
+    color: var(--kiba-color-brand-primary);
+  }
+
+  // Primary variant
+  &.primary > .KibaButtonFocusFixer {
+    background-color: var(--kiba-color-brand-primary);
+    color: var(--kiba-color-text-on-brand);
+  }
+}
+```
