@@ -14,8 +14,8 @@
 
 @layer kiba-theme {
   .KibaIcon {
-    width: 1.3em;
-    height: 1.3em;
+    width: var(--kiba-icon-size, 1.3em);
+    height: var(--kiba-icon-size, 1.3em);
 
     // fill/stroke styling
     &.fill > svg {

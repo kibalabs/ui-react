@@ -387,7 +387,7 @@ All molecule theme props have been removed:
 - [x] `src/atoms/titledCollapsibleBox/componentStateful.tsx` - removed theme import/usage
 - [x] `src/atoms/dialog/component.tsx` - removed IDialogTheme, uses backdropColor prop
 
-**Wrappers (migrated - no longer use props.theme):** 
+**Wrappers (migrated - no longer use props.theme):**
 - [x] `src/wrappers/containingView/component.tsx` - uses CSS variables
 - [x] `src/wrappers/responsiveContainingView/component.tsx` - uses CSS variables
 - [x] `src/wrappers/paddingView/component.tsx` - uses CSS variables
@@ -406,11 +406,13 @@ All molecule theme props have been removed:
 
 - [x] Delete `src/theming/cssBuilder.ts` entirely
 - [x] Delete `src/util/legacyThemeCompat.ts` entirely
-- [x] Delete `src/util/themeUtil.ts` entirely
-- [x] Delete `src/util/componentUtil.ts` entirely
-- [x] Delete `src/util/responsiveUtil.ts` entirely
 - [x] Delete `src/particles/colors/theme.ts` and `buildTheme.ts`
-- [x] Delete `src/particles/dimensions/theme.ts` and `buildTheme.ts`
+- [x] Delete `src/particles/dimensions/buildTheme.ts`
+- [x] Delete `src/particles/fonts/` directory entirely
+- [x] Simplify `src/particles/dimensions/theme.ts` (keep only PaddingSize, ScreenSize, CSS-based helpers)
+- [x] Simplify `src/util/themeUtil.ts` (keep only valueToCss)
+- [x] Simplify `src/util/responsiveUtil.ts` (keep only ResponsiveField, responsiveValueToCss)
+- [x] Keep `src/util/componentUtil.ts` (getVariant is still used)
 - [x] Remove `styled-components` from peerDependencies
 
 ### Phase 5: Update Exports and Dependencies ✅
