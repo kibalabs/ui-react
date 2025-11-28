@@ -8,7 +8,6 @@ import { IComponentProps } from '../../model';
 import { KibaIcon } from '../../particles';
 import { HidingView } from '../../wrappers';
 
-export { CollapsibleBoxThemedStyle } from '../../util/legacyThemeCompat';
 
 interface ICollapsibleBoxProps extends IComponentProps, ISingleAnyChildProps {
   headerView: React.ReactNode;

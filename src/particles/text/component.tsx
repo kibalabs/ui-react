@@ -7,7 +7,6 @@ import './styles.scss';
 import { IComponentProps } from '../../model';
 import { ResponsiveField } from '../../util';
 
-export { TextThemedStyle } from '../../util/legacyThemeCompat';
 
 export enum TextAlignment {
   Center = 'center',

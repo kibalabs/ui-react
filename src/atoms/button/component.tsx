@@ -7,7 +7,6 @@ import './styles.scss';
 import { Alignment, IComponentProps } from '../../model';
 import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particles';
 
-export { ButtonThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface IButtonProps extends IComponentProps {
   text: string;

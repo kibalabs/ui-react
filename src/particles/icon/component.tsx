@@ -5,7 +5,6 @@ import { getClassName } from '@kibalabs/core';
 import './styles.scss';
 import { IComponentProps } from '../../model';
 
-export { IconThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface IIconProps extends IComponentProps {
   _color?: string;

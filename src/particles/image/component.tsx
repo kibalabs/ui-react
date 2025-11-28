@@ -5,7 +5,6 @@ import { getClassName, updateQueryString } from '@kibalabs/core';
 import './styles.scss';
 import { IComponentProps } from '../../model';
 
-export { ImageThemedStyle } from '../../util/legacyThemeCompat';
 
 const getImageFit = (fitType: string): string => {
   if (fitType === 'crop' || fitType === 'cover') {

@@ -7,7 +7,6 @@ import './styles.scss';
 import { IComponentProps } from '../..';
 import { ResponsiveField } from '../../util';
 
-export { BoxThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface IBoxProps extends IComponentProps, IOptionalSingleAnyChildProps {
   height?: string;

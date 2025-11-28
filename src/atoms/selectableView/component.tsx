@@ -10,7 +10,6 @@ import { IComponentProps } from '../../model';
 import { PaddingSize } from '../../particles';
 import { KibaIcon } from '../../particles/kibaIcon';
 
-export { SelectableViewThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface ISelectableViewProps extends IComponentProps, ISingleAnyChildProps {
   isSelected: boolean;

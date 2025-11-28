@@ -7,7 +7,6 @@ import './styles.scss';
 import { IComponentProps } from '../../model';
 import { IIconProps } from '../../particles/icon';
 
-export { IconButtonThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface IIconButtonProps extends IComponentProps {
   isEnabled?: boolean;

@@ -2,8 +2,7 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 
-import { getPaddingSize, IDimensionGuide, PaddingSizeProp } from '../../particles/dimensions';
-import { useDimensions } from '../../theming';
+import { getPaddingSizeCss, PaddingSizeProp } from '../../particles/dimensions';
 import { IWrapperProps } from '../wrapperProps';
 import { WrapperView } from '../wrappingComponent';
 
@@ -18,20 +17,18 @@ export interface IPaddingViewPaddingProps {
 }
 
 export interface IPaddingViewProps extends IWrapperProps, IPaddingViewPaddingProps {
-  theme?: IDimensionGuide;
 }
 
 export function PaddingView(props: IPaddingViewProps): React.ReactElement {
-  const theme = useDimensions(props.theme);
   const paddingTop = props.paddingTop || props.paddingVertical || props.padding;
   const paddingBottom = props.paddingBottom || props.paddingVertical || props.padding;
   const paddingRight = props.paddingRight || props.paddingHorizontal || props.padding;
   const paddingLeft = props.paddingLeft || props.paddingHorizontal || props.padding;
   const wrapperStyle: React.CSSProperties = {
-    ...(paddingTop ? { paddingTop: getPaddingSize(paddingTop, theme) } : {}),
-    ...(paddingBottom ? { paddingBottom: getPaddingSize(paddingBottom, theme) } : {}),
-    ...(paddingLeft ? { paddingLeft: getPaddingSize(paddingLeft, theme) } : {}),
-    ...(paddingRight ? { paddingRight: getPaddingSize(paddingRight, theme) } : {}),
+    ...(paddingTop ? { paddingTop: getPaddingSizeCss(paddingTop) } : {}),
+    ...(paddingBottom ? { paddingBottom: getPaddingSizeCss(paddingBottom) } : {}),
+    ...(paddingLeft ? { paddingLeft: getPaddingSizeCss(paddingLeft) } : {}),
+    ...(paddingRight ? { paddingRight: getPaddingSizeCss(paddingRight) } : {}),
   };
   return (
     <WrapperView

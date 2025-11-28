@@ -4,9 +4,7 @@ import { getClassName } from '@kibalabs/core';
 import { getIsRunningOnBrowser, IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
 
 import { GlobalCss } from './globalCss';
-import { ITheme, ThemeProvider } from '../theming';
-import { ComponentDefinition } from '../theming/cssBuilder';
-import { ThemeType } from '../util';
+import { ITheme } from '../theming';
 import { BackgroundView, IBackgroundConfig } from '../wrappers';
 
 import 'lazysizes';
@@ -20,12 +18,9 @@ export interface IKibaAppProps extends IMultiAnyChildProps {
   extraGlobalCss?: string;
   extraCss?: string;
   background?: IBackgroundConfig;
-  extraComponentDefinitions?: ComponentDefinition<ThemeType>[];
 }
 
-export function KibaApp({
-  ...props
-}: IKibaAppProps): React.ReactElement {
+export function KibaApp(props: IKibaAppProps): React.ReactElement {
   const [isRunningOnBrowser, setIsRunningOnBrowser] = React.useState<boolean>(!props.isRehydrating);
   useInitialization((): void => {
     setIsRunningOnBrowser(getIsRunningOnBrowser());
@@ -36,28 +31,25 @@ export function KibaApp({
       window.lazySizes.cfg.minSize = 20;
     }
   });
-  // eslint-disable-next-line react/no-danger
   const extraCssStyle = props.extraCss ? <style dangerouslySetInnerHTML={{ __html: props.extraCss }} /> : null;
   const mainViewStyle: React.CSSProperties = {
     minHeight: props.isFullPageApp ? '100%' : '100vh',
     ...(props.isFullPageApp ? { height: '1px' } : {}),
   };
   return (
-    <ThemeProvider theme={props.theme} extraComponentDefinitions={props.extraComponentDefinitions}>
+    <React.Fragment>
       <GlobalCss
-        theme={props.theme}
         extraCss={props.extraGlobalCss}
         isFullPageApp={props.isFullPageApp}
       />
       {extraCssStyle}
       <link href='https://assets-cdn.kiba.dev' rel='preconnect' crossOrigin='anonymous' />
-      { Object.keys(props.theme.fonts || {}).map((fontKey: string): React.ReactElement => (
+      {Object.keys(props.theme.fonts || {}).map((fontKey: string): React.ReactElement => (
         <React.Fragment key={fontKey}>
           <link href={props.theme.fonts[fontKey].url} rel='preload' as='style' />
           <link href={props.theme.fonts[fontKey].url} rel='stylesheet' />
         </React.Fragment>
       ))}
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <BackgroundView {...props.background}>
         <div
           className={getClassName(isRunningOnBrowser ? 'js' : 'no-js')}
@@ -66,6 +58,6 @@ export function KibaApp({
           {props.children}
         </div>
       </BackgroundView>
-    </ThemeProvider>
+    </React.Fragment>
   );
 }

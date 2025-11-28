@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { IColorGuide } from '../../particles';
-import { useColors } from '../../theming';
 import { valueToCss } from '../../util';
 import { IWrapperProps } from '../wrapperProps';
 import { WrapperView } from '../wrappingComponent';
@@ -19,12 +17,11 @@ export interface IBackgroundConfig extends IBackgroundLayer {
   layers?: IBackgroundLayer[];
 }
 
-const getLayersCss = (backgroundLayers: IBackgroundLayer[], colors: IColorGuide): string => {
-  return backgroundLayers.slice().reverse().map((backgroundLayer: IBackgroundLayer): string => getLayerCss(backgroundLayer, colors)).join(', ');
+const getLayersCss = (backgroundLayers: IBackgroundLayer[]): string => {
+  return backgroundLayers.slice().reverse().map((backgroundLayer: IBackgroundLayer): string => getLayerCss(backgroundLayer)).join(', ');
 };
 
-// eslint-disable-next-line unused-imports/no-unused-vars
-const getLayerCss = (backgroundLayer: IBackgroundLayer, colors: IColorGuide): string => {
+const getLayerCss = (backgroundLayer: IBackgroundLayer): string => {
   const layers: string[] = [];
   if (backgroundLayer.color) {
     layers.push(`linear-gradient(${valueToCss(backgroundLayer.color)}, ${valueToCss(backgroundLayer.color)})`);
@@ -48,7 +45,6 @@ export interface IBackgroundViewProps extends IWrapperProps, IBackgroundConfig {
 }
 
 export function BackgroundView(props: IBackgroundViewProps): React.ReactElement {
-  const colors = useColors();
   const layers = props.layers || [];
   if (props.color || props.linearGradient || props.radialGradient || props.imageUrl || props.patternImageUrl || layers.length === 0) {
     layers.splice(0, 0, {
@@ -59,7 +55,7 @@ export function BackgroundView(props: IBackgroundViewProps): React.ReactElement 
       patternImageUrl: props.patternImageUrl,
     });
   }
-  const backgroundCss = getLayersCss(layers, colors);
+  const backgroundCss = getLayersCss(layers);
   return (
     <WrapperView
       className={props.className}

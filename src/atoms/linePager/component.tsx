@@ -8,7 +8,6 @@ import { ScreenSize, Spacing } from '../../particles';
 import { ResponsiveField } from '../../util';
 import { ResponsiveHidingView } from '../../wrappers';
 
-export { LinePagerThemedStyle } from '../../util/legacyThemeCompat';
 
 interface ILinePagerProps extends IComponentProps {
   pageCount?: number;

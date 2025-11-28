@@ -7,7 +7,6 @@ import './styles.scss';
 import { IComponentProps } from '../../model';
 import { IBulletListProps } from '../bulletList';
 
-export { BulletTextThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface IBulletTextProps extends IComponentProps, IOptionalSingleChildProps<IBulletListProps> {
   text: string;

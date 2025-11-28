@@ -7,7 +7,6 @@ import './styles.scss';
 import { IComponentProps } from '../../model';
 import { HidingView } from '../../wrappers';
 
-export { InputWrapperThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface IInputWrapperProps extends IComponentProps, ISingleAnyChildProps {
   messageText?: string;

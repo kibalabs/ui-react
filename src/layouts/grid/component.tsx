@@ -4,11 +4,10 @@ import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiChildProps, IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
 
 import './styles.scss';
-import { Alignment, getFlexContentAlignment, getFlexItemAlignment, PaddingSize, PaddingSizeProp } from '../..';
-import { getPaddingSize, IDimensionGuide } from '../../particles';
-import { useDimensions } from '../../theming';
-import { ResponsiveField } from '../../util';
+import { Alignment, getFlexContentAlignment, getFlexItemAlignment, getPaddingSizeCss, PaddingSize, PaddingSizeProp } from '../..';
 import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
+
+const DEFAULT_COLUMN_COUNT = 12;
 
 export interface IGridItemProps extends IOptionalSingleAnyChildProps {
   id?: string;
@@ -25,10 +24,12 @@ export function GridItem(_props: IGridItemProps): React.ReactElement {
 }
 GridItem.displayName = 'KibaGridItem';
 
+import { ResponsiveField } from '../../util';
+
 export interface IGridProps extends IMultiChildProps<IGridItemProps>, IPaddingViewPaddingProps {
   id?: string;
   className?: string;
-  theme?: IDimensionGuide;
+  columnCount?: number;
   isFullHeight?: boolean;
   shouldAddGutters?: boolean;
   defaultGutter?: PaddingSizeProp;
@@ -53,10 +54,10 @@ export function Grid({
   contentAlignment = Alignment.Center,
   ...props
 }: IGridProps): React.ReactElement {
-  const theme = useDimensions(props.theme);
+  const columnCount = props.columnCount ?? DEFAULT_COLUMN_COUNT;
   const defaultGutter = props.defaultGutter || PaddingSize.Default;
   const innerShouldAddGutters = shouldAddGutters && defaultGutter !== PaddingSize.None;
-  const gutter = innerShouldAddGutters ? getPaddingSize(defaultGutter, theme) : '0px';
+  const gutter = innerShouldAddGutters ? getPaddingSizeCss(defaultGutter) : '0px';
   let childIndex = 0;
   const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): React.ReactElement<IGridItemProps> => {
     if (typeof child === 'object' && 'type' in child && child.type === GridItem) {
@@ -89,26 +90,26 @@ export function Grid({
             // @ts-expect-error CSS custom properties
             '--kiba-grid-item-gutter': gutter,
             '--kiba-grid-item-alignment': childProps.alignment ? getFlexItemAlignment(childProps.alignment) : 'auto',
-            '--kiba-grid-item-width': getItemWidth(theme.columnCount, size, gutter),
+            '--kiba-grid-item-width': getItemWidth(columnCount, size, gutter),
             '--kiba-grid-item-display': getItemDisplay(size),
             ...(childProps.isFullHeight ? {
               '--kiba-grid-item-height': '100%',
               '--kiba-grid-item-overflow-y': 'auto',
             } : {}),
             ...(sizeResponsive.small !== undefined ? {
-              '--kiba-grid-item-width-sm': getItemWidth(theme.columnCount, sizeResponsive.small, gutter),
+              '--kiba-grid-item-width-sm': getItemWidth(columnCount, sizeResponsive.small, gutter),
               '--kiba-grid-item-display-sm': getItemDisplay(sizeResponsive.small),
             } : {}),
             ...(sizeResponsive.medium !== undefined ? {
-              '--kiba-grid-item-width-md': getItemWidth(theme.columnCount, sizeResponsive.medium, gutter),
+              '--kiba-grid-item-width-md': getItemWidth(columnCount, sizeResponsive.medium, gutter),
               '--kiba-grid-item-display-md': getItemDisplay(sizeResponsive.medium),
             } : {}),
             ...(sizeResponsive.large !== undefined ? {
-              '--kiba-grid-item-width-lg': getItemWidth(theme.columnCount, sizeResponsive.large, gutter),
+              '--kiba-grid-item-width-lg': getItemWidth(columnCount, sizeResponsive.large, gutter),
               '--kiba-grid-item-display-lg': getItemDisplay(sizeResponsive.large),
             } : {}),
             ...(sizeResponsive.extraLarge !== undefined ? {
-              '--kiba-grid-item-width-xl': getItemWidth(theme.columnCount, sizeResponsive.extraLarge, gutter),
+              '--kiba-grid-item-width-xl': getItemWidth(columnCount, sizeResponsive.extraLarge, gutter),
               '--kiba-grid-item-display-xl': getItemDisplay(sizeResponsive.extraLarge),
             } : {}),
           };

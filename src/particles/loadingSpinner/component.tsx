@@ -5,7 +5,6 @@ import { getClassName } from '@kibalabs/core';
 import './styles.scss';
 import { IComponentProps } from '../..';
 
-export { LoadingSpinnerThemedStyle } from '../../util/legacyThemeCompat';
 
 interface ILoadingSpinnerProps extends IComponentProps {
 }

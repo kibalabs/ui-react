@@ -5,7 +5,6 @@ import { getClassName } from '@kibalabs/core';
 import './styles.scss';
 import { IComponentProps } from '../../model';
 
-export { SwitchThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface ISwitchProps extends IComponentProps {
   isEnabled?: boolean;

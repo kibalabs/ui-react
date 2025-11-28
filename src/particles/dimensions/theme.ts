@@ -38,28 +38,16 @@ export enum ScreenSize {
   ExtraLarge = 'extra-large',
 }
 
-export const getScreenSize = (size: ScreenSize, theme: IDimensionGuide): string => {
-  switch (size) {
-    case ScreenSize.Small: {
-      return theme.screenWidthSmall;
-    }
-    case ScreenSize.Medium: {
-      return theme.screenWidthMedium;
-    }
-    case ScreenSize.Large: {
-      return theme.screenWidthLarge;
-    }
-    case ScreenSize.ExtraLarge: {
-      return theme.screenWidthExtraLarge;
-    }
-    default: {
-      return '0';
-    }
-  }
+export const defaultScreenSizes: Record<ScreenSize, number> = {
+  [ScreenSize.Base]: 0,
+  [ScreenSize.Small]: 576,
+  [ScreenSize.Medium]: 768,
+  [ScreenSize.Large]: 992,
+  [ScreenSize.ExtraLarge]: 1200,
 };
 
-export const getScreenSizeValue = (size: ScreenSize, theme: IDimensionGuide): number => {
-  return Number(getScreenSize(size, theme).replace('px', ''));
+export const getScreenSizeValue = (size: ScreenSize): number => {
+  return defaultScreenSizes[size];
 };
 
 export enum PaddingSize {
@@ -93,4 +81,29 @@ export const getPaddingSize = (size: PaddingSizeProp, theme: IDimensionGuide): s
   }
   console.error(`Failed to find padding size: ${size} (${fieldName})`);
   return '0px';
+};
+
+const paddingSizeToVarName: Record<string, string> = {
+  [PaddingSize.None]: '0px',
+  [PaddingSize.Default]: 'var(--kiba-padding)',
+  [PaddingSize.Narrow]: 'var(--kiba-padding-narrow1)',
+  [PaddingSize.Narrow1]: 'var(--kiba-padding-narrow1)',
+  [PaddingSize.Narrow2]: 'var(--kiba-padding-narrow2)',
+  [PaddingSize.Narrow3]: 'var(--kiba-padding-narrow3)',
+  [PaddingSize.Narrow4]: 'var(--kiba-padding-narrow4)',
+  [PaddingSize.Wide]: 'var(--kiba-padding-wide1)',
+  [PaddingSize.Wide1]: 'var(--kiba-padding-wide1)',
+  [PaddingSize.Wide2]: 'var(--kiba-padding-wide2)',
+  [PaddingSize.Wide3]: 'var(--kiba-padding-wide3)',
+  [PaddingSize.Wide4]: 'var(--kiba-padding-wide4)',
+};
+
+export const getPaddingSizeCss = (size: PaddingSizeProp): string => {
+  if (size in paddingSizeToVarName) {
+    return paddingSizeToVarName[size];
+  }
+  const capitalizedSize = size.charAt(0).toUpperCase() + size.slice(1);
+  const fieldName = size.startsWith('padding') ? size : `padding${capitalizedSize}`;
+  const kebabName = fieldName.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+  return `var(--kiba-${kebabName})`;
 };

@@ -6,7 +6,6 @@ import { ISingleAnyChildProps } from '@kibalabs/core-react';
 import './styles.scss';
 import { IComponentProps } from '../../model';
 
-export { ListItemThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface IListItemProps extends IComponentProps, ISingleAnyChildProps {
   itemKey: string;

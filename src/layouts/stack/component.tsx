@@ -3,8 +3,7 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiAnyChildProps, IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
 
-import { Alignment, Direction, getFlexContentAlignment, getFlexItemAlignment, getPaddingSize, IDimensionGuide, PaddingSize, PaddingSizeProp, Spacing } from '../..';
-import { useDimensions } from '../../theming';
+import { Alignment, Direction, getFlexContentAlignment, getFlexItemAlignment, getPaddingSizeCss, PaddingSize, PaddingSizeProp, Spacing } from '../..';
 import { CssConverter, ResponsiveField, responsiveValueToCss } from '../../util';
 import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
 
@@ -43,7 +42,6 @@ interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   id?: string;
   className?: string;
   style?: React.CSSProperties;
-  theme?: IDimensionGuide;
   shouldAddGutters?: boolean;
   defaultGutter?: PaddingSizeProp;
   isScrollableVertically?: boolean;
@@ -127,7 +125,6 @@ export function Stack({
   isScrollableHorizontally = false,
   ...props
 }: IStackProps): React.ReactElement {
-  const theme = useDimensions(props.theme);
   const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number), index: number): React.ReactElement<IStackItemProps> => (
     // eslint-disable-next-line react/no-array-index-key
     typeof child === 'object' && 'type' in child && child.type === StackItem ? child : <StackItem key={`child-${index}`}>{ child }</StackItem>
@@ -164,7 +161,7 @@ export function Stack({
     ...(maxWidthResponsive ? { '--kiba-stack-max-width-base': maxWidthResponsive.base ?? 'none', ...responsiveValueToCss(maxWidthResponsive, '--kiba-stack-max-width') } : {}),
     ...(minHeightResponsive ? { '--kiba-stack-min-height-base': minHeightResponsive.base ?? '0', ...responsiveValueToCss(minHeightResponsive, '--kiba-stack-min-height') } : {}),
     ...(minWidthResponsive ? { '--kiba-stack-min-width-base': minWidthResponsive.base ?? '0', ...responsiveValueToCss(minWidthResponsive, '--kiba-stack-min-width') } : {}),
-    ...(shouldWrapItems && innerShouldAddGutters ? { '--kiba-stack-gap': getPaddingSize(defaultGutter, theme) } : {}),
+    ...(shouldWrapItems && innerShouldAddGutters ? { '--kiba-stack-gap': getPaddingSizeCss(defaultGutter) } : {}),
     ...props.style,
   } as React.CSSProperties;
   return (

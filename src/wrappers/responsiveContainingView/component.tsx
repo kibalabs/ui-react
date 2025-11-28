@@ -3,18 +3,18 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 
 import './styles.scss';
-import { IDimensionGuide } from '../../particles';
-import { useDimensions } from '../../theming';
 import { ResponsiveField } from '../../util';
 import { IWrapperProps } from '../wrapperProps';
 import { WrapperView } from '../wrappingComponent';
+
+const DEFAULT_COLUMN_COUNT = 12;
 
 export const getGridItemSizeCss = (totalColumnCount: number, columnCount: number, baseSize = '100%'): string => {
   return `calc(${baseSize} * ${(columnCount / totalColumnCount).toFixed(1)})`;
 };
 
 export interface IResponsiveContainingViewProps extends IWrapperProps {
-  theme?: IDimensionGuide;
+  columnCount?: number;
   size?: number;
   sizeResponsive?: ResponsiveField<number>;
   isFullWidth?: boolean;
@@ -23,15 +23,14 @@ export interface IResponsiveContainingViewProps extends IWrapperProps {
 }
 
 export function ResponsiveContainingView(props: IResponsiveContainingViewProps): React.ReactElement {
-  const theme = useDimensions(props.theme);
   const isCenteredHorizontally = props.isCenteredHorizontally ?? true;
   const isFullWidth = props.isFullWidth ?? true;
   const shouldIncludeMaxSize = props.shouldIncludeMaxSize ?? true;
+  const columnCount = props.columnCount ?? DEFAULT_COLUMN_COUNT;
   if (props.size == null && props.sizeResponsive?.base == null) {
     throw new Error(`One of {size, sizeResponsive.base} must be passed to ${ResponsiveContainingView.displayName}`);
   }
   const sizeField: ResponsiveField<number> = { base: props.size, ...props.sizeResponsive };
-  const columnCount = theme.columnCount;
   const wrapperStyle: React.CSSProperties & Record<string, string> = {
     width: isFullWidth ? '100%' : 'auto',
     '--rcv-max-width-base': sizeField.base !== undefined ? getGridItemSizeCss(columnCount, sizeField.base) : undefined,
@@ -42,7 +41,7 @@ export function ResponsiveContainingView(props: IResponsiveContainingViewProps):
   } as React.CSSProperties;
   if (shouldIncludeMaxSize) {
     const largestColumnCount = sizeField.extraLarge || sizeField.large || sizeField.medium || sizeField.small || sizeField.base || 12;
-    wrapperStyle['--rcv-max-width-max' as keyof React.CSSProperties] = getGridItemSizeCss(columnCount, largestColumnCount, theme.screenWidthMax);
+    wrapperStyle['--rcv-max-width-max' as keyof React.CSSProperties] = getGridItemSizeCss(columnCount, largestColumnCount, 'var(--kiba-screen-width-max)');
   }
   return (
     <WrapperView

@@ -8,7 +8,6 @@ import { Box } from '../../particles/box';
 
 import './styles.scss';
 
-export { DialogThemedStyle } from '../../util/legacyThemeCompat';
 
 interface IDialogProps extends IComponentProps, ISingleAnyChildProps {
   isOpen: boolean;

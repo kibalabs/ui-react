@@ -7,7 +7,6 @@ import './styles.scss';
 import { IComponentProps } from '../../model';
 import { getTextTag, TextAlignment, TextTag } from '../../particles/text';
 
-export { PrettyTextThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface IPrettyTextProps extends IComponentProps, IMultiAnyChildProps {
   alignment?: TextAlignment;

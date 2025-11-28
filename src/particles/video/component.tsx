@@ -5,7 +5,6 @@ import { getClassName } from '@kibalabs/core';
 import './styles.scss';
 import { IComponentProps } from '../../model';
 
-export { VideoThemedStyle } from '../../util/legacyThemeCompat';
 
 const getVideoFit = (fitType: string): string => {
   if (fitType === 'crop' || fitType === 'cover') {

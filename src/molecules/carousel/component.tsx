@@ -7,7 +7,6 @@ import { IconButton } from '../../atoms';
 import { Stack } from '../../layouts';
 import { Alignment, Direction } from '../../model';
 import { getScreenSizeValue, KibaIcon, ScreenSize } from '../../particles';
-import { useDimensions } from '../../theming';
 import { ResponsiveField } from '../../util';
 import { IMoleculeProps } from '../moleculeProps';
 import './styles.scss';
@@ -32,7 +31,6 @@ export function Carousel({
   slidesPerPage = 1,
   ...props
 }: ICarouselProps): React.ReactElement {
-  const dimensions = useDimensions();
   const [sliderRef] = useRenderedRef<HTMLDivElement>();
   const scrollTimeoutRef = React.useRef<number | null>(null);
   const children = flattenChildren(props.children);
@@ -48,20 +46,20 @@ export function Carousel({
   const calculateSlidesPerPage = React.useCallback((): number => {
     const screenWidth = Math.ceil(document.body.clientWidth);
     let slideCount = innerSlidesPerPage;
-    if (screenWidth > getScreenSizeValue(ScreenSize.Small, dimensions)) {
+    if (screenWidth > getScreenSizeValue(ScreenSize.Small)) {
       slideCount = innerSlidesPerPageSmall;
     }
-    if (screenWidth > getScreenSizeValue(ScreenSize.Medium, dimensions)) {
+    if (screenWidth > getScreenSizeValue(ScreenSize.Medium)) {
       slideCount = innerSlidesPerPageMedium;
     }
-    if (screenWidth > getScreenSizeValue(ScreenSize.Large, dimensions)) {
+    if (screenWidth > getScreenSizeValue(ScreenSize.Large)) {
       slideCount = innerSlidesPerPageLarge;
     }
-    if (screenWidth > getScreenSizeValue(ScreenSize.ExtraLarge, dimensions)) {
+    if (screenWidth > getScreenSizeValue(ScreenSize.ExtraLarge)) {
       slideCount = innerSlidesPerPageExtraLarge;
     }
     return slideCount;
-  }, [dimensions, innerSlidesPerPage, innerSlidesPerPageSmall, innerSlidesPerPageMedium, innerSlidesPerPageLarge, innerSlidesPerPageExtraLarge]);
+  }, [innerSlidesPerPage, innerSlidesPerPageSmall, innerSlidesPerPageMedium, innerSlidesPerPageLarge, innerSlidesPerPageExtraLarge]);
 
   React.useEffect((): (() => void) => {
     const handleResize = (): void => {

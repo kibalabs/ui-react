@@ -7,7 +7,6 @@ import './styles.scss';
 import { IComponentProps } from '../../model';
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
 
-export { PillThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface IPillProps extends IComponentProps {
   text: string;

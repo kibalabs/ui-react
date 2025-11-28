@@ -8,7 +8,6 @@ import { ISingleAnyChildProps, useEventListener, useInterval } from '@kibalabs/c
 import './styles.scss';
 import { IComponentProps } from '../../model';
 
-export { PortalThemedStyle } from '../../util/legacyThemeCompat';
 
 export enum Placement {
   bottomLeft = 'bottom-left',

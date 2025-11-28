@@ -6,7 +6,6 @@ import { Link as CoreLink, useIsCoreRoutingEnabled } from '@kibalabs/core-react'
 import './styles.scss';
 import { IComponentProps } from '../../model';
 
-export { LinkThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface ILinkProps extends IComponentProps {
   text: string;

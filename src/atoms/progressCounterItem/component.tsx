@@ -5,7 +5,6 @@ import { getClassName } from '@kibalabs/core';
 import './styles.scss';
 import { IComponentProps } from '../../model';
 
-export { ProgressCounterItemThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface IProgressCounterItemProps extends IComponentProps {
   text: string;

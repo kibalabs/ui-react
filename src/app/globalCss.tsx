@@ -1,9 +1,6 @@
 import React from 'react';
 
-import { ITheme } from '../theming';
-
 interface IGlobalCssProps {
-  theme: ITheme;
   extraCss?: string;
   isFullPageApp?: boolean;
 }

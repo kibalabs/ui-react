@@ -6,7 +6,6 @@ import { Link as CoreLink, ISingleAnyChildProps, useIsCoreRoutingEnabled } from 
 import './styles.scss';
 import { IComponentProps } from '../../model';
 
-export { LinkBaseThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface ILinkBaseProps extends IComponentProps, ISingleAnyChildProps {
   isEnabled?: boolean;

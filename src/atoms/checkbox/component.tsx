@@ -6,7 +6,6 @@ import './styles.scss';
 import { IComponentProps } from '../../model';
 import { Icon, PaddingSize, Spacing } from '../../particles';
 
-export { CheckboxThemedStyle } from '../../util/legacyThemeCompat';
 
 interface ICheckBoxProps extends IComponentProps {
   text: string;

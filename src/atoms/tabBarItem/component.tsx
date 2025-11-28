@@ -5,7 +5,6 @@ import { getClassName } from '@kibalabs/core';
 import './styles.scss';
 import { IComponentProps } from '../../model';
 
-export { TabBarItemThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface ITabBarItemProps extends IComponentProps {
   tabKey: string;

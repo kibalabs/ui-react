@@ -8,7 +8,6 @@ import { IComponentProps } from '../../model';
 import { KibaIcon } from '../../particles';
 import { HidingView } from '../../wrappers';
 
-export { TitledCollapsibleBoxThemedStyle } from '../../util/legacyThemeCompat';
 
 interface ITitledCollapsibleBoxProps extends IComponentProps, ISingleAnyChildProps {
   title: string;

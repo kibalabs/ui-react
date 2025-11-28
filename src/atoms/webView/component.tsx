@@ -7,7 +7,6 @@ import './styles.scss';
 import { IComponentProps } from '../../model';
 import { LoadingSpinner } from '../../particles';
 
-export { WebViewThemedStyle } from '../../util/legacyThemeCompat';
 
 export interface IWebViewProps extends IComponentProps {
   url: string;
