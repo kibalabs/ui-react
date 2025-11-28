@@ -1,2 +1,1 @@
-export * from './theme';
-export * from './buildTheme';
+// Colors are now CSS variables defined in styles/colors.scss

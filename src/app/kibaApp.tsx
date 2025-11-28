@@ -4,7 +4,6 @@ import { getClassName } from '@kibalabs/core';
 import { getIsRunningOnBrowser, IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
 
 import { GlobalCss } from './globalCss';
-import { ITheme } from '../theming';
 import { BackgroundView, IBackgroundConfig } from '../wrappers';
 
 import 'lazysizes';
@@ -12,10 +11,11 @@ import 'lazysizes/plugins/attrchange/ls.attrchange.js';
 import 'lazysizes/plugins/respimg/ls.respimg.js';
 
 export interface IKibaAppProps extends IMultiAnyChildProps {
-  theme: ITheme;
   isRehydrating?: boolean;
   isFullPageApp?: boolean;
+  /** @deprecated Use SCSS imports instead */
   extraGlobalCss?: string;
+  /** @deprecated Use SCSS imports instead */
   extraCss?: string;
   background?: IBackgroundConfig;
 }
@@ -31,6 +31,7 @@ export function KibaApp(props: IKibaAppProps): React.ReactElement {
       window.lazySizes.cfg.minSize = 20;
     }
   });
+  const extraGlobalCssStyle = props.extraGlobalCss ? <style dangerouslySetInnerHTML={{ __html: props.extraGlobalCss }} /> : null;
   const extraCssStyle = props.extraCss ? <style dangerouslySetInnerHTML={{ __html: props.extraCss }} /> : null;
   const mainViewStyle: React.CSSProperties = {
     minHeight: props.isFullPageApp ? '100%' : '100vh',
@@ -39,17 +40,11 @@ export function KibaApp(props: IKibaAppProps): React.ReactElement {
   return (
     <React.Fragment>
       <GlobalCss
-        extraCss={props.extraGlobalCss}
         isFullPageApp={props.isFullPageApp}
       />
+      {extraGlobalCssStyle}
       {extraCssStyle}
       <link href='https://assets-cdn.kiba.dev' rel='preconnect' crossOrigin='anonymous' />
-      {Object.keys(props.theme.fonts || {}).map((fontKey: string): React.ReactElement => (
-        <React.Fragment key={fontKey}>
-          <link href={props.theme.fonts[fontKey].url} rel='preload' as='style' />
-          <link href={props.theme.fonts[fontKey].url} rel='stylesheet' />
-        </React.Fragment>
-      ))}
       <BackgroundView {...props.background}>
         <div
           className={getClassName(isRunningOnBrowser ? 'js' : 'no-js')}

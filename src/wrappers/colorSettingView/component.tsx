@@ -18,18 +18,15 @@ const colorsToStyleProperties = (colors: Partial<IColorGuide>): Record<string, s
 };
 
 export interface IColorSettingViewProps extends IWrapperProps {
-  /** @deprecated Use `colors` instead */
-  theme?: Partial<IColorGuide>;
   colors?: Partial<IColorGuide>;
 }
 
 export function ColorSettingView(props: IColorSettingViewProps): React.ReactElement {
-  const colorOverrides = props.colors || props.theme;
-  const colorStyles = colorsToStyleProperties(colorOverrides || {});
+  const colorStyles = colorsToStyleProperties(props.colors || {});
   const wrapperStyle: React.CSSProperties = {
     ...colorStyles,
-    ...(colorOverrides?.text ? { color: colorOverrides.text } : {}),
-    ...(colorOverrides?.background ? { backgroundColor: colorOverrides.background } : {}),
+    ...(props.colors?.text ? { color: props.colors.text } : {}),
+    ...(props.colors?.background ? { backgroundColor: props.colors.background } : {}),
   };
   return (
     <WrapperView

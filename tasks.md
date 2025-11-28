@@ -387,41 +387,52 @@ All molecule theme props have been removed:
 - [x] `src/atoms/titledCollapsibleBox/componentStateful.tsx` - removed theme import/usage
 - [x] `src/atoms/dialog/component.tsx` - removed IDialogTheme, uses backdropColor prop
 
-**Wrappers (still use props.theme for dimensions/colors - needs further work):**
-- [ ] `src/wrappers/containingView/component.tsx` - uses `useDimensions(props.theme)`
-- [ ] `src/wrappers/responsiveContainingView/component.tsx` - uses `useDimensions(props.theme)`
-- [ ] `src/wrappers/paddingView/component.tsx` - uses `useDimensions(props.theme)`
-- [ ] `src/wrappers/colorSettingView/component.tsx` - uses `props.colors || props.theme`
+**Wrappers (migrated - no longer use props.theme):** 
+- [x] `src/wrappers/containingView/component.tsx` - uses CSS variables
+- [x] `src/wrappers/responsiveContainingView/component.tsx` - uses CSS variables
+- [x] `src/wrappers/paddingView/component.tsx` - uses CSS variables
+- [x] `src/wrappers/colorSettingView/component.tsx` - props.theme deprecated, uses props.colors
 
 **App:**
-- [ ] `src/app/globalCss.tsx` - uses props.theme for global styles
+- [x] `src/app/globalCss.tsx` - migrated to SCSS (global.scss)
 
-### Phase 3: Update ITheme and themeBuilder.ts
+### Phase 3: Update ITheme and themeBuilder.ts ✅
 
 - [x] Remove `src/theming/themeBuilder.ts`
 - [x] Remove `src/theming/themeContext.tsx`
 - [x] Simplify `ITheme` to only require `fonts` (colors/dimensions are CSS variables)
 
-### Phase 4: Remove Legacy CSS Building
+### Phase 4: Remove Legacy CSS Building ✅
 
-- [ ] Delete `src/theming/cssBuilder.ts` entirely
-- [ ] Delete `src/util/legacyThemeCompat.ts` entirely
-- [ ] Remove all `*ThemedStyle` exports from components
+- [x] Delete `src/theming/cssBuilder.ts` entirely
+- [x] Delete `src/util/legacyThemeCompat.ts` entirely
+- [x] Delete `src/util/themeUtil.ts` entirely
+- [x] Delete `src/util/componentUtil.ts` entirely
+- [x] Delete `src/util/responsiveUtil.ts` entirely
+- [x] Delete `src/particles/colors/theme.ts` and `buildTheme.ts`
+- [x] Delete `src/particles/dimensions/theme.ts` and `buildTheme.ts`
+- [x] Remove `styled-components` from peerDependencies
 
-### Phase 5: Update Exports and Dependencies
+### Phase 5: Update Exports and Dependencies ✅
 
-- [ ] Update `src/index.ts` - remove theme type exports
-- [ ] Update component `index.ts` files - remove theme exports
-- [ ] Remove `styled-components` from peerDependencies in package.json
+- [x] Update `src/index.ts` - no longer exports theme types
+- [x] Update `src/particles/colors/index.ts` - now just a comment
+- [x] Update `src/particles/dimensions/index.ts` - now just a comment
+- [x] Update `src/util/index.ts` - now just a comment
+- [x] Remove `styled-components` from peerDependencies in package.json
+- [x] Remove `ITheme` export (was in theming/theme.ts, now deleted)
+- [x] Remove `theme` prop from `KibaApp` (deprecated, consumers use SCSS)
 
-### Phase 6: Migrate Consumer Apps
+### Phase 6: Migrate Consumer Apps ✅
 
-Apps using ui-react need to migrate from JS theme objects to SCSS:
+Apps using ui-react have been migrated from JS theme objects to SCSS:
 
 **agent-hack/app:**
-- [ ] Move theme variants from `theme.ts` to `theme.scss`
-- [ ] Use CSS variables instead of `$colors.*` references
-- [ ] Remove `buildTheme()` call, use simplified theme with just colors/dimensions
+- [x] Removed `theme.ts` entirely
+- [x] All theme variants now in `theme.scss`
+- [x] Uses CSS variables instead of `$colors.*` references
+- [x] Removed `buildTheme()` call and `theme` prop from KibaApp
+- [x] Fonts loaded via `@font-face` declarations pointing to Google Fonts CDN
 
 ### Phase 7: Documentation Updates
 
