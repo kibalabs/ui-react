@@ -1,96 +1,16 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
+import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
-import { ITitledCollapsibleBoxTheme } from './theme';
+import './styles.scss';
 import { IComponentProps } from '../../model';
 import { KibaIcon } from '../../particles';
-import { themeToCss } from '../../util';
 import { HidingView } from '../../wrappers';
 
-export const TitledCollapsibleBoxThemedStyle = (theme: RecursivePartial<ITitledCollapsibleBoxTheme>): string => `
-  ${themeToCss(theme?.normal?.default?.background)};
+export { TitledCollapsibleBoxThemedStyle } from '../../util/legacyThemeCompat';
 
-  & > .KibaTitledCollapsibleBoxContent {
-    ${themeToCss(theme?.normal?.default?.contentBackground)};
-  }
-  &:hover > .KibaTitledCollapsibleBoxHeader {
-    ${themeToCss(theme?.normal?.hover?.contentBackground)};
-  }
-  &:active > .KibaTitledCollapsibleBoxHeader {
-    ${themeToCss(theme?.normal?.press?.contentBackground)};
-  }
-
-  & > .KibaTitledCollapsibleBoxHeader {
-    ${themeToCss(theme?.normal?.default?.headerBackground)};
-    ${themeToCss(theme?.normal?.default?.headerText)};
-  }
-  &:hover > .KibaTitledCollapsibleBoxHeader {
-    ${themeToCss(theme?.normal?.hover?.headerBackground)};
-    ${themeToCss(theme?.normal?.hover?.headerText)};
-  }
-  &:active > .KibaTitledCollapsibleBoxHeader {
-    ${themeToCss(theme?.normal?.press?.headerBackground)};
-    ${themeToCss(theme?.normal?.press?.headerText)};
-  }
-
-  &.collapsed {
-    ${themeToCss(theme?.collapsed?.default?.background)};
-    & > .KibaTitledCollapsibleBoxContent {
-      ${themeToCss(theme?.collapsed?.default?.contentBackground)};
-    }
-    &:hover > .KibaTitledCollapsibleBoxHeader {
-      ${themeToCss(theme?.collapsed?.hover?.contentBackground)};
-    }
-    &:active > .KibaTitledCollapsibleBoxHeader {
-      ${themeToCss(theme?.collapsed?.press?.contentBackground)};
-    }
-    & > .KibaTitledCollapsibleBoxHeader {
-      ${themeToCss(theme?.collapsed?.default?.headerBackground)};
-      ${themeToCss(theme?.collapsed?.default?.headerText)};
-    }
-    &:hover > .KibaTitledCollapsibleBoxHeader {
-      ${themeToCss(theme?.collapsed?.hover?.headerBackground)};
-      ${themeToCss(theme?.collapsed?.hover?.headerText)};
-    }
-
-    &:active > .KibaTitledCollapsibleBoxHeader {
-      ${themeToCss(theme?.collapsed?.press?.headerBackground)};
-      ${themeToCss(theme?.collapsed?.press?.headerText)};
-    }
-  }
-
-`;
-
-interface IStyledTitledCollapsibleBoxProps {
-  $theme?: RecursivePartial<ITitledCollapsibleBoxTheme>;
-}
-
-const StyledTitledCollapsibleBox = styled.div<IStyledTitledCollapsibleBoxProps>`
-  width: 100%;
-  overflow: hidden;
-
-  &&&& {
-    ${(props: IStyledTitledCollapsibleBoxProps): string => (props.$theme ? TitledCollapsibleBoxThemedStyle(props.$theme) : '')};
-  }
-`;
-
-const StyledHeader = styled.div`
-  display: flex;
-  flex-direction: horizontal;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  width: 100%;
-`;
-
-const StyledContent = styled.div`
-  width: 100%;
-`;
-
-interface ITitledCollapsibleBoxProps extends IComponentProps<ITitledCollapsibleBoxTheme>, ISingleAnyChildProps {
+interface ITitledCollapsibleBoxProps extends IComponentProps, ISingleAnyChildProps {
   title: string;
   isCollapsed: boolean;
   onCollapseToggled(): void;
@@ -98,35 +18,34 @@ interface ITitledCollapsibleBoxProps extends IComponentProps<ITitledCollapsibleB
 }
 
 export function TitledCollapsibleBox({
-  className = '',
   variant = 'default',
   ...props
 }: ITitledCollapsibleBoxProps): React.ReactElement {
   const onCollapseToggled = (): void => {
     props.onCollapseToggled();
   };
-
   return (
-    <StyledTitledCollapsibleBox
+    <div
       id={props.id}
-      className={getClassName(TitledCollapsibleBox.displayName, className, props.isCollapsed && 'collapsed', ...(variant?.split('-') || []))}
-      $theme={props.theme}
+      className={getClassName(TitledCollapsibleBox.displayName, props.className, props.isCollapsed && 'collapsed', ...(variant?.split('-') || []))}
+      style={props.style}
     >
-      <StyledHeader
+      <button
+        type='button'
         className='KibaTitledCollapsibleBoxHeader'
         onClick={onCollapseToggled}
       >
         <span>{props.title}</span>
         <KibaIcon iconId={props.isCollapsed ? 'ion-chevron-down' : 'ion-chevron-up'} />
-      </StyledHeader>
+      </button>
       {(!props.isCollapsed || !props.shouldSkipRenderingWhenCollapsed) && (
         <HidingView isHidden={props.isCollapsed}>
-          <StyledContent className='KibaTitledCollapsibleBoxContent'>
+          <div className='KibaTitledCollapsibleBoxContent'>
             {props.children}
-          </StyledContent>
+          </div>
         </HidingView>
       )}
-    </StyledTitledCollapsibleBox>
+    </div>
   );
 }
 TitledCollapsibleBox.displayName = 'KibaTitledCollapsibleBox';

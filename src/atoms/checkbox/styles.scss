@@ -1,0 +1,81 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaCheckbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    &.disabled {
+      cursor: auto;
+      & > .checkbox-inner {
+        cursor: auto;
+      }
+    }
+    & > .checkbox-inner {
+      cursor: pointer;
+      background-clip: border-box;
+      width: 1em;
+      height: 1em;
+    }
+    & > .checkbox-hidden {
+      opacity: 0;
+      pointer-events: none;
+      width: 0 !important;
+      height: 0 !important;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+    }
+    & > .checkbox-text {
+      cursor: pointer;
+      flex-basis: 0;
+      flex-grow: 1;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaCheckbox {
+    transition-duration: 0.3s;
+    font-size: $font-size;
+    font-family: $font-family;
+    color: $color-text;
+    & > .checkbox-inner {
+      transition-duration: 0.3s;
+      background-color: transparent;
+      border: 1px solid $color-text;
+      border-radius: $border-radius;
+      color: $color-text;
+    }
+    &:hover > .checkbox-inner {
+      border-color: $color-brand-primary;
+    }
+    &.checked {
+      & > .checkbox-inner {
+        background-color: $color-brand-primary;
+        border-color: $color-brand-primary;
+        color: $color-text-on-brand;
+      }
+      &:hover > .checkbox-inner {
+        background-color: $color-brand-secondary;
+        border-color: $color-brand-secondary;
+      }
+    }
+    &.disabled {
+      color: $color-disabled-text;
+      & > .checkbox-inner {
+        border-color: $color-disabled-text;
+        color: $color-disabled-text;
+      }
+      &:hover > .checkbox-inner {
+        border-color: $color-disabled-text;
+      }
+      &.checked > .checkbox-inner {
+        background-color: $color-disabled-text;
+        border-color: $color-disabled-text;
+      }
+    }
+  }
+}

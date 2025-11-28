@@ -1,0 +1,40 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaCarouselSlider {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+
+    /* Hide scrollbar */
+    &::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    /* Hide scrollbar on ie 11 */
+    -ms-overflow-style: none;
+    overflow: auto;
+  }
+
+  .KibaCarouselSlide {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    height: 100%;
+    transform-origin: center center;
+    transform: scale(1);
+    transition: transform 0.5s;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { IBulletListTheme, IBulletTextTheme, ILinkTheme } from '../atoms';
 import { ITheme } from '../theming';
-import { ThemeMap, themeToCss } from '../util';
+import { themeToCss } from '../util';
 
 interface IGlobalCssProps {
   theme: ITheme;
@@ -41,13 +40,14 @@ export function GlobalCss(props: IGlobalCssProps): React.ReactElement {
       ${fullPageCss}
 
       a:not(.KibaButton):not(.KibaLinkBase):not(.KibaIconButton):not(.KibaLink) {
-        ${themeToCss((props.theme.links as ThemeMap<ILinkTheme>).default.normal.default.text)}
+        color: var(--kiba-color-brand-primary);
+        text-decoration: underline;
       }
       a:not(.KibaButton):not(.KibaLinkBase):not(.KibaIconButton):not(.KibaLink):hover {
-        ${themeToCss((props.theme.links as ThemeMap<ILinkTheme>).default.normal.hover.text)}
+        color: var(--kiba-color-brand-primary-dark10);
       }
       a:not(.KibaButton):not(.KibaLinkBase):not(.KibaIconButton):not(.KibaLink):visited {
-        ${themeToCss((props.theme.links as ThemeMap<ILinkTheme>).default.visited?.default?.text)}
+        color: var(--kiba-color-brand-primary);
       }
 
       p { ${themeToCss(props.theme.texts.paragraph)} }
@@ -70,37 +70,33 @@ export function GlobalCss(props: IGlobalCssProps): React.ReactElement {
       h6 { ${themeToCss(props.theme.texts.header6)} }
 
       ul {
-        ${themeToCss((props.theme.bulletLists as ThemeMap<IBulletListTheme>).default.normal.default.bulletList)}
         list-style-position: outside;
         text-indent: -0.1em;
         display: table;
       }
       ul li {
-        ${themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).default.normal.default.text)}
         display: table;
       }
       ul li:before {
         display: table-cell;
         padding-right: 1em;
-        ${themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).default.normal.default.bullet)}
+        content: '•';
       }
 
       ol {
-        ${themeToCss((props.theme.bulletLists as ThemeMap<IBulletListTheme>).default.normal.default.bulletList)}
         list-style-position: outside;
         counter-reset: list-number;
         text-indent: -0.1em;
         display: table;
       }
       ol li {
-        ${themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).numbered?.normal?.default?.text)}
         counter-increment: list-number;
         display: table;
       }
       ol li:before {
         display: table-cell;
         padding-right: 1em;
-        ${themeToCss((props.theme.bulletTexts as ThemeMap<IBulletTextTheme>).numbered?.normal?.default?.bullet)}
+        content: counter(list-number) '.';
       }
 
       ${props.extraCss || ''}

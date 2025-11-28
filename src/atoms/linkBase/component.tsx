@@ -1,94 +1,14 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
+import { getClassName } from '@kibalabs/core';
 import { Link as CoreLink, ISingleAnyChildProps, useIsCoreRoutingEnabled } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
-import { ILinkBaseTheme } from './theme';
+import './styles.scss';
 import { IComponentProps } from '../../model';
-import { themeToCss } from '../../util';
 
-export const LinkBaseThemedStyle = (theme: RecursivePartial<ILinkBaseTheme>): string => `
-  & > .KibaLinkBaseFocusFixer {
-    ${themeToCss(theme?.normal?.default?.background)};
-    ${themeToCss(theme?.normal?.default?.linkBase)};
-  }
-  &:hover > .KibaLinkBaseFocusFixer {
-    ${themeToCss(theme?.normal?.hover?.background)};
-    ${themeToCss(theme?.normal?.hover?.linkBase)};
-  }
-  &:active > .KibaLinkBaseFocusFixer {
-    ${themeToCss(theme?.normal?.press?.background)};
-    ${themeToCss(theme?.normal?.press?.linkBase)};
-  }
-  &:focus > .KibaLinkBaseFocusFixer {
-    ${themeToCss(theme?.normal?.focus?.background)};
-    ${themeToCss(theme?.normal?.focus?.linkBase)};
-  }
-  &.disabled {
-    & > .KibaLinkBaseFocusFixer {
-      ${themeToCss(theme?.disabled?.default?.background)};
-      ${themeToCss(theme?.disabled?.default?.linkBase)};
-    }
-    &:hover > .KibaLinkBaseFocusFixer {
-      ${themeToCss(theme?.disabled?.hover?.background)};
-      ${themeToCss(theme?.disabled?.hover?.linkBase)};
-    }
-    &:active > .KibaLinkBaseFocusFixer {
-      ${themeToCss(theme?.disabled?.press?.background)};
-      ${themeToCss(theme?.disabled?.press?.linkBase)};
-    }
-    &:focus > .KibaLinkBaseFocusFixer {
-      ${themeToCss(theme?.disabled?.focus?.background)};
-      ${themeToCss(theme?.disabled?.focus?.linkBase)};
-    }
-  }
-`;
+export { LinkBaseThemedStyle } from '../../util/legacyThemeCompat';
 
-interface IStyledLinkBaseProps {
-  $theme?: RecursivePartial<ILinkBaseTheme>;
-}
-
-const StyledLinkBaseFocusFixer = styled.span`
-  transition-duration: 0.3s;
-  cursor: pointer;
-  color: currentColor;
-  outline: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-clip: padding-box;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  /* Fixing the Safari bug for <button>s overflow */
-  position: relative;
-`;
-
-// TODO(krishan711): this hurts to be a button or a as both have unintended consequences:
-// button -> you cant have another button inside
-// a -> inners get styled accordingly as if they are links themselves
-const StyledLinkBase = styled.button<IStyledLinkBaseProps>`
-  cursor: pointer;
-  width: fit-content;
-  transition-duration: 0.3s;
-  &.fullWidth {
-    width: 100%;
-  }
-  &.fullHeight {
-    height: 100%;
-  }
-  &.disabled {
-    cursor: not-allowed;
-  }
-
-  &&&& {
-    ${(props: IStyledLinkBaseProps): string => (props.$theme ? LinkBaseThemedStyle(props.$theme) : '')};
-  }
-`;
-
-export interface ILinkBaseProps extends IComponentProps<ILinkBaseTheme>, ISingleAnyChildProps {
+export interface ILinkBaseProps extends IComponentProps, ISingleAnyChildProps {
   isEnabled?: boolean;
   isFullWidth?: boolean;
   isFullHeight?: boolean;
@@ -100,7 +20,6 @@ export interface ILinkBaseProps extends IComponentProps<ILinkBaseTheme>, ISingle
 }
 
 export function LinkBase({
-  className = '',
   variant = 'default',
   isEnabled = true,
   isFullWidth = false,
@@ -108,7 +27,6 @@ export function LinkBase({
   ...props
 }: ILinkBaseProps): React.ReactElement {
   const isUsingCoreRouting = useIsCoreRoutingEnabled();
-
   const onClicked = (event: React.SyntheticEvent): void => {
     if (props.onClicked) {
       props.onClicked();
@@ -117,27 +35,25 @@ export function LinkBase({
       event.stopPropagation();
     }
   };
-
   const isTargetWithinApp = props.target && props.target.startsWith('/');
   const targetShouldOpenSameTab = props.targetShouldOpenSameTab || props.target?.startsWith('#') || (props.targetShouldOpenSameTab == null && isTargetWithinApp);
+  const LinkComponent = props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : 'button';
   return (
-    // @ts-ignore: as prop doesn't match type required
-    <StyledLinkBase
+    <LinkComponent
       id={props.id}
-      className={getClassName(LinkBase.displayName, className, isFullWidth && 'fullWidth', isFullHeight && 'fullHeight', !isEnabled && 'disabled', ...(variant?.split('-') || []))}
-      $theme={props.theme}
+      className={getClassName(LinkBase.displayName, props.className, isFullWidth && 'fullWidth', isFullHeight && 'fullHeight', !isEnabled && 'disabled', ...(variant?.split('-') || []))}
       onClick={onClicked}
       aria-label={props.label}
       href={props.target}
       rel={props.target ? 'noopener' : undefined}
       tabIndex={props.tabIndex || 0}
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
-      as={props.target ? (isUsingCoreRouting && targetShouldOpenSameTab && isTargetWithinApp ? CoreLink : 'a') : undefined}
+      style={props.style}
     >
-      <StyledLinkBaseFocusFixer className='KibaLinkBaseFocusFixer' tabIndex={-1}>
+      <span className='KibaLinkBaseFocusFixer' tabIndex={-1}>
         {props.children}
-      </StyledLinkBaseFocusFixer>
-    </StyledLinkBase>
+      </span>
+    </LinkComponent>
   );
 }
 LinkBase.displayName = 'KibaLinkBase';

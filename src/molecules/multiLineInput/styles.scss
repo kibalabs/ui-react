@@ -1,0 +1,33 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaMultiLineInput-textarea {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: text;
+    overflow-y: auto;
+    resize: none;
+    box-shadow: none;
+
+    &:hover {
+      box-shadow: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &.disabled {
+      pointer-events: none;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaMultiLineInput-textarea {
+    font: inherit;
+    color: inherit;
+  }
+}

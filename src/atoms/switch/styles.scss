@@ -1,0 +1,55 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaSwitch {
+    cursor: pointer;
+    & > .KibaSwitchInner {
+      float: left;
+      cursor: pointer;
+    }
+    &.checked > .KibaSwitchInner {
+      float: right;
+    }
+    &.disabled {
+      cursor: not-allowed;
+      & > .KibaSwitchInner {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaSwitch {
+    transition: 300ms;
+    width: 2.5em;
+    background-color: $color-background-dark50;
+    border-radius: 1em;
+    padding: 0.15em;
+    & > .KibaSwitchInner {
+      width: 1em;
+      height: 1em;
+      background-color: $color-background;
+      border-radius: 50%;
+      transition: 300ms;
+    }
+    &:hover {
+      background-color: $color-brand-secondary;
+    }
+    &.checked {
+      background-color: $color-brand-primary;
+      &:hover {
+        background-color: $color-brand-secondary;
+      }
+    }
+    &.disabled {
+      background-color: $color-disabled-light50;
+      &:hover {
+        background-color: $color-disabled-light50;
+      }
+      &.checked {
+        background-color: $color-disabled-light50;
+      }
+    }
+  }
+}

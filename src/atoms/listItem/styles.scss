@@ -1,0 +1,44 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaListItem {
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    background-clip: border-box;
+    cursor: default;
+    &.clickable {
+      cursor: pointer;
+    }
+    &.disabled {
+      cursor: auto;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaListItem {
+    transition-duration: 0.3s;
+    padding: $padding $padding-wide;
+    background-color: transparent;
+    &.clickable {
+      &:hover {
+        background-color: $color-background-light10;
+      }
+      &:active {
+        background-color: $color-background-dark05;
+      }
+    }
+    &.selected {
+      background-color: $color-brand-primary-clear90;
+      &:hover {
+        background-color: $color-brand-primary-clear80;
+      }
+    }
+    &.disabled {
+      opacity: 0.5;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaVideo {
+    display: block;
+    width: var(--kiba-video-width, auto);
+    height: var(--kiba-video-height, auto);
+    max-width: var(--kiba-video-max-width, none);
+    max-height: var(--kiba-video-max-height, none);
+    object-fit: var(--kiba-video-fit, fill);
+    &.lazyload, &.lazyloading {
+      opacity: 0;
+    }
+    &.lazyloaded {
+      display: block;
+      opacity: 1;
+    }
+    &.centered {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .no-js &.lazyload {
+      display: none;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaVideo {
+    &.lazyloaded {
+      transition: opacity 0.15s;
+    }
+  }
+}

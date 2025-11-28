@@ -1,0 +1,51 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaTabBarItem {
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 0;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    background-clip: border-box;
+    text-align: center;
+    &.collapsible {
+      flex-shrink: 1;
+    }
+    &.expandable {
+      flex-grow: 1;
+    }
+    &.disabled {
+      cursor: auto;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaTabBarItem {
+    transition-duration: 0.3s;
+    font-size: $font-size;
+    font-family: $font-family;
+    color: $color-text;
+    background-color: transparent;
+    padding: $padding $padding-wide;
+    border: none;
+    border-bottom: 2px solid transparent;
+    &:hover {
+      color: $color-brand-primary;
+    }
+    &.selected {
+      color: $color-brand-primary;
+      border-bottom-color: $color-brand-primary;
+    }
+    &.disabled {
+      color: $color-disabled-text;
+      &:hover {
+        color: $color-disabled-text;
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaPill {
+    outline: none;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-clip: border-box;
+    &.fullWidth {
+      width: 100%;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaPill {
+    padding: $padding $padding-wide2;
+    border-radius: $padding-wide2;
+    background-color: $color-brand-primary-clear80;
+    color: $color-brand-primary;
+    font-weight: 600;
+    font-size: $font-size;
+    &.primary {
+      border: 1px solid $color-brand-primary;
+    }
+    &.secondary {
+      background-color: $color-brand-primary;
+      color: $color-text-on-brand;
+    }
+    &.error {
+      background-color: $color-error;
+      color: $color-text-on-brand;
+    }
+    &.success {
+      background-color: $color-success;
+      color: $color-text-on-brand;
+    }
+  }
+}

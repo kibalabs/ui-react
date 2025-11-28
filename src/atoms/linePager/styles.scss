@@ -1,0 +1,57 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaLinePager {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .LinePagerItem {
+    cursor: pointer;
+    outline: none;
+    transition-duration: 0.3s;
+    flex-grow: 1;
+    flex-shrink: 1;
+    border: none;
+    padding: 0;
+  }
+}
+
+@layer kiba-theme {
+  .KibaLinePager {
+    .LinePagerItem {
+      background-color: $color-background-light10;
+      height: 4px;
+      border-radius: 2px;
+
+      &:hover {
+        background-color: $color-background-dark05;
+      }
+
+      &:active {
+        background-color: $color-background-dark05;
+      }
+
+      &:focus {
+        background-color: $color-background-dark05;
+      }
+
+      &.active {
+        background-color: $color-brand-primary;
+
+        &:hover {
+          background-color: $color-brand-secondary;
+        }
+
+        &:active {
+          background-color: $color-brand-secondary;
+        }
+
+        &:focus {
+          background-color: $color-brand-secondary;
+        }
+      }
+    }
+  }
+}

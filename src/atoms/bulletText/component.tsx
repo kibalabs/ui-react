@@ -1,56 +1,32 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
+import { getClassName } from '@kibalabs/core';
 import { IOptionalSingleChildProps } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
-import { IBulletTextTheme } from './theme';
+import './styles.scss';
 import { IComponentProps } from '../../model';
-import { themeToCss } from '../../util';
 import { IBulletListProps } from '../bulletList';
 
-export const BulletTextThemedStyle = (theme: RecursivePartial<IBulletTextTheme>): string => `
-  ${themeToCss(theme?.normal?.default?.text)};
-  &:before {
-    ${themeToCss(theme?.normal?.default?.bullet)};
-  }
-`;
+export { BulletTextThemedStyle } from '../../util/legacyThemeCompat';
 
-interface IStyledBulletTextProps {
-  $theme?: RecursivePartial<IBulletTextTheme>;
-}
-
-const StyledBulletText = styled.li<IStyledBulletTextProps>`
-  counter-increment: list-number;
-  display: table;
-  &:before {
-    display: table-cell;
-    padding-right: 1em;
-  }
-  &&&& {
-    ${(props: IStyledBulletTextProps): string => (props.$theme ? BulletTextThemedStyle(props.$theme) : '')};
-  }
-`;
-
-export interface IBulletTextProps extends IComponentProps<IBulletTextTheme>, IOptionalSingleChildProps<IBulletListProps> {
+export interface IBulletTextProps extends IComponentProps, IOptionalSingleChildProps<IBulletListProps> {
   text: string;
 }
 
 export function BulletText({
   text,
-  className = '',
   variant = 'default',
   ...props
 }: IBulletTextProps): React.ReactElement {
   return (
-    <StyledBulletText
+    <li
       id={props.id}
-      className={getClassName(BulletText.displayName, className, ...(variant?.split('-') || []))}
-      $theme={props.theme}
+      className={getClassName(BulletText.displayName, props.className, ...(variant?.split('-') || []))}
+      style={props.style}
     >
       {text}
       {props.children}
-    </StyledBulletText>
+    </li>
   );
 }
 BulletText.displayName = 'KibaBulletText';

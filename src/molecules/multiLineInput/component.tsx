@@ -1,45 +1,15 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { styled } from 'styled-components';
 
+import './styles.scss';
 import { IInputFrameTheme, InputFrame } from '../inputFrame';
 import { IMoleculeProps } from '../moleculeProps';
-
 
 export interface IMultiLineInputTheme {
   inputFrameTheme: IInputFrameTheme;
 }
 
-interface IStyledMultiLineTextAreaProps {
-  $resize: string;
-}
-
-const StyledMultiLineTextArea = styled.textarea<IStyledMultiLineTextAreaProps>`
-  width: 100%;
-  background: none;
-  border: none;
-  outline: none;
-  cursor: text;
-  overflow-y: auto;
-  resize: none;
-  box-shadow: none;
-  resize: ${(props: IStyledMultiLineTextAreaProps): string => props.$resize};
-
-  &:hover {
-    box-shadow: none;
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &.disabled {
-    pointer-events: none;
-  }
-`;
-
-// TODO(krishan711): this only grows when the user types into it, not when the prop passed in is very long
 interface IMultiLineInputProps extends IMoleculeProps<IMultiLineInputTheme> {
   value: string| null;
   isEnabled?: boolean;
@@ -69,21 +39,18 @@ export function MultiLineInput({
 }: IMultiLineInputProps): React.ReactElement {
   const [rowCount, setRowCount] = React.useState(minRowCount);
   const innerMaxRowCount = Math.max(maxRowCount, minRowCount);
-
   const onKeyUp = (event: React.KeyboardEvent<HTMLElement>): void => {
     if (props.onKeyUp) {
       const { key } = event;
       props.onKeyUp(key);
     }
   };
-
   const onKeyDown = (event: React.KeyboardEvent<HTMLElement>): void => {
     if (props.onKeyDown) {
       const { key } = event;
       props.onKeyDown(key);
     }
   };
-
   const onValueChanged = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
     const calculatedLineHeight = window.getComputedStyle(event.target, null).getPropertyValue('line-height');
     const fontSize = parseInt(calculatedLineHeight, 10);
@@ -98,13 +65,12 @@ export function MultiLineInput({
       props.onValueChanged(event.target.value);
     }
   };
-
   const onClick = (): void => {
     if (props.onClick) {
       props.onClick();
     }
   };
-
+  const resizeValue = props.isResizableVertically && props.isResizableHorizontally ? 'both' : props.isResizableVertically ? 'vertical' : props.isResizableHorizontally ? 'horizontal' : 'none';
   return (
     <InputFrame
       id={props.id}
@@ -114,10 +80,10 @@ export function MultiLineInput({
       messageText={props.messageText}
       isEnabled={isEnabled}
     >
-      <StyledMultiLineTextArea
+      <textarea
         id={props.id && `${props.id}-multiline-textarea`}
-        className={getClassName(StyledMultiLineTextArea.displayName, !isEnabled && 'disabled')}
-        $resize={props.isResizableVertically && props.isResizableHorizontally ? 'both' : props.isResizableVertically ? 'vertical' : props.isResizableHorizontally ? 'horizontal' : 'none'}
+        className={getClassName('KibaMultiLineInput-textarea', !isEnabled && 'disabled')}
+        style={{ resize: resizeValue }}
         name={props.name}
         rows={rowCount}
         value={props.value || ''}

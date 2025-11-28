@@ -4,6 +4,7 @@ import { getClassName } from '@kibalabs/core';
 
 import './styles.scss';
 import { IComponentProps } from '../../model';
+
 export { DividerThemedStyle } from '../../util/legacyThemeCompat';
 
 interface IDividerProps extends IComponentProps {

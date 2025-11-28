@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { getClassName, RecursivePartial } from '@kibalabs/core';
-import { styled } from 'styled-components';
 
+import './styles.scss';
 import { Box, IInputFrameTheme, IListItemProps, IListTheme, List, SingleLineInput } from '../..';
 import { IBoxTheme, KibaIcon, Placement, Portal, Text } from '../../particles';
 import { getVariant } from '../../util';
@@ -39,12 +39,6 @@ interface IOptionSelectProps extends IMoleculeProps<IOptionSelectTheme> {
   onFilterTextChanged?: (filterText: string | null) => void;
   onItemClicked: (itemKey: string) => void;
 }
-
-const StyledOptionSelect = styled.div`
-  width: 100%;
-  position: relative;
-  display: block;
-`;
 
 interface IOptionSelectContentProps {
   options: IOption[];
@@ -124,7 +118,7 @@ export function OptionSelect({
   const placeholder = props.placeholderText || 'Select an option';
 
   return (
-    <StyledOptionSelect
+    <div
       id={props.id}
       className={getClassName(OptionSelect.displayName, className)}
     >
@@ -178,7 +172,7 @@ export function OptionSelect({
           </Box>
         )}
       </HidingView>
-    </StyledOptionSelect>
+    </div>
   );
 }
 OptionSelect.displayName = 'KibaOptionSelect';

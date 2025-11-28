@@ -1,78 +1,14 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
+import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
-import { IListItemTheme } from './theme';
+import './styles.scss';
 import { IComponentProps } from '../../model';
-import { themeToCss } from '../../util';
 
-export const ListItemThemedStyle = (theme: RecursivePartial<IListItemTheme>): string => `
-  ${themeToCss(theme?.normal?.default?.background)};
-  &.clickable {
-    &:hover {
-        ${themeToCss(theme?.normal?.hover?.background)};
-    }
-    &:active {
-        ${themeToCss(theme?.normal?.press?.background)};
-    }
-    &:focus {
-        ${themeToCss(theme?.normal?.focus?.background)};
-    }
-    &.disabled {
-      ${themeToCss(theme?.disabled?.default?.background)};
-      &:hover {
-        ${themeToCss(theme?.disabled?.hover?.background)};
-      }
-      &:active {
-        ${themeToCss(theme?.disabled?.press?.background)};
-      }
-      &:focus {
-        ${themeToCss(theme?.disabled?.focus?.background)};
-      }
-    }
-  }
-  &.selected {
-    ${themeToCss(theme?.selected?.default?.background)};
-    &:hover {
-      ${themeToCss(theme?.selected?.hover?.background)};
-    }
-    &:active {
-      ${themeToCss(theme?.selected?.press?.background)};
-    }
-    &:focus {
-      ${themeToCss(theme?.selected?.focus?.background)};
-    }
-  }
-`;
+export { ListItemThemedStyle } from '../../util/legacyThemeCompat';
 
-interface IStyledListItemProps {
-  $theme?: RecursivePartial<IListItemTheme>;
-}
-
-const StyledListItem = styled.div<IStyledListItemProps>`
-  outline: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: start;
-  background-clip: border-box;
-  transition-duration: 0.3s;
-  cursor: default;
-  &.clickable {
-    cursor: pointer;
-  }
-  &.disabled {
-    cursor: auto;
-  }
-
-  &&&& {
-    ${(props: IStyledListItemProps): string => (props.$theme ? ListItemThemedStyle(props.$theme) : '')};
-  }
-`;
-
-export interface IListItemProps extends IComponentProps<IListItemTheme>, ISingleAnyChildProps {
+export interface IListItemProps extends IComponentProps, ISingleAnyChildProps {
   itemKey: string;
   isDisabled?: boolean;
   isSelected?: boolean;
@@ -80,7 +16,6 @@ export interface IListItemProps extends IComponentProps<IListItemTheme>, ISingle
 }
 
 export function ListItem({
-  className = '',
   variant = 'default',
   isDisabled = false,
   isSelected = false,
@@ -88,20 +23,36 @@ export function ListItem({
 }: IListItemProps): React.ReactElement {
   const isClickable = props.onClicked != null && !isDisabled;
   const onClicked = (): void => {
-    // @ts-ignore
-    props.onClicked(props.itemKey);
+    if (props.onClicked) {
+      props.onClicked(props.itemKey);
+    }
   };
-
+  const classNames = getClassName(ListItem.displayName, props.className, isDisabled && 'disabled', isSelected && 'selected', isClickable && 'clickable', ...(variant?.split('-') || []));
+  if (isClickable) {
+    return (
+      <div
+        id={props.id}
+        key={props.itemKey}
+        className={classNames}
+        onClick={onClicked}
+        onKeyDown={(e) => e.key === 'Enter' && onClicked()}
+        role='button'
+        tabIndex={0}
+        style={props.style}
+      >
+        { props.children }
+      </div>
+    );
+  }
   return (
-    <StyledListItem
+    <div
       id={props.id}
       key={props.itemKey}
-      className={getClassName(ListItem.displayName, className, isDisabled && 'disabled', isSelected && 'selected', isClickable && 'clickable', ...(variant?.split('-') || []))}
-      $theme={props.theme}
-      onClick={isClickable ? onClicked : undefined}
+      className={classNames}
+      style={props.style}
     >
       { props.children }
-    </StyledListItem>
+    </div>
   );
 }
 ListItem.displayName = 'KibaListItem';

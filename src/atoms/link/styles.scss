@@ -1,0 +1,51 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaLink {
+    cursor: pointer;
+    & > .KibaLinkFocusFixer {
+      cursor: pointer;
+      position: relative;
+    }
+    &.disabled {
+      cursor: not-allowed;
+      & > .KibaLinkFocusFixer {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaLink {
+    transition-duration: 0.3s;
+    & > .KibaLinkFocusFixer {
+      transition-duration: 0.3s;
+      color: $color-brand-primary;
+      text-decoration: underline;
+      font-size: inherit;
+      font-family: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+    }
+    &:hover > .KibaLinkFocusFixer {
+      color: $color-brand-secondary;
+    }
+    &.disabled {
+      & > .KibaLinkFocusFixer {
+        color: $color-disabled-text;
+      }
+      &:hover > .KibaLinkFocusFixer {
+        color: $color-disabled-text;
+      }
+    }
+    &:visited {
+      & > .KibaLinkFocusFixer {
+        color: $color-brand-primary;
+      }
+      &:hover > .KibaLinkFocusFixer {
+        color: $color-brand-secondary;
+      }
+    }
+  }
+}

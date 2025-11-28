@@ -1,0 +1,27 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaPortal {
+    position: absolute;
+    display: block;
+    z-index: 999;
+    overflow: hidden;
+    top: var(--kiba-portal-top, 0);
+    left: var(--kiba-portal-left, 0);
+    width: var(--kiba-portal-width, auto);
+    height: var(--kiba-portal-height, auto);
+    max-width: var(--kiba-portal-max-width, none);
+    max-height: var(--kiba-portal-max-height, none);
+    &.scrollableVertically {
+      overflow-y: auto;
+    }
+    &.scrollableHorizontally {
+      overflow-x: auto;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaPortal {
+  }
+}

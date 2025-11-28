@@ -1,0 +1,64 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaProgressCounterItem {
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-clip: border-box;
+    transition-duration: 0.3s;
+    border: none;
+
+    &.disabled {
+      cursor: auto;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaProgressCounterItem {
+    padding: $padding-narrow $padding;
+    border-radius: $border-radius;
+    background-color: $color-background-light10;
+    color: $color-text;
+    font: inherit;
+
+    &:hover {
+      background-color: $color-background-dark05;
+    }
+
+    &:active {
+      background-color: $color-background-dark05;
+    }
+
+    &:focus {
+      background-color: $color-background-dark05;
+    }
+
+    &.disabled {
+      background-color: $color-background-light10;
+      color: $color-disabled-text;
+      opacity: 0.5;
+    }
+
+    &.selected {
+      background-color: $color-brand-primary;
+      color: $color-text-on-brand;
+
+      &:hover {
+        background-color: $color-brand-secondary;
+      }
+
+      &:active {
+        background-color: $color-brand-secondary;
+      }
+
+      &:focus {
+        background-color: $color-brand-secondary;
+      }
+    }
+  }
+}

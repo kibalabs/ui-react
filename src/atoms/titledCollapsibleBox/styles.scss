@@ -1,0 +1,48 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaTitledCollapsibleBox {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .KibaTitledCollapsibleBoxHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .KibaTitledCollapsibleBoxContent {
+    width: 100%;
+  }
+}
+
+@layer kiba-theme {
+  .KibaTitledCollapsibleBox {
+    background-color: $color-background;
+    border-radius: $border-radius;
+
+    .KibaTitledCollapsibleBoxHeader {
+      padding: $padding;
+      background-color: $color-background-light10;
+      color: $color-text;
+      border: none;
+      font: inherit;
+
+      &:hover {
+        background-color: $color-background-dark05;
+      }
+
+      &:active {
+        background-color: $color-background-dark05;
+      }
+    }
+
+    .KibaTitledCollapsibleBoxContent {
+      padding: $padding;
+    }
+  }
+}

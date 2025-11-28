@@ -1,7 +1,7 @@
 @use '../../styles/variables' as *;
 
 @layer kiba-structure {
-  .Image {
+  .KibaImage {
     display: block;
     width: var(--kiba-image-width, auto);
     height: var(--kiba-image-height, auto);
@@ -26,7 +26,7 @@
 }
 
 @layer kiba-theme {
-  .Image {
+  .KibaImage {
     &.lazyloaded {
       transition: opacity 0.15s;
     }

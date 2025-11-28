@@ -2,8 +2,8 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { IMultiChildProps, OptionalProppedElement } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
+import './styles.scss';
 import { IListItemProps, IListItemTheme, ListItem } from '../../atoms/listItem';
 import { Divider } from '../../particles';
 import { IMoleculeProps } from '../moleculeProps';
@@ -11,16 +11,6 @@ import { IMoleculeProps } from '../moleculeProps';
 export interface IListTheme {
   listItemTheme: IListItemTheme;
 }
-
-const StyledList = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 100%;
-  overflow: auto;
-  &.fullWidth {
-    width: 100%;
-  }
-`;
 
 // TODO(krishan711): move this somewhere else if it is used again
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
@@ -53,7 +43,7 @@ export function List({
   });
 
   return (
-    <StyledList
+    <div
       id={props.id}
       className={getClassName(List.displayName, className, props.isFullWidth && 'fullWidth')}
     >
@@ -82,7 +72,7 @@ export function List({
           </React.Fragment>
         );
       })}
-    </StyledList>
+    </div>
   );
 }
 List.displayName = 'KibaList';

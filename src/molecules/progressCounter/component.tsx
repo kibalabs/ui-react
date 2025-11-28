@@ -1,26 +1,16 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { styled } from 'styled-components';
 
 import { IProgressCounterItemTheme, ProgressCounterItem } from '../../atoms';
 import { Direction } from '../../model';
 import { PaddingSize, Spacing } from '../../particles';
 import { IMoleculeProps } from '../moleculeProps';
+import './styles.scss';
 
 export interface IProgressCounterTheme {
   progressCounterItemTheme: IProgressCounterItemTheme;
 }
-
-interface IStyledProgressCounterProps {
-}
-
-const StyledProgressCounter = styled.div<IStyledProgressCounterProps>`
-  display: flex;
-  flex-direction: row;
-  max-width: 100%;
-  overflow: auto;
-`;
 
 // TODO(krishan711): this can probably be abstracted into a tabbar + tab component
 export interface IProgressCounterProps extends IMoleculeProps<IProgressCounterTheme> {
@@ -37,7 +27,7 @@ export function ProgressCounter({
   ...props
 }: IProgressCounterProps): React.ReactElement {
   return (
-    <StyledProgressCounter
+    <div
       id={props.id}
       className={getClassName(ProgressCounter.displayName, className)}
     >
@@ -57,7 +47,7 @@ export function ProgressCounter({
           </React.Fragment>
         );
       })}
-    </StyledProgressCounter>
+    </div>
   );
 }
 ProgressCounter.displayName = 'KibaProgressCounter';

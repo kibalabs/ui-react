@@ -1,67 +1,15 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
+import { getClassName } from '@kibalabs/core';
 import { useInitialization } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
-import { IWebViewTheme } from './theme';
+import './styles.scss';
 import { IComponentProps } from '../../model';
 import { LoadingSpinner } from '../../particles';
-import { themeToCss } from '../../util';
 
-export const WebViewThemedStyle = (theme: RecursivePartial<IWebViewTheme>): string => `
-  ${themeToCss(theme?.normal?.default?.background)};
-`;
+export { WebViewThemedStyle } from '../../util/legacyThemeCompat';
 
-interface IStyledWebViewProps {
-  $theme?: RecursivePartial<IWebViewTheme>;
-  $aspectRatio?: number;
-}
-
-const StyledWebView = styled.div<IStyledWebViewProps>`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding-bottom: ${(props: IStyledWebViewProps): string => (props.$aspectRatio ? `calc(${props.$aspectRatio} * 100%)` : 'auto')};
-
-  &&&& {
-    ${(props: IStyledWebViewProps): string => (props.$theme ? WebViewThemedStyle(props.$theme) : '')};
-  }
-`;
-
-const LoadingWrapper = styled.div`
-  position: absolute;
-`;
-
-interface IStyledIframeProps {
-}
-
-const StyledIframe = styled.iframe<IStyledIframeProps>`
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  height: 100%;
-  width: 100%;
-  border: none;
-
-  .no-js &.lazyload {
-    display: none;
-  }
-
-  &.lazyload, &.lazyloading, &.isLoading {
-    opacity: 0;
-  }
-  &.lazyloaded {
-    display: block;
-    opacity: 1;
-    transition: opacity 0.15s;
-  }
-`;
-
-export interface IWebViewProps extends IComponentProps<IWebViewTheme> {
+export interface IWebViewProps extends IComponentProps {
   url: string;
   permissions?: string[];
   shouldShowLoadingSpinner?: boolean;
@@ -72,7 +20,6 @@ export interface IWebViewProps extends IComponentProps<IWebViewTheme> {
   onLoadingChanged?: (isLoading: boolean) => void;
 }
 
-// TODO(krishan711): make a better default error view
 function DefaultErrorView(): React.ReactElement {
   return (
     <div>Something went wrong</div>
@@ -80,7 +27,6 @@ function DefaultErrorView(): React.ReactElement {
 }
 
 export function WebView({
-  className = '',
   variant = 'default',
   shouldShowLoadingSpinner = true,
   title = 'Embedded View',
@@ -91,7 +37,6 @@ export function WebView({
   const [hasFailedToLoad, setHasFailedToLoad] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const isInitialized = useInitialization((): void => undefined);
-
   React.useEffect((): void => {
     if (props.url !== currentUrl) {
       setIsLoading(true);
@@ -99,12 +44,10 @@ export function WebView({
       setHasFailedToLoad(false);
     }
   }, [props.url, currentUrl]);
-
   const handleOnError = (): void => {
     setIsLoading(false);
     setHasFailedToLoad(true);
   };
-
   const handleOnLoad = (event: React.SyntheticEvent<HTMLIFrameElement, Event>): void => {
     setIsLoading(false);
     const iframe: HTMLIFrameElement = event.target as HTMLIFrameElement;
@@ -112,24 +55,21 @@ export function WebView({
       // setHasFailedToLoad(true);
     }
   };
-
   const onLoadingChanged = props.onLoadingChanged;
   React.useEffect((): void => {
     if (onLoadingChanged) {
       onLoadingChanged(isLoading);
     }
   }, [onLoadingChanged, isLoading]);
-
+  const aspectRatioStyle = props.aspectRatio ? { paddingBottom: `calc(${props.aspectRatio} * 100%)` } : undefined;
   return (
-    // @ts-ignore
-    <StyledWebView
+    <div
       id={props.id}
-      className={getClassName(WebView.displayName, className, ...(variant?.split('-') || []))}
-      $theme={props.theme}
-      $aspectRatio={props.aspectRatio}
+      className={getClassName(WebView.displayName, props.className, ...(variant?.split('-') || []))}
+      style={{ ...props.style, ...aspectRatioStyle }}
     >
       <noscript>
-        <StyledIframe
+        <iframe
           id={props.id && `${props.id}-iframe`}
           className={getClassName('web-view-iframe', 'unlazy')}
           title={title}
@@ -149,11 +89,11 @@ export function WebView({
       ) : isInitialized && (
         <React.Fragment>
           { isLoading && shouldShowLoadingSpinner && (
-            <LoadingWrapper id={props.id && `${props.id}-loading-wrapper`}>
+            <div id={props.id && `${props.id}-loading-wrapper`} className='web-view-loading-wrapper'>
               <LoadingSpinner id={props.id && `${props.id}-loading-spinner`} className='web-view-loading-spinner' />
-            </LoadingWrapper>
+            </div>
           )}
-          <StyledIframe
+          <iframe
             id={props.id && `${props.id}-iframe`}
             className={getClassName('web-view-iframe', props.isLazyLoadable ? 'lazyload' : 'unlazy', isLoading && 'isLoading')}
             title={title}
@@ -166,7 +106,7 @@ export function WebView({
           />
         </React.Fragment>
       )}
-    </StyledWebView>
+    </div>
   );
 }
 WebView.displayName = 'KibaWebView';

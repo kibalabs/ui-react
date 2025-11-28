@@ -2,14 +2,11 @@ import React from 'react';
 
 import { KibaException } from '@kibalabs/core';
 
-import { IComponentProps, ThemeType, WebView } from '../..';
+import { IComponentProps, WebView } from '../..';
 import { IImageProps, Image } from '../image';
 import { Video } from '../video';
 
-export interface IMediaTheme extends ThemeType {
-}
-
-export interface IMediaProps extends IComponentProps<IMediaTheme> {
+export interface IMediaProps extends IComponentProps {
   source: string;
   alternativeText: string;
   fitType?: 'crop' | 'cover' | 'scale' | 'contain';

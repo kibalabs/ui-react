@@ -1,0 +1,15 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaOptionSelect {
+    width: 100%;
+    position: relative;
+    display: block;
+  }
+}
+
+@layer kiba-theme {
+  .KibaOptionSelect {
+    // Theme styles applied via child components
+  }
+}

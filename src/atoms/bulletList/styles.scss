@@ -1,0 +1,16 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaBulletList {
+    counter-reset: list-number;
+    list-style-position: outside;
+    text-indent: -0.1em;
+    display: table;
+  }
+}
+
+@layer kiba-theme {
+  .KibaBulletList {
+    // Theme styles applied via CSS custom properties
+  }
+}
