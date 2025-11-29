@@ -1,7 +1,7 @@
 import React, { AnchorHTMLAttributes } from 'react';
 
 import { deepCompare, getClassName } from '@kibalabs/core';
-import MarkdownToJsx from 'markdown-to-jsx';
+import MarkdownToJsx from 'markdown-to-jsx/react';
 
 import { Link, PrettyText } from '../../atoms';
 import { TextAlignment, TextTag } from '../../particles';

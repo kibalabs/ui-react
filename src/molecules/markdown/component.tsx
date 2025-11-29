@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { deepCompare, getClassName } from '@kibalabs/core';
-import MarkdownToJsx from 'markdown-to-jsx';
+import MarkdownToJsx from 'markdown-to-jsx/react';
 
 import { BulletList, BulletText, Link, PrettyText } from '../../atoms';
 import { Box, Media, TextAlignment } from '../../particles';
