@@ -36,19 +36,44 @@
     & > .KibaLinkBaseFocusFixer {
       @include box.default;
       @include box.focusable;
+      opacity: 1;
     }
     &:hover > .KibaLinkBaseFocusFixer {
-      opacity: 0.8;
+      background-color: var(--kiba-color-brand-primary-clear80);
     }
     &:active > .KibaLinkBaseFocusFixer {
-      opacity: 0.6;
+      background-color: var(--kiba-color-brand-primary-clear50);
+    }
+    &:focus > .KibaLinkBaseFocusFixer {
+      @include box.focussed;
     }
     &.disabled {
       & > .KibaLinkBaseFocusFixer {
-        opacity: 0.5;
+        background-color: $color-disabled-text;
       }
       &:hover > .KibaLinkBaseFocusFixer {
-        opacity: 0.5;
+        background-color: $color-disabled-text;
+      }
+    }
+
+    // Translucent variant
+    &.translucent > .KibaLinkBaseFocusFixer {
+      background-color: transparent;
+    }
+
+    // Card variant
+    &.card > .KibaLinkBaseFocusFixer {
+      @include box.card;
+      margin: 0;
+    }
+
+    // Image variant
+    &.image {
+      &:hover > .KibaLinkBaseFocusFixer {
+        opacity: 0.8;
+      }
+      &:active > .KibaLinkBaseFocusFixer {
+        opacity: 0.6;
       }
     }
   }

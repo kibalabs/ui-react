@@ -22,24 +22,33 @@
   .KibaListItem {
     @include box.default;
     @include box.focusable;
-    padding: $padding $padding-wide;
+    padding: $padding-wide $padding-wide;
     background-color: transparent;
+    border-radius: $border-radius $border-radius;
+    border-width: $border-width;
     &.clickable {
       &:hover {
-        background-color: $color-background-light10;
+        background-color: var(--kiba-color-brand-primary-clear90);
       }
       &:active {
-        background-color: $color-background-dark05;
+        background-color: var(--kiba-color-brand-primary-clear75);
+      }
+      &:focus {
+        @include box.focussed;
       }
     }
     &.selected {
-      background-color: $color-brand-primary-clear90;
-      &:hover {
-        background-color: $color-brand-primary-clear80;
-      }
+      background-color: var(--kiba-color-brand-primary-clear80);
     }
     &.disabled {
-      opacity: 0.5;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    // Slim variant
+    &.slim {
+      padding: $padding $padding;
     }
   }
 }

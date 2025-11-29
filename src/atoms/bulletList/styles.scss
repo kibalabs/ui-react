@@ -11,6 +11,7 @@
 
 @layer kiba-theme {
   .KibaBulletList {
-    // Theme styles applied via CSS custom properties
+    list-style-type: none;
+    margin: 0 0 0 $padding-wide;
   }
 }

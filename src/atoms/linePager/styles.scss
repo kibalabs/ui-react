@@ -22,30 +22,55 @@
     .LinePagerItem {
       @include box.default;
       @include box.focusable;
-      background-color: $color-background-light10;
-      height: 4px;
-      border-radius: 2px;
+      padding: var(--kiba-padding-narrow3);
+      background-color: $color-background-dark05;
+      border-radius: $border-radius;
       &:hover {
-        background-color: $color-background-dark05;
+        background-color: var(--kiba-color-brand-primary-clear90);
       }
       &:active {
-        background-color: $color-background-dark05;
+        background-color: var(--kiba-color-brand-primary-clear80);
       }
       &:focus {
-        background-color: $color-background-dark05;
+        @include box.focussed;
       }
       &.active {
         background-color: $color-brand-primary;
-        &:hover {
-          background-color: $color-brand-secondary;
-        }
-        &:active {
-          background-color: $color-brand-secondary;
-        }
-        &:focus {
-          background-color: $color-brand-secondary;
-        }
       }
+    }
+
+    // Primary variant
+    &.primary .LinePagerItem {
+      background-color: $color-brand-primary;
+      border-color: $color-brand-primary;
+      &:hover {
+        background-color: $color-brand-secondary;
+      }
+      &:active {
+        background-color: var(--kiba-color-brand-secondary-dark10);
+      }
+    }
+
+    // Secondary variant
+    &.secondary .LinePagerItem {
+      border-color: $color-brand-primary;
+    }
+
+    // Tertiary variant (same as default)
+
+    // Large variant
+    &.large .LinePagerItem {
+      padding: $padding;
+    }
+
+    // Small variant
+    &.small .LinePagerItem {
+      padding: var(--kiba-padding-narrow4);
+    }
+
+    // Card variant
+    &.card .LinePagerItem {
+      @include box.card;
     }
   }
 }

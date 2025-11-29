@@ -48,9 +48,9 @@
   .KibaInputWrapperInner {
     @include text.default;
     @include box.default;
-    background-color: $color-background-light10;
+    background-color: var(--kiba-color-background-light50);
     padding: $padding $padding-wide;
-    border-width: $border-width;
+    border-width: var(--kiba-border-width-narrow);
     border-color: $color-background-dark05;
     border-style: solid;
 
@@ -73,8 +73,17 @@
   }
 
   .KibaInputWrapper.disabled .KibaInputWrapperInner {
-    background-color: var(--kiba-color-text-clear90);
-    border-color: var(--kiba-color-text-clear80);
+    background-color: var(--kiba-color-disabled-light90);
+    border-color: var(--kiba-color-disabled-light20);
+  }
+
+  .KibaInputWrapper.disabled:hover .KibaInputWrapperInner {
+    border-color: var(--kiba-color-disabled-light10);
+  }
+
+  .KibaInputWrapper.disabled.focus .KibaInputWrapperInner,
+  .KibaInputWrapper.disabled:focus-within .KibaInputWrapperInner {
+    border-color: var(--kiba-color-disabled);
   }
 
   .KibaInputWrapperMessage {

@@ -16,9 +16,17 @@
 @layer kiba-theme {
   .KibaBulletText {
     @include text.default;
+    margin: 0 0 0.4em 0;
     &::before {
       color: $color-text;
       font-weight: bold;
+    }
+    &.numbered {
+      margin: 0 0 0.5em 0;
+      &::before {
+        content: counter(list-number) '.';
+        font-weight: normal;
+      }
     }
   }
 }

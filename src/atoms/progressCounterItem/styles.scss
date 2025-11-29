@@ -24,42 +24,31 @@
     @include text.default;
     @include box.default;
     @include box.focusable;
-    padding: $padding-narrow $padding;
-    background-color: $color-background-light10;
+    padding: $padding $padding-wide;
+    background-color: transparent;
+    color: var(--kiba-color-brand-primary-clear75);
 
     &:hover {
-      background-color: $color-background-dark05;
+      background-color: var(--kiba-color-brand-primary-clear90);
     }
 
     &:active {
-      background-color: $color-background-dark05;
+      background-color: var(--kiba-color-brand-primary-clear80);
     }
 
     &:focus {
-      background-color: $color-background-dark05;
+      @include box.focussed;
     }
 
     &.disabled {
-      background-color: $color-background-light10;
-      color: $color-disabled-text;
-      opacity: 0.5;
+      &:hover {
+        background-color: transparent;
+      }
     }
 
     &.selected {
-      background-color: $color-brand-primary;
-      color: $color-text-on-brand;
-
-      &:hover {
-        background-color: $color-brand-secondary;
-      }
-
-      &:active {
-        background-color: $color-brand-secondary;
-      }
-
-      &:focus {
-        background-color: $color-brand-secondary;
-      }
+      font-weight: bolder;
+      color: $color-brand-primary;
     }
   }
 }

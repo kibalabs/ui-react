@@ -25,22 +25,35 @@
 @layer kiba-theme {
   .KibaTitledCollapsibleBox {
     @include box.default;
-    background-color: $color-background;
+    @include box.focusable;
+    border-color: var(--kiba-color-background-dark10);
+    border-style: solid;
     .KibaTitledCollapsibleBoxHeader {
       @include text.default;
+      @include text.bold;
       @include box.focusable;
-      padding: $padding;
-      background-color: $color-background-light10;
+      padding: $padding $padding-wide;
+      background-color: var(--kiba-color-background-dark01);
       border: none;
+      border-radius: 0;
       &:hover {
-        background-color: $color-background-dark05;
+        background-color: var(--kiba-color-neutral);
       }
       &:active {
-        background-color: $color-background-dark05;
+        background-color: var(--kiba-color-brand-primary-clear80);
+      }
+      &:focus {
+        @include box.focussed;
       }
     }
     .KibaTitledCollapsibleBoxContent {
-      padding: $padding;
+      padding: $padding $padding-wide;
+    }
+    &.disabled {
+      background-color: var(--kiba-color-disabled);
+      .KibaTitledCollapsibleBoxHeader {
+        color: $color-disabled-text;
+      }
     }
   }
 }

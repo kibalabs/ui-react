@@ -36,17 +36,23 @@
     border: none;
     border-bottom: 2px solid transparent;
     border-radius: $border-radius $border-radius 0 0;
+    color: var(--kiba-color-brand-primary-clear25);
     &:hover {
-      color: $color-brand-primary;
+      background-color: var(--kiba-color-brand-primary-clear90);
+    }
+    &:active {
+      background-color: var(--kiba-color-brand-primary-clear80);
+    }
+    &:focus {
+      @include box.focussed;
     }
     &.selected {
       color: $color-brand-primary;
       border-bottom-color: $color-brand-primary;
     }
     &.disabled {
-      color: $color-disabled-text;
       &:hover {
-        color: $color-disabled-text;
+        background-color: transparent;
       }
     }
   }

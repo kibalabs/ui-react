@@ -61,6 +61,9 @@
       color: $color-text;
       line-height: 1.2em;
       margin: 0.67em 0;
+      & > strong {
+        color: $color-brand-primary;
+      }
     }
 
     &.header2, &.title {

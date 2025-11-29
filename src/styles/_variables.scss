@@ -53,7 +53,7 @@ $line-height: var(--kiba-line-height);
 // -------------------------------------------------------------------------
 // NOTE: CSS custom properties cannot be used in media queries, so these must
 // be pure SCSS variables. Apps can override by redefining before importing.
-// These defaults match the values in particles/dimensions/buildTheme.ts
+// These defaults match the values in particles/dimensions/sizing.ts
 $screen-width-small: 576px !default;
 $screen-width-medium: 768px !default;
 $screen-width-large: 992px !default;

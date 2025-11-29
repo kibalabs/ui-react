@@ -24,23 +24,25 @@
     @include box.focusable;
     padding: $padding $padding-wide2;
     border-radius: $padding-wide2;
-    background-color: $color-brand-primary-clear80;
+    background-color: var(--kiba-color-brand-primary-clear75);
     color: $color-brand-primary;
     font-weight: 600;
     &.primary {
-      border: 1px solid $color-brand-primary;
+      border-color: $color-brand-primary;
     }
     &.secondary {
-      background-color: $color-brand-primary;
+      background-color: var(--kiba-color-brand-primary-clear25);
       color: $color-text-on-brand;
     }
     &.error {
-      background-color: $color-error;
-      color: $color-text-on-brand;
+      background-color: var(--kiba-color-error-clear75);
+      border-color: var(--kiba-color-error-light10);
+      color: var(--kiba-color-error-light10);
     }
     &.success {
-      background-color: $color-success;
-      color: $color-text-on-brand;
+      background-color: var(--kiba-color-success-clear75);
+      border-color: var(--kiba-color-success-light10);
+      color: var(--kiba-color-success-light10);
     }
   }
 }
