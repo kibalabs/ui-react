@@ -10,10 +10,6 @@
   "homepage": "https://ui-react-docs.kibalabs.com",
   "bugs": "https://github.com/kibalabs/ui-react/issues",
   "type": "module",
-  "scripts": {
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
-  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "sideEffects": [
@@ -26,27 +22,7 @@
       "import": "./dist/index.js"
     },
     "./dist/index.css": "./dist/index.css",
-    "./styles": {
-      "sass": "./src/styles/index.scss",
-      "default": "./src/styles/index.scss"
-    },
-    "./styles/reset": {
-      "sass": "./src/styles/reset.scss",
-      "default": "./src/styles/reset.scss"
-    },
-    "./styles/colors": {
-      "sass": "./src/styles/colors.scss",
-      "default": "./src/styles/colors.scss"
-    },
-    "./styles/global": {
-      "sass": "./src/styles/global.scss",
-      "default": "./src/styles/global.scss"
-    },
-    "./styles/variables": {
-      "sass": "./src/styles/_variables.scss",
-      "default": "./src/styles/_variables.scss"
-    },
-    "./src/styles/*": "./src/styles/*"
+    "./styles/*": "./src/styles/*.scss"
   },
   "files": [
     "dist/*",
@@ -60,16 +36,15 @@
     "polished": "^4.3.1"
   },
   "devDependencies": {
-    "@kibalabs/build": "^0.13.3-next.10",
-    "@storybook/addon-docs": "^10.1.2",
-    "@storybook/react-vite": "^10.1.2",
+    "@kibalabs/build": "file:../build-js",
+    "@storybook/addon-docs": "10.1.2",
+    "@storybook/react-vite": "10.1.2",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "remark-gfm": "^4.0.1",
-    "sass": "^1.94.2",
-    "storybook": "^10.1.2"
+    "remark-gfm": "4.0.1",
+    "storybook": "10.1.2"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0 || ^19.0.0",

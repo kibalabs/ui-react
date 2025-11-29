@@ -29,9 +29,9 @@ export const Default: Story = {
 export const MultipleBullets: Story = {
   render: () => (
     <BulletList>
-      <BulletText text="First bullet item" />
-      <BulletText text="Second bullet item" />
-      <BulletText text="Third bullet item" />
+      <BulletText text='First bullet item' />
+      <BulletText text='Second bullet item' />
+      <BulletText text='Third bullet item' />
     </BulletList>
   ),
   decorators: [],
@@ -40,10 +40,10 @@ export const MultipleBullets: Story = {
 export const WithNestedList: Story = {
   render: () => (
     <BulletList>
-      <BulletText text="Parent item">
+      <BulletText text='Parent item'>
         <BulletList>
-          <BulletText text="Nested item 1" />
-          <BulletText text="Nested item 2" />
+          <BulletText text='Nested item 1' />
+          <BulletText text='Nested item 2' />
         </BulletList>
       </BulletText>
     </BulletList>

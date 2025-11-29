@@ -3,6 +3,7 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { SingleLineInput } from '.';
+import { InputType } from '../../model';
 
 const meta: Meta<typeof SingleLineInput> = {
   component: SingleLineInput,
@@ -25,7 +26,7 @@ export const Stateful: Story = {
       <SingleLineInput
         value={value}
         onValueChanged={setValue}
-        placeholderText="Type something..."
+        placeholderText='Type something...'
       />
     );
   },
@@ -43,8 +44,8 @@ export const Success: Story = {
     const [value, setValue] = React.useState('Valid email');
     return (
       <SingleLineInput
-        inputWrapperVariant="success"
-        messageText="Email is valid"
+        inputWrapperVariant='success'
+        messageText='Email is valid'
         value={value}
         onValueChanged={setValue}
       />
@@ -57,11 +58,11 @@ export const Error: Story = {
     const [value, setValue] = React.useState('');
     return (
       <SingleLineInput
-        inputWrapperVariant="error"
-        messageText="This field is required"
+        inputWrapperVariant='error'
+        messageText='This field is required'
         value={value}
         onValueChanged={setValue}
-        placeholderText="Required field"
+        placeholderText='Required field'
       />
     );
   },
@@ -79,10 +80,10 @@ export const Password: Story = {
     const [value, setValue] = React.useState('');
     return (
       <SingleLineInput
-        inputType="password"
+        inputType={InputType.Password}
         value={value}
         onValueChanged={setValue}
-        placeholderText="Enter password"
+        placeholderText='Enter password'
       />
     );
   },

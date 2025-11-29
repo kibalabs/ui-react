@@ -16,8 +16,8 @@ type Story = StoryObj<typeof ResponsiveContainingView>;
 export const Default: Story = {
   render: (args) => (
     <ResponsiveContainingView {...args}>
-      <Box variant="card">
-        <Box width="2000px">
+      <Box variant='card'>
+        <Box width='2000px'>
           <Text>Content contained responsively</Text>
         </Box>
       </Box>

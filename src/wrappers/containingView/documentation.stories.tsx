@@ -16,8 +16,8 @@ type Story = StoryObj<typeof ContainingView>;
 export const Default: Story = {
   render: (args) => (
     <ContainingView {...args}>
-      <Box variant="card">
-        <Box width="2000px">
+      <Box variant='card'>
+        <Box width='2000px'>
           <Text>This content is wider than the container but contained</Text>
         </Box>
       </Box>

@@ -1,5 +1,7 @@
 import React from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { Icon } from '.';
 import { Stack } from '../../layouts/stack';
 import { Direction } from '../../model';
@@ -23,27 +25,27 @@ export const Default: Story = {
 };
 
 export const CustomColor: Story = {
-  render: () => <Icon svgContent={cashSvg} _color="#ff5577" />,
+  render: () => <Icon svgContent={cashSvg} _color='#ff5577' />,
 };
 
 export const Sizes: Story = {
   render: () => (
     <Stack direction={Direction.Horizontal} shouldAddGutters={true}>
       <Stack direction={Direction.Vertical}>
-        <Icon variant="small" svgContent={cashSvg} />
-        <Text variant="note">small</Text>
+        <Icon variant='small' svgContent={cashSvg} />
+        <Text variant='note'>small</Text>
       </Stack>
       <Stack direction={Direction.Vertical}>
         <Icon svgContent={cashSvg} />
-        <Text variant="note">default</Text>
+        <Text variant='note'>default</Text>
       </Stack>
       <Stack direction={Direction.Vertical}>
-        <Icon variant="large" svgContent={cashSvg} />
-        <Text variant="note">large</Text>
+        <Icon variant='large' svgContent={cashSvg} />
+        <Text variant='note'>large</Text>
       </Stack>
       <Stack direction={Direction.Vertical}>
-        <Icon variant="extraLarge" svgContent={cashSvg} />
-        <Text variant="note">extraLarge</Text>
+        <Icon variant='extraLarge' svgContent={cashSvg} />
+        <Text variant='note'>extraLarge</Text>
       </Stack>
     </Stack>
   ),
@@ -52,7 +54,11 @@ export const Sizes: Story = {
 export const InlineWithText: Story = {
   render: () => (
     <Text>
-      Save money <Icon svgContent={cashSvg} /> with our deals
+      Save money
+      {' '}
+      <Icon svgContent={cashSvg} />
+      {' '}
+      with our deals
     </Text>
   ),
 };

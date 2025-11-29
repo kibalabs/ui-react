@@ -16,16 +16,17 @@ export const Default: Story = {
   args: {
     isLazyLoadable: false,
     appType: 'android',
+    appId: 'com.example.app',
   },
 };
 
 export const AppTypes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <AppDownloadButton isLazyLoadable={false} appType="android" buttonVariant="dark" />
-      <AppDownloadButton isLazyLoadable={false} appType="ios" buttonVariant="dark" />
-      <AppDownloadButton isLazyLoadable={false} appType="mac" buttonVariant="dark" />
-      <AppDownloadButton isLazyLoadable={false} appType="appletv" buttonVariant="dark" />
+      <AppDownloadButton isLazyLoadable={false} appType='android' buttonVariant='dark' appId='com.example.app' />
+      <AppDownloadButton isLazyLoadable={false} appType='ios' buttonVariant='dark' appId='123456789' />
+      <AppDownloadButton isLazyLoadable={false} appType='mac' buttonVariant='dark' appId='123456789' />
+      <AppDownloadButton isLazyLoadable={false} appType='appletv' buttonVariant='dark' appId='123456789' />
     </div>
   ),
 };
@@ -33,8 +34,8 @@ export const AppTypes: Story = {
 export const DarkVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem' }}>
-      <AppDownloadButton isLazyLoadable={false} appType="android" buttonVariant="dark" />
-      <AppDownloadButton isLazyLoadable={false} appType="android" buttonVariant="dark-clear" />
+      <AppDownloadButton isLazyLoadable={false} appType='android' buttonVariant='dark' appId='com.example.app' />
+      <AppDownloadButton isLazyLoadable={false} appType='android' buttonVariant='dark-clear' appId='com.example.app' />
     </div>
   ),
 };
@@ -42,19 +43,19 @@ export const DarkVariants: Story = {
 export const LightVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', backgroundColor: '#333', padding: '1rem' }}>
-      <AppDownloadButton isLazyLoadable={false} appType="android" buttonVariant="light" />
-      <AppDownloadButton isLazyLoadable={false} appType="android" buttonVariant="light-clear" />
+      <AppDownloadButton isLazyLoadable={false} appType='android' buttonVariant='light' appId='com.example.app' />
+      <AppDownloadButton isLazyLoadable={false} appType='android' buttonVariant='light-clear' appId='com.example.app' />
     </div>
   ),
 };
 
-export const WithTarget: Story = {
+export const WithAppId: Story = {
   render: () => (
     <AppDownloadButton
       isLazyLoadable={false}
-      appType="android"
-      buttonVariant="dark"
-      target="https://play.google.com/store"
+      appType='android'
+      buttonVariant='dark'
+      appId='com.example.app'
     />
   ),
 };

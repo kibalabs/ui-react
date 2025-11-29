@@ -1,5 +1,7 @@
 import React from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { Checkbox } from '.';
 import { Stack } from '../../layouts/stack';
 import { Direction } from '../../model';
@@ -25,7 +27,7 @@ export const Interactive: Story = {
     const [isChecked, setIsChecked] = React.useState(false);
     return (
       <Checkbox
-        text="Click to toggle"
+        text='Click to toggle'
         isChecked={isChecked}
         onToggled={() => setIsChecked(!isChecked)}
       />
@@ -35,15 +37,15 @@ export const Interactive: Story = {
 
 export const Checked: Story = {
   render: () => (
-    <Checkbox text="This is checked" isChecked={true} />
+    <Checkbox text='This is checked' isChecked={true} />
   ),
 };
 
 export const Disabled: Story = {
   render: () => (
     <Stack direction={Direction.Vertical} shouldAddGutters={true}>
-      <Checkbox text="Disabled unchecked" isChecked={false} isDisabled={true} />
-      <Checkbox text="Disabled checked" isChecked={true} isDisabled={true} />
+      <Checkbox text='Disabled unchecked' isChecked={false} isDisabled={true} />
+      <Checkbox text='Disabled checked' isChecked={true} isDisabled={true} />
     </Stack>
   ),
 };
@@ -56,17 +58,17 @@ export const FormExample: Story = {
     return (
       <Stack direction={Direction.Vertical} shouldAddGutters={true}>
         <Checkbox
-          text="Subscribe to newsletter"
+          text='Subscribe to newsletter'
           isChecked={newsletter}
           onToggled={() => setNewsletter(!newsletter)}
         />
         <Checkbox
-          text="I agree to terms and conditions"
+          text='I agree to terms and conditions'
           isChecked={terms}
           onToggled={() => setTerms(!terms)}
         />
         <Checkbox
-          text="Receive marketing emails"
+          text='Receive marketing emails'
           isChecked={marketing}
           onToggled={() => setMarketing(!marketing)}
         />

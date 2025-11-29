@@ -24,6 +24,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MAJOR] Removed `Head` in favor of react 19 inline metadata tags
 - [MINOR] Added `isResizableVertically` and `isResizableHorizontally` to `MultiLineInput`
 - [MAJOR] Fix for `Checkbox` to not use aboslute positioning to hide the input
+- [MAJOR] Migrated all components from styled-components to pure CSS/SCSS with CSS layers
+- [MAJOR] Replaced JavaScript theme system with CSS custom properties (`--kiba-*`)
+- [MAJOR] Updated to Storybook 10 with CSF3 format and MDX documentation
 
 ### Removed
 

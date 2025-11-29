@@ -1,9 +1,11 @@
 import React from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { Video } from '.';
-import { Text } from '../text';
 import { Stack } from '../../layouts/stack';
 import { Direction } from '../../model';
+import { Text } from '../text';
 
 const meta: Meta<typeof Video> = {
   component: Video,
@@ -27,7 +29,7 @@ export const NoControls: Story = {
   render: () => (
     <Video
       source={sampleVideo}
-      alternativeText="Video without controls"
+      alternativeText='Video without controls'
       shouldShowControls={false}
       shouldLoop={true}
       shouldMute={true}
@@ -40,7 +42,7 @@ export const Autoplay: Story = {
   render: () => (
     <Video
       source={sampleVideo}
-      alternativeText="Autoplaying video"
+      alternativeText='Autoplaying video'
       shouldAutoplay={true}
       shouldMute={true}
       shouldLoop={true}
@@ -52,10 +54,10 @@ export const FixedSize: Story = {
   render: () => (
     <Video
       source={sampleVideo}
-      alternativeText="Fixed size video"
-      width="400px"
-      height="300px"
-      fitType="cover"
+      alternativeText='Fixed size video'
+      width='400px'
+      height='300px'
+      fitType='cover'
     />
   ),
 };
@@ -65,11 +67,14 @@ export const WithCallbacks: Story = {
     const [status, setStatus] = React.useState('Ready');
     return (
       <Stack direction={Direction.Vertical} shouldAddGutters={true}>
-        <Text>Status: {status}</Text>
+        <Text>
+          Status:
+          {status}
+        </Text>
         <Video
           source={sampleVideo}
-          alternativeText="Video with callbacks"
-          width="400px"
+          alternativeText='Video with callbacks'
+          width='400px'
           onPlayed={() => setStatus('Playing')}
           onPaused={() => setStatus('Paused')}
           onEnded={() => setStatus('Ended')}

@@ -16,7 +16,7 @@ type Story = StoryObj<typeof SelectableView>;
 export const Default: Story = {
   render: (args) => (
     <SelectableView {...args}>
-      <Box variant="card" isFullWidth={false}>
+      <Box variant='card' isFullWidth={false}>
         <Text>Selectable Item</Text>
       </Box>
     </SelectableView>
@@ -30,7 +30,7 @@ export const Default: Story = {
 export const Selected: Story = {
   render: () => (
     <SelectableView isSelected={true} onClicked={() => {}}>
-      <Box variant="card" isFullWidth={false}>
+      <Box variant='card' isFullWidth={false}>
         <Text>Selected Item</Text>
       </Box>
     </SelectableView>
@@ -42,7 +42,7 @@ export const Interactive: Story = {
     const [isSelected, setIsSelected] = React.useState(false);
     return (
       <SelectableView isSelected={isSelected} onClicked={() => setIsSelected(!isSelected)}>
-        <Box variant="card" isFullWidth={false}>
+        <Box variant='card' isFullWidth={false}>
           <Text>{isSelected ? 'Selected' : 'Click to select'}</Text>
         </Box>
       </SelectableView>
@@ -54,9 +54,7 @@ export const MultipleSelection: Story = {
   render: function MultiSelect() {
     const [selected, setSelected] = React.useState<number[]>([]);
     const toggle = (index: number) => {
-      setSelected((prev) =>
-        prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-      );
+      setSelected((prev) => (prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]));
     };
     return (
       <div style={{ display: 'flex', gap: '1rem' }}>
@@ -66,8 +64,11 @@ export const MultipleSelection: Story = {
             isSelected={selected.includes(index)}
             onClicked={() => toggle(index)}
           >
-            <Box variant="card" isFullWidth={false}>
-              <Text>Option {index + 1}</Text>
+            <Box variant='card' isFullWidth={false}>
+              <Text>
+                Option
+                {index + 1}
+              </Text>
             </Box>
           </SelectableView>
         ))}
@@ -79,7 +80,7 @@ export const MultipleSelection: Story = {
 export const Disabled: Story = {
   render: () => (
     <SelectableView isSelected={false} isDisabled={true} onClicked={() => {}}>
-      <Box variant="card" isFullWidth={false}>
+      <Box variant='card' isFullWidth={false}>
         <Text>Disabled Item</Text>
       </Box>
     </SelectableView>
@@ -93,9 +94,9 @@ export const CustomIndicator: Story = {
       <SelectableView
         isSelected={isSelected}
         onClicked={() => setIsSelected(!isSelected)}
-        selectedIndicator={<KibaIcon iconId="ion-star" variant="large" _color="gold" />}
+        selectedIndicator={<KibaIcon iconId='ion-star' variant='large' _color='gold' />}
       >
-        <Box variant="card" isFullWidth={false}>
+        <Box variant='card' isFullWidth={false}>
           <Text>Custom indicator</Text>
         </Box>
       </SelectableView>
@@ -110,7 +111,7 @@ export const NoDefaultIndicator: Story = {
       onClicked={() => {}}
       shouldHideDefaultSelectedIndicator={true}
     >
-      <Box variant="card-selected" isFullWidth={false}>
+      <Box variant='card-selected' isFullWidth={false}>
         <Text>Selected (no overlay indicator)</Text>
       </Box>
     </SelectableView>

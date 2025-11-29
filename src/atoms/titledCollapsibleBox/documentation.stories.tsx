@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { TitledCollapsibleBox, StatefulTitledCollapsibleBox } from '.';
+import { StatefulTitledCollapsibleBox, TitledCollapsibleBox } from '.';
 import { Text } from '../../particles';
 
 const meta: Meta<typeof TitledCollapsibleBox> = {
@@ -24,7 +24,7 @@ export const Default: Story = {
 
 export const Stateful: Story = {
   render: () => (
-    <StatefulTitledCollapsibleBox title="Stateful Box">
+    <StatefulTitledCollapsibleBox title='Stateful Box'>
       <Text>This manages its own collapse state</Text>
     </StatefulTitledCollapsibleBox>
   ),
@@ -32,7 +32,7 @@ export const Stateful: Story = {
 
 export const CollapsedInitially: Story = {
   render: () => (
-    <StatefulTitledCollapsibleBox title="Initially Collapsed" isCollapsedInitially={true}>
+    <StatefulTitledCollapsibleBox title='Initially Collapsed' isCollapsedInitially={true}>
       <Text>This content was hidden initially</Text>
     </StatefulTitledCollapsibleBox>
   ),
@@ -66,13 +66,13 @@ export const Accordion: Story = {
 export const FAQ: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-      <StatefulTitledCollapsibleBox title="What is this component?">
+      <StatefulTitledCollapsibleBox title='What is this component?'>
         <Text>TitledCollapsibleBox is a collapsible container with a built-in title header.</Text>
       </StatefulTitledCollapsibleBox>
-      <StatefulTitledCollapsibleBox title="When should I use it?" isCollapsedInitially={true}>
+      <StatefulTitledCollapsibleBox title='When should I use it?' isCollapsedInitially={true}>
         <Text>Use it for FAQs, accordions, or any content that can be hidden to save space.</Text>
       </StatefulTitledCollapsibleBox>
-      <StatefulTitledCollapsibleBox title="How is it different from CollapsibleBox?" isCollapsedInitially={true}>
+      <StatefulTitledCollapsibleBox title='How is it different from CollapsibleBox?' isCollapsedInitially={true}>
         <Text>This component includes a styled title header, while CollapsibleBox lets you provide custom header content.</Text>
       </StatefulTitledCollapsibleBox>
     </div>

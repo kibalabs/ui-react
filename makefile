@@ -30,7 +30,7 @@ security-check-ci:
 	@ echo "Not Supported"
 
 build:
-	@ NODE_ENV=production npx build-module-rolldown --config-modifier ./config.build.js
+	@ NODE_ENV=production npx build-module-rolldown
 
 build-ssr:
 	@ echo "Not Supported"
@@ -42,10 +42,10 @@ build-docs:
 	@ npx storybook build --docs --output-dir dist
 
 start:
-	@ NODE_ENV=development npx build-module-rolldown --start --config-modifier ./config.build.js
+	@ NODE_ENV=development npx build-module-rolldown --start
 
 start-prod:
-	@ NODE_ENV=production npx build-module-rolldown --start --config-modifier ./config.build.js
+	@ NODE_ENV=production npx build-module-rolldown --start
 
 start-docs:
 	@ npx storybook dev --docs --port 6006

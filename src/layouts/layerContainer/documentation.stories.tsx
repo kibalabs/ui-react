@@ -17,13 +17,13 @@ type Story = StoryObj<typeof LayerContainer>;
 
 export const Default: Story = {
   render: () => (
-    <Box height="100px" width="100px">
+    <Box height='100px' width='100px'>
       <LayerContainer>
-        <BackgroundView color="lightblue">
-          <Box height="100px" width="100px" />
+        <BackgroundView color='lightblue'>
+          <Box height='100px' width='100px' />
         </BackgroundView>
-        <BackgroundView color="limegreen">
-          <Box height="50px" width="50px" />
+        <BackgroundView color='limegreen'>
+          <Box height='50px' width='50px' />
         </BackgroundView>
       </LayerContainer>
     </Box>
@@ -32,10 +32,10 @@ export const Default: Story = {
 
 export const Centered: Story = {
   render: () => (
-    <Box height="100px" width="100px">
+    <Box height='100px' width='100px'>
       <LayerContainer>
-        <BackgroundView color="lightblue">
-          <Box height="100px" width="100px" />
+        <BackgroundView color='lightblue'>
+          <Box height='100px' width='100px' />
         </BackgroundView>
         <LayerContainer.Layer
           isFullHeight={false}
@@ -43,8 +43,8 @@ export const Centered: Story = {
           alignmentVertical={Alignment.Center}
           alignmentHorizontal={Alignment.Center}
         >
-          <BackgroundView color="limegreen">
-            <Box height="50px" width="50px" />
+          <BackgroundView color='limegreen'>
+            <Box height='50px' width='50px' />
           </BackgroundView>
         </LayerContainer.Layer>
       </LayerContainer>
@@ -54,10 +54,10 @@ export const Centered: Story = {
 
 export const CustomAlignment: Story = {
   render: () => (
-    <Box height="100px" width="100px">
+    <Box height='100px' width='100px'>
       <LayerContainer>
-        <BackgroundView color="lightblue">
-          <Box height="100px" width="100px" />
+        <BackgroundView color='lightblue'>
+          <Box height='100px' width='100px' />
         </BackgroundView>
         <LayerContainer.Layer
           isFullHeight={false}
@@ -65,8 +65,8 @@ export const CustomAlignment: Story = {
           alignmentVertical={Alignment.Start}
           alignmentHorizontal={Alignment.End}
         >
-          <BackgroundView color="limegreen">
-            <Box height="30px" width="30px" />
+          <BackgroundView color='limegreen'>
+            <Box height='30px' width='30px' />
           </BackgroundView>
         </LayerContainer.Layer>
       </LayerContainer>
@@ -76,11 +76,11 @@ export const CustomAlignment: Story = {
 
 export const StaticLayer: Story = {
   render: () => (
-    <Box width="250px">
+    <Box width='250px'>
       <LayerContainer>
         <LayerContainer.Layer isStatic={true}>
-          <BackgroundView color="lightblue">
-            <Box height="150px" isFullWidth={true} />
+          <BackgroundView color='lightblue'>
+            <Box height='150px' isFullWidth={true} />
           </BackgroundView>
         </LayerContainer.Layer>
         <LayerContainer.Layer
@@ -89,7 +89,7 @@ export const StaticLayer: Story = {
           alignmentVertical={Alignment.Center}
           alignmentHorizontal={Alignment.Center}
         >
-          <Box variant="card">
+          <Box variant='card'>
             <Text>Overlay</Text>
           </Box>
         </LayerContainer.Layer>

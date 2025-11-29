@@ -84,7 +84,7 @@ export function LayerContainer({
 }: ILayerContainerProps): React.ReactElement {
   const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number), index: number): React.ReactElement<ILayerProps> => (
   // eslint-disable-next-line react/no-array-index-key
-    typeof child === 'object' && 'type' in child && child.type === Layer ? child : <Layer key={`child-${index}`}>{ child }</Layer>
+    typeof child === 'object' && 'type' in child && child.type === Layer ? child as React.ReactElement<ILayerProps> : <Layer key={`child-${index}`}>{ child }</Layer>
   ));
   return (
     <div

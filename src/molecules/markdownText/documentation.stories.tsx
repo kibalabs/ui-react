@@ -33,8 +33,8 @@ export const WithLink: Story = {
 
 export const Wrapped: Story = {
   render: () => (
-    <Box width="200px">
-      <MarkdownText source="This is an **example with very long text** so we can see what things might look like if they get split on *multiple lines*." />
+    <Box width='200px'>
+      <MarkdownText source='This is an **example with very long text** so we can see what things might look like if they get split on *multiple lines*.' />
     </Box>
   ),
 };

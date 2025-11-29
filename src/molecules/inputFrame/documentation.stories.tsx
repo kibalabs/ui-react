@@ -3,6 +3,7 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { InputFrame } from '.';
+import { Text } from '../../particles';
 
 const meta: Meta<typeof InputFrame> = {
   component: InputFrame,
@@ -13,21 +14,25 @@ export default meta;
 type Story = StoryObj<typeof InputFrame>;
 
 export const Default: Story = {
-  args: {
-    placeholderText: 'Enter text here...',
-  },
+  render: () => (
+    <InputFrame>
+      <Text>Enter text here...</Text>
+    </InputFrame>
+  ),
 };
 
 export const WithValue: Story = {
-  args: {
-    placeholderText: 'Enter text here...',
-    value: 'Some text content',
-  },
+  render: () => (
+    <InputFrame>
+      <Text>Some text content</Text>
+    </InputFrame>
+  ),
 };
 
 export const Disabled: Story = {
-  args: {
-    placeholderText: 'Disabled input',
-    isEnabled: false,
-  },
+  render: () => (
+    <InputFrame isEnabled={false}>
+      <Text>Disabled input</Text>
+    </InputFrame>
+  ),
 };

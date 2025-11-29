@@ -25,7 +25,7 @@ export const Stateful: Story = {
       <MultiLineInput
         value={value}
         onValueChanged={setValue}
-        placeholderText="Type something..."
+        placeholderText='Type something...'
       />
     );
   },

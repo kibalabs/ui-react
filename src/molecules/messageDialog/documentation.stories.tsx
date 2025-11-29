@@ -27,19 +27,19 @@ export const Interactive: Story = {
   render: function InteractiveDialog() {
     const [isOpen, setIsOpen] = React.useState(false);
     return (
-      <>
-        <Button variant="primary" onClicked={() => setIsOpen(true)} text="Open Dialog" />
+      <React.Fragment>
+        <Button variant='primary' onClicked={() => setIsOpen(true)} text='Open Dialog' />
         <MessageDialog
           isOpen={isOpen}
-          title="Message Dialog"
-          message="This is a simple message dialog with two buttons."
+          title='Message Dialog'
+          message='This is a simple message dialog with two buttons.'
           onConfirmClicked={() => {
             alert('Confirmed!');
             setIsOpen(false);
           }}
           onCloseClicked={() => setIsOpen(false)}
         />
-      </>
+      </React.Fragment>
     );
   },
 };
@@ -58,19 +58,19 @@ export const DeleteConfirmation: Story = {
   render: function DeleteDialog() {
     const [isOpen, setIsOpen] = React.useState(false);
     return (
-      <>
-        <Button variant="destructive" onClicked={() => setIsOpen(true)} text="Delete Item" />
+      <React.Fragment>
+        <Button variant='destructive' onClicked={() => setIsOpen(true)} text='Delete Item' />
         <MessageDialog
           isOpen={isOpen}
-          title="Delete Item?"
-          message="This action cannot be undone. Are you sure you want to delete this item?"
+          title='Delete Item?'
+          message='This action cannot be undone. Are you sure you want to delete this item?'
           onConfirmClicked={() => {
             console.log('Item deleted');
             setIsOpen(false);
           }}
           onCloseClicked={() => setIsOpen(false)}
         />
-      </>
+      </React.Fragment>
     );
   },
 };

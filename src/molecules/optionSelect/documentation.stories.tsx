@@ -59,7 +59,6 @@ export const LongOptions: Story = {
     return (
       <div style={{ height: '200px' }}>
         <OptionSelect
-          isFullWidth={false}
           options={options}
           selectedItemKey={selectedItemKey}
           onItemClicked={setSelectedItemKey}
@@ -92,9 +91,8 @@ export const FullWidth: Story = {
   render: function FullWidthSelect() {
     const [selectedItemKey, setSelectedItemKey] = React.useState('');
     return (
-      <div style={{ height: '200px' }}>
+      <div style={{ height: '200px', width: '100%' }}>
         <OptionSelect
-          isFullWidth={true}
           options={defaultOptions}
           selectedItemKey={selectedItemKey}
           onItemClicked={setSelectedItemKey}

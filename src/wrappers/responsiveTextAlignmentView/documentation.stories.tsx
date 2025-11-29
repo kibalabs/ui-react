@@ -3,8 +3,8 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ResponsiveTextAlignmentView } from '.';
-import { TextAlignment } from '../../particles/text';
 import { Box, Text } from '../../particles';
+import { TextAlignment } from '../../particles/text';
 
 const meta: Meta<typeof ResponsiveTextAlignmentView> = {
   component: ResponsiveTextAlignmentView,
@@ -17,7 +17,7 @@ type Story = StoryObj<typeof ResponsiveTextAlignmentView>;
 export const Default: Story = {
   render: (args) => (
     <ResponsiveTextAlignmentView {...args}>
-      <Box variant="card">
+      <Box variant='card'>
         <Text>Text with responsive alignment</Text>
       </Box>
     </ResponsiveTextAlignmentView>

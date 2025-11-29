@@ -1,5 +1,7 @@
 import React from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { Link } from '.';
 import { Stack } from '../../layouts/stack';
 import { Direction } from '../../model';
@@ -23,19 +25,19 @@ export const Default: Story = {
 
 export const External: Story = {
   render: () => (
-    <Link text="Visit Kiba Labs" target="https://kibalabs.com" />
+    <Link text='Visit Kiba Labs' target='https://kibalabs.com' />
   ),
 };
 
 export const SameTab: Story = {
   render: () => (
-    <Link text="Open in same tab" target="https://kibalabs.com" shouldOpenSameTab={true} />
+    <Link text='Open in same tab' target='https://kibalabs.com' shouldOpenSameTab={true} />
   ),
 };
 
 export const Disabled: Story = {
   render: () => (
-    <Link text="Disabled link" target="https://kibalabs.com" isEnabled={false} />
+    <Link text='Disabled link' target='https://kibalabs.com' isEnabled={false} />
   ),
 };
 
@@ -45,7 +47,7 @@ export const WithCallback: Story = {
     return (
       <Stack direction={Direction.Vertical} shouldAddGutters={true}>
         <Link
-          text="Click me"
+          text='Click me'
           onClicked={() => setClicked(true)}
         />
         <Text>{clicked ? 'Link was clicked!' : 'Link not clicked yet'}</Text>
@@ -57,7 +59,15 @@ export const WithCallback: Story = {
 export const InlineWithText: Story = {
   render: () => (
     <Text>
-      Please read our <Link text="terms of service" target="https://kibalabs.com" /> and <Link text="privacy policy" target="https://kibalabs.com" /> before continuing.
+      Please read our
+      {' '}
+      <Link text='terms of service' target='https://kibalabs.com' />
+      {' '}
+      and
+      {' '}
+      <Link text='privacy policy' target='https://kibalabs.com' />
+      {' '}
+      before continuing.
     </Text>
   ),
 };

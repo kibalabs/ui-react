@@ -1,6 +1,8 @@
 import React from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
-import { Portal, Placement } from '.';
+
+import { Placement, Portal } from '.';
 import { Box } from '../box';
 import { Text } from '../text';
 
@@ -21,7 +23,7 @@ export const Default: Story = {
           Anchor Element
         </div>
         <Portal anchorElement={ref} placement={Placement.bottomLeft}>
-          <Box variant="card">
+          <Box variant='card'>
             <Text>Portal content</Text>
           </Box>
         </Portal>
@@ -39,7 +41,7 @@ export const BottomRight: Story = {
           Click me
         </div>
         <Portal anchorElement={ref} placement={Placement.bottomRight}>
-          <Box variant="card" width="200px">
+          <Box variant='card' width='200px'>
             <Text>Anchored at bottom-right</Text>
           </Box>
         </Portal>
@@ -57,7 +59,7 @@ export const BottomCenter: Story = {
           Center anchor
         </div>
         <Portal anchorElement={ref} placement={Placement.bottomCenter}>
-          <Box variant="card" width="200px">
+          <Box variant='card' width='200px'>
             <Text>Anchored at bottom-center</Text>
           </Box>
         </Portal>
@@ -75,7 +77,7 @@ export const TopPlacements: Story = {
           Anchor
         </div>
         <Portal anchorElement={ref} placement={Placement.topLeft}>
-          <Box variant="card" width="200px">
+          <Box variant='card' width='200px'>
             <Text>Anchored at top-left</Text>
           </Box>
         </Portal>
@@ -93,7 +95,7 @@ export const MatchAnchorWidth: Story = {
           Wide anchor element
         </div>
         <Portal anchorElement={ref} placement={Placement.bottomLeft} shouldMatchAnchorWidth={true}>
-          <Box variant="card">
+          <Box variant='card'>
             <Text>This portal matches the anchor width</Text>
           </Box>
         </Portal>
@@ -108,12 +110,14 @@ export const Dropdown: Story = {
     const [isOpen, setIsOpen] = React.useState(false);
     return (
       <div>
-        <button ref={ref as React.RefObject<HTMLButtonElement>} onClick={() => setIsOpen(!isOpen)} type="button">
-          Toggle Dropdown
-        </button>
+        <div ref={ref} style={{ display: 'inline-block' }}>
+          <button onClick={() => setIsOpen(!isOpen)} type='button'>
+            Toggle Dropdown
+          </button>
+        </div>
         {isOpen && (
           <Portal anchorElement={ref} placement={Placement.bottomLeft} shouldMatchAnchorWidth={true}>
-            <Box variant="card">
+            <Box variant='card'>
               <Text>Option 1</Text>
               <Text>Option 2</Text>
               <Text>Option 3</Text>

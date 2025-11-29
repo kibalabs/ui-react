@@ -1,9 +1,11 @@
 import React from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { Image } from '.';
-import { Box } from '../box';
 import { Stack } from '../../layouts/stack';
 import { Direction } from '../../model';
+import { Box } from '../box';
 
 const meta: Meta<typeof Image> = {
   component: Image,
@@ -28,12 +30,12 @@ export const Default: Story = {
 export const Circular: Story = {
   render: () => (
     <Image
-      variant="circular"
+      variant='circular'
       source={sampleImage}
-      alternativeText="Profile image"
-      width="150px"
-      height="150px"
-      fitType="cover"
+      alternativeText='Profile image'
+      width='150px'
+      height='150px'
+      fitType='cover'
       isLazyLoadable={false}
     />
   ),
@@ -41,13 +43,13 @@ export const Circular: Story = {
 
 export const Cover: Story = {
   render: () => (
-    <Box width="300px" height="200px">
+    <Box width='300px' height='200px'>
       <Image
         source={sampleImage}
-        alternativeText="Cover fit image"
+        alternativeText='Cover fit image'
         isFullWidth={true}
         isFullHeight={true}
-        fitType="cover"
+        fitType='cover'
         isLazyLoadable={false}
       />
     </Box>
@@ -56,13 +58,13 @@ export const Cover: Story = {
 
 export const Contain: Story = {
   render: () => (
-    <Box variant="bordered" width="300px" height="200px">
+    <Box variant='bordered' width='300px' height='200px'>
       <Image
         source={sampleImage}
-        alternativeText="Contain fit image"
+        alternativeText='Contain fit image'
         isFullWidth={true}
         isFullHeight={true}
-        fitType="contain"
+        fitType='contain'
         isLazyLoadable={false}
       />
     </Box>
@@ -71,13 +73,13 @@ export const Contain: Story = {
 
 export const CenteredHorizontally: Story = {
   render: () => (
-    <Box variant="bordered" width="400px">
+    <Box variant='bordered' width='400px'>
       <Image
         source={sampleImage}
-        alternativeText="Centered image"
-        width="150px"
-        height="150px"
-        fitType="cover"
+        alternativeText='Centered image'
+        width='150px'
+        height='150px'
+        fitType='cover'
         isCenteredHorizontally={true}
         isLazyLoadable={false}
       />
@@ -89,11 +91,11 @@ export const Responsive: Story = {
   render: () => (
     <Stack direction={Direction.Horizontal}>
       <Image
-        source="https://d35ci2i0uce4j6.cloudfront.net/v1/images/87ea0e3413b84d9496e7ec7baee8468d/go"
-        alternativeText="Responsive image"
-        width="200px"
-        height="200px"
-        fitType="cover"
+        source='https://d35ci2i0uce4j6.cloudfront.net/v1/images/87ea0e3413b84d9496e7ec7baee8468d/go'
+        alternativeText='Responsive image'
+        width='200px'
+        height='200px'
+        fitType='cover'
         isLazyLoadable={false}
       />
     </Stack>
@@ -104,29 +106,29 @@ export const Gallery: Story = {
   render: () => (
     <Stack direction={Direction.Horizontal}>
       <Image
-        variant="circular"
+        variant='circular'
         source={sampleImage}
-        alternativeText="Image 1"
-        width="100px"
-        height="100px"
-        fitType="cover"
+        alternativeText='Image 1'
+        width='100px'
+        height='100px'
+        fitType='cover'
         isLazyLoadable={false}
       />
       <Image
         source={sampleImage}
-        alternativeText="Image 2"
-        width="100px"
-        height="100px"
-        fitType="cover"
+        alternativeText='Image 2'
+        width='100px'
+        height='100px'
+        fitType='cover'
         isLazyLoadable={false}
       />
       <Image
-        variant="unrounded"
+        variant='unrounded'
         source={sampleImage}
-        alternativeText="Image 3"
-        width="100px"
-        height="100px"
-        fitType="cover"
+        alternativeText='Image 3'
+        width='100px'
+        height='100px'
+        fitType='cover'
         isLazyLoadable={false}
       />
     </Stack>

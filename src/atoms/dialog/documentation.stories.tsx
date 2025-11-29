@@ -1,10 +1,12 @@
 import React from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { Dialog } from '.';
-import { Button } from '../button';
 import { Stack } from '../../layouts/stack';
 import { Direction } from '../../model';
 import { Text, TextAlignment } from '../../particles';
+import { Button } from '../button';
 
 const meta: Meta<typeof Dialog> = {
   component: Dialog,
@@ -22,7 +24,7 @@ export const Default: Story = {
   render: (args) => (
     <Dialog {...args}>
       <Stack direction={Direction.Vertical} shouldAddGutters={true}>
-        <Text variant="header3" alignment={TextAlignment.Center}>Dialog Title</Text>
+        <Text variant='header3' alignment={TextAlignment.Center}>Dialog Title</Text>
         <Text alignment={TextAlignment.Center}>This is the dialog content.</Text>
       </Stack>
     </Dialog>
@@ -34,12 +36,12 @@ export const Interactive: Story = {
     const [isOpen, setIsOpen] = React.useState(false);
     return (
       <React.Fragment>
-        <Button variant="primary" text="Open Dialog" onClicked={() => setIsOpen(true)} />
+        <Button variant='primary' text='Open Dialog' onClicked={() => setIsOpen(true)} />
         <Dialog isOpen={isOpen} onCloseClicked={() => setIsOpen(false)}>
           <Stack direction={Direction.Vertical} shouldAddGutters={true}>
-            <Text variant="header3" alignment={TextAlignment.Center}>Hello!</Text>
+            <Text variant='header3' alignment={TextAlignment.Center}>Hello!</Text>
             <Text alignment={TextAlignment.Center}>Click outside or press Escape to close.</Text>
-            <Button variant="primary" text="Close" onClicked={() => setIsOpen(false)} />
+            <Button variant='primary' text='Close' onClicked={() => setIsOpen(false)} />
           </Stack>
         </Dialog>
       </React.Fragment>
@@ -52,7 +54,7 @@ export const NonDismissable: Story = {
     const [isOpen, setIsOpen] = React.useState(false);
     return (
       <React.Fragment>
-        <Button variant="primary" text="Open Non-Dismissable" onClicked={() => setIsOpen(true)} />
+        <Button variant='primary' text='Open Non-Dismissable' onClicked={() => setIsOpen(true)} />
         <Dialog
           isOpen={isOpen}
           onCloseClicked={() => setIsOpen(false)}
@@ -60,9 +62,9 @@ export const NonDismissable: Story = {
           isClosableByEscape={false}
         >
           <Stack direction={Direction.Vertical} shouldAddGutters={true}>
-            <Text variant="header3" alignment={TextAlignment.Center}>Important!</Text>
+            <Text variant='header3' alignment={TextAlignment.Center}>Important!</Text>
             <Text alignment={TextAlignment.Center}>You must click the button to close this dialog.</Text>
-            <Button variant="primary" text="I Understand" onClicked={() => setIsOpen(false)} />
+            <Button variant='primary' text='I Understand' onClicked={() => setIsOpen(false)} />
           </Stack>
         </Dialog>
       </React.Fragment>
@@ -75,17 +77,17 @@ export const CustomSize: Story = {
     const [isOpen, setIsOpen] = React.useState(false);
     return (
       <React.Fragment>
-        <Button variant="primary" text="Open Large Dialog" onClicked={() => setIsOpen(true)} />
+        <Button variant='primary' text='Open Large Dialog' onClicked={() => setIsOpen(true)} />
         <Dialog
           isOpen={isOpen}
           onCloseClicked={() => setIsOpen(false)}
-          maxWidth="600px"
-          maxHeight="500px"
+          maxWidth='600px'
+          maxHeight='500px'
         >
           <Stack direction={Direction.Vertical} shouldAddGutters={true}>
-            <Text variant="header3">Large Dialog</Text>
+            <Text variant='header3'>Large Dialog</Text>
             <Text>This dialog has custom maxWidth and maxHeight.</Text>
-            <Button text="Close" onClicked={() => setIsOpen(false)} />
+            <Button text='Close' onClicked={() => setIsOpen(false)} />
           </Stack>
         </Dialog>
       </React.Fragment>

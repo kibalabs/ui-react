@@ -16,13 +16,13 @@ type Story = StoryObj<typeof ColorSettingView>;
 export const Default: Story = {
   render: (args) => (
     <ColorSettingView {...args}>
-      <Box variant="card">
+      <Box variant='card'>
         <Text>Text with custom color</Text>
       </Box>
     </ColorSettingView>
   ),
   args: {
-    theme: {
+    colors: {
       text: 'orange',
     },
   },
@@ -30,7 +30,7 @@ export const Default: Story = {
 
 export const BrandColors: Story = {
   render: () => (
-    <ColorSettingView theme={{ text: 'purple' }}>
+    <ColorSettingView colors={{ text: 'purple' }}>
       <Text>This text is purple</Text>
     </ColorSettingView>
   ),
@@ -38,8 +38,8 @@ export const BrandColors: Story = {
 
 export const MultipleSettings: Story = {
   render: () => (
-    <ColorSettingView theme={{ text: 'blue', 'brand-primary': 'green' }}>
-      <Box variant="card">
+    <ColorSettingView colors={{ text: 'blue', brandPrimary: 'green' }}>
+      <Box variant='card'>
         <Text>Custom themed content</Text>
       </Box>
     </ColorSettingView>

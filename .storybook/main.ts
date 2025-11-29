@@ -1,5 +1,5 @@
-import remarkGfm from 'remark-gfm';
 import type { StorybookConfig } from '@storybook/react-vite';
+import remarkGfm from 'remark-gfm';
 
 const config: StorybookConfig = {
   framework: '@storybook/react-vite',

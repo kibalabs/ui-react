@@ -127,7 +127,7 @@ export function Stack({
 }: IStackProps): React.ReactElement {
   const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number), index: number): React.ReactElement<IStackItemProps> => (
     // eslint-disable-next-line react/no-array-index-key
-    typeof child === 'object' && 'type' in child && child.type === StackItem ? child : <StackItem key={`child-${index}`}>{ child }</StackItem>
+    typeof child === 'object' && 'type' in child && child.type === StackItem ? child as React.ReactElement<IStackItemProps> : <StackItem key={`child-${index}`}>{ child }</StackItem>
   ));
   const paddingTop = (props.paddingStart && direction === Direction.Vertical) ? props.paddingStart : undefined;
   const paddingBottom = (props.paddingEnd && direction === Direction.Vertical) ? props.paddingEnd : undefined;
