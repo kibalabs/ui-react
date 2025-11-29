@@ -82,8 +82,11 @@
 @mixin generate-all-color-variants() {
   @include generate-color-variants('background');
   @include generate-color-variants('brand-primary');
+  @include generate-color-variants('brand-secondary');
   @include generate-color-variants('text');
   @include generate-color-variants('text-on-brand');
+  @include generate-color-variants('disabled');
+  @include generate-color-variants('disabled-text');
   @include generate-color-variants('error');
   @include generate-color-variants('success');
   @include generate-color-variants('warning');
@@ -99,8 +102,11 @@
   // Base Colors (apps override these)
   --kiba-color-background: #ffffff;
   --kiba-color-brand-primary: #0066cc;
+  --kiba-color-brand-secondary: #0055aa;
   --kiba-color-text: #333333;
   --kiba-color-text-on-brand: #ffffff;
+  --kiba-color-disabled: #cccccc;
+  --kiba-color-disabled-text: #888888;
   --kiba-color-error: #cc0000;
   --kiba-color-success: #00cc66;
   --kiba-color-warning: #cc9900;
