@@ -1,55 +1,62 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { KibaIcon } from '.';
-import { } from '../icon';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # KibaIcon
 
-<br />
+**KibaIcon** is a convenience wrapper around `Icon` that fetches icons from Kiba's CDN by ID. Supports multiple popular icon libraries.
 
-export const Template = (args) => (
-  <KibaIcon {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Ionicons
 
-<Canvas>
-  <Story of={DocumentationStories.IonIcon} />
-</Canvas>
+<Canvas of={Stories.IonIcons} />
 
-<Canvas>
-  <Story of={DocumentationStories.MaterialIcon} />
-</Canvas>
+### Material Icons
 
-<Canvas>
-  <Story of={DocumentationStories.FeatherIcon} />
-</Canvas>
+<Canvas of={Stories.MaterialIcons} />
 
-<Canvas>
-  <Story of={DocumentationStories.BootstrapIcon} />
-</Canvas>
+### Feather Icons
 
-<Canvas>
-  <Story of={DocumentationStories.RemixIcon} />
-</Canvas>
+<Canvas of={Stories.FeatherIcons} />
 
-<Canvas>
-  <Story of={DocumentationStories.SmallIcon} />
-</Canvas>
+### Bootstrap Icons
 
-<Canvas>
-  <Story of={DocumentationStories.LargeIcon} />
-</Canvas>
+<Canvas of={Stories.BootstrapIcons} />
 
-### Theming
+### Remix Icons
 
-See [Icon]()
+<Canvas of={Stories.RemixIcons} />
+
+### Sizes
+
+<Canvas of={Stories.Sizes} />
+
+### Custom Color
+
+<Canvas of={Stories.CustomColor} />
+
+## Theming
+
+### CSS Class: `.KibaKibaIcon`
+
+Inherits all styling from Icon. See Icon documentation for variants and customization.
+
+### Supported Icon Sets
+
+| Prefix | Icon Set | Example |
+|--------|----------|---------|
+| `ion-` | [Ionicons v5](https://ionic.io/ionicons) | `ion-home` |
+| `mui-` | [Material Icons](https://fonts.google.com/icons) | `mui-home` |
+| `bs-` | [Bootstrap Icons](https://icons.getbootstrap.com/) | `bs-house` |
+| `feather-` | [Feather Icons](https://feathericons.com/) | `feather-home` |
+| `remix-` | [Remix Icons](https://remixicon.com/) | `remix-home-line` |
+
+### Note
+
+Icons are fetched asynchronously from `assets-cdn.kiba.dev`. Consider using `Icon` with bundled SVGs for critical icons to avoid network delays.

@@ -1,0 +1,20 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaTabBar {
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    overflow: auto;
+
+    &.fullWidth {
+      width: 100%;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaTabBar {
+    // Theme styles applied via child components
+  }
+}

@@ -1,58 +1,77 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Markdown, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Markdown
 
-<br />
+**Markdown** is a `molecule` component for rendering markdown content. Supports headers, formatting, lists, links, and images.
 
-export const Template = (args) => (
-  <Markdown {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Headers
 
-<Canvas>
-  <Story of={DocumentationStories.MarkdownWithEmbeddedStrong} />
-</Canvas>
+<Canvas of={Stories.Headers} />
 
-<Canvas>
-  <Story of={DocumentationStories.MarkdownWithJustStrong} />
-</Canvas>
+### Text Formatting
 
-<Canvas>
-  <Story of={DocumentationStories.MarkdownWithImageCaption} />
-</Canvas>
+<Canvas of={Stories.TextFormatting} />
 
-<Canvas>
-  <Story of={DocumentationStories.MarkdownWithTitles} />
-</Canvas>
+### Bullet Points
 
-<Canvas>
-  <Story of={DocumentationStories.MarkdownWithBulletPoints} />
-</Canvas>
+<Canvas of={Stories.BulletPoints} />
 
-<Canvas>
-  <Story of={DocumentationStories.MarkdownWithBulletPointsAndBolding} />
-</Canvas>
+### Numbered List
 
-<Canvas>
-  <Story of={DocumentationStories.MarkdownWithBulletPointsAndTrailingText} />
-</Canvas>
+<Canvas of={Stories.NumberedList} />
 
-<Canvas>
-  <Story of={DocumentationStories.MarkdownWithBulletPointsAndTrailingHtml} />
-</Canvas>
+### Links
 
-### Theming
+<Canvas of={Stories.Links} />
 
-TODO
+### Images
+
+<Canvas of={Stories.Images} />
+
+### Mixed Content
+
+<Canvas of={Stories.Mixed} />
+
+## Theming
+
+### CSS Class: `.KibaMarkdown`
+
+Markdown renders standard HTML elements which inherit Text styling.
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaMarkdown {
+    h1, h2, h3, h4, h5, h6 {
+      margin-bottom: var(--kiba-spacing);
+    }
+
+    p {
+      margin-bottom: var(--kiba-spacing);
+    }
+
+    ul, ol {
+      padding-left: 1.5em;
+      margin-bottom: var(--kiba-spacing);
+    }
+
+    a {
+      color: var(--kiba-color-brand-primary);
+    }
+
+    img {
+      max-width: 100%;
+    }
+  }
+}
+```

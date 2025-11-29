@@ -3,17 +3,13 @@ import React from 'react';
 import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps, OptionalProppedElement } from '@kibalabs/core-react';
 
-import { IInputWrapperTheme, InputWrapper } from '../../atoms';
+import { InputWrapper } from '../../atoms';
 import { Stack } from '../../layouts';
 import { Alignment, Direction } from '../../model';
 import { IIconProps, LoadingSpinner, PaddingSize, Spacing } from '../../particles';
 import { IMoleculeProps } from '../moleculeProps';
 
-export interface IInputFrameTheme {
-  inputWrapperTheme?: IInputWrapperTheme;
-}
-
-export interface IInputFrameProps extends IMoleculeProps<IInputFrameTheme>, ISingleAnyChildProps {
+export interface IInputFrameProps extends IMoleculeProps, ISingleAnyChildProps {
   messageText?: string;
   isEnabled?: boolean;
   isLoading?: boolean;
@@ -40,7 +36,6 @@ export function InputFrame({
     <InputWrapper
       id={props.id}
       className={getClassName(InputFrame.displayName, className)}
-      theme={props.theme?.inputWrapperTheme}
       variant={props.inputWrapperVariant}
       messageText={props.messageText}
       isEnabled={isEnabled}

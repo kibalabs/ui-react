@@ -1,0 +1,54 @@
+@use '../../styles/variables' as *;
+@use '../../particles/box/styles' as box;
+
+@layer kiba-structure {
+  .KibaListItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    background-clip: border-box;
+    cursor: default;
+    &.clickable {
+      cursor: pointer;
+    }
+    &.disabled {
+      cursor: auto;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaListItem {
+    @include box.default;
+    @include box.focusable;
+    padding: $padding-wide $padding-wide;
+    background-color: transparent;
+    border-radius: $border-radius $border-radius;
+    border-width: $border-width;
+    &.clickable {
+      &:hover {
+        background-color: var(--kiba-color-brand-primary-clear90);
+      }
+      &:active {
+        background-color: var(--kiba-color-brand-primary-clear75);
+      }
+      &:focus {
+        @include box.focussed;
+      }
+    }
+    &.selected {
+      background-color: var(--kiba-color-brand-primary-clear80);
+    }
+    &.disabled {
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    // Slim variant
+    &.slim {
+      padding: $padding $padding;
+    }
+  }
+}

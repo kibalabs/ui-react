@@ -1,54 +1,65 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import { Box } from '../../particles/box';
-import { MarkdownText, } from '.';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # MarkdownText
 
-<br />
+**MarkdownText** is a `molecule` component for inline markdown. Renders as a single text element with formatting.
 
-export const Template = (args) => (
-  <MarkdownText {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### With Formatting
 
-<Canvas>
-  <Story of={DocumentationStories.Simple} />
-</Canvas>
+<Canvas of={Stories.WithFormatting} />
 
-<Canvas>
-  <Story of={DocumentationStories.VeryLong} />
-</Canvas>
+### With Link
 
-<Canvas>
-  <Story of={DocumentationStories.WithNewlines} />
-</Canvas>
+<Canvas of={Stories.WithLink} />
 
-<Canvas>
-  <Story of={DocumentationStories.Link} />
-</Canvas>
+### Wrapped Text
 
-<Canvas>
-  <Story of={DocumentationStories.LinkAsNote} />
-</Canvas>
+<Canvas of={Stories.Wrapped} />
 
-<Canvas>
-  <Story of={DocumentationStories.CustomTheme} />
-</Canvas>
+### With Newlines
 
-<Canvas>
-  <Story of={DocumentationStories.CustomVariant} />
-</Canvas>
+<Canvas of={Stories.WithNewlines} />
 
-### Theming
+### Note Variant
 
-TODO
+<Canvas of={Stories.NoteVariant} />
+
+### Header Variant
+
+<Canvas of={Stories.HeaderVariant} />
+
+## Theming
+
+### CSS Class: `.KibaMarkdownText`
+
+Inherits styling from Text component. See Text documentation for theming details.
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaMarkdownText {
+    a {
+      color: var(--kiba-color-brand-primary);
+      text-decoration: underline;
+    }
+
+    strong {
+      font-weight: var(--kiba-font-weight-bold);
+    }
+
+    em {
+      font-style: italic;
+    }
+  }
+}
+```

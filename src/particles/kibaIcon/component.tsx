@@ -2,10 +2,10 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 
-import { IComponentProps } from '../..';
-import { Icon, IIconTheme } from '../icon';
+import { IComponentProps } from '../../model';
+import { Icon } from '../icon';
 
-interface IKibaIconProps extends IComponentProps<IIconTheme> {
+interface IKibaIconProps extends IComponentProps {
   iconId: string;
   _color?: string;
 }

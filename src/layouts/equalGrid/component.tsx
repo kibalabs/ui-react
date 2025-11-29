@@ -4,7 +4,6 @@ import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiAnyChildProps } from '@kibalabs/core-react';
 
 import { Alignment, PaddingSizeProp } from '../..';
-import { IDimensionGuide } from '../../particles';
 import { ResponsiveField } from '../../util';
 import { IPaddingViewPaddingProps } from '../../wrappers';
 import { Grid, IGridItemProps } from '../grid';
@@ -12,7 +11,6 @@ import { Grid, IGridItemProps } from '../grid';
 export interface IEqualGridProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   id?: string;
   className?: string;
-  theme?: IDimensionGuide;
   isFullHeight?: boolean;
   shouldAddGutters?: boolean;
   defaultGutter?: PaddingSizeProp;

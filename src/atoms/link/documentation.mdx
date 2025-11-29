@@ -1,34 +1,72 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Link } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Link
 
-<br />
+**Link** is an `atom` component for navigation. Supports internal routing, external links, and click callbacks.
 
-export const Template = (args) => (
-  <Link {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### External Link
 
-<Canvas>
-  <Story of={DocumentationStories.Disabled} />
-</Canvas>
+<Canvas of={Stories.External} />
 
-<Canvas>
-  <Story of={DocumentationStories.LinkWithOnClicked} />
-</Canvas>
+### Open in Same Tab
 
-### Theming
+<Canvas of={Stories.SameTab} />
 
-TODO
+### Disabled
+
+<Canvas of={Stories.Disabled} />
+
+### With Callback
+
+<Canvas of={Stories.WithCallback} />
+
+### Inline with Text
+
+<Canvas of={Stories.InlineWithText} />
+
+## Theming
+
+### CSS Class: `.KibaLink`
+
+### States
+
+| Class | Description |
+|-------|-------------|
+| `.disabled` | When link is not clickable |
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaLink {
+    > .KibaLinkFocusFixer {
+      color: var(--kiba-color-brand-primary);
+      text-decoration: underline;
+    }
+
+    &:hover > .KibaLinkFocusFixer {
+      color: var(--kiba-color-brand-secondary);
+    }
+
+    &:focus > .KibaLinkFocusFixer {
+      outline: 2px solid var(--kiba-color-brand-primary);
+      outline-offset: 2px;
+    }
+
+    &.disabled > .KibaLinkFocusFixer {
+      color: var(--kiba-color-disabled-text);
+      cursor: not-allowed;
+      text-decoration: none;
+    }
+  }
+}
+```

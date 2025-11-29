@@ -1,39 +1,73 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { IconButton } from '.';
-import { PaddingSize, KibaIcon } from '../../particles';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # IconButton
 
-<br />
+**IconButton** is an `atom` component for icon-only buttons. Supports the same variants as Button.
 
-export const Template = (args) => (
-  <IconButton {...args} icon={<KibaIcon iconId='ion-bulb' />}/>
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Variants
 
-<Canvas>
-  <Story of={DocumentationStories.Primary} />
-</Canvas>
+<Canvas of={Stories.Variants} />
 
-<Canvas>
-  <Story of={DocumentationStories.Secondary} />
-</Canvas>
+### Sizes
 
-<Canvas>
-  <Story of={DocumentationStories.Disabled} />
-</Canvas>
+<Canvas of={Stories.Sizes} />
 
-### Theming
+### States
 
-TODO
+<Canvas of={Stories.States} />
+
+### Action Toolbar
+
+<Canvas of={Stories.Actions} />
+
+### As Link
+
+<Canvas of={Stories.AsLink} />
+
+## Theming
+
+### CSS Class: `.KibaIconButton`
+
+### Variants
+
+| Variant | Description |
+|---------|-------------|
+| `default` | Transparent with brand color |
+| `primary` | Filled brand background |
+| `secondary` | Brand border |
+| `tertiary` | No border, subtle background on hover |
+| `small` | Smaller size |
+| `large` | Larger size |
+| `passive` | Muted styling |
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaIconButton {
+    > .KibaIconButtonFocusFixer {
+      border-radius: var(--kiba-border-radius);
+      color: var(--kiba-color-brand-primary);
+      padding: var(--kiba-padding);
+    }
+
+    &.primary > .KibaIconButtonFocusFixer {
+      background-color: var(--kiba-color-brand-primary);
+      color: var(--kiba-color-text-on-brand);
+    }
+
+    &:hover > .KibaIconButtonFocusFixer {
+      background-color: var(--kiba-color-brand-primary-clear90);
+    }
+  }
+}
+```

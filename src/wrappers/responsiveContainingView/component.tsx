@@ -1,63 +1,20 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { styled } from 'styled-components';
 
-import { IDimensionGuide } from '../../particles';
-import { useDimensions } from '../../theming';
-import { getResponsiveCss, ResponsiveField } from '../../util';
+import './styles.scss';
+import { ResponsiveField } from '../../util';
 import { IWrapperProps } from '../wrapperProps';
-import { wrappingComponent } from '../wrappingComponent';
+import { WrapperView } from '../wrappingComponent';
 
-interface IStyledResponsiveContainingViewProps extends IWrapperProps {
-  $theme: IDimensionGuide;
-  $size: ResponsiveField<number>;
-  $isFullWidth: boolean;
-  $shouldIncludeMaxSize: boolean;
-}
+const DEFAULT_COLUMN_COUNT = 12;
 
 export const getGridItemSizeCss = (totalColumnCount: number, columnCount: number, baseSize = '100%'): string => {
-  return `max-width: calc(${baseSize} * ${(columnCount / totalColumnCount).toFixed(1)}) !important;`;
+  return `calc(${baseSize} * ${(columnCount / totalColumnCount).toFixed(1)})`;
 };
-
-const columnCountsToCss = (field: ResponsiveField<number>, theme: IDimensionGuide, shouldIncludeMaxSize?: boolean): string => {
-  const output: string[] = [];
-  if (field?.base !== undefined) {
-    output.push(getGridItemSizeCss(theme.columnCount, field.base));
-  }
-  if (field?.small !== undefined) {
-    output.push(getResponsiveCss(theme.screenWidthSmall, getGridItemSizeCss(theme.columnCount, field.small)));
-  }
-  if (field?.medium !== undefined) {
-    output.push(getResponsiveCss(theme.screenWidthMedium, getGridItemSizeCss(theme.columnCount, field.medium)));
-  }
-  if (field?.large !== undefined) {
-    output.push(getResponsiveCss(theme.screenWidthLarge, getGridItemSizeCss(theme.columnCount, field.large)));
-  }
-  if (field?.extraLarge !== undefined) {
-    output.push(getResponsiveCss(theme.screenWidthExtraLarge, getGridItemSizeCss(theme.columnCount, field.extraLarge)));
-  }
-  if (shouldIncludeMaxSize) {
-    const largestColumnCount = field.extraLarge || field.large || field.medium || field.small || field.base || 12;
-    output.push(getResponsiveCss(theme.screenWidthMax, getGridItemSizeCss(theme.columnCount, largestColumnCount, theme.screenWidthMax)));
-  }
-  return output.join('\n');
-};
-
-const StyledResponsiveContainingView = wrappingComponent((Component: React.ComponentType<IStyledResponsiveContainingViewProps>): React.ComponentType<IStyledResponsiveContainingViewProps> => {
-  return styled(Component)<IStyledResponsiveContainingViewProps>`
-    max-width: 100%;
-    width: ${(props: IStyledResponsiveContainingViewProps): string => (props.$isFullWidth ? '100%' : 'auto')};
-    ${(props: IStyledResponsiveContainingViewProps): string => columnCountsToCss(props.$size, props.$theme, props.$shouldIncludeMaxSize)};
-    &.centered {
-      margin-right: auto;
-      margin-left: auto;
-    }
-  `;
-});
 
 export interface IResponsiveContainingViewProps extends IWrapperProps {
-  theme?: IDimensionGuide;
+  columnCount?: number;
   size?: number;
   sizeResponsive?: ResponsiveField<number>;
   isFullWidth?: boolean;
@@ -65,27 +22,36 @@ export interface IResponsiveContainingViewProps extends IWrapperProps {
   isCenteredHorizontally?: boolean;
 }
 
-export function ResponsiveContainingView({
-  className = '',
-  isCenteredHorizontally = true,
-  ...props
-}: IResponsiveContainingViewProps): React.ReactElement {
-  const theme = useDimensions(props.theme);
-  const isFullWidth = props.isFullWidth === true || props.isFullWidth == null;
-  const shouldIncludeMaxSize = props.shouldIncludeMaxSize === true || props.shouldIncludeMaxSize == null;
+export function ResponsiveContainingView(props: IResponsiveContainingViewProps): React.ReactElement {
+  const isCenteredHorizontally = props.isCenteredHorizontally ?? true;
+  const isFullWidth = props.isFullWidth ?? true;
+  const shouldIncludeMaxSize = props.shouldIncludeMaxSize ?? true;
+  const columnCount = props.columnCount ?? DEFAULT_COLUMN_COUNT;
   if (props.size == null && props.sizeResponsive?.base == null) {
     throw new Error(`One of {size, sizeResponsive.base} must be passed to ${ResponsiveContainingView.displayName}`);
   }
+  const sizeField: ResponsiveField<number> = { base: props.size, ...props.sizeResponsive };
+  const wrapperStyle: Record<string, string | undefined> = {
+    width: isFullWidth ? '100%' : 'auto',
+    '--rcv-max-width-base': sizeField.base !== undefined ? getGridItemSizeCss(columnCount, sizeField.base) : undefined,
+    '--rcv-max-width-small': sizeField.small !== undefined ? getGridItemSizeCss(columnCount, sizeField.small) : undefined,
+    '--rcv-max-width-medium': sizeField.medium !== undefined ? getGridItemSizeCss(columnCount, sizeField.medium) : undefined,
+    '--rcv-max-width-large': sizeField.large !== undefined ? getGridItemSizeCss(columnCount, sizeField.large) : undefined,
+    '--rcv-max-width-extra-large': sizeField.extraLarge !== undefined ? getGridItemSizeCss(columnCount, sizeField.extraLarge) : undefined,
+  };
+  if (shouldIncludeMaxSize) {
+    const largestColumnCount = sizeField.extraLarge || sizeField.large || sizeField.medium || sizeField.small || sizeField.base || 12;
+    wrapperStyle['--rcv-max-width-max'] = getGridItemSizeCss(columnCount, largestColumnCount, 'var(--kiba-screen-width-max)');
+  }
   return (
-    <StyledResponsiveContainingView
-      className={getClassName(ResponsiveContainingView.displayName, className, isCenteredHorizontally && 'centered')}
-      $theme={theme}
-      $size={{ base: props.size, ...props.sizeResponsive }}
-      $isFullWidth={isFullWidth}
-      $shouldIncludeMaxSize={shouldIncludeMaxSize}
+    <WrapperView
+      className={props.className}
+      style={props.style}
+      wrapperClassName={getClassName(ResponsiveContainingView.displayName, isCenteredHorizontally && 'centered')}
+      wrapperStyle={wrapperStyle}
     >
       {props.children}
-    </StyledResponsiveContainingView>
+    </WrapperView>
   );
 }
 ResponsiveContainingView.displayName = 'KibaResponsiveContainingView';

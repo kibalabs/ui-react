@@ -1,51 +1,80 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Pill, } from '.';
-import { PaddingSize, KibaIcon } from '../../particles';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Pill
 
-<br />
+**Pill** is a `particle` for displaying small labels, tags, or status indicators. Supports icons on either side.
 
-export const Template = (args) => (
-  <Pill {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Variants
 
-<Canvas>
-  <Story of={DocumentationStories.Primary} />
-</Canvas>
+<Canvas of={Stories.Variants} />
 
-<Canvas>
-  <Story of={DocumentationStories.Secondary} />
-</Canvas>
+### With Left Icon
 
-<Canvas>
-  <Story of={DocumentationStories.Success} />
-</Canvas>
+<Canvas of={Stories.WithLeftIcon} />
 
-<Canvas>
-  <Story of={DocumentationStories.Error} />
-</Canvas>
+### With Right Icon
 
-<Canvas>
-  <Story of={DocumentationStories.RightIcon} />
-</Canvas>
+<Canvas of={Stories.WithRightIcon} />
 
-<Canvas>
-  <Story of={DocumentationStories.LeftIcon} />
-</Canvas>
+### Tags
 
-### Theming
+<Canvas of={Stories.Tags} />
 
-TODO
+### Status Indicators
+
+<Canvas of={Stories.Status} />
+
+## Theming
+
+### CSS Class: `.KibaPill`
+
+### Variants
+
+| Variant | Description |
+|---------|-------------|
+| `default` | Light brand background |
+| `primary` | Brand primary border |
+| `secondary` | Filled brand background |
+| `success` | Green success styling |
+| `error` | Red error styling |
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaPill {
+    padding: var(--kiba-padding) var(--kiba-padding-wide2);
+    border-radius: var(--kiba-padding-wide2);
+    background-color: var(--kiba-color-brand-primary-clear75);
+    color: var(--kiba-color-brand-primary);
+
+    &.primary {
+      border-color: var(--kiba-color-brand-primary);
+    }
+
+    &.secondary {
+      background-color: var(--kiba-color-brand-primary-clear25);
+      color: var(--kiba-color-text-on-brand);
+    }
+
+    &.error {
+      background-color: var(--kiba-color-error-clear75);
+      color: var(--kiba-color-error);
+    }
+
+    &.success {
+      background-color: var(--kiba-color-success-clear75);
+      color: var(--kiba-color-success);
+    }
+  }
+}
+```

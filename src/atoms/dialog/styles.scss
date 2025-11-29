@@ -1,0 +1,31 @@
+@use '../../styles/variables' as *;
+@use '../../particles/box/styles' as box;
+
+@layer kiba-structure {
+  .KibaDialog {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    &.closed {
+      display: none;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaDialog {
+    @include box.default;
+    background: var(--kiba-dialog-backdrop-color, rgba(0, 0, 0, 0.8));
+    > .KibaDialogInner {
+      @include box.default;
+      @include box.card;
+      background-color: var(--kiba-color-background-light05);
+    }
+  }
+}

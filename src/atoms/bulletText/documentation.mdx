@@ -1,33 +1,39 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { BulletText } from '.';
-import { BulletList } from '../bulletList';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # BulletText
 
-<br />
+**BulletText** is an `atom` component for individual bullet list items. Use inside BulletList.
 
-export const Template = (args) => (
-  <BulletList>
-    <BulletText {...args} />
-  </BulletList>
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Multiple Bullets
 
-<Canvas>
-  <Story of={DocumentationStories.SimpleExample} />
-</Canvas>
+<Canvas of={Stories.MultipleBullets} />
 
-### Theming
+### With Nested List
 
-TODO
+<Canvas of={Stories.WithNestedList} />
+
+## Theming
+
+### CSS Class: `.KibaBulletText`
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaBulletText {
+    font-family: var(--kiba-text-font-family);
+    font-size: var(--kiba-text-font-size);
+    color: var(--kiba-color-text);
+    line-height: var(--kiba-line-height);
+  }
+}
+```

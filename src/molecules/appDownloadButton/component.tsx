@@ -6,10 +6,7 @@ import { IMoleculeProps } from '..';
 import { LinkBase } from '../../atoms/linkBase';
 import { Image } from '../../particles/image';
 
-export interface AppDownloadButtonTheme {
-}
-
-export interface AppDownloadButtonProps extends IMoleculeProps<AppDownloadButtonTheme> {
+export interface AppDownloadButtonProps extends IMoleculeProps {
   appId: string;
   appType: 'android' | 'ios' | 'mac' | 'appletv';
   buttonVariant: string;

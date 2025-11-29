@@ -2,70 +2,16 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiAnyChildProps, useInterval, useRenderedRef, useScrollListener } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
-import { IconButton, IIconButtonTheme } from '../../atoms';
+import { IconButton } from '../../atoms';
 import { Stack } from '../../layouts';
 import { Alignment, Direction } from '../../model';
-import { getScreenSizeValue, IDimensionGuide, KibaIcon, ScreenSize } from '../../particles';
-import { useDimensions } from '../../theming';
-import { CssConverter, fieldToResponsiveCss, ResponsiveField } from '../../util';
+import { getScreenSizeValue, KibaIcon, ScreenSize } from '../../particles';
+import { ResponsiveField } from '../../util';
 import { IMoleculeProps } from '../moleculeProps';
+import './styles.scss';
 
-const getSlidesPerPageCss: CssConverter<number> = (field: number): string => {
-  return `width: calc(100% / ${field});`;
-};
-
-export interface ICarouselTheme {
-  indexButtonTheme: IIconButtonTheme;
-}
-
-const StyledSlider = styled.div`
-  display: flex;
-  align-items: center;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-
-
-  &::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: transparent;
-  }
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  /* Hide scrollbar on ie 11 */
-  -ms-overflow-style: none;
-  overflow: auto;
-`;
-StyledSlider.displayName = 'KibaCarouselSlider';
-
-interface IStyledSlideProps {
-  $theme: IDimensionGuide;
-  $slidesPerPage: ResponsiveField<number>;
-}
-
-const StyledSlide = styled.div<IStyledSlideProps>`
-  scroll-snap-align: start;
-  flex-shrink: 0;
-  height: 100%;
-  transform-origin: center center;
-  transform: scale(1);
-  transition: transform 0.5s;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  ${(props: IStyledSlideProps): string => fieldToResponsiveCss(props.$slidesPerPage, props.$theme, getSlidesPerPageCss)};
-`;
-StyledSlide.displayName = 'KibaCarouselSliderSlide';
-
-export interface ICarouselProps extends IMoleculeProps<ICarouselTheme>, IMultiAnyChildProps {
+export interface ICarouselProps extends IMoleculeProps, IMultiAnyChildProps {
   shouldShowButtons?: boolean;
   autoplaySeconds?: number;
   initialIndex?: number;
@@ -85,11 +31,46 @@ export function Carousel({
   slidesPerPage = 1,
   ...props
 }: ICarouselProps): React.ReactElement {
-  const dimensions = useDimensions();
   const [sliderRef] = useRenderedRef<HTMLDivElement>();
   const scrollTimeoutRef = React.useRef<number | null>(null);
   const children = flattenChildren(props.children);
   const [slideIndex, setSlideIndex] = React.useState<number>(initialIndex);
+  const [currentSlidesPerPage, setCurrentSlidesPerPage] = React.useState<number>(slidesPerPage);
+
+  const innerSlidesPerPage = props.slidesPerPageResponsive?.base || slidesPerPage;
+  const innerSlidesPerPageSmall = props.slidesPerPageResponsive?.small || innerSlidesPerPage;
+  const innerSlidesPerPageMedium = props.slidesPerPageResponsive?.medium || innerSlidesPerPageSmall;
+  const innerSlidesPerPageLarge = props.slidesPerPageResponsive?.large || innerSlidesPerPageMedium;
+  const innerSlidesPerPageExtraLarge = props.slidesPerPageResponsive?.extraLarge || innerSlidesPerPageLarge;
+
+  const calculateSlidesPerPage = React.useCallback((): number => {
+    const screenWidth = Math.ceil(document.body.clientWidth);
+    let slideCount = innerSlidesPerPage;
+    if (screenWidth > getScreenSizeValue(ScreenSize.Small)) {
+      slideCount = innerSlidesPerPageSmall;
+    }
+    if (screenWidth > getScreenSizeValue(ScreenSize.Medium)) {
+      slideCount = innerSlidesPerPageMedium;
+    }
+    if (screenWidth > getScreenSizeValue(ScreenSize.Large)) {
+      slideCount = innerSlidesPerPageLarge;
+    }
+    if (screenWidth > getScreenSizeValue(ScreenSize.ExtraLarge)) {
+      slideCount = innerSlidesPerPageExtraLarge;
+    }
+    return slideCount;
+  }, [innerSlidesPerPage, innerSlidesPerPageSmall, innerSlidesPerPageMedium, innerSlidesPerPageLarge, innerSlidesPerPageExtraLarge]);
+
+  React.useEffect((): (() => void) => {
+    const handleResize = (): void => {
+      setCurrentSlidesPerPage(calculateSlidesPerPage());
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return (): void => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [calculateSlidesPerPage]);
 
   const onPreviousClicked = (): void => {
     if (sliderRef.current && !sliderRef.current.scrollTo) {
@@ -130,32 +111,12 @@ export function Carousel({
     }, 50);
   }, [initialIndex, sliderRef]);
 
-  const innerSlidesPerPage = props.slidesPerPageResponsive?.base || slidesPerPage;
-  const innerSlidesPerPageSmall = props.slidesPerPageResponsive?.small || innerSlidesPerPage;
-  const innerSlidesPerPageMedium = props.slidesPerPageResponsive?.medium || innerSlidesPerPageSmall;
-  const innerSlidesPerPageLarge = props.slidesPerPageResponsive?.large || innerSlidesPerPageMedium;
-  const innerSlidesPerPageExtraLarge = props.slidesPerPageResponsive?.extraLarge || innerSlidesPerPageLarge;
-
   useScrollListener(sliderRef.current, (): void => {
     if (!sliderRef.current) {
       return;
     }
     const position = Math.ceil(sliderRef.current.scrollLeft);
-    // TODO(krishan711): this doesn't work in everypage console because it refers to the global document, not the local (inside iframe) one
-    const screenWidth = Math.ceil(document.body.clientWidth);
-    let slideCount = innerSlidesPerPage;
-    if (screenWidth > getScreenSizeValue(ScreenSize.Small, dimensions)) {
-      slideCount = innerSlidesPerPageSmall;
-    }
-    if (screenWidth > getScreenSizeValue(ScreenSize.Medium, dimensions)) {
-      slideCount = innerSlidesPerPageMedium;
-    }
-    if (screenWidth > getScreenSizeValue(ScreenSize.Large, dimensions)) {
-      slideCount = innerSlidesPerPageLarge;
-    }
-    if (screenWidth > getScreenSizeValue(ScreenSize.ExtraLarge, dimensions)) {
-      slideCount = innerSlidesPerPageExtraLarge;
-    }
+    const slideCount = calculateSlidesPerPage();
     const width = Math.ceil(sliderRef.current.scrollWidth);
     const progress = (children.length / slideCount) * (position / width);
     const progressRounded = Math.round(progress * 100.0) / 100;
@@ -190,7 +151,6 @@ export function Carousel({
     >
       {shouldShowButtons && (
         <IconButton
-          theme={props.theme?.indexButtonTheme}
           variant={props.indexButtonVariant}
           icon={<KibaIcon iconId='mui-chevron-left' />}
           label='Previous'
@@ -198,28 +158,26 @@ export function Carousel({
         />
       )}
       <Stack.Item growthFactor={1} shrinkFactor={1}>
-        <StyledSlider
+        <div
           ref={sliderRef}
-          className={getClassName(StyledSlider.displayName)}
+          className={getClassName('KibaCarouselSlider')}
         >
           {children.map((child: (React.ReactElement | string | number), index: number): React.ReactElement => {
             return (
-              <StyledSlide
+              <div
               // eslint-disable-next-line react/no-array-index-key
                 key={index}
-                className={getClassName(StyledSlide.displayName)}
-                $theme={dimensions}
-                $slidesPerPage={{ base: slidesPerPage, ...props.slidesPerPageResponsive }}
+                className={getClassName('KibaCarouselSlide')}
+                style={{ width: `calc(100% / ${currentSlidesPerPage})` }}
               >
                 {child}
-              </StyledSlide>
+              </div>
             );
           })}
-        </StyledSlider>
+        </div>
       </Stack.Item>
       {shouldShowButtons && (
         <IconButton
-          theme={props.theme?.indexButtonTheme}
           variant={props.indexButtonVariant}
           icon={<KibaIcon iconId='mui-chevron-right' />}
           label='Next'

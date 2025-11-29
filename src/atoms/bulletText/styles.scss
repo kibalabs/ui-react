@@ -1,0 +1,32 @@
+@use '../../styles/variables' as *;
+@use '../../particles/text/styles' as text;
+
+@layer kiba-structure {
+  .KibaBulletText {
+    counter-increment: list-number;
+    display: table;
+    &::before {
+      display: table-cell;
+      padding-right: 1em;
+      content: '•';
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaBulletText {
+    @include text.default;
+    margin: 0 0 0.4em 0;
+    &::before {
+      color: $color-text;
+      font-weight: bold;
+    }
+    &.numbered {
+      margin: 0 0 0.5em 0;
+      &::before {
+        content: counter(list-number) '.';
+        font-weight: normal;
+      }
+    }
+  }
+}

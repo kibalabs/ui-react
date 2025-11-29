@@ -1,0 +1,92 @@
+// =============================================================================
+// SCSS Variable Aliases for CSS Custom Properties
+// =============================================================================
+// These SCSS variables map to CSS custom properties, allowing components to
+// use SCSS syntax while the actual values come from CSS variables.
+// Apps override the CSS custom properties in their theme.scss.
+
+// -------------------------------------------------------------------------
+// Color Variables
+// -------------------------------------------------------------------------
+$color-brand-primary: var(--kiba-color-brand-primary);
+$color-brand-secondary: var(--kiba-color-brand-secondary, var(--kiba-color-brand-primary-dark10));
+$color-brand-primary-clear90: var(--kiba-color-brand-primary-clear90);
+$color-brand-primary-clear80: var(--kiba-color-brand-primary-clear80);
+$color-background: var(--kiba-color-background);
+$color-background-light10: var(--kiba-color-background-light10);
+$color-background-dark05: var(--kiba-color-background-dark05);
+$color-background-dark50: var(--kiba-color-background-dark50);
+$color-background-clear75: var(--kiba-color-background-clear75);
+$color-text: var(--kiba-color-text);
+$color-text-on-brand: var(--kiba-color-text-on-brand, #222222);
+$color-text-light25: var(--kiba-color-text-clear25);
+$color-disabled-light50: var(--kiba-color-text-clear50);
+$color-disabled-text: var(--kiba-color-text-clear50);
+$color-error: var(--kiba-color-error);
+$color-success: var(--kiba-color-success);
+
+// -------------------------------------------------------------------------
+// Spacing Variables
+// -------------------------------------------------------------------------
+$padding: var(--kiba-padding);
+$padding-half: var(--kiba-padding-half);
+$padding-narrow: var(--kiba-padding-narrow);
+$padding-wide: var(--kiba-padding-wide);
+$padding-wide2: var(--kiba-padding-wide2);
+$padding-wide3: var(--kiba-padding-wide3);
+
+// -------------------------------------------------------------------------
+// Border Variables
+// -------------------------------------------------------------------------
+$border-radius: var(--kiba-border-radius);
+$border-width: var(--kiba-border-width);
+
+// -------------------------------------------------------------------------
+// Font Variables
+// -------------------------------------------------------------------------
+$font-size: var(--kiba-font-size);
+$font-family: var(--kiba-font-family);
+$line-height: var(--kiba-line-height);
+
+// -------------------------------------------------------------------------
+// Breakpoint Variables
+// -------------------------------------------------------------------------
+// NOTE: CSS custom properties cannot be used in media queries, so these must
+// be pure SCSS variables. Apps can override by redefining before importing.
+// These defaults match the values in particles/dimensions/sizing.ts
+$screen-width-small: 576px !default;
+$screen-width-medium: 768px !default;
+$screen-width-large: 992px !default;
+$screen-width-extra-large: 1200px !default;
+
+// -------------------------------------------------------------------------
+// Mixins
+// -------------------------------------------------------------------------
+@mixin transition($duration: 0.3s) {
+  transition-duration: $duration;
+}
+
+// Responsive breakpoint mixins
+@mixin screen-small {
+  @media (min-width: $screen-width-small) {
+    @content;
+  }
+}
+
+@mixin screen-medium {
+  @media (min-width: $screen-width-medium) {
+    @content;
+  }
+}
+
+@mixin screen-large {
+  @media (min-width: $screen-width-large) {
+    @content;
+  }
+}
+
+@mixin screen-extra-large {
+  @media (min-width: $screen-width-extra-large) {
+    @content;
+  }
+}

@@ -1,0 +1,59 @@
+@use '../../styles/variables' as *;
+@use '../../particles/text/styles' as text;
+@use '../../particles/box/styles' as box;
+
+@layer kiba-structure {
+  .KibaTabBarItem {
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 0;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    background-clip: border-box;
+    text-align: center;
+    &.collapsible {
+      flex-shrink: 1;
+    }
+    &.expandable {
+      flex-grow: 1;
+    }
+    &.disabled {
+      cursor: auto;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaTabBarItem {
+    @include text.default;
+    @include box.default;
+    @include box.focusable;
+    background-color: transparent;
+    padding: $padding $padding-wide;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: $border-radius $border-radius 0 0;
+    color: var(--kiba-color-brand-primary-clear25);
+    &:hover {
+      background-color: var(--kiba-color-brand-primary-clear90);
+    }
+    &:active {
+      background-color: var(--kiba-color-brand-primary-clear80);
+    }
+    &:focus {
+      @include box.focussed;
+    }
+    &.selected {
+      color: $color-brand-primary;
+      border-bottom-color: $color-brand-primary;
+    }
+    &.disabled {
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}

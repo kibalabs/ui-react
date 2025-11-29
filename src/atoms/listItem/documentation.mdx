@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import { Meta, Story, Canvas, Controls } from '@storybook/addon-docs/blocks';
 
 import { ListItem } from '.';
 
@@ -10,4 +10,18 @@ This component is only intended to be used with [Molecules/List](/?path=/docs/mo
 
 ### Theming
 
-TODO
+ListItem styling uses CSS custom properties for interactive states:
+
+```scss
+.KibaListItem {
+  background-color: transparent;
+  &.clickable:hover {
+    background-color: var(--kiba-color-brand-primary-clear90);
+  }
+  &.selected {
+    background-color: var(--kiba-color-brand-primary-clear80);
+  }
+}
+```
+
+Variants include: `slim`.

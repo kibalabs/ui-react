@@ -1,84 +1,99 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
-
-import { Box, } from '.';
-import { BoxThemeExample } from './themeExample';
-import { PaddingSize, KibaIcon, Image, Text } from '../../particles';
+import { Meta, Canvas, Controls, ArgTypes, Source } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
+import { Box } from '.';
 import { LayerContainer, Stack } from '../../layouts';
-import { Alignment } from '../../model';
+import { Image, Text } from '../../particles';
 
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Box
 
-<br />
+**Box** is a fundamental `particle` component - the basic building block for structuring layouts.
 
-export const Template = (args) => (
-  <Box {...args}>
-    <p>I'm in a box</p>
-  </Box>
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Card
 
-<Canvas>
-  <Story of={DocumentationStories.Card} />
-</Canvas>
+<Canvas of={Stories.Card} />
 
-<Canvas>
-  <Story of={DocumentationStories.Bordered} />
-</Canvas>
+### Bordered
 
-<Canvas>
-  <Story of={DocumentationStories.Padded} />
-</Canvas>
+<Canvas of={Stories.Bordered} />
 
-<Canvas>
-  <Story of={DocumentationStories.ScrollableHorizontally} />
-</Canvas>
+### Padded
 
-<Canvas>
-  <Story of={DocumentationStories.ScrollableVertically} />
-</Canvas>
+<Canvas of={Stories.Padded} />
 
-<Canvas>
-  <Story of={DocumentationStories.EmptyCardWithTooltip} />
-</Canvas>
+### Scrollable Horizontally
 
-<Canvas>
-  <Story of={DocumentationStories.ClippedContent} />
-</Canvas>
+<Canvas of={Stories.ScrollableHorizontally} />
 
-### Theming
+### Scrollable Vertically
 
-**Box** is a type of `particle`. Boxes provide a basic building block for structuring UIs.
-The theming structure of a **Box** is as follows:
+<Canvas of={Stories.ScrollableVertically} />
 
-```ts
-interface IBoxTheme extends CssTheme, ThemeType {
-  'background-color': string;
-  'border-radius': string;
-  'border-color': string;
-  'border-width': string;
-  'border-style': string;
-  'padding': string;
-  'box-shadow': string;
-  'margin': string;
-  'outline-style': string;
-  'outline-color': string;
-  'outline-width': string;
-  'outline-offset': string;
+### Empty Card with Tooltip
+
+<Canvas of={Stories.EmptyCardWithTooltip} />
+
+### Clipped Content
+
+<Canvas of={Stories.ClippedContent} />
+
+## Theming
+
+### CSS Class: `.KibaBox`
+
+### Variants
+
+| Variant | Description |
+|---------|-------------|
+| `card` | Elevated card with background, border, shadow, and padding |
+| `bordered` | Box with border and padding |
+| `padded` | Adds default padding |
+| `transparent` | Transparent background with padding |
+| `rounded` | Circular border-radius (50%) |
+| `focusable` | Adds focus border styling |
+| `unpadded` | Removes padding |
+| `unmargined` | Removes margin |
+| `overlay` | Semi-transparent background overlay |
+
+### Customizing with SCSS
+
+```css
+@layer kiba-theme {
+  .KibaBox {
+    border-radius: var(--kiba-border-radius);
+
+    &.card {
+      background-color: var(--kiba-color-background-light10);
+      border-color: var(--kiba-color-background-dark05);
+      box-shadow: 0px 8px 8px -6px rgba(0, 0, 0, 0.15);
+      padding: var(--kiba-padding-wide2);
+    }
+
+    &.bordered {
+      background-color: var(--kiba-color-background-light10);
+      border-color: var(--kiba-color-background-dark05);
+      padding: var(--kiba-padding-wide2);
+    }
+  }
 }
 ```
 
-#### Example
+### Responsive Sizing
 
-<Canvas withSource={'none'}>
-  <Story of={DocumentationStories.ComTestBlock} />
-</Canvas>
+Box supports responsive dimensions via CSS custom properties with breakpoint suffixes:
+
+```tsx
+<Box
+  width="100%"
+  widthResponsive={{ small: '100%', medium: '50%', large: '33%' }}
+/>
+```
+
+This sets `--kiba-box-width-sm`, `--kiba-box-width-md`, `--kiba-box-width-lg` which are used at their respective breakpoints.

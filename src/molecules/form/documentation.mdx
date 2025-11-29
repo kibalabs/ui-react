@@ -1,40 +1,47 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import { SingleLineInput } from '..';
-import { Button } from '../../atoms';
-import { Stack } from '../../layouts';
-import { Direction } from '../../model';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Form, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Form
 
-<br />
+**Form** is a `molecule` component that wraps form inputs. Handles submit events and loading states.
 
-export const Template = (args) => (
-  <Form {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Simple Form
 
-<Canvas>
-  {/* Button is disabled, so that when Button is clicked the page doesn't change. */}
+<Canvas of={Stories.Simple} />
 
-  <Story of={DocumentationStories.Simple} />
-</Canvas>
+### Loading State
 
-<Canvas>
-  <Story of={DocumentationStories.Loading} />
-</Canvas>
+<Canvas of={Stories.Loading} />
 
-### Theming
+### With Validation
 
-TODO
+<Canvas of={Stories.WithValidation} />
+
+## Theming
+
+### CSS Class: `.KibaForm`
+
+Form is a structural wrapper. Styling is applied to child input components.
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaForm {
+    width: 100%;
+
+    &.isLoading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+  }
+}
+```

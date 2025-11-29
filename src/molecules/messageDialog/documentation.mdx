@@ -1,27 +1,55 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Button} from '../../atoms';
-import { MessageDialog } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # MessageDialog
 
-<br />
+**MessageDialog** is a `molecule` component for confirmation dialogs. Displays a title, message, and confirm/cancel buttons.
 
-export const Template = (args) => (
-  <MessageDialog {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-# Examples
+### Interactive
 
-<Canvas>
-  <Story of={DocumentationStories.ExampleMessageDialog} />
-</Canvas>
+<Canvas of={Stories.Interactive} />
+
+### Long Message
+
+<Canvas of={Stories.LongMessage} />
+
+### Delete Confirmation
+
+<Canvas of={Stories.DeleteConfirmation} />
+
+## Theming
+
+### CSS Class: `.KibaMessageDialog`
+
+Inherits styling from Dialog component. See Dialog documentation for theming details.
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaMessageDialog {
+    > .KibaMessageDialogTitle {
+      font-size: var(--kiba-text-font-size-header3);
+      margin-bottom: var(--kiba-spacing);
+    }
+
+    > .KibaMessageDialogMessage {
+      margin-bottom: var(--kiba-spacing);
+    }
+
+    > .KibaMessageDialogButtons {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--kiba-spacing);
+    }
+  }
+}
+```

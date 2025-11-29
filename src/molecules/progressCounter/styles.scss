@@ -1,0 +1,10 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaProgressCounter {
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    overflow: auto;
+  }
+}

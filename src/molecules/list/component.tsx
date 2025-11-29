@@ -2,25 +2,11 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { IMultiChildProps, OptionalProppedElement } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
-import { IListItemProps, IListItemTheme, ListItem } from '../../atoms/listItem';
+import './styles.scss';
+import { IListItemProps, ListItem } from '../../atoms/listItem';
+import { IComponentProps } from '../../model';
 import { Divider } from '../../particles';
-import { IMoleculeProps } from '../moleculeProps';
-
-export interface IListTheme {
-  listItemTheme: IListItemTheme;
-}
-
-const StyledList = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 100%;
-  overflow: auto;
-  &.fullWidth {
-    width: 100%;
-  }
-`;
 
 // TODO(krishan711): move this somewhere else if it is used again
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
@@ -34,7 +20,7 @@ export function ListItemInner(props: IListItemInnerProps): React.ReactElement {
 }
 ListItemInner.displayName = 'KibaListItem';
 
-interface IListProps extends IMoleculeProps<IListTheme>, IMultiChildProps<IListItemInnerProps> {
+interface IListProps extends IComponentProps, IMultiChildProps<IListItemInnerProps> {
   isFullWidth?: boolean;
   selectedItemKey?: string;
   shouldShowDividers?: boolean;
@@ -53,7 +39,7 @@ export function List({
   });
 
   return (
-    <StyledList
+    <div
       id={props.id}
       className={getClassName(List.displayName, className, props.isFullWidth && 'fullWidth')}
     >
@@ -67,7 +53,6 @@ export function List({
               key={child.props.itemKey}
               id={child.props.id}
               className={child.props.className}
-              theme={props.theme?.listItemTheme}
               variant={props.itemVariant || child.props.variant}
               itemKey={child.props.itemKey}
               isDisabled={child.props.isDisabled}
@@ -82,7 +67,7 @@ export function List({
           </React.Fragment>
         );
       })}
-    </StyledList>
+    </div>
   );
 }
 List.displayName = 'KibaList';

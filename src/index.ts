@@ -1,3 +1,6 @@
+import './styles/reset.scss';
+import './styles/colors.scss';
+
 export * from './model';
 export * from './util';
 
@@ -7,6 +10,5 @@ export * from './atoms';
 export * from './particles';
 export * from './molecules';
 
-export * from './theming';
 export * from './hooks';
 export * from './app';

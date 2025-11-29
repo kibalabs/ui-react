@@ -1,51 +1,80 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Box } from '../box';
-import { LoadingSpinner, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # LoadingSpinner
 
-<br />
+**LoadingSpinner** is a `particle` that displays an animated loading indicator.
 
-export const Template = (args) => (
-  <LoadingSpinner {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Light (for dark backgrounds)
 
-<Canvas>
-  <Story of={DocumentationStories.Light} />
-</Canvas>
+<Canvas of={Stories.Light} />
 
-<Canvas>
-  <Story of={DocumentationStories.Dark} />
-</Canvas>
+### Dark
 
-<Canvas>
-  <Story of={DocumentationStories.Small} />
-</Canvas>
+<Canvas of={Stories.Dark} />
 
-<Canvas>
-  <Story of={DocumentationStories.Large} />
-</Canvas>
+### Sizes
 
-<Canvas>
-  <Story of={DocumentationStories.ExtraLarge} />
-</Canvas>
+<Canvas of={Stories.Sizes} />
 
-<Canvas>
-  <Story of={DocumentationStories.Fill} />
-</Canvas>
+### Fill Container
 
-### Theming
+<Canvas of={Stories.Fill} />
 
-TODO
+### In Button
+
+<Canvas of={Stories.InButton} />
+
+## Theming
+
+### CSS Class: `.KibaLoadingSpinner`
+
+### Variants
+
+| Variant | Description |
+|---------|-------------|
+| `light` | White spinner |
+| `dark` | Black spinner |
+| `small` | 1rem size |
+| (default) | 2rem size |
+| `large` | 4rem size |
+| `extraLarge` | 8rem size |
+| `fill` | 100% of container |
+
+Combine variants: `variant="light-large"`
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaLoadingSpinner {
+    --kiba-loading-spinner-size: 2rem;
+    --kiba-loading-spinner-width: 0.2em;
+    --kiba-loading-spinner-color: var(--kiba-color-brand-primary);
+
+    &.small {
+      --kiba-loading-spinner-size: 1rem;
+    }
+
+    &.large {
+      --kiba-loading-spinner-size: 4rem;
+    }
+
+    &.light {
+      --kiba-loading-spinner-color: white;
+    }
+
+    &.dark {
+      --kiba-loading-spinner-color: black;
+    }
+  }
+}
+```

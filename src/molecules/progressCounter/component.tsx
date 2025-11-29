@@ -1,29 +1,15 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { styled } from 'styled-components';
 
-import { IProgressCounterItemTheme, ProgressCounterItem } from '../../atoms';
+import { ProgressCounterItem } from '../../atoms';
 import { Direction } from '../../model';
 import { PaddingSize, Spacing } from '../../particles';
 import { IMoleculeProps } from '../moleculeProps';
-
-export interface IProgressCounterTheme {
-  progressCounterItemTheme: IProgressCounterItemTheme;
-}
-
-interface IStyledProgressCounterProps {
-}
-
-const StyledProgressCounter = styled.div<IStyledProgressCounterProps>`
-  display: flex;
-  flex-direction: row;
-  max-width: 100%;
-  overflow: auto;
-`;
+import './styles.scss';
 
 // TODO(krishan711): this can probably be abstracted into a tabbar + tab component
-export interface IProgressCounterProps extends IMoleculeProps<IProgressCounterTheme> {
+export interface IProgressCounterProps extends IMoleculeProps {
   stepCount: number;
   selectedStepIndex: number;
   progressCounterItemVariant?: string;
@@ -37,7 +23,7 @@ export function ProgressCounter({
   ...props
 }: IProgressCounterProps): React.ReactElement {
   return (
-    <StyledProgressCounter
+    <div
       id={props.id}
       className={getClassName(ProgressCounter.displayName, className)}
     >
@@ -47,7 +33,6 @@ export function ProgressCounter({
           <React.Fragment key={index}>
             <ProgressCounterItem
               id={props.id && `${props.id}-item-${index}`}
-              theme={props.theme?.progressCounterItemTheme}
               variant={props.progressCounterItemVariant}
               text={String(index + 1)}
               isEnabled={props.isSelectable ? props.isSelectable(index) : false}
@@ -57,7 +42,7 @@ export function ProgressCounter({
           </React.Fragment>
         );
       })}
-    </StyledProgressCounter>
+    </div>
   );
 }
 ProgressCounter.displayName = 'KibaProgressCounter';

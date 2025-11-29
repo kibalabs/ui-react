@@ -1,0 +1,46 @@
+@use '../../styles/variables' as *;
+@use '../../particles/box/styles' as box;
+
+@layer kiba-structure {
+  .KibaWebView {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .web-view-loading-wrapper {
+    position: absolute;
+  }
+
+  .web-view-iframe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border: none;
+    .no-js &.lazyload {
+      display: none;
+    }
+    &.lazyload,
+    &.lazyloading,
+    &.isLoading {
+      opacity: 0;
+    }
+    &.lazyloaded {
+      display: block;
+      opacity: 1;
+      transition: opacity 0.15s;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaWebView {
+    @include box.default;
+    background-color: $color-background;
+  }
+}

@@ -1,0 +1,20 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaList {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    overflow: auto;
+
+    &.fullWidth {
+      width: 100%;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaList {
+    // Theme styles applied via child components
+  }
+}

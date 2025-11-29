@@ -1,0 +1,48 @@
+@use '../../styles/variables' as *;
+@use '../text/styles' as text;
+@use '../box/styles' as box;
+
+@layer kiba-structure {
+  .KibaPill {
+    outline: none;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-clip: border-box;
+    &.fullWidth {
+      width: 100%;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaPill {
+    @include text.default;
+    @include text.small;
+    @include box.default;
+    @include box.focusable;
+    padding: $padding $padding-wide2;
+    border-radius: $padding-wide2;
+    background-color: var(--kiba-color-brand-primary-clear75);
+    color: $color-brand-primary;
+    font-weight: 600;
+    &.primary {
+      border-color: $color-brand-primary;
+    }
+    &.secondary {
+      background-color: var(--kiba-color-brand-primary-clear25);
+      color: $color-text-on-brand;
+    }
+    &.error {
+      background-color: var(--kiba-color-error-clear75);
+      border-color: var(--kiba-color-error-light10);
+      color: var(--kiba-color-error-light10);
+    }
+    &.success {
+      background-color: var(--kiba-color-success-clear75);
+      border-color: var(--kiba-color-success-light10);
+      color: var(--kiba-color-success-light10);
+    }
+  }
+}

@@ -4,10 +4,9 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
 import { CollapsibleBox } from './component';
-import { ICollapsibleBoxTheme } from './theme';
 import { IComponentProps } from '../../model';
 
-interface IStatefulCollapsibleBoxProps extends IComponentProps<ICollapsibleBoxTheme>, ISingleAnyChildProps {
+interface IStatefulCollapsibleBoxProps extends IComponentProps, ISingleAnyChildProps {
   headerView: React.ReactNode;
   isCollapsedInitially?: boolean;
   shouldSkipRenderingWhenCollapsed?: boolean;
@@ -28,13 +27,13 @@ export function StatefulCollapsibleBox({
     <CollapsibleBox
       id={props.id}
       className={getClassName(StatefulCollapsibleBox.displayName, className)}
-      theme={props.theme}
       variant={variant}
       headerView={props.headerView}
       isCollapsed={isCollapsed}
       onCollapseToggled={onCollapseToggled}
       shouldSkipRenderingWhenCollapsed={props.shouldSkipRenderingWhenCollapsed}
       shouldHideIndicator={props.shouldHideIndicator}
+      style={props.style}
     >
       {props.children}
     </CollapsibleBox>

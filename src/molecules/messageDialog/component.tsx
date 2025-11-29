@@ -6,10 +6,7 @@ import { Alignment, Direction } from '../../model';
 import { KibaIcon, PaddingSize, Spacing, Text, TextAlignment } from '../../particles';
 import { IMoleculeProps } from '../moleculeProps';
 
-export interface IMessageDialogTheme {
-}
-
-interface IMessageDialogProps extends IMoleculeProps<IMessageDialogTheme> {
+interface IMessageDialogProps extends IMoleculeProps {
   isOpen: boolean;
   maxHeight?: string;
   maxWidth?: string;

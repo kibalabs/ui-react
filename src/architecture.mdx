@@ -1,183 +1,257 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title='Introduction/Architecture' />
 
 # Architecture
 
-The project defines components that follow a customized version of the [Atomic Design by Brad Frost](https://bradfrost.com/blog/post/atomic-web-design/) principles. We've extended and augmented the core principles in a few ways described below. I'd recommend reading up on atomic design when you get a chance but it's definitely not needed to use the library (it is if you want to contribute though).
+The project defines components that follow a customized version of the [Atomic Design by Brad Frost](https://bradfrost.com/blog/post/atomic-web-design/) principles. We've extended and augmented the core principles in a few ways described below.
 
-## Particles
+## Component Hierarchy
 
-These are the basic building blocks on which most other components in UI-React will build. Particle components only have one layer of theming, because these components are not used in stateful ways.
+### Particles
 
-### Theming
+These are the basic building blocks on which most other components in UI-React will build. Particles are simple, stateless components that map closely to CSS styling.
 
-Particles have themes with only a single layer because they are intended to be used within other themable components.
+**Examples:**
+- **Box** - A rectangular area with background, shadow, border, and padding
+- **Text** - Display text with various typographic styles
+- **Icon** - Display simple icons
+- **Spacing** - Create spacing between/around items
+- **Image** - Display images with various fit modes
 
-```ts
-export interface IBoxTheme extends CssTheme, ThemeType {
-  'background-color': string;
-  'border-radius': string;
-  'border-color': string;
-  'border-width': string;
-  'border-style': string;
-  'box-shadow': string;
-  'margin': string;
-  'padding': string;
-  ...
+### Atoms
+
+Atoms combine particles and native elements to create interactive, stateful components. These are the primary building blocks for user interfaces.
+
+**Examples:**
+- **Button** - Clickable element for user actions
+- **Link** - Navigational text element
+- **Checkbox** - Toggle input for boolean values
+- **InputWrapper** - Consistent styling for input components
+
+### Molecules
+
+Molecules combine atoms and particles to create more complex UI patterns.
+
+**Examples:**
+- **OptionSelect** - Dropdown selection component
+- **Accordion** - Collapsible content sections
+- **Form** - Form layout and validation
+
+### Layouts
+
+Layout components handle positioning and arrangement of child components.
+
+**Examples:**
+- **Stack** - Vertical or horizontal stacking
+- **Grid** - CSS Grid-based layouts
+- **EqualGrid** - Equal-width grid columns
+- **Container** - Max-width container with centering
+
+## Theming with SCSS and CSS Variables
+
+UI-React uses a pure CSS approach to theming via SCSS and CSS custom properties. This provides excellent performance, easy customization, and full CSS cascade support.
+
+### CSS Layers
+
+Styles are organized into CSS layers for predictable specificity:
+
+```scss
+@layer kiba-reset, kiba-structure, kiba-theme;
+```
+
+- **kiba-reset** - CSS reset and normalization
+- **kiba-structure** - Component structure (layout, positioning)
+- **kiba-theme** - Visual theming (colors, typography, spacing)
+
+### CSS Custom Properties
+
+All themeable values use CSS custom properties with the `--kiba-` prefix:
+
+```scss
+:root {
+  // Colors
+  --kiba-color-background: #ffffff;
+  --kiba-color-text: #1a1a2e;
+  --kiba-color-brand-primary: #4361ee;
+  --kiba-color-brand-secondary: #3f37c9;
+
+  // Typography
+  --kiba-font-family: system-ui, sans-serif;
+  --kiba-font-size-base: 16px;
+  --kiba-font-weight-normal: 400;
+  --kiba-font-weight-bold: 700;
+
+  // Spacing
+  --kiba-spacing-xs: 4px;
+  --kiba-spacing-sm: 8px;
+  --kiba-spacing-md: 16px;
+  --kiba-spacing-lg: 24px;
+  --kiba-spacing-xl: 32px;
+
+  // Borders
+  --kiba-border-radius: 4px;
+  --kiba-border-width: 1px;
+  --kiba-border-color: #e0e0e0;
 }
 ```
 
-They can have variants to allow using particles directly in simple ways. For example, the `Text` particle has variants: `title`, `subtitle`, `note`, as well as `header1`, `header2`, `header3`, `bold`, `italic` etc.
+### Component Styling
 
-NOTE(krishan711): I think the colors, dimensions and fonts should be pulled out from particles and moved to their own category.
+Each component has its own SCSS file with styles organized by layer:
 
-### Examples
-
-* Box - Used to draw a rectangular area of content with a background, shadow and border, which can have children inside
-* Text - used to show a piece of text (like this line!)
-* Icon - Used to show a simple icon
-* Spacing - Used to create spacing between / around items
-
-## Atoms
-
-Atoms use particles and native components to build themable, stateful components. These components are intended to be used directly (or within molecules and organisms) to create a consistent UI.
-
-### Theming
-
-Each atom has a theme with 3 levels. The theme has a normal "state" and then zero or more states that represent states that are "long-term" e.g. a button is disabled. Each state then has a default theme and then zero or more states that are "short-term" e.g. a button can be hovered. This is the complete button theme:
-
-```ts
-export interface IButtonTheme {
-  normal: IButtonThemeState;
-  disabled: RecursivePartial<IButtonThemeState>;
+```scss
+// button/styles.scss
+@layer kiba-structure {
+  .KibaButton {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
 }
 
-export interface IButtonThemeState {
-  default: IButtonThemeBase;
-  hover: RecursivePartial<IButtonThemeBase>;
-  press: RecursivePartial<IButtonThemeBase>;
-  focus: RecursivePartial<IButtonThemeBase>;
-}
+@layer kiba-theme {
+  .KibaButton {
+    background-color: transparent;
+    border-radius: var(--kiba-border-radius);
+    color: var(--kiba-color-brand-primary);
+    padding: var(--kiba-spacing-sm) var(--kiba-spacing-md);
 
-export interface IButtonThemeBase {
-  text: ITextTheme;
-  background: IBoxTheme;
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
 }
 ```
 
-The `default > normal` theme for the atom should be specified in entirety, i.e. all the fields need to be filled in for the state, the base and every particle theme in the base. The `RecursivePartial` definition allows all other theme paths to only specify their difference from the normal state. This works just like CSS and is implemented in exactly the same way - the alternate states are applied *over* the normal state.
+### Variants
 
-So the "theme" object for a Button can look like this:
+Variants are implemented as CSS class modifiers:
 
-```js
-{
-  "normal": {
-    "default": {
-      "text": {
-          ... all ITextTheme fields filled in ...
-      },
-      "background": {
-          "color": "$colors.brandPrimary"
-          ... all IBoxTheme fields filled in ...
-      },
-    },
-    "hover": {
-      "background": {
-          "color": "$colors.brandPrimaryDark10"
-      },
-    },
-    "press": {
-      "background": {
-          "color": "$colors.brandPrimaryDark20"
-      },
-    },
-  },
-  "disabled": {
-    "default": {
-      "background": {
-          "color": "$colors.disabled"
-      },
-    },
-  },
+```scss
+@layer kiba-theme {
+  .KibaButton {
+    // Default styling
+    background-color: transparent;
+    color: var(--kiba-color-brand-primary);
+
+    // Primary variant
+    &.primary {
+      background-color: var(--kiba-color-brand-primary);
+      color: var(--kiba-color-text-on-brand);
+    }
+
+    // Secondary variant
+    &.secondary {
+      background-color: var(--kiba-color-brand-secondary);
+      color: var(--kiba-color-text-on-brand);
+    }
+
+    // Large variant
+    &.large {
+      padding: var(--kiba-spacing-md) var(--kiba-spacing-lg);
+      font-size: 1.25em;
+    }
+  }
 }
 ```
 
-This will create a nice button with your brand color as the background with it getting darker on hover and even darker on press. When the button is disabled it will be the disabled color with no other changes from the base.
+Usage:
+```tsx
+<Button variant="primary" text="Primary Action" />
+<Button variant="secondary-large" text="Large Secondary" />
+```
 
-This means that we can configure how the button looks in each of the states its in very efficiently. Plus, because it's JSON you can even do it programmatically!
+### Customizing Themes
 
-Atoms alse have variants which allow the atom to have different styles. For example, the button atom has variants including primary, secondary and tertiary to indicate to the user what kind of action they are about to make.
+To customize the theme, override CSS custom properties in your application:
 
-### Examples
+```scss
+// Your app's theme.scss
+@use '@kibalabs/ui-react/styles';
 
-Current examples of atoms include:
-
-* Button - allow the user to take some action by clicking on this
-* Link - a piece of text that can be click to take the user somewhere
-* InputWrapper - intended to be used in conjunction with other components to create a coherent style for input components
-
-## Molecules
-
-Molecules use atoms, particles and native components to create more complex visual components.
-
-#### Theming
-
-As molecules can use atoms, it would not make sense for them to be stateful and have actions because this would lead to very deep hierarchies in the themes. To alleviate this, the theme for a molecule only includes the sub-themes for the atoms it uses.
-
-For example, the OptionSelect molecule uses an input and shows a list item for each option. To allow theming, the OptionSelectTheme looks like this:
-
-```ts
-interface IOptionSelectTheme {
-  inputTheme: ISingleLineInputTheme;
-  listItemTheme: IListItemTheme;
+:root {
+  --kiba-color-brand-primary: #e63946;
+  --kiba-color-brand-secondary: #457b9d;
+  --kiba-font-family: 'Inter', sans-serif;
+  --kiba-border-radius: 8px;
 }
 ```
 
-This allows the user to pass in the theme directly where they want to, but the use of it will look weird and stick out in a pull request. In most cases the theme should not be provided and the default theme for the atoms should be used.
+### Adding Custom Variants
 
-If the molecule includes a list of atomic components as children (e.g. the Accordion molecule takes a list of Accordion.Item as children), each child should also be allowed to specify its theme and mode.
+Extend component styling with your own variants:
 
-TODO(krishan711): add images for the below section Sometimes, the molecule wants to use a specific version of the theme. E.g. in the TitledBox atom, the default theme has a padding for the contents of the box. However, the Accordion molecule should use the TitledBox but doesn't want a padding in the content. So, it should have code like this:
+```scss
+// Extend Button with a "danger" variant
+@layer kiba-theme {
+  .KibaButton.danger {
+    background-color: var(--kiba-color-error);
+    color: white;
+
+    &:hover {
+      background-color: var(--kiba-color-error-dark);
+    }
+  }
+}
+```
+
+## Responsive Design
+
+Components support responsive behavior through the `ScreenSize` system:
 
 ```tsx
-<TitledBox
-  id={props.id}
-  className={getClassName('accordion', className)}
-  theme={props.theme?.titledBoxTheme}
-  variant={'unpadded'}
-  title={props.title}
+import { ScreenSize } from '@kibalabs/ui-react';
+
+// Different padding at different screen sizes
+<Stack
+  paddingStart={PaddingSize.Default}
+  paddingStartResponsive={{ base: PaddingSize.Narrow, medium: PaddingSize.Wide }}
 >
   ...
-</TitledBox>
+</Stack>
 ```
 
-This means that by default the molecule will use the unpadded mode for the TitledBox, but if the user provides a theme directly to the Accordion, that theme will be used instead.
+Screen size breakpoints are defined in SCSS variables.
 
-## Layouts
+## Creating Custom Components
 
-These components are used to lay out other components in specific configurations.
+When creating your own components that integrate with UI-React:
 
-TODO(krishan711): fill this in.
+1. **Use CSS layers** - Place styles in `kiba-structure` and `kiba-theme` layers
+2. **Use CSS variables** - Reference `--kiba-*` variables for consistency
+3. **Follow naming** - Use `Kiba` prefix for class names (e.g., `.KibaMyComponent`)
+4. **Support variants** - Implement variants as class modifiers
+5. **Use existing particles** - Compose with Box, Text, etc. where possible
 
-## Wrappers
+```tsx
+// MyCard/component.tsx
+export const MyCard = ({ variant, children }: IMyCardProps) => {
+  return (
+    <Box className={getClassName('KibaMyCard', variant)}>
+      {children}
+    </Box>
+  );
+};
+```
 
-These components are used to augment other components without creating an additional level of heirarchy in the output html.
+```scss
+// MyCard/styles.scss
+@layer kiba-theme {
+  .KibaMyCard {
+    background-color: var(--kiba-color-background);
+    border-radius: var(--kiba-border-radius);
+    padding: var(--kiba-spacing-md);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-TODO(krishan711): fill this in.
-
-## Application-level
-
-These components are used to set up the application.
-
-TODO(krishan711): fill this in.
-
-## Theme CSS
-
-Themes are applied to components via normal css. The themes passed into `ThemeProvider` are converted into CSS and applied to the document through the component names (e.g. the `Box` component will have css applied from `.KibaBox`). The variants are created in the same way through css with classNames as well. Although it's far better to pass variants through the variant prop, they can actually be passed in through classNames too.
-
-## Creating your own components
-
-See other kiba projects to see how custom components with theming are made. Feel free to open a PR if you think they can be reused.
-
-TODO(krishan711): fill this in.
+    &.elevated {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+```

@@ -2,65 +2,49 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { flattenChildren, IMultiChildProps, IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
-import { Alignment, getFlexContentAlignment, getFlexItemAlignment, PaddingSize, PaddingSizeProp } from '../..';
-import { getPaddingSize, IDimensionGuide } from '../../particles';
-import { useDimensions } from '../../theming';
-import { getResponsiveCss, ResponsiveField } from '../../util';
+import './styles.scss';
+import { Alignment, getFlexContentAlignment, getFlexItemAlignment, getPaddingSizeCss, PaddingSize, PaddingSizeProp } from '../..';
+import { ResponsiveField } from '../../util';
 import { IPaddingViewPaddingProps, PaddingView } from '../../wrappers/paddingView';
 
 
+const DEFAULT_COLUMN_COUNT = 12;
+
 export interface IGridItemProps extends IOptionalSingleAnyChildProps {
-  // eslint-disable-next-line react/no-unused-prop-types
   id?: string;
-  // eslint-disable-next-line react/no-unused-prop-types
   className?: string;
-  // eslint-disable-next-line react/no-unused-prop-types
   isFullHeight?: boolean;
-  // eslint-disable-next-line react/no-unused-prop-types
   size?: number;
-  // eslint-disable-next-line react/no-unused-prop-types
   sizeResponsive?: ResponsiveField<number>;
-  // eslint-disable-next-line react/no-unused-prop-types
   alignment?: Alignment;
+  style?: React.CSSProperties;
 }
 
-// eslint-disable-next-line unused-imports/no-unused-vars
-export function GridItem(props: IGridItemProps): React.ReactElement {
-  return (
-    <React.Fragment />
-  );
+export function GridItem(_props: IGridItemProps): React.ReactElement {
+  return <React.Fragment />;
 }
 GridItem.displayName = 'KibaGridItem';
-
-interface IStyledGridProps {
-  $isFullHeight?: boolean;
-  $childAlignment: Alignment;
-  $contentAlignment: Alignment;
-}
-
-const StyledGrid = styled.div<IStyledGridProps>`
-  height: ${(props: IStyledGridProps): string => (props.$isFullHeight ? '100%' : 'auto')};
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  overflow-x: auto;
-  align-items: ${(props: IStyledGridProps): string => getFlexItemAlignment(props.$childAlignment)};
-  justify-content: ${(props: IStyledGridProps): string => getFlexContentAlignment(props.$contentAlignment)};
-`;
 
 export interface IGridProps extends IMultiChildProps<IGridItemProps>, IPaddingViewPaddingProps {
   id?: string;
   className?: string;
-  theme?: IDimensionGuide;
+  columnCount?: number;
   isFullHeight?: boolean;
   shouldAddGutters?: boolean;
   defaultGutter?: PaddingSizeProp;
   childAlignment?: Alignment;
   contentAlignment?: Alignment;
+  style?: React.CSSProperties;
 }
+
+const getItemWidth = (columnCount: number, size: number, gutter: string): string => {
+  return `calc(${(100.0 * size) / columnCount}% - 2 * ${gutter})`;
+};
+
+const getItemDisplay = (size: number): string => {
+  return size === 0 ? 'none' : 'flex';
+};
 
 export function Grid({
   className = '',
@@ -70,91 +54,79 @@ export function Grid({
   contentAlignment = Alignment.Center,
   ...props
 }: IGridProps): React.ReactElement {
-  const theme = useDimensions(props.theme);
+  const columnCount = props.columnCount ?? DEFAULT_COLUMN_COUNT;
   const defaultGutter = props.defaultGutter || PaddingSize.Default;
   const innerShouldAddGutters = shouldAddGutters && defaultGutter !== PaddingSize.None;
-
-  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number), index: number): React.ReactElement<IGridItemProps> => (
-    // eslint-disable-next-line react/no-array-index-key
-    typeof child === 'object' && 'type' in child && child.type === GridItem ? child : <GridItem key={index}>{ child }</GridItem>
-  ));
+  const gutter = innerShouldAddGutters ? getPaddingSizeCss(defaultGutter) : '0px';
+  let childIndex = 0;
+  const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number)): React.ReactElement => {
+    if (typeof child === 'object' && 'type' in child && child.type === GridItem) {
+      return child;
+    }
+    childIndex += 1;
+    return <GridItem key={`grid-item-${childIndex}`}>{child}</GridItem>;
+  });
+  const gridStyles: React.CSSProperties = {
+    ...props.style,
+    // @ts-expect-error CSS custom properties
+    '--kiba-grid-height': isFullHeight ? '100%' : 'auto',
+    '--kiba-grid-child-alignment': getFlexItemAlignment(childAlignment),
+    '--kiba-grid-content-alignment': getFlexContentAlignment(contentAlignment),
+  };
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <PaddingView className={className} {...props as IPaddingViewPaddingProps}>
-      <StyledGrid
+      <div
         id={props.id}
         className={getClassName(Grid.displayName, className)}
-        $isFullHeight={isFullHeight}
-        $childAlignment={childAlignment}
-        $contentAlignment={contentAlignment}
+        style={gridStyles}
       >
-        { children.map((child: React.ReactElement<IGridItemProps>): React.ReactElement => (
-          <StyledGridItem
-            key={child.key}
-            id={child.props.id}
-            className={getClassName(StyledGridItem.displayName, child.props.className)}
-            $theme={theme}
-            $size={{ base: child.props.size || 12, ...child.props.sizeResponsive }}
-            $isFullHeight={child.props.isFullHeight || false}
-            $gutter={innerShouldAddGutters ? getPaddingSize(defaultGutter, theme) : '0px'}
-            $alignment={child.props.alignment}
-          >
-            {child.props.children}
-          </StyledGridItem>
-        ))}
-      </StyledGrid>
+        {(children as React.ReactElement<IGridItemProps>[]).map((child: React.ReactElement<IGridItemProps>): React.ReactElement => {
+          const childProps = child.props;
+          const size = childProps.size ?? 12;
+          const sizeResponsive = childProps.sizeResponsive ?? {};
+          const itemStyles: React.CSSProperties = {
+            ...childProps.style,
+            // @ts-expect-error CSS custom properties
+            '--kiba-grid-item-gutter': gutter,
+            '--kiba-grid-item-alignment': childProps.alignment ? getFlexItemAlignment(childProps.alignment) : 'auto',
+            '--kiba-grid-item-width': getItemWidth(columnCount, size, gutter),
+            '--kiba-grid-item-display': getItemDisplay(size),
+            ...(childProps.isFullHeight ? {
+              '--kiba-grid-item-height': '100%',
+              '--kiba-grid-item-overflow-y': 'auto',
+            } : {}),
+            ...(sizeResponsive.small !== undefined ? {
+              '--kiba-grid-item-width-sm': getItemWidth(columnCount, sizeResponsive.small, gutter),
+              '--kiba-grid-item-display-sm': getItemDisplay(sizeResponsive.small),
+            } : {}),
+            ...(sizeResponsive.medium !== undefined ? {
+              '--kiba-grid-item-width-md': getItemWidth(columnCount, sizeResponsive.medium, gutter),
+              '--kiba-grid-item-display-md': getItemDisplay(sizeResponsive.medium),
+            } : {}),
+            ...(sizeResponsive.large !== undefined ? {
+              '--kiba-grid-item-width-lg': getItemWidth(columnCount, sizeResponsive.large, gutter),
+              '--kiba-grid-item-display-lg': getItemDisplay(sizeResponsive.large),
+            } : {}),
+            ...(sizeResponsive.extraLarge !== undefined ? {
+              '--kiba-grid-item-width-xl': getItemWidth(columnCount, sizeResponsive.extraLarge, gutter),
+              '--kiba-grid-item-display-xl': getItemDisplay(sizeResponsive.extraLarge),
+            } : {}),
+          };
+          return (
+            <div
+              key={child.key}
+              id={childProps.id}
+              className={getClassName('KibaGridItem', childProps.className)}
+              style={itemStyles}
+            >
+              {childProps.children}
+            </div>
+          );
+        })}
+      </div>
     </PaddingView>
   );
 }
 Grid.displayName = 'KibaGrid';
 Grid.Item = GridItem;
-
-const getCssSize = (totalColumnCount: number, gutter: string, columnCount: number): string => {
-  return `
-    width: calc(${(100.0 * columnCount) / totalColumnCount}% - 2 * ${gutter});
-    ${columnCount === 0 ? 'display: none' : 'display: flex'};
-  `;
-};
-
-// TODO(krishan711): this can be consolidated with responsiveUtil.fieldToResponsiveCss with some kind of currying for the above function.
-const columnCountsToCss = (field: ResponsiveField<number>, theme: IDimensionGuide, gutter: string): string => {
-  const output: string[] = [];
-  if (field?.base !== undefined) {
-    output.push(getCssSize(theme.columnCount, gutter, field.base));
-  }
-  if (field?.small !== undefined) {
-    output.push(getResponsiveCss(theme.screenWidthSmall, getCssSize(theme.columnCount, gutter, field.small)));
-  }
-  if (field?.medium !== undefined) {
-    output.push(getResponsiveCss(theme.screenWidthMedium, getCssSize(theme.columnCount, gutter, field.medium)));
-  }
-  if (field?.large !== undefined) {
-    output.push(getResponsiveCss(theme.screenWidthLarge, getCssSize(theme.columnCount, gutter, field.large)));
-  }
-  if (field?.extraLarge !== undefined) {
-    output.push(getResponsiveCss(theme.screenWidthExtraLarge, getCssSize(theme.columnCount, gutter, field.extraLarge)));
-  }
-  return output.join('\n');
-};
-
-interface IStyledGridItemProps {
-  $gutter: string;
-  $theme: IDimensionGuide;
-  $alignment?: Alignment;
-  $isFullHeight: boolean;
-  $size: ResponsiveField<number>;
-}
-
-const StyledGridItem = styled.div<IStyledGridItemProps>`
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: auto;
-  height: ${(props: IStyledGridItemProps): string => (props.$isFullHeight ? '100%' : 'auto')};
-  ${(props: IStyledGridItemProps): string => columnCountsToCss(props.$size, props.$theme, props.$gutter)};
-  overflow-y: ${(props: IStyledGridItemProps): string => (props.$isFullHeight ? 'auto' : 'visible')};
-  margin-left: ${(props: IStyledGridItemProps): string => props.$gutter};
-  margin-right: ${(props: IStyledGridItemProps): string => props.$gutter};
-  margin-top: ${(props: IStyledGridItemProps): string => props.$gutter};
-  margin-bottom: ${(props: IStyledGridItemProps): string => props.$gutter};
-  align-self: ${(props: IStyledGridItemProps): string => (props.$alignment ? getFlexItemAlignment(props.$alignment) : 'auto')};
-`;

@@ -1,33 +1,22 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Box, Text } from '../../particles';
-import { HidingView, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # HidingView
 
-<br />
+**HidingView** is a `wrapper` component that conditionally hides content. Toggles visibility of children.
 
-export const Template = (args) => (
-  <HidingView {...args}>
-    <Box variant='card'>
-      <Text>I'm wrapped</Text>
-    </Box>
-  </HidingView>
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Is Hidden
 
-TODO
+<Canvas of={Stories.IsHidden} />
 
-### Theming
+## Theming
 
-TODO
+This is a structural component without visual theming.

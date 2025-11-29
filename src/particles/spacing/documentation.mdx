@@ -1,28 +1,73 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Spacing, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Spacing
 
-<br />
+**Spacing** is a utility `particle` that adds empty space between elements. It's a non-visual component that creates margin-based gaps.
 
-export const Template = (args) => (
-  <Spacing {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Narrow Spacing
 
-TODO
+<Canvas of={Stories.Narrow} />
 
-### Theming
+### Wide Spacing
 
-TODO
+<Canvas of={Stories.Wide} />
+
+### Horizontal Direction
+
+<Canvas of={Stories.Horizontal} />
+
+### Vertical Direction
+
+<Canvas of={Stories.Vertical} />
+
+### All Sizes
+
+<Canvas of={Stories.AllSizes} />
+
+## Theming
+
+### CSS Class: `.KibaSpacing`
+
+### Variants (PaddingSize)
+
+| Variant | Description |
+|---------|-------------|
+| `none` | No spacing (0px) |
+| `narrow2` | Extra narrow spacing |
+| `narrow1` | Narrow spacing |
+| `default` | Default spacing |
+| `wide1` | Wide spacing |
+| `wide2` | Extra wide spacing |
+| `wide3` | Very wide spacing |
+| `wide4` | Maximum wide spacing |
+
+### Direction
+
+| Value | Description |
+|-------|-------------|
+| `Both` | Adds margin on both axes (default) |
+| `Horizontal` | Only horizontal (left) margin |
+| `Vertical` | Only vertical (top) margin |
+
+### Customizing with CSS
+
+```css
+:root {
+  --kiba-padding: 0.5rem;
+  --kiba-padding-narrow: 0.25rem;
+  --kiba-padding-narrow2: 0.125rem;
+  --kiba-padding-wide: 1rem;
+  --kiba-padding-wide2: 1.5rem;
+  --kiba-padding-wide3: 2rem;
+  --kiba-padding-wide4: 3rem;
+}
+```

@@ -1,25 +1,15 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { styled } from 'styled-components';
 
 import { Direction, IComponentProps, MultiDirection } from '../../model';
-import { useDimensions } from '../../theming';
-import { getPaddingSize, IDimensionGuide, PaddingSize } from '../dimensions';
+import { getPaddingSizeCss, PaddingSize } from '../dimensions';
 
-interface IStyledSpacingProps {
-  $size: PaddingSize;
-  $direction: Direction | MultiDirection;
-  $theme: IDimensionGuide;
-}
+import './styles.scss';
 
-const StyledDiv = styled.div<IStyledSpacingProps>`
-  margin-left: ${(props: IStyledSpacingProps): string => (props.$direction === MultiDirection.Both || props.$direction === MultiDirection.Horizontal ? getPaddingSize(props.$size, props.$theme) : '0')};
-  margin-top: ${(props: IStyledSpacingProps): string => (props.$direction === MultiDirection.Both || props.$direction === MultiDirection.Vertical ? getPaddingSize(props.$size, props.$theme) : '0')};
-`;
-
-export interface ISpacingProps extends IComponentProps<IDimensionGuide> {
+export interface ISpacingProps extends IComponentProps {
   direction?: Direction | MultiDirection;
+  style?: React.CSSProperties;
 }
 
 export function Spacing({
@@ -28,14 +18,19 @@ export function Spacing({
   direction = MultiDirection.Both,
   ...props
 }: ISpacingProps): React.ReactElement {
-  const theme = useDimensions(props.theme);
+  const size = getPaddingSizeCss(variant as PaddingSize);
+  const marginLeft = direction === MultiDirection.Both || direction === MultiDirection.Horizontal ? size : '0';
+  const marginTop = direction === MultiDirection.Both || direction === MultiDirection.Vertical ? size : '0';
+  const spacingStyles: React.CSSProperties = {
+    ...props.style,
+    '--kiba-spacing-margin-left': marginLeft,
+    '--kiba-spacing-margin-top': marginTop,
+  } as React.CSSProperties;
   return (
-    <StyledDiv
+    <div
       id={props.id}
       className={getClassName(Spacing.displayName, className)}
-      $theme={theme}
-      $size={variant as PaddingSize}
-      $direction={direction}
+      style={spacingStyles}
     />
   );
 }

@@ -1,14 +1,8 @@
 import React from 'react';
 
-import { getClassName } from '@kibalabs/core';
-import { ISingleAnyChildProps } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
-
-import { IColorGuide } from '../../particles';
-import { useColors } from '../../theming';
 import { valueToCss } from '../../util';
 import { IWrapperProps } from '../wrapperProps';
-import { wrappingComponent } from '../wrappingComponent';
+import { WrapperView } from '../wrappingComponent';
 
 export interface IBackgroundLayer {
   color?: string;
@@ -23,15 +17,12 @@ export interface IBackgroundConfig extends IBackgroundLayer {
   layers?: IBackgroundLayer[];
 }
 
-const getLayersCss = (backgroundLayers: IBackgroundLayer[], colors: IColorGuide): string => {
-  return backgroundLayers.slice().reverse().map((backgroundLayer: IBackgroundLayer): string => getLayerCss(backgroundLayer, colors)).join(', ');
+const getLayersCss = (backgroundLayers: IBackgroundLayer[]): string => {
+  return backgroundLayers.slice().reverse().map((backgroundLayer: IBackgroundLayer): string => getLayerCss(backgroundLayer)).join(', ');
 };
 
-// eslint-disable-next-line unused-imports/no-unused-vars
-const getLayerCss = (backgroundLayer: IBackgroundLayer, colors: IColorGuide): string => {
+const getLayerCss = (backgroundLayer: IBackgroundLayer): string => {
   const layers: string[] = [];
-  // TODO(krishan711): this resolve doesn't do the "full resolution" thing for IE
-  // TODO(krishan711): resolve values for linear and radial gradients too
   if (backgroundLayer.color) {
     layers.push(`linear-gradient(${valueToCss(backgroundLayer.color)}, ${valueToCss(backgroundLayer.color)})`);
   }
@@ -50,26 +41,10 @@ const getLayerCss = (backgroundLayer: IBackgroundLayer, colors: IColorGuide): st
   return layers.join(', ');
 };
 
-interface IStyledBackgroundViewProps extends ISingleAnyChildProps {
-  className?: string;
-  $backgroundLayers: IBackgroundLayer[];
-  $colors: IColorGuide;
-}
-
-const StyledBackgroundView = wrappingComponent((Component: React.ComponentType<IStyledBackgroundViewProps>): React.ComponentType<IStyledBackgroundViewProps> => {
-  return styled(Component)<IStyledBackgroundViewProps>`
-    background: ${(props: IStyledBackgroundViewProps): string => getLayersCss(props.$backgroundLayers, props.$colors)};
-  `;
-});
-
 export interface IBackgroundViewProps extends IWrapperProps, IBackgroundConfig {
 }
 
-export function BackgroundView({
-  className = '',
-  ...props
-}: IBackgroundViewProps): React.ReactElement {
-  const colors = useColors();
+export function BackgroundView(props: IBackgroundViewProps): React.ReactElement {
   const layers = props.layers || [];
   if (props.color || props.linearGradient || props.radialGradient || props.imageUrl || props.patternImageUrl || layers.length === 0) {
     layers.splice(0, 0, {
@@ -80,14 +55,16 @@ export function BackgroundView({
       patternImageUrl: props.patternImageUrl,
     });
   }
+  const backgroundCss = getLayersCss(layers);
   return (
-    <StyledBackgroundView
-      className={getClassName(BackgroundView.displayName, className)}
-      $backgroundLayers={layers}
-      $colors={colors}
+    <WrapperView
+      className={props.className}
+      style={props.style}
+      wrapperClassName={BackgroundView.displayName}
+      wrapperStyle={backgroundCss ? { background: backgroundCss } : undefined}
     >
-      { props.children }
-    </StyledBackgroundView>
+      {props.children}
+    </WrapperView>
   );
 }
 BackgroundView.displayName = 'KibaBackgroundView';

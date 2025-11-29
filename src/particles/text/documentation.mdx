@@ -1,142 +1,135 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Text } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Text
 
-<br />
+**Text** is a `particle` component for displaying typography with semantic HTML tags and styling variants.
 
-export const Template = (args) => (
-  <Text {...args}>Every word tells a story</Text>
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Semantic Text Styles
 
-<Canvas>
-  <Story of={DocumentationStories.Paragraph} />
-</Canvas>
+<Canvas of={Stories.Bold} />
 
-<Canvas>
-  <Story of={DocumentationStories.Inline} />
-</Canvas>
+<Canvas of={Stories.Italic} />
 
-<Canvas>
-  <Story of={DocumentationStories.Bold} />
-</Canvas>
+<Canvas of={Stories.Underline} />
 
-<Canvas>
-  <Story of={DocumentationStories.Strong} />
-</Canvas>
+<Canvas of={Stories.Deleted} />
 
-<Canvas>
-  <Story of={DocumentationStories.Italic} />
-</Canvas>
+<Canvas of={Stories.Inserted} />
 
-<Canvas>
-  <Story of={DocumentationStories.Emphasis} />
-</Canvas>
+<Canvas of={Stories.Mark} />
 
-<Canvas>
-  <Story of={DocumentationStories.Underline} />
-</Canvas>
+<Canvas of={Stories.Subscript} />
 
-<Canvas>
-  <Story of={DocumentationStories.Mark} />
-</Canvas>
+<Canvas of={Stories.Superscript} />
 
-<Canvas>
-  <Story of={DocumentationStories.Small} />
-</Canvas>
+### Headings
 
-<Canvas>
-  <Story of={DocumentationStories.Deleted} />
-</Canvas>
+<Canvas of={Stories.Header1} />
 
-<Canvas>
-  <Story of={DocumentationStories.Inserted} />
-</Canvas>
+<Canvas of={Stories.Header2} />
 
-<Canvas>
-  <Story of={DocumentationStories.Subscript} />
-</Canvas>
+<Canvas of={Stories.Header3} />
 
-<Canvas>
-  <Story of={DocumentationStories.Superscript} />
-</Canvas>
+<Canvas of={Stories.Header4} />
 
-<Canvas>
-  <Story of={DocumentationStories.Header} />
-</Canvas>
+<Canvas of={Stories.Header5} />
 
-<Canvas>
-  <Story of={DocumentationStories.Title} />
-</Canvas>
+<Canvas of={Stories.Header6} />
 
-<Canvas>
-  <Story of={DocumentationStories.Subtitle} />
-</Canvas>
+### Sizes
 
-<Canvas>
-  <Story of={DocumentationStories.Header1} />
-</Canvas>
+<Canvas of={Stories.Small} />
 
-<Canvas>
-  <Story of={DocumentationStories.Header2} />
-</Canvas>
+<Canvas of={Stories.Note} />
 
-<Canvas>
-  <Story of={DocumentationStories.Header3} />
-</Canvas>
+<Canvas of={Stories.Supersize} />
 
-<Canvas>
-  <Story of={DocumentationStories.Header4} />
-</Canvas>
+### Colors
 
-<Canvas>
-  <Story of={DocumentationStories.Header5} />
-</Canvas>
+<Canvas of={Stories.Colored} />
 
-<Canvas>
-  <Story of={DocumentationStories.Header6} />
-</Canvas>
+<Canvas of={Stories.Error} />
 
-<Canvas>
-  <Story of={DocumentationStories.Note} />
-</Canvas>
+<Canvas of={Stories.Success} />
 
-<Canvas>
-  <Story of={DocumentationStories.Supersize} />
-</Canvas>
+### Line Limiting
 
-<Canvas>
-  <Story of={DocumentationStories.Unmargined} />
-</Canvas>
+<Canvas of={Stories.SingleLine} />
 
-<Canvas>
-  <Story of={DocumentationStories.Margined} />
-</Canvas>
+<Canvas of={Stories.MultiLine} />
 
-<Canvas>
-  <Story of={DocumentationStories.Colored} />
-</Canvas>
+### Combined Variants
 
-<Canvas>
-  <Story of={DocumentationStories.SingleLineTextView} />
-</Canvas>
+Variants can be combined using hyphens:
 
-<Canvas>
-  <Story of={DocumentationStories.MultipleLineTextView} />
-</Canvas>
+<Canvas of={Stories.CombinedVariants} />
 
-### Theming
+## Theming
 
-TODO
+### CSS Class: `.KibaText`
+
+### Variants
+
+| Variant | Description |
+|---------|-------------|
+| `paragraph` | Block-level paragraph text (`<p>`) |
+| `inline` | Inline text (`<span>`) |
+| `bold` / `strong` | Bold weight text |
+| `italic` / `emphasis` | Italic style text |
+| `underline` / `inserted` | Underlined text |
+| `deleted` | Strikethrough text |
+| `mark` | Highlighted/marked text |
+| `small` / `smaller` | Smaller font size |
+| `large` | Larger font size |
+| `subscript` | Subscript text |
+| `superscript` | Superscript text |
+| `header1` / `header` | H1 heading (3.0rem, 800 weight) |
+| `header2` / `title` | H2 heading (2.0rem, 700 weight) |
+| `header3` / `subtitle` | H3 heading (1.4rem, 700 weight) |
+| `header4` | H4 heading (1.3rem, 600 weight, underlined) |
+| `header5` | H5 heading (1.2rem, 600 weight) |
+| `header6` | H6 heading (1.1rem, 600 weight) |
+| `note` | Small, light text for annotations |
+| `supersize` | Extra large text (3rem) |
+| `colored` / `branded` | Brand primary color |
+| `error` | Error color |
+| `success` | Success color |
+| `unmargined` | Removes margin |
+| `margined` | Adds vertical margin |
+| `inherit` | Inherits all styles from parent |
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaText {
+    font-family: var(--kiba-font-family);
+    color: var(--kiba-color-text);
+    line-height: var(--kiba-line-height);
+
+    &.header1 {
+      font-size: 3.0rem;
+      font-weight: 800;
+      line-height: 1.2em;
+    }
+
+    &.note {
+      font-size: 0.8rem;
+      color: var(--kiba-color-text-light25);
+    }
+
+    &.colored {
+      color: var(--kiba-color-brand-primary);
+    }
+  }
+}
+```

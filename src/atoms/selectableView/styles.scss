@@ -1,0 +1,60 @@
+@use '../../styles/variables' as *;
+@use '../../particles/box/styles' as box;
+
+@layer kiba-structure {
+  .KibaSelectableView {
+    position: relative;
+    color: currentColor;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-clip: padding-box;
+    width: fit-content;
+    box-sizing: border-box;
+    &.fullWidth { width: 100%; }
+    &.fullHeight { height: 100%; }
+    &.disabled { cursor: not-allowed; }
+    > .KibaSelectableView-overlay {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      z-index: 2;
+      box-sizing: border-box;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaSelectableView {
+    @include box.default;
+    @include box.focusable;
+    @include box.transparent;
+    > .KibaSelectableView-overlay {
+      @include box.default;
+      @include box.focusable;
+      background-color: transparent;
+      padding: 0;
+    }
+    &:hover > .KibaSelectableView-overlay {
+      background-color: var(--kiba-color-brand-primary-clear80);
+    }
+    &:active > .KibaSelectableView-overlay {
+      background-color: var(--kiba-color-brand-primary-clear50);
+    }
+    &.selected > .KibaSelectableView-overlay {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: var(--kiba-color-brand-primary);
+    }
+    &.disabled {
+      > .KibaSelectableView-overlay {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      &:hover > .KibaSelectableView-overlay,
+      &:active > .KibaSelectableView-overlay {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}

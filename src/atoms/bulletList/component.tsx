@@ -1,48 +1,28 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
+import { getClassName } from '@kibalabs/core';
 import { IMultiChildProps } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
-import { IBulletListTheme } from './theme';
+import './styles.scss';
 import { IComponentProps } from '../../model';
-import { themeToCss } from '../../util';
 import { IBulletTextProps } from '../bulletText';
 
-export const BulletListThemedStyle = (theme: RecursivePartial<IBulletListTheme>): string => `
-  ${themeToCss(theme?.normal?.default?.bulletList)};
-`;
 
-interface IStyledBulletListProps {
-  $theme?: RecursivePartial<IBulletListTheme>;
-}
-
-const StyledBulletList = styled.ul<IStyledBulletListProps>`
-  counter-reset: list-number;
-  list-style-position: outside;
-  text-indent: -0.1em;
-  display: table;
-  &&&& {
-    ${(props: IStyledBulletListProps): string => (props.$theme ? BulletListThemedStyle(props.$theme) : '')};
-  }
-`;
-
-export interface IBulletListProps extends IComponentProps<IBulletListTheme>, IMultiChildProps<IBulletTextProps> {
+export interface IBulletListProps extends IComponentProps, IMultiChildProps<IBulletTextProps> {
 }
 
 export function BulletList({
-  className = '',
   variant = 'default',
   ...props
 }: IBulletListProps): React.ReactElement {
   return (
-    <StyledBulletList
+    <ul
       id={props.id}
-      className={getClassName(BulletList.displayName, className, ...(variant?.split('-') || []))}
-      $theme={props.theme}
+      className={getClassName(BulletList.displayName, props.className, ...(variant?.split('-') || []))}
+      style={props.style}
     >
       {props.children}
-    </StyledBulletList>
+    </ul>
   );
 }
 BulletList.displayName = 'KibaBulletList';

@@ -5,17 +5,10 @@ import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
 import { Alignment } from '../..';
 import { LayerContainer } from '../../layouts';
-import { Box, IBoxTheme, ILoadingSpinnerTheme, LoadingSpinner } from '../../particles';
-import { ThemeType } from '../../util';
+import { Box, LoadingSpinner } from '../../particles';
 import { IMoleculeProps } from '../moleculeProps';
 
-export interface IFormTheme extends ThemeType {
-  backgroundTheme: IBoxTheme;
-  loadingOverlayTheme: IBoxTheme;
-  loadingSpinnerTheme: ILoadingSpinnerTheme;
-}
-
-interface IFormProps extends IMoleculeProps<IFormTheme>, ISingleAnyChildProps {
+interface IFormProps extends IMoleculeProps, ISingleAnyChildProps {
   isLoading?: boolean;
   backgroundVariant?: string;
   loadingOverlayVariant?: string;
@@ -45,7 +38,6 @@ export function Form({
       id={props.id}
       className={getClassName(Form.displayName, className)}
       variant={props.backgroundVariant}
-      theme={props.theme?.backgroundTheme}
       isFullWidth={true}
     >
       <form
@@ -67,7 +59,6 @@ export function Form({
                   isFullHeight={true}
                   isFullWidth={true}
                   variant={props.loadingOverlayVariant || 'overlay'}
-                  theme={props.theme?.loadingOverlayTheme}
                 />
               </LayerContainer.Layer>
               <LayerContainer.Layer isFullHeight={false} isFullWidth={false} alignmentHorizontal={Alignment.Center} alignmentVertical={Alignment.Center}>
@@ -75,7 +66,6 @@ export function Form({
                   id={props.id && `${props.id}-loading-spinner`}
                   className='form-overlay-spinner'
                   variant={props.loadingSpinnerVariant}
-                  theme={props.theme?.loadingSpinnerTheme}
                 />
               </LayerContainer.Layer>
             </React.Fragment>

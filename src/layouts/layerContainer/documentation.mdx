@@ -1,64 +1,28 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { LayerContainer, } from '.';
-import { Direction, Alignment } from '../../model';
-import { KibaIcon, Box } from '../../particles';
-import { BackgroundView } from '../../wrappers';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # LayerContainer
 
-<br />
+**LayerContainer** is a `layout` component for stacking layers. Use `LayerContainer.Layer` to control positioning and alignment of each layer.
 
-{/* NOTE(krishan711): some unknonwn problem with this and grid when building docs */}
+<Canvas of={Stories.Default} />
 
-{/*export const Template = (args) => (
-  <Box height='30px' width='30px'>
-    <LayerContainer {...args}>
-      <BackgroundView color='lightblue'>
-        <Box isFullHeight={true} isFullWidth={true} />
-      </BackgroundView>
-      <KibaIcon iconId={'ion-airplane'} />
-      <LayerContainer.Layer isFullHeight={false} isFullWidth={false} alignmentVertical={Alignment.Center} alignmentHorizontal={Alignment.Center}>
-        <KibaIcon iconId={'ion-american-football'} />
-      </LayerContainer.Layer>
-    </LayerContainer>
-  </Box>
-);
+## Examples
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story name='Default' args={{}}>
-    {Template.bind({})}
-  </Story>
-</Canvas>
+### Centered Layer
 
-<ArgsTable story={'Default'} />*/}
+<Canvas of={Stories.Centered} />
 
-### Examples
+### Custom Alignment
 
-<Canvas>
-  <Story of={DocumentationStories.LayersOnTopOfEachOther} />
-</Canvas>
+<Canvas of={Stories.CustomAlignment} />
 
-{/* NOTE(krishan711): it would be nice if this figured out the width too
-  but it only works when container has display: inline */}
+### Static Layer
 
-<Canvas>
-  <Story of={DocumentationStories.LayersWithAStaticHeightLayer} />
-</Canvas>
+<Canvas of={Stories.StaticLayer} />
 
-<Canvas>
-  <Story of={DocumentationStories.LayersOnTopOfEachOtherAndCentered} />
-</Canvas>
+## Theming
 
-<Canvas>
-  <Story of={DocumentationStories.LayersOnTopOfEachOtherWithCustomAlignment} />
-</Canvas>
-
-TODO
-
-### Theming
-
-TODO
+This is a structural component without visual theming.

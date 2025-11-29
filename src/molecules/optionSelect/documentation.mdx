@@ -1,32 +1,63 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { OptionSelect } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # OptionSelect
 
-<br />
+**OptionSelect** is a `molecule` component for dropdown selection. Displays options in a dropdown list.
 
-export const Template = (args) => {
-  const [selectedItemKey, setSelectedItemKey] = React.useState('');
-  const options=[{itemKey: '1' , text: 'First Option'},{itemKey: '2' , text: 'Second Option'},{itemKey: '3' , text: 'Third Option'}];
-  return (
-    <div style={{height: '250px'}}>
-      <OptionSelect {...args} selectedItemKey={args.selectedItemKey || selectedItemKey} options={args.options || options} onItemClicked={args.onItemClicked || setSelectedItemKey} />
-    </div>
-  );
-};
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-# Examples
+### With Preselection
 
-<Canvas>
-  <Story of={DocumentationStories.LongOption} />
-</Canvas>
+<Canvas of={Stories.WithPreselection} />
+
+### Long Options
+
+<Canvas of={Stories.LongOptions} />
+
+### Many Options
+
+<Canvas of={Stories.ManyOptions} />
+
+### Full Width
+
+<Canvas of={Stories.FullWidth} />
+
+## Theming
+
+### CSS Class: `.KibaOptionSelect`
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaOptionSelect {
+    position: relative;
+
+    > .KibaOptionSelectTrigger {
+      border: 1px solid var(--kiba-color-background-dark10);
+      border-radius: var(--kiba-border-radius);
+      padding: var(--kiba-padding);
+      cursor: pointer;
+    }
+
+    > .KibaOptionSelectDropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: var(--kiba-color-background);
+      border: 1px solid var(--kiba-color-background-dark10);
+      border-radius: var(--kiba-border-radius);
+      box-shadow: var(--kiba-box-shadow);
+      z-index: 10;
+    }
+  }
+}
+```

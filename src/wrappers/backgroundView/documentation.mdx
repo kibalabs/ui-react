@@ -1,33 +1,26 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Box, Text } from '../../particles';
-import { BackgroundView, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # BackgroundView
 
-<br />
+**BackgroundView** is a `wrapper` component that applies a background color. Wraps children with a background styling.
 
-export const Template = (args) => (
-  <BackgroundView {...args}>
-    <Box variant='card'>
-      <Text>I'm wrapped</Text>
-    </Box>
-  </BackgroundView>
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Primary Color
 
-TODO
+<Canvas of={Stories.PrimaryColor} />
 
-### Theming
+### Light Gradient
 
-TODO
+<Canvas of={Stories.LightGradient} />
+
+## Theming
+
+This is a structural component without visual theming.

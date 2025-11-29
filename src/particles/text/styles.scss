@@ -1,0 +1,92 @@
+@use '../../styles/variables' as *;
+
+@mixin default {
+  font-size: $font-size;
+  font-family: $font-family;
+  font-weight: normal;
+  color: $color-text;
+  line-height: $line-height;
+  text-decoration: none;
+  margin: 0;
+  text-align: inherit;
+  text-shadow: inherit;
+  text-transform: inherit;
+}
+
+@mixin inherit {
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  color: inherit;
+  line-height: inherit;
+  text-decoration: inherit;
+  margin: inherit;
+  text-align: inherit;
+  text-shadow: inherit;
+  text-transform: inherit;
+}
+
+@mixin bold { font-weight: bolder; }
+@mixin italic { font-style: italic; }
+@mixin underline { text-decoration: underline; }
+@mixin strikethrough { text-decoration: line-through; }
+@mixin small { font-size: smaller; }
+@mixin large { font-size: larger; }
+@mixin supersize { font-size: 3rem; }
+@mixin unmargined { margin: 0; }
+@mixin margined { margin: 1em 0 0.5em 0; }
+@mixin colored { color: $color-brand-primary; }
+@mixin error { color: $color-error; }
+@mixin success { color: $color-success; }
+@mixin ellipsis { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@mixin note { font-size: 0.8rem; color: $color-text-light25; }
+
+@mixin header1 { font-size: 3.0rem; font-weight: 800; color: $color-text; line-height: 1.2em; }
+@mixin header2 { font-size: 2.0rem; font-weight: 700; color: $color-text; line-height: 1.2em; }
+@mixin header3 { font-size: 1.4rem; font-weight: 700; color: $color-text; line-height: 1.2em; }
+@mixin header4 { font-size: 1.3rem; font-weight: 600; color: $color-text; line-height: 1.2em; text-decoration: underline; }
+@mixin header5 { font-size: 1.2rem; font-weight: 600; color: $color-text; line-height: 1.2em; }
+@mixin header6 { font-size: 1.1rem; font-weight: 600; color: $color-text; line-height: 1.2em; }
+
+@layer kiba-structure {
+  .KibaText {
+    box-sizing: border-box;
+    &.singleLine {
+      display: block;
+      @include ellipsis;
+    }
+    &.fixedLines {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaText {
+    @include default;
+    &.inherit { @include inherit; }
+    &.bold, &.strong { @include bold; }
+    &.italic, &.emphasis { @include italic; }
+    &.underline, &.inserted { @include underline; }
+    &.deleted { @include strikethrough; }
+    &.small, &.smaller { @include small; }
+    &.large { @include large; }
+    &.subscript { vertical-align: sub; @include small; }
+    &.superscript { vertical-align: super; @include small; }
+    &.header1, &.header { @include header1; }
+    &.header2, &.title { @include header2; }
+    &.header3, &.subtitle { @include header3; }
+    &.header4 { @include header4; }
+    &.header5 { @include header5; }
+    &.header6 { @include header6; }
+    &.note { @include note; }
+    &.supersize { @include supersize; }
+    &.unmargined { @include unmargined; }
+    &.margined { @include margined; }
+    &.colored, &.branded { @include colored; }
+    &.error { @include error; }
+    &.success { @include success; }
+  }
+}

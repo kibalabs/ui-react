@@ -1,0 +1,50 @@
+@use '../../styles/variables' as *;
+
+@layer kiba-structure {
+  .KibaIcon {
+    display: inline-flex;
+    flex-shrink: 0;
+    overflow: hidden;
+    & > svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaIcon {
+    width: var(--kiba-icon-size, 1.3em);
+    height: var(--kiba-icon-size, 1.3em);
+
+    // fill/stroke styling
+    &.fill > svg {
+      fill: var(--kiba-icon-color, currentColor);
+    }
+    &.stroke > svg {
+      stroke: var(--kiba-icon-color, currentColor);
+    }
+
+    // Size variants
+    &.small {
+      width: 0.75em;
+      height: 0.75em;
+    }
+    &.large {
+      width: 2em;
+      height: 2em;
+    }
+    &.extraLarge {
+      width: 4em;
+      height: 4em;
+    }
+    &.extraExtraLarge {
+      width: 8em;
+      height: 8em;
+    }
+    &.fillSize {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

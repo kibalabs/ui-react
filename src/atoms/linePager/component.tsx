@@ -1,64 +1,15 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
-import { styled } from 'styled-components';
+import { getClassName } from '@kibalabs/core';
 
-import { ILinePagerTheme } from './theme';
+import './styles.scss';
 import { Direction, IComponentProps } from '../../model';
 import { ScreenSize, Spacing } from '../../particles';
-import { ResponsiveField, themeToCss } from '../../util';
+import { ResponsiveField } from '../../util';
 import { ResponsiveHidingView } from '../../wrappers';
 
-export const LinePagerThemedStyle = (theme: RecursivePartial<ILinePagerTheme>): string => `
-  & > .LinePagerItem {
-    ${themeToCss(theme.normal?.default?.background)};
-    &:hover {
-      ${themeToCss(theme.normal?.hover?.background)};
-    }
-    &:active {
-      ${themeToCss(theme.normal?.press?.background)};
-    }
-    &:focus {
-      ${themeToCss(theme.normal?.focus?.background)};
-    }
-    &.active {
-      ${themeToCss(theme.active?.default?.background)};
-      &:hover {
-        ${themeToCss(theme.active?.hover?.background)};
-      }
-      &:active {
-        ${themeToCss(theme.active?.press?.background)};
-      }
-      &:focus {
-        ${themeToCss(theme.active?.focus?.background)};
-      }
-    }
-  }
-`;
 
-interface IStyledLinePagerProps {
-  $theme?: RecursivePartial<ILinePagerTheme>;
-}
-
-const StyledLinePager = styled.div<IStyledLinePagerProps>`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-
-  &&&& {
-    ${(props: IStyledLinePagerProps): string => (props.$theme ? LinePagerThemedStyle(props.$theme) : '')};
-  }
-`;
-
-const StyledLinePagerItem = styled.button<IStyledLinePagerProps>`
-  cursor: pointer;
-  outline: none;
-  transition-duration: 0.3s;
-  flex-grow: 1;
-  flex-shrink: 1;
-`;
-
-interface ILinePagerProps extends IComponentProps<ILinePagerTheme> {
+interface ILinePagerProps extends IComponentProps {
   pageCount?: number;
   pageCountResponsive?: ResponsiveField<number>;
   activePageIndex: number;
@@ -66,14 +17,12 @@ interface ILinePagerProps extends IComponentProps<ILinePagerTheme> {
 }
 
 export function LinePager({
-  className = '',
   variant = 'default',
   ...props
 }: ILinePagerProps): React.ReactElement {
   if (props.pageCount == null && props.pageCountResponsive?.base == null) {
     throw new Error(`One of {pageCount, pageCountResponsive.base} must be passed to ${LinePager.displayName}`);
   }
-
   const pageCount = props.pageCountResponsive?.base || props.pageCount || 12;
   const pageCountSmall = props.pageCountResponsive?.small || pageCount;
   const pageCountMedium = props.pageCountResponsive?.medium || pageCountSmall;
@@ -81,13 +30,11 @@ export function LinePager({
   const pageCountExtraLarge = props.pageCountResponsive?.extraLarge || pageCountLarge;
   const pageCounts = [pageCount, pageCountSmall, pageCountMedium, pageCountLarge, pageCountExtraLarge];
   const maxPageCount = Math.max(...(pageCounts.filter((candidatePageCount?: number): boolean => candidatePageCount !== undefined)));
-
   const onPageClicked = (pageIndex: number): void => {
     if (props.onPageClicked) {
       props.onPageClicked(pageIndex);
     }
   };
-
   const getHiddenAboveSize = (index: number): ScreenSize | undefined => {
     if (index >= pageCountSmall) {
       return ScreenSize.Small;
@@ -103,18 +50,18 @@ export function LinePager({
     }
     return undefined;
   };
-
   return (
-    <StyledLinePager
+    <div
       id={props.id}
-      className={getClassName(LinePager.displayName, className, ...(variant?.split('-') || []))}
-      $theme={props.theme}
+      className={getClassName(LinePager.displayName, props.className, ...(variant?.split('-') || []))}
+      style={props.style}
     >
       {Array(maxPageCount).fill(null).map((_: unknown, index: number): React.ReactElement => {
         return (
           // eslint-disable-next-line react/no-array-index-key
           <ResponsiveHidingView key={index} hiddenAbove={getHiddenAboveSize(index)}>
-            <StyledLinePagerItem
+            <button
+              type='button'
               className={getClassName(index === props.activePageIndex && 'active', 'LinePagerItem')}
               aria-label={`Page ${index + 1}`}
               onClick={(): void => onPageClicked(index)}
@@ -125,7 +72,7 @@ export function LinePager({
           </ResponsiveHidingView>
         );
       })}
-    </StyledLinePager>
+    </div>
   );
 }
 LinePager.displayName = 'KibaLinePager';

@@ -1,0 +1,27 @@
+@use '../../styles/variables' as *;
+
+// ResponsiveTextAlignmentView uses CSS variables for responsive text-align values.
+// The component sets --rtav-text-align-* variables, and this SCSS applies them
+// at the appropriate breakpoints.
+
+@layer kiba-theme {
+  .KibaResponsiveTextAlignmentView {
+    text-align: var(--rtav-text-align-base, left);
+
+    @include screen-small {
+      text-align: var(--rtav-text-align-small, var(--rtav-text-align-base, left));
+    }
+
+    @include screen-medium {
+      text-align: var(--rtav-text-align-medium, var(--rtav-text-align-small, var(--rtav-text-align-base, left)));
+    }
+
+    @include screen-large {
+      text-align: var(--rtav-text-align-large, var(--rtav-text-align-medium, var(--rtav-text-align-small, var(--rtav-text-align-base, left))));
+    }
+
+    @include screen-extra-large {
+      text-align: var(--rtav-text-align-extra-large, var(--rtav-text-align-large, var(--rtav-text-align-medium, var(--rtav-text-align-small, var(--rtav-text-align-base, left)))));
+    }
+  }
+}

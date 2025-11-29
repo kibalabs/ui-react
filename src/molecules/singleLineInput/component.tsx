@@ -2,51 +2,12 @@ import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
 import { OptionalProppedElement } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
+import './styles.scss';
 import { Alignment, InputType } from '../../model';
 import { IIconProps, PaddingSize } from '../../particles';
-import { IInputFrameTheme, InputFrame } from '../inputFrame';
+import { InputFrame } from '../inputFrame';
 import { IMoleculeProps } from '../moleculeProps';
-
-
-export interface ISingleLineInputTheme {
-  inputFrameTheme: IInputFrameTheme;
-}
-
-const StyledSingleLineInput = styled.input`
-  background: none;
-  border: none;
-  outline: none;
-  cursor: text;
-  overflow: hidden;
-  white-space: nowrap;
-  box-shadow: none;
-
-  &:hover {
-    box-shadow: none;
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &.disabled {
-    pointer-events: none;
-  }
-
-  &.hideSpinButtons {
-    &[type='number'] {
-      -moz-appearance: textfield;
-    }
-
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  }
-`;
 
 const getAutocompleteType = (inputType: InputType): string | undefined => {
   if (inputType === InputType.Email) {
@@ -57,7 +18,7 @@ const getAutocompleteType = (inputType: InputType): string | undefined => {
   return undefined;
 };
 
-export interface ISingleLineInputProps extends IMoleculeProps<ISingleLineInputTheme> {
+export interface ISingleLineInputProps extends IMoleculeProps {
   value: string | null;
   isEnabled?: boolean;
   placeholderText?: string;
@@ -94,37 +55,31 @@ export function SingleLineInput({
       props.onValueChanged(event.target.value);
     }
   };
-
   const onKeyUp = (event: React.KeyboardEvent<HTMLInputElement>): void => {
     if (props.onKeyUp) {
       props.onKeyUp(event.key);
     }
   };
-
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
     if (props.onKeyDown) {
       props.onKeyDown(event.key);
     }
   };
-
   const onClicked = (event: React.SyntheticEvent<HTMLInputElement>): void => {
     if (props.onClicked) {
       props.onClicked();
     }
     event.stopPropagation();
   };
-
   const onWheelCapture = (event: React.WheelEvent<HTMLInputElement>): void => {
     if (props.shouldStopNumberScrolling) {
       event.currentTarget.blur();
     }
   };
-
   return (
     <InputFrame
       id={props.id}
       className={getClassName(SingleLineInput.displayName, className)}
-      theme={props.theme?.inputFrameTheme}
       inputWrapperVariant={props.inputWrapperVariant}
       messageText={props.messageText}
       isEnabled={isEnabled}
@@ -135,9 +90,9 @@ export function SingleLineInput({
       contentAlignment={props.contentAlignment}
       onClicked={props.onFrameClicked}
     >
-      <StyledSingleLineInput
+      <input
         id={props.id && `${props.id}-textarea`}
-        className={getClassName(StyledSingleLineInput.displayName, !isEnabled && 'disabled', props.shouldHideNumberSpinButtons && 'hideSpinButtons')}
+        className={getClassName('KibaSingleLineInputInput', !isEnabled && 'disabled', props.shouldHideNumberSpinButtons && 'hideSpinButtons')}
         type={inputType}
         name={props.name}
         autoComplete={getAutocompleteType(inputType)}
@@ -148,6 +103,7 @@ export function SingleLineInput({
         onChange={onValueChanged}
         aria-label={props.label || props.name || props.placeholderText}
         placeholder={props.placeholderText}
+        // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus={props.shouldAutofocus}
         onWheelCapture={onWheelCapture}
         spellCheck={props.shouldSpellCheck}

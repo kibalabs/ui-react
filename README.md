@@ -1,81 +1,334 @@
 # UI-React
 
-UI-React is a React component library for building powerful applications at scale.
+A React component library for building powerful, consistent applications at scale.
 
-(Yes, we need a better name. If you have a suggestion, post here: https://github.com/kibalabs/ui-react/issues/12.)
+UI-React enforces a strong separation between **theming** and **layout**. This practice enables teams of all sizes to build beautiful, efficient, and consistent UIs quickly.
 
-UI-React promotes strong separation between the theming and layout in your applications. This practice allows efficient, beautiful, consistent UIs to be built quickly by teams of all sizes.
+## Quick Start
 
-## Documentation
+### Installation
 
-Read all our principles and see live examples of all components in [the storybook documentation](https://ui-react-docs.kibalabs.com).
-
-Here's a good example, [our Button component](https://ui-react-docs.kibalabs.com/?path=/docs/atoms-button--default-story).
-
-## Using UI-React
-
-### Installing
-
-To install UI-React you can simply run:
-
-```
-npm install @kibalabs/ui-react styled-components
+```bash
+npm install @kibalabs/ui-react
 ```
 
-UI-React is built on styled-components and styled-components should be installed as a peer dependency which is why you need to install it yourself with the above command.
+### Basic Setup
 
-### Setup
-
-The easiest way to setup your code to be ready to use UI-React components is to use the `KibaApp` component. It should be used at the topmost level and needs to be passed a theme object like so:
+Wrap your app with `KibaApp` and import the CSS:
 
 ```tsx
 import React from 'react';
-import { KibaApp, buildTheme } from '@kibalabs/ui-react';
-
-const theme = buildTheme();
+import { KibaApp } from '@kibalabs/ui-react';
+import '@kibalabs/ui-react/dist/index.css';
+import './theme.scss';
 
 export const App = (): React.ReactElement => {
-  ...
   return (
-    <KibaApp theme={theme}>
-      ...
+    <KibaApp>
+      {/* Your app content */}
     </KibaApp>
   );
 };
 ```
 
-If you don't want to use the `KibaApp` component (because, for example, it adds CSS to make everything look plain by default), you can instantiate the `ThemeProvider` yourself like this:
+### Theme Configuration
 
-```tsx
-import React from 'react';
-import { ThemeProvider, buildTheme, GlobalCSS } from '@kibalabs/ui-react';
+Create a `theme.scss` file to customize the look and feel:
 
-const theme = buildTheme();
+```scss
+@use '@kibalabs/ui-react/styles/reset';
+@use '@kibalabs/ui-react/styles/colors';
+@use '@kibalabs/ui-react/styles/global';
 
-export const App = (): React.ReactElement => {
-  ...
-  return (
-    <ThemeProvider theme={theme}>
-      <React.Fragment>
-        <GlobalCss resetCss={<your reset css>} theme={theme} />
-        ...
-      </React.Fragment>
-    </ThemeProvider>
-  );
-};
+:root {
+  // Colors
+  --kiba-color-background: #ffffff;
+  --kiba-color-brand-primary: #4b6cb7;
+  --kiba-color-text: #333333;
+
+  // Typography
+  --kiba-font-family: -apple-system, system-ui, sans-serif;
+  --kiba-font-size: 16px;
+
+  // Spacing & Borders
+  --kiba-border-radius: 0.5em;
+}
 ```
 
-This should work just as well but won't include the CSS to clear by default and you will need to provide it yourself as resetCss (it can just be an empty string).
+That's it! You're ready to use UI-React components.
 
-### Example code
+---
 
+## Documentation
 
-Here's some code to show you what it's like to work with (it's taken from the everypage console).
+See live examples and detailed documentation in [the Storybook](https://ui-react-docs.kibalabs.com).
+
+---
+
+## Core Philosophy
+
+### Separation of Theming and Layout
+
+UI-React is built around one core principle: **component code should only define layout, never appearance**.
+
+In traditional React development, styling is often mixed with component logic:
+
+```tsx
+// ❌ Traditional approach - styling mixed with layout
+<div style={{ backgroundColor: '#f0f0f0', padding: '16px', borderRadius: '8px' }}>
+  <h2 style={{ color: '#333', fontSize: '1.5em' }}>Title</h2>
+  <p style={{ color: '#666' }}>Content</p>
+</div>
+```
+
+With UI-React, components only specify **what** they are, not **how** they look:
+
+```tsx
+// ✅ UI-React approach - layout only, theming via variants
+<Box variant="card">
+  <Stack direction={Direction.Vertical} shouldAddGutters={true}>
+    <Text variant="header2">Title</Text>
+    <Text>Content</Text>
+  </Stack>
+</Box>
+```
+
+All visual styling is defined globally in SCSS and applied through **variants**.
+
+### Why This Matters
+
+1. **Consistency** - All buttons look like buttons, all cards look like cards. No one-off styles.
+2. **Maintainability** - Change your brand color once, it updates everywhere.
+3. **Speed** - Building new features is fast when you don't think about styling.
+4. **Reusability** - Components work in any context because they don't carry styling baggage.
+5. **Team Scaling** - Designers define the theme, developers use it. Clear separation of concerns.
+
+---
+
+## Theming System
+
+UI-React uses CSS Custom Properties (CSS Variables) for all theming. This provides:
+
+- Runtime theme switching (light/dark mode)
+- No build step required for theme changes
+- Standard CSS cascade and specificity rules
+- Easy debugging in browser dev tools
+
+### CSS Variable Naming Convention
+
+All UI-React variables follow the pattern `--kiba-{category}-{name}`:
+
+```scss
+// Colors
+--kiba-color-background
+--kiba-color-brand-primary
+--kiba-color-text
+--kiba-color-error
+--kiba-color-success
+
+// Typography
+--kiba-font-family
+--kiba-font-size
+--kiba-line-height
+
+// Spacing
+--kiba-padding
+--kiba-padding-narrow
+--kiba-padding-wide
+
+// Borders
+--kiba-border-radius
+--kiba-border-width
+```
+
+### Color Variants
+
+For each base color, UI-React automatically generates variants using CSS `color-mix()`:
+
+```scss
+--kiba-color-brand-primary          // Base color
+--kiba-color-brand-primary-light10  // 10% lighter
+--kiba-color-brand-primary-light25  // 25% lighter
+--kiba-color-brand-primary-dark10   // 10% darker
+--kiba-color-brand-primary-dark25   // 25% darker
+--kiba-color-brand-primary-clear25  // 25% transparent
+--kiba-color-brand-primary-clear50  // 50% transparent
+--kiba-color-brand-primary-clear75  // 75% transparent
+```
+
+This means you only need to define base colors, and all variants are available automatically.
+
+### Component Variants
+
+Every component supports a `variant` prop that maps to CSS classes:
+
+```tsx
+<Button variant="primary">Primary Action</Button>
+<Button variant="secondary">Secondary Action</Button>
+<Button variant="tertiary">Tertiary Action</Button>
+```
+
+Define custom variants in your theme.scss:
+
+```scss
+.KibaButton {
+  // Default button styles are inherited from ui-react
+
+  &.primary > .KibaButtonFocusFixer {
+    background-color: var(--kiba-color-brand-primary);
+    color: var(--kiba-color-text-on-brand);
+  }
+
+  &.secondary > .KibaButtonFocusFixer {
+    background-color: transparent;
+    border: 1px solid var(--kiba-color-brand-primary);
+    color: var(--kiba-color-brand-primary);
+  }
+
+  &.destructive > .KibaButtonFocusFixer {
+    background-color: var(--kiba-color-error);
+    color: white;
+  }
+}
+```
+
+### Multi-Part Variants
+
+Variants can be combined using hyphens:
+
+```tsx
+<Button variant="primary-large">Large Primary Button</Button>
+<Text variant="header1-bold">Bold Header</Text>
+<Box variant="card-bordered-padded">Styled Card</Box>
+```
+
+Each part becomes a separate CSS class, so `primary-large` applies both `.primary` and `.large`.
+
+---
+
+## CSS Layers
+
+UI-React uses CSS `@layer` to organize styles with predictable specificity:
+
+```scss
+@layer kiba-reset, kiba-structure, kiba-theme;
+```
+
+1. **kiba-reset** - CSS reset and normalization
+2. **kiba-structure** - Component structure (display, flex, positioning)
+3. **kiba-theme** - Visual styling (colors, borders, shadows)
+
+This ensures your theme overrides always take precedence without needing `!important`.
+
+---
+
+## Component Architecture
+
+### Particles
+
+The lowest-level building blocks. Pure visual elements with no semantic meaning:
+
+- `Box` - A container with optional styling
+- `Text` - Styled text content
+- `Icon` / `KibaIcon` - Icon display
+- `Image` / `Video` / `Media` - Media elements
+- `Divider` - Visual separator
+- `Spacing` - Whitespace control
+
+### Atoms
+
+Interactive elements that handle user input:
+
+- `Button` / `IconButton` - Clickable actions
+- `Link` / `LinkBase` - Navigation
+- `Checkbox` / `Switch` - Boolean inputs
+- `InputWrapper` - Form field wrapper
+- `Dialog` - Modal overlays
+- And more...
+
+### Molecules
+
+Composed components for common patterns:
+
+- `Form` - Form container with loading states
+- `SingleLineInput` / `MultiLineInput` - Text inputs
+- `OptionSelect` - Dropdown selection
+- `TabBar` - Navigation tabs
+- `Markdown` / `MarkdownText` - Rendered markdown
+- And more...
+
+### Layouts
+
+Components that control arrangement of children:
+
+- `Stack` - Flexbox-based linear layout
+- `Grid` - CSS Grid layout
+- `LayerContainer` - Stacked layers (z-axis)
+- `Container` - Max-width wrapper
+
+### Wrappers
+
+Components that modify their children without adding DOM elements:
+
+- `BackgroundView` - Adds background styling
+- `ColorSettingView` - Overrides color context
+- `PaddingView` - Adds padding
+- `HidingView` - Conditional visibility
+- `ResponsiveHidingView` - Breakpoint-based visibility
+
+---
+
+## Responsive Design
+
+### Responsive Props
+
+Many components accept responsive prop objects:
+
+```tsx
+<Stack
+  direction={Direction.Vertical}
+  directionResponsive={{ medium: Direction.Horizontal }}
+>
+  <Box>Item 1</Box>
+  <Box>Item 2</Box>
+</Stack>
+```
+
+This stacks vertically on mobile, horizontally on medium+ screens.
+
+### Screen Size Breakpoints
+
+```
+Base:       0px+
+Small:      576px+
+Medium:     768px+
+Large:      992px+
+ExtraLarge: 1200px+
+```
+
+### ResponsiveHidingView
+
+Control visibility at different breakpoints:
+
+```tsx
+<ResponsiveHidingView hiddenBelow={ScreenSize.Medium}>
+  <Text>Only visible on tablets and up</Text>
+</ResponsiveHidingView>
+
+<ResponsiveHidingView hiddenAbove={ScreenSize.Medium}>
+  <Text>Only visible on mobile</Text>
+</ResponsiveHidingView>
+```
+
+---
+
+## Example Usage
+
+Here's a real-world example showing the separation of layout and theming:
 
 ```tsx
 import React from 'react';
-import { IWebsite } from '@kibalabs/everypage-core'
-import { Box, Text, Stack, Direction, KibaIcon, Alignment, Spacing } from '@kibalabs/ui-react'
+import { Box, Text, Stack, Direction, KibaIcon, Alignment, Spacing } from '@kibalabs/ui-react';
 
 interface IMetaItemProps {
   isChecked: boolean;
@@ -84,130 +337,104 @@ interface IMetaItemProps {
 
 const MetaItem = (props: IMetaItemProps): React.ReactElement => {
   return (
-    <Stack direction={Direction.Horizontal} contentAlignment={Alignment.Start} childAlignment={Alignment.Center} shouldAddGutters={true}>
-      <KibaIcon variant='small' iconId={props.isChecked ? 'ion-checkmark-circle-outline' : 'ion-close-circle-outline'} />
-      <Text variant='small'>{ props.text }</Text>
+    <Stack direction={Direction.Horizontal} childAlignment={Alignment.Center} shouldAddGutters={true}>
+      <KibaIcon
+        variant="small"
+        iconId={props.isChecked ? 'ion-checkmark-circle-outline' : 'ion-close-circle-outline'}
+      />
+      <Text variant="small">{props.text}</Text>
     </Stack>
   );
+};
+
+interface ICardProps {
+  title: string;
+  items: Array<{ text: string; isChecked: boolean }>;
 }
 
-interface ISiteMetaCardProps {
-  website: IWebsite;
-}
-
-export const SiteMetaCard = (props: ISiteMetaCardProps): React.ReactElement => {
+export const MetaCard = (props: ICardProps): React.ReactElement => {
   return (
-    <Box variant='bordered'>
-      <Stack direction={Direction.Vertical}>
-        <Text variant='header5'>Metadata</Text>
-        <Spacing />
-        <MetaItem text='name' isChecked={!!props.website.name} />
-        <MetaItem text='description' isChecked={!!props.website.description} />
-        <MetaItem text='faviconImageUrl' isChecked={!!props.website.faviconImageUrl} />
-        <MetaItem text='socialCardImageUrl' isChecked={!!props.website.socialCardImageUrl} />
+    <Box variant="card">
+      <Stack direction={Direction.Vertical} shouldAddGutters={true}>
+        <Text variant="header3">{props.title}</Text>
+        {props.items.map((item, index) => (
+          <MetaItem key={index} text={item.text} isChecked={item.isChecked} />
+        ))}
       </Stack>
     </Box>
   );
-}
+};
 ```
 
-The code generates this visual:
+Notice:
+- **No colors, spacing values, or visual styles in the component code**
+- Layout is explicit via `Stack` and `Direction`
+- Appearance is controlled entirely through variants (`card`, `header3`, `small`)
+- The component is completely reusable across any theme
 
-![Everypage Console Metadata Card](https://wml-images.s3-eu-west-1.amazonaws.com/ep-console-metadata.png)
+---
 
-The important thing to notice here is that this code only includes the **layout** of the components. All the theming is done globally and accessed via **variants** on each of the atomic particles provided by UI-React (e.g. Box, Text and Stack). You can read more about this in our [Theming Goals documentation](https://ui-react-docs.kibalabs.com?path=/docs/introduction-theming-goals--page).
+## Development
 
-This practice makes new interfaces extremely quick to create and allows your components to be super re-usable.
+### Prerequisites
 
-### Customizing your theme
+- Node.js 18+
+- npm 9+
 
-To customize the theming in your application, you should provide a parameter to the `buildTheme` function. This parameter can contain a subset of an entire theme object (which you can find in buildTheme.ts in this project).
+### Setup
 
-Here's a simple example where just some colors are changed (see particles/colors/theme.ts):
+```bash
+# Install dependencies
+npm install
 
-```ts
-const theme = buildTheme({
-  colors: {
-    brandPrimary: '#E56B6F',
-    brandSecondary: '#6D597A',
-    background: '#000000',
-    text: '#ffffff',
-    placeholderText: 'rgba(255, 255, 255, 0.5)',
-  },
-});
+# Start development mode with hot reloading
+npm run start-dev
+
+# Start Storybook documentation
+npm run docs
 ```
 
-Here's a more complex example where a custom font is used for all text and all buttons and inputs are changed to have a box shadow when hovered or focussed:
+### Building
 
-```ts
-const theme = buildTheme({
-  colors: {
-    brandPrimary: '#2B59C3',
-    brandSecondary: '#1d3557',
-  },
-  fonts: {
-    main: {
-      url: 'https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap',
-    },
-  },
-  texts: {
-    default: {
-      'font-family': "Montserrat, apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif"
-    }
-  },
-  buttons: {
-    default: {
-      normal: {
-        focus: {
-          background: {
-            "box-shadow": "0 4px 8px 0 rgba(0,0,0,0.2)"
-          }
-        },
-        hover: {
-          background: {
-          "box-shadow": "0 4px 8px 0 rgba(0,0,0,0.2)"
-          }
-        }
-      }
-    }
-  },
-  inputWrappers: {
-    default: {
-      normal: {
-        focus: {
-          background: {
-            "box-shadow": "0 4px 8px 0 rgba(0,0,0,0.2)"
-          }
-        },
-        hover: {
-          background: {
-            "box-shadow": "0 4px 8px 0 rgba(0,0,0,0.2)"
-          }
-        }
-      }
-    }
-  }
-});
+```bash
+# Build the library
+make build
+
+# Run linting
+make lint-fix
+
+# Run type checking
+make type-check
 ```
 
-Hopefully this starts to give you a sense of how powerful the separation of theming and layout can be.
+### Using Local Version in Another Project
 
-// TODO(krishan711): we need way more documentation on this!
+```bash
+# In ui-react directory
+npm link
 
-## Contribute
-1. Ensure you have installed `node` and `npm`
-2. Run `npm install` to install dependencies
-3. Run `npm run start-dev`. This will start ui-react for local development with live reloading and give you instructions for using it locally in other packages.
-4. Run `npm run docs`. This will start the documentation app (storybook.js) at port 6006 on your local machine.
+# In your project directory
+npm link @kibalabs/ui-react
+```
+
+---
 
 ## Support
 
-UI-React is mostly written by me ([krishan711](https://twitter.com/krishan711)) at the moment. If you want help with contributing or even if you want help using UI-React in your own application just reach out, I'd love to help 🙌.
+UI-React is primarily maintained by [@krishan711](https://twitter.com/krishan711).
 
-## Built with UI-React
+For help with contributing or using UI-React in your project, feel free to reach out!
 
-**[everypage](https://www.everypagehq.com)** - a website (landing page) builder which is actually just a thin, application-specific layer on top of UI-React. If you want to build a landing page just with JSON, check it out!
+---
 
-**[everysize](https://everysize-app.kibalabs.com)** \[[open source](https://github.com/kibalabs/everysize-app)\] - a tool for checking your websites look great at multiple resolutions. This is a real must-have if you're using UI-React to build a responsive product!
+## Projects Using UI-React
 
-**[Appage](https://www.appage.io)** - a small application built on top of everypage. It lets you build a landing page for your mobile app in minutes!
+- **[everypage](https://www.everypagehq.com)** - Website builder built as a thin layer on UI-React
+- **[everysize](https://everysize-app.kibalabs.com)** ([source](https://github.com/kibalabs/everysize-app)) - Multi-resolution website testing tool
+- **[Appage](https://www.appage.io)** - Mobile app landing page builder
+
+---
+
+## License
+
+MIT

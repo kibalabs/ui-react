@@ -1,0 +1,52 @@
+@use '../../styles/variables' as *;
+
+// ResponsiveHidingView uses class-based responsive hiding.
+// Classes like .hidden-above-small, .hidden-below-medium control visibility at breakpoints.
+
+@layer kiba-structure {
+  .KibaResponsiveHidingView {
+    // Hidden ABOVE breakpoint (hide when screen >= breakpoint)
+    &.hidden-above-small {
+      @include screen-small {
+        display: none !important;
+      }
+    }
+    &.hidden-above-medium {
+      @include screen-medium {
+        display: none !important;
+      }
+    }
+    &.hidden-above-large {
+      @include screen-large {
+        display: none !important;
+      }
+    }
+    &.hidden-above-extra-large {
+      @include screen-extra-large {
+        display: none !important;
+      }
+    }
+
+    // Hidden BELOW breakpoint (hide when screen < breakpoint)
+    &.hidden-below-small {
+      @media not all and (min-width: $screen-width-small) {
+        display: none !important;
+      }
+    }
+    &.hidden-below-medium {
+      @media not all and (min-width: $screen-width-medium) {
+        display: none !important;
+      }
+    }
+    &.hidden-below-large {
+      @media not all and (min-width: $screen-width-large) {
+        display: none !important;
+      }
+    }
+    &.hidden-below-extra-large {
+      @media not all and (min-width: $screen-width-extra-large) {
+        display: none !important;
+      }
+    }
+  }
+}

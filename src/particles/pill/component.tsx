@@ -1,40 +1,14 @@
 import React from 'react';
 
-import { getClassName, RecursivePartial } from '@kibalabs/core';
+import { getClassName } from '@kibalabs/core';
 import { OptionalProppedElement } from '@kibalabs/core-react';
-import { styled } from 'styled-components';
 
-import { IPillTheme } from './theme';
+import './styles.scss';
 import { IComponentProps } from '../../model';
 import { IIconProps, PaddingSize, Spacing } from '../../particles';
-import { themeToCss } from '../../util/themeUtil';
 
-export const PillThemedStyle = (theme: RecursivePartial<IPillTheme>): string => `
-  ${themeToCss(theme.text)};
-  ${themeToCss(theme.background)};
-`;
 
-interface IStyledPillProps {
-  $theme?: RecursivePartial<IPillTheme>;
-}
-
-const StyledPill = styled.div<IStyledPillProps>`
-  outline: none;
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-clip: border-box;
-  &.fullWidth {
-    width: 100%;
-  }
-
-  &&&& {
-    ${(props: IStyledPillProps): string => (props.$theme ? PillThemedStyle(props.$theme) : '')};
-  }
-`;
-
-export interface IPillProps extends IComponentProps<IPillTheme> {
+export interface IPillProps extends IComponentProps {
   text: string;
   isFullWidth?: boolean;
   iconRight?: OptionalProppedElement<IIconProps>;
@@ -50,10 +24,10 @@ export function Pill({
   ...props
 }: IPillProps): React.ReactElement {
   return (
-    <StyledPill
+    <div
       id={props.id}
       className={getClassName(Pill.displayName, className, isFullWidth && 'fullWidth', ...(variant?.split('-') || []))}
-      $theme={props.theme}
+      style={props.style}
     >
       { props.iconLeft && (
         <React.Fragment>
@@ -68,7 +42,7 @@ export function Pill({
           {props.iconRight}
         </React.Fragment>
       )}
-    </StyledPill>
+    </div>
   );
 }
 Pill.displayName = 'KibaPill';

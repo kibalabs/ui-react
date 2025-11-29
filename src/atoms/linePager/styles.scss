@@ -1,0 +1,76 @@
+@use '../../styles/variables' as *;
+@use '../../particles/box/styles' as box;
+
+@layer kiba-structure {
+  .KibaLinePager {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .LinePagerItem {
+    cursor: pointer;
+    flex-grow: 1;
+    flex-shrink: 1;
+    border: none;
+    padding: 0;
+  }
+}
+
+@layer kiba-theme {
+  .KibaLinePager {
+    .LinePagerItem {
+      @include box.default;
+      @include box.focusable;
+      padding: var(--kiba-padding-narrow3);
+      background-color: $color-background-dark05;
+      border-radius: $border-radius;
+      &:hover {
+        background-color: var(--kiba-color-brand-primary-clear90);
+      }
+      &:active {
+        background-color: var(--kiba-color-brand-primary-clear80);
+      }
+      &:focus {
+        @include box.focussed;
+      }
+      &.active {
+        background-color: $color-brand-primary;
+      }
+    }
+
+    // Primary variant
+    &.primary .LinePagerItem {
+      background-color: $color-brand-primary;
+      border-color: $color-brand-primary;
+      &:hover {
+        background-color: $color-brand-secondary;
+      }
+      &:active {
+        background-color: var(--kiba-color-brand-secondary-dark10);
+      }
+    }
+
+    // Secondary variant
+    &.secondary .LinePagerItem {
+      border-color: $color-brand-primary;
+    }
+
+    // Tertiary variant (same as default)
+
+    // Large variant
+    &.large .LinePagerItem {
+      padding: $padding;
+    }
+
+    // Small variant
+    &.small .LinePagerItem {
+      padding: var(--kiba-padding-narrow4);
+    }
+
+    // Card variant
+    &.card .LinePagerItem {
+      @include box.card;
+    }
+  }
+}

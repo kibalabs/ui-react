@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { deepCompare, getClassName } from '@kibalabs/core';
-import MarkdownToJsx from 'markdown-to-jsx';
+import MarkdownToJsx from 'markdown-to-jsx/react';
 
 import { BulletList, BulletText, Link, PrettyText } from '../../atoms';
 import { Box, Media, TextAlignment } from '../../particles';
@@ -91,6 +91,7 @@ MarkdownBulletText.displayName = 'MarkdownBulletText';
 export interface IMarkdownProps {
   id?: string;
   className?: string;
+  style?: React.CSSProperties;
   source: string;
   rootBoxVariant?: string;
   extraOverrideComponents?: Record<string, React.ElementType>;
@@ -104,6 +105,7 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
       id={props.id}
       className={getClassName(Markdown.displayName, props.className)}
       variant={props.rootBoxVariant}
+      style={props.style}
     >
       <MarkdownToJsx
         options={{

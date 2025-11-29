@@ -1,36 +1,60 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { TitledCollapsibleBox, StatefulTitledCollapsibleBox } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # TitledCollapsibleBox
 
-<br />
+**TitledCollapsibleBox** is an `atom` component for collapsible sections with a built-in title header. Use `StatefulTitledCollapsibleBox` for self-managed state.
 
-export const Template = (args) => (
-  <TitledCollapsibleBox {...args}>
-    <span> This is the content inside the box </span>
-  </TitledCollapsibleBox>
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Stateful
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Stateful} />
-</Canvas>
+<Canvas of={Stories.Stateful} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.StatefulCollapsed} />
-</Canvas>
+### Collapsed Initially
 
-### Theming
+<Canvas of={Stories.CollapsedInitially} />
 
-TODO
+### Accordion
+
+<Canvas of={Stories.Accordion} />
+
+### FAQ
+
+<Canvas of={Stories.FAQ} />
+
+## Theming
+
+### CSS Class: `.KibaTitledCollapsibleBox`
+
+Inherits styles from CollapsibleBox. See CollapsibleBox documentation for base theming.
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaTitledCollapsibleBox {
+    border: 1px solid var(--kiba-color-background-dark10);
+    border-radius: var(--kiba-border-radius);
+
+    > .KibaTitledCollapsibleBoxHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--kiba-padding);
+      background-color: var(--kiba-color-background-dark05);
+      cursor: pointer;
+    }
+
+    > .KibaTitledCollapsibleBoxContent {
+      padding: var(--kiba-padding);
+    }
+  }
+}
+```

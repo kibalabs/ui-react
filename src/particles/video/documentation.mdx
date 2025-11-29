@@ -1,42 +1,65 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Video, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Video
 
-<br />
+**Video** is a `particle` for displaying video content with support for autoplay, looping, and playback callbacks.
 
-export const Template = (args) => (
-  <Video {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### No Controls (Background Video)
 
-<Canvas>
-  <Story of={DocumentationStories.NoControls} />
-</Canvas>
+<Canvas of={Stories.NoControls} />
 
-<Canvas>
-  <Story of={DocumentationStories.Autoplay} />
-</Canvas>
+### Autoplay with Loop
 
-<Canvas>
-  <Story of={DocumentationStories.LazyLoading} />
-</Canvas>
+<Canvas of={Stories.Autoplay} />
 
-<Canvas>
-  <Story of={DocumentationStories.OnEnded} />
-</Canvas>
+### Fixed Size
 
-### Theming
+<Canvas of={Stories.FixedSize} />
 
-TODO
+### With Callbacks
+
+<Canvas of={Stories.WithCallbacks} />
+
+## Theming
+
+### CSS Class: `.KibaVideo`
+
+This component renders a native `<video>` element with minimal visual theming. Sizing is controlled via CSS custom properties.
+
+### Fit Types
+
+| Value | Description |
+|-------|-------------|
+| `cover` | Fills container, may crop |
+| `contain` | Fits inside container, may letterbox |
+| `crop` | Same as cover |
+| `scale` | Fills container, may stretch |
+
+### Customizing with CSS
+
+```css
+@layer kiba-structure {
+  .KibaVideo {
+    display: block;
+    width: var(--kiba-video-width, auto);
+    height: var(--kiba-video-height, auto);
+    max-width: var(--kiba-video-max-width, none);
+    max-height: var(--kiba-video-max-height, none);
+    object-fit: var(--kiba-video-fit, fill);
+
+    &.centered {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+```

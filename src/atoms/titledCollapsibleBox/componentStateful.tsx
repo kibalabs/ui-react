@@ -4,10 +4,9 @@ import { getClassName } from '@kibalabs/core';
 import { ISingleAnyChildProps } from '@kibalabs/core-react';
 
 import { TitledCollapsibleBox } from './component';
-import { ITitledCollapsibleBoxTheme } from './theme';
 import { IComponentProps } from '../../model';
 
-interface IStatefulTitledCollapsibleBoxProps extends IComponentProps<ITitledCollapsibleBoxTheme>, ISingleAnyChildProps {
+interface IStatefulTitledCollapsibleBoxProps extends IComponentProps, ISingleAnyChildProps {
   title: string;
   isCollapsedInitially?: boolean;
   shouldSkipRenderingWhenCollapsed?: boolean;
@@ -27,12 +26,12 @@ export function StatefulTitledCollapsibleBox({
     <TitledCollapsibleBox
       id={props.id}
       className={getClassName(StatefulTitledCollapsibleBox.displayName, className)}
-      theme={props.theme}
       variant={variant}
       title={props.title}
       isCollapsed={isCollapsed}
       onCollapseToggled={onCollapseToggled}
       shouldSkipRenderingWhenCollapsed={props.shouldSkipRenderingWhenCollapsed}
+      style={props.style}
     >
       {props.children}
     </TitledCollapsibleBox>

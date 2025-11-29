@@ -1,50 +1,85 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Portal, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Portal
 
-<br />
+**Portal** is a utility `particle` that renders content at the document body level, positioned relative to an anchor element. Useful for dropdowns, tooltips, and overlays.
 
-export const Template = (args) => (
-  <Portal {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+## Examples
 
-<Controls />
+### Bottom Right
 
-### Examples
+<Canvas of={Stories.BottomRight} />
 
-<Canvas>
-  <Story of={DocumentationStories.PlacedAtBottomRight} />
-</Canvas>
+### Bottom Center
 
-<Canvas>
-  <Story of={DocumentationStories.PlacedAtBottomLeft} />
-</Canvas>
+<Canvas of={Stories.BottomCenter} />
 
-<Canvas>
-  <Story of={DocumentationStories.PlacedAtBottomCenter} />
-</Canvas>
+### Top Placements
 
-<Canvas>
-  <Story of={DocumentationStories.PlacedAtTopRight} />
-</Canvas>
+<Canvas of={Stories.TopPlacements} />
 
-<Canvas>
-  <Story of={DocumentationStories.PlacedAtTopLeft} />
-</Canvas>
+### Match Anchor Width
 
-<Canvas>
-  <Story of={DocumentationStories.PlacedAtTopCenter} />
-</Canvas>
+<Canvas of={Stories.MatchAnchorWidth} />
 
-### Theming
+### Dropdown Example
 
-TODO
+<Canvas of={Stories.Dropdown} />
+
+## Theming
+
+### CSS Class: `.KibaPortal`
+
+Portal is primarily a structural component. Positioning is controlled via inline CSS custom properties.
+
+### Placement Options
+
+| Value | Description |
+|-------|-------------|
+| `bottom-left` | Below anchor, aligned left |
+| `bottom-center` | Below anchor, centered |
+| `bottom-right` | Below anchor, aligned right |
+| `top-left` | Above anchor, aligned left |
+| `top-center` | Above anchor, centered |
+| `top-right` | Above anchor, aligned right |
+
+### CSS Custom Properties
+
+| Property | Description |
+|----------|-------------|
+| `--kiba-portal-top` | Top position |
+| `--kiba-portal-left` | Left position |
+| `--kiba-portal-max-height` | Maximum height (for scrolling) |
+| `--kiba-portal-max-width` | Maximum width |
+| `--kiba-portal-width` | Width (when matching anchor) |
+| `--kiba-portal-height` | Height (when matching anchor) |
+
+### Customizing with CSS
+
+```css
+@layer kiba-structure {
+  .KibaPortal {
+    position: fixed;
+    z-index: 1000;
+    top: var(--kiba-portal-top);
+    left: var(--kiba-portal-left);
+    max-height: var(--kiba-portal-max-height);
+    max-width: var(--kiba-portal-max-width);
+    width: var(--kiba-portal-width);
+    height: var(--kiba-portal-height);
+
+    &.scrollableVertically {
+      overflow-y: auto;
+    }
+
+    &.scrollableHorizontally {
+      overflow-x: auto;
+    }
+  }
+}
+```

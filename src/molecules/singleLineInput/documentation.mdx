@@ -1,42 +1,68 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { SingleLineInput, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # SingleLineInput
 
-<br />
+**SingleLineInput** is a `molecule` component for single-line text input. Wraps an input with InputWrapper styling.
 
-export const Template = (args) => (
-  <SingleLineInput {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Stateful
 
-<Canvas>
-  <Story of={DocumentationStories.StatefulExample} />
-</Canvas>
+<Canvas of={Stories.Stateful} />
 
-<Canvas>
-  <Story of={DocumentationStories.SuccessMessage} />
-</Canvas>
+### With Value
 
-<Canvas>
-  <Story of={DocumentationStories.ErrorMessage} />
-</Canvas>
+<Canvas of={Stories.WithValue} />
 
-<Canvas>
-  <Story of={DocumentationStories.Disabled} />
-</Canvas>
+### Success State
 
-### Theming
+<Canvas of={Stories.Success} />
 
-TODO
+### Error State
+
+<Canvas of={Stories.Error} />
+
+### Disabled
+
+<Canvas of={Stories.Disabled} />
+
+### Password
+
+<Canvas of={Stories.Password} />
+
+## Theming
+
+### CSS Class: `.KibaSingleLineInput`
+
+See InputWrapper documentation for detailed theming options.
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaSingleLineInput {
+    > input {
+      width: 100%;
+      border: none;
+      font-family: inherit;
+      font-size: inherit;
+      background: transparent;
+    }
+
+    &.error {
+      border-color: var(--kiba-color-error);
+    }
+
+    &.success {
+      border-color: var(--kiba-color-success);
+    }
+  }
+}
+```

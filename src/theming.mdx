@@ -1,31 +1,227 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 
-<Meta title='Introduction/Theming Goals' />
+<Meta title='Introduction/Theming' />
 
-# Theming Goals
+# Theming
 
-The primary goals for theming in UI-React is to ensure ease of use, consistency and compounding.
+UI-React uses a pure SCSS/CSS approach to theming, leveraging CSS custom properties (variables) for maximum flexibility and performance.
 
-## Ease of use
+## Design Principles
 
-UI-React is intended to be plug and play. This means a user should be able to install UI-React and use its components immediately without any configuration or other work. The goal is to minimise the time to value.
+### Ease of Use
 
-This does not, however, mean the user cannot configure anything. UI-React is intended to allow a huge amount of customization so that each use of it could look totally different. This can be seen more in the theming sections of each component below.
+UI-React is designed to be plug and play. Install the library, import the styles, and start using components immediately:
 
-## Consistency
+```tsx
+// Import base styles
+import '@kibalabs/ui-react/dist/index.css';
 
-Theming in UI-React should prevent a user from creating "random" looking components without it being obvious in a pull request. In our workflow at Kiba Labs, we ask users to post a screenshot of their work whenever working on projects with an interface - it's often hard to tell what the output will look like from just the code.
+// Use components
+<Button text="Click me" />
+```
 
-To alleviate this a little (not entirely!), UI-React tries to ensure that each use of its components look and feel as they do in other uses - which means that if I create a `<Button />` on two separate pages, they look and work in the same way. Following from this, if I use a `<ButtonGroup />` (which internally creates `<Button />`s), it looks and feels the same too. This includes when the component is clicked on, hovered on, selected or unselected, and if its enabled or disabled.
+No configuration required for basic usage. Customization is opt-in and incremental.
 
-The key part of this is that the components in UI-React always take the theme from the nearest `ThemeProvider`. UI-React doesn't allow colors, sizes or any stylistic preferences to be specified on the components themselves.
+### Consistency
 
-Themes are defined to allow each component to look different in different **variants**. So, if the default checkbox on the page is a white on a black box, and somebody asks for a checkbox that is a black tick on a white box, we need to create a new "variant" which can then be used as `<Checkbox variant="inverse" />`. The key part of this is that with the structure of UI-React, the variant is created independently of this particular use case, which means it can be used anywhere in the application. This ensures that nothing is created with a "one-off" mentality - everything that is created is intended to be re-used.
+All components share a common design language through CSS custom properties. When you change `--kiba-color-brand-primary`, every component using that color updates automatically.
 
-With all that said, it's important that a user can override everything if they really want to. We enable this by allowing a theme to be passed in to most components directly in the case where a totally custom theme is wanted.
+Variants ensure that component variations are intentional and reusable:
 
-## Compounding
+```tsx
+// These will look consistent across your entire app
+<Button variant="primary" text="Save" />
+<Button variant="secondary" text="Cancel" />
+```
 
-Compounding refers to the idea of building on top of something that already exists. This builds on the general premise of atomic design (see Structure below) but extends it to the code level.
+### Cascading Customization
 
-To see this, let's continue the example above with Checkboxs, and suppose they have a "box" area and a "text" area. There are multiple "states" the box could be in: selected and pressed on, selected and hovered on, selected and not interacted with, disabled and pressed on, etc etc. If we had to specify all the details for the text and box design for each of these states, the theme would be absurdly long. However, we do want to be able to create different design states at each level so we need a way to do this. Compounding here allows us to define a "base" design state and then define each of the individual states as a set of changes from the base - we will see more of this in the Defining a Theme section below.
+CSS custom properties naturally cascade, enabling powerful theming patterns:
+
+```scss
+// Global theme
+:root {
+  --kiba-color-brand-primary: #4361ee;
+}
+
+// Dark mode section
+.dark-theme {
+  --kiba-color-brand-primary: #7c8aff;
+  --kiba-color-background: #1a1a2e;
+  --kiba-color-text: #ffffff;
+}
+
+// Component-specific override
+.special-section {
+  --kiba-color-brand-primary: #e63946;
+}
+```
+
+## Setting Up Theming
+
+### 1. Import Base Styles
+
+```tsx
+// Option A: Import compiled CSS
+import '@kibalabs/ui-react/dist/index.css';
+
+// Option B: Import SCSS (for customization)
+@use '@kibalabs/ui-react/styles';
+```
+
+### 2. Define Your Theme
+
+Create a theme file with your brand colors and preferences:
+
+```scss
+// theme.scss
+:root {
+  // Brand colors
+  --kiba-color-brand-primary: #your-primary-color;
+  --kiba-color-brand-secondary: #your-secondary-color;
+
+  // Text colors
+  --kiba-color-text: #1a1a2e;
+  --kiba-color-text-light: #6b7280;
+  --kiba-color-text-on-brand: #ffffff;
+
+  // Background colors
+  --kiba-color-background: #ffffff;
+  --kiba-color-background-light: #f9fafb;
+
+  // Typography
+  --kiba-font-family: 'Your Font', system-ui, sans-serif;
+  --kiba-font-size-base: 16px;
+
+  // Spacing scale
+  --kiba-spacing-unit: 4px;
+
+  // Border radius
+  --kiba-border-radius: 6px;
+  --kiba-border-radius-lg: 12px;
+}
+```
+
+### 3. Import in Your App
+
+```tsx
+// App.tsx
+import '@kibalabs/ui-react/dist/index.css';
+import './theme.scss';
+```
+
+## Available CSS Variables
+
+### Colors
+
+| Variable | Description |
+|----------|-------------|
+| `--kiba-color-brand-primary` | Primary brand color |
+| `--kiba-color-brand-secondary` | Secondary brand color |
+| `--kiba-color-text` | Default text color |
+| `--kiba-color-text-light` | Lighter text color |
+| `--kiba-color-text-on-brand` | Text color on brand backgrounds |
+| `--kiba-color-background` | Default background color |
+| `--kiba-color-background-light` | Lighter background color |
+| `--kiba-color-error` | Error state color |
+| `--kiba-color-success` | Success state color |
+| `--kiba-color-warning` | Warning state color |
+
+### Typography
+
+| Variable | Description |
+|----------|-------------|
+| `--kiba-font-family` | Default font family |
+| `--kiba-font-family-heading` | Heading font family |
+| `--kiba-font-size-base` | Base font size |
+| `--kiba-font-weight-normal` | Normal font weight |
+| `--kiba-font-weight-bold` | Bold font weight |
+| `--kiba-line-height` | Default line height |
+
+### Spacing
+
+| Variable | Description |
+|----------|-------------|
+| `--kiba-spacing-xs` | Extra small spacing (4px) |
+| `--kiba-spacing-sm` | Small spacing (8px) |
+| `--kiba-spacing-md` | Medium spacing (16px) |
+| `--kiba-spacing-lg` | Large spacing (24px) |
+| `--kiba-spacing-xl` | Extra large spacing (32px) |
+
+### Borders
+
+| Variable | Description |
+|----------|-------------|
+| `--kiba-border-radius` | Default border radius |
+| `--kiba-border-radius-sm` | Small border radius |
+| `--kiba-border-radius-lg` | Large border radius |
+| `--kiba-border-width` | Default border width |
+| `--kiba-border-color` | Default border color |
+
+## Dark Mode
+
+Implement dark mode by overriding variables in a class or media query:
+
+```scss
+// Class-based dark mode
+.dark-theme {
+  --kiba-color-background: #1a1a2e;
+  --kiba-color-background-light: #2d2d44;
+  --kiba-color-text: #ffffff;
+  --kiba-color-text-light: #a0a0b0;
+  --kiba-color-border: #3d3d5c;
+}
+
+// System preference dark mode
+@media (prefers-color-scheme: dark) {
+  :root {
+    --kiba-color-background: #1a1a2e;
+    --kiba-color-text: #ffffff;
+    // ... other dark mode overrides
+  }
+}
+```
+
+## Component Variants
+
+Each component supports variants for different visual styles:
+
+```tsx
+// Button variants
+<Button variant="primary" />
+<Button variant="secondary" />
+<Button variant="tertiary" />
+<Button variant="small" />
+<Button variant="large" />
+
+// Combine variants
+<Button variant="primary-large" />
+```
+
+### Creating Custom Variants
+
+Add your own variants by extending component styles:
+
+```scss
+@layer kiba-theme {
+  // Add a "ghost" button variant
+  .KibaButton.ghost {
+    background-color: transparent;
+    border: 1px solid var(--kiba-color-brand-primary);
+    color: var(--kiba-color-brand-primary);
+
+    &:hover {
+      background-color: var(--kiba-color-brand-primary);
+      color: var(--kiba-color-text-on-brand);
+    }
+  }
+}
+```
+
+## Best Practices
+
+1. **Use CSS variables** - Always reference `--kiba-*` variables instead of hardcoded values
+2. **Leverage cascading** - Use parent classes to scope theme changes
+3. **Create variants** - Instead of one-off styles, create reusable variants
+4. **Use layers** - Place customizations in `@layer kiba-theme` for proper specificity
+5. **Keep it semantic** - Name variables by purpose, not appearance (e.g., `--kiba-color-error` not `--kiba-color-red`)

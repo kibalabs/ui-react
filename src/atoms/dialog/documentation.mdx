@@ -1,34 +1,58 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Text, TextAlignment } from '../../particles';
-import { Button} from '../../atoms';
-import { Stack } from '../../layouts';
-import { Alignment, Direction } from '../../model'
-import { Dialog } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Dialog
 
-<br />
+**Dialog** is an `atom` component for modal overlays. Supports backdrop click and escape key dismissal.
 
-export const Template = (args) => (
-  <Dialog {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+## Examples
 
-<Controls />
+### Interactive
 
-# Examples
+<Canvas of={Stories.Interactive} />
 
-<Canvas>
-  <Story of={DocumentationStories.SimpleDialog} />
-</Canvas>
+### Non-Dismissable
 
-<Canvas>
-  <Story of={DocumentationStories.NonDismissableDialog} />
-</Canvas>
+Dialogs can be configured to only close via explicit button click.
+
+<Canvas of={Stories.NonDismissable} />
+
+### Custom Size
+
+<Canvas of={Stories.CustomSize} />
+
+## Theming
+
+### CSS Class: `.KibaDialog`
+
+### States
+
+| Class | Description |
+|-------|-------------|
+| `.closed` | When dialog is not visible |
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaDialog {
+    --kiba-dialog-backdrop-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--kiba-dialog-backdrop-color);
+
+    > .KibaDialogInner {
+      background-color: var(--kiba-color-background);
+      border-radius: var(--kiba-border-radius);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: var(--kiba-padding-wide2);
+    }
+
+    &.closed {
+      display: none;
+    }
+  }
+}
+```

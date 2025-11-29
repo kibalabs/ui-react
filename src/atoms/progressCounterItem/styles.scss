@@ -1,0 +1,54 @@
+@use '../../styles/variables' as *;
+@use '../../particles/text/styles' as text;
+@use '../../particles/box/styles' as box;
+
+@layer kiba-structure {
+  .KibaProgressCounterItem {
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-clip: border-box;
+    transition-duration: 0.3s;
+    border: none;
+    &.disabled {
+      cursor: auto;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaProgressCounterItem {
+    @include text.default;
+    @include box.default;
+    @include box.focusable;
+    padding: $padding $padding-wide;
+    background-color: transparent;
+    color: var(--kiba-color-brand-primary-clear75);
+
+    &:hover {
+      background-color: var(--kiba-color-brand-primary-clear90);
+    }
+
+    &:active {
+      background-color: var(--kiba-color-brand-primary-clear80);
+    }
+
+    &:focus {
+      @include box.focussed;
+    }
+
+    &.disabled {
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    &.selected {
+      font-weight: bolder;
+      color: $color-brand-primary;
+    }
+  }
+}
