@@ -10,6 +10,10 @@
   "homepage": "https://ui-react-docs.kibalabs.com",
   "bugs": "https://github.com/kibalabs/ui-react/issues",
   "type": "module",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "sideEffects": [
@@ -57,17 +61,15 @@
   },
   "devDependencies": {
     "@kibalabs/build": "^0.13.3-next.10",
-    "@storybook/addon-essentials": "8.6.2",
-    "@storybook/addon-links": "8.6.2",
-    "@storybook/blocks": "8.6.2",
-    "@storybook/react": "8.6.2",
-    "@storybook/react-vite": "^8.6.2",
+    "@storybook/addon-docs": "^10.1.2",
+    "@storybook/react-vite": "^10.1.2",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "remark-gfm": "^4.0.1",
     "sass": "^1.94.2",
-    "storybook": "8.6.2"
+    "storybook": "^10.1.2"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0 || ^19.0.0",

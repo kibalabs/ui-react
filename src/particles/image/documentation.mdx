@@ -1,36 +1,86 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Image, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Image
 
-<br />
+**Image** is a `particle` for displaying images with support for responsive loading, lazy loading, and various fit modes.
 
-export const Template = (args) => (
-  <Image maxWidth={'100%'} isFullHeigh={true} {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Circular
 
-<Canvas>
-  <Story of={DocumentationStories.Circular} />
-</Canvas>
+<Canvas of={Stories.Circular} />
 
-{/* NOTE(krishan711): this does not work well! */}
+### Cover Fit
 
-<Canvas>
-  <Story of={DocumentationStories.Responsive} />
-</Canvas>
+<Canvas of={Stories.Cover} />
 
-### Theming
+### Contain Fit
 
-TODO
+<Canvas of={Stories.Contain} />
+
+### Centered Horizontally
+
+<Canvas of={Stories.CenteredHorizontally} />
+
+### Responsive
+
+Images from supported CDNs automatically get `srcset` for responsive loading.
+
+<Canvas of={Stories.Responsive} />
+
+### Gallery
+
+<Canvas of={Stories.Gallery} />
+
+## Theming
+
+### CSS Class: `.KibaImage`
+
+### Variants
+
+| Variant | Description |
+|---------|-------------|
+| `circular` / `profile` | Circular border-radius (50%) |
+| `unrounded` | No border-radius |
+
+### Fit Types
+
+| Value | Description |
+|-------|-------------|
+| `cover` | Fills container, may crop |
+| `contain` | Fits inside container, may letterbox |
+| `crop` | Same as cover |
+| `scale` | Fills container, may stretch |
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaImage {
+    border-radius: var(--kiba-border-radius);
+
+    &.lazyloaded {
+      transition: opacity 0.15s;
+    }
+
+    &.circular, &.profile {
+      border-radius: 50%;
+    }
+
+    &.unrounded {
+      border-radius: 0;
+    }
+  }
+}
+```
+
+### Lazy Loading
+
+Set `isLazyLoadable={true}` for lazy loading. Requires the [lazysizes](https://github.com/aFarkas/lazysizes) library. The component adds `.lazyload` / `.lazyloaded` classes automatically.

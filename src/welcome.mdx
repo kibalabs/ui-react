@@ -1,9 +1,59 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title='Introduction/Welcome' />
 
-# Introduction
+# UI-React
 
-👋 Welcome to Kiba Labs' UI-React (yes, we need a better name 🙄)
+👋 Welcome to Kiba Labs' UI-React component library.
 
-This is a React component library designed to explicitly separate that **theming**, **layout** and (wip) **structure** of your applications.
+A React component library built with **SCSS** and **CSS custom properties** for maximum theming flexibility.
+
+## Features
+
+- 🎨 **Pure CSS Theming** - No JavaScript runtime for styles
+- 📦 **Tree-shakeable** - Import only what you need
+- 🎯 **CSS Layers** - Predictable specificity with `@layer`
+- 🌗 **Dark Mode Ready** - Easy theme switching with CSS variables
+- 📱 **Responsive** - Built-in responsive props and breakpoints
+- ♿ **Accessible** - ARIA attributes and keyboard navigation
+
+## Quick Start
+
+```bash
+npm install @kibalabs/ui-react
+```
+
+```tsx
+// Import styles
+import '@kibalabs/ui-react/dist/index.css';
+
+// Use components
+import { Button, Stack, Text } from '@kibalabs/ui-react';
+
+function App() {
+  return (
+    <Stack direction="vertical" gap="md">
+      <Text variant="header1">Hello World</Text>
+      <Button variant="primary" text="Get Started" />
+    </Stack>
+  );
+}
+```
+
+## Customize
+
+Override CSS variables to match your brand:
+
+```scss
+:root {
+  --kiba-color-brand-primary: #your-brand-color;
+  --kiba-font-family: 'Your Font', sans-serif;
+  --kiba-border-radius: 8px;
+}
+```
+
+## Learn More
+
+- [Architecture](/docs/introduction-architecture--docs) - Component hierarchy and design principles
+- [Theming](/docs/introduction-theming--docs) - CSS variables and customization
+- Browse components in the sidebar to see examples and usage

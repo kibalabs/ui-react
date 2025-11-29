@@ -1,55 +1,55 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Box } from '../box';
-import { Media, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Media
 
-<br />
+**Media** is a smart `particle` that automatically detects and renders the appropriate component (Image, Video, or WebView) based on the source URL.
 
-export const Template = (args) => (
-  <Media maxWidth='100%' {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Image
 
-<Canvas>
-  <Story of={DocumentationStories.Circular} />
-</Canvas>
+<Canvas of={Stories.Image} />
 
-<Canvas>
-  <Story of={DocumentationStories.Video} />
-</Canvas>
+### Circular Image
 
-<Canvas>
-  <Story of={DocumentationStories.Relative} />
-</Canvas>
+<Canvas of={Stories.CircularImage} />
 
-<Canvas>
-  <Story of={DocumentationStories.VideoWithoutExtension} />
-</Canvas>
+### Video
 
-<Canvas>
-  <Story of={DocumentationStories.ImageWithoutExtension} />
-</Canvas>
+<Canvas of={Stories.Video} />
 
-<Canvas>
-  <Story of={DocumentationStories.UnknownContentTypeWithoutExtension} />
-</Canvas>
+### Auto-Detection
 
-<Canvas>
-  <Story of={DocumentationStories.ImageWithExtension} />
-</Canvas>
+Media automatically detects the content type from the file extension or by fetching headers.
 
-### Theming
+<Canvas of={Stories.AutoDetection} />
 
-TODO
+### Gallery
+
+<Canvas of={Stories.Gallery} />
+
+## Theming
+
+### CSS Class: `.KibaMedia`
+
+Media inherits styling from Image and Video components. It's primarily a utility component that delegates rendering.
+
+### Detection Logic
+
+1. **Extension check**: Looks for known image extensions (.png, .jpg, .gif, etc.) or video extensions (.mp4, .webm, .ogg)
+2. **Content-Type header**: If no extension match, fetches the URL and checks the Content-Type header
+3. **Fallback**: Unknown types are rendered in a WebView
+
+### Supported Formats
+
+| Type | Extensions |
+|------|------------|
+| Image | png, jpg, jpeg, gif, tif, tiff, raw, avif, webp |
+| Video | mp4, webm, ogg |

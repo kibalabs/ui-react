@@ -1,42 +1,64 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { WebView, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # WebView
 
-<br />
+**WebView** is an `atom` component for embedding external content via iframe.
 
-export const Template = (args) => (
-  <div style={{height: '300px'}}>
-    <WebView {...args} />
-  </div>
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### With Aspect Ratio
 
-<Canvas>
-  <Story of={DocumentationStories.WithError} />
-</Canvas>
+<Canvas of={Stories.WithAspectRatio} />
 
-<Canvas>
-  <Story of={DocumentationStories.WithAspectRatio} />
-</Canvas>
+### With Lazy Loading
 
-<Canvas>
-  <Story of={DocumentationStories.WithLazyLoading} />
-</Canvas>
+<Canvas of={Stories.WithLazyLoading} />
 
-NOTE(krishan711): the error detection isn't working yet.
+### No Loading Spinner
 
-### Theming
+<Canvas of={Stories.NoLoadingSpinner} />
 
-TODO
+### With Custom Title
+
+<Canvas of={Stories.WithCustomTitle} />
+
+## Theming
+
+### CSS Class: `.KibaWebView`
+
+This component embeds external content and has minimal visual theming. The loading spinner follows LoadingSpinner theming.
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaWebView {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    > .web-view-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    > .web-view-loading-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+```

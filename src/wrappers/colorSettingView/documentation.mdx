@@ -1,33 +1,22 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Box, Text } from '../../particles';
-import { ColorSettingView, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # ColorSettingView
 
-<br />
+**ColorSettingView** is a `wrapper` component that sets semantic color context. Affects how child components render colors.
 
-export const Template = (args) => (
-  <ColorSettingView {...args}>
-    <Box variant='card'>
-      <Text>I'm wrapped</Text>
-    </Box>
-  </ColorSettingView>
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Inverse Variant
 
-TODO
+<Canvas of={Stories.InverseVariant} />
 
-### Theming
+## Theming
 
-TODO
+This is a structural component without visual theming.

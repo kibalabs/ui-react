@@ -1,35 +1,62 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { LinePager } from '.';
-import { PaddingSize, KibaIcon } from '../../particles';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # LinePager
 
-<br />
+**LinePager** is an `atom` component for pagination indicators. Shows clickable dots for page navigation.
 
-export const Template = (args) => (
-  <LinePager {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### First Page
 
-<Canvas>
-  <Story of={DocumentationStories.Simple} />
-</Canvas>
+<Canvas of={Stories.FirstPage} />
 
-<Canvas>
-  <Story of={DocumentationStories.Many} />
-</Canvas>
+### Last Page
 
-### Theming
+<Canvas of={Stories.LastPage} />
 
-TODO
+### Many Pages
+
+<Canvas of={Stories.ManyPages} />
+
+### Interactive
+
+<Canvas of={Stories.Interactive} />
+
+## Theming
+
+### CSS Class: `.KibaLinePager`
+
+### States
+
+| Class | Description |
+|-------|-------------|
+| `.active` | Active page indicator |
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaLinePager {
+    display: flex;
+    gap: var(--kiba-spacing);
+
+    > .LinePagerItem {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: var(--kiba-color-background-dark25);
+
+      &.active {
+        background-color: var(--kiba-color-brand-primary);
+      }
+    }
+  }
+}
+```

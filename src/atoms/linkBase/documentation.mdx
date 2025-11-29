@@ -1,49 +1,82 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { LinkBase } from '.';
-import { KibaIcon } from '../../particles';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # LinkBase
 
-<br />
+**LinkBase** is an `atom` component for unstyled clickable areas. Renders as `<a>` with target or `<button>` without.
 
-export const Template = (args) => (
-  <LinkBase {...args}>
-    <KibaIcon iconId='ion-bulb' />
-  </LinkBase>
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Variants
 
-<Canvas>
-  <Story of={DocumentationStories.Translucent} />
-</Canvas>
+<Canvas of={Stories.Variants} />
 
-<Canvas>
-  <Story of={DocumentationStories.Image} />
-</Canvas>
+### With External Target
 
-<Canvas>
-  <Story of={DocumentationStories.Card} />
-</Canvas>
+<Canvas of={Stories.WithTarget} />
 
-<Canvas>
-  <Story of={DocumentationStories.LinkWithTarget} />
-</Canvas>
+### Internal Link
 
-<Canvas>
-  <Story of={DocumentationStories.LinkWithoutTarget} />
-</Canvas>
+<Canvas of={Stories.InternalLink} />
 
-### Theming
+### As Button
 
-TODO
+<Canvas of={Stories.AsButton} />
+
+### Disabled
+
+<Canvas of={Stories.Disabled} />
+
+### Full Width
+
+<Canvas of={Stories.FullWidth} />
+
+## Theming
+
+### CSS Class: `.KibaLinkBase`
+
+### Variants
+
+| Variant | Description |
+|---------|-------------|
+| `default` | No styling |
+| `translucent` | Subtle hover effect |
+| `card` | Card-like appearance |
+| `image` | For wrapping images |
+
+### States
+
+| Class | Description |
+|-------|-------------|
+| `.fullWidth` | Expands to container width |
+| `.fullHeight` | Expands to container height |
+| `.disabled` | Disabled state |
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaLinkBase {
+    text-decoration: none;
+    cursor: pointer;
+
+    &.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    &.card > .KibaLinkBaseFocusFixer {
+      display: block;
+      padding: var(--kiba-padding);
+      border-radius: var(--kiba-border-radius);
+      background-color: var(--kiba-color-background);
+    }
+  }
+}
+```

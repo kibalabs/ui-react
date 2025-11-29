@@ -1,75 +1,93 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Button } from '.';
-import { EqualGrid, Stack } from '../../layouts';
-import { Direction } from '../../model';
-import { Box, KibaIcon, Text } from '../../particles';
-import { MultiLineInput } from '../../molecules';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Button
 
-<br />
+**Button** is an `atom` component for user interactions. Supports variants, icons, loading states, and can act as a link.
 
-export const Template = (args) => (
-  <Button {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Variants
 
-<Canvas>
-  <Story of={DocumentationStories.Primary} />
-</Canvas>
+<Canvas of={Stories.Variants} />
 
-<Canvas>
-  <Story of={DocumentationStories.Secondary} />
-</Canvas>
+### Sizes
 
-<Canvas>
-  <Story of={DocumentationStories.RightIcon} />
-</Canvas>
+<Canvas of={Stories.Sizes} />
 
-<Canvas>
-  <Story of={DocumentationStories.LeftIcon} />
-</Canvas>
+### With Icons
 
-<Canvas>
-  <Story of={DocumentationStories.Disabled} />
-</Canvas>
+<Canvas of={Stories.WithIcons} />
 
-<Canvas>
-  <Story of={DocumentationStories.FullWidth} />
-</Canvas>
+### States
 
-<Canvas>
-  <Story of={DocumentationStories.EndAligned} />
-</Canvas>
+<Canvas of={Stories.States} />
 
-### Theming
+### Full Width
 
-Button styling is controlled through CSS custom properties and variant classes. Define your button variants in your theme SCSS file:
+<Canvas of={Stories.FullWidth} />
 
-```scss
-.KibaButton {
-  // Default button styling
-  > .KibaButtonFocusFixer {
-    background-color: transparent;
-    border-radius: var(--kiba-border-radius);
-    color: var(--kiba-color-brand-primary);
-  }
+### As Link
 
-  // Primary variant
-  &.primary > .KibaButtonFocusFixer {
-    background-color: var(--kiba-color-brand-primary);
-    color: var(--kiba-color-text-on-brand);
+Buttons can navigate to URLs using the `target` prop.
+
+<Canvas of={Stories.AsLink} />
+
+### Card Style
+
+<Canvas of={Stories.Card} />
+
+## Theming
+
+### CSS Class: `.KibaButton`
+
+### Variants
+
+| Variant | Description |
+|---------|-------------|
+| `default` | Transparent with brand color text |
+| `primary` | Filled brand background |
+| `secondary` | Brand border, transparent background |
+| `small` | Smaller padding and font |
+| `large` | Larger padding and font |
+| `card` | With shadow, card-like appearance |
+
+Combine variants: `variant="primary-large"` or `variant="card-primary"`
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaButton {
+    > .KibaButtonFocusFixer {
+      background-color: transparent;
+      border-radius: var(--kiba-border-radius);
+      border-width: 2px;
+      color: var(--kiba-color-brand-primary);
+      font-weight: 600;
+      padding: var(--kiba-padding) var(--kiba-padding-wide);
+    }
+
+    &:hover > .KibaButtonFocusFixer {
+      background-color: var(--kiba-color-brand-primary-clear90);
+    }
+
+    &.primary > .KibaButtonFocusFixer {
+      background-color: var(--kiba-color-brand-primary);
+      color: var(--kiba-color-text-on-brand);
+    }
+
+    &.disabled > .KibaButtonFocusFixer {
+      background-color: var(--kiba-color-disabled-light50);
+      color: var(--kiba-color-disabled-text);
+      cursor: not-allowed;
+    }
   }
 }
 ```

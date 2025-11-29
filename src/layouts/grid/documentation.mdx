@@ -1,76 +1,32 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Grid, } from '.';
-import { PaddingSize } from '../../';
-import { Direction } from '../../model';
-import { Box, KibaIcon, Text } from '../../particles';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Grid
 
-<br />
+**Grid** is a `layout` component for flexible grid layouts. Use `Grid.Item` with size prop (1-12) for different column widths.
 
-{/* NOTE(krishan711): some unknonwn problem with this and grid when building docs */}
+<Canvas of={Stories.Default} />
 
-{/* export const Template = (args) => (
-  <Grid {...args}>
-    <Grid.Item size={3}>
-      <KibaIcon iconId={'ion-airplane'} />
-    </Grid.Item>
-    <Grid.Item size={3}>
-      <KibaIcon iconId={'ion-american-football'} />
-    </Grid.Item>
-    <Grid.Item size={3}>
-      <KibaIcon iconId={'ion-at'} />
-    </Grid.Item>
-    <Grid.Item size={3}>
-      <KibaIcon iconId={'ion-albums'} />
-    </Grid.Item>
-    <Grid.Item size={3}>
-      <KibaIcon iconId={'ion-bag'} />
-    </Grid.Item>
-    <Grid.Item size={3}>
-      <KibaIcon iconId={'ion-bonfire'} />
-    </Grid.Item>
-  </Grid>
-);
+## Examples
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story name='Default' args={{}}>
-    {Template.bind({})}
-  </Story>
-</Canvas>
+### Different Sizes
 
-<ArgsTable story={'Default'} /> */}
+<Canvas of={Stories.DifferentSizes} />
 
-### Examples
+### With Gutters
 
-<Canvas>
-  <Story of={DocumentationStories.AllDifferentSizes} />
-</Canvas>
+<Canvas of={Stories.WithGutters} />
 
-<Canvas>
-  <Story of={DocumentationStories.GutterApplied} />
-</Canvas>
+### Wide Gutters
 
-<Canvas>
-  <Story of={DocumentationStories.DefaultGutters} />
-</Canvas>
+<Canvas of={Stories.WideGutters} />
 
-<Canvas>
-  <Story of={DocumentationStories.WideGutters} />
-</Canvas>
+### Responsive
 
-<Canvas>
-  <Story of={DocumentationStories.NoGutters} />
-</Canvas>
+<Canvas of={Stories.Responsive} />
 
-<Canvas>
-  <Story of={DocumentationStories.ResponsiveGrid} />
-</Canvas>
+## Theming
 
-### Theming
-
-TODO
+This is a structural component without visual theming.

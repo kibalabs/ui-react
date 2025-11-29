@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import { Meta, Story, Canvas, Controls } from '@storybook/addon-docs/blocks';
 
 import { InputWrapper } from '.';
 
@@ -10,4 +10,24 @@ This component is only intended to be used with InputFrame
 
 ### Theming
 
-TODO
+InputWrapper styling uses CSS custom properties for colors and states:
+
+```scss
+.KibaInputWrapperInner {
+  background-color: var(--kiba-color-background-light50);
+  border-color: var(--kiba-color-background-dark05);
+}
+.KibaInputWrapper:focus-within .KibaInputWrapperInner {
+  border-color: var(--kiba-color-brand-primary);
+}
+.KibaInputWrapper.error .KibaInputWrapperInner {
+  background-color: var(--kiba-color-error-light90);
+  border-color: var(--kiba-color-error-light20);
+}
+.KibaInputWrapper.success .KibaInputWrapperInner {
+  background-color: var(--kiba-color-success-light90);
+  border-color: var(--kiba-color-success-light20);
+}
+```
+
+Variants include: `error`, `success`.

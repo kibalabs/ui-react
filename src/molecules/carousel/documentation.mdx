@@ -1,45 +1,53 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Box, Image } from '../../particles';
-import { Carousel, } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Carousel
 
-<br />
+**Carousel** is a `molecule` component for slideshows with navigation. Displays multiple slides with prev/next controls.
 
-export const Template = (args) => (
-  <Carousel {...args}>
-    <Box variant='padded-transparent' isFullWidth={false}>
-      <Image source={'https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg'} isLazyLoadable={false} isFullHeight={true} isFullWidth={true} />
-    </Box>
-    <Box variant='padded-transparent' isFullWidth={false}>
-      <Image source={'https://upload.wikimedia.org/wikipedia/commons/0/0d/Alouatta_guariba.jpg'} isLazyLoadable={false} isFullHeight={true} isFullWidth={true} />
-    </Box>
-    <Box variant='padded-transparent' isFullWidth={false}>
-      <Image source={'https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg'} isLazyLoadable={false} isFullHeight={true} isFullWidth={true} />
-    </Box>
-    <Box variant='padded-transparent' isFullWidth={false}>
-      <Image source={'https://upload.wikimedia.org/wikipedia/commons/0/0d/Alouatta_guariba.jpg'} isLazyLoadable={false} isFullHeight={true} isFullWidth={true} />
-    </Box>
-    <Box variant='padded-transparent' isFullWidth={false}>
-      <Image source={'https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg'} isLazyLoadable={false} isFullHeight={true} isFullWidth={true} />
-    </Box>
-  </Carousel>
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Single Slide
 
-TODO
+<Canvas of={Stories.SingleSlide} />
 
-### Theming
+### Many Slides
 
-TODO
+<Canvas of={Stories.ManySlides} />
+
+### With Images
+
+<Canvas of={Stories.WithImages} />
+
+## Theming
+
+### CSS Class: `.KibaCarousel`
+
+Carousel is primarily structural. Navigation buttons use IconButton theming.
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaCarousel {
+    position: relative;
+
+    > .KibaCarouselSlides {
+      display: flex;
+      overflow: hidden;
+    }
+
+    > .KibaCarouselNavigation {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+```

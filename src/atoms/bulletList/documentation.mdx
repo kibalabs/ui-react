@@ -1,34 +1,38 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { BulletList } from '.';
-import { BulletText } from '../bulletText';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # BulletList
 
-<br />
+**BulletList** is an `atom` component that wraps BulletText items in a semantic unordered list.
 
-export const Template = (args) => (
-  <BulletList {...args}>
-    <BulletText>hello</BulletText>
-    <BulletText>world</BulletText>
-  </BulletList>
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Nested List
 
-<Canvas>
-  <Story of={DocumentationStories.SimpleExample} />
-</Canvas>
+<Canvas of={Stories.NestedList} />
 
-### Theming
+### Long Content
 
-TODO
+<Canvas of={Stories.LongContent} />
+
+## Theming
+
+### CSS Class: `.KibaBulletList`
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaBulletList {
+    list-style-type: disc;
+    padding-left: var(--kiba-padding);
+    margin: 0;
+  }
+}
+```

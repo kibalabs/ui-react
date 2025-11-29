@@ -1,35 +1,70 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { Checkbox } from '.';
-import { PaddingSize, KibaIcon } from '../../particles';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # Checkbox
 
-<br />
+**Checkbox** is an `atom` component for boolean input with label text.
 
-export const Template = (args) => (
-  <Checkbox {...args} />
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Interactive
 
-<Canvas>
-  <Story of={DocumentationStories.WrappedState} />
-</Canvas>
+<Canvas of={Stories.Interactive} />
 
-<Canvas>
-  <Story of={DocumentationStories.Disabled} />
-</Canvas>
+### Checked State
 
-### Theming
+<Canvas of={Stories.Checked} />
 
-TODO
+### Disabled
+
+<Canvas of={Stories.Disabled} />
+
+### Form Example
+
+<Canvas of={Stories.FormExample} />
+
+## Theming
+
+### CSS Class: `.KibaCheckbox`
+
+### States
+
+| Class | Description |
+|-------|-------------|
+| `.checked` | When checkbox is selected |
+| `.disabled` | When checkbox is disabled |
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaCheckbox {
+    > .checkbox-inner {
+      border: 1px solid var(--kiba-color-text);
+      border-radius: var(--kiba-border-radius);
+      color: var(--kiba-color-text);
+    }
+
+    &.checked > .checkbox-inner {
+      background-color: var(--kiba-color-brand-primary);
+      border-color: var(--kiba-color-brand-primary);
+      color: var(--kiba-color-text-on-brand);
+    }
+
+    &.disabled > .checkbox-inner {
+      border-color: var(--kiba-color-disabled-text);
+      opacity: 0.5;
+    }
+
+    > .checkbox-text {
+      color: var(--kiba-color-text);
+    }
+  }
+}
+```

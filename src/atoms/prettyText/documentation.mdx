@@ -1,46 +1,63 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
-import * as DocumentationStories from './documentation.stories';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Stories from './documentation.stories';
 
-import { PrettyText } from '.';
-
-<Meta of={DocumentationStories} />
+<Meta of={Stories} />
 
 # PrettyText
 
-<br />
+**PrettyText** is an `atom` component for styled text with inline formatting. Inherits Text styles with support for bold, italic, etc.
 
-export const Template = (args) => (
-  <PrettyText {...args}><span><b>Bold</b> and <i>italic</i> text</span></PrettyText>
-);
+<Canvas of={Stories.Default} />
 
-<Canvas withToolbar={true} withSource={'none'}>
-  <Story of={DocumentationStories.Default} />
-</Canvas>
+<Controls of={Stories.Default} />
 
-<Controls />
+## Examples
 
-### Examples
+### Headers
 
-<Canvas>
-  <Story of={DocumentationStories.Header1} />
-</Canvas>
+<Canvas of={Stories.Headers} />
 
-<Canvas>
-  <Story of={DocumentationStories.Header2} />
-</Canvas>
+### Mixed Formatting
 
-<Canvas>
-  <Story of={DocumentationStories.Header3} />
-</Canvas>
+<Canvas of={Stories.MixedFormatting} />
 
-<Canvas>
-  <Story of={DocumentationStories.Header4} />
-</Canvas>
+### With Alignment
 
-<Canvas>
-  <Story of={DocumentationStories.Header5} />
-</Canvas>
+<Canvas of={Stories.WithAlignment} />
 
-### Theming
+## Theming
 
-TODO
+### CSS Class: `.KibaPrettyText`
+
+Inherits all styles from `.KibaText`. See Text documentation for theming details.
+
+### Variants
+
+| Variant | Description |
+|---------|-------------|
+| `default` | Body text size |
+| `header1` | Largest header |
+| `header2` | Second level header |
+| `header3` | Third level header |
+| `header4` | Fourth level header |
+| `header5` | Smallest header |
+
+### Customizing with CSS
+
+```css
+@layer kiba-theme {
+  .KibaPrettyText {
+    b, strong {
+      font-weight: var(--kiba-font-weight-bold);
+    }
+
+    i, em {
+      font-style: italic;
+    }
+
+    u {
+      text-decoration: underline;
+    }
+  }
+}
+```

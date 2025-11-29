@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, Controls } from '@storybook/blocks';
+import { Meta, Story, Canvas, Controls } from '@storybook/addon-docs/blocks';
 
 import { TabBarItem, } from '.';
 
@@ -10,4 +10,18 @@ This component is only intended to be used with [Molecules/TabBar](/?path=/docs/
 
 ### Theming
 
-TODO
+TabBarItem styling uses CSS custom properties for colors and states:
+
+```scss
+.KibaTabBarItem {
+  color: var(--kiba-color-brand-primary-clear25);
+  border-bottom: 2px solid transparent;
+  &:hover {
+    background-color: var(--kiba-color-brand-primary-clear90);
+  }
+  &.selected {
+    color: var(--kiba-color-brand-primary);
+    border-bottom-color: var(--kiba-color-brand-primary);
+  }
+}
+```
