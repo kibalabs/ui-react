@@ -11,6 +11,20 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    options: {
+      storySort: {
+        order: [
+          'Introduction',
+          ['Welcome', 'Architecture', 'Theming'],
+          'Particles',
+          'Atoms',
+          'Molecules',
+          'Layouts',
+          'Wrappers',
+          '*',
+        ],
+      },
+    },
   },
 };
 

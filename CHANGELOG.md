@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
+- [MAJOR] Upgraded `markdown-to-jsx` from v7 to v9
 - [MAJOR] Changed `onClick` to `onClicked` in `SingleLineInput`
 - [MINOR] Added `onFrameClicked` to `SingleLineInput`
 - [MINOR] Added `iconRight` and `iconLeft` to `InputFrame`
