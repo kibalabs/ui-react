@@ -1,5 +1,5 @@
 # Stage 1: build
-FROM node:22.2.0 AS build
+FROM node:24.11.1 AS build
 
 WORKDIR /app
 COPY makefile .
