@@ -1,0 +1,70 @@
+// =============================================================================
+// UI-React Complete SCSS Entry Point
+// =============================================================================
+// This file imports all styles from @kibalabs/ui-react including base styles
+// and all component styles. Use this when you want to import everything via
+// SCSS and customize with your own overrides.
+//
+// Usage in consuming apps:
+//   @use '@kibalabs/ui-react/styles/all';
+//   // Then add your theme overrides...
+//
+// This eliminates the need to separately import dist/index.css
+
+// Base styles (reset includes layer order declaration)
+@use 'reset';
+@use 'colors';
+@use 'global';
+
+// Particles
+@use '../particles/box/styles' as box;
+@use '../particles/divider/styles' as divider;
+@use '../particles/icon/styles' as icon;
+@use '../particles/image/styles' as image;
+@use '../particles/loadingSpinner/styles' as loadingSpinner;
+@use '../particles/pill/styles' as pill;
+@use '../particles/portal/styles' as portal;
+@use '../particles/spacing/styles' as spacing;
+@use '../particles/text/styles' as text;
+@use '../particles/video/styles' as video;
+
+// Layouts
+@use '../layouts/container/styles' as container;
+@use '../layouts/grid/styles' as grid;
+@use '../layouts/layerContainer/styles' as layerContainer;
+@use '../layouts/stack/styles' as stack;
+
+// Atoms
+@use '../atoms/bulletList/styles' as bulletList;
+@use '../atoms/bulletText/styles' as bulletText;
+@use '../atoms/button/styles' as button;
+@use '../atoms/checkbox/styles' as checkbox;
+@use '../atoms/collapsibleBox/styles' as collapsibleBox;
+@use '../atoms/dialog/styles' as dialog;
+@use '../atoms/iconButton/styles' as iconButton;
+@use '../atoms/inputWrapper/styles' as inputWrapper;
+@use '../atoms/linePager/styles' as linePager;
+@use '../atoms/link/styles' as link;
+@use '../atoms/linkBase/styles' as linkBase;
+@use '../atoms/listItem/styles' as listItem;
+@use '../atoms/prettyText/styles' as prettyText;
+@use '../atoms/progressCounterItem/styles' as progressCounterItem;
+@use '../atoms/selectableView/styles' as selectableView;
+@use '../atoms/switch/styles' as switch;
+@use '../atoms/tabBarItem/styles' as tabBarItem;
+@use '../atoms/titledCollapsibleBox/styles' as titledCollapsibleBox;
+@use '../atoms/webView/styles' as webView;
+
+// Molecules
+@use '../molecules/carousel/styles' as carousel;
+@use '../molecules/list/styles' as list;
+@use '../molecules/multiLineInput/styles' as multiLineInput;
+@use '../molecules/optionSelect/styles' as optionSelect;
+@use '../molecules/progressCounter/styles' as progressCounter;
+@use '../molecules/singleLineInput/styles' as singleLineInput;
+@use '../molecules/tabBar/styles' as tabBar;
+
+// Wrappers
+@use '../wrappers/responsiveContainingView/styles' as responsiveContainingView;
+@use '../wrappers/responsiveHidingView/styles' as responsiveHidingView;
+@use '../wrappers/responsiveTextAlignmentView/styles' as responsiveTextAlignmentView;

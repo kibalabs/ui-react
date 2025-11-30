@@ -21,12 +21,17 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./dist/index.css": "./dist/index.css",
-    "./styles/*": "./src/styles/*.scss"
+    "./styles.css": "./dist/index.css",
+    "./styles.scss": "./src/styles/all.scss"
   },
   "files": [
     "dist/*",
-    "src/styles/*.scss"
+    "src/styles/*.scss",
+    "src/particles/*/styles.scss",
+    "src/layouts/*/styles.scss",
+    "src/atoms/*/styles.scss",
+    "src/molecules/*/styles.scss",
+    "src/wrappers/*/styles.scss"
   ],
   "dependencies": {
     "@kibalabs/core": "^0.6.3-next.4",
@@ -36,7 +41,7 @@
     "polished": "^4.3.1"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.13.3-next.12",
+    "@kibalabs/build": "0.13.3-next.13",
     "@storybook/addon-docs": "10.1.2",
     "@storybook/react-vite": "10.1.2",
     "@types/react": "19.2.7",
