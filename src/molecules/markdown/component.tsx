@@ -71,16 +71,17 @@ function MarkdownBulletText(props: React.LiHTMLAttributes<HTMLLIElement>): React
   return (
     <BulletText>
       {/* @ts-expect-error */}
-      {React.Children.toArray(props.children).map((child: React.ReactElement): React.ReactElement => {
+      {React.Children.toArray(props.children).map((child: React.ReactElement, index: number): React.ReactElement => {
         if (typeof child === 'string') {
-          return <MarkdownParagraph isInline={true} key={child}>{child}</MarkdownParagraph>;
+          // eslint-disable-next-line react/no-array-index-key
+          return <MarkdownParagraph isInline={true} key={index}>{child}</MarkdownParagraph>;
         }
         // @ts-expect-error
         if (child.type?.displayName === 'MarkdownParagraph') {
           // @ts-expect-error
-          return React.cloneElement(child, { isInline: true, key: child.key });
+          return React.cloneElement(child, { isInline: true, key: child.key ?? index });
         }
-        return React.cloneElement(child, { key: child.key });
+        return React.cloneElement(child, { key: child.key ?? index });
       })}
     </BulletText>
   );
