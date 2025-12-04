@@ -15,8 +15,6 @@
 @use 'reset';
 @use 'defaults';
 @use 'global';
-
-// Forward mixins so consumers can use them
 @forward 'mixins';
 
 // Particles
