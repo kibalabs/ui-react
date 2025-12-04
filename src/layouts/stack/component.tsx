@@ -105,7 +105,7 @@ function renderStackItemChildren(
     }
     const existingStyle = (child.props as { style?: React.CSSProperties }).style ?? {};
     const existingClassName = (child.props as { className?: string }).className ?? '';
-    // itemStyle must come AFTER existingStyle so Stack.Item flex properties take precedence
+    // itemStyle comes after existingStyle so Stack.Item flex properties (from itemStyle) take precedence over child's existing styles
     return React.cloneElement(child, {
       key: child.key ?? index,
       style: { ...existingStyle, ...itemStyle },
