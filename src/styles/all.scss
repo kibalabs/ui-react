@@ -15,6 +15,7 @@
 @use 'reset';
 @use 'defaults';
 @use 'global';
+@forward 'mixins';
 
 // Particles
 @use '../particles/box/styles' as box;
