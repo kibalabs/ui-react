@@ -91,7 +91,6 @@
   @include generate-color-variants('background');
   @include generate-color-variants('brand-primary');
   @include generate-color-variants('brand-secondary');
-  @include generate-color-variants('brand-dark');
   @include generate-color-variants('text');
   @include generate-color-variants('text-on-brand');
   @include generate-color-variants('disabled');
@@ -109,10 +108,9 @@
 
 :root {
   // Base Colors (apps override these)
-  --kiba-color-background: #f5f5f5;
-  --kiba-color-brand-primary: #333333;
+  --kiba-color-background: #ffffff;
+  --kiba-color-brand-primary: #0066cc;
   --kiba-color-brand-secondary: #0055aa;
-  --kiba-color-brand-dark: #003366;
   --kiba-color-text: #333333;
   --kiba-color-text-on-brand: #ffffff;
   --kiba-color-disabled: #cccccc;
