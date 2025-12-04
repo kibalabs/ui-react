@@ -374,6 +374,42 @@ Notice:
 
 ---
 
+## Creating Custom Components
+
+When creating custom components in your project, extend `IComponentProps` and pass the styling props to your root element:
+
+```tsx
+import { IComponentProps, Stack, Text } from '@kibalabs/ui-react';
+
+interface IMyComponentProps extends IComponentProps {
+  title: string;
+  onClicked?: () => void;
+}
+
+export const MyComponent = (props: IMyComponentProps): React.ReactElement => {
+  return (
+    <Stack
+      id={props.id}
+      className={props.className}
+      style={props.style}
+      direction={Direction.Vertical}
+    >
+      <Text>{props.title}</Text>
+    </Stack>
+  );
+};
+```
+
+`IComponentProps` provides:
+- `id?: string` - HTML id attribute
+- `className?: string` - Additional CSS classes
+- `style?: React.CSSProperties` - Inline styles
+- `variant?: string` - Component variant (if applicable)
+
+**Always pass `id`, `className`, and `style` to your root element** to ensure consumers can style and identify your component.
+
+---
+
 ## Development
 
 ### Prerequisites

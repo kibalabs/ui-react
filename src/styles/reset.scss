@@ -24,6 +24,7 @@
     white-space:normal;
     background:none;
     line-height:1;
+    /* stylelint-disable-next-line declaration-block-no-shorthand-property-overrides -- reset */
     font: inherit;
   }
 
@@ -101,6 +102,7 @@
     padding: 0;
     border: 0;
     font-size: 100%;
+    /* stylelint-disable-next-line declaration-block-no-shorthand-property-overrides -- reset */
     font: inherit;
     vertical-align: baseline;
   }
@@ -124,6 +126,7 @@
   }
   blockquote:before, blockquote:after,
   q:before, q:after {
+    /* stylelint-disable-next-line declaration-block-no-duplicate-properties -- reset */
     content: '';
     content: none;
   }
@@ -132,9 +135,11 @@
     border-spacing: 0;
   }
   /* http://www.paulirish.com/2012/box-sizing-border-box-ftw */
+  /* stylelint-disable-next-line no-duplicate-selectors -- reset */
   html {
     box-sizing: border-box;
   }
+  /* stylelint-disable-next-line no-duplicate-selectors -- reset */
   *, *:before, *:after {
     box-sizing: inherit;
   }
@@ -161,11 +166,13 @@
     -webkit-appearance: none;
   }
   /* Fix antialiasing */
+  /* stylelint-disable-next-line no-duplicate-selectors -- reset */
   *, *:before, *:after {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   /* Disable user select on everything but texts */
+  /* stylelint-disable-next-line no-duplicate-selectors -- reset */
   *, *:before, *:after {
     user-select: none;
   }

@@ -8,6 +8,7 @@
 @layer kiba-reset {
   html {
     scroll-behavior: smooth;
+    /* stylelint-disable-next-line declaration-block-no-duplicate-properties -- browser fallback */
     image-rendering: pixelated;
     image-rendering: -webkit-optimize-contrast;
     -ms-interpolation-mode: nearest-neighbor;
