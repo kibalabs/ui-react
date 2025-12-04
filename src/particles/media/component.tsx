@@ -111,7 +111,7 @@ export function Media({
     <WebView className={className} variant={variant} style={props.style} url={props.source} />
   ) : (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Image className={className} variant={variant} style={props.style} {...props as IImageProps} />
+    <Image className={className} variant={variant} {...props as IImageProps} />
   );
 }
 Media.displayName = 'KibaMedia';
