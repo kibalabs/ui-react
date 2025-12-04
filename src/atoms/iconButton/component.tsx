@@ -48,6 +48,7 @@ export function IconButton({
     <ButtonComponent
       id={props.id}
       className={getClassName(IconButton.displayName, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !isEnabled && 'disabled', className, ...(variant?.split('-') || []))}
+      style={props.style}
       onClick={onClicked}
       disabled={!isEnabled}
       aria-label={label}

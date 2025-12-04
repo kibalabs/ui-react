@@ -36,6 +36,7 @@ export function InputFrame({
     <InputWrapper
       id={props.id}
       className={getClassName(InputFrame.displayName, className)}
+      style={props.style}
       variant={props.inputWrapperVariant}
       messageText={props.messageText}
       isEnabled={isEnabled}

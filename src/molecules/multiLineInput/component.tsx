@@ -71,6 +71,7 @@ export function MultiLineInput({
     <InputFrame
       id={props.id}
       className={getClassName(MultiLineInput.displayName, className)}
+      style={props.style}
       inputWrapperVariant={props.inputWrapperVariant}
       messageText={props.messageText}
       isEnabled={isEnabled}

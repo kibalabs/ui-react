@@ -106,12 +106,12 @@ export function Media({
 
   return (isVideo || mediaType === 'video') ? (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Video shouldShowControls={false} shouldLoop={true} shouldMute={true} shouldAutoplay={true} className={className} variant={variant} {...props} />
+    <Video shouldShowControls={false} shouldLoop={true} shouldMute={true} shouldAutoplay={true} className={className} variant={variant} style={props.style} {...props} />
   ) : mediaType && mediaType !== 'image' ? (
-    <WebView className={className} variant={variant} url={props.source} />
+    <WebView className={className} variant={variant} style={props.style} url={props.source} />
   ) : (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Image className={className} variant={variant} {...props as IImageProps} />
+    <Image className={className} variant={variant} style={props.style} {...props as IImageProps} />
   );
 }
 Media.displayName = 'KibaMedia';

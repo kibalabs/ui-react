@@ -114,6 +114,7 @@ export function OptionSelect({
     <div
       id={props.id}
       className={getClassName(OptionSelect.displayName, className)}
+      style={props.style}
     >
       <Box ref={inputFrameRef}>
         <SingleLineInput

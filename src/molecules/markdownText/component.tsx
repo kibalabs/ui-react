@@ -19,6 +19,7 @@ function MarkdownLink(props: AnchorHTMLAttributes<HTMLAnchorElement>): React.Rea
 interface IMarkdownTextProps {
   id?: string;
   className?: string;
+  style?: React.CSSProperties;
   source: string;
   textAlignment?: TextAlignment;
   textVariant?: string;
@@ -32,6 +33,7 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
     <PrettyText
       id={props.id}
       className={getClassName(MarkdownText.displayName, props.className)}
+      style={props.style}
       variant={getVariant(props.textVariant, 'unmargined')}
       tag={props.textTag}
       alignment={props.textAlignment}

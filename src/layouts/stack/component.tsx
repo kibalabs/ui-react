@@ -92,6 +92,9 @@ function renderStackItemChildren(
     minWidth,
     minHeight,
     alignSelf,
+    // When using flex-grow/shrink with a specific baseSize, override any width/height
+    // from the child to prevent it from taking precedence over flex properties
+    ...(growthFactor > 0 || shrinkFactor > 0 ? { width: 'auto', height: 'auto' } : {}),
     ...(itemProps.isHidden ? { display: 'none' } : {}),
   };
   const itemClassName = getClassName(itemProps.className, 'KibaStackItem');
@@ -105,9 +108,10 @@ function renderStackItemChildren(
     }
     const existingStyle = (child.props as { style?: React.CSSProperties }).style ?? {};
     const existingClassName = (child.props as { className?: string }).className ?? '';
+    // itemStyle must come AFTER existingStyle so Stack.Item flex properties take precedence
     return React.cloneElement(child, {
       key: child.key ?? index,
-      style: { ...itemStyle, ...existingStyle },
+      style: { ...existingStyle, ...itemStyle },
       className: getClassName(existingClassName, itemClassName),
     } as React.HTMLAttributes<HTMLElement>);
   });
@@ -125,9 +129,21 @@ export function Stack({
   isScrollableHorizontally = false,
   ...props
 }: IStackProps): React.ReactElement {
+  const isStackItem = (child: React.ReactElement | string | number): boolean => {
+    if (typeof child !== 'object' || !('type' in child)) {
+      return false;
+    }
+    // Check by reference first
+    if (child.type === StackItem) {
+      return true;
+    }
+    // Fallback: check by displayName for cases where the reference might differ
+    const childType = child.type as { displayName?: string };
+    return childType?.displayName === 'KibaStackItem';
+  };
   const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number), index: number): React.ReactElement<IStackItemProps> => (
     // eslint-disable-next-line react/no-array-index-key
-    typeof child === 'object' && 'type' in child && child.type === StackItem ? child as React.ReactElement<IStackItemProps> : <StackItem key={`child-${index}`}>{ child }</StackItem>
+    isStackItem(child) ? child as React.ReactElement<IStackItemProps> : <StackItem key={`child-${index}`}>{ child }</StackItem>
   ));
   const paddingTop = (props.paddingStart && direction === Direction.Vertical) ? props.paddingStart : undefined;
   const paddingBottom = (props.paddingEnd && direction === Direction.Vertical) ? props.paddingEnd : undefined;
@@ -166,7 +182,7 @@ export function Stack({
   } as React.CSSProperties;
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <PaddingView paddingTop={paddingTop} paddingBottom={paddingBottom} paddingRight={paddingRight} paddingLeft={paddingLeft} className={className} {...props as IPaddingViewPaddingProps}>
+    <PaddingView paddingTop={paddingTop} paddingBottom={paddingBottom} paddingRight={paddingRight} paddingLeft={paddingLeft} className={className} style={props.style} {...props as IPaddingViewPaddingProps}>
       <div
         id={props.id}
         className={getClassName(Stack.displayName, isScrollableVertically && 'scrollableVertically', isScrollableHorizontally && 'scrollableHorizontally', shouldWrapItems && 'wrapItems')}

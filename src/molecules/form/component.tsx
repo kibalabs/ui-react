@@ -37,6 +37,7 @@ export function Form({
     <Box
       id={props.id}
       className={getClassName(Form.displayName, className)}
+      style={props.style}
       variant={props.backgroundVariant}
       isFullWidth={true}
     >

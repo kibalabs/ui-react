@@ -26,6 +26,7 @@ export function ProgressCounter({
     <div
       id={props.id}
       className={getClassName(ProgressCounter.displayName, className)}
+      style={props.style}
     >
       {Array(props.stepCount).fill(null).map((_: unknown, index: number): React.ReactElement => {
         return (
