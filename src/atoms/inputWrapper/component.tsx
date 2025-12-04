@@ -35,6 +35,7 @@ export function InputWrapper({
     <div
       id={props.id}
       className={getClassName(InputWrapper.displayName, className, props.messageText && 'message-showing', isFocussed && 'focus', !props.isEnabled && 'disabled', ...(variant?.split('-') || []))}
+      style={props.style}
     >
       {/* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
       <div
