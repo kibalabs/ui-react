@@ -43,7 +43,7 @@
     &:active {
       background-color: var(--kiba-color-brand-primary-clear80);
     }
-    &:focus {
+    &:focus-visible {
       @include box.focussed;
     }
     &.selected {

@@ -24,4 +24,4 @@ export function Divider({
     />
   );
 }
-Divider.displayName = 'Divider';
+Divider.displayName = 'KibaDivider';

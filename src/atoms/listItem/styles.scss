@@ -33,7 +33,7 @@
       &:active {
         background-color: var(--kiba-color-brand-primary-clear75);
       }
-      &:focus {
+      &:focus-visible {
         @include box.focussed;
       }
     }

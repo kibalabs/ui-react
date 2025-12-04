@@ -48,21 +48,19 @@ import * as Stories from './documentation.stories';
 ```css
 @layer kiba-theme {
   .KibaLink {
-    > .KibaLinkFocusFixer {
-      color: var(--kiba-color-brand-primary);
-      text-decoration: underline;
-    }
+    color: var(--kiba-color-brand-primary);
+    text-decoration: underline;
 
-    &:hover > .KibaLinkFocusFixer {
+    &:hover {
       color: var(--kiba-color-brand-secondary);
     }
 
-    &:focus > .KibaLinkFocusFixer {
+    &:focus-visible {
       outline: 2px solid var(--kiba-color-brand-primary);
       outline-offset: 2px;
     }
 
-    &.disabled > .KibaLinkFocusFixer {
+    &.disabled {
       color: var(--kiba-color-disabled-text);
       cursor: not-allowed;
       text-decoration: none;

@@ -5,121 +5,109 @@
 @layer kiba-structure {
   .KibaIconButton {
     display: inline-flex;
-
-    &.fullWidth {
-      width: 100%;
-    }
-
-    &.fullHeight {
-      height: 100%;
-    }
-
-    &.disabled {
-      cursor: not-allowed;
-    }
-  }
-
-  .KibaIconButtonFocusFixer {
-    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     background-clip: border-box;
     position: relative;
     outline: none;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    text-decoration: none;
+
+    &.fullWidth { width: 100%; }
+    &.fullHeight { height: 100%; }
+    &.disabled { cursor: not-allowed; }
   }
 }
 
 @layer kiba-theme {
   .KibaIconButton {
-    transition-duration: 0.3s;
-  }
-
-  .KibaIconButtonFocusFixer {
     @include text.default;
     @include box.default;
     @include box.focusable;
-    cursor: pointer;
+    @include transition;
     padding: $padding;
     border-width: 2px;
-  }
 
-  // Default variant
-  .KibaIconButton:hover > .KibaIconButtonFocusFixer {
-    background-color: var(--kiba-color-brand-primary-clear90);
-  }
+    &:hover {
+      background-color: var(--kiba-color-brand-primary-clear90);
+    }
 
-  .KibaIconButton:active > .KibaIconButtonFocusFixer {
-    background-color: var(--kiba-color-brand-primary-clear80);
-  }
+    &:active {
+      background-color: var(--kiba-color-brand-primary-clear80);
+    }
 
-  .KibaIconButton:focus > .KibaIconButtonFocusFixer {
-    border-color: $color-background-dark50;
-  }
+    &:focus-visible {
+      border-color: $color-background-dark50;
+    }
 
-  .KibaIconButton.disabled > .KibaIconButtonFocusFixer {
-    background-color: var(--kiba-color-text-clear90);
-    cursor: not-allowed;
-  }
+    &.disabled {
+      background-color: var(--kiba-color-text-clear90);
+      cursor: not-allowed;
+    }
 
-  .KibaIconButton.disabled .KibaIcon {
-    color: var(--kiba-color-text-clear50);
-  }
+    &.disabled .KibaIcon {
+      color: var(--kiba-color-text-clear50);
+    }
 
-  // Primary variant
-  .KibaIconButton.primary > .KibaIconButtonFocusFixer {
-    background-color: $color-brand-primary;
-    border-color: $color-brand-primary;
-    color: $color-text-on-brand;
-  }
+    // Primary variant
+    &.primary {
+      background-color: $color-brand-primary;
+      border-color: $color-brand-primary;
+      color: $color-text-on-brand;
+    }
 
-  .KibaIconButton.primary .KibaIcon {
-    color: $color-text-on-brand;
-  }
+    &.primary .KibaIcon {
+      color: $color-text-on-brand;
+    }
 
-  .KibaIconButton.primary:hover > .KibaIconButtonFocusFixer {
-    background-color: var(--kiba-color-brand-primary-dark10);
-  }
+    &.primary:hover {
+      background-color: var(--kiba-color-brand-primary-dark10);
+    }
 
-  .KibaIconButton.primary:active > .KibaIconButtonFocusFixer {
-    background-color: var(--kiba-color-brand-primary-dark20);
-  }
+    &.primary:active {
+      background-color: var(--kiba-color-brand-primary-dark20);
+    }
 
-  .KibaIconButton.primary.disabled > .KibaIconButtonFocusFixer {
-    background-color: $color-background-light10;
-    border-color: transparent;
-  }
+    &.primary.disabled {
+      background-color: $color-background-light10;
+      border-color: transparent;
+    }
 
-  // Secondary variant
-  .KibaIconButton.secondary > .KibaIconButtonFocusFixer {
-    border-color: $color-brand-primary;
-  }
+    // Secondary variant
+    &.secondary {
+      border-color: $color-brand-primary;
+    }
 
-  .KibaIconButton.secondary .KibaIcon {
-    color: $color-brand-primary;
-  }
+    &.secondary .KibaIcon {
+      color: $color-brand-primary;
+    }
 
-  // Tertiary variant
-  .KibaIconButton.tertiary > .KibaIconButtonFocusFixer {
-    background-color: transparent;
-  }
+    // Tertiary variant
+    &.tertiary {
+      background-color: transparent;
+    }
 
-  // Small variant
-  .KibaIconButton.small > .KibaIconButtonFocusFixer {
-    padding: $padding-narrow;
-  }
+    // Small variant
+    &.small {
+      padding: $padding-narrow;
+    }
 
-  // Passive variant
-  .KibaIconButton.passive > .KibaIconButtonFocusFixer {
-    opacity: 0.5;
-  }
+    // Passive variant
+    &.passive {
+      opacity: 0.5;
+    }
 
-  .KibaIconButton.passive:hover > .KibaIconButtonFocusFixer {
-    opacity: 1;
-  }
+    &.passive:hover {
+      opacity: 1;
+    }
 
-  // Large variant
-  .KibaIconButton.large > .KibaIconButtonFocusFixer {
-    padding: $padding-wide;
+    // Large variant
+    &.large {
+      padding: $padding-wide;
+    }
   }
 }

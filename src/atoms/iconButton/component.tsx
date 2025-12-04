@@ -59,9 +59,7 @@ export function IconButton({
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       type={props.target ? undefined : (props.buttonType || 'button')}
     >
-      <span className='KibaIconButtonFocusFixer' tabIndex={-1}>
-        {props.icon}
-      </span>
+      {props.icon}
     </ButtonComponent>
   );
 }

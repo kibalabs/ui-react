@@ -5,45 +5,38 @@
 @layer kiba-structure {
   .KibaLink {
     cursor: pointer;
-    & > .KibaLinkFocusFixer {
-      cursor: pointer;
-      position: relative;
-    }
     &.disabled {
       cursor: not-allowed;
-      & > .KibaLinkFocusFixer {
-        cursor: not-allowed;
-      }
     }
   }
 }
 
 @layer kiba-theme {
   .KibaLink {
+    @include text.inherit;
+    @include box.default;
     @include box.focusable;
-    & > .KibaLinkFocusFixer {
-      @include text.inherit;
-      @include box.default;
-      @include box.focusable;
-      color: $color-brand-primary;
-      text-decoration: underline;
-    }
-    &:hover > .KibaLinkFocusFixer {
+    color: $color-brand-primary;
+    text-decoration: underline;
+
+    &:hover {
       color: $color-brand-secondary;
     }
+
+    &:focus-visible {
+      @include box.focussed;
+    }
+
     &.disabled {
-      & > .KibaLinkFocusFixer {
-        color: $color-disabled-text;
-      }
-      &:hover > .KibaLinkFocusFixer {
+      color: $color-disabled-text;
+      &:hover {
         color: $color-disabled-text;
       }
     }
+
     &:visited {
-      & > .KibaLinkFocusFixer {
-        color: $color-brand-primary;
-      }
-      &:hover > .KibaLinkFocusFixer {
+      color: $color-brand-primary;
+      &:hover {
         color: $color-brand-secondary;
       }
     }
