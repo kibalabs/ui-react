@@ -16,6 +16,9 @@
 @use 'defaults';
 @use 'global';
 
+// Forward mixins so consumers can use them
+@forward 'mixins';
+
 // Particles
 @use '../particles/box/styles' as box;
 @use '../particles/divider/styles' as divider;
