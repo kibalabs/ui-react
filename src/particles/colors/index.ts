@@ -1,4 +1,4 @@
-// Colors are now CSS variables defined in styles/colors.scss
+// Colors are now CSS variables defined in styles/defaults.scss
 
 export interface IColorGuide {
   brandPrimary: string;

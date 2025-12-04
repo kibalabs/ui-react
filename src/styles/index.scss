@@ -13,12 +13,13 @@
 //
 // Or import individual files:
 //   @use '@kibalabs/ui-react/styles/reset';
-//   @use '@kibalabs/ui-react/styles/colors';
+//   @use '@kibalabs/ui-react/styles/defaults';
 //   @use '@kibalabs/ui-react/styles/global';
 //   @use '@kibalabs/ui-react/styles/variables' as vars;
 
 // Forward all modules
 @forward 'reset';
-@forward 'colors';
+@forward 'defaults';
+@forward 'mixins';
 @forward 'global';
 @forward 'variables';

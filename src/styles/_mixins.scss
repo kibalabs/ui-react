@@ -63,6 +63,23 @@
 }
 
 // =============================================================================
+// All Color Variants Generator
+// =============================================================================
+// Call this mixin to generate variants for all standard color names
+@mixin generate-all-color-variants() {
+  @include generate-color-variants('background');
+  @include generate-color-variants('brand-primary');
+  @include generate-color-variants('brand-secondary');
+  @include generate-color-variants('text');
+  @include generate-color-variants('text-on-brand');
+  @include generate-color-variants('disabled');
+  @include generate-color-variants('disabled-text');
+  @include generate-color-variants('error');
+  @include generate-color-variants('success');
+  @include generate-color-variants('warning');
+}
+
+// =============================================================================
 // Padding Variant Generator
 // =============================================================================
 @mixin generate-padding-variants() {
@@ -81,63 +98,4 @@
   --kiba-padding-wide4: calc(var(--kiba-padding-base) * 8);
   // Legacy alias
   --kiba-padding-half: var(--kiba-padding-narrow1);
-}
-
-// =============================================================================
-// All Color Variants Generator
-// =============================================================================
-// Call this mixin to generate variants for all standard color names
-@mixin generate-all-color-variants() {
-  @include generate-color-variants('background');
-  @include generate-color-variants('brand-primary');
-  @include generate-color-variants('brand-secondary');
-  @include generate-color-variants('text');
-  @include generate-color-variants('text-on-brand');
-  @include generate-color-variants('disabled');
-  @include generate-color-variants('disabled-text');
-  @include generate-color-variants('error');
-  @include generate-color-variants('success');
-  @include generate-color-variants('warning');
-}
-
-// =============================================================================
-// Default Theme Values with Auto-Generated Variants
-// =============================================================================
-// These provide fallback defaults. Apps override just the base colors in their
-// theme.scss and the variants are computed dynamically via color-mix().
-
-:root {
-  // Base Colors (apps override these)
-  --kiba-color-background: #ffffff;
-  --kiba-color-brand-primary: #0066cc;
-  --kiba-color-brand-secondary: #0055aa;
-  --kiba-color-text: #333333;
-  --kiba-color-text-on-brand: #ffffff;
-  --kiba-color-disabled: #cccccc;
-  --kiba-color-disabled-text: #888888;
-  --kiba-color-error: #cc0000;
-  --kiba-color-success: #00cc66;
-  --kiba-color-warning: #cc9900;
-
-  // Generate all color variants (computed from base colors via color-mix)
-  @include generate-all-color-variants();
-
-  // Typography
-  --kiba-font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  --kiba-font-size: 16px;
-  --kiba-line-height: 1.5;
-  --font-family-main: var(--kiba-font-family);
-
-  // Spacing
-  --kiba-padding-base: 0.5em;
-  @include generate-padding-variants();
-
-  // Borders
-  --kiba-border-radius: 0.5em;
-  --kiba-border-width: 1px;
-  --kiba-border-width-narrow: calc(var(--kiba-border-width) / 2);
-  --kiba-border-width-wide: calc(var(--kiba-border-width) * 2);
-
-  // Screen widths
-  --kiba-screen-width-max: 1200px;
 }
