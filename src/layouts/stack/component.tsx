@@ -179,7 +179,7 @@ export function Stack({
   } as React.CSSProperties;
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <PaddingView paddingTop={paddingTop} paddingBottom={paddingBottom} paddingRight={paddingRight} paddingLeft={paddingLeft} className={className} style={props.style} {...props as IPaddingViewPaddingProps}>
+    <PaddingView paddingTop={paddingTop} paddingBottom={paddingBottom} paddingRight={paddingRight} paddingLeft={paddingLeft} className={className} {...props as IPaddingViewPaddingProps}>
       <div
         id={props.id}
         className={getClassName(Stack.displayName, isScrollableVertically && 'scrollableVertically', isScrollableHorizontally && 'scrollableHorizontally', shouldWrapItems && 'wrapItems')}
