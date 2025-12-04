@@ -39,7 +39,7 @@ html {
   --kiba-line-height-wide: 2;
   --kiba-heading-font-family: var(--kiba-font-family);
 
-  --kiba-padding-base: 1rem;
+  --kiba-padding-base: 0.5rem;
   @include mixins.generate-padding-variants();
 
   --kiba-border-width: 1px;
