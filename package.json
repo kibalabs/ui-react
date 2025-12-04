@@ -27,7 +27,6 @@
   "files": [
     "dist/*",
     "src/styles/*.scss",
-    "src/styles/_*.scss",
     "src/particles/*/styles.scss",
     "src/layouts/*/styles.scss",
     "src/atoms/*/styles.scss",
