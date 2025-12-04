@@ -51,9 +51,7 @@ export function LinkBase({
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       style={props.style}
     >
-      <span className='KibaLinkBaseFocusFixer' tabIndex={-1}>
-        {props.children}
-      </span>
+      {props.children}
     </LinkComponent>
   );
 }

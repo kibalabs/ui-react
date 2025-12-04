@@ -26,7 +26,7 @@ export function MessageDialog({
   const confirmButtonText = props.confirmButtonText || 'Confirm';
 
   return (
-    <Dialog className={className} isOpen={props.isOpen} onCloseClicked={props.onCloseClicked} maxHeight={props.maxHeight} maxWidth={props.maxWidth}>
+    <Dialog className={className} style={props.style} isOpen={props.isOpen} onCloseClicked={props.onCloseClicked} maxHeight={props.maxHeight} maxWidth={props.maxWidth}>
       <Stack direction={Direction.Vertical} shouldAddGutters={true} defaultGutter={PaddingSize.Wide}>
         <Stack direction={Direction.Horizontal} contentAlignment={Alignment.Fill} childAlignment={Alignment.Center} shouldAddGutters={true}>
           <Spacing />

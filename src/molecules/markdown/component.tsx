@@ -111,7 +111,7 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
       <MarkdownToJsx
         options={{
           forceWrapper: props.shouldForceWrapper,
-          forceBlock: props.shouldForceBlock,
+          forceBlock: props.shouldForceBlock ?? true,
           wrapper: 'span',
           overrides: {
             a: { component: MarkdownLink },

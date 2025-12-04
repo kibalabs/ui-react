@@ -5,6 +5,13 @@
   .KibaLinkBase {
     cursor: pointer;
     width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-clip: padding-box;
+    box-sizing: border-box;
+    position: relative;
     &.fullWidth {
       width: 100%;
     }
@@ -14,65 +21,47 @@
     &.disabled {
       cursor: not-allowed;
     }
-    & > .KibaLinkBaseFocusFixer {
-      cursor: pointer;
-      color: currentColor;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      background-clip: padding-box;
-      box-sizing: border-box;
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
   }
 }
 
 @layer kiba-theme {
   .KibaLinkBase {
+    @include box.default;
     @include box.focusable;
-    & > .KibaLinkBaseFocusFixer {
-      @include box.default;
-      @include box.focusable;
-      opacity: 1;
-    }
-    &:hover > .KibaLinkBaseFocusFixer {
+    opacity: 1;
+    &:hover {
       background-color: var(--kiba-color-brand-primary-clear80);
     }
-    &:active > .KibaLinkBaseFocusFixer {
+    &:active {
       background-color: var(--kiba-color-brand-primary-clear50);
     }
-    &:focus > .KibaLinkBaseFocusFixer {
+    &:focus-visible {
       @include box.focussed;
     }
     &.disabled {
-      & > .KibaLinkBaseFocusFixer {
-        background-color: $color-disabled-text;
-      }
-      &:hover > .KibaLinkBaseFocusFixer {
+      background-color: $color-disabled-text;
+      &:hover {
         background-color: $color-disabled-text;
       }
     }
 
     // Translucent variant
-    &.translucent > .KibaLinkBaseFocusFixer {
+    &.translucent {
       background-color: transparent;
     }
 
     // Card variant
-    &.card > .KibaLinkBaseFocusFixer {
+    &.card {
       @include box.card;
       margin: 0;
     }
 
     // Image variant
     &.image {
-      &:hover > .KibaLinkBaseFocusFixer {
+      &:hover {
         opacity: 0.8;
       }
-      &:active > .KibaLinkBaseFocusFixer {
+      &:active {
         opacity: 0.6;
       }
     }

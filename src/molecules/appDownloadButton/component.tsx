@@ -63,6 +63,7 @@ export function AppDownloadButton({
     <LinkBase
       id={props.id}
       className={getClassName(AppDownloadButton.displayName, className)}
+      style={props.style}
       variant='image'
       target={getAppUrl()}
     >

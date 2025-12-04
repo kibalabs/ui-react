@@ -174,18 +174,18 @@ Define custom variants in your theme.scss:
 .KibaButton {
   // Default button styles are inherited from ui-react
 
-  &.primary > .KibaButtonFocusFixer {
+  &.primary {
     background-color: var(--kiba-color-brand-primary);
     color: var(--kiba-color-text-on-brand);
   }
 
-  &.secondary > .KibaButtonFocusFixer {
+  &.secondary {
     background-color: transparent;
     border: 1px solid var(--kiba-color-brand-primary);
     color: var(--kiba-color-brand-primary);
   }
 
-  &.destructive > .KibaButtonFocusFixer {
+  &.destructive {
     background-color: var(--kiba-color-error);
     color: white;
   }

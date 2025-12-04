@@ -146,6 +146,7 @@ export function Carousel({
     <Stack
       id={props.id}
       className={getClassName(Carousel.displayName, className)}
+      style={props.style}
       direction={Direction.Horizontal}
       childAlignment={Alignment.Center}
     >

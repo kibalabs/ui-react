@@ -65,25 +65,23 @@ Combine variants: `variant="primary-large"` or `variant="card-primary"`
 ```css
 @layer kiba-theme {
   .KibaButton {
-    > .KibaButtonFocusFixer {
-      background-color: transparent;
-      border-radius: var(--kiba-border-radius);
-      border-width: 2px;
-      color: var(--kiba-color-brand-primary);
-      font-weight: 600;
-      padding: var(--kiba-padding) var(--kiba-padding-wide);
-    }
+    background-color: transparent;
+    border-radius: var(--kiba-border-radius);
+    border-width: 2px;
+    color: var(--kiba-color-brand-primary);
+    font-weight: 600;
+    padding: var(--kiba-padding) var(--kiba-padding-wide);
 
-    &:hover > .KibaButtonFocusFixer {
+    &:hover {
       background-color: var(--kiba-color-brand-primary-clear90);
     }
 
-    &.primary > .KibaButtonFocusFixer {
+    &.primary {
       background-color: var(--kiba-color-brand-primary);
       color: var(--kiba-color-text-on-brand);
     }
 
-    &.disabled > .KibaButtonFocusFixer {
+    &.disabled {
       background-color: var(--kiba-color-disabled-light50);
       color: var(--kiba-color-disabled-text);
       cursor: not-allowed;

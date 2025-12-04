@@ -48,6 +48,7 @@ export function IconButton({
     <ButtonComponent
       id={props.id}
       className={getClassName(IconButton.displayName, props.isFullWidth && 'fullWidth', props.isFullHeight && 'fullHeight', !isEnabled && 'disabled', className, ...(variant?.split('-') || []))}
+      style={props.style}
       onClick={onClicked}
       disabled={!isEnabled}
       aria-label={label}
@@ -58,9 +59,7 @@ export function IconButton({
       target={props.target ? (targetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       type={props.target ? undefined : (props.buttonType || 'button')}
     >
-      <span className='KibaIconButtonFocusFixer' tabIndex={-1}>
-        {props.icon}
-      </span>
+      {props.icon}
     </ButtonComponent>
   );
 }

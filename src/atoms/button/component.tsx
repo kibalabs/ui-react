@@ -86,40 +86,35 @@ export function Button({
       tabIndex={props.tabIndex || 0}
       target={props.target ? (innerTargetShouldOpenSameTab ? '_self' : '_blank') : undefined}
       type={buttonType || 'button'}
-      style={props.style}
+      style={{
+        ...props.style,
+        // @ts-ignore
+        alignItems: childAlignment,
+        // @ts-ignore
+        justifyContent: contentAlignment,
+      }}
     >
-      <span
-        className='KibaButtonFocusFixer'
-        tabIndex={-1}
-        style={{
-          // @ts-ignore
-          alignItems: childAlignment,
-          // @ts-ignore
-          justifyContent: contentAlignment,
-        }}
-      >
-        {!props.isLoading && props.iconLeft && (
-          <React.Fragment>
-            {props.iconLeft}
-            <Spacing variant={iconGutter} />
-          </React.Fragment>
-        )}
-        {!props.isLoading && (
-          <span className={getClassName('KibaButton-text', isTextFullWidth && 'fullWidth')}>{props.text}</span>
-        )}
-        {!props.isLoading && props.iconRight && (
-          <React.Fragment>
-            <Spacing variant={iconGutter} />
-            {props.iconRight}
-          </React.Fragment>
-        )}
-        {props.isLoading && (
-          <LoadingSpinner
-            id={props.id && `${props.id}-loading-spinner`}
-            variant='light-small'
-          />
-        )}
-      </span>
+      {!props.isLoading && props.iconLeft && (
+        <React.Fragment>
+          {props.iconLeft}
+          <Spacing variant={iconGutter} />
+        </React.Fragment>
+      )}
+      {!props.isLoading && (
+        <span className={getClassName('KibaButton-text', isTextFullWidth && 'fullWidth')}>{props.text}</span>
+      )}
+      {!props.isLoading && props.iconRight && (
+        <React.Fragment>
+          <Spacing variant={iconGutter} />
+          {props.iconRight}
+        </React.Fragment>
+      )}
+      {props.isLoading && (
+        <LoadingSpinner
+          id={props.id && `${props.id}-loading-spinner`}
+          variant='light-small'
+        />
+      )}
     </Component>
   );
 }

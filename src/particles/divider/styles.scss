@@ -1,7 +1,7 @@
 @use '../../styles/variables' as *;
 
 @layer kiba-structure {
-  .Divider {
+  .KibaDivider {
     flex-shrink: 0;
     margin: 0;
     border-style: solid;
@@ -17,8 +17,8 @@
 }
 
 @layer kiba-theme {
-  .Divider {
-    color: $color-background-dark05;
+  .KibaDivider {
+    border-color: $color-background-dark05;
     &.horizontal {
       border-bottom-width: 1px;
     }

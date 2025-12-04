@@ -105,9 +105,10 @@ function renderStackItemChildren(
     }
     const existingStyle = (child.props as { style?: React.CSSProperties }).style ?? {};
     const existingClassName = (child.props as { className?: string }).className ?? '';
+    // itemStyle comes after existingStyle so Stack.Item flex properties (from itemStyle) take precedence over child's existing styles
     return React.cloneElement(child, {
       key: child.key ?? index,
-      style: { ...itemStyle, ...existingStyle },
+      style: { ...existingStyle, ...itemStyle },
       className: getClassName(existingClassName, itemClassName),
     } as React.HTMLAttributes<HTMLElement>);
   });
@@ -125,9 +126,21 @@ export function Stack({
   isScrollableHorizontally = false,
   ...props
 }: IStackProps): React.ReactElement {
+  const isStackItem = (child: React.ReactElement | string | number): boolean => {
+    if (typeof child !== 'object' || !('type' in child)) {
+      return false;
+    }
+    // Check by reference first
+    if (child.type === StackItem) {
+      return true;
+    }
+    // Fallback: check by displayName for cases where the reference might differ
+    const childType = child.type as { displayName?: string };
+    return childType?.displayName === 'KibaStackItem';
+  };
   const children = flattenChildren(props.children).map((child: (React.ReactElement | string | number), index: number): React.ReactElement<IStackItemProps> => (
     // eslint-disable-next-line react/no-array-index-key
-    typeof child === 'object' && 'type' in child && child.type === StackItem ? child as React.ReactElement<IStackItemProps> : <StackItem key={`child-${index}`}>{ child }</StackItem>
+    isStackItem(child) ? child as React.ReactElement<IStackItemProps> : <StackItem key={`child-${index}`}>{ child }</StackItem>
   ));
   const paddingTop = (props.paddingStart && direction === Direction.Vertical) ? props.paddingStart : undefined;
   const paddingBottom = (props.paddingEnd && direction === Direction.Vertical) ? props.paddingEnd : undefined;

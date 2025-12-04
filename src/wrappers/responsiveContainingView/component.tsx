@@ -17,14 +17,12 @@ export interface IResponsiveContainingViewProps extends IWrapperProps {
   columnCount?: number;
   size?: number;
   sizeResponsive?: ResponsiveField<number>;
-  isFullWidth?: boolean;
   shouldIncludeMaxSize?: boolean;
   isCenteredHorizontally?: boolean;
 }
 
 export function ResponsiveContainingView(props: IResponsiveContainingViewProps): React.ReactElement {
   const isCenteredHorizontally = props.isCenteredHorizontally ?? true;
-  const isFullWidth = props.isFullWidth ?? true;
   const shouldIncludeMaxSize = props.shouldIncludeMaxSize ?? true;
   const columnCount = props.columnCount ?? DEFAULT_COLUMN_COUNT;
   if (props.size == null && props.sizeResponsive?.base == null) {
@@ -32,7 +30,6 @@ export function ResponsiveContainingView(props: IResponsiveContainingViewProps):
   }
   const sizeField: ResponsiveField<number> = { base: props.size, ...props.sizeResponsive };
   const wrapperStyle: Record<string, string | undefined> = {
-    width: isFullWidth ? '100%' : 'auto',
     '--rcv-max-width-base': sizeField.base !== undefined ? getGridItemSizeCss(columnCount, sizeField.base) : undefined,
     '--rcv-max-width-small': sizeField.small !== undefined ? getGridItemSizeCss(columnCount, sizeField.small) : undefined,
     '--rcv-max-width-medium': sizeField.medium !== undefined ? getGridItemSizeCss(columnCount, sizeField.medium) : undefined,

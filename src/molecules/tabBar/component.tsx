@@ -42,6 +42,7 @@ export function TabBar({
     props.onTabKeySelected(tabKey);
   };
   const contentAlignmentStyle: React.CSSProperties = {
+    ...props.style,
     justifyContent: getFlexContentAlignment(contentAlignment),
   };
   return (

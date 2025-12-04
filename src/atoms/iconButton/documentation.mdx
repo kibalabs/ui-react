@@ -54,18 +54,16 @@ import * as Stories from './documentation.stories';
 ```css
 @layer kiba-theme {
   .KibaIconButton {
-    > .KibaIconButtonFocusFixer {
-      border-radius: var(--kiba-border-radius);
-      color: var(--kiba-color-brand-primary);
-      padding: var(--kiba-padding);
-    }
+    border-radius: var(--kiba-border-radius);
+    color: var(--kiba-color-brand-primary);
+    padding: var(--kiba-padding);
 
-    &.primary > .KibaIconButtonFocusFixer {
+    &.primary {
       background-color: var(--kiba-color-brand-primary);
       color: var(--kiba-color-text-on-brand);
     }
 
-    &:hover > .KibaIconButtonFocusFixer {
+    &:hover {
       background-color: var(--kiba-color-brand-primary-clear90);
     }
   }
