@@ -106,7 +106,7 @@ export function Media({
 
   return (isVideo || mediaType === 'video') ? (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <Video shouldShowControls={false} shouldLoop={true} shouldMute={true} shouldAutoplay={true} className={className} variant={variant} style={props.style} {...props} />
+    <Video shouldShowControls={false} shouldLoop={true} shouldMute={true} shouldAutoplay={true} className={className} variant={variant} {...props} />
   ) : mediaType && mediaType !== 'image' ? (
     <WebView className={className} variant={variant} style={props.style} url={props.source} />
   ) : (
