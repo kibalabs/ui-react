@@ -22,6 +22,7 @@
     }
     /* Hide scrollbar on ie 11 */
     -ms-overflow-style: none;
+    /* stylelint-disable-next-line declaration-block-no-shorthand-property-overrides -- IE11 fallback */
     overflow: auto;
   }
 
