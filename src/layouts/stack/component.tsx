@@ -92,9 +92,6 @@ function renderStackItemChildren(
     minWidth,
     minHeight,
     alignSelf,
-    // When using flex-grow/shrink with a specific baseSize, override any width/height
-    // from the child to prevent it from taking precedence over flex properties
-    ...(growthFactor > 0 || shrinkFactor > 0 ? { width: 'auto', height: 'auto' } : {}),
     ...(itemProps.isHidden ? { display: 'none' } : {}),
   };
   const itemClassName = getClassName(itemProps.className, 'KibaStackItem');
