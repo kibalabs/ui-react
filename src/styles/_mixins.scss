@@ -1,41 +1,68 @@
 // =============================================================================
+// Color Functions
+// =============================================================================
+// These functions provide consistent color manipulation across the library.
+// Using sRGB for linear color mixing that produces predictable results.
+
+@function lighten($color, $amount) {
+  @return color-mix(in srgb, #{$color}, white #{$amount});
+}
+
+@function darken($color, $amount) {
+  @return color-mix(in srgb, #{$color}, black #{$amount});
+}
+
+@function transparentize($color, $amount) {
+  @return color-mix(in srgb, #{$color}, transparent #{$amount});
+}
+
+// =============================================================================
 // Color Variant Generator
 // =============================================================================
 // This mixin generates light, dark, and transparency variants for any base color.
-// Variants are computed dynamically using color-mix(), so they update automatically
-// when the base color is overridden.
+// lightXX = lighten color by XX% (mix XX% white)
+// darkXX = darken color by XX% (mix XX% black)
+// clearXX = make color XX% transparent
 
 @mixin generate-color-variants($name) {
-  // Light variants (mix with white) - percentage is how much of the ORIGINAL color to keep
-  // light10 = 10% original + 90% white (very light)
-  // light50 = 50% original + 50% white (medium light)
-  --kiba-color-#{$name}-light01: color-mix(in srgb, var(--kiba-color-#{$name}) 1%, white);
-  --kiba-color-#{$name}-light05: color-mix(in srgb, var(--kiba-color-#{$name}) 5%, white);
-  --kiba-color-#{$name}-light10: color-mix(in srgb, var(--kiba-color-#{$name}) 10%, white);
-  --kiba-color-#{$name}-light20: color-mix(in srgb, var(--kiba-color-#{$name}) 20%, white);
-  --kiba-color-#{$name}-light25: color-mix(in srgb, var(--kiba-color-#{$name}) 25%, white);
-  --kiba-color-#{$name}-light50: color-mix(in srgb, var(--kiba-color-#{$name}) 50%, white);
+  // Light variants - increase lightness by mixing with white
+  --kiba-color-#{$name}-light01: #{lighten(var(--kiba-color-#{$name}), 1%)};
+  --kiba-color-#{$name}-light05: #{lighten(var(--kiba-color-#{$name}), 5%)};
+  --kiba-color-#{$name}-light10: #{lighten(var(--kiba-color-#{$name}), 10%)};
+  --kiba-color-#{$name}-light20: #{lighten(var(--kiba-color-#{$name}), 20%)};
+  --kiba-color-#{$name}-light25: #{lighten(var(--kiba-color-#{$name}), 25%)};
+  --kiba-color-#{$name}-light50: #{lighten(var(--kiba-color-#{$name}), 50%)};
+  --kiba-color-#{$name}-light75: #{lighten(var(--kiba-color-#{$name}), 75%)};
+  --kiba-color-#{$name}-light80: #{lighten(var(--kiba-color-#{$name}), 80%)};
+  --kiba-color-#{$name}-light90: #{lighten(var(--kiba-color-#{$name}), 90%)};
+  --kiba-color-#{$name}-light95: #{lighten(var(--kiba-color-#{$name}), 95%)};
+  --kiba-color-#{$name}-light99: #{lighten(var(--kiba-color-#{$name}), 99%)};
 
-  // Dark variants (mix with black) - percentage is how much of the ORIGINAL color to keep
-  // dark10 = 90% original + 10% black (slightly darker)
-  // dark50 = 50% original + 50% black (much darker)
-  --kiba-color-#{$name}-dark01: color-mix(in srgb, var(--kiba-color-#{$name}) 99%, black);
-  --kiba-color-#{$name}-dark05: color-mix(in srgb, var(--kiba-color-#{$name}) 95%, black);
-  --kiba-color-#{$name}-dark10: color-mix(in srgb, var(--kiba-color-#{$name}) 90%, black);
-  --kiba-color-#{$name}-dark20: color-mix(in srgb, var(--kiba-color-#{$name}) 80%, black);
-  --kiba-color-#{$name}-dark25: color-mix(in srgb, var(--kiba-color-#{$name}) 75%, black);
-  --kiba-color-#{$name}-dark50: color-mix(in srgb, var(--kiba-color-#{$name}) 50%, black);
+  // Dark variants - decrease lightness by mixing with black
+  --kiba-color-#{$name}-dark01: #{darken(var(--kiba-color-#{$name}), 1%)};
+  --kiba-color-#{$name}-dark05: #{darken(var(--kiba-color-#{$name}), 5%)};
+  --kiba-color-#{$name}-dark10: #{darken(var(--kiba-color-#{$name}), 10%)};
+  --kiba-color-#{$name}-dark20: #{darken(var(--kiba-color-#{$name}), 20%)};
+  --kiba-color-#{$name}-dark25: #{darken(var(--kiba-color-#{$name}), 25%)};
+  --kiba-color-#{$name}-dark50: #{darken(var(--kiba-color-#{$name}), 50%)};
+  --kiba-color-#{$name}-dark75: #{darken(var(--kiba-color-#{$name}), 75%)};
+  --kiba-color-#{$name}-dark80: #{darken(var(--kiba-color-#{$name}), 80%)};
+  --kiba-color-#{$name}-dark90: #{darken(var(--kiba-color-#{$name}), 90%)};
+  --kiba-color-#{$name}-dark95: #{darken(var(--kiba-color-#{$name}), 95%)};
+  --kiba-color-#{$name}-dark99: #{darken(var(--kiba-color-#{$name}), 99%)};
 
-  // Clear/transparency variants (alpha channel)
-  --kiba-color-#{$name}-clear05: color-mix(in srgb, var(--kiba-color-#{$name}) 95%, transparent);
-  --kiba-color-#{$name}-clear10: color-mix(in srgb, var(--kiba-color-#{$name}) 90%, transparent);
-  --kiba-color-#{$name}-clear20: color-mix(in srgb, var(--kiba-color-#{$name}) 80%, transparent);
-  --kiba-color-#{$name}-clear25: color-mix(in srgb, var(--kiba-color-#{$name}) 75%, transparent);
-  --kiba-color-#{$name}-clear50: color-mix(in srgb, var(--kiba-color-#{$name}) 50%, transparent);
-  --kiba-color-#{$name}-clear75: color-mix(in srgb, var(--kiba-color-#{$name}) 25%, transparent);
-  --kiba-color-#{$name}-clear80: color-mix(in srgb, var(--kiba-color-#{$name}) 20%, transparent);
-  --kiba-color-#{$name}-clear90: color-mix(in srgb, var(--kiba-color-#{$name}) 10%, transparent);
-  --kiba-color-#{$name}-clear95: color-mix(in srgb, var(--kiba-color-#{$name}) 5%, transparent);
+  // Clear/transparency variants
+  --kiba-color-#{$name}-clear01: #{transparentize(var(--kiba-color-#{$name}), 1%)};
+  --kiba-color-#{$name}-clear05: #{transparentize(var(--kiba-color-#{$name}), 5%)};
+  --kiba-color-#{$name}-clear10: #{transparentize(var(--kiba-color-#{$name}), 10%)};
+  --kiba-color-#{$name}-clear20: #{transparentize(var(--kiba-color-#{$name}), 20%)};
+  --kiba-color-#{$name}-clear25: #{transparentize(var(--kiba-color-#{$name}), 25%)};
+  --kiba-color-#{$name}-clear50: #{transparentize(var(--kiba-color-#{$name}), 50%)};
+  --kiba-color-#{$name}-clear75: #{transparentize(var(--kiba-color-#{$name}), 75%)};
+  --kiba-color-#{$name}-clear80: #{transparentize(var(--kiba-color-#{$name}), 80%)};
+  --kiba-color-#{$name}-clear90: #{transparentize(var(--kiba-color-#{$name}), 90%)};
+  --kiba-color-#{$name}-clear95: #{transparentize(var(--kiba-color-#{$name}), 95%)};
+  --kiba-color-#{$name}-clear99: #{transparentize(var(--kiba-color-#{$name}), 99%)};
 
   // Short aliases (without kiba- prefix) for backwards compatibility
   --color-#{$name}: var(--kiba-color-#{$name});
@@ -45,12 +72,23 @@
   --color-#{$name}-light20: var(--kiba-color-#{$name}-light20);
   --color-#{$name}-light25: var(--kiba-color-#{$name}-light25);
   --color-#{$name}-light50: var(--kiba-color-#{$name}-light50);
+  --color-#{$name}-light75: var(--kiba-color-#{$name}-light75);
+  --color-#{$name}-light80: var(--kiba-color-#{$name}-light80);
+  --color-#{$name}-light90: var(--kiba-color-#{$name}-light90);
+  --color-#{$name}-light95: var(--kiba-color-#{$name}-light95);
+  --color-#{$name}-light99: var(--kiba-color-#{$name}-light99);
   --color-#{$name}-dark01: var(--kiba-color-#{$name}-dark01);
   --color-#{$name}-dark05: var(--kiba-color-#{$name}-dark05);
   --color-#{$name}-dark10: var(--kiba-color-#{$name}-dark10);
   --color-#{$name}-dark20: var(--kiba-color-#{$name}-dark20);
   --color-#{$name}-dark25: var(--kiba-color-#{$name}-dark25);
   --color-#{$name}-dark50: var(--kiba-color-#{$name}-dark50);
+  --color-#{$name}-dark75: var(--kiba-color-#{$name}-dark75);
+  --color-#{$name}-dark80: var(--kiba-color-#{$name}-dark80);
+  --color-#{$name}-dark90: var(--kiba-color-#{$name}-dark90);
+  --color-#{$name}-dark95: var(--kiba-color-#{$name}-dark95);
+  --color-#{$name}-dark99: var(--kiba-color-#{$name}-dark99);
+  --color-#{$name}-clear01: var(--kiba-color-#{$name}-clear01);
   --color-#{$name}-clear05: var(--kiba-color-#{$name}-clear05);
   --color-#{$name}-clear10: var(--kiba-color-#{$name}-clear10);
   --color-#{$name}-clear20: var(--kiba-color-#{$name}-clear20);
@@ -60,6 +98,7 @@
   --color-#{$name}-clear80: var(--kiba-color-#{$name}-clear80);
   --color-#{$name}-clear90: var(--kiba-color-#{$name}-clear90);
   --color-#{$name}-clear95: var(--kiba-color-#{$name}-clear95);
+  --color-#{$name}-clear99: var(--kiba-color-#{$name}-clear99);
 }
 
 // =============================================================================
