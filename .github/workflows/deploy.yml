@@ -10,9 +10,11 @@ concurrency:
 jobs:
   deploy-package:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write  # Required for OIDC authentication with npm
     env:
       DOCKER_IMAGE: package
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -32,14 +34,24 @@ jobs:
       - name: Calculate commit count since last tag
         id: vars
         run: echo ::set-output name=commit_count::$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
-      - name: Create .npmrc file
-        run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+      - name: Extract built package from Docker
+        run: |
+          docker create --name temp-container $DOCKER_IMAGE
+          docker cp temp-container:/app/. ./
+          docker rm temp-container
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Update npm to latest
+        run: npm install -g npm@latest
       - name: Publish next package to npm
         if: steps.vars.outputs.commit_count != '0' && github.ref == 'refs/heads/main'
-        run: docker run -v $(pwd)/.npmrc:/root/.npmrc $DOCKER_IMAGE make NEXT_VERSION=${{ steps.vars.outputs.commit_count }} publish-next
+        run: npx kiba-publish --next --next-version ${{ steps.vars.outputs.commit_count }}
       - name: Publish package to npm
         if: startsWith(github.ref, 'refs/tags/v')
-        run: docker run -v $(pwd)/.npmrc:/root/.npmrc $DOCKER_IMAGE make publish
+        run: npm publish
   create-release:
     needs: deploy-package
     if: startsWith(github.ref, 'refs/tags/v')
