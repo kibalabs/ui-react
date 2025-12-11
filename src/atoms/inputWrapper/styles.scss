@@ -6,7 +6,10 @@
   .KibaInputWrapper {
     display: flex;
     flex-direction: column;
-    width: 100%;
+
+    &.full-width {
+      width: 100%;
+    }
 
     &.disabled {
       cursor: not-allowed;

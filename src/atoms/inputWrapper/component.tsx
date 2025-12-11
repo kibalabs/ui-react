@@ -11,12 +11,14 @@ import { HidingView } from '../../wrappers';
 export interface IInputWrapperProps extends IComponentProps, ISingleAnyChildProps {
   messageText?: string;
   isEnabled?: boolean;
+  isFullWidth?: boolean;
   onClicked?: () => void;
 }
 
 export function InputWrapper({
   className = '',
   variant = 'default',
+  isFullWidth = false,
   ...props
 }: IInputWrapperProps): React.ReactElement {
   const [isFocussed, setIsFocussed] = React.useState(false);
@@ -34,7 +36,7 @@ export function InputWrapper({
   return (
     <div
       id={props.id}
-      className={getClassName(InputWrapper.displayName, className, props.messageText && 'message-showing', isFocussed && 'focus', !props.isEnabled && 'disabled', ...(variant?.split('-') || []))}
+      className={getClassName(InputWrapper.displayName, className, props.messageText && 'message-showing', isFocussed && 'focus', !props.isEnabled && 'disabled', isFullWidth && 'full-width', ...(variant?.split('-') || []))}
       style={props.style}
     >
       {/* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
