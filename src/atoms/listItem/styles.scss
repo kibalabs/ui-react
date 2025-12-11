@@ -24,6 +24,7 @@
     @include box.focusable;
     padding: $padding-wide $padding-wide;
     &.clickable {
+      cursor: pointer;
       &:hover {
         background-color: var(--kiba-color-brand-primary-clear90);
       }
