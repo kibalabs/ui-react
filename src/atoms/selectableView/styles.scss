@@ -34,9 +34,6 @@
     > .KibaSelectableView-overlay {
       @include box.default;
       @include box.focusable;
-      background-color: transparent;
-      border-color: transparent;
-      padding: 0;
     }
     &:hover > .KibaSelectableView-overlay {
       background-color: var(--kiba-color-brand-primary-clear80);

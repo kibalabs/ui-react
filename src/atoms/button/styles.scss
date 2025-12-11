@@ -2,6 +2,15 @@
 @use '../../particles/text/styles' as text;
 @use '../../particles/box/styles' as box;
 
+@mixin default-hover-states {
+  &:hover {
+    background-color: $color-brand-primary-clear90;
+  }
+  &:active {
+    background-color: $color-brand-primary-clear80;
+  }
+}
+
 @layer kiba-structure {
   .KibaButton {
     display: inline-flex;
@@ -41,14 +50,7 @@
     color: $color-brand-primary;
     font-weight: 600;
     text-align: center;
-
-    &:hover {
-      background-color: $color-brand-primary-clear90;
-    }
-
-    &:active {
-      background-color: $color-brand-primary-clear80;
-    }
+    @include default-hover-states;
 
     &:focus-visible {
       border-color: $color-background-dark50;
@@ -76,34 +78,25 @@
       background-color: $color-brand-primary;
       border-color: $color-brand-primary;
       color: $color-text-on-brand;
+      &:hover {
+        background-color: $color-brand-secondary;
+      }
+      &:active {
+        background-color: var(--kiba-color-brand-secondary-dark10, #158040);
+      }
     }
-
-    &.primary:hover {
-      background-color: $color-brand-secondary;
-    }
-
-    &.primary:active {
-      background-color: var(--kiba-color-brand-secondary-dark10, #158040);
-    }
-
-    // Secondary variant
     &.secondary {
       border-color: $color-brand-primary;
+      @include default-hover-states;
     }
-
-    // Large variant
     &.large {
       padding: $padding-wide $padding-wide2;
       font-size: 1.2em;
     }
-
-    // Small variant
     &.small {
       padding: $padding-narrow $padding;
       font-size: 0.8em;
     }
-
-    // Card variant
     &.card {
       box-shadow: 0px 8px 8px -6px rgba(0, 0, 0, 0.15);
       margin: 0px 4px 12px 4px;
