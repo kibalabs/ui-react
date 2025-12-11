@@ -1,6 +1,15 @@
 @use '../../styles/variables' as *;
 @use '../../particles/box/styles' as box;
 
+@mixin hover-states {
+  &:hover {
+    background-color: var(--kiba-color-brand-primary-clear90);
+  }
+  &:active {
+    background-color: var(--kiba-color-brand-primary-clear75);
+  }
+}
+
 @layer kiba-structure {
   .KibaLinkBase {
     cursor: pointer;
@@ -28,13 +37,7 @@
   .KibaLinkBase {
     @include box.default;
     @include box.focusable;
-    opacity: 1;
-    &:hover {
-      background-color: var(--kiba-color-brand-primary-clear80);
-    }
-    &:active {
-      background-color: var(--kiba-color-brand-primary-clear50);
-    }
+    @include hover-states;
     &:focus-visible {
       @include box.focussed;
     }
@@ -43,21 +46,20 @@
       &:hover {
         background-color: $color-disabled-text;
       }
+      &:active {
+        background-color: $color-disabled-text;
+      }
     }
-
-    // Translucent variant
     &.translucent {
       background-color: transparent;
+      @include hover-states;
     }
-
-    // Card variant
     &.card {
       @include box.card;
-      margin: 0;
+      @include hover-states;
     }
-
-    // Image variant
     &.image {
+      @include hover-states;
       &:hover {
         opacity: 0.8;
       }

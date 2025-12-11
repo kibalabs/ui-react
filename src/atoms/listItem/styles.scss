@@ -23,9 +23,6 @@
     @include box.default;
     @include box.focusable;
     padding: $padding-wide $padding-wide;
-    background-color: transparent;
-    border-radius: $border-radius $border-radius;
-    border-width: $border-width;
     &.clickable {
       &:hover {
         background-color: var(--kiba-color-brand-primary-clear90);

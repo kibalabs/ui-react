@@ -2,6 +2,12 @@
 @use '../../particles/text/styles' as text;
 @use '../../particles/box/styles' as box;
 
+@mixin default-link-hover {
+  &:hover {
+    color: $color-brand-secondary;
+  }
+}
+
 @layer kiba-structure {
   .KibaLink {
     cursor: pointer;
@@ -18,10 +24,7 @@
     @include box.focusable;
     color: $color-brand-primary;
     text-decoration: underline;
-
-    &:hover {
-      color: $color-brand-secondary;
-    }
+    @include default-link-hover;
 
     &:focus-visible {
       @include box.focussed;
@@ -36,9 +39,7 @@
 
     &:visited {
       color: $color-brand-primary;
-      &:hover {
-        color: $color-brand-secondary;
-      }
+      @include default-link-hover;
     }
   }
 }

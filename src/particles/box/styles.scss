@@ -130,19 +130,11 @@
 @layer kiba-theme {
   .KibaBox {
     @include default;
-    box-shadow: none;
-    padding: 0;
-    margin: 0;
-    outline-style: solid;
-    outline-color: transparent;
-    outline-width: 0;
-    outline-offset: 0;
-    opacity: 1;
     &.transparent { @include transparent; }
     &.padded { @include padded; }
     &.card { @include card; }
     &.bordered { @include bordered; }
-    &.focusable { @include focusable; border-width: 2px; }
+    &.focusable { @include focusable; }
     &.focussed { @include focussed; }
     &.rounded { @include rounded; }
     &.unpadded { @include unpadded; }

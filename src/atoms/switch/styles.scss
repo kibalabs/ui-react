@@ -1,5 +1,11 @@
 @use '../../styles/variables' as *;
 
+@mixin active-hover-state {
+  &:hover {
+    background-color: $color-brand-secondary;
+  }
+}
+
 @layer kiba-structure {
   .KibaSwitch {
     cursor: pointer;
@@ -26,6 +32,7 @@
     background-color: $color-background-dark50;
     border-radius: 1em;
     padding: 0.15em;
+    @include active-hover-state;
     & > .KibaSwitchInner {
       width: 1em;
       height: 1em;
@@ -33,14 +40,9 @@
       border-radius: 50%;
       transition: 300ms;
     }
-    &:hover {
-      background-color: $color-brand-secondary;
-    }
     &.checked {
       background-color: $color-brand-primary;
-      &:hover {
-        background-color: $color-brand-secondary;
-      }
+      @include active-hover-state;
     }
     &.disabled {
       background-color: $color-disabled-light50;

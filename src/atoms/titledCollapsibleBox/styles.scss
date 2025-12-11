@@ -27,15 +27,12 @@
     @include box.default;
     @include box.focusable;
     border-color: var(--kiba-color-background-dark10);
-    border-style: solid;
     .KibaTitledCollapsibleBoxHeader {
       @include text.default;
       @include text.bold;
       @include box.focusable;
       padding: $padding $padding-wide;
       background-color: var(--kiba-color-background-dark01);
-      border: none;
-      border-radius: 0;
       &:hover {
         background-color: var(--kiba-color-neutral);
       }

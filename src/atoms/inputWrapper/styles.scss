@@ -2,6 +2,16 @@
 @use '../../particles/text/styles' as text;
 @use '../../particles/box/styles' as box;
 
+@mixin input-states($hover-color, $focus-color) {
+  &:hover .KibaInputWrapperInner {
+    border-color: $hover-color;
+  }
+  &.focus .KibaInputWrapperInner,
+  &:focus-within .KibaInputWrapperInner {
+    border-color: $focus-color;
+  }
+}
+
 @layer kiba-structure {
   .KibaInputWrapper {
     display: flex;
@@ -42,6 +52,7 @@
 @layer kiba-theme {
   .KibaInputWrapper {
     transition-duration: 0.3s;
+    @include input-states(var(--kiba-color-brand-primary-light10), $color-brand-primary);
 
     & * {
       transition-duration: 0.3s;
@@ -65,16 +76,6 @@
     }
   }
 
-  .KibaInputWrapper:hover .KibaInputWrapperInner {
-    border-color: var(--kiba-color-brand-primary-light10);
-    box-shadow: none;
-  }
-
-  .KibaInputWrapper.focus .KibaInputWrapperInner,
-  .KibaInputWrapper:focus-within .KibaInputWrapperInner {
-    border-color: $color-brand-primary;
-  }
-
   .KibaInputWrapper.disabled .KibaInputWrapperInner {
     background-color: var(--kiba-color-disabled-light90);
     border-color: var(--kiba-color-disabled-light20);
@@ -96,18 +97,10 @@
 
   // Error variant
   .KibaInputWrapper.error {
+    @include input-states(var(--kiba-color-error-light10), $color-error);
     .KibaInputWrapperInner {
       background-color: var(--kiba-color-error-light90);
       border-color: var(--kiba-color-error-light20);
-    }
-
-    &:hover .KibaInputWrapperInner {
-      border-color: var(--kiba-color-error-light10);
-    }
-
-    &.focus .KibaInputWrapperInner,
-    &:focus-within .KibaInputWrapperInner {
-      border-color: $color-error;
     }
 
     .KibaInputWrapperMessage {
@@ -117,18 +110,10 @@
 
   // Success variant
   .KibaInputWrapper.success {
+    @include input-states(var(--kiba-color-success-light10), $color-success);
     .KibaInputWrapperInner {
       background-color: var(--kiba-color-success-light90);
       border-color: var(--kiba-color-success-light20);
-    }
-
-    &:hover .KibaInputWrapperInner {
-      border-color: var(--kiba-color-success-light10);
-    }
-
-    &.focus .KibaInputWrapperInner,
-    &:focus-within .KibaInputWrapperInner {
-      border-color: $color-success;
     }
 
     .KibaInputWrapperMessage {
