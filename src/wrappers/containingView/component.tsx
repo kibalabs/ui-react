@@ -14,7 +14,6 @@ export function ContainingView(props: IContainingViewProps): React.ReactElement 
   const wrapperStyle: React.CSSProperties = {
     maxWidth: 'var(--kiba-screen-width-max)',
     width: '100%',
-    overflow: 'auto',
     ...(isCenteredHorizontally ? { marginLeft: 'auto', marginRight: 'auto' } : {}),
   };
   return (

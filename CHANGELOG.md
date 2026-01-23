@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MAJOR] Migrated all components from styled-components to pure CSS/SCSS with CSS layers
 - [MAJOR] Replaced JavaScript theme system with CSS custom properties (`--kiba-*`)
 - [MAJOR] Updated to Storybook 10 with CSF3 format and MDX documentation
+- [MINOR] Changed `ContainingView` to not make children automatically have `overflow: auto`
 
 ### Removed
 
