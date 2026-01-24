@@ -18,6 +18,7 @@
     height: var(--kiba-icon-size, 1.3em);
 
     // fill/stroke styling
+    color: var(--kiba-icon-color, currentColor);
     &.fill > svg {
       fill: var(--kiba-icon-color, currentColor);
     }
