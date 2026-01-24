@@ -7,12 +7,13 @@ import { WrapperView } from '../wrappingComponent';
 
 export interface IContainingViewProps extends IWrapperProps {
   isCenteredHorizontally?: boolean;
+  maxWidth?: string;
 }
 
 export function ContainingView(props: IContainingViewProps): React.ReactElement {
   const isCenteredHorizontally = props.isCenteredHorizontally ?? true;
   const wrapperStyle: React.CSSProperties = {
-    maxWidth: 'var(--kiba-screen-width-max)',
+    maxWidth: props.maxWidth ?? 'var(--kiba-screen-width-max)',
     width: '100%',
     ...(isCenteredHorizontally ? { marginLeft: 'auto', marginRight: 'auto' } : {}),
   };
