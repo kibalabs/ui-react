@@ -41,6 +41,7 @@ export const MarkdownText = React.memo((props: IMarkdownTextProps): React.ReactE
       <MarkdownToJsx
         options={{
           forceWrapper: true,
+          disableParsingRawHTML: true,
           wrapper: React.Fragment,
           overrides: {
             a: {

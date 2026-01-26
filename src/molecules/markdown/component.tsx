@@ -98,6 +98,7 @@ export interface IMarkdownProps {
   extraOverrideComponents?: Record<string, React.ElementType>;
   shouldForceWrapper?: boolean;
   shouldForceBlock?: boolean;
+  shouldEnableHtmlParsing?: boolean;
 }
 
 export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement => {
@@ -112,6 +113,7 @@ export const Markdown = React.memo((props: IMarkdownProps): React.ReactElement =
         options={{
           forceWrapper: props.shouldForceWrapper,
           forceBlock: props.shouldForceBlock ?? true,
+          disableParsingRawHTML: !props.shouldEnableHtmlParsing,
           wrapper: 'span',
           overrides: {
             a: { component: MarkdownLink },
