@@ -10,6 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
+
+### Removed
+
+## [0.12.0] - 2025-01-29
+
+### Changed
 - [MAJOR] Upgraded `markdown-to-jsx` from v7 to v9
 - [MAJOR] Changed `onClick` to `onClicked` in `SingleLineInput`
 - [MINOR] Added `onFrameClicked` to `SingleLineInput`
@@ -31,8 +37,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Changed `ContainingView` to not make children automatically have `overflow: auto`
 - [MINOR] Added `maxWidth` prop to `ContainingView`
 - [MINOR] Added `shouldEnableHtmlParsing` to `Markdown`
-
-### Removed
 
 ## [0.11.2] - 2024-08-29
 

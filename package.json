@@ -1,6 +1,6 @@
 {
   "name": "@kibalabs/ui-react",
-  "version": "0.11.2",
+  "version": "0.12.0",
   "description": "React UI component library for building projects at Kiba Labs",
   "license": "MIT",
   "repository": {
@@ -34,25 +34,24 @@
     "src/wrappers/*/styles.scss"
   ],
   "dependencies": {
-    "@kibalabs/core": "^0.6.3-next.4",
-    "@kibalabs/core-react": "^0.9.7-next.2",
+    "@kibalabs/core": "^0.7.1",
+    "@kibalabs/core-react": "^0.10.0",
     "lazysizes": "^5.3.2",
-    "markdown-to-jsx": "^9.2.0",
-    "polished": "^4.3.1"
+    "markdown-to-jsx": "^9.6.1"
   },
   "devDependencies": {
-    "@kibalabs/build": "^0.13.3-next.14",
-    "@storybook/addon-docs": "10.1.2",
-    "@storybook/react-vite": "10.1.2",
-    "@types/react": "19.2.7",
+    "@kibalabs/build": "0.14.1",
+    "@storybook/addon-docs": "10.2.1",
+    "@storybook/react-vite": "10.2.1",
+    "@types/react": "19.2.10",
     "@types/react-dom": "19.2.3",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "remark-gfm": "4.0.1",
-    "storybook": "10.1.2"
+    "storybook": "10.2.1"
   },
   "peerDependencies": {
-    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   }
 }

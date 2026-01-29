@@ -1,4 +1,4 @@
-name: Deploy Package
+name: Deploy
 on:
   push:
     branches: [main]
