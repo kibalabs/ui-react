@@ -83,7 +83,7 @@ export function Grid({
       >
         {(children as React.ReactElement<IGridItemProps>[]).map((child: React.ReactElement<IGridItemProps>): React.ReactElement => {
           const childProps = child.props;
-          const size = childProps.size ?? 12;
+          const size = childProps.size ?? childProps.sizeResponsive?.base ?? 12;
           const sizeResponsive = childProps.sizeResponsive ?? {};
           const itemStyles: React.CSSProperties = {
             ...childProps.style,
