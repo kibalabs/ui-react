@@ -5,6 +5,79 @@
 // These are in the kiba-reset layer so component styles in kiba-theme
 // will always take precedence.
 
+// =============================================================================
+// CSS @property declarations for non-inheriting custom properties
+// =============================================================================
+// By default, CSS custom properties (variables) inherit from parent elements.
+// This causes issues when a parent Box/Stack sets responsive sizing variables
+// (e.g. --kiba-box-height-md: 300px) - all child components would inherit
+// and use these values even if they didn't set their own.
+//
+// Using @property with `inherits: false` prevents this cascade, ensuring each
+// component instance only uses the variables it explicitly sets on itself.
+// Browser support: Chrome 85+, Safari 15.4+, Firefox 128+ (universal by 2024)
+@property --kiba-box-width { syntax: "*"; inherits: false; }
+@property --kiba-box-width-sm { syntax: "*"; inherits: false; }
+@property --kiba-box-width-md { syntax: "*"; inherits: false; }
+@property --kiba-box-width-lg { syntax: "*"; inherits: false; }
+@property --kiba-box-width-xl { syntax: "*"; inherits: false; }
+@property --kiba-box-height { syntax: "*"; inherits: false; }
+@property --kiba-box-height-sm { syntax: "*"; inherits: false; }
+@property --kiba-box-height-md { syntax: "*"; inherits: false; }
+@property --kiba-box-height-lg { syntax: "*"; inherits: false; }
+@property --kiba-box-height-xl { syntax: "*"; inherits: false; }
+@property --kiba-box-max-width { syntax: "*"; inherits: false; }
+@property --kiba-box-max-width-sm { syntax: "*"; inherits: false; }
+@property --kiba-box-max-width-md { syntax: "*"; inherits: false; }
+@property --kiba-box-max-width-lg { syntax: "*"; inherits: false; }
+@property --kiba-box-max-width-xl { syntax: "*"; inherits: false; }
+@property --kiba-box-max-height { syntax: "*"; inherits: false; }
+@property --kiba-box-max-height-sm { syntax: "*"; inherits: false; }
+@property --kiba-box-max-height-md { syntax: "*"; inherits: false; }
+@property --kiba-box-max-height-lg { syntax: "*"; inherits: false; }
+@property --kiba-box-max-height-xl { syntax: "*"; inherits: false; }
+@property --kiba-box-min-width { syntax: "*"; inherits: false; }
+@property --kiba-box-min-width-sm { syntax: "*"; inherits: false; }
+@property --kiba-box-min-width-md { syntax: "*"; inherits: false; }
+@property --kiba-box-min-width-lg { syntax: "*"; inherits: false; }
+@property --kiba-box-min-width-xl { syntax: "*"; inherits: false; }
+@property --kiba-box-min-height { syntax: "*"; inherits: false; }
+@property --kiba-box-min-height-sm { syntax: "*"; inherits: false; }
+@property --kiba-box-min-height-md { syntax: "*"; inherits: false; }
+@property --kiba-box-min-height-lg { syntax: "*"; inherits: false; }
+@property --kiba-box-min-height-xl { syntax: "*"; inherits: false; }
+
+@property --kiba-stack-height-base { syntax: "*"; inherits: false; }
+@property --kiba-stack-height-small { syntax: "*"; inherits: false; }
+@property --kiba-stack-height-medium { syntax: "*"; inherits: false; }
+@property --kiba-stack-height-large { syntax: "*"; inherits: false; }
+@property --kiba-stack-height-extraLarge { syntax: "*"; inherits: false; }
+@property --kiba-stack-width-base { syntax: "*"; inherits: false; }
+@property --kiba-stack-width-small { syntax: "*"; inherits: false; }
+@property --kiba-stack-width-medium { syntax: "*"; inherits: false; }
+@property --kiba-stack-width-large { syntax: "*"; inherits: false; }
+@property --kiba-stack-width-extraLarge { syntax: "*"; inherits: false; }
+@property --kiba-stack-max-height-base { syntax: "*"; inherits: false; }
+@property --kiba-stack-max-height-small { syntax: "*"; inherits: false; }
+@property --kiba-stack-max-height-medium { syntax: "*"; inherits: false; }
+@property --kiba-stack-max-height-large { syntax: "*"; inherits: false; }
+@property --kiba-stack-max-height-extraLarge { syntax: "*"; inherits: false; }
+@property --kiba-stack-max-width-base { syntax: "*"; inherits: false; }
+@property --kiba-stack-max-width-small { syntax: "*"; inherits: false; }
+@property --kiba-stack-max-width-medium { syntax: "*"; inherits: false; }
+@property --kiba-stack-max-width-large { syntax: "*"; inherits: false; }
+@property --kiba-stack-max-width-extraLarge { syntax: "*"; inherits: false; }
+@property --kiba-stack-min-height-base { syntax: "*"; inherits: false; }
+@property --kiba-stack-min-height-small { syntax: "*"; inherits: false; }
+@property --kiba-stack-min-height-medium { syntax: "*"; inherits: false; }
+@property --kiba-stack-min-height-large { syntax: "*"; inherits: false; }
+@property --kiba-stack-min-height-extraLarge { syntax: "*"; inherits: false; }
+@property --kiba-stack-min-width-base { syntax: "*"; inherits: false; }
+@property --kiba-stack-min-width-small { syntax: "*"; inherits: false; }
+@property --kiba-stack-min-width-medium { syntax: "*"; inherits: false; }
+@property --kiba-stack-min-width-large { syntax: "*"; inherits: false; }
+@property --kiba-stack-min-width-extraLarge { syntax: "*"; inherits: false; }
+
 @layer kiba-reset {
   html {
     scroll-behavior: smooth;
