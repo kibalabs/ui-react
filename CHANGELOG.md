@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Changed
 - [MINOR] Correction for using `childSizeResponsive.base` size in `EqualGrid`
+- [MINOR] Fix `Box` and `Stack` to not inherit sizing props from parent when not intended
 
 ### Removed
 
