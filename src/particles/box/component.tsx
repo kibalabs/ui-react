@@ -40,8 +40,8 @@ export function Box({
   isFullWidth = true,
   ...props
 }: IBoxProps): React.ReactElement {
-  const height = props.height || (props.isFullHeight ? '100%' : 'auto');
-  const width = props.width || (isFullWidth ? '100%' : 'auto');
+  const height = props.height ?? props.heightResponsive?.base ?? (props.isFullHeight ? '100%' : 'auto');
+  const width = props.width ?? props.widthResponsive?.base ?? (isFullWidth ? '100%' : 'auto');
   const blockType = width === '100%' ? 'block' : 'flex';
   const combinedStyles: React.CSSProperties = {
     ...props.style,
