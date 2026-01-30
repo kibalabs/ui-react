@@ -1,5 +1,32 @@
 @use '../../styles/variables' as *;
 
+// =============================================================================
+// CSS @property declarations for non-inheriting custom properties
+// =============================================================================
+// By default, CSS custom properties (variables) inherit from parent elements.
+// This causes issues when a parent Grid sets responsive sizing variables
+// - all child components would inherit and use these values even if they
+// didn't set their own.
+//
+// Using @property with `inherits: false` prevents this cascade, ensuring each
+// Grid/GridItem instance only uses the variables it explicitly sets on itself.
+@property --kiba-grid-height { syntax: "*"; inherits: false; }
+@property --kiba-grid-child-alignment { syntax: "*"; inherits: false; }
+@property --kiba-grid-content-alignment { syntax: "*"; inherits: false; }
+@property --kiba-grid-item-width { syntax: "*"; inherits: false; }
+@property --kiba-grid-item-width-sm { syntax: "*"; inherits: false; }
+@property --kiba-grid-item-width-md { syntax: "*"; inherits: false; }
+@property --kiba-grid-item-width-lg { syntax: "*"; inherits: false; }
+@property --kiba-grid-item-width-xl { syntax: "*"; inherits: false; }
+@property --kiba-grid-item-display { syntax: "*"; inherits: false; }
+@property --kiba-grid-item-display-sm { syntax: "*"; inherits: false; }
+@property --kiba-grid-item-display-md { syntax: "*"; inherits: false; }
+@property --kiba-grid-item-display-lg { syntax: "*"; inherits: false; }
+@property --kiba-grid-item-display-xl { syntax: "*"; inherits: false; }
+@property --kiba-grid-item-gutter { syntax: "*"; inherits: false; }
+@property --kiba-grid-item-alignment { syntax: "*"; inherits: false; }
+@property --kiba-grid-item-overflow-y { syntax: "*"; inherits: false; }
+
 @layer kiba-structure {
   .KibaGrid {
     box-sizing: border-box;

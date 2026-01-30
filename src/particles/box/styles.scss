@@ -1,5 +1,46 @@
 @use '../../styles/variables' as *;
 
+// =============================================================================
+// CSS @property declarations for non-inheriting custom properties
+// =============================================================================
+// By default, CSS custom properties (variables) inherit from parent elements.
+// This causes issues when a parent Box sets responsive sizing variables
+// (e.g. --kiba-box-height-md: 300px) - all child components would inherit
+// and use these values even if they didn't set their own.
+//
+// Using @property with `inherits: false` prevents this cascade, ensuring each
+// Box instance only uses the variables it explicitly sets on itself.
+@property --kiba-box-width { syntax: "*"; inherits: false; }
+@property --kiba-box-width-sm { syntax: "*"; inherits: false; }
+@property --kiba-box-width-md { syntax: "*"; inherits: false; }
+@property --kiba-box-width-lg { syntax: "*"; inherits: false; }
+@property --kiba-box-width-xl { syntax: "*"; inherits: false; }
+@property --kiba-box-height { syntax: "*"; inherits: false; }
+@property --kiba-box-height-sm { syntax: "*"; inherits: false; }
+@property --kiba-box-height-md { syntax: "*"; inherits: false; }
+@property --kiba-box-height-lg { syntax: "*"; inherits: false; }
+@property --kiba-box-height-xl { syntax: "*"; inherits: false; }
+@property --kiba-box-max-width { syntax: "*"; inherits: false; }
+@property --kiba-box-max-width-sm { syntax: "*"; inherits: false; }
+@property --kiba-box-max-width-md { syntax: "*"; inherits: false; }
+@property --kiba-box-max-width-lg { syntax: "*"; inherits: false; }
+@property --kiba-box-max-width-xl { syntax: "*"; inherits: false; }
+@property --kiba-box-max-height { syntax: "*"; inherits: false; }
+@property --kiba-box-max-height-sm { syntax: "*"; inherits: false; }
+@property --kiba-box-max-height-md { syntax: "*"; inherits: false; }
+@property --kiba-box-max-height-lg { syntax: "*"; inherits: false; }
+@property --kiba-box-max-height-xl { syntax: "*"; inherits: false; }
+@property --kiba-box-min-width { syntax: "*"; inherits: false; }
+@property --kiba-box-min-width-sm { syntax: "*"; inherits: false; }
+@property --kiba-box-min-width-md { syntax: "*"; inherits: false; }
+@property --kiba-box-min-width-lg { syntax: "*"; inherits: false; }
+@property --kiba-box-min-width-xl { syntax: "*"; inherits: false; }
+@property --kiba-box-min-height { syntax: "*"; inherits: false; }
+@property --kiba-box-min-height-sm { syntax: "*"; inherits: false; }
+@property --kiba-box-min-height-md { syntax: "*"; inherits: false; }
+@property --kiba-box-min-height-lg { syntax: "*"; inherits: false; }
+@property --kiba-box-min-height-xl { syntax: "*"; inherits: false; }
+
 // Mixins for use by other components
 @mixin default {
   background-color: transparent;
