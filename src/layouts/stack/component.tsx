@@ -146,12 +146,12 @@ export function Stack({
   const paddingBottom = (props.paddingEnd && direction === Direction.Vertical) ? props.paddingEnd : undefined;
   const paddingLeft = (props.paddingStart && direction === Direction.Horizontal) ? props.paddingStart : undefined;
   const paddingRight = (props.paddingEnd && direction === Direction.Horizontal) ? props.paddingEnd : undefined;
-  const height = props.height || (isFullHeight ? '100%' : 'auto');
-  const width = props.width || (isFullWidth ? '100%' : 'auto');
-  const maxHeight = props.maxHeight ?? null;
-  const maxWidth = props.maxWidth ?? null;
-  const minHeight = props.minHeight ?? null;
-  const minWidth = props.minWidth ?? null;
+  const height = props.height ?? props.heightResponsive?.base ?? (isFullHeight ? '100%' : 'auto');
+  const width = props.width ?? props.widthResponsive?.base ?? (isFullWidth ? '100%' : 'auto');
+  const maxHeight = props.maxHeight ?? props.maxHeightResponsive?.base ?? null;
+  const maxWidth = props.maxWidth ?? props.maxWidthResponsive?.base ?? null;
+  const minHeight = props.minHeight ?? props.minHeightResponsive?.base ?? null;
+  const minWidth = props.minWidth ?? props.minWidthResponsive?.base ?? null;
   const maxHeightResponsive = props.maxHeightResponsive || maxHeight ? { base: (maxHeight || undefined), ...props.maxHeightResponsive } : null;
   const maxWidthResponsive = props.maxWidthResponsive || maxWidth ? { base: (maxWidth || undefined), ...props.maxWidthResponsive } : null;
   const minHeightResponsive = props.minHeightResponsive || minHeight ? { base: (minHeight || undefined), ...props.minHeightResponsive } : null;
