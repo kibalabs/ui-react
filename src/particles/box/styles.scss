@@ -88,41 +88,41 @@
     &.scrollableVertically { overflow-y: auto; }
     &.scrollableHorizontally { overflow-x: auto; }
 
-    // Responsive breakpoints - only use responsive variables if explicitly set (not initial)
+    // Responsive breakpoints
     @include screen-small {
       width: var(--kiba-box-width-sm, var(--kiba-box-width, 100%));
       height: var(--kiba-box-height-sm, var(--kiba-box-height, auto));
-      max-width: var(--kiba-box-max-width-sm, var(--kiba-box-max-width, none));
-      max-height: var(--kiba-box-max-height-sm, var(--kiba-box-max-height, none));
-      min-width: var(--kiba-box-min-width-sm, var(--kiba-box-min-width, 0));
-      min-height: var(--kiba-box-min-height-sm, var(--kiba-box-min-height, 0));
+      max-width: var(--kiba-box-max-width-sm, var(--kiba-box-max-width));
+      max-height: var(--kiba-box-max-height-sm, var(--kiba-box-max-height));
+      min-width: var(--kiba-box-min-width-sm, var(--kiba-box-min-width));
+      min-height: var(--kiba-box-min-height-sm, var(--kiba-box-min-height));
     }
 
     @include screen-medium {
       width: var(--kiba-box-width-md, var(--kiba-box-width-sm, var(--kiba-box-width, 100%)));
       height: var(--kiba-box-height-md, var(--kiba-box-height-sm, var(--kiba-box-height, auto)));
-      max-width: var(--kiba-box-max-width-md, var(--kiba-box-max-width-sm, var(--kiba-box-max-width, none)));
-      max-height: var(--kiba-box-max-height-md, var(--kiba-box-max-height-sm, var(--kiba-box-max-height, none)));
-      min-width: var(--kiba-box-min-width-md, var(--kiba-box-min-width-sm, var(--kiba-box-min-width, 0)));
-      min-height: var(--kiba-box-min-height-md, var(--kiba-box-min-height-sm, var(--kiba-box-min-height, 0)));
+      max-width: var(--kiba-box-max-width-md, var(--kiba-box-max-width-sm, var(--kiba-box-max-width)));
+      max-height: var(--kiba-box-max-height-md, var(--kiba-box-max-height-sm, var(--kiba-box-max-height)));
+      min-width: var(--kiba-box-min-width-md, var(--kiba-box-min-width-sm, var(--kiba-box-min-width)));
+      min-height: var(--kiba-box-min-height-md, var(--kiba-box-min-height-sm, var(--kiba-box-min-height)));
     }
 
     @include screen-large {
       width: var(--kiba-box-width-lg, var(--kiba-box-width-md, var(--kiba-box-width-sm, var(--kiba-box-width, 100%))));
       height: var(--kiba-box-height-lg, var(--kiba-box-height-md, var(--kiba-box-height-sm, var(--kiba-box-height, auto))));
-      max-width: var(--kiba-box-max-width-lg, var(--kiba-box-max-width-md, var(--kiba-box-max-width-sm, var(--kiba-box-max-width, none))));
-      max-height: var(--kiba-box-max-height-lg, var(--kiba-box-max-height-md, var(--kiba-box-max-height-sm, var(--kiba-box-max-height, none))));
-      min-width: var(--kiba-box-min-width-lg, var(--kiba-box-min-width-md, var(--kiba-box-min-width-sm, var(--kiba-box-min-width, 0))));
-      min-height: var(--kiba-box-min-height-lg, var(--kiba-box-min-height-md, var(--kiba-box-min-height-sm, var(--kiba-box-min-height, 0))));
+      max-width: var(--kiba-box-max-width-lg, var(--kiba-box-max-width-md, var(--kiba-box-max-width-sm, var(--kiba-box-max-width))));
+      max-height: var(--kiba-box-max-height-lg, var(--kiba-box-max-height-md, var(--kiba-box-max-height-sm, var(--kiba-box-max-height))));
+      min-width: var(--kiba-box-min-width-lg, var(--kiba-box-min-width-md, var(--kiba-box-min-width-sm, var(--kiba-box-min-width))));
+      min-height: var(--kiba-box-min-height-lg, var(--kiba-box-min-height-md, var(--kiba-box-min-height-sm, var(--kiba-box-min-height))));
     }
 
     @include screen-extra-large {
       width: var(--kiba-box-width-xl, var(--kiba-box-width-lg, var(--kiba-box-width-md, var(--kiba-box-width-sm, var(--kiba-box-width, 100%)))));
       height: var(--kiba-box-height-xl, var(--kiba-box-height-lg, var(--kiba-box-height-md, var(--kiba-box-height-sm, var(--kiba-box-height, auto)))));
-      max-width: var(--kiba-box-max-width-xl, var(--kiba-box-max-width-lg, var(--kiba-box-max-width-md, var(--kiba-box-max-width-sm, var(--kiba-box-max-width, none)))));
-      max-height: var(--kiba-box-max-height-xl, var(--kiba-box-max-height-lg, var(--kiba-box-max-height-md, var(--kiba-box-max-height-sm, var(--kiba-box-max-height, none)))));
-      min-width: var(--kiba-box-min-width-xl, var(--kiba-box-min-width-lg, var(--kiba-box-min-width-md, var(--kiba-box-min-width-sm, var(--kiba-box-min-width, 0)))));
-      min-height: var(--kiba-box-min-height-xl, var(--kiba-box-min-height-lg, var(--kiba-box-min-height-md, var(--kiba-box-min-height-sm, var(--kiba-box-min-height, 0)))));
+      max-width: var(--kiba-box-max-width-xl, var(--kiba-box-max-width-lg, var(--kiba-box-max-width-md, var(--kiba-box-max-width-sm, var(--kiba-box-max-width)))));
+      max-height: var(--kiba-box-max-height-xl, var(--kiba-box-max-height-lg, var(--kiba-box-max-height-md, var(--kiba-box-max-height-sm, var(--kiba-box-max-height)))));
+      min-width: var(--kiba-box-min-width-xl, var(--kiba-box-min-width-lg, var(--kiba-box-min-width-md, var(--kiba-box-min-width-sm, var(--kiba-box-min-width)))));
+      min-height: var(--kiba-box-min-height-xl, var(--kiba-box-min-height-lg, var(--kiba-box-min-height-md, var(--kiba-box-min-height-sm, var(--kiba-box-min-height)))));
     }
   }
 }
