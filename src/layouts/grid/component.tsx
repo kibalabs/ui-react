@@ -87,6 +87,7 @@ export function Grid({
           const sizeResponsive = childProps.sizeResponsive ?? {};
           const itemStyles: React.CSSProperties = {
             ...childProps.style,
+            // @ts-expect-error CSS custom properties
             '--kiba-grid-item-gutter': gutter,
             '--kiba-grid-item-alignment': childProps.alignment ? getFlexItemAlignment(childProps.alignment) : 'auto',
             '--kiba-grid-item-width': getItemWidth(columnCount, size, gutter),
@@ -95,15 +96,22 @@ export function Grid({
               '--kiba-grid-item-height': '100%',
               '--kiba-grid-item-overflow-y': 'auto',
             } : {}),
-            // @ts-expect-error
-            '--kiba-grid-item-width-sm': sizeResponsive.small !== undefined ? getItemWidth(columnCount, sizeResponsive.small, gutter) : 'initial',
-            '--kiba-grid-item-display-sm': sizeResponsive.small !== undefined ? getItemDisplay(sizeResponsive.small) : 'initial',
-            '--kiba-grid-item-width-md': sizeResponsive.medium !== undefined ? getItemWidth(columnCount, sizeResponsive.medium, gutter) : 'initial',
-            '--kiba-grid-item-display-md': sizeResponsive.medium !== undefined ? getItemDisplay(sizeResponsive.medium) : 'initial',
-            '--kiba-grid-item-width-lg': sizeResponsive.large !== undefined ? getItemWidth(columnCount, sizeResponsive.large, gutter) : 'initial',
-            '--kiba-grid-item-display-lg': sizeResponsive.large !== undefined ? getItemDisplay(sizeResponsive.large) : 'initial',
-            '--kiba-grid-item-width-xl': sizeResponsive.extraLarge !== undefined ? getItemWidth(columnCount, sizeResponsive.extraLarge, gutter) : 'initial',
-            '--kiba-grid-item-display-xl': sizeResponsive.extraLarge !== undefined ? getItemDisplay(sizeResponsive.extraLarge) : 'initial',
+            ...(sizeResponsive.small !== undefined ? {
+              '--kiba-grid-item-width-sm': getItemWidth(columnCount, sizeResponsive.small, gutter),
+              '--kiba-grid-item-display-sm': getItemDisplay(sizeResponsive.small),
+            } : {}),
+            ...(sizeResponsive.medium !== undefined ? {
+              '--kiba-grid-item-width-md': getItemWidth(columnCount, sizeResponsive.medium, gutter),
+              '--kiba-grid-item-display-md': getItemDisplay(sizeResponsive.medium),
+            } : {}),
+            ...(sizeResponsive.large !== undefined ? {
+              '--kiba-grid-item-width-lg': getItemWidth(columnCount, sizeResponsive.large, gutter),
+              '--kiba-grid-item-display-lg': getItemDisplay(sizeResponsive.large),
+            } : {}),
+            ...(sizeResponsive.extraLarge !== undefined ? {
+              '--kiba-grid-item-width-xl': getItemWidth(columnCount, sizeResponsive.extraLarge, gutter),
+              '--kiba-grid-item-display-xl': getItemDisplay(sizeResponsive.extraLarge),
+            } : {}),
           };
           return (
             <div

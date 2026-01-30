@@ -10,8 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
-- [MINOR] Correction for using `sizeResponsive.base` size in `EqualGrid`
-- [MINOR] Correction for using `heightResponsive.base`, `widthResponsive.base` size in `EqualGrid`, `Box` and `Stack`
+- [MINOR] Correction for using `childSizeResponsive.base` size in `EqualGrid`
+- [MINOR] Fix `Box` and `Stack` to not inherit sizing props from parent when not intended
 
 ### Removed
 

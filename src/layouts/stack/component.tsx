@@ -148,10 +148,10 @@ export function Stack({
   const paddingRight = (props.paddingEnd && direction === Direction.Horizontal) ? props.paddingEnd : undefined;
   const height = props.height ?? props.heightResponsive?.base ?? (isFullHeight ? '100%' : 'auto');
   const width = props.width ?? props.widthResponsive?.base ?? (isFullWidth ? '100%' : 'auto');
-  const maxHeight = props.maxHeight ?? null;
-  const maxWidth = props.maxWidth ?? null;
-  const minHeight = props.minHeight ?? null;
-  const minWidth = props.minWidth ?? null;
+  const maxHeight = props.maxHeight ?? props.maxHeightResponsive?.base ?? null;
+  const maxWidth = props.maxWidth ?? props.maxWidthResponsive?.base ?? null;
+  const minHeight = props.minHeight ?? props.minHeightResponsive?.base ?? null;
+  const minWidth = props.minWidth ?? props.minWidthResponsive?.base ?? null;
   const maxHeightResponsive = props.maxHeightResponsive || maxHeight ? { base: (maxHeight || undefined), ...props.maxHeightResponsive } : null;
   const maxWidthResponsive = props.maxWidthResponsive || maxWidth ? { base: (maxWidth || undefined), ...props.maxWidthResponsive } : null;
   const minHeightResponsive = props.minHeightResponsive || minHeight ? { base: (minHeight || undefined), ...props.minHeightResponsive } : null;
@@ -161,23 +161,19 @@ export function Stack({
   const shouldWrapItems = props.shouldWrapItems || false;
   const stackStyles: React.CSSProperties = {
     '--kiba-stack-direction-base': getDirectionValue(direction),
-    ...responsiveValueToCss(props.directionResponsive, '--kiba-stack-direction', getDirectionValue, true),
+    ...responsiveValueToCss(props.directionResponsive, '--kiba-stack-direction', getDirectionValue),
     '--kiba-stack-child-alignment-base': getFlexItemAlignment(childAlignment),
-    ...responsiveValueToCss(props.childAlignmentResponsive, '--kiba-stack-child-alignment', getFlexItemAlignment, true),
+    ...responsiveValueToCss(props.childAlignmentResponsive, '--kiba-stack-child-alignment', getFlexItemAlignment),
     '--kiba-stack-content-alignment-base': getFlexContentAlignment(contentAlignment),
-    ...responsiveValueToCss(props.contentAlignmentResponsive, '--kiba-stack-content-alignment', getFlexContentAlignment, true),
+    ...responsiveValueToCss(props.contentAlignmentResponsive, '--kiba-stack-content-alignment', getFlexContentAlignment),
     '--kiba-stack-height-base': height,
-    ...responsiveValueToCss(props.heightResponsive, '--kiba-stack-height', undefined, true),
+    ...responsiveValueToCss(props.heightResponsive, '--kiba-stack-height'),
     '--kiba-stack-width-base': width,
-    ...responsiveValueToCss(props.widthResponsive, '--kiba-stack-width', undefined, true),
-    '--kiba-stack-max-height-base': maxHeightResponsive?.base ?? 'none',
-    ...responsiveValueToCss(maxHeightResponsive, '--kiba-stack-max-height', undefined, true),
-    '--kiba-stack-max-width-base': maxWidthResponsive?.base ?? 'none',
-    ...responsiveValueToCss(maxWidthResponsive, '--kiba-stack-max-width', undefined, true),
-    '--kiba-stack-min-height-base': minHeightResponsive?.base ?? '0',
-    ...responsiveValueToCss(minHeightResponsive, '--kiba-stack-min-height', undefined, true),
-    '--kiba-stack-min-width-base': minWidthResponsive?.base ?? '0',
-    ...responsiveValueToCss(minWidthResponsive, '--kiba-stack-min-width', undefined, true),
+    ...responsiveValueToCss(props.widthResponsive, '--kiba-stack-width'),
+    ...(maxHeightResponsive ? { '--kiba-stack-max-height-base': maxHeightResponsive.base ?? 'none', ...responsiveValueToCss(maxHeightResponsive, '--kiba-stack-max-height') } : {}),
+    ...(maxWidthResponsive ? { '--kiba-stack-max-width-base': maxWidthResponsive.base ?? 'none', ...responsiveValueToCss(maxWidthResponsive, '--kiba-stack-max-width') } : {}),
+    ...(minHeightResponsive ? { '--kiba-stack-min-height-base': minHeightResponsive.base ?? '0', ...responsiveValueToCss(minHeightResponsive, '--kiba-stack-min-height') } : {}),
+    ...(minWidthResponsive ? { '--kiba-stack-min-width-base': minWidthResponsive.base ?? '0', ...responsiveValueToCss(minWidthResponsive, '--kiba-stack-min-width') } : {}),
     ...(shouldWrapItems && innerShouldAddGutters ? { '--kiba-stack-gap': getPaddingSizeCss(defaultGutter) } : {}),
     ...props.style,
   } as React.CSSProperties;
