@@ -1,0 +1,34 @@
+name: Release
+on:
+  workflow_dispatch:
+concurrency:
+  group: release
+jobs:
+  push-version-tag:
+    runs-on: ubuntu-latest
+    # NOTE(krishan711): the release environment only allows main and holds the deploy key, the only thing allowed to push version tags. Unlike the GITHUB_TOKEN, a push with it starts the workflows that publish the tag.
+    environment: release
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v7
+        with:
+          ssh-key: ${{ secrets.RELEASE_DEPLOY_KEY }}
+      - name: Push the version tag
+        run: |
+          version="v$(jq -r .version package.json)"
+          if [[ ! "$version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::package.json version $version is not X.Y.Z"
+            exit 1
+          fi
+          existingSha="$(git ls-remote origin "refs/tags/$version" | cut -f1)"
+          if [[ "$existingSha" == "$GITHUB_SHA" ]]; then
+            echo "$version is already tagged on this commit; if publishing failed, re-run the workflow run for the tag"
+          elif [[ -n "$existingSha" ]]; then
+            echo "::error::$version already exists on $existingSha, bump the version in package.json"
+            exit 1
+          else
+            git tag "$version"
+            git push origin "refs/tags/$version"
+          fi
