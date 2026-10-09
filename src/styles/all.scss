@@ -19,53 +19,96 @@
 
 // Particles
 @use '../particles/box/styles' as box;
+@forward '../particles/box/styles' as box-*;
 @use '../particles/divider/styles' as divider;
+@forward '../particles/divider/styles' as divider-*;
 @use '../particles/icon/styles' as icon;
+@forward '../particles/icon/styles' as icon-*;
 @use '../particles/image/styles' as image;
+@forward '../particles/image/styles' as image-*;
 @use '../particles/loadingSpinner/styles' as loadingSpinner;
+@forward '../particles/loadingSpinner/styles' as loadingSpinner-*;
 @use '../particles/pill/styles' as pill;
+@forward '../particles/pill/styles' as pill-*;
 @use '../particles/portal/styles' as portal;
+@forward '../particles/portal/styles' as portal-*;
 @use '../particles/spacing/styles' as spacing;
+@forward '../particles/spacing/styles' as spacing-*;
 @use '../particles/text/styles' as text;
+@forward '../particles/text/styles' as text-*;
 @use '../particles/video/styles' as video;
+@forward '../particles/video/styles' as video-*;
 
 // Layouts
 @use '../layouts/container/styles' as container;
+@forward '../layouts/container/styles' as container-*;
 @use '../layouts/grid/styles' as grid;
+@forward '../layouts/grid/styles' as grid-*;
 @use '../layouts/layerContainer/styles' as layerContainer;
+@forward '../layouts/layerContainer/styles' as layerContainer-*;
 @use '../layouts/stack/styles' as stack;
+@forward '../layouts/stack/styles' as stack-*;
 
 // Atoms
 @use '../atoms/bulletList/styles' as bulletList;
+@forward '../atoms/bulletList/styles' as bulletList-*;
 @use '../atoms/bulletText/styles' as bulletText;
+@forward '../atoms/bulletText/styles' as bulletText-*;
 @use '../atoms/button/styles' as button;
+@forward '../atoms/button/styles' as button-*;
 @use '../atoms/checkbox/styles' as checkbox;
+@forward '../atoms/checkbox/styles' as checkbox-*;
 @use '../atoms/collapsibleBox/styles' as collapsibleBox;
+@forward '../atoms/collapsibleBox/styles' as collapsibleBox-*;
 @use '../atoms/dialog/styles' as dialog;
+@forward '../atoms/dialog/styles' as dialog-*;
 @use '../atoms/iconButton/styles' as iconButton;
+@forward '../atoms/iconButton/styles' as iconButton-*;
 @use '../atoms/inputWrapper/styles' as inputWrapper;
+@forward '../atoms/inputWrapper/styles' as inputWrapper-*;
 @use '../atoms/linePager/styles' as linePager;
+@forward '../atoms/linePager/styles' as linePager-*;
 @use '../atoms/link/styles' as link;
+@forward '../atoms/link/styles' as link-*;
 @use '../atoms/linkBase/styles' as linkBase;
+@forward '../atoms/linkBase/styles' as linkBase-*;
 @use '../atoms/listItem/styles' as listItem;
+@forward '../atoms/listItem/styles' as listItem-*;
 @use '../atoms/prettyText/styles' as prettyText;
+@forward '../atoms/prettyText/styles' as prettyText-*;
 @use '../atoms/progressCounterItem/styles' as progressCounterItem;
+@forward '../atoms/progressCounterItem/styles' as progressCounterItem-*;
 @use '../atoms/selectableView/styles' as selectableView;
+@forward '../atoms/selectableView/styles' as selectableView-*;
 @use '../atoms/switch/styles' as switch;
+@forward '../atoms/switch/styles' as switch-*;
 @use '../atoms/tabBarItem/styles' as tabBarItem;
+@forward '../atoms/tabBarItem/styles' as tabBarItem-*;
 @use '../atoms/titledCollapsibleBox/styles' as titledCollapsibleBox;
+@forward '../atoms/titledCollapsibleBox/styles' as titledCollapsibleBox-*;
 @use '../atoms/webView/styles' as webView;
+@forward '../atoms/webView/styles' as webView-*;
 
 // Molecules
 @use '../molecules/carousel/styles' as carousel;
+@forward '../molecules/carousel/styles' as carousel-*;
 @use '../molecules/list/styles' as list;
+@forward '../molecules/list/styles' as list-*;
 @use '../molecules/multiLineInput/styles' as multiLineInput;
+@forward '../molecules/multiLineInput/styles' as multiLineInput-*;
 @use '../molecules/optionSelect/styles' as optionSelect;
+@forward '../molecules/optionSelect/styles' as optionSelect-*;
 @use '../molecules/progressCounter/styles' as progressCounter;
+@forward '../molecules/progressCounter/styles' as progressCounter-*;
 @use '../molecules/singleLineInput/styles' as singleLineInput;
+@forward '../molecules/singleLineInput/styles' as singleLineInput-*;
 @use '../molecules/tabBar/styles' as tabBar;
+@forward '../molecules/tabBar/styles' as tabBar-*;
 
 // Wrappers
 @use '../wrappers/responsiveContainingView/styles' as responsiveContainingView;
+@forward '../wrappers/responsiveContainingView/styles' as responsiveContainingView-*;
 @use '../wrappers/responsiveHidingView/styles' as responsiveHidingView;
+@forward '../wrappers/responsiveHidingView/styles' as responsiveHidingView-*;
 @use '../wrappers/responsiveTextAlignmentView/styles' as responsiveTextAlignmentView;
+@forward '../wrappers/responsiveTextAlignmentView/styles' as responsiveTextAlignmentView-*;
