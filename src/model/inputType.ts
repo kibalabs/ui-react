@@ -5,5 +5,5 @@ export enum InputType {
   Password = 'password',
   Email = 'email',
   Number = 'number',
-  PhoneNumber = 'tel'
+  PhoneNumber = 'tel',
 }

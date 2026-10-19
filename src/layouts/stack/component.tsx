@@ -60,8 +60,8 @@ interface IStackProps extends IMultiAnyChildProps, IPaddingViewPaddingProps {
   minHeightResponsive?: ResponsiveField<string>;
   minWidth?: string;
   minWidthResponsive?: ResponsiveField<string>;
-  paddingStart?: PaddingSizeProp,
-  paddingEnd?: PaddingSizeProp,
+  paddingStart?: PaddingSizeProp;
+  paddingEnd?: PaddingSizeProp;
   direction?: Direction;
   directionResponsive?: ResponsiveField<Direction>;
   childAlignment?: Alignment;

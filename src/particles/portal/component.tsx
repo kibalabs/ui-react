@@ -15,7 +15,7 @@ export enum Placement {
   bottomRight = 'bottom-right',
   topLeft = 'top-left',
   topCenter = 'top-center',
-  topRight = 'top-right'
+  topRight = 'top-right',
 }
 
 export function getOffsetTop(rect: DOMRect, vertical: number | string): number {

@@ -30,7 +30,6 @@ export function Icon({
       id={props.id}
       className={getClassName(Icon.displayName, className, shouldAddFill && 'fill', shouldAddStroke && 'stroke', ...(variant?.split('-') || []))}
       style={iconStyles}
-      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: props.svgContent }}
     />
   );
