@@ -40,7 +40,7 @@
     "markdown-to-jsx": "^9.10.3"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.14.1",
+    "@kibalabs/build": "0.14.2-next.10",
     "@storybook/addon-docs": "10.6.1",
     "@storybook/react-vite": "10.6.1",
     "@types/react": "19.3.0",
