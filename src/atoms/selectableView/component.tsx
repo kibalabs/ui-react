@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
