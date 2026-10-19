@@ -27,7 +27,6 @@ export function Checkbox({
     }
   }, [isDisabled, propsOnToggled]);
   return (
-    // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
       id={props.id}
       className={getClassName(Checkbox.displayName, props.className, props.isDisabled && 'disabled', props.isChecked && 'checked', ...(variant?.split('-') || []))}

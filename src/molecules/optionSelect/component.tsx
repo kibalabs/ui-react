@@ -20,7 +20,7 @@ export interface IOption {
 interface IOptionSelectProps extends IMoleculeProps {
   options: IOption[];
   selectedItemKey?: string;
-  isDisabled?:boolean;
+  isDisabled?: boolean;
   closeIconId?: string;
   openIconId?: string;
   messageText?: string;
@@ -37,7 +37,7 @@ interface IOptionSelectProps extends IMoleculeProps {
 interface IOptionSelectContentProps {
   options: IOption[];
   selectedItemKey?: string;
-  isDisabled?:boolean;
+  isDisabled?: boolean;
   placeholderText?: string;
   optionListVariant?: string;
   optionTextVariant?: string;

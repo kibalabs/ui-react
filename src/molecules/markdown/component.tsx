@@ -7,7 +7,7 @@ import { BulletList, BulletText, Link, PrettyText } from '../../atoms';
 import { Box, Media, TextAlignment } from '../../particles';
 import { getVariant } from '../../util';
 
-function MarkdownParagraph(props: React.AnchorHTMLAttributes<HTMLAnchorElement> & {isInline: boolean | undefined}): React.ReactElement {
+function MarkdownParagraph(props: React.AnchorHTMLAttributes<HTMLAnchorElement> & { isInline: boolean | undefined }): React.ReactElement {
   const childrenDisplayNames = React.Children.map(props.children, (child: React.ReactNode): string | null => (
     // @ts-expect-error: Property 'displayName' does not exist on type
     (child && typeof child === 'object' && 'type' in child) ? String(child.type.displayName).split('-')[0] : null

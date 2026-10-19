@@ -39,7 +39,6 @@ export function InputWrapper({
       className={getClassName(InputWrapper.displayName, className, props.messageText && 'message-showing', isFocussed && 'focus', !props.isEnabled && 'disabled', isFullWidth && 'full-width', ...(variant?.split('-') || []))}
       style={props.style}
     >
-      {/* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
       <div
         role={props.onClicked ? 'button' : undefined}
         tabIndex={props.onClicked ? 0 : undefined}
@@ -52,7 +51,6 @@ export function InputWrapper({
       >
         {props.children}
       </div>
-      {/* eslint-enable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
       <HidingView isHidden={!props.messageText}>
         <p
           id={props.id && `${props.id}-message`}

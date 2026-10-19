@@ -7,7 +7,7 @@ import { InputFrame } from '../inputFrame';
 import { IMoleculeProps } from '../moleculeProps';
 
 interface IMultiLineInputProps extends IMoleculeProps {
-  value: string| null;
+  value: string | null;
   isEnabled?: boolean;
   minRowCount?: number;
   maxRowCount?: number;

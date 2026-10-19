@@ -1,4 +1,3 @@
-
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Markdown } from '.';
@@ -13,7 +12,7 @@ type Story = StoryObj<typeof Markdown>;
 
 export const Default: Story = {
   args: {
-    source: "This is an **example**\n\nIt's got [links](https://www.kibalabs.com)\n\n![cool image](https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg)",
+    source: 'This is an **example**\n\nIt\'s got [links](https://www.kibalabs.com)\n\n![cool image](https://upload.wikimedia.org/wikipedia/commons/5/50/Male_gorilla_in_SF_zoo.jpg)',
   },
 };
 

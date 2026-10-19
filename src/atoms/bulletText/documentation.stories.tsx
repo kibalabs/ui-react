@@ -1,5 +1,3 @@
-import React from 'react';
-
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { BulletText } from '.';
@@ -22,7 +20,7 @@ type Story = StoryObj<typeof BulletText>;
 
 export const Default: Story = {
   args: {
-    text: "I'm a bullet point",
+    text: 'I\'m a bullet point',
   },
 };
 

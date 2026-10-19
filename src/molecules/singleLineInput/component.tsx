@@ -12,7 +12,8 @@ import { IMoleculeProps } from '../moleculeProps';
 const getAutocompleteType = (inputType: InputType): string | undefined => {
   if (inputType === InputType.Email) {
     return 'email';
-  } if (inputType === InputType.Url) {
+  }
+  if (inputType === InputType.Url) {
     return 'url';
   }
   return undefined;
