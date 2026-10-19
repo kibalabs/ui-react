@@ -1,4 +1,3 @@
-
 export enum InputType {
   Text = 'text',
   Url = 'url',
