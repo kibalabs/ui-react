@@ -66,7 +66,7 @@ export const RemixIcons: Story = {
     <Stack direction={Direction.Horizontal} shouldAddGutters={true}>
       <KibaIcon iconId='remix-home-line' />
       <KibaIcon iconId='remix-settings-line' />
-      <KibaIcon iconId='remix-honour' />
+      <KibaIcon iconId='remix-honour-line' />
     </Stack>
   ),
 };
