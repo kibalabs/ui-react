@@ -14,7 +14,6 @@ export interface IKibaIconsPluginOptions {
 
 interface IIconSet {
   prefix: string;
-  name: string;
   packageName: string;
   iconsDirectory: string;
   getIconFilePaths: (iconsDirectoryPath: string, iconName: string) => string[];
@@ -46,14 +45,12 @@ const getRemixIconFilePaths = (iconsDirectoryPath: string): Map<string, string> 
 
 const ICON_SETS: IIconSet[] = [{
   prefix: 'ion',
-  name: 'Ionicons',
   packageName: 'ionicons',
   // NOTE(krishan711): the svg files are used (not the ionicons/icons data uris) because those style outlines with classes from ion-icon's css
   iconsDirectory: 'dist/svg',
   getIconFilePaths: (iconsDirectoryPath, iconName) => [path.join(iconsDirectoryPath, `${iconName}.svg`)],
 }, {
   prefix: 'mui',
-  name: 'Material Icons',
   packageName: '@material-design-icons/svg',
   iconsDirectory: '.',
   // NOTE(krishan711): mui-account-box is filled/account_box.svg and mui-account-box-outlined is outlined/account_box.svg
@@ -66,19 +63,16 @@ const ICON_SETS: IIconSet[] = [{
   },
 }, {
   prefix: 'bs',
-  name: 'Bootstrap Icons',
   packageName: 'bootstrap-icons',
   iconsDirectory: 'icons',
   getIconFilePaths: (iconsDirectoryPath, iconName) => [path.join(iconsDirectoryPath, `${iconName}.svg`)],
 }, {
   prefix: 'feather',
-  name: 'Feather Icons',
   packageName: 'feather-icons',
   iconsDirectory: 'dist/icons',
   getIconFilePaths: (iconsDirectoryPath, iconName) => [path.join(iconsDirectoryPath, `${iconName}.svg`)],
 }, {
   prefix: 'remix',
-  name: 'Remix Icons',
   packageName: 'remixicon',
   iconsDirectory: 'icons',
   getIconFilePaths: (iconsDirectoryPath, iconName) => {
@@ -245,11 +239,13 @@ export const kibaIconsPlugin = (options: IKibaIconsPluginOptions = {}): Plugin =
         icons[iconId] = svgContent;
       }
     });
-    missingIconIds.forEach((setIconIds, iconSet) => {
-      const packageDirectory = getPackageDirectory(iconSet.packageName);
-      const reason = packageDirectory ? `the installed ${iconSet.packageName} has no ${iconSet.iconsDirectory} directory` : `${iconSet.packageName} isn't installed`;
-      logger?.warn(`[kiba-icons] ${setIconIds.length} ${iconSet.name} id(s) are used (${setIconIds.join(', ')}) but ${reason}, so KibaIcon will fetch them at runtime.`);
-    });
+    if (missingIconIds.size > 0) {
+      const missingDescriptions = [...missingIconIds.entries()].map(([iconSet, setIconIds]) => {
+        const reason = getPackageDirectory(iconSet.packageName) ? `the installed version has no ${iconSet.iconsDirectory} directory` : 'not installed';
+        return `${iconSet.packageName} (${reason}): ${setIconIds.join(', ')}`;
+      });
+      logger?.warn(`[kiba-icons] KibaIcon will fetch these icons at runtime because their icon package is missing:\n  ${missingDescriptions.join('\n  ')}`);
+    }
     return icons;
   };
 
