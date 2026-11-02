@@ -6,6 +6,28 @@ import { IMoleculeProps } from '..';
 import { LinkBase } from '../../atoms/linkBase';
 import { Image } from '../../particles/image';
 
+// NOTE(krishan711): each badge is in its own chunk (they're 7-20kb each) so apps only load the ones they show
+const BADGE_LOADERS: Record<string, () => Promise<{ default: string }>> = {
+  'android-dark': () => import('./badges/androidDark'),
+  'android-dark-clear': () => import('./badges/androidDarkClear'),
+  'android-light': () => import('./badges/androidLight'),
+  'android-light-clear': () => import('./badges/androidLightClear'),
+  'ios-dark': () => import('./badges/iosDark'),
+  'ios-dark-clear': () => import('./badges/iosDarkClear'),
+  'ios-light': () => import('./badges/iosLight'),
+  'ios-light-clear': () => import('./badges/iosLightClear'),
+  'mac-dark': () => import('./badges/macDark'),
+  'mac-dark-clear': () => import('./badges/macDarkClear'),
+  'mac-light': () => import('./badges/macLight'),
+  'mac-light-clear': () => import('./badges/macLightClear'),
+  'appletv-dark': () => import('./badges/appletvDark'),
+  'appletv-dark-clear': () => import('./badges/appletvDarkClear'),
+  'appletv-light': () => import('./badges/appletvLight'),
+  'appletv-light-clear': () => import('./badges/appletvLightClear'),
+};
+
+const loadedBadgeSources = new Map<string, string>();
+
 export interface AppDownloadButtonProps extends IMoleculeProps {
   appId: string;
   appType: 'android' | 'ios' | 'mac' | 'appletv';
@@ -26,6 +48,35 @@ export function AppDownloadButton({
   if (['android', 'ios', 'mac', 'appletv'].indexOf(props.appType) === -1) {
     throw new KibaException(`appType not recognized: ${props.appType}`);
   }
+
+  const badgeId = `${props.appType}-${buttonVariant}`;
+  const [badgeSource, setBadgeSource] = React.useState<string | null>(loadedBadgeSources.get(badgeId) ?? null);
+
+  React.useEffect((): (() => void) | undefined => {
+    const loadedBadgeSource = loadedBadgeSources.get(badgeId);
+    if (loadedBadgeSource) {
+      setBadgeSource(loadedBadgeSource);
+      return undefined;
+    }
+    setBadgeSource(null);
+    const badgeLoader = BADGE_LOADERS[badgeId];
+    if (!badgeLoader) {
+      return undefined;
+    }
+    let isCancelled = false;
+    badgeLoader().then((badgeModule: { default: string }): void => {
+      const source = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(badgeModule.default)}`;
+      loadedBadgeSources.set(badgeId, source);
+      if (!isCancelled) {
+        setBadgeSource(source);
+      }
+    }).catch((error: unknown): void => {
+      console.error(`Failed to load the ${badgeId} badge`, error);
+    });
+    return (): void => {
+      isCancelled = true;
+    };
+  }, [badgeId]);
 
   const getAppUrl = (): string => {
     if (props.appType === 'android') {
@@ -67,11 +118,13 @@ export function AppDownloadButton({
       variant='image'
       target={getAppUrl()}
     >
-      <Image
-        source={`https://assets-cdn.kiba.dev/${props.appType}/download-button/v5/${buttonVariant}.svg`}
-        alternativeText={getAlternativeText()}
-        isLazyLoadable={isLazyLoadable}
-      />
+      {badgeSource && (
+        <Image
+          source={badgeSource}
+          alternativeText={getAlternativeText()}
+          isLazyLoadable={isLazyLoadable}
+        />
+      )}
     </LinkBase>
   );
 }
