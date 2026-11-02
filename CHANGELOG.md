@@ -8,9 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [MINOR] Added `@kibalabs/ui-react/vite-plugin` with `kibaIconsPlugin` to bundle the icons used with `KibaIcon` at build time, icon packages (`ionicons`, `@material-design-icons/svg`, `bootstrap-icons`, `feather-icons`, `remixicon`) are optional peer dependencies
+- [MINOR] Added `registerKibaIcons` to register svgs that `KibaIcon` renders without fetching
 - [MAJOR] Added `@kibalabs/ui-react/toast` (all of `@kibalabs/ui-react-toast`) and `@kibalabs/ui-react/dropzone` (all of `@kibalabs/ui-react-dropzone`) with their styles, `react-hot-toast` and `react-dropzone` are optional peer dependencies
 
 ### Changed
+- [MINOR] Changed `KibaIcon` to fetch each icon once per page (shared between instances), retry once and ignore responses for a previous `iconId`
+- [MINOR] Changed `AppDownloadButton` to use bundled badges (loaded lazily) instead of `assets-cdn.kiba.dev`
+- [PATCH] Changed `Carousel` to use ionicons chevrons
 - [MAJOR] Use `@kibalabs/core/react` instead of `@kibalabs/core-react`, `react-router` is now a peer dependency
 - [MINOR] Correction for using `childSizeResponsive.base` size in `EqualGrid`
 - [MINOR] Fix `Box` and `Stack` to not inherit sizing props from parent when not intended

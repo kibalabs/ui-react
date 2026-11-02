@@ -46,6 +46,26 @@ Use `@kibalabs/ui-react/styles.css` instead if you don't use scss.
 
 Toast and dropzone styles only hold their own rules, so use them on top of the main styles.
 
+## Icons
+
+`KibaIcon` shows icons by id (`ion-home`, `mui-home`, `bs-house`, `feather-home`, `remix-home-line`). To bundle the ones you use at build time, install the icon packages you need (optional peer dependencies: `ionicons`, `@material-design-icons/svg`, `bootstrap-icons`, `feather-icons`, `remixicon`) and add the vite plugin:
+
+```js
+// config.build.js
+import { kibaIconsPlugin } from '@kibalabs/ui-react/vite-plugin';
+
+export default (config) => {
+  const newConfig = config;
+  newConfig.viteConfigModifier = (viteConfig) => {
+    viteConfig.plugins.push(kibaIconsPlugin());
+    return viteConfig;
+  };
+  return newConfig;
+};
+```
+
+It scans `src` (and ui-react) for quoted icon ids and registers their svgs before your app starts. Anything it can't see (e.g. `` `ion-${name}` ``) is fetched from `assets-cdn.kiba.dev` at runtime as before.
+
 ## Theming
 
 - **Variables:** everything is themed with CSS variables named `--kiba-{category}-{name}` (e.g. `--kiba-color-brand-primary`, `--kiba-padding`). Each color also gets `-light10/25`, `-dark10/25` and `-clear25/50/75` variants.

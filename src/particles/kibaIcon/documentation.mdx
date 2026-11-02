@@ -5,7 +5,7 @@ import * as Stories from './documentation.stories';
 
 # KibaIcon
 
-**KibaIcon** is a convenience wrapper around `Icon` that fetches icons from Kiba's CDN by ID. Supports multiple popular icon libraries.
+**KibaIcon** is a convenience wrapper around `Icon` that shows an icon by ID from one of several popular icon libraries. With the vite plugin (below) the icons are bundled into your app at build time.
 
 <Canvas of={Stories.Default} />
 
@@ -49,14 +49,36 @@ Inherits all styling from Icon. See Icon documentation for variants and customiz
 
 ### Supported Icon Sets
 
-| Prefix | Icon Set | Example |
-|--------|----------|---------|
-| `ion-` | [Ionicons v5](https://ionic.io/ionicons) | `ion-home` |
-| `mui-` | [Material Icons](https://fonts.google.com/icons) | `mui-home` |
-| `bs-` | [Bootstrap Icons](https://icons.getbootstrap.com/) | `bs-house` |
-| `feather-` | [Feather Icons](https://feathericons.com/) | `feather-home` |
-| `remix-` | [Remix Icons](https://remixicon.com/) | `remix-home-line` |
+| Prefix | Icon Set | Package | Example |
+|--------|----------|---------|---------|
+| `ion-` | [Ionicons](https://ionic.io/ionicons) | `ionicons` | `ion-home` |
+| `mui-` | [Material Icons](https://fonts.google.com/icons) | `@material-design-icons/svg` | `mui-home`, `mui-account-box-outlined` |
+| `bs-` | [Bootstrap Icons](https://icons.getbootstrap.com/) | `bootstrap-icons` | `bs-house` |
+| `feather-` | [Feather Icons](https://feathericons.com/) | `feather-icons` | `feather-home` |
+| `remix-` | [Remix Icons](https://remixicon.com/) | `remixicon` | `remix-home-line` |
 
-### Note
+## Bundling icons
 
-Icons are fetched asynchronously from `assets-cdn.kiba.dev`. Consider using `Icon` with bundled SVGs for critical icons to avoid network delays.
+Install the packages for the icon sets you use (they are optional peer dependencies, ui-react's own components only use `ionicons`) and add the vite plugin in your `config.build.js`:
+
+```bash
+npm install ionicons
+```
+
+```js
+import { kibaIconsPlugin } from '@kibalabs/ui-react/vite-plugin';
+
+export default (config) => {
+  const newConfig = config;
+  newConfig.viteConfigModifier = (viteConfig) => {
+    const newViteConfig = viteConfig;
+    newViteConfig.plugins.push(kibaIconsPlugin());
+    return newViteConfig;
+  };
+  return newConfig;
+};
+```
+
+At build time and in dev the plugin finds every quoted icon id (e.g. `'ion-home'`) in your `src` and in ui-react itself, reads those svgs from the installed packages and registers them before your app's entry runs, so they render straight away with no requests. Ids from a set whose package isn't installed are warned about once. Pass `sourceDirectories` (relative to the vite root) if your code isn't in `src`.
+
+Ids that aren't written out in full in the code (e.g. `` `ion-${name}` `` or ids from an api) and apps without the plugin still work: those icons are fetched from `assets-cdn.kiba.dev` once per page and shared by every `KibaIcon`.
