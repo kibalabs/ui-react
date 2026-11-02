@@ -1,0 +1,55 @@
+@layer kiba-structure {
+  .KibaDropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    &.disabled {
+      cursor: not-allowed;
+    }
+  }
+}
+
+@layer kiba-theme {
+  .KibaDropzone {
+    --kiba-icon-size: 1.2em;
+    padding: var(--kiba-padding-wide, 1em) var(--kiba-padding-wide2, 1.5em);
+    background-color: var(--kiba-color-background-light05, rgba(0, 0, 0, 0.02));
+    border-width: var(--kiba-border-width, 1px);
+    border-color: var(--kiba-color-text-clear75, rgba(0, 0, 0, 0.25));
+    border-style: dashed;
+    border-radius: var(--kiba-border-radius, 0.5em);
+    color: var(--kiba-color-text-clear50, rgba(0, 0, 0, 0.5));
+    text-align: center;
+    font-size: var(--kiba-font-size, 1rem);
+    &:hover {
+      border-color: var(--kiba-color-brand-primary-clear50, rgba(0, 0, 0, 0.5));
+      color: var(--kiba-color-text-clear25, rgba(0, 0, 0, 0.75));
+    }
+    &:active {
+      border-color: var(--kiba-color-brand-primary, rgba(0, 0, 0, 0.75));
+      color: var(--kiba-color-text, rgba(0, 0, 0, 0.9));
+    }
+    &:focus {
+      outline: none;
+      border-color: var(--kiba-color-brand-primary-clear50, rgba(0, 0, 0, 0.5));
+    }
+    &.fileHovering {
+      border-color: var(--kiba-color-brand-primary, rgba(0, 0, 0, 0.75));
+      border-style: solid;
+      background-color: var(--kiba-color-brand-primary-clear90, rgba(0, 0, 0, 0.05));
+      color: var(--kiba-color-brand-primary, rgba(0, 0, 0, 0.75));
+    }
+    &.disabled {
+      background-color: var(--kiba-color-background-dark10, rgba(128, 128, 128, 0.1));
+      color: var(--kiba-color-text-clear75, rgba(128, 128, 128, 0.5));
+      border-color: var(--kiba-color-text-clear90, rgba(128, 128, 128, 0.25));
+    }
+  }
+}

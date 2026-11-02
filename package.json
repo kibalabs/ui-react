@@ -1,7 +1,7 @@
 {
   "name": "@kibalabs/ui-react",
   "version": "0.12.0",
-  "description": "React UI component library for building projects at Kiba Labs",
+  "description": "React UI component library for building projects at Kiba Labs (with toasts and dropzones)",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -19,10 +19,25 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./toast": {
+      "types": "./dist/toast/index.d.ts",
+      "import": "./dist/toast/index.js",
+      "default": "./dist/toast/index.js"
+    },
+    "./dropzone": {
+      "types": "./dist/dropzone/index.d.ts",
+      "import": "./dist/dropzone/index.js",
+      "default": "./dist/dropzone/index.js"
     },
     "./styles.css": "./dist/index.css",
-    "./styles.scss": "./src/styles/all.scss"
+    "./styles.scss": "./src/styles/all.scss",
+    "./toast/styles.css": "./dist/toast/index.css",
+    "./toast/styles.scss": "./src/toast/styles.scss",
+    "./dropzone/styles.css": "./dist/dropzone/index.css",
+    "./dropzone/styles.scss": "./src/dropzone/styles.scss"
   },
   "files": [
     "dist/*",
@@ -31,27 +46,42 @@
     "src/layouts/*/styles.scss",
     "src/atoms/*/styles.scss",
     "src/molecules/*/styles.scss",
-    "src/wrappers/*/styles.scss"
+    "src/wrappers/*/styles.scss",
+    "src/toast/styles.scss",
+    "src/dropzone/styles.scss"
   ],
   "dependencies": {
-    "@kibalabs/core": "^0.7.2-next.9",
-    "@kibalabs/core-react": "^0.10.1-next.7",
+    "@kibalabs/core": "^0.7.2-next.10",
     "lazysizes": "^5.3.2",
     "markdown-to-jsx": "^9.10.3"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.14.2-next.14",
+    "@kibalabs/build": "0.14.2-next.16",
     "@storybook/addon-docs": "10.6.4",
     "@storybook/react-vite": "10.6.4",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
+    "react-dropzone": "20.1.4",
+    "react-hot-toast": "2.6.1",
+    "react-router": "8.5.0",
     "remark-gfm": "4.0.1",
     "storybook": "10.6.4"
   },
   "peerDependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-dropzone": "^20.1.4",
+    "react-hot-toast": "^2.6.1",
+    "react-router": "^8.5.0"
+  },
+  "peerDependenciesMeta": {
+    "react-dropzone": {
+      "optional": true
+    },
+    "react-hot-toast": {
+      "optional": true
+    }
   }
 }

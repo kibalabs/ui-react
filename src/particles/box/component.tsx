@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
+import { IOptionalSingleAnyChildProps } from '@kibalabs/core/react';
 
 import './styles.scss';
 import { IComponentProps } from '../..';

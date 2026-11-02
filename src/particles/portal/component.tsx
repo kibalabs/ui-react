@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { getClassName } from '@kibalabs/core';
-import { ISingleAnyChildProps, useEventListener, useInterval } from '@kibalabs/core-react';
+import { ISingleAnyChildProps, useEventListener, useInterval } from '@kibalabs/core/react';
 
 import './styles.scss';
 import { IComponentProps } from '../../model';

@@ -1,0 +1,101 @@
+// Override react-hot-toast default styles - must be outside @layer for higher specificity
+.KibaToastContainer > div {
+  max-width: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+@layer kiba-structure {
+  @keyframes kiba-toast-fade-in {
+    0% {
+      transform: translate3d(0, -200%, 0) scale(0.6);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes kiba-toast-fade-out {
+    0% {
+      transform: translate3d(0, 0, -1px) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(0, -150%, -1px) scale(0.6);
+      opacity: 0;
+    }
+  }
+
+  .KibaToast {
+    display: flex;
+    transition-duration: 0.3s;
+    white-space: nowrap;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    cursor: default;
+    background-clip: border-box;
+    position: relative;
+    box-sizing: border-box;
+    &.clickable {
+      cursor: pointer;
+    }
+    &.animateIn {
+      animation: kiba-toast-fade-in 0.35s cubic-bezier(0.21, 1.02, 0.73, 1);
+    }
+    &.animateOut {
+      animation: kiba-toast-fade-out 0.75s cubic-bezier(0.06, 0.71, 0.55, 1) forwards;
+    }
+  }
+
+
+}
+
+@layer kiba-theme {
+  .KibaToast {
+    // Use same styling as card from ui-react
+    background-color: var(--kiba-color-background-light10, #ffffff);
+    border-color: var(--kiba-color-background-dark05, rgba(0, 0, 0, 0.05));
+    border-width: var(--kiba-border-width, 1px);
+    border-style: solid;
+    border-radius: var(--kiba-border-radius, 0.5em);
+    box-shadow: 0px 8px 8px -6px rgba(0, 0, 0, 0.15);
+    padding: var(--kiba-padding, 0.5em) var(--kiba-padding-wide, 1em);
+    color: var(--kiba-color-text, #333333);
+    transition-duration: 0.3s;
+    &:hover {
+      background-color: var(--kiba-color-background, #ffffff);
+    }
+    &:active {
+      background-color: var(--kiba-color-background-dark10, #f0f0f0);
+    }
+    &:focus-visible {
+      border-color: var(--kiba-color-background-dark50, rgba(0, 0, 0, 0.5));
+    }
+    // Variant styles
+    &.success {
+      background-color: var(--kiba-color-success-clear90, #d4edda);
+      color: var(--kiba-color-success-dark25, #155724);
+      border-color: var(--kiba-color-success-clear75, #c3e6cb);
+    }
+    &.error {
+      background-color: var(--kiba-color-error-clear90, #f8d7da);
+      color: var(--kiba-color-error-dark25, #721c24);
+      border-color: var(--kiba-color-error-clear75, #f5c6cb);
+    }
+    &.warning {
+      background-color: var(--kiba-color-warning-clear90, #fff3cd);
+      color: var(--kiba-color-warning-dark25, #856404);
+      border-color: var(--kiba-color-warning-clear75, #ffeeba);
+    }
+    &.info {
+      background-color: var(--kiba-color-info-clear90, #d1ecf1);
+      color: var(--kiba-color-info-dark25, #0c5460);
+      border-color: var(--kiba-color-info-clear75, #bee5eb);
+    }
+  }
+}

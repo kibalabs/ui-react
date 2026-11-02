@@ -1,0 +1,33 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { Button, Box, Image } from '../index';
+import * as DocumentationStories from './documentation.stories';
+
+import { Toast, useToastManager } from '.';
+
+<Meta of={DocumentationStories} />
+
+# Toast
+
+<br />
+
+export const Template = (args) => {
+  const toastManager = useToastManager();
+  const onShowToastClicked = () => {
+    toastManager.showTextToast('👋 Hello world');
+  }
+  return (
+    <Button text='Show Toast' onClicked={onShowToastClicked} />
+  );
+};
+
+<Canvas withToolbar={true} withSource={'none'}>
+  <Story of={DocumentationStories.Default} />
+</Canvas>
+
+<Controls />
+
+### Examples
+
+<Canvas>
+  <Story of={DocumentationStories.CustomToast} />
+</Canvas>

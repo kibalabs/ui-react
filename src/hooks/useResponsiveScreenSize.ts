@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useWindowSize } from '@kibalabs/core-react';
+import { useWindowSize } from '@kibalabs/core/react';
 
 import { getScreenSizeValue, ScreenSize } from '../particles';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { ISingleAnyChildProps, OptionalProppedElement } from '@kibalabs/core-react';
+import { ISingleAnyChildProps, OptionalProppedElement } from '@kibalabs/core/react';
 
 import { InputWrapper } from '../../atoms';
 import { Stack } from '../../layouts';

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { flattenChildren, IMultiAnyChildProps } from '@kibalabs/core-react';
+import { flattenChildren, IMultiAnyChildProps } from '@kibalabs/core/react';
 
 import { Alignment, PaddingSizeProp } from '../..';
 import { ResponsiveField } from '../../util';

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { ISingleAnyChildProps } from '@kibalabs/core-react';
+import { ISingleAnyChildProps } from '@kibalabs/core/react';
 
 import './styles.scss';
 import { Stack } from '../../layouts';
