@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Added
 - [MINOR] Added `@kibalabs/ui-react/vite-plugin` with `kibaIconsPlugin` to bundle the icons used with `KibaIcon` at build time, icon packages (`ionicons`, `@material-design-icons/svg`, `bootstrap-icons`, `feather-icons`, `remixicon`) are optional peer dependencies
+- [MINOR] Added `kibaFontsPlugin` to `@kibalabs/ui-react/vite-plugin` to self-host the Google Fonts an app imports, downloading them at build time and preloading the main file of each family
 - [MINOR] Added `registerKibaIcons` to register svgs that `KibaIcon` renders without fetching
 - [MINOR] Added icon id props for the icons components show by default, so apps can use any icon set: `previousIconId`/`nextIconId` on `Carousel`, `expandIconId`/`collapseIconId` on `CollapsibleBox` and `TitledCollapsibleBox`, `selectedIconId` on `SelectableView`, `closeIconId` on `MessageDialog` and `iconId` on `Dropzone`
 - [MAJOR] Added `@kibalabs/ui-react/toast` (all of `@kibalabs/ui-react-toast`) and `@kibalabs/ui-react/dropzone` (all of `@kibalabs/ui-react-dropzone`) with their styles, `react-hot-toast` and `react-dropzone` are optional peer dependencies
