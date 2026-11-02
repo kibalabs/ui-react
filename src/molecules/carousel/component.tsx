@@ -20,6 +20,8 @@ export interface ICarouselProps extends IMoleculeProps, IMultiAnyChildProps {
   slidesPerPageResponsive?: ResponsiveField<number>;
   onIndexProgressed?: (slideIndexProgress: number) => void;
   onIndexChanged?: (slideIndex: number) => void;
+  previousIconId?: string;
+  nextIconId?: string;
 }
 
 // NOTE(krishan711): the slider could potentially be its own component here!
@@ -153,7 +155,7 @@ export function Carousel({
       {shouldShowButtons && (
         <IconButton
           variant={props.indexButtonVariant}
-          icon={<KibaIcon iconId='mui-chevron-left' />}
+          icon={<KibaIcon iconId={props.previousIconId || 'ion-chevron-back'} />}
           label='Previous'
           onClicked={onPreviousClicked}
         />
@@ -180,7 +182,7 @@ export function Carousel({
       {shouldShowButtons && (
         <IconButton
           variant={props.indexButtonVariant}
-          icon={<KibaIcon iconId='mui-chevron-right' />}
+          icon={<KibaIcon iconId={props.nextIconId || 'ion-chevron-forward'} />}
           label='Next'
           onClicked={onNextClicked}
         />

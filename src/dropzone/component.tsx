@@ -15,10 +15,11 @@ export interface IDropzoneProps extends IMultiAnyChildProps {
   fileMimeTypeExtensions?: Record<string, string[]>;
   fileLimit?: number;
   isDisabled?: boolean;
+  iconId?: string;
 }
 
 export function Dropzone(props: IDropzoneProps): React.ReactElement {
-  const { onFilesChosen, fileLimit, isDisabled, fileMimeTypeExtensions, fileMimeTypes, id, className, style, children } = props;
+  const { onFilesChosen, fileLimit, isDisabled, fileMimeTypeExtensions, fileMimeTypes, id, className, style, children, iconId } = props;
   const onDrop = React.useCallback((files: File[]) => {
     onFilesChosen(files);
   }, [onFilesChosen]);
@@ -61,7 +62,7 @@ export function Dropzone(props: IDropzoneProps): React.ReactElement {
         tabIndex={inputProps.tabIndex}
         style={inputProps.style}
       />
-      {children ?? <KibaIcon iconId='ion-cloud-upload-outline' />}
+      {children ?? <KibaIcon iconId={iconId || 'ion-cloud-upload-outline'} />}
     </div>
   );
 }

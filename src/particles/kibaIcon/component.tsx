@@ -16,75 +16,164 @@ interface IconData {
   shouldAddStroke: boolean;
 }
 
+const getIconData = (iconId: string): IconData | null => {
+  if (iconId.startsWith('ion-')) {
+    return {
+      url: `https://assets-cdn.kiba.dev/ionicons/v5/${iconId.replace('ion-', '')}.svg`,
+      shouldAddFill: true,
+      shouldAddStroke: false,
+    };
+  }
+  if (iconId.startsWith('mui-')) {
+    return {
+      url: `https://assets-cdn.kiba.dev/material-icons/v1/${iconId.replace('mui-', '')}.svg`,
+      shouldAddFill: true,
+      shouldAddStroke: false,
+    };
+  }
+  if (iconId.startsWith('bs-')) {
+    return {
+      url: `https://assets-cdn.kiba.dev/bootstrap-icons/v1/${iconId.replace('bs-', '')}.svg`,
+      shouldAddFill: true,
+      shouldAddStroke: false,
+    };
+  }
+  if (iconId.startsWith('feather-')) {
+    return {
+      url: `https://assets-cdn.kiba.dev/feather/v4/${iconId.replace('feather-', '')}.svg`,
+      shouldAddFill: false,
+      shouldAddStroke: true,
+    };
+  }
+  if (iconId.startsWith('remix-')) {
+    return {
+      url: `https://assets-cdn.kiba.dev/remix-icons/v2/${iconId.replace('remix-', '')}.svg`,
+      shouldAddFill: true,
+      shouldAddStroke: false,
+    };
+  }
+  return null;
+};
+
+// NOTE(krishan711): icons bundled into the app at build time by @kibalabs/ui-react/vite-plugin are registered
+// here (svg content keyed by icon id, already normalised) so KibaIcon can render them without fetching.
+const registeredIcons = new Map<string, string>();
+
+export const registerKibaIcons = (icons: Record<string, string>): void => {
+  Object.entries(icons).forEach(([iconId, svgContent]) => {
+    registeredIcons.set(iconId, svgContent);
+  });
+};
+
+const getRegisteredKibaIcon = (iconId: string): string | undefined => {
+  return registeredIcons.get(iconId);
+};
+
+const normalizeKibaIconSvg = (svgContent: string): string => {
+  return svgContent.replace(/<title>.*<\/title>/gi, '').replace(/stroke:#000/gi, 'stroke:currentColor').replace(/fill:#000/gi, 'fill:currentColor');
+};
+
+// NOTE(krishan711): icons that weren't bundled at build time are fetched at most once per page and shared by every KibaIcon
+const fetchedSvgContents = new Map<string, string>();
+const inFlightSvgContents = new Map<string, Promise<string>>();
+const FETCH_RETRY_DELAY_MILLIS = 1000;
+
+const fetchSvgContent = async (url: string, retryCount: number): Promise<string> => {
+  try {
+    const response = await fetch(url);
+    if (response.status >= 300) {
+      throw new Error(`Failed to fetch icon from ${url}: ${response.status}`);
+    }
+    return normalizeKibaIconSvg(await response.text());
+  } catch (error: unknown) {
+    if (retryCount <= 0) {
+      throw error;
+    }
+    await new Promise((resolve): void => {
+      setTimeout(resolve, FETCH_RETRY_DELAY_MILLIS);
+    });
+    return fetchSvgContent(url, retryCount - 1);
+  }
+};
+
+const loadSvgContent = (url: string): Promise<string> => {
+  const fetchedSvgContent = fetchedSvgContents.get(url);
+  if (fetchedSvgContent !== undefined) {
+    return Promise.resolve(fetchedSvgContent);
+  }
+  let inFlightSvgContent = inFlightSvgContents.get(url);
+  if (!inFlightSvgContent) {
+    inFlightSvgContent = fetchSvgContent(url, 1)
+      .then((svgContent: string): string => {
+        fetchedSvgContents.set(url, svgContent);
+        return svgContent;
+      })
+      .finally((): void => {
+        inFlightSvgContents.delete(url);
+      });
+    inFlightSvgContents.set(url, inFlightSvgContent);
+  }
+  return inFlightSvgContent;
+};
+
+const getKnownSvgContent = (iconId: string): string | undefined => {
+  const registeredSvgContent = getRegisteredKibaIcon(iconId);
+  if (registeredSvgContent !== undefined) {
+    return registeredSvgContent;
+  }
+  const iconData = getIconData(iconId);
+  return iconData ? fetchedSvgContents.get(iconData.url) : undefined;
+};
+
+interface ILoadedSvgContent {
+  iconId: string;
+  svgContent: string;
+}
+
 export function KibaIcon({
   className = '',
   variant = 'default',
   ...props
 }: IKibaIconProps): React.ReactElement {
-  const [svgContent, setSvgContent] = React.useState<string | null>(null);
-  const [shouldAddFill, setShouldAddFill] = React.useState<boolean | undefined>(undefined);
-  const [shouldAddStroke, setShouldAddStroke] = React.useState<boolean | undefined>(undefined);
+  const iconData = getIconData(props.iconId);
+  // NOTE(krishan711): icons bundled at build time (or already fetched) render straight away
+  const knownSvgContent = getKnownSvgContent(props.iconId);
+  const [loadedSvgContent, setLoadedSvgContent] = React.useState<ILoadedSvgContent | null>(null);
 
-  const getIconData = (iconId: string): IconData | null => {
-    if (iconId.startsWith('ion-')) {
-      return {
-        url: `https://assets-cdn.kiba.dev/ionicons/v5/${iconId.replace('ion-', '')}.svg`,
-        shouldAddFill: true,
-        shouldAddStroke: false,
-      };
+  React.useEffect((): (() => void) | undefined => {
+    if (knownSvgContent !== undefined) {
+      return undefined;
     }
-    if (iconId.startsWith('mui-')) {
-      return {
-        url: `https://assets-cdn.kiba.dev/material-icons/v1/${iconId.replace('mui-', '')}.svg`,
-        shouldAddFill: true,
-        shouldAddStroke: false,
-      };
+    const iconId = props.iconId;
+    // NOTE(krishan711): covers icons registered (or fetched by another KibaIcon) after this rendered
+    const currentKnownSvgContent = getKnownSvgContent(iconId);
+    if (currentKnownSvgContent !== undefined) {
+      setLoadedSvgContent({ iconId, svgContent: currentKnownSvgContent });
+      return undefined;
     }
-    if (iconId.startsWith('bs-')) {
-      return {
-        url: `https://assets-cdn.kiba.dev/bootstrap-icons/v1/${iconId.replace('bs-', '')}.svg`,
-        shouldAddFill: true,
-        shouldAddStroke: false,
-      };
+    const currentIconData = getIconData(iconId);
+    if (!currentIconData) {
+      console.warn(`Failed to identify icon type from iconId: ${iconId}`);
+      return undefined;
     }
-    if (iconId.startsWith('feather-')) {
-      return {
-        url: `https://assets-cdn.kiba.dev/feather/v4/${iconId.replace('feather-', '')}.svg`,
-        shouldAddFill: false,
-        shouldAddStroke: true,
-      };
-    }
-    if (iconId.startsWith('remix-')) {
-      return {
-        url: `https://assets-cdn.kiba.dev/remix-icons/v2/${iconId.replace('remix-', '')}.svg`,
-        shouldAddFill: true,
-        shouldAddStroke: false,
-      };
-    }
-    return null;
-  };
-
-  React.useEffect(() => {
-    setSvgContent(null);
-    const iconData = getIconData(props.iconId);
-    if (!iconData) {
-      console.warn(`Failed to identify icon type from iconId: ${props.iconId}`);
-      return;
-    }
-    setShouldAddFill(iconData.shouldAddFill);
-    setShouldAddStroke(iconData.shouldAddStroke);
-    fetch(iconData.url)
-      .then((result) => {
-        if (result.status >= 300) {
-          throw new Error(`Failed to fetch icon: ${result}`);
+    let isCancelled = false;
+    loadSvgContent(currentIconData.url)
+      .then((svgContent: string): void => {
+        if (!isCancelled) {
+          setLoadedSvgContent({ iconId, svgContent });
         }
-        return result.text();
       })
-      .then((resultText) => {
-        setSvgContent(resultText.replace(/<title>.*<\/title>/gi, '').replace(/stroke:#000/gi, 'stroke:currentColor').replace(/fill:#000/gi, 'fill:currentColor'));
-      })
-      .catch(() => setSvgContent(null));
-  }, [props.iconId]);
+      .catch((): void => {
+        if (!isCancelled) {
+          setLoadedSvgContent(null);
+        }
+      });
+    return (): void => {
+      isCancelled = true;
+    };
+  }, [props.iconId, knownSvgContent]);
+
+  const svgContent = knownSvgContent ?? (loadedSvgContent?.iconId === props.iconId ? loadedSvgContent.svgContent : null);
 
   return (
     <Icon
@@ -93,8 +182,8 @@ export function KibaIcon({
       variant={variant}
       // eslint-disable-next-line no-underscore-dangle
       _color={props._color}
-      shouldAddFill={shouldAddFill}
-      shouldAddStroke={shouldAddStroke}
+      shouldAddFill={iconData?.shouldAddFill}
+      shouldAddStroke={iconData?.shouldAddStroke}
       svgContent={svgContent || '<svg></svg>'}
     />
   );

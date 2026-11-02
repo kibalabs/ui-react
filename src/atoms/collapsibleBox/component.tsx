@@ -14,6 +14,8 @@ interface ICollapsibleBoxProps extends IComponentProps, ISingleAnyChildProps {
   isCollapsed: boolean;
   onCollapseToggled(): void;
   shouldSkipRenderingWhenCollapsed?: boolean;
+  expandIconId?: string;
+  collapseIconId?: string;
   shouldHideIndicator?: boolean;
 }
 
@@ -46,7 +48,7 @@ export function CollapsibleBox({
       >
         {props.headerView}
         {!props.shouldHideIndicator && (
-          <KibaIcon iconId={props.isCollapsed ? 'ion-chevron-down' : 'ion-chevron-up'} />
+          <KibaIcon iconId={props.isCollapsed ? (props.expandIconId || 'ion-chevron-down') : (props.collapseIconId || 'ion-chevron-up')} />
         )}
       </div>
       {(!props.isCollapsed || !props.shouldSkipRenderingWhenCollapsed) && (

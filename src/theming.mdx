@@ -138,6 +138,37 @@ import './theme.scss';
 | `--kiba-font-weight-bold` | Bold font weight |
 | `--kiba-line-height` | Default line height |
 
+### Self-hosting Google Fonts
+
+Load Google Fonts as usual and add the fonts vite plugin in your `config.build.js` to serve them from your own domain:
+
+```scss
+// theme.scss
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+:root {
+  --kiba-font-family: 'Inter', system-ui, sans-serif;
+}
+```
+
+```js
+import { kibaFontsPlugin } from '@kibalabs/ui-react/vite-plugin';
+
+export default (config) => {
+  const newConfig = config;
+  newConfig.viteConfigModifier = (viteConfig) => {
+    const newViteConfig = viteConfig;
+    newViteConfig.plugins.push(kibaFontsPlugin());
+    return newViteConfig;
+  };
+  return newConfig;
+};
+```
+
+At build time the plugin finds `fonts.googleapis.com` stylesheets in your css (after sass has compiled it, so partials count too) and in `<link rel="stylesheet">` tags in `index.html`, downloads them and their font files (only ever from `fonts.googleapis.com` and `fonts.gstatic.com`), emits the fonts as hashed assets and replaces the `@import` with the `@font-face` rules. The latin, normal style file (closest to weight 400) of each family that the page's css uses is preloaded; pass `shouldPreloadFonts: false` to turn that off.
+
+Downloads are cached in `node_modules/.cache/kiba-fonts` (or `cacheDirectory`). If downloading fails (e.g. an offline build) the build still succeeds: the `@import` is left as it is, so the browser loads the fonts from Google, and a warning is logged. The dev server always leaves the `@import` as it is.
+
 ### Spacing
 
 | Variable | Description |

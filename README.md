@@ -46,6 +46,36 @@ Use `@kibalabs/ui-react/styles.css` instead if you don't use scss.
 
 Toast and dropzone styles only hold their own rules, so use them on top of the main styles.
 
+## Icons
+
+`KibaIcon` shows icons by id (`ion-home`, `mui-home`, `bs-house`, `feather-home`, `remix-home-line`). To bundle the ones you use at build time, install the icon packages you need (optional peer dependencies: `ionicons`, `@material-design-icons/svg`, `bootstrap-icons`, `feather-icons`, `remixicon`) and add the vite plugin:
+
+```js
+// config.build.js
+import { kibaIconsPlugin } from '@kibalabs/ui-react/vite-plugin';
+
+export default (config) => {
+  const newConfig = config;
+  newConfig.viteConfigModifier = (viteConfig) => {
+    viteConfig.plugins.push(kibaIconsPlugin());
+    return viteConfig;
+  };
+  return newConfig;
+};
+```
+
+It scans `src` (and ui-react) for quoted icon ids and registers their svgs before your app starts. Anything it can't see (e.g. `` `ion-${name}` ``) is fetched from `assets-cdn.kiba.dev` at runtime as before.
+
+## Fonts
+
+Keep loading Google Fonts the usual way (`@import url('https://fonts.googleapis.com/css2?family=...&display=swap');` in your css/scss, or a `<link>` in `index.html`) and add `kibaFontsPlugin()` (from the same `@kibalabs/ui-react/vite-plugin`) to self-host them:
+
+```js
+viteConfig.plugins.push(kibaFontsPlugin());
+```
+
+At build time it downloads the stylesheet and its font files, emits them as hashed assets, replaces the `@import` with the `@font-face` rules and preloads the latin, normal style file of each family the page's css uses. Downloads are cached in `node_modules/.cache/kiba-fonts`. If they fail (e.g. offline) the `@import` is left as it is with a warning. In dev the fonts still load from Google.
+
 ## Theming
 
 - **Variables:** everything is themed with CSS variables named `--kiba-{category}-{name}` (e.g. `--kiba-color-brand-primary`, `--kiba-padding`). Each color also gets `-light10/25`, `-dark10/25` and `-clear25/50/75` variants.
