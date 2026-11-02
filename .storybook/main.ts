@@ -27,11 +27,11 @@ const config: StorybookConfig = {
   docs: {
     autodocs: true,
   },
-  viteFinal: (config) => {
-    // NOTE(krishan711): the stories use the source files, so the icons are registered with the source registry
-    config.plugins = [...(config.plugins || []), kibaIconsPlugin({ registrationModule: fileURLToPath(new URL('../src/particles/kibaIcon/registry.ts', import.meta.url)) })];
-    return config;
-  },
+  // NOTE(krishan711): the stories use the source files, so the icons are registered with the source registry
+  viteFinal: (viteConfig) => ({
+    ...viteConfig,
+    plugins: [...(viteConfig.plugins || []), kibaIconsPlugin({ registrationModule: fileURLToPath(new URL('../src/particles/kibaIcon/registry.ts', import.meta.url)) })],
+  }),
 };
 
 export default config;
