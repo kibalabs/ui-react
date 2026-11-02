@@ -8,8 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [MAJOR] Added `@kibalabs/ui-react/toast` (all of `@kibalabs/ui-react-toast`) and `@kibalabs/ui-react/dropzone` (all of `@kibalabs/ui-react-dropzone`) with their styles, `react-hot-toast` and `react-dropzone` are optional peer dependencies
 
 ### Changed
+- [MAJOR] Use `@kibalabs/core/react` instead of `@kibalabs/core-react`, `react-router` is now a peer dependency
 - [MINOR] Correction for using `childSizeResponsive.base` size in `EqualGrid`
 - [MINOR] Fix `Box` and `Stack` to not inherit sizing props from parent when not intended
 
