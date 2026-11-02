@@ -30,7 +30,7 @@ const config: StorybookConfig = {
   // NOTE(krishan711): the stories use the source files, so the icons are registered with the source registry
   viteFinal: (viteConfig) => ({
     ...viteConfig,
-    plugins: [...(viteConfig.plugins || []), kibaIconsPlugin({ registrationModule: fileURLToPath(new URL('../src/particles/kibaIcon/registry.ts', import.meta.url)) })],
+    plugins: [...(viteConfig.plugins || []), kibaIconsPlugin({ registrationModule: fileURLToPath(new URL('../src/particles/kibaIcon/component.tsx', import.meta.url)) })],
   }),
 };
 
