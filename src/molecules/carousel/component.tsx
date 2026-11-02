@@ -153,7 +153,7 @@ export function Carousel({
       {shouldShowButtons && (
         <IconButton
           variant={props.indexButtonVariant}
-          icon={<KibaIcon iconId='mui-chevron-left' />}
+          icon={<KibaIcon iconId='ion-chevron-back' />}
           label='Previous'
           onClicked={onPreviousClicked}
         />
@@ -180,7 +180,7 @@ export function Carousel({
       {shouldShowButtons && (
         <IconButton
           variant={props.indexButtonVariant}
-          icon={<KibaIcon iconId='mui-chevron-right' />}
+          icon={<KibaIcon iconId='ion-chevron-forward' />}
           label='Next'
           onClicked={onNextClicked}
         />
