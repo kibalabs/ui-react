@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MAJOR] Added `@kibalabs/ui-react/toast` (all of `@kibalabs/ui-react-toast`) and `@kibalabs/ui-react/dropzone` (all of `@kibalabs/ui-react-dropzone`) with their styles, `react-hot-toast` and `react-dropzone` are optional peer dependencies
 
 ### Changed
+- [MINOR] Changed `KibaIcon`'s runtime fallback to the icon set versions the vite plugin bundles (ionicons v8, material icons from `@material-design-icons/svg`, remixicon v4)
 - [MINOR] Changed `KibaIcon` to fetch each icon once per page (shared between instances), retry once and ignore responses for a previous `iconId`
 - [MINOR] Changed `AppDownloadButton` to use bundled badges (loaded lazily) instead of `assets-cdn.kiba.dev`
 - [PATCH] Changed `Carousel` to use ionicons chevrons

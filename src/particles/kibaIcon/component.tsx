@@ -19,14 +19,14 @@ interface IconData {
 const getIconData = (iconId: string): IconData | null => {
   if (iconId.startsWith('ion-')) {
     return {
-      url: `https://assets-cdn.kiba.dev/ionicons/v5/${iconId.replace('ion-', '')}.svg`,
+      url: `https://assets-cdn.kiba.dev/ionicons/v8/${iconId.replace('ion-', '')}.svg`,
       shouldAddFill: true,
       shouldAddStroke: false,
     };
   }
   if (iconId.startsWith('mui-')) {
     return {
-      url: `https://assets-cdn.kiba.dev/material-icons/v1/${iconId.replace('mui-', '')}.svg`,
+      url: `https://assets-cdn.kiba.dev/material-icons/v2/${iconId.replace('mui-', '')}.svg`,
       shouldAddFill: true,
       shouldAddStroke: false,
     };
@@ -47,7 +47,7 @@ const getIconData = (iconId: string): IconData | null => {
   }
   if (iconId.startsWith('remix-')) {
     return {
-      url: `https://assets-cdn.kiba.dev/remix-icons/v2/${iconId.replace('remix-', '')}.svg`,
+      url: `https://assets-cdn.kiba.dev/remix-icons/v4/${iconId.replace('remix-', '')}.svg`,
       shouldAddFill: true,
       shouldAddStroke: false,
     };
