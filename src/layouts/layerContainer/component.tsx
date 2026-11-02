@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { flattenChildren, IMultiAnyChildProps, IOptionalSingleAnyChildProps } from '@kibalabs/core-react';
+import { flattenChildren, IMultiAnyChildProps, IOptionalSingleAnyChildProps } from '@kibalabs/core/react';
 
 import './styles.scss';
 import { Alignment } from '../../model';

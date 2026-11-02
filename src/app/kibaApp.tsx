@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { getIsRunningOnBrowser, IMultiAnyChildProps, useInitialization } from '@kibalabs/core-react';
+import { getIsRunningOnBrowser, IMultiAnyChildProps, useInitialization } from '@kibalabs/core/react';
 
 import { GlobalCss } from './globalCss';
 import { BackgroundView, IBackgroundConfig } from '../wrappers';

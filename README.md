@@ -9,7 +9,7 @@ UI-React enforces a strong separation between **theming** and **layout**. This p
 ### Installation
 
 ```bash
-npm install @kibalabs/ui-react
+npm install @kibalabs/ui-react @kibalabs/core react react-dom react-router
 ```
 
 ### Basic Setup
@@ -19,7 +19,7 @@ Wrap your app with `KibaApp` and import the CSS:
 ```tsx
 import React from 'react';
 import { KibaApp } from '@kibalabs/ui-react';
-import '@kibalabs/ui-react/dist/index.css';
+import '@kibalabs/ui-react/styles.css';
 import './theme.scss';
 
 export const App = (): React.ReactElement => {
@@ -56,6 +56,17 @@ Create a `theme.scss` file to customize the look and feel:
 ```
 
 That's it! You're ready to use UI-React components.
+
+### Toasts and Dropzones
+
+Toasts (previously `@kibalabs/ui-react-toast`) and dropzones (previously `@kibalabs/ui-react-dropzone`) are separate entries so their libraries are only needed when you use them:
+
+| Import | Styles | Needs installed |
+| --- | --- | --- |
+| `@kibalabs/ui-react/toast` | `@kibalabs/ui-react/toast/styles.css` or `.../toast/styles.scss` | `react-hot-toast` |
+| `@kibalabs/ui-react/dropzone` | `@kibalabs/ui-react/dropzone/styles.css` or `.../dropzone/styles.scss` | `react-dropzone` |
+
+Their styles only contain the toast or dropzone rules, so use them on top of the main `@kibalabs/ui-react/styles.css` (or `styles.scss`).
 
 ---
 

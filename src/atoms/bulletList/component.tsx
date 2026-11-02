@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { IMultiChildProps } from '@kibalabs/core-react';
+import { IMultiChildProps } from '@kibalabs/core/react';
 
 import './styles.scss';
 import { IComponentProps } from '../../model';

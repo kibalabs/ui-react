@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { IMultiChildProps, OptionalProppedElement } from '@kibalabs/core-react';
+import { IMultiChildProps, OptionalProppedElement } from '@kibalabs/core/react';
 
 import './styles.scss';
 import { IListItemProps, ListItem } from '../../atoms/listItem';

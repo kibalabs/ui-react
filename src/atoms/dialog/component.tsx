@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getClassName } from '@kibalabs/core';
-import { getIsRunningOnBrowser, ISingleAnyChildProps, useEventListener } from '@kibalabs/core-react';
+import { getIsRunningOnBrowser, ISingleAnyChildProps, useEventListener } from '@kibalabs/core/react';
 
 import { IComponentProps } from '../../model';
 import { Box } from '../../particles/box';

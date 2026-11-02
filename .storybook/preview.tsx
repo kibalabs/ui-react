@@ -1,6 +1,10 @@
+import React from 'react';
+
 import type { Preview } from '@storybook/react-vite';
+
 import '../src/styles/reset.scss';
 import '../src/styles/defaults.scss';
+import { ToastContainer } from '../src/toast';
 
 const preview: Preview = {
   parameters: {
@@ -21,11 +25,20 @@ const preview: Preview = {
           'Molecules',
           'Layouts',
           'Wrappers',
+          'Extras',
           '*',
         ],
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <React.Fragment>
+        <ToastContainer />
+        <Story />
+      </React.Fragment>
+    ),
+  ],
 };
 
 export default preview;
