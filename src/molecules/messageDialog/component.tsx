@@ -10,6 +10,7 @@ interface IMessageDialogProps extends IMoleculeProps {
   isOpen: boolean;
   maxHeight?: string;
   maxWidth?: string;
+  closeIconId?: string;
   title: string;
   message: string;
   confirmButtonText?: string;
@@ -32,7 +33,7 @@ export function MessageDialog({
           <Spacing />
           <Text variant='header3' alignment={TextAlignment.Center}>{props.title}</Text>
           {props.onCloseClicked && (
-            <IconButton icon={<KibaIcon iconId='ion-close' />} onClicked={props.onCloseClicked} />
+            <IconButton icon={<KibaIcon iconId={props.closeIconId || 'ion-close'} />} onClicked={props.onCloseClicked} />
           )}
         </Stack>
         <Text alignment={TextAlignment.Center}>{props.message}</Text>

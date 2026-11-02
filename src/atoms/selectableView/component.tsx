@@ -15,6 +15,7 @@ export interface ISelectableViewProps extends IComponentProps, ISingleAnyChildPr
   isDisabled?: boolean;
   selectedIndicator?: React.ReactElement;
   shouldHideDefaultSelectedIndicator?: boolean;
+  selectedIconId?: string;
   isFullWidth?: boolean;
   isFullHeight?: boolean;
   onClicked(): void;
@@ -48,7 +49,7 @@ export function SelectableView({
               </React.Fragment>
             ) : !props.shouldHideDefaultSelectedIndicator && (
               <Stack paddingTop={PaddingSize.Default} paddingLeft={PaddingSize.Default}>
-                <KibaIcon iconId='ion-checkmark-circle' variant='large' _color='var(--kiba-color-brand-primary)' />
+                <KibaIcon iconId={props.selectedIconId || 'ion-checkmark-circle'} variant='large' _color='var(--kiba-color-brand-primary)' />
               </Stack>
             )}
           </React.Fragment>

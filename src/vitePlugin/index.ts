@@ -218,6 +218,8 @@ export const kibaIconsPlugin = (options: IKibaIconsPluginOptions = {}): Plugin =
 
   const getIcons = (): Record<string, string> => {
     const iconIds = [...new Set([...fileIconIds.values()].flat())].sort();
+    // NOTE(krishan711): ui-react's own default icons (e.g. the carousel's chevrons) can be swapped with props, so a missing package is only warned about for ids the app uses itself
+    const appIconIds = new Set([...fileIconIds.entries()].filter(([filePath]) => !libraryDirectory || !filePath.startsWith(`${libraryDirectory}${path.sep}`)).flatMap(([, fileIds]) => fileIds));
     const missingIconIds = new Map<IIconSet, string[]>();
     const icons: Record<string, string> = {};
     iconIds.forEach((iconId) => {
@@ -227,7 +229,7 @@ export const kibaIconsPlugin = (options: IKibaIconsPluginOptions = {}): Plugin =
       }
       const packageDirectory = getPackageDirectory(iconSet.packageName);
       if (!packageDirectory || !fs.existsSync(path.join(packageDirectory, iconSet.iconsDirectory))) {
-        if (!warnedIconIds.has(iconId)) {
+        if (appIconIds.has(iconId) && !warnedIconIds.has(iconId)) {
           missingIconIds.set(iconSet, [...(missingIconIds.get(iconSet) ?? []), iconId]);
           warnedIconIds.add(iconId);
         }

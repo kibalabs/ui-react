@@ -14,6 +14,8 @@ interface ITitledCollapsibleBoxProps extends IComponentProps, ISingleAnyChildPro
   isCollapsed: boolean;
   onCollapseToggled(): void;
   shouldSkipRenderingWhenCollapsed?: boolean;
+  expandIconId?: string;
+  collapseIconId?: string;
 }
 
 export function TitledCollapsibleBox({
@@ -35,7 +37,7 @@ export function TitledCollapsibleBox({
         onClick={onCollapseToggled}
       >
         <span>{props.title}</span>
-        <KibaIcon iconId={props.isCollapsed ? 'ion-chevron-down' : 'ion-chevron-up'} />
+        <KibaIcon iconId={props.isCollapsed ? (props.expandIconId || 'ion-chevron-down') : (props.collapseIconId || 'ion-chevron-up')} />
       </button>
       {(!props.isCollapsed || !props.shouldSkipRenderingWhenCollapsed) && (
         <HidingView isHidden={props.isCollapsed}>

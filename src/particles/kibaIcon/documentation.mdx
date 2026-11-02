@@ -59,7 +59,7 @@ Inherits all styling from Icon. See Icon documentation for variants and customiz
 
 ## Bundling icons
 
-Install the packages for the icon sets you use (they are optional peer dependencies, ui-react's own components only use `ionicons`) and add the vite plugin in your `config.build.js`:
+Install the packages for the icon sets you use (they are optional peer dependencies; ui-react's own components default to `ionicons` but take icon id props, e.g. `Carousel`'s `previousIconId`/`nextIconId`, to use another set) and add the vite plugin in your `config.build.js`:
 
 ```bash
 npm install ionicons
