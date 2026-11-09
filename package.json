@@ -56,15 +56,15 @@
     "src/dropzone/styles.scss"
   ],
   "dependencies": {
-    "@kibalabs/core": "^0.7.2-next.10",
+    "@kibalabs/core": "^0.7.2-next.11",
     "lazysizes": "^5.3.2",
-    "markdown-to-jsx": "^9.10.3"
+    "markdown-to-jsx": "^9.10.4"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.14.2-next.16",
+    "@kibalabs/build": "0.14.2-next.17",
     "@material-design-icons/svg": "0.14.15",
-    "@storybook/addon-docs": "10.6.4",
-    "@storybook/react-vite": "10.6.4",
+    "@storybook/addon-docs": "10.6.5",
+    "@storybook/react-vite": "10.6.5",
     "@types/node": "24.19.2",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
@@ -75,10 +75,10 @@
     "react-dom": "19.3.1",
     "react-dropzone": "20.1.4",
     "react-hot-toast": "2.6.1",
-    "react-router": "8.5.0",
+    "react-router": "8.5.1",
     "remark-gfm": "4.0.1",
     "remixicon": "4.9.1",
-    "storybook": "10.6.4"
+    "storybook": "10.6.5"
   },
   "peerDependencies": {
     "@material-design-icons/svg": ">=0.14.0",
