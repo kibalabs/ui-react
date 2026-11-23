@@ -56,15 +56,15 @@
     "src/dropzone/styles.scss"
   ],
   "dependencies": {
-    "@kibalabs/core": "^0.7.2-next.12",
+    "@kibalabs/core": "^0.7.2-next.13",
     "lazysizes": "^5.3.2",
     "markdown-to-jsx": "^9.10.6"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.14.2-next.18",
+    "@kibalabs/build": "0.14.2-next.19",
     "@material-design-icons/svg": "0.14.15",
-    "@storybook/addon-docs": "10.6.6",
-    "@storybook/react-vite": "10.6.6",
+    "@storybook/addon-docs": "10.6.7",
+    "@storybook/react-vite": "10.6.7",
     "@types/node": "26.6.6",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
@@ -78,7 +78,7 @@
     "react-router": "8.5.1",
     "remark-gfm": "4.0.1",
     "remixicon": "4.9.1",
-    "storybook": "10.6.6"
+    "storybook": "10.6.7"
   },
   "peerDependencies": {
     "@material-design-icons/svg": ">=0.14.0",

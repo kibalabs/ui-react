@@ -107,7 +107,8 @@ export const Portal = ({
       >
         {props.children}
       </div>
-    ), window.document.body,
+    ),
+    window.document.body,
   );
 };
 Portal.displayName = 'KibaPortal';
